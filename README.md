@@ -14,6 +14,6 @@ A referent website for *Listeria* species called <a rel="nofollow" class="extern
 *  What are the biological conditions in which a genomic feature is translated?
 *  What is the regulation network involved with a genomic feature of interest?
 
-You will find in the <a rel="nofollow" class="external text" href="https://gitlab.pasteur.fr/bacnet/Bacnet-public/wikis/home">project wikis</a> different tutorials showing you how to build such a website using BACNET platform.
+You will find in the <a rel="nofollow" class="external text" href="https://github.com/drbecavin/bacnet-private/wiki">project wikis</a> different tutorials showing you how to build such a website using BACNET platform.
 
 
