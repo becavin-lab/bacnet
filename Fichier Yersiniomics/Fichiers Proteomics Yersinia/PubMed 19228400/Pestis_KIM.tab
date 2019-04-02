@@ -1,0 +1,433 @@
+yourlist:M20180720A7434721E10EE6586998A056CCD0537E950530A	isomap:M20180720A7434721E10EE6586998A056CCD0537E950530A	Entry	Entry name	Status	Protein names	Gene names	Organism	Cross-reference (RefSeq)
+y0031		O68693	YSCA_YERPE	reviewed	Yop proteins translocation protein A	yscA YPCD1.50 y5028 y0031 YP_pCD33	Yersinia pestis	NP_395184.1;NP_857732.1;NP_857927.1;WP_002229797.1;
+y0031		Q8ZAS8	MALK_YERPE	reviewed	Maltose/maltodextrin import ATP-binding protein MalK (EC 3.6.3.19)	malK YPO3712 y0031 YP_3074	Yersinia pestis	WP_002212091.1;YP_002348593.1;
+y0036		A0A0H2W8A5	A0A0H2W8A5_YERPE	unreviewed	Hemolysin co-regulated protein (Hemolysin-coregulated protein (Uncharacterized))	hcp7 y0036 YP_3069	Yersinia pestis	WP_002212097.1;
+y0036		P69982	YSCS_YERPE	reviewed	Yop proteins translocation protein S	yscS YPCD1.45 y5033 y0036 YP_pCD38	Yersinia pestis	NP_395179.1;NP_857737.1;NP_857932.1;WP_002212945.1;
+y0038		P42713	YSCQ_YERPE	reviewed	Yop proteins translocation protein Q	yscQ YPCD1.43 y5035 y0038 YP_pCD40	Yersinia pestis	NP_395177.1;NP_857739.1;NP_857934.1;WP_002212948.1;
+y0038		Q0WAV1	Q0WAV1_YERPE	unreviewed	Uncharacterized protein	y0038	Yersinia pestis	WP_002212099.1;
+y0108		Q0WKQ9	Q0WKQ9_YERPE	unreviewed	Uncharacterized protein	y0108	Yersinia pestis	WP_002209007.1;
+y0118		Q8D1R7	Q8D1R7_YERPE	unreviewed	Penicillin-binding protein activator LpoA (PBP activator LpoA)	lppC lpoA y0118 YP_3802	Yersinia pestis	
+y0123		Q8D1R6	Q8D1R6_YERPE	unreviewed	Conserved putative exported protein	y0123	Yersinia pestis	
+y0136		Q0WB86	Q0WB86_YERPE	unreviewed	Cytochrome D ubiquinol oxidase subunit III (Putative membrane protein)	y0136 YP_3820 C6P89_17710	Yersinia pestis	WP_002210130.1;
+y0142		Q0WB80	Q0WB80_YERPE	unreviewed	Anti-sigma B factor antagonist (Putative anti-sigma B factor antagonist)	y0142 YP_3826 C6P89_07320	Yersinia pestis	WP_002210125.1;
+y0146		Q0WB76	Q0WB76_YERPE	unreviewed	Phospholipid ABC transporter ATP-binding protein MlaF (Putative ABC transporter ATP-binding protein) (Putative ATP-binding component of ABC transport system)	y0146 YP_3830 C6P89_07300	Yersinia pestis	WP_002210121.1;
+y0153		Q0WB70	Q0WB70_YERPE	unreviewed	Lipopolysaccharide ABC transporter ATP-binding protein (Putative ABC transporter ATP-binding protein) (Putative ATP-binding component of ABC transport system)	y0153 YP_3836 C6P89_07270	Yersinia pestis	WP_002210116.1;
+y0184		Q8D1P7	Q8D1P7_YERPE	unreviewed	Putative toxin subunit (Toxin)	tcbA y0184 YP_3865 C6P89_07120	Yersinia pestis	WP_002220204.1;
+y0185		Q8D1P6	Q8D1P6_YERPE	unreviewed	Putative toxin subunit	tcaC1 y0185	Yersinia pestis	
+y0202		A0A0H2W9J4	A0A0H2W9J4_YERPE	unreviewed	Regulator of ftsI, penicillin binding protein 3 (Rod shape-determining protein) (Rod shape-determining protein MreB)	mreB y0202 YP_3881 C6P89_07045	Yersinia pestis	WP_002228205.1;
+y0209		Q0WAZ4	Q0WAZ4_YERPE	unreviewed	Acetyl CoA carboxylase, biotin carboxylase subunit (Acetyl-CoA carboxylase biotin carboxylase subunit) (Biotin carboxylase)	accC accC2 y0209 YP_3888 C6P89_07010	Yersinia pestis	WP_002210069.1;
+y0329		A0A0H2W745	A0A0H2W745_YERPE	unreviewed	Putative ATP-binding component of ATP transport system (Putative sugar transport system ATP-binding protein) (Sugar ABC transporter ATP-binding protein)	mglA6 y0329 YP_3141 C6P89_10525	Yersinia pestis	WP_002212023.1;
+y0363		Q8D1K6	Q8D1K6_YERPE	unreviewed	ECA polysaccharide chain length modulation protein	wzzE y0363	Yersinia pestis	
+y0378		A0A0H2W784	A0A0H2W784_YERPE	unreviewed	HemY protein (Protoheme IX biogenesis protein HemY) (Putative protoheme IX biogenesis protein)	hemY2 hemY y0378 YP_3194 C6P89_17565	Yersinia pestis	WP_002211462.1;
+y0379		Q8D1K1	Q8D1K1_YERPE	unreviewed	Uroporphyrinogen III methylase	hemX y0379 YP_3195	Yersinia pestis	
+y0393		Q8ZAG5	CORA_YERPE	reviewed	Magnesium transport protein CorA	corA YPO3837 y0393 YP_3211	Yersinia pestis	WP_002211480.1;YP_002348715.1;
+y0407		A0A0H2W6N9	A0A0H2W6N9_YERPE	unreviewed	DUF1795 domain-containing protein (Putative lipoprotein)	y0407 YP_3225 C6P89_19800	Yersinia pestis	WP_002211494.1;
+y0410		Q8D1J3	Q8D1J3_YERPE	unreviewed	Zinc, lead, cadmium, and mercury transporting ATPase	zntA y0410	Yersinia pestis	WP_002231925.1;
+y0416		Q8D1J2	Q8D1J2_YERPE	unreviewed	Signal recognition particle receptor FtsY (SRP receptor)	ftsY y0416	Yersinia pestis	WP_002224010.1;
+y0418		Q0WAJ9	Q0WAJ9_YERPE	unreviewed	Cell division protein FtsX	ftsX y0418 YP_3237 C6P89_19740	Yersinia pestis	WP_002211505.1;
+y0442		Q8ZAL3	METE_YERPE	reviewed	5-methyltetrahydropteroyltriglutamate--homocysteine methyltransferase (EC 2.1.1.14) (Cobalamin-independent methionine synthase) (Methionine synthase, vitamin-B12 independent isozyme)	metE YPO3788 y0442 YP_3261	Yersinia pestis	WP_002211526.1;YP_002348665.1;
+y0448		Q8ZAL8	RMUC_YERPE	reviewed	DNA recombination protein RmuC homolog	rmuC rumC YPO3782 y0448 YP_3267	Yersinia pestis	WP_010981428.1;YP_002348659.1;
+y0539		Q56993	HMUV_YERPE	reviewed	Hemin import ATP-binding protein HmuV (EC 3.6.3.-)	hmuV YPO0279 y0539 YP_0434	Yersinia pestis	WP_002209058.1;YP_002345361.1;
+y0555		Q8D1F8	Q8D1F8_YERPE	unreviewed	Putative tellurium resistance protein (Tellurium resistance protein)	terZ y0555 YP_0452	Yersinia pestis	
+y0632		Q0WJT6	Q0WJT6_YERPE	unreviewed	GTPase HflX (GTP-binding protein HflX)	hflX y0632 YP_0530 C6P89_05455	Yersinia pestis	WP_002209152.1;
+y0633		A0A0H2W1N3	A0A0H2W1N3_YERPE	unreviewed	Protein HflK	hflK y0633 YP_0531 C6P89_05460	Yersinia pestis	WP_002209154.1;
+y0634		A0A0H2W2L4	A0A0H2W2L4_YERPE	unreviewed	Protein HflC	hflC1 hflC y0634 YP_0532 C6P89_05465	Yersinia pestis	WP_002209155.1;
+y0661		Q0WBC6	Q0WBC6_YERPE	unreviewed	Putative exported protein (Translocation and assembly module TamB)	y0661 YP_0560 C6P89_02250	Yersinia pestis	WP_002210167.1;
+y0664		Q0WBC9	F16PA_YERPE	reviewed	Fructose-1,6-bisphosphatase class 1 (FBPase class 1) (EC 3.1.3.11) (D-fructose-1,6-bisphosphate 1-phosphohydrolase class 1)	fbp YPO3520 y0664 YP_0563	Yersinia pestis	WP_002216946.1;YP_002348409.1;
+y0678		A0A0H2W1R1	A0A0H2W1R1_YERPE	unreviewed	D-alanyl-D-alanine carboxypeptidase, fraction B (Penicillin-binding protein 4) (Serine-type D-Ala-D-Ala carboxypeptidase) (EC 3.4.16.4) (EC 3.4.21.-)	dacB y0678 YP_0577 C6P89_02160	Yersinia pestis	WP_002217314.1;
+y0682		Q8D1D4	Q8D1D4_YERPE	unreviewed	ATP-dependent zinc metalloprotease FtsH (EC 3.4.24.-)	hflB ftsH y0682 YP_0581	Yersinia pestis	
+y0685		Q0WBF0	Q0WBF0_YERPE	unreviewed	Preprotein translocase subunit SecG (Protein-export membrane protein)	secG y0685 YP_0584 C6P89_02125	Yersinia pestis	WP_002210190.1;
+y0695		Q7CKI5	NLPI_YERPE	reviewed	Lipoprotein NlpI	nlpI YPO3489 YP_0594 y0695	Yersinia pestis	WP_002209260.1;YP_002348378.1;
+y0702		A0A0H2W3A3	A0A0H2W3A3_YERPE	unreviewed	Acridine efflux pump (Efflux RND transporter periplasmic adaptor subunit) (Multidrug efflux protein)	acrA2 acrA y0702 YP_0600 C6P89_02035	Yersinia pestis	WP_002209266.1;
+y0704		A0A0H2W1S5	A0A0H2W1S5_YERPE	unreviewed	Putative outer membrane efflux lipoprotein (Putative outer membrane protein, efflux pump) (TolC family protein)	ibeB y0704 YP_0602 C6P89_02025	Yersinia pestis	WP_002209268.1;
+y0735		Q8D1C2	Q8D1C2_YERPE	unreviewed	Putative ATP-binding component of dipeptide transport system	dppD dppD1 y0735 YP_0633	Yersinia pestis	
+y0795		Q8D1A6	Q8D1A6_YERPE	unreviewed	Penicillin-binding protein 1B (PBP-1b) (PBP1b) (Murein polymerase)	mrcB y0795	Yersinia pestis	
+y0827		Q8ZBP5	FTSB_YERPE	reviewed	Cell division protein FtsB	ftsB YPO3362 y0827 YP_0325	Yersinia pestis	WP_002209390.1;YP_002348255.1;
+y0833		A0A0H2W268	A0A0H2W268_YERPE	unreviewed	Lipoprotein (Murein hydrolase activator NlpD)	nlpD2 nlpD y0833 YP_0331 C6P89_00375	Yersinia pestis	WP_002228228.1;
+y0835		Q8ZBQ3	MUTS_YERPE	reviewed	DNA mismatch repair protein MutS	mutS YPO3354 y0835 YP_0333	Yersinia pestis	WP_002209399.1;YP_002348247.1;
+y0911		Q0WC10	Q0WC10_YERPE	unreviewed	Outer membrane protein assembly factor BamD	nrfG1 bamD y0911 YP_0653 C6P89_21960	Yersinia pestis	WP_002209469.1;
+y0923		Q8CWH7	Q8CWH7_YERPE	unreviewed	MarR-family transcriptional regulatory protein (Regulator of plasmid mcrB operon (Microcin B17 synthesis))	emrR y0923 YP_0666	Yersinia pestis	
+y0951		Q8ZBZ0	NQRA_YERPE	reviewed	Na(+)-translocating NADH-quinone reductase subunit A (Na(+)-NQR subunit A) (Na(+)-translocating NQR subunit A) (EC 1.6.5.8) (NQR complex subunit A) (NQR-1 subunit A)	nqrA YPO3240 y0951 YP_0693	Yersinia pestis	WP_002208717.1;YP_002348142.1;
+y0992		Q8D164	Q8D164_YERPE	unreviewed	Putative membrane protein	yajC y0992 YP_0741	Yersinia pestis	
+y0993		Q8D163	Q8D163_YERPE	unreviewed	Protein translocase subunit SecD	secD y0993	Yersinia pestis	WP_002232174.1;
+y1021		A0A0H2W2A3	A0A0H2W2A3_YERPE	unreviewed	Ubiquinol oxidase subunit 2	cyoA y1021 YP_0767 C6P89_06940	Yersinia pestis	WP_002208649.1;
+y1021		A0A1U8QPF6	A0A1U8QPF6_YERPE	unreviewed	Uncharacterized protein	Y1021 YP_pMT034 C6P89_16120	Yersinia pestis	NP_857668.1;WP_002214131.1;YP_093910.1;
+y1024		A0A1U8QVB7	A0A1U8QVB7_YERPE	unreviewed	Uncharacterized protein	Y1024 YP_pMT031	Yersinia pestis	WP_011172028.1;YP_093907.1;
+y1024		Q0WCC2	Q0WCC2_YERPE	unreviewed	Putative polymerase/proteinase	y1024 C6P89_06925	Yersinia pestis	WP_002208646.1;
+y1031		A0A1U8QLB5	A0A1U8QLB5_YERPE	unreviewed	Uncharacterized protein	Y1031 C6P89_16070	Yersinia pestis	WP_002228788.1;
+y1031		Q0WCD0	Q0WCD0_YERPE	unreviewed	Peptidylprolyl isomerase (EC 5.2.1.8)	ppiD y1031 YP_0778 C6P89_06885	Yersinia pestis	WP_002208638.1;
+y1049		A0A0H2W1D8	A0A0H2W1D8_YERPE	unreviewed	Efflux pump membrane transporter	acrB2 acrB y1049 YP_0798 C6P89_06780	Yersinia pestis	WP_002208616.1;
+y1049		A0A1U8QS93	A0A1U8QS93_YERPE	unreviewed	Lambda host specificity protein J (Phage lambda-related host specificity protein J)	Y1049 YP_pMT007	Yersinia pestis	WP_002228780.1;
+y1050		O68723	O68723_YERPE	unreviewed	Uncharacterized protein	Y1050 YP_pMT006	Yersinia pestis	
+y1050		Q0WCF1	Q0WCF1_YERPE	unreviewed	Acridine efflux pump (Efflux RND transporter periplasmic adaptor subunit) (Multidrug efflux protein)	acrA acrA3 y1050 YP_0799 C6P89_06775	Yersinia pestis	WP_002208615.1;
+y1170		Q8ZDH1	TATE_YERPE	reviewed	Probable Sec-independent protein translocase protein TatE	tatE YPO2597 y1170 YP_1117	Yersinia pestis	WP_002210319.1;YP_002347553.1;
+y1175		A0A0H2W3P5	A0A0H2W3P5_YERPE	unreviewed	D-alanyl-D-alanine carboxypeptidase, fraction A (Putative penicillin-binding protein 5) (Serine-type D-Ala-D-Ala carboxypeptidase)	dacA y1175 YP_1112 C6P89_09820	Yersinia pestis	WP_002210323.1;
+y1176		Q8ZDG6	RLPA_YERPE	reviewed	Endolytic peptidoglycan transglycosylase RlpA (EC 4.2.2.-) (Rare lipoprotein A)	rlpA YPO2602 y1176 YP_1111	Yersinia pestis	WP_002210324.1;YP_002347558.1;
+y1183		Q7CJV2	LPTE_YERPE	reviewed	LPS-assembly lipoprotein LptE	lptE rlpB YPO2609 y1183 YP_1104	Yersinia pestis	WP_002210332.1;YP_002347565.1;
+y1186		Q0WDS0	Q0WDS0_YERPE	unreviewed	ATP-binding protein of glutamate/aspartate transport system	gltL y1186	Yersinia pestis	
+y1203		Q0WDQ4	Q0WDQ4_YERPE	unreviewed	PTS N-acetyl glucosamine transporter subunit IIABC (PTS system, N-acetylglucosamine-specific enzyme IIABC) (Pts system, N-acetylglucosamine-specific IIABC component)	nagE y1203 YP_1085 C6P89_16855	Yersinia pestis	WP_002210353.1;
+y1221		Q8D118	Q8D118_YERPE	unreviewed	ATP-binding component of high affinity transport system for glycine, betaine and proline (Glycine betaine/L-proline transport ATP-binding protein)	proV proV2 y1221 YP_2449	Yersinia pestis	
+y1247		Q0WDL5	Q0WDL5_YERPE	unreviewed	Putative potassium channel (Putative potassium channel protein) (Voltage-gated potassium channel)	kch y1247 YP_2476 C6P89_06375	Yersinia pestis	WP_002212236.1;
+y1296		Q0WDH4	Q0WDH4_YERPE	unreviewed	Signal peptidase I (EC 3.4.21.89)	lepB y1296 YP_2521 C6P89_06625	Yersinia pestis	WP_002209678.1;
+y1314		Q8CLH8	Q8CLH8_YERPE	unreviewed	Uncharacterized protein	y1314 YP_2542	Yersinia pestis	
+y1321		Q8ZCR0	HMP_YERPE	reviewed	Flavohemoprotein (Flavohemoglobin) (Hemoglobin-like protein) (Nitric oxide dioxygenase) (NO oxygenase) (NOD) (EC 1.14.12.17)	hmp fsrB hmp2 hmpA hmpX YPO2908 y1321 YP_2547	Yersinia pestis	WP_002211553.1;YP_002347842.1;
+y1334		A0A0H2W6T5	A0A0H2W6T5_YERPE	unreviewed	Cysteine desulfurase IscS (EC 2.8.1.7)	nifS_2 iscS y1334 YP_2558 C6P89_10970	Yersinia pestis	WP_002209836.1;
+y1346		Q8D0Z3	Q8D0Z3_YERPE	unreviewed	Putative autotransporter	yapA y1346	Yersinia pestis	
+y1351		A0A0H2W6J0	A0A0H2W6J0_YERPE	unreviewed	Putative fimbrial biogenesis protein (Type IV pilus biogenesis/stability protein PilW)	pilF y1351 YP_2747 C6P89_10880	Yersinia pestis	WP_002209819.1;
+y1353		P58672	ISPG_YERPE	reviewed	4-hydroxy-3-methylbut-2-en-1-yl diphosphate synthase (flavodoxin) (EC 1.17.7.3) (1-hydroxy-2-methyl-2-(E)-butenyl 4-diphosphate synthase)	ispG gcpE YPO2879 y1353 YP_2745	Yersinia pestis	WP_002209817.1;YP_002347814.1;
+y1355		A0A0H2W6C2	A0A0H2W6C2_YERPE	unreviewed	Putative membrane protein	y1355 YP_2743 C6P89_10860	Yersinia pestis	WP_002209815.1;
+y1356		Q7CJM5	BAMB_YERPE	reviewed	Outer membrane protein assembly factor BamB	bamB YPO2876 y1356 YP_2742	Yersinia pestis	WP_002209814.1;YP_002347811.1;
+y1376		P58483	Y2857_YERPE	reviewed	Uncharacterized protein YPO2857/y1376/YP_2723	YPO2857 y1376 YP_2723	Yersinia pestis	WP_002227858.1;YP_002347793.1;
+y1401		Q8ZCX5	PSTB1_YERPE	reviewed	Phosphate import ATP-binding protein PstB 1 (EC 3.6.3.27) (ABC phosphate transporter 1) (Phosphate-specific transport component 1) (Phosphate-transporting ATPase 1)	pstB1 YPO2833 y1401 YP_2700	Yersinia pestis	WP_002209780.1;YP_002347771.1;
+y1412		Q8ZCC3	BEPA_YERPE	reviewed	Beta-barrel assembly-enhancing protease (EC 3.4.-.-)	bepA YPO3069 y1412 YP_2691	Yersinia pestis	WP_002208564.1;YP_002347989.1;
+y1432		Q8D0X9	Q8D0X9_YERPE	unreviewed	Putative ABC-transporter, ATP-binding protein (Spermidine/putrescine transport ATP-binding protein)	potA y1432 YP_2670	Yersinia pestis	
+y1469		Q8D0W8	CYSA_YERPE	reviewed	Sulfate/thiosulfate import ATP-binding protein CysA (EC 3.6.3.25) (Sulfate-transporting ATPase)	cysA YPO3012 y1469 YP_2636	Yersinia pestis	WP_002208509.1;YP_002347934.1;
+y1491		P58492	ZIPA_YERPE	reviewed	Cell division protein ZipA	zipA YPO2990 y1491 YP_2615	Yersinia pestis	WP_002227089.1;YP_002347914.1;
+y1524		Q8ZCM2	FBPC_YERPE	reviewed	Fe(3+) ions import ATP-binding protein FbpC (EC 3.6.3.30)	fbpC YPO2960 y1524 YP_2586	Yersinia pestis	WP_002211598.1;YP_002347885.1;
+y1527		Q0WCV6	Q0WCV6_YERPE	unreviewed	Membrane-bound lytic murein transglycosylase B (Murein transglycosylase B) (Putative membrane-bound lytic murein transglycosylase B)	mltB mltB2 y1527 YP_2583 C6P89_12620	Yersinia pestis	WP_002227842.1;
+y1576		Q8D0V1	Q8D0V1_YERPE	unreviewed	Lipoprotein	vacJ y1576 YP_2421	Yersinia pestis	
+y1580		Q8ZD45	FADJ_YERPE	reviewed	Fatty acid oxidation complex subunit alpha [Includes: Enoyl-CoA hydratase/3-hydroxybutyryl-CoA epimerase (EC 4.2.1.17) (EC 5.1.2.3); 3-hydroxyacyl-CoA dehydrogenase (EC 1.1.1.35)]	fadJ YPO2747 y1580 YP_2417	Yersinia pestis	YP_002347694.1;
+y1603		Q8D0T9	Q8D0T9_YERPE	unreviewed	Cell division protein DedD	dedD y1603 YP_2394	Yersinia pestis	
+y1673		Q0WE10	Q0WE10_YERPE	unreviewed	ATP-binding component of glutamine high-affinity glutamine ABC transport system (Glutamine ABC transporter ATP-binding protein) (Putative glutamine transport ATP-binding protein)	glnQ glnQ3 y1673 YP_2329 C6P89_08425	Yersinia pestis	WP_002210237.1;
+y1767		Q0WGG9	Q0WGG9_YERPE	unreviewed	PTS glucose transporter subunit IIBC (PTS system, glucose-specific IIBC component)	ptsG y1767 YP_2246 C6P89_21875	Yersinia pestis	WP_002213085.1;
+y1786		Q8ZFR4	LOLD_YERPE	reviewed	Lipoprotein-releasing system ATP-binding protein LolD (EC 3.6.3.-)	lolD YPO1627 y1786 YP_1756	Yersinia pestis	WP_002210923.1;YP_002346638.1;
+y1795		Q0WGE2	Q0WGE2_YERPE	unreviewed	Lipoprotein (Putative lipoprotein)	y1795 YP_1765 C6P89_05800	Yersinia pestis	WP_002210916.1;
+y1852		A0A0H2W4F2	A0A0H2W4F2_YERPE	unreviewed	Lipoprotein (Putative lipoprotein)	rssA1 y1852 YP_1819 C6P89_05545	Yersinia pestis	WP_002210864.1;
+y1863		Q8D0N9	Q8D0N9_YERPE	unreviewed	Paraquat-inducible protein B	pqiB2 y1863 YP_1726	Yersinia pestis	
+y1867		Q8D0N7	Q8D0N7_YERPE	unreviewed	Carboxy-terminal protease for penicillin-binding protein 3 (Tail-specific protease)	prc y1867 YP_1730	Yersinia pestis	
+y1877		A0A0H2W5K5	A0A0H2W5K5_YERPE	unreviewed	N-acetylmuramoyl-L-alanine amidase (Putative N-acetylmuramoyl-L-alanine amidase) (Putative regulator)	ampD2 y1877 YP_1740 C6P89_14665	Yersinia pestis	WP_002210839.1;
+y1878		Q0WG69	Q0WG69_YERPE	unreviewed	Putative symporter	y1878	Yersinia pestis	WP_010981403.1;
+y1896		Q56953	YFEB_YERPE	reviewed	Chelated iron transport system membrane protein YfeB	yfeB YPO2440 y1896 YP_2228	Yersinia pestis	WP_002211843.1;YP_002347404.1;
+y1919		Q8ZDX8	ARNA_YERPE	reviewed	Bifunctional polymyxin resistance protein ArnA [Includes: UDP-4-amino-4-deoxy-L-arabinose formyltransferase (EC 2.1.2.13) (ArnAFT) (UDP-L-Ara4N formyltransferase); UDP-glucuronic acid oxidase, UDP-4-keto-hexauronic acid decarboxylating (EC 1.1.1.305) (ArnADH) (UDP-GlcUA decarboxylase) (UDP-glucuronic acid dehydrogenase)]	arnA YPO2420 y1919 YP_2207	Yersinia pestis	WP_002211823.1;YP_002347383.1;
+y1926		Q8ZDY2	LPLA_YERPE	reviewed	Lipoate-protein ligase A (EC 6.3.1.20) (Lipoate--protein ligase)	lplA YPO2414 y1926 YP_2200	Yersinia pestis	WP_002211816.1;YP_002347377.1;
+y1928		Q0WEB2	Q0WEB2_YERPE	unreviewed	Phospho-2-dehydro-3-deoxyheptonate aldolase (EC 2.5.1.54) (3-deoxy-D-arabino-heptulosonate 7-phosphate synthase) (DAHP synthase) (Phospho-2-keto-3-deoxyheptonate aldolase)	aroH y1928 YP_2198 C6P89_12145	Yersinia pestis	WP_002211815.1;
+y1962		Q0WEE9	Q0WEE9_YERPE	unreviewed	Lipoprotein (Putative lipoprotein) (Putative outer membrane protein)	slyB y1962 YP_2159 C6P89_20155	Yersinia pestis	WP_002210956.1;
+y1988		Q8D0K9	Q8D0K9_YERPE	unreviewed	Transcriptional regulator of aroF, aroG, tyrA and aromatic amino acid transport	tyrR y1988	Yersinia pestis	
+y2003		Q0WEJ1	Q0WEJ1_YERPE	unreviewed	Heat shock protein HslJ (Heat-inducible protein) (Putative heat shock protein)	hslJ y2003 YP_2116 C6P89_19175	Yersinia pestis	WP_002214605.1;
+y2010		Q8ZE60	AZOR_YERPE	reviewed	FMN-dependent NADH-azoreductase (EC 1.7.-.-) (Azo-dye reductase) (FMN-dependent NADH-azo compound oxidoreductase)	azoR YPO2323 y2010 YP_2110	Yersinia pestis	WP_002211004.1;YP_002347290.1;
+y2037		Q0WEX2	Q0WEX2_YERPE	unreviewed	Protein TonB	tonB y2037 YP_1992 C6P89_19970	Yersinia pestis	WP_002210642.1;
+y2044		Q8D0J8	Q8D0J8_YERPE	unreviewed	Putative outer membrane protein	y2044	Yersinia pestis	
+y2045		Q0WEW5	Q0WEW5_YERPE	unreviewed	Lipoprotein (Putative lipoprotein)	osmY1 y2045 YP_2000 C6P89_01190	Yersinia pestis	WP_002210636.1;
+y2047		Q8ZEH0	TRPA_YERPE	reviewed	Tryptophan synthase alpha chain (EC 4.2.1.20)	trpA YPO2203 y2047 YP_2001	Yersinia pestis	WP_002210634.1;YP_002347174.1;
+y2104		Q8D0I4	Q8D0I4_YERPE	unreviewed	Uncharacterized protein	y2104	Yersinia pestis	
+y2134		Q0WEL9	Q0WEL9_YERPE	unreviewed	NAD(P) transhydrogenase subunit beta (EC 1.6.1.2) (Nicotinamide nucleotide transhydrogenase subunit beta)	pntB y2134 YP_2087 C6P89_00745	Yersinia pestis	WP_002211020.1;
+y2135		Q0WEL8	Q0WEL8_YERPE	unreviewed	NAD(P) transhydrogenase subunit alpha (EC 1.6.1.2)	pntA y2135 YP_2088 C6P89_00740	Yersinia pestis	WP_002211019.1;
+y2160		Q0WF01	Q0WF01_YERPE	unreviewed	Protease 4 (EC 3.4.21.-) (Endopeptidase IV) (Protease IV) (Signal peptide peptidase)	sppA y2160	Yersinia pestis	WP_002211674.1;
+y2233		A0A0H2W4W8	A0A0H2W4W8_YERPE	unreviewed	Site-determining protein	minD y2233 YP_1920 C6P89_09505	Yersinia pestis	WP_002211179.1;
+y2234		Q8ZES7	MINE_YERPE	reviewed	Cell division topological specificity factor	minE YPO2076 y2234 YP_1919	Yersinia pestis	WP_002211180.1;YP_002347058.1;
+y2237		Q8D0F6	Q8D0F6_YERPE	unreviewed	Putative outer membrane protein	slp y2237 YP_1916	Yersinia pestis	
+y2263		Q8ZEV5	CUTC_YERPE	reviewed	Copper homeostasis protein CutC	cutC YPO2048 y2263 YP_1891	Yersinia pestis	WP_002211209.1;YP_002347030.1;
+y2270		Q0WFB4	Q0WFB4_YERPE	unreviewed	UPF0502 protein y2270	mviM3 y2270 YP_1885 C6P89_09705	Yersinia pestis	WP_002211215.1;
+y2292		Q8ZEY0	LOLB_YERPE	reviewed	Outer-membrane lipoprotein LolB	lolB hemM YPO2015 y2292 YP_1863	Yersinia pestis	WP_002224468.1;YP_002347001.1;
+y2315		A0A0H2W4H9	A0A0H2W4H9_YERPE	unreviewed	Uncharacterized protein	y2315 YP_1842 C6P89_13960	Yersinia pestis	WP_002211259.1;
+y2364		A0A1U8QN20	A0A1U8QN20_YERPE	unreviewed	ABC transporter ATP-binding protein (ABC transporter, ATP-binding protein)	phnL4 y2364 YP_1690 C6P89_15495	Yersinia pestis	WP_002212049.1;
+y2396		A0A1U8QVE0	A0A1U8QVE0_YERPE	unreviewed	ABC transporter ATP-binding protein (Inner membrane ABC-transporter YbtQ) (Permease and ATP-binding protein of yersiniabactin-iron ABC transporter)	ybtQ y2396 YP_1657 C6P89_10110	Yersinia pestis	WP_002212761.1;
+y2397		A0A1U8QH65	A0A1U8QH65_YERPE	unreviewed	ABC transporter ATP-binding protein (Permease and ATP-binding protein of yersiniabactin-iron ABC transporter)	ybtP y2397 YP_1656 C6P89_10105	Yersinia pestis	WP_000098391.1;
+y2452		Q0WFU0	EFEU_YERPE	reviewed	Ferrous iron permease EfeU (Fe(2+) ion permease EfeU) (Ferrous iron uptake protein)	efeU fTR11 YPO1854 y2452 YP_1539	Yersinia pestis	WP_002211165.1;YP_002346848.1;
+y2552		Q8D093	Q8D093_YERPE	unreviewed	PTS enzyme IIC, mannose-specific (PTS system, mannose-specific IIC component)	manY y2552 YP_1635	Yersinia pestis	
+y2553		A0A0H2W4X8	A0A0H2W4X8_YERPE	unreviewed	PTS enzyme IID, mannose-specific (PTS system, mannose-specific IID component)	manZ y2553 YP_1636	Yersinia pestis	WP_002221010.1;
+y2596		Q8ZFV8	LLDD_YERPE	reviewed	L-lactate dehydrogenase (EC 1.1.-.-)	lldD YPO1569 y2596 YP_1457	Yersinia pestis	WP_002211919.1;YP_002346582.1;
+y2633		A0A0H2W4I5	A0A0H2W4I5_YERPE	unreviewed	Putative iron-siderophore receptor (Putative outer membrane iron/siderophore receptor) (TonB-dependent siderophore receptor)	ysuR y2633 YP_1426 C6P89_13085	Yersinia pestis	WP_002211883.1;
+y2644		Q0WGP6	Q0WGP6_YERPE	unreviewed	Outer membrane assembly protein AsmA (Suppressor of ompF assembly mutants)	asmA y2644 C6P89_13030	Yersinia pestis	WP_002211874.1;
+y2647		A0A0H2W3M4	A0A0H2W3M4_YERPE	unreviewed	Iron-sulfur cluster carrier protein	mrp y2647 YP_1412 C6P89_13015	Yersinia pestis	WP_002211871.1;
+y2661		Q7CHQ3	MGLA_YERPE	reviewed	Galactose/methyl galactoside import ATP-binding protein MglA (EC 3.6.3.17)	mglA YPO1508 y2661 YP_1398	Yersinia pestis	WP_002211964.1;YP_002346524.1;
+y2677		Q8D068	Q8D068_YERPE	unreviewed	Putative ATP-binding component of ABC transport system	uup3 y2677 YP_1381	Yersinia pestis	
+y2731		A0A0H2W3E9	A0A0H2W3E9_YERPE	unreviewed	Putative membrane protein (YccF domain-containing protein)	y2731 YP_1330 C6P89_17405	Yersinia pestis	WP_002213062.1;
+y2747		Q8D053	Q8D053_YERPE	unreviewed	Paraquat-inducible protein B	pqiB pqiB1 y2747 YP_1172	Yersinia pestis	
+y2750		Q8D052	Q8D052_YERPE	unreviewed	Putative ATP-binding component of ABC transport system	uup y2750	Yersinia pestis	
+y2765		Q8ZG99	MUKB_YERPE	reviewed	Chromosome partition protein MukB (Structural maintenance of chromosome-related protein)	mukB YPO1405 y2765 YP_1188	Yersinia pestis	WP_002211308.1;YP_002346428.1;
+y2767		Q8ZGA1	MUKF_YERPE	reviewed	Chromosome partition protein MukF	mukF YPO1403 y2767 YP_1190	Yersinia pestis	WP_002211310.1;YP_002346426.1;
+y2814		P58411	MACA_YERPE	reviewed	Macrolide export protein MacA	macA YPO1364 y2814 YP_1230	Yersinia pestis	WP_002211352.1;YP_002346387.1;
+y2826		A0A0H2W416	A0A0H2W416_YERPE	unreviewed	Lipoprotein (Putative enzyme) (Putative lipoprotein)	y2826 YP_1242 C6P89_15635	Yersinia pestis	WP_002211365.1;
+y2836		Q8D035	Q8D035_YERPE	unreviewed	Putative ABC transport protein	smtA3 y2836 YP_1250	Yersinia pestis	
+y2864		Q0WH93	Q0WH93_YERPE	unreviewed	D-alanyl-D-alanine carboxypeptidase (D-alanyl-D-alanine carboxypeptidase penicillin-binding protein 6) (Serine-type D-Ala-D-Ala carboxypeptidase) (EC 3.4.16.4)	dacC y2864 YP_1272 C6P89_07935	Yersinia pestis	WP_002228017.1;
+y2882		P31522	PSAA_YERPE	reviewed	pH 6 antigen (Adhesin) (Antigen 4)	psaA YPO1303 y2882 YP_1289	Yersinia pestis	WP_002208794.1;YP_002346328.1;
+y2910		A0A0H2W3D6	A0A0H2W3D6_YERPE	unreviewed	ABC transporter substrate-binding protein (Putative substrate-binding transport protein)	oppA2 y2910 YP_1316 C6P89_07710	Yersinia pestis	WP_002208825.1;
+y2913		Q8D022	Q8D022_YERPE	unreviewed	Putative ATP-binding component of a transport system	y2913	Yersinia pestis	
+y2940		Q0WHG2	Q0WHG2_YERPE	unreviewed	Phage tail protein	y2940 C6P89_03165	Yersinia pestis	WP_002208850.1;
+y2980		Q8D012	Q8D012_YERPE	unreviewed	Uncharacterized protein	y2980 YP_0930	Yersinia pestis	
+y3018		Q0WHN6	Q0WHN6_YERPE	unreviewed	BAX inhibitor (BI)-1/YccA family protein (Putative membrane protein)	y3018 YP_0996 C6P89_14730	Yersinia pestis	WP_002210775.1;
+y3041		Q8D001	Q8D001_YERPE	unreviewed	ATP-binding component of molybdate transport system (Putative molybdenum transport ATP-binding protein modF)	modF y3041 YP_1018	Yersinia pestis	
+y3058		Q0WHS4	Q0WHS4_YERPE	unreviewed	Tol-Pal system protein TolQ	tolQ y3058 YP_1035 C6P89_14940	Yersinia pestis	WP_002210735.1;
+y3074		Q8ZH09	NADK_YERPE	reviewed	NAD kinase (EC 2.7.1.23) (ATP-dependent NAD kinase)	nadK YPO1106 y3074 YP_1050	Yersinia pestis	WP_002210719.1;YP_002346149.1;
+y3076		Q7CH39	BAME_YERPE	reviewed	Outer membrane protein assembly factor BamE	bamE smpA YPO1104 y3076 YP_1052	Yersinia pestis	WP_002228037.1;YP_002346147.1;
+y3104		Q8ZH38	METN1_YERPE	reviewed	Methionine import ATP-binding protein MetN 1 (EC 3.6.3.-)	metN1 YPO1073 y3104 YP_2776	Yersinia pestis	WP_002212161.1;YP_002346117.1;
+y3106		Q8ZH40	METQ_YERPE	reviewed	D-methionine-binding lipoprotein MetQ	metQ YPO1071 y3106 YP_2778	Yersinia pestis	WP_002212159.1;YP_002346115.1;
+y3110		Q0WHX7	Q0WHX7_YERPE	unreviewed	Copper homeostasis protein (Lipoprotein) (Copper homeostasis/adhesion lipoprotein NlpE) (Putative copper homeostasis lipoprotein)	cutF y3110 YP_2782 C6P89_17235	Yersinia pestis	WP_002228043.1;
+y3235		Q8ZHP0	LAMB2_YERPE	reviewed	Maltoporin-2 (Maltose-inducible porin 2)	lamB2 YPO0850 y3235 YP_3547	Yersinia pestis	WP_002215759.1;YP_002345901.1;
+y3242		Q8CZW8	Q8CZW8_YERPE	unreviewed	ABC transporter ATP-binding protein (Putative transport ATP-binding protein)	y3242 YP_3554 C6P89_10700	Yersinia pestis	WP_002223743.1;
+y3306		Q0WIC1	Q0WIC1_YERPE	unreviewed	Mechanosensitive ion channel protein MscS (Putative membrane protein) (Putative transport protein)	mscS2 y3306 YP_3521 C6P89_13425	Yersinia pestis	WP_002209961.1;
+y3311		Q8CZV8	Q8CZV8_YERPE	unreviewed	Zn-dependent protease with chaperone function	htpX3 y3311 YP_3515	Yersinia pestis	
+y3341		Q8ZHE6	MLTC_YERPE	reviewed	Membrane-bound lytic murein transglycosylase C (EC 4.2.2.n1) (Murein lyase C)	mltC YPO0954 y3341 YP_3487	Yersinia pestis	WP_002209995.1;
+y3385		Q0WI49	Q0WI49_YERPE	unreviewed	Aerobactin OM receptor (Putative ferric siderophore receptor) (TonB-dependent siderophore receptor)	iutA y3385 YP_3446 C6P89_16570	Yersinia pestis	WP_002211646.1;
+y3494		A0A0H2W7R5	A0A0H2W7R5_YERPE	unreviewed	ExbD/TolR-family transport protein (TonB system transport protein ExbD) (TonB-complex protein)	exbD y3494 YP_2998 C6P89_01720	Yersinia pestis	WP_002212170.1;
+y3495		Q8CZS6	Q8CZS6_YERPE	unreviewed	Biopolymer transporter ExbB (TonB complex protein)	exbB y3495 YP_2997 C6P89_01715	Yersinia pestis	WP_011055760.1;
+y3560		A0A0H2W629	A0A0H2W629_YERPE	unreviewed	Protein CyaE	cyaE y3560 YP_2935 C6P89_01385	Yersinia pestis	WP_002214220.1;
+y3586		A0A0H2W7Y4	A0A0H2W7Y4_YERPE	unreviewed	Protein phosphatase 2C domain-containing protein	y3586 YP_2913 C6P89_01265	Yersinia pestis	WP_002210398.1;
+y3622		A0A0H2W9H8	A0A0H2W9H8_YERPE	unreviewed	Cell division protein FtsA	ftsA2 ftsA y3622 YP_3625 C6P89_18395	Yersinia pestis	WP_002210431.1;
+y3625		Q8ZIE8	MURC_YERPE	reviewed	UDP-N-acetylmuramate--L-alanine ligase (EC 6.3.2.8) (UDP-N-acetylmuramoyl-L-alanine synthetase)	murC YPO0556 y3625 YP_3628	Yersinia pestis	WP_002216457.1;YP_002345627.1;
+y3640		Q8CZQ3	Q8CZQ3_YERPE	unreviewed	Acetolactate synthase (EC 2.2.1.6)	ilvI y3640 YP_3646	Yersinia pestis	
+y3656		Q8ZII0	RAPA_YERPE	reviewed	RNA polymerase-associated protein RapA (EC 3.6.4.-) (ATP-dependent helicase HepA)	rapA hepA YPO0517 y3656 YP_3662	Yersinia pestis	WP_002220588.1;YP_002345591.1;
+y3658		Q8CKD9	Q8CKD9_YERPE	unreviewed	Uncharacterized protein	icmF3 y3658 YP_3664	Yersinia pestis	
+y3659		Q8CKD8	Q8CKD8_YERPE	unreviewed	Uncharacterized protein	y3659 YP_3665	Yersinia pestis	
+y3660		Q8CKD7	Q8CKD7_YERPE	unreviewed	Uncharacterized protein	y3660 YP_3666	Yersinia pestis	
+y3664		Q0WJF5	Q0WJF5_YERPE	unreviewed	Putative low-complexity proteins	y3664 YP_3670 C6P89_08690	Yersinia pestis	WP_002214739.1;
+y3665		Q8CKD5	Q8CKD5_YERPE	unreviewed	DUF2169 domain-containing protein (Putative low-complexity proteins)	y3665 YP_3671 C6P89_08685	Yersinia pestis	WP_002224087.1;
+y3668		A0A0H2W7R8	A0A0H2W7R8_YERPE	unreviewed	Type VI secretion system tip protein VgrG	vgrG5 y3668 YP_3672 C6P89_08680	Yersinia pestis	WP_002210474.1;
+y3671		A0A0H2W8G5	A0A0H2W8G5_YERPE	unreviewed	Type VI secretion system baseplate subunit TssF	vasA y3671 YP_3675 C6P89_08665	Yersinia pestis	WP_002210477.1;
+y3674		A0A0H2W9L2	A0A0H2W9L2_YERPE	unreviewed	Type VI secretion system contractile sheath large subunit	tssC y3674 YP_3678 C6P89_08650	Yersinia pestis	WP_002214743.1;
+y3675		Q0WJG5	Q0WJG5_YERPE	unreviewed	Type VI secretion system contractile sheath small subunit	tssB y3675 YP_3679 C6P89_08645	Yersinia pestis	WP_002210481.1;
+y3676		A0A0H2W8G8	A0A0H2W8G8_YERPE	unreviewed	Uncharacterized protein	y3676 YP_3680 C6P89_08640	Yersinia pestis	WP_002210482.1;
+y3731		Q0WJL8	Q0WJL8_YERPE	unreviewed	Lipoprotein (Putative lipoprotein) (Putative outer membrane protein)	ompA5 y3731 YP_3735 C6P89_02615	Yersinia pestis	WP_002215967.1;
+y3737		Q0WJM1	Q0WJM1_YERPE	unreviewed	DNA repair protein RadA	sms radA y3737 YP_3739 C6P89_02595	Yersinia pestis	WP_002209220.1;
+y3760		Q8CZN4	Q8CZN4_YERPE	unreviewed	Putative multidrug resistance protein	y3760	Yersinia pestis	
+y3803		Q0WKR6	Q0WKR6_YERPE	unreviewed	Putative GTP-binding factor (Putative GTPase) (Translational GTPase TypA)	bipA y3803 YP_0027 C6P89_19650	Yersinia pestis	WP_002217380.1;
+y3864		Q0WA52	Q0WA52_YERPE	unreviewed	Histidine kinase (EC 2.7.13.3)	y3864 C6P89_17685	Yersinia pestis	WP_002209524.1;
+y3891		Q8CWG4	Q8CWG4_YERPE	unreviewed	Glycerol-3-phosphate dehydrogenase (EC 1.1.5.3)	glpD y3891 YP_3299	Yersinia pestis	
+y3924		Q8CZJ8	Q8CZJ8_YERPE	unreviewed	Peptidoglycan synthetase penicillin-binding protein 1A	mrcA y3924	Yersinia pestis	
+y3936		Q8CZJ7	Q8CZJ7_YERPE	unreviewed	Cell division protein DamX	damX y3936	Yersinia pestis	WP_002223839.1;
+y3948		Q0WKD8	Q0WKD8_YERPE	unreviewed	Putative membrane receptor protein	cirA1 y3948 YP_0166	Yersinia pestis	WP_002208882.1;
+y4020		Q0WK68	Q0WK68_YERPE	unreviewed	Potassium uptake protein (Trk system potassium transporter TrkA) (Trk system potassium uptake protein)	trkA y4020 YP_0237 C6P89_18140	Yersinia pestis	WP_002209018.1;
+y4043		Q8CZI1	Q8CZI1_YERPE	unreviewed	Putative solute-binding iron ABC transport protein	fecB3 y4043 YP_3385	Yersinia pestis	
+y4088		Q0W9W2	Q0W9W2_YERPE	unreviewed	Putative exported protein	y4088 YP_3980	Yersinia pestis	WP_002228156.1;
+y4117		Q8Z9U3	YIDC_YERPE	reviewed	Membrane protein insertase YidC (Foldase YidC) (Membrane integrase YidC) (Membrane protein YidC)	yidC YPO4102 y4117 YP_4009	Yersinia pestis	WP_002220739.1;YP_002348953.1;
+y4128		Q8Z9T1	PSTB2_YERPE	reviewed	Phosphate import ATP-binding protein PstB 2 (EC 3.6.3.27) (ABC phosphate transporter 2) (Phosphate-transporting ATPase 2)	pstB2 YPO4114 y4128 YP_4021	Yersinia pestis	WP_002215562.1;YP_002348965.1;
+y4141		Q7CFM3	ATP6_YERPE	reviewed	ATP synthase subunit a (ATP synthase F0 sector subunit a) (F-ATPase subunit 6)	atpB YPO4127 y4141 YP_4034	Yersinia pestis	WP_002228150.1;YP_002348978.1;
+y4144		Q8Z9R8	MNMG_YERPE	reviewed	tRNA uridine 5-carboxymethylaminomethyl modification enzyme MnmG (Glucose-inhibited division protein A)	mnmG gidA YPO4130 y4144 YP_4037	Yersinia pestis	WP_002212259.1;YP_002348981.1;
+Y1020		A0A1U8QS12	A0A1U8QS12_YERPE	unreviewed	Putative lipoprotein	Y1020 YP_pMT035 C6P89_16125	Yersinia pestis	WP_002211796.1;YP_093911.1;
+Y1020		Q0WCB8	Q0WCB8_YERPE	unreviewed	Cytochrome O Ubiquinol oxidase subunit I	cyoB y1020 YP_0766 C6P89_06945	Yersinia pestis	WP_002208650.1;
+y0032		P28808	LCRF_YERPE	reviewed	Thermoregulatory protein LcrF	lcrF virF YPCD1.49 y5029 y0032 YP_pCD34	Yersinia pestis	NP_395183.1;NP_857733.1;NP_857928.1;WP_002212931.1;
+y0032		Q8ZAS9	LAMB1_YERPE	reviewed	Maltoporin-1 (Maltose-inducible porin 1)	lamB1 lamB YPO3711 y0032 YP_3073	Yersinia pestis	WP_002212092.1;YP_002348592.1;
+y0221		Q8D1N7	Q8D1N7_YERPE	unreviewed	Outer membrane lipoprotein (Putative outer membrane receptor)	slyB pcp2 y0221 YP_3901	Yersinia pestis	
+y0325		Q8ZAA1	BTUB_YERPE	reviewed	Vitamin B12 transporter BtuB (Cobalamin receptor) (Outer membrane cobalamin translocator)	btuB YPO3910 y0325 YP_3138	Yersinia pestis	
+y0396		Q0WAH6	Q0WAH6_YERPE	unreviewed	Outer membrane phospholipase A (Phospholipase A)	pldA y0396 YP_3214 C6P89_17470	Yersinia pestis	WP_002211483.1;
+y0543		Q56989	HMUR_YERPE	reviewed	Hemin receptor	hmuR YPO0283 y0543 YP_0438	Yersinia pestis	WP_002209062.1;YP_002345365.1;
+y0659		Q0WBC5	Q0WBC5_YERPE	unreviewed	Outer membrane protein assembly factor (Putative exported protein)	y0659 YP_0559 C6P89_02255	Yersinia pestis	WP_002210166.1;
+y0850		Q8D192	Q8D192_YERPE	unreviewed	Putative outer membrane receptor	cirA2 y0850 YP_0347	Yersinia pestis	
+y1324		Q8D0Z7	Q8D0Z7_YERPE	unreviewed	Outer membrane protein X	ompX y1324	Yersinia pestis	
+y1419		Q0WCK7	BAMC_YERPE	reviewed	Outer membrane protein assembly factor BamC	bamC dapX nlpB YPO3061 y1419 YP_2683	Yersinia pestis	WP_002208557.1;YP_002347981.1;
+y1577		Q8D0V0	Q8D0V0_YERPE	unreviewed	Long-chain fatty acid transport protein	fadL y1577	Yersinia pestis	WP_011055434.1;
+y1682		Q8D0S1	Q8D0S1_YERPE	unreviewed	Outer membrane protein X (Putative outer membrane protein)	ompX y1682 YP_2321	Yersinia pestis	
+y2167		A0A0H2W5M7	A0A0H2W5M7_YERPE	unreviewed	MipA/OmpV family protein (Putative exported protein)	y2167 YP_1955 C6P89_14250	Yersinia pestis	WP_002211680.1;
+y2358		A0A1U8QGN1	A0A1U8QGN1_YERPE	unreviewed	Hemin storage system, HmsF protein (Poly-beta-1,6-N-acetyl-D-glucosamine N-deacetylase PgaB)	hmsF y2358 YP_1696 C6P89_15525	Yersinia pestis	WP_002212043.1;
+y2359		Q8D0D4	Q8D0D4_YERPE	unreviewed	Putative outer membrane protein	hmsH y2359	Yersinia pestis	
+y2404		P46359	FYUA_YERPE	reviewed	Pesticin receptor (IRPC)	fyuA psn YPO1906 y2404 YP_1649	Yersinia pestis	WP_002212885.1;YP_002346897.1;
+y2556		Q8D092	Q8D092_YERPE	unreviewed	Putative ferrichrome receptor, TonB dependent	fcuA y2556	Yersinia pestis	
+y2735		Q8ZG77	OMPA_YERPE	reviewed	Outer membrane protein A	ompA ompA1 YPO1435 y2735 YP_1326	Yersinia pestis	WP_002213066.1;YP_002346456.1;
+y2759		Q8D051	Q8D051_YERPE	unreviewed	Putative outer membrane porin	y2759	Yersinia pestis	
+y2872		Q0WHA0	Q0WHA0_YERPE	unreviewed	Ligand-gated channel protein (Putative outer membrane iron/siderophore receptor) (Putative outer membrane protein)	yiuR y2872 YP_1279 C6P89_07895	Yersinia pestis	WP_002208782.1;
+y2966		Q7CHA0	Q7CHA0_YERPE	unreviewed	Outer membrane protein 1b (Ibc) (Outer membrane protein C, porin)	ompC ompC1 y2966 YP_0916	Yersinia pestis	
+y2983		Q8D011	Q8D011_YERPE	unreviewed	Putative outer membrane porin	y2983	Yersinia pestis	WP_002231293.1;
+y3054		Q0WHS0	Q0WHS0_YERPE	unreviewed	Peptidoglycan-associated protein	pal y3054 YP_1031 C6P89_14920	Yersinia pestis	WP_002210739.1;
+y3127		Q8ZH58	BAMA_YERPE	reviewed	Outer membrane protein assembly factor BamA	bamA yaeT YPO1052 y3127 YP_2798	Yersinia pestis	WP_002212139.1;YP_002346095.1;
+y3343		Q8CZU8	Q8CZU8_YERPE	unreviewed	Putative TonB-dependent outer membrane receptor	y3343	Yersinia pestis	
+y3404		Q8CZU1	Q8CZU1_YERPE	unreviewed	Putative OM receptor	y3404	Yersinia pestis	WP_002223671.1;
+y3480		Q0WIX6	Q0WIX6_YERPE	unreviewed	Outer membrane usher protein (Putative outer membrane usher protein)	papC y3480 C6P89_11795	Yersinia pestis	WP_002211458.1;
+y3516		A0A0H2W6T6	A0A0H2W6T6_YERPE	unreviewed	ABC-transporter outer membrane component (Outer membrane channel protein)	hasF y3516 YP_2978	Yersinia pestis	
+y3680		Q8ZIK3	LPTD_YERPE	reviewed	LPS-assembly protein LptD	lptD imp ostA YPO0495 y3680 YP_3684	Yersinia pestis	WP_002228111.1;YP_002345568.1;
+y4083		Q8CK76	Q8CK76_YERPE	unreviewed	Uncharacterized protein	y4083 YP_3975 C6P89_14395	Yersinia pestis	WP_002209617.1;
+YP_2181		Q8ZDZ6	LPP_YERPE	reviewed	Major outer membrane lipoprotein (Murein-lipoprotein)	lpp YPO2394 y1943.1 YP_2181	Yersinia pestis	WP_002227902.1;YP_002347360.1;
+y0037		P69980	YSCR_YERPE	reviewed	Yop proteins translocation protein R	yscR YPCD1.44 y5034 y0037 YP_pCD39	Yersinia pestis	NP_395178.1;NP_857738.1;NP_857933.1;WP_002212947.1;
+y0037		Q8D1T9	Q8D1T9_YERPE	unreviewed	Uncharacterized protein	y0037 YP_3068	Yersinia pestis	
+y0067		Q8D1S9	Q8D1S9_YERPE	unreviewed	Transcriptional regulator in 2-component system (Two component system response regulatory protein)	cpxR cpxR1 y0067 YP_0074	Yersinia pestis	
+y0084		O68709	O68709_YERPE	unreviewed	Putative IS1617 transposase (Putative transposase) (Transposase)	Y0084 YPCD1.93	Yersinia pestis	NP_395222.1;NP_857767.1;NP_857970.1;WP_002213260.1;
+y0084		Q8D1S4	Q8D1S4_YERPE	unreviewed	ADP-heptose--LPS heptosyltransferase II	rfaF y0084 YP_0058	Yersinia pestis	
+y0098		Q0WKP9	Q0WKP9_YERPE	unreviewed	Putative alpha helix protein (Putative stress-induced protein) (YicC family protein)	y0098 YP_0044 C6P89_09390	Yersinia pestis	WP_002208998.1;
+y0137		Q8D1R0	Q8D1R0_YERPE	unreviewed	Periplasmic serine endoprotease DegP-like (EC 3.4.21.107)	degQ y0137	Yersinia pestis	
+y0163		Q8D1Q3	Q8D1Q3_YERPE	unreviewed	Putative translation initiation inhibitor	tdcF5 y0163 YP_3844	Yersinia pestis	
+y0194		Q0WAY1	Q0WAY1_YERPE	unreviewed	Carbon-nitrogen hydrolase family protein (Putative carbon-nitrogen hydrolase)	y0194 YP_3875 C6P89_07075	Yersinia pestis	WP_002210081.1;
+y0391		Q8ZAG3	Y3839_YERPE	reviewed	UPF0261 protein YPO3839/y0391/YP_3209	YPO3839 y0391 YP_3209	Yersinia pestis	WP_002211477.1;YP_002348717.1;
+y0542		Q56990	HMUS_YERPE	reviewed	Hemin transport protein HmuS	hmuS YPO0282 y0542 YP_0437	Yersinia pestis	WP_002209061.1;YP_002345364.1;
+y0546		Q0WK21	Q0WK21_YERPE	unreviewed	OrfX protein in hemin uptake locus	y0546	Yersinia pestis	WP_002215053.1;
+y0556		Q8D1F7	Q8D1F7_YERPE	unreviewed	Putative tellurium resistance protein (Tellurite resistance protein)	terA y0556 C6P89_09050	Yersinia pestis	WP_002209075.1;
+y0596		Q0WJX2	Q0WJX2_YERPE	unreviewed	Putative exported protein (Subtilase cytotoxin subunit B)	y0596 YP_0491 C6P89_05245	Yersinia pestis	WP_002209112.1;
+y0606		Q8CWH9	Q8CWH9_YERPE	unreviewed	Aspartate ammonia-lyase (Aspartase) (EC 4.3.1.1)	aspA y0606	Yersinia pestis	WP_002232006.1;
+y0616		Q0WJV1	Q0WJV1_YERPE	unreviewed	Succinate dehydrogenase iron-sulfur subunit (EC 1.3.5.1)	frdB y0616 YP_0514 C6P89_05360	Yersinia pestis	WP_002209136.1;
+y0617		Q0WJV0	Q0WJV0_YERPE	unreviewed	Fumarate reductase flavoprotein subunit (EC 1.3.5.4)	frdA y0617 YP_0515 C6P89_05365	Yersinia pestis	WP_002209137.1;
+y0686		Q8ZBC0	RIMP_YERPE	reviewed	Ribosome maturation factor RimP	rimP YPO3498 y0686 YP_0585	Yersinia pestis	
+y0696		Q8D1D0	Q8D1D0_YERPE	unreviewed	ATP-dependent RNA helicase DeaD (EC 3.6.4.13) (Cold-shock DEAD box protein A)	deaD y0696 YP_0595	Yersinia pestis	
+y0722		Q0WBI6	Q0WBI6_YERPE	unreviewed	Alpha-D-ribose 1-methylphosphonate 5-triphosphate diphosphatase (PhnM protein) (Phosphonate metabolism protein)	phnM y0722 YP_0620 C6P89_01935	Yersinia pestis	WP_002209286.1;
+y0733		Q0WBJ5	Q0WBJ5_YERPE	unreviewed	Anaerobic ribonucleoside-triphosphate reductase	nrdD y0733 YP_0631 C6P89_01890	Yersinia pestis	WP_002209296.1;
+y0766		Q8D1B5	Q8D1B5_YERPE	unreviewed	Pyruvate dehydrogenase complex repressor (Transcriptional regulator for pyruvate dehydrogenase complex)	pdhR y0766 YP_0264	Yersinia pestis	
+y0767		A0A0H2W249	A0A0H2W249_YERPE	unreviewed	Pyruvate dehydrogenase E1 component (EC 1.2.4.1)	aceE y0767 YP_0265 C6P89_19505	Yersinia pestis	WP_002209329.1;
+y0768		A0A0H2W0C1	A0A0H2W0C1_YERPE	unreviewed	Acetyltransferase component of pyruvate dehydrogenase complex (EC 2.3.1.12)	aceF y0768 YP_0266 C6P89_19500	Yersinia pestis	WP_002209330.1;
+y0769		Q0WBM9	Q0WBM9_YERPE	unreviewed	Dihydrolipoyl dehydrogenase (EC 1.8.1.4)	lpdA y0769 YP_0268 C6P89_19495	Yersinia pestis	WP_002222081.1;
+y0818		Q8ZBN6	CYSJ_YERPE	reviewed	Sulfite reductase [NADPH] flavoprotein alpha-component (SiR-FP) (EC 1.8.1.2)	cysJ YPO3372 y0818 YP_0314	Yersinia pestis	WP_002209381.1;YP_002348264.1;
+y0870		Q9X6B0	KATG_YERPE	reviewed	Catalase-peroxidase (CP) (EC 1.11.1.21) (Antigen 5) (Peroxidase/catalase)	katG katY YPO3319 y0870 YP_0367	Yersinia pestis	WP_002209433.1;YP_002348215.1;
+y0914		Q74X11	CLPB_YERPE	reviewed	Chaperone protein ClpB	clpB YPO3275 y0914 YP_0656	Yersinia pestis	YP_002348175.1;
+y0964		Q8D170	Y3224_YERPE	reviewed	UPF0255 protein YPO3224/y0964/YP_0709	YPO3224 y0964 YP_0709	Yersinia pestis	WP_002208703.1;YP_002348126.1;
+y0966		Q8ZC08	PROB_YERPE	reviewed	Glutamate 5-kinase (EC 2.7.2.11) (Gamma-glutamyl kinase) (GK)	proB YPO3222 y0966 YP_0711	Yersinia pestis	WP_002208701.1;YP_002348124.1;
+y0978		Q8D168	Q8D168_YERPE	unreviewed	Phosphate regulon transcriptional regulatory protein (Positive response regulator for pho regulon)	phoB y0978 YP_0727	Yersinia pestis	
+y1043		A0A1U8QU40	A0A1U8QU40_YERPE	unreviewed	Uncharacterized protein	Y1043 YP_pMT013 C6P89_16015	Yersinia pestis	WP_002228782.1;YP_093889.1;
+y1043		Q8D151	Q8D151_YERPE	unreviewed	Acyl-CoA thioesterase II	tesB y1043 YP_0790	Yersinia pestis	
+y1064		A0A1U8QLC2	A0A1U8QLC2_YERPE	unreviewed	Uncharacterized protein	Y1064 YP_pMT124	Yersinia pestis	WP_002211759.1;YP_093996.1;
+y1064		P58482	HTPG_YERPE	reviewed	Chaperone protein HtpG (Heat shock protein HtpG) (High temperature protein G)	htpG YPO3119 y1064 YP_0811	Yersinia pestis	YP_002348027.1;
+y1194		Q0WDR3	Q0WDR3_YERPE	unreviewed	PhoH family protein (Phosphate starvation-inducible protein PhoH, predicted ATPase) (Putative ATP-binding protein in pho regulon)	phoH1 y1194 YP_1094 C6P89_16930	Yersinia pestis	WP_010981414.1;
+y1195		Q0WDR2	MIAB_YERPE	reviewed	tRNA-2-methylthio-N(6)-dimethylallyladenosine synthase (EC 2.8.4.3) ((Dimethylallyl)adenosine tRNA methylthiotransferase MiaB) (tRNA-i(6)A37 methylthiotransferase)	miaB YPO2620 y1195 YP_1093	Yersinia pestis	WP_002227875.1;YP_002347576.1;
+y1237		P69994	URE3_YERPE	reviewed	Urease subunit gamma (EC 3.5.1.5) (Urea amidohydrolase subunit gamma)	ureA yeuA YPO2665 y1237 YP_2466	Yersinia pestis	WP_002215288.1;YP_002347614.1;
+y1240		Q9ZFR8	UREE_YERPE	reviewed	Urease accessory protein UreE	ureE YPO2668 y1240 YP_2469	Yersinia pestis	WP_002212230.1;YP_002347617.1;
+y1242		P69992	UREG_YERPE	reviewed	Urease accessory protein UreG	ureG YPO2670 y1242 YP_2471	Yersinia pestis	WP_002212232.1;YP_002347619.1;
+y1290		Q0WDI0	Q0WDI0_YERPE	unreviewed	RNA polymerase sigma factor	rpoE y1290 YP_2515 C6P89_06595	Yersinia pestis	WP_002209672.1;
+y1295		Q8ZD74	LEPA_YERPE	reviewed	Elongation factor 4 (EF-4) (EC 3.6.5.n1) (Ribosomal back-translocase LepA)	lepA YPO2716 y1295 YP_2520	Yersinia pestis	WP_002209677.1;YP_002347663.1;
+y1298		Q8ZD71	ERA_YERPE	reviewed	GTPase Era	era YPO2719 y1298 YP_2523	Yersinia pestis	WP_002214829.1;YP_002347666.1;
+y1357		Q8ZCT9	DER_YERPE	reviewed	GTPase Der (GTP-binding protein EngA)	der engA YPO2875 y1357 YP_2741	Yersinia pestis	WP_002209813.1;YP_002347810.1;
+y1362		Q0WD32	IMDH_YERPE	reviewed	Inosine-5'-monophosphate dehydrogenase (IMP dehydrogenase) (IMPD) (IMPDH) (EC 1.1.1.205)	guaB YPO2871 y1362 YP_2737	Yersinia pestis	WP_002227862.1;YP_002347806.1;
+y1397		A0A0H2W7J2	A0A0H2W7J2_YERPE	unreviewed	Exopolyphosphatase (Putative exopolyphosphatase)	ppx y1397 YP_2704 C6P89_15425	Yersinia pestis	WP_002209783.1;
+y1455		A0A0H2W657	A0A0H2W657_YERPE	unreviewed	Putative exported protein (TIGR00156 family protein)	y1455 YP_2650 C6P89_13545	Yersinia pestis	WP_002208522.1;
+y1485		Q0WCR9	Q0WCR9_YERPE	unreviewed	PTS glucose transporter subunit IIA (PTS system, glucose-specific IIA component)	crr y1485 YP_2620 C6P89_21125	Yersinia pestis	WP_002208491.1;
+y1579		Q8ZD46	FADI_YERPE	reviewed	3-ketoacyl-CoA thiolase (EC 2.3.1.16) (ACSs) (Acetyl-CoA acyltransferase) (Acyl-CoA ligase) (Beta-ketothiolase) (Fatty acid oxidation complex subunit beta)	fadI YPO2746 y1579 YP_2418	Yersinia pestis	WP_002209704.1;YP_002347693.1;
+y1601		Q0WDC3	ACCD_YERPE	reviewed	Acetyl-coenzyme A carboxylase carboxyl transferase subunit beta (ACCase subunit beta) (Acetyl-CoA carboxylase carboxyltransferase subunit beta) (EC 2.1.3.15)	accD YPO2768 y1601 YP_2396	Yersinia pestis	WP_002209729.1;YP_002347715.1;
+y1611		Q8D0T6	Q8D0T6_YERPE	unreviewed	Putative nucleoside-diphosphate sugar epimerases (SulA family) (Putative sugar nucleotide epimerase)	y1611 YP_2386	Yersinia pestis	
+y1631		Q7CJ93	NUOB_YERPE	reviewed	NADH-quinone oxidoreductase subunit B (EC 1.6.5.11) (NADH dehydrogenase I subunit B) (NDH-1 subunit B)	nuoB YPO2554 y1631 YP_2365	Yersinia pestis	WP_002210278.1;YP_002347515.1;
+y1632		Q7CJ92	NUOCD_YERPE	reviewed	NADH-quinone oxidoreductase subunit C/D (EC 1.6.5.11) (NADH dehydrogenase I subunit C/D) (NDH-1 subunit C/D)	nuoC nuoCD nuoD YPO2553 y1632 YP_2364	Yersinia pestis	WP_002210277.1;YP_002347514.1;
+y1633		Q8D0S9	Q8D0S9_YERPE	unreviewed	NADH dehydrogenase I chain E	nuoE y1633 YP_2363	Yersinia pestis	WP_002228514.1;
+y1634		A0A0H2W4W9	A0A0H2W4W9_YERPE	unreviewed	NADH-quinone oxidoreductase subunit F (EC 1.6.5.11)	nuoF y1634 YP_2362 C6P89_16690	Yersinia pestis	WP_002210276.1;
+y1635		Q8ZDL2	NUOG_YERPE	reviewed	NADH-quinone oxidoreductase subunit G (EC 1.6.5.11) (NADH dehydrogenase I subunit G) (NDH-1 subunit G)	nuoG YPO2550 y1635 YP_2361	Yersinia pestis	WP_002210275.1;YP_002347511.1;
+y1637		Q7CJ89	NUOI_YERPE	reviewed	NADH-quinone oxidoreductase subunit I (EC 1.6.5.11) (NADH dehydrogenase I subunit I) (NDH-1 subunit I)	nuoI YPO2548 y1637 YP_2359	Yersinia pestis	WP_002210273.1;YP_002347509.1;
+y1677		Q7CJ65	DPS_YERPE	reviewed	DNA protection during starvation protein (EC 1.16.-.-)	dps YPO2510 y1677 YP_2325	Yersinia pestis	WP_002210233.1;YP_002347474.1;
+y1794		A0A1U8QPT1	A0A1U8QPT1_YERPE	unreviewed	Transcriptional regulatory protein	phoP y1794	Yersinia pestis	WP_002210917.1;
+y1845		A0A0H2W4E7	A0A0H2W4E7_YERPE	unreviewed	N-acetylmuramoyl-L-alanine amidase (Putative N-acetylmuramoyl-L-alanine amidase) (Putative regulator)	ampD3 y1845 YP_1812 C6P89_05580	Yersinia pestis	WP_002210870.1;
+y1935		Q0WEC0	Q0WEC0_YERPE	unreviewed	Fe-S cluster assembly protein SufB (Putative membrane components of an uncharacterized iron-regulated ABC-type transporter SufB)	y1935 YP_2190 C6P89_12100	Yersinia pestis	WP_002211808.1;
+y1936		Q8D0M8	Q8D0M8_YERPE	unreviewed	Putative ATP-binding component of a transport system (Putative ATP-dependent transporter)	y1936 YP_2189	Yersinia pestis	
+y1980		Q0WEH0	Q0WEH0_YERPE	unreviewed	Phage shock protein A (Phage shock protein PspA)	pspA y1980 YP_2139 C6P89_21580	Yersinia pestis	WP_002210975.1;
+y2023		Q8D0K2	Q8D0K2_YERPE	unreviewed	Aldehyde-alcohol dehydrogenase	adhE y2023	Yersinia pestis	WP_002223614.1;
+y2168		Q0WF09	Q0WF09_YERPE	unreviewed	PrkA family serine protein kinase	y2168 C6P89_14260	Yersinia pestis	WP_002211681.1;
+y2295		Q8ZEY2	KPRS_YERPE	reviewed	Ribose-phosphate pyrophosphokinase (RPPK) (EC 2.7.6.1) (5-phospho-D-ribosyl alpha-1-diphosphate) (Phosphoribosyl diphosphate synthase) (Phosphoribosyl pyrophosphate synthase) (P-Rib-PP synthase) (PRPP synthase) (PRPPase)	prs prsA YPO2013 y2295 YP_1861	Yersinia pestis	WP_002211240.1;YP_002346999.1;
+y2402		Q8D0C3	Q8D0C3_YERPE	unreviewed	Yersiniabactin thioesterase	ybtT y2402	Yersinia pestis	
+y2455		Q8D0B6	Q8D0B6_YERPE	unreviewed	Bifunctional protein PutA [Includes: Proline dehydrogenase (EC 1.5.5.2) (Proline oxidase); Delta-1-pyrroline-5-carboxylate dehydrogenase (P5C dehydrogenase) (EC 1.2.1.88) (L-glutamate gamma-semialdehyde dehydrogenase)]	putA y2455 C6P89_03550	Yersinia pestis	WP_002224448.1;
+y2551		Q0WG31	Q0WG31_YERPE	unreviewed	PTS enzyme IIAB, mannose-specific (PTS mannose transporter subunit IIAB)	manX y2551 C6P89_04490	Yersinia pestis	WP_002211069.1;
+y2739		Q0WGY5	Q0WGY5_YERPE	unreviewed	Endopeptidase La (EC 3.4.21.53)	y2739 C6P89_22160	Yersinia pestis	WP_002228003.1;
+y2766		Q8D049	MUKE_YERPE	reviewed	Chromosome partition protein MukE	mukE YPO1404 y2766 YP_1189	Yersinia pestis	YP_002346427.1;
+y2809		Q8D041	Q8D041_YERPE	unreviewed	ATP-binding component of serine protease (ATP-dependent Clp protease ATP-binding subunit)	clpA clpA1 y2809 YP_1225	Yersinia pestis	
+y3065		Q8ZH00	SUCC_YERPE	reviewed	Succinate--CoA ligase [ADP-forming] subunit beta (EC 6.2.1.5) (Succinyl-CoA synthetase subunit beta) (SCS-beta)	sucC YPO1115 y3065 YP_1041	Yersinia pestis	WP_002210728.1;YP_002346158.1;
+y3066		A0A0H2W3J8	A0A0H2W3J8_YERPE	unreviewed	Dihydrolipoyllysine-residue succinyltransferase component of 2-oxoglutarate dehydrogenase complex (EC 2.3.1.61) (2-oxoglutarate dehydrogenase complex component E2)	sucB y3066 YP_1042 C6P89_18685	Yersinia pestis	WP_002210727.1;
+y3068		Q0WHT3	Q0WHT3_YERPE	unreviewed	Succinate dehydrogenase iron-sulfur subunit (EC 1.3.5.1)	sdhB y3068 YP_1044 C6P89_18695	Yersinia pestis	WP_002210725.1;
+y3069		Q0WHT4	Q0WHT4_YERPE	unreviewed	Succinate dehydrogenase flavoprotein subunit (EC 1.3.5.1)	sdhA y3069 YP_1045 C6P89_18700	Yersinia pestis	WP_002210724.1;
+y3123		Q8ZH56	LPXA_YERPE	reviewed	Acyl-[acyl-carrier-protein]--UDP-N-acetylglucosamine O-acyltransferase (UDP-N-acetylglucosamine acyltransferase) (EC 2.3.1.129)	lpxA YPO1056 y3123 YP_2794	Yersinia pestis	WP_002212143.1;YP_002346099.1;
+y3124		Q8ZH57	FABZ_YERPE	reviewed	3-hydroxyacyl-[acyl-carrier-protein] dehydratase FabZ (EC 4.2.1.59) ((3R)-hydroxymyristoyl-[acyl-carrier-protein] dehydratase) ((3R)-hydroxymyristoyl-ACP dehydrase) (Beta-hydroxyacyl-ACP dehydratase)	fabZ YPO1055 y3124 YP_2795	Yersinia pestis	WP_002212142.1;YP_002346098.1;
+y3126		P58607	SKP_YERPE	reviewed	Chaperone protein Skp	skp ompH YPO1053 y3126 YP_2797	Yersinia pestis	WP_002212140.1;YP_002346096.1;
+y3219		Q0WIK3	Q0WIK3_YERPE	unreviewed	PTS family enzyme IIB component 2 (EIIB-AGA) (PTS system mannose/fructose/N-acetylgalactosamine-transporter subunit IIB) (Putative PTS transport protein)	agaV manX2 y3219 YP_3530 C6P89_10585	Yersinia pestis	WP_002209878.1;
+y3295		Q8CZW2	Q8CZW2_YERPE	unreviewed	Putative monooxygenase	visC y3295 YP_3605	Yersinia pestis	
+y3555		Q0WJ46	Q0WJ46_YERPE	unreviewed	Aminotransferase (EC 2.6.1.-)	avtA2 y3555 YP_2940 C6P89_01415	Yersinia pestis	WP_002210373.1;
+y3590		Q0WJ78	RLMG_YERPE	reviewed	Ribosomal RNA large subunit methyltransferase G (EC 2.1.1.174) (23S rRNA m2G1835 methyltransferase) (rRNA (guanine-N(2)-)-methyltransferase RlmG)	rlmG YPO0588 y3590 YP_2908	Yersinia pestis	WP_002210402.1;YP_002345660.1;
+y3609		A0A0H2W6M3	A0A0H2W6M3_YERPE	unreviewed	DUF883 domain-containing protein (Putative membrane protein)	y3609 YP_2890 C6P89_20560	Yersinia pestis	WP_002210418.1;
+y3617		Q7CGB6	SECA_YERPE	reviewed	Protein translocase subunit SecA	secA YPO0564 y3617 YP_3620	Yersinia pestis	WP_002210426.1;YP_002345635.1;
+y3621		Q0WJA7	Q0WJA7_YERPE	unreviewed	Cell division protein FtsZ	ftsZ y3621 C6P89_18400	Yersinia pestis	WP_002210430.1;
+y3657		Q8CKE0	Q8CKE0_YERPE	unreviewed	Uncharacterized protein	y3657 YP_3663	Yersinia pestis	
+y3669		Q0WJF9	Q0WJF9_YERPE	unreviewed	Putative ATP-dependent protease (Putative Clp ATPase) (Type VI secretion system ATPase TssH)	clpB2 clpV y3669 YP_3673 C6P89_08675	Yersinia pestis	WP_002214742.1;
+y3753		Q7CG56	RSMC_YERPE	reviewed	Ribosomal RNA small subunit methyltransferase C (EC 2.1.1.172) (16S rRNA m2G1207 methyltransferase) (rRNA (guanine-N(2)-)-methyltransferase RsmC)	rsmC YPO0427 y3753 YP_3754	Yersinia pestis	WP_002209206.1;YP_002345503.1;
+y3773		Q7CG47	LSRF_YERPE	reviewed	3-hydroxy-5-phosphonooxypentane-2,4-dione thiolase (EC 2.3.1.245)	lsrF YPO0408 y3773 YP_3773	Yersinia pestis	WP_002209188.1;YP_002345485.1;
+y3859		Q8ZA49	USPA_YERPE	reviewed	Universal stress protein A	uspA YPO3970 y3859 YP_3333	Yersinia pestis	WP_002209528.1;YP_002348841.1;
+y3916		A0A0H2W212	A0A0H2W212_YERPE	unreviewed	Response regulator (Sensor, EnvZ) (Transcriptional regulatory protein) (Two-component system response regulator OmpR)	ompR1 ompR y3916 YP_0137 C6P89_04765	Yersinia pestis	WP_002208914.1;
+y4101		Q8Z9V6	IBPB_YERPE	reviewed	Small heat shock protein IbpB (16 kDa heat shock protein B)	ibpB YPO4084 y4101 YP_3993	Yersinia pestis	WP_002209635.1;YP_002348938.1;
+y4127		Q8CZF8	Q8CZF8_YERPE	unreviewed	Phosphate-specific transport system accessory protein PhoU	phoU y4127 YP_4020 C6P89_11660	Yersinia pestis	WP_002220747.1;
+y4133		Q8Z9S7	GLMU_YERPE	reviewed	Bifunctional protein GlmU [Includes: UDP-N-acetylglucosamine pyrophosphorylase (EC 2.7.7.23) (N-acetylglucosamine-1-phosphate uridyltransferase); Glucosamine-1-phosphate N-acetyltransferase (EC 2.3.1.157)]	glmU YPO4119 y4133 YP_4026	Yersinia pestis	WP_002215550.1;YP_002348970.1;
+y4134		P58647	ATPE_YERPE	reviewed	ATP synthase epsilon chain (ATP synthase F1 sector epsilon subunit) (F-ATPase epsilon subunit)	atpC YPO4120 y4134 YP_4027	Yersinia pestis	WP_002215546.1;YP_002348971.1;
+y4135		Q7CFM8	ATPB_YERPE	reviewed	ATP synthase subunit beta (EC 3.6.3.14) (ATP synthase F1 sector subunit beta) (F-ATPase subunit beta)	atpD YPO4121 y4135 YP_4028	Yersinia pestis	WP_002220753.1;YP_002348972.1;
+y4136		Q8Z9S5	ATPG_YERPE	reviewed	ATP synthase gamma chain (ATP synthase F1 sector gamma subunit) (F-ATPase gamma subunit)	atpG YPO4122 y4136 YP_4029	Yersinia pestis	WP_002220756.1;YP_002348973.1;
+y4137		Q8Z9S4	ATPA_YERPE	reviewed	ATP synthase subunit alpha (EC 3.6.3.14) (ATP synthase F1 sector subunit alpha) (F-ATPase subunit alpha)	atpA YPO4123 y4137 YP_4030	Yersinia pestis	WP_002220758.1;YP_002348974.1;
+y4138		Q7CFM5	ATPD_YERPE	reviewed	ATP synthase subunit delta (ATP synthase F(1) sector subunit delta) (F-type ATPase subunit delta) (F-ATPase subunit delta)	atpH YPO4124 y4138 YP_4031	Yersinia pestis	WP_002220760.1;YP_002348975.1;
+y4139		Q7CFM4	ATPF_YERPE	reviewed	ATP synthase subunit b (ATP synthase F(0) sector subunit b) (ATPase subunit I) (F-type ATPase subunit b) (F-ATPase subunit b)	atpF YPO4125 y4139 YP_4032	Yersinia pestis	WP_002220762.1;YP_002348976.1;
+y0294		Q8ZJJ5	HSLU_YERPE	reviewed	ATP-dependent protease ATPase subunit HslU (Unfoldase HslU)	hslU YPO0105 y0294 YP_0107	Yersinia pestis	WP_002208943.1;YP_002345195.1;
+y0609		Q8ZIY3	CH60_YERPE	reviewed	60 kDa chaperonin (GroEL protein) (Protein Cpn60)	groL groEL mopA YPO0351 y0609 YP_0506	Yersinia pestis	WP_002209128.1;YP_002345429.1;
+y0651		A0A0H2W363	A0A0H2W363_YERPE	unreviewed	Peptidyl-prolyl cis-trans isomerase (EC 5.2.1.8)	fklB y0651 YP_0551 C6P89_02295	Yersinia pestis	WP_002228198.1;
+y0687		Q8D1D2	Q8D1D2_YERPE	unreviewed	Transcription termination/antitermination protein NusA	nusA y0687	Yersinia pestis	
+y0694		Q0WBF9	PNP_YERPE	reviewed	Polyribonucleotide nucleotidyltransferase (EC 2.7.7.8) (Polynucleotide phosphorylase) (PNPase)	pnp YPO3490 y0694 YP_0593	Yersinia pestis	WP_002209259.1;YP_002348379.1;
+y0807		Q0WBR4	Q0WBR4_YERPE	unreviewed	Periplasmic serine endoprotease DegP-like (EC 3.4.21.107)	htrA gsrA y0807 YP_0303 C6P89_00525	Yersinia pestis	WP_002209370.1;
+y0815		Q8D1A0	Q8D1A0_YERPE	unreviewed	Superoxide dismutase [Cu-Zn] (EC 1.15.1.1)	sodC y0815	Yersinia pestis	WP_002209378.1;
+y0988		Q0WC89	Q0WC89_YERPE	unreviewed	Peroxiredoxin (Putative alkyl hydroperoxide reductase subunit c) (Putative peroxidase)	ahpC y0988 YP_0737 C6P89_06180	Yersinia pestis	WP_002208675.1;
+y1026		A0A1U8QKQ0	A0A1U8QKQ0_YERPE	unreviewed	Uncharacterized protein	Y1026 YP_pMT029 C6P89_16095	Yersinia pestis	WP_002211790.1;YP_093905.1;
+y1026		Q8ZC64	TIG_YERPE	reviewed	Trigger factor (TF) (EC 5.2.1.8) (PPIase)	tig YPO3158 y1026 YP_0773	Yersinia pestis	WP_002208643.1;YP_002348063.1;
+y1029		A0A1U8QL38	A0A1U8QL38_YERPE	unreviewed	DNA-binding protein	Y1029 C6P89_16080	Yersinia pestis	NP_857661.1;WP_002211788.1;YP_093902.1;
+y1029		Q8D154	Q8D154_YERPE	unreviewed	Lon protease (EC 3.4.21.53) (ATP-dependent protease La)	lon y1029	Yersinia pestis	
+y1239		Q9ZFR9	URE1_YERPE	reviewed	Urease subunit alpha (EC 3.5.1.5) (Urea amidohydrolase subunit alpha)	ureC YPO2667 y1239 YP_2468	Yersinia pestis	WP_002212229.1;YP_002347616.1;
+y1363		Q8ZCU4	GUAA_YERPE	reviewed	GMP synthase [glutamine-hydrolyzing] (EC 6.3.5.2) (GMP synthetase) (Glutamine amidotransferase)	guaA YPO2870 y1363 YP_2736	Yersinia pestis	WP_002209807.1;YP_002347805.1;
+y1620		Q7CJ96	PTA_YERPE	reviewed	Phosphate acetyltransferase (EC 2.3.1.8) (Phosphotransacetylase)	pta YPO2567 y1620 YP_2378	Yersinia pestis	WP_002225867.1;YP_002347528.1;
+y2394		A0A1U8QXA0	A0A1U8QXA0_YERPE	unreviewed	Anthranilate synthase	ybtS y2394	Yersinia pestis	WP_000703040.1;
+y2399		Q0WFN6	Q0WFN6_YERPE	unreviewed	HMWP2 nonribosomal peptide synthetase (Non-ribosomal peptide synthetase)	irp2 y2399 C6P89_10095	Yersinia pestis	WP_002212775.1;
+y2400		A0A1U8QLS0	A0A1U8QLS0_YERPE	unreviewed	HMWP1 nonribosomal peptide/polyketide synthase	irp1 y2400	Yersinia pestis	WP_002212777.1;
+y2401		Q8D0C4	Q8D0C4_YERPE	unreviewed	Thiazolinyl-S-HMWP1 reductase (Yersiniabactin biosynthetic protein YbtU)	ybtU y2401 YP_1652	Yersinia pestis	
+y2403		A0A1U8QEL9	A0A1U8QEL9_YERPE	unreviewed	(2,3-dihydroxybenzoyl)adenylate synthase (Salicyl-AMP ligase) (Yersiniabactin siderophore biosynthetic protein)	ybtE y2403 YP_1650 C6P89_10075	Yersinia pestis	WP_001088826.1;
+y3055		Q8ZGZ1	TOLB_YERPE	reviewed	Tol-Pal system protein TolB	tolB YPO1124 y3055 YP_1032	Yersinia pestis	WP_002210738.1;YP_002346167.1;
+y3067		A0A0H2W1U8	A0A0H2W1U8_YERPE	unreviewed	2-oxoglutarate dehydrogenase (Decarboxylase component) (2-oxoglutarate dehydrogenase E1 component)	sucA y3067 YP_1043 C6P89_18690	Yersinia pestis	WP_002210726.1;
+y3314		Q8ZHG7	METK_YERPE	reviewed	S-adenosylmethionine synthase (AdoMet synthase) (EC 2.5.1.6) (MAT) (Methionine adenosyltransferase)	metK YPO0931 y3314 YP_3512	Yersinia pestis	WP_002209971.1;YP_002345978.1;
+y3673		A0A0H2W7S3	A0A0H2W7S3_YERPE	unreviewed	Type VI secretion system tube protein Hcp	y3673 YP_3677 C6P89_08655	Yersinia pestis	WP_002210479.1;
+y3706		Q8ZIM7	DNAK_YERPE	reviewed	Chaperone protein DnaK (HSP70) (Heat shock 70 kDa protein) (Heat shock protein 70)	dnaK YPO0468 y3706 YP_3712	Yersinia pestis	WP_002209248.1;YP_002345540.1;
+y3985		Q8ZJB3	EFG_YERPE	reviewed	Elongation factor G (EF-G)	fusA YPO0202 y3985 YP_0201	Yersinia pestis	WP_002212325.1;YP_002345284.1;
+y3986		Q8ZJB2	EFTU1_YERPE	reviewed	Elongation factor Tu-A (EF-Tu-A)	tufA YPO0203 y3986 YP_0202	Yersinia pestis	WP_002212326.1;YP_002345285.1;
+y4015		Q8ZJ87	RPOA_YERPE	reviewed	DNA-directed RNA polymerase subunit alpha (RNAP subunit alpha) (EC 2.7.7.6) (RNA polymerase subunit alpha) (Transcriptase subunit alpha)	rpoA YPO0234 y4015 YP_0232	Yersinia pestis	WP_002209013.1;YP_002345315.1;
+Y1069		Q8D148	Q8D148_YERPE	unreviewed	Putative CDP-D-glucose-4,6-dehydratase	y1069	Yersinia pestis	WP_002215987.1;
+y0048		P69959	LCRR_YERPE	reviewed	Low calcium response locus protein R	lcrR YPCD1.33c y5045 y0048 YP_pCD50	Yersinia pestis	NP_395167.1;NP_857749.1;NP_857944.1;WP_002220918.1;
+y0048		Q8CLW7	Q8CLW7_YERPE	unreviewed	Fructose-1,6-bisphosphatase	glpX y0048 YP_0093	Yersinia pestis	
+y0161		Q8ZB39	PYRB_YERPE	reviewed	Aspartate carbamoyltransferase (EC 2.1.3.2) (Aspartate transcarbamylase) (ATCase)	pyrB YPO3588 y0161 YP_3842	Yersinia pestis	WP_002210111.1;YP_002348473.1;
+y0223		Q8D1N6	Q8D1N6_YERPE	unreviewed	Cold shock-like protein	cspI y0223	Yersinia pestis	
+y0244		Q8ZB04	SSUD_YERPE	reviewed	Alkanesulfonate monooxygenase (EC 1.14.14.5) (FMNH2-dependent aliphatic sulfonate monooxygenase)	ssuD YPO3625 y0244 YP_3922	Yersinia pestis	WP_002210034.1;YP_002348510.1;
+y0303		A0A0H2W0Y3	A0A0H2W0Y3_YERPE	unreviewed	Bifunctional aspartokinase/homoserine dehydrogenase [Includes: Aspartokinase (EC 2.7.2.4); Homoserine dehydrogenase (EC 1.1.1.3)]	metL metM y0303 YP_0118 C6P89_18995	Yersinia pestis	WP_002208934.1;
+y0308		Q8ZA84	CAPP_YERPE	reviewed	Phosphoenolpyruvate carboxylase (PEPC) (PEPCase) (EC 4.1.1.31)	ppc YPO3929 y0308 YP_3121	Yersinia pestis	WP_002209491.1;YP_002348802.1;
+y0345		Q8ZAC2	ILVC_YERPE	reviewed	Ketol-acid reductoisomerase (NADP(+)) (KARI) (EC 1.1.1.86) (Acetohydroxy-acid isomeroreductase) (AHIR) (Alpha-keto-beta-hydroxylacyl reductoisomerase) (Ketol-acid reductoisomerase type 2) (Ketol-acid reductoisomerase type II)	ilvC YPO3888 y0345 YP_3158	Yersinia pestis	WP_002212007.1;YP_002348764.1;
+y0361		Q0WAE3	Q0WAE3_YERPE	unreviewed	Transcription termination factor Rho (EC 3.6.4.-) (ATP-dependent helicase Rho)	rho y0361 YP_3178 C6P89_10325	Yersinia pestis	WP_002211989.1;
+y0366		Q8D1K5	Q8D1K5_YERPE	unreviewed	dTDP-glucose 4,6-dehydratase (EC 4.2.1.46)	rffG y0366 YP_3183	Yersinia pestis	
+y0401		Q8D1J6	Q8D1J6_YERPE	unreviewed	Putative haloacid dehalogenase-like hydrolase	cof3 y0401 YP_3219	Yersinia pestis	
+y0483		Q8ZAP4	RL7_YERPE	reviewed	50S ribosomal protein L7/L12	rplL YPO3748 y0483 YP_3111	Yersinia pestis	WP_002210675.1;YP_002348628.1;
+y0484		Q8ZAP5	RPOB_YERPE	reviewed	DNA-directed RNA polymerase subunit beta (RNAP subunit beta) (EC 2.7.7.6) (RNA polymerase subunit beta) (Transcriptase subunit beta)	rpoB YPO3747 y0484 YP_3110	Yersinia pestis	WP_002210676.1;YP_002348627.1;
+y0485		Q8D1H3	RPOC_YERPE	reviewed	DNA-directed RNA polymerase subunit beta' (RNAP subunit beta') (EC 2.7.7.6) (RNA polymerase subunit beta') (Transcriptase subunit beta')	rpoC YPO3746 y0485 YP_3109	Yersinia pestis	WP_002210677.1;YP_002348626.1;
+y0557		A0A0H2W1N6	A0A0H2W1N6_YERPE	unreviewed	Putative tellurium resistance protein (Tellurite resistance protein) (Tellurium resistance protein TerB)	terB y0557 YP_0454 C6P89_09055	Yersinia pestis	WP_002209076.1;
+y0638		Q8ZIV4	RLMB_YERPE	reviewed	23S rRNA (guanosine-2'-O-)-methyltransferase RlmB (EC 2.1.1.185) (23S rRNA (guanosine2251 2'-O)-methyltransferase) (23S rRNA Gm2251 2'-O-methyltransferase)	rlmB spoU YPO0381 y0638 YP_0537	Yersinia pestis	WP_002209161.1;YP_002345459.1;
+y0645		Q8ZB81	RS6_YERPE	reviewed	30S ribosomal protein S6	rpsF YPO3539 y0645 YP_0542	Yersinia pestis	WP_002210153.1;YP_002348428.1;
+y0647		Q8ZB84	RL9_YERPE	reviewed	50S ribosomal protein L9	rplI YPO3536 y0647 YP_0545	Yersinia pestis	WP_002210156.1;YP_002348425.1;
+y0668		P61892	MDH_YERPE	reviewed	Malate dehydrogenase (EC 1.1.1.37)	mdh YPO3516 y0668 YP_0567	Yersinia pestis	WP_002210174.1;YP_002348405.1;
+y0672		Q0WBD7	RL21_YERPE	reviewed	50S ribosomal protein L21	rplU YPO3512 y0672 YP_0571	Yersinia pestis	WP_002210178.1;YP_002348401.1;
+y0688		Q8ZBC2	IF2_YERPE	reviewed	Translation initiation factor IF-2	infB YPO3496 y0688 YP_0587	Yersinia pestis	WP_002223151.1;YP_002348385.1;
+y0689		Q8ZBC3	RBFA_YERPE	reviewed	Ribosome-binding factor A	rbfA YPO3495 y0689 YP_0588	Yersinia pestis	WP_002209255.1;YP_002348384.1;
+y0784		Q8ZBK6	PAND_YERPE	reviewed	Aspartate 1-decarboxylase (EC 4.1.1.11) (Aspartate alpha-decarboxylase) [Cleaved into: Aspartate 1-decarboxylase beta chain; Aspartate 1-decarboxylase alpha chain]	panD YPO3403 y0784 YP_0282	Yersinia pestis	WP_002209347.1;YP_002348295.1;
+y0785		Q8ZBK7	PANC_YERPE	reviewed	Pantothenate synthetase (PS) (EC 6.3.2.1) (Pantoate--beta-alanine ligase) (Pantoate-activating enzyme)	panC YPO3402 y0785 YP_0283	Yersinia pestis	WP_002209348.1;YP_002348294.1;
+y0814		Q8ZBN2	ENO_YERPE	reviewed	Enolase (EC 4.2.1.11) (2-phospho-D-glycerate hydro-lyase) (2-phosphoglycerate dehydratase)	eno YPO3376 y0814 YP_0310	Yersinia pestis	WP_002209377.1;YP_002348268.1;
+y0843		Q8D193	Q8D193_YERPE	unreviewed	Putative transcriptional regulator	y0843	Yersinia pestis	
+y0881		P37858	RECA_YERPE	reviewed	Protein RecA (Recombinase A)	recA YPO3307 y0881 YP_0379	Yersinia pestis	WP_002209446.1;YP_002348203.1;
+y0892		Q0WBZ6	Q0WBZ6_YERPE	unreviewed	Signal recognition particle protein (Fifty-four homolog)	ffh y0892 YP_0389 C6P89_00060	Yersinia pestis	WP_002209456.1;
+y0895		Q8ZBU8	RIMM_YERPE	reviewed	Ribosome maturation factor RimM	rimM YPO3294 y0895 YP_0392	Yersinia pestis	WP_002209459.1;YP_002348190.1;
+y0904		A0A0H2W2V0	A0A0H2W2V0_YERPE	unreviewed	T-protein	tyrA y0904 YP_0399 C6P89_00015	Yersinia pestis	WP_002209465.1;
+y0960		Q0WC56	Q0WC56_YERPE	unreviewed	Aminoacyl-histidine dipeptidase (Aminoacyl-histidine dipeptidase (Peptidase D)) (Beta-Ala-His dipeptidase)	pepD pepD1 y0960 YP_0703 C6P89_06030	Yersinia pestis	WP_002208707.1;
+y1315		Q8D0Z8	Q8D0Z8_YERPE	unreviewed	Putative 2-component transcriptional regulator	y1315	Yersinia pestis	
+y1331		A0A0H2W666	A0A0H2W666_YERPE	unreviewed	Inositol-1-monophosphatase (EC 3.1.3.25)	suhB y1331 YP_2555 C6P89_10985	Yersinia pestis	WP_002213305.1;
+y1417		Q8D0Y3	Q8D0Y3_YERPE	unreviewed	Bacterioferritin comigratory protein	bcp y1417 YP_2686	Yersinia pestis	
+y1487		A0A0H2W631	A0A0H2W631_YERPE	unreviewed	Phosphoenolpyruvate-protein phosphotransferase (EC 2.7.3.9) (Phosphotransferase system, enzyme I)	ptsI y1487 YP_2619 C6P89_21120	Yersinia pestis	WP_002208490.1;
+y1489		A0A0H2W5D6	A0A0H2W5D6_YERPE	unreviewed	Cysteine synthase (EC 2.5.1.47)	cysK2 cysK y1489 YP_2617 C6P89_21110	Yersinia pestis	WP_002222180.1;
+y1507		Q0WCT9	Q0WCT9_YERPE	unreviewed	Putative aminotransferase	y1507	Yersinia pestis	WP_002211613.1;
+y1777		A0A0H2W6L6	A0A0H2W6L6_YERPE	unreviewed	NAD(P)/FAD-dependent oxidoreductase (NADH dehydrogenase) (Respiratory NADH dehydrogenase)	ndh y1777 YP_2237 C6P89_21500	Yersinia pestis	WP_002213097.1;
+y1876		Q0WG71	Q0WG71_YERPE	unreviewed	DNA-binding transcriptional regulator KdgR (IclR-family transcriptional regulatory protein) (Putative regulator)	kdgR y1876 YP_1739 C6P89_14660	Yersinia pestis	WP_002210840.1;
+y1947		Q0WED2	Q0WED2_YERPE	unreviewed	Cyclopropane fatty acyl phospholipid synthase	cfa y1947	Yersinia pestis	WP_002210940.1;
+y1990		Q8ZE42	TPX_YERPE	reviewed	Thiol peroxidase (Tpx) (EC 1.11.1.15) (Peroxiredoxin tpx) (Prx) (Thioredoxin peroxidase)	tpx YPO2342 y1990 YP_2129	Yersinia pestis	WP_002210984.1;YP_002347309.1;
+y2067		Q0WEU1	Q0WEU1_YERPE	unreviewed	Lipopolysaccharide assembly protein B	lapB y2067 YP_2024 C6P89_01070	Yersinia pestis	WP_002210615.1;
+y2101		A0A0H2W4D0	A0A0H2W4D0_YERPE	unreviewed	Oxidoreductase (Putative oxidoreductase)	mviM4 y2101 YP_2055 C6P89_00910	Yersinia pestis	WP_002210585.1;
+y2132		Q8ZE82	FNR_YERPE	reviewed	Fumarate and nitrate reduction regulatory protein	fnr YPO2300 y2132 YP_2085	Yersinia pestis	WP_002211022.1;YP_002347267.1;
+y2139		Q8D0H1	Q8D0H1_YERPE	unreviewed	Response transcriptional regulatory protein (RstB sensor) (Two-component regulatory system, response regulator protein)	rstA y2139 YP_2093	Yersinia pestis	
+y2165		A0A0H2W614	A0A0H2W614_YERPE	unreviewed	Glyceraldehyde-3-phosphate dehydrogenase (EC 1.2.1.-)	gapA y2165 YP_1957 C6P89_14240	Yersinia pestis	WP_002211678.1;
+y2175		Q0WF16	Q0WF16_YERPE	unreviewed	Putative sporulation protein (SpoVR family protein)	spoVR y2175 YP_1947 C6P89_14295	Yersinia pestis	WP_002211687.1;
+y2238		Q8D0F5	Q8D0F5_YERPE	unreviewed	Inactive homologs of metal-dependent proteases, putative molecular chaperones	y2238 YP_1915	Yersinia pestis	
+y2244		Q8D0F3	Q8D0F3_YERPE	unreviewed	Glucose-6-phosphate 1-dehydrogenase (G6PD) (EC 1.1.1.49)	zwf y2244 YP_1909	Yersinia pestis	
+y2262		Q7CIB6	CMOB_YERPE	reviewed	tRNA U34 carboxymethyltransferase (EC 2.5.1.-)	cmoB YPO2049 y2262 YP_1892	Yersinia pestis	WP_002211208.1;YP_002347031.1;
+y2290		Q8ZEX8	RF1_YERPE	reviewed	Peptide chain release factor 1 (RF-1)	prfA YPO2017 y2290 YP_1865	Yersinia pestis	WP_002211236.1;YP_002347003.1;
+y2524		Q8D099	Q8D099_YERPE	unreviewed	Ferritin (EC 1.16.3.2)	ftn y2524	Yersinia pestis	
+y2751		Q7CHK7	RLMKL_YERPE	reviewed	Ribosomal RNA large subunit methyltransferase K/L [Includes: 23S rRNA m2G2445 methyltransferase (EC 2.1.1.173) (rRNA (guanine-N(2)-)-methyltransferase RlmL); 23S rRNA m7G2069 methyltransferase (EC 2.1.1.264) (rRNA (guanine-N(7)-)-methyltransferase RlmK)]	rlmL YPO1418 y2751 YP_1175	Yersinia pestis	WP_002211293.1;YP_002346441.1;
+y2755		Q8ZG91	PYRD_YERPE	reviewed	Dihydroorotate dehydrogenase (quinone) (EC 1.3.5.2) (DHOdehase) (DHOD) (DHODase) (Dihydroorotate oxidase)	pyrD YPO1415 y2755 YP_1178	Yersinia pestis	WP_002211296.1;YP_002346438.1;
+y2781		Q0WH23	Q0WH23_YERPE	unreviewed	30S ribosomal protein S1	rpsA y2781 YP_1201 C6P89_11390	Yersinia pestis	WP_002211323.1;
+y2821		A0A0H2W410	A0A0H2W410_YERPE	unreviewed	Pyruvate dehydrogenase (Cytochrome) (Pyruvate oxidase) (Ubiquinone-dependent pyruvate dehydrogenase)	poxB y2821 YP_1237 C6P89_15610	Yersinia pestis	WP_002211361.1;
+y3119		Q8ZH52	ACCA_YERPE	reviewed	Acetyl-coenzyme A carboxylase carboxyl transferase subunit alpha (ACCase subunit alpha) (Acetyl-CoA carboxylase carboxyltransferase subunit alpha) (EC 2.1.3.15)	accA YPO1060 y3119 YP_2790	Yersinia pestis	WP_002212147.1;YP_002346103.1;
+y3135		Q8ZH65	EFTS_YERPE	reviewed	Elongation factor Ts (EF-Ts)	tsf YPO1045 y3135 YP_2806	Yersinia pestis	WP_002212132.1;YP_002346088.1;
+y3137		Q8ZH66	RS2_YERPE	reviewed	30S ribosomal protein S2	rpsB YPO1044 y3137 YP_2807	Yersinia pestis	WP_002221800.1;YP_002346087.1;
+y3307		A0A0H2W861	A0A0H2W861_YERPE	unreviewed	Class II fructose-bisphosphate aldolase (Fructose-bisphosphate aldolase class II) (Fructose-bisphosphate aldolase, class II)	fbaA fba y3307 YP_3520 C6P89_13435	Yersinia pestis	WP_002209962.1;
+y3310		Q0WIB4	Q0WIB4_YERPE	unreviewed	Transketolase (EC 2.2.1.1)	tktA tkt tktA3 y3310 YP_3516 C6P89_13000	Yersinia pestis	WP_002209965.1;
+y3499		A0A0H2W7R1	A0A0H2W7R1_YERPE	unreviewed	Alcohol dehydrogenase (Putative iron-containing alcohol dehydrogenase) (Putative oxidoreductase)	y3499 YP_2993 C6P89_01695	Yersinia pestis	WP_002212174.1;
+y3524		Q8ZI60	HLDE_YERPE	reviewed	Bifunctional protein HldE [Includes: D-beta-D-heptose 7-phosphate kinase (EC 2.7.1.167) (D-beta-D-heptose 7-phosphotransferase) (D-glycero-beta-D-manno-heptose-7-phosphate kinase); D-beta-D-heptose 1-phosphate adenylyltransferase (EC 2.7.7.70) (D-glycero-beta-D-manno-heptose 1-phosphate adenylyltransferase)]	hldE rfaE waaE YPO0654 y3524 YP_2969	Yersinia pestis	WP_002212193.1;YP_002345722.1;
+y3529		Q8ZI64	CCA_YERPE	reviewed	Multifunctional CCA protein [Includes: CCA-adding enzyme (EC 2.7.7.72) (CCA tRNA nucleotidyltransferase) (tRNA CCA-pyrophosphorylase) (tRNA adenylyl-/cytidylyl-transferase) (tRNA nucleotidyltransferase) (tRNA-NT); 2'-nucleotidase (EC 3.1.3.-); 2',3'-cyclic phosphodiesterase (EC 3.1.4.-); Phosphatase (EC 3.1.3.-)]	cca YPO0650 y3529 YP_2965	Yersinia pestis	WP_002212197.1;YP_002345718.1;
+y3537		Q8CZR5	Q8CZR5_YERPE	unreviewed	RNA polymerase sigma factor RpoD (Sigma-70)	rpoD y3537	Yersinia pestis	
+y3630		Q0WJB6	Q0WJB6_YERPE	unreviewed	UDP-N-acetylmuramoyl-tripeptide--D-alanyl-D-alanine ligase (EC 6.3.2.10) (D-alanyl-D-alanine-adding enzyme)	murF y3630 YP_3633 C6P89_18355	Yersinia pestis	WP_002210438.1;
+y3631		Q8ZIF4	MURE_YERPE	reviewed	UDP-N-acetylmuramoyl-L-alanyl-D-glutamate--2,6-diaminopimelate ligase (EC 6.3.2.13) (Meso-A2pm-adding enzyme) (Meso-diaminopimelate-adding enzyme) (UDP-MurNAc-L-Ala-D-Glu:meso-diaminopimelate ligase) (UDP-MurNAc-tripeptide synthetase) (UDP-N-acetylmuramyl-tripeptide synthetase)	murE YPO0550 y3631 YP_3634	Yersinia pestis	WP_002228101.1;YP_002345621.1;
+y3693		Q8ZIL5	CARA_YERPE	reviewed	Carbamoyl-phosphate synthase small chain (EC 6.3.5.5) (Carbamoyl-phosphate synthetase glutamine chain)	carA YPO0481 y3693 YP_3698	Yersinia pestis	WP_002224759.1;YP_002345554.1;
+y3697		P58680	ISPH_YERPE	reviewed	4-hydroxy-3-methylbut-2-enyl diphosphate reductase (HMBPP reductase) (EC 1.17.7.4)	ispH lytB YPO0477 y3697 YP_3702	Yersinia pestis	WP_002210506.1;YP_002345550.1;
+y3804		Q8CZM5	Q8CZM5_YERPE	unreviewed	Glutamine synthetase (EC 6.3.1.2)	glnA y3804	Yersinia pestis	
+y3858		Q8CZK9	Q8CZK9_YERPE	unreviewed	Glutamate dehydrogenase	gdhA y3858	Yersinia pestis	
+y3913		Q0WKG8	Q0WKG8_YERPE	unreviewed	Putative RNA binding protein, Contains S1 domain (RNA-binding transcriptional accessory protein)	y3913 YP_0135 C6P89_04755	Yersinia pestis	WP_002208916.1;
+y3990		Q8ZJA9	RL3_YERPE	reviewed	50S ribosomal protein L3	rplC YPO0210 y3990 YP_0207	Yersinia pestis	WP_002218932.1;YP_002345290.1;
+y4001		Q8ZJA0	RL5_YERPE	reviewed	50S ribosomal protein L5	rplE YPO0222 y4001 YP_0219	Yersinia pestis	WP_002213329.1;YP_002345302.1;

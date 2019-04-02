@@ -1,0 +1,64 @@
+Yersinia enterocolitica subsp. enterocolitica 8081
+Yersinia enterocolitica subsp. palearctica 105.5R(r)
+Yersinia enterocolitica subsp. palearctica Y11
+Yersinia enterocolitica LC20
+Yersinia enterocolitica WA
+Yersinia enterocolitica 2516-87
+Yersinia enterocolitica (type O:5) str. YE53/03
+Yersinia enterocolitica FORC_002
+Yersinia enterocolitica FORC-002
+Yersinia enterocolitica KNG22703
+Yersinia enterocolitica YE7
+Yersinia enterocolitica YE165
+Yersinia enterocolitica YE6
+Yersinia enterocolitica YE5
+Yersinia enterocolitica YE1
+Yersinia enterocolitica YE3
+Yersinia enterocolitica 8081
+Yersinia pestis KIM10+
+Yersinia pestis biovar Microtus str. 91001
+Yersinia pestis Nepal516
+Yersinia pestis Angola
+Yersinia pestis D106004
+Yersinia pestis D182038
+Yersinia pestis Z176003
+Yersinia pestis biovar Medievalis str. Harbin 35
+Yersinia pestis PBM19
+Yersinia pestis Harbin35
+Yersinia pestis Pestoides F
+Yersinia pestis Shasta
+Yersinia pestis El Dorado
+Yersinia pestis A1122
+Yersinia pestis Dodson
+Yersinia pestis Antiqua
+Yersinia pestis Angola
+Yersinia pestis Nicholisk 41
+Yersinia pestis str. Pestoides B
+Yersinia pestis Pestoides G
+Yersinia pestis 1412
+Yersinia pestis 1522
+Yersinia pestis 8787
+Yersinia pestis 3770
+Yersinia pestis 3067
+Yersinia pestis 2944
+Yersinia pestis 1413
+Yersinia pestis CO92
+Yersinia pestis Cadman
+Yersinia pestis Java9
+Yersinia pestis Nairobi
+Yersinia pestis KIM5
+Yersinia pestis 790
+Yersinia pestis 1045
+Yersinia pestis 195/P
+Yersinia pseudotuberculosis IP 31758
+Yersinia pseudotuberculosis YPIII
+Yersinia pseudotuberculosis PB1/+
+Yersinia pseudotuberculosis IP 32953
+Yersinia pseudotuberculosis ATCC 6904
+Yersinia pseudotuberculosis IP 32953
+Yersinia pseudotuberculosis MD67
+Yersinia pseudotuberculosis EP2/+
+Yersinia pseudotuberculosis 1
+Yersinia pseudotuberculosis PB1/+
+Yersinia pseudotuberculosis str. PA3606
+Yersinia pseudotuberculosis NZYP4713

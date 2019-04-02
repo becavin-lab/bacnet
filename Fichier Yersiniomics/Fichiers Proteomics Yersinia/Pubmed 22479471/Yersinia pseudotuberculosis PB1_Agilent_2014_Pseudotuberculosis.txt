@@ -1,0 +1,2000 @@
+Locus_tag	ORF_start	ORF_stop	Gene_start	Gene_end	Peptide_count	Name_protein
+YPTS_0001	1	1389	37	1389	9	chromosomal replication initiation protein
+YPTS_0002	1370	2494	1394	2494	10	DNA polymerase III subunit beta
+YPTS_0004	3733	6186	3772	6186	45	DNA gyrase subunit B
+YPTS_0005	6315	7211	6402	7211	2	sugar phosphatase
+YPTS_4218	7772	8155	7808	8155	1	protein-tyrosine phosphatase YopH
+YPTS_0014	13793	14353	13793	14323	1	molybdopterin-guanine dinucleotide biosynthesis protein B
+YPTS_0016	15016	15333	15064	15333	9	hypothetical protein YPTS_0016
+YPTS_0017	15370	16410	15424	16410	7	serine/threonine protein kinase
+YPTS_0018	16417	17061	16438	17061	19	periplasmic protein disulfide isomerase I
+YPTS_0019	17543	20350	17552	20350	21	DNA polymerase I
+YPTS_0020	20758	21423	20758	21408	8	ribosome biogenesis GTP-binding protein YsxC
+YPTS_0021	22120	22719	22153	22719	1	hypothetical protein YPTS_0021
+YPTS_0022	22882	24279	22906	24279	8	coproporphyrinogen III oxidase
+YPTS_4238	23493	24803	23493	24791	26	YadA domain-containing protein
+YPTS_0023	24333	25964	24333	25745	17	nitrogen regulation protein NR(I)
+YPTS_0024	25753	26832	25753	26802	7	nitrogen regulation protein NR(II)
+YPTS_0025	27055	28563	27055	28464	73	glutamine synthetase
+YPTS_0026	29015	30850	29027	30850	41	GTP-binding protein TypA
+YPTS_4246	31105	31542	31105	31530	1	TIR chaperone family protein
+YPTS_0027	31145	31762	31172	31762	8	phosphatase
+YPTS_0028	31763	32743	31859	32743	1	ribonuclease BN
+YPTS_0029	32744	33187	32750	33187	1	D-tyrosyl-tRNA(Tyr) deacylase
+YPTS_0030	33358	34296	33373	34296	4	thioesterase domain-containing protein
+YPTS_0031	34431	36158	34431	36140	11	AsmA family protein
+YPTS_4254	35767	36042	35767	36009	1	CopG/Arc/MetJ family addiction module antidote protein
+YPTS_0033	37868	39124	37910	39124	1	sodium/glutamate symporter
+YPTS_0034	39490	41571	39490	41571	7	ATP-dependent DNA helicase RecG
+YPTS_0035	41572	42279	41572	42231	1	tRNA guanosine-2'-O-methyltransferase
+YPTS_0036	42270	44393	42270	44378	7	bifunctional (p)ppGpp synthetase II/ guanosine-3',5'-bis pyrophosphate 3'-pyrophosphohydrolase
+YPTS_0037	44398	44727	44398	44673	9	DNA-directed RNA polymerase subunit omega
+YPTS_0038	44728	45360	44728	45351	4	guanylate kinase
+YPTS_0042	48613	49491	48613	49476	10	hypothetical protein YPTS_0042
+YPTS_0043	49582	50319	49603	50319	7	ribonuclease PH
+YPTS_0044	50435	51133	50486	51133	14	orotate phosphoribosyltransferase
+YPTS_0045	51268	51960	51268	51864	5	nucleoid occlusion protein
+YPTS_0046	51986	52462	51986	52444	4	deoxyuridine 5'-triphosphate nucleotidohydrolase
+YPTS_4273	52228	53160	52228	53148	2	YopD family protein
+YPTS_0047	52422	53786	52422	53636	6	bifunctional phosphopantothenoylcysteine decarboxylase/phosphopantothenate synthase
+YPTS_4275	54350	54868	54350	54856	1	type III secretion low calcium response chaperone LcrH/SycD
+YPTS_0049	54743	55000	54764	55000	6	50S ribosomal protein L28
+YPTS_4276	54869	55870	54869	55849	1	low calcium response V antigen
+YPTS_0050	55009	55179	55012	55179	10	50S ribosomal protein L33
+YPTS_0052	56077	56607	56077	56556	4	phosphopantetheine adenylyltransferase
+YPTS_0054	57336	58766	57336	58655	4	3-deoxy-D-manno-octulosonic-acid transferase
+YPTS_0055	59033	60043	59033	59998	5	ADP-heptose:LPS heptosyl transferase I
+YPTS_0056	59998	61092	59998	61062	3	ADP-heptose:LPS heptosyltransferase II
+YPTS_0057	61093	62073	61093	62025	23	ADP-L-glycero-D-mannoheptose-6-epimerase
+YPTS_0058	62196	63482	62271	63482	34	2-amino-3-ketobutyrate coenzyme A ligase
+YPTS_0059	63483	64517	63492	64517	9	L-threonine 3-dehydrogenase
+YPTS_0060	64655	65713	64655	65665	3	protein of unknown function DUF610 YibQ
+YPTS_0061	65689	67068	65689	67059	5	hypothetical protein YPTS_0061
+YPTS_0062	67069	68664	67069	68616	9	phosphoglyceromutase
+YPTS_0063	68993	69448	69014	69448	6	rhodanese domain-containing protein
+YPTS_0064	69558	69815	69567	69815	4	glutaredoxin 3
+YPTS_0065	69885	70379	69903	70379	10	preprotein translocase subunit SecB
+YPTS_0066	70361	71398	70379	71398	8	NAD(P)H-dependent glycerol-3-phosphate dehydrogenase
+YPTS_0067	71640	72485	71661	72485	4	serine acetyltransferase
+YPTS_0068	72608	73270	72608	73096	1	RNA methyltransferase
+YPTS_0070	74417	75832	74417	75793	1	two-component sensor protein
+YPTS_0071	75790	76518	75790	76488	7	DNA-binding transcriptional regulator CpxR
+YPTS_0072	76653	77150	76662	77150	10	periplasmic stress adaptor protein CpxP
+YPTS_0077	80418	81452	80469	81452	22	6-phosphofructokinase
+YPTS_0078	81595	82662	81673	82662	1	sulfate transporter subunit
+YPTS_0084	86817	88118	86940	88118	1	LysR family transcriptional regulator
+YPTS_0085	88349	89146	88349	89116	18	triosephosphate isomerase
+YPTS_0086	89245	89883	89245	89880	2	hypothetical protein YPTS_0086
+YPTS_0088	90803	91567	90803	91549	4	ferredoxin-NADP reductase
+YPTS_0089	91704	92831	91704	92714	14	fructose 1,6-bisphosphatase II
+YPTS_0090	92967	94550	92967	94490	18	glycerol kinase
+YPTS_0092	96147	96398	96159	96398	8	hypothetical protein YPTS_0092
+YPTS_0095	100334	100597	100358	100597	1	hypothetical protein YPTS_0095
+YPTS_0096	101218	101811	101227	101811	5	hypothetical protein YPTS_0096
+YPTS_0097	101928	102497	101928	102413	6	ribonuclease activity regulator protein RraA
+YPTS_0099	103707	105044	103707	105038	31	ATP-dependent protease ATP-binding subunit HslU
+YPTS_0100	105109	105705	105109	105633	7	ATP-dependent protease peptidase subunit
+YPTS_0101	105733	106620	105733	106479	2	cell division protein FtsN
+YPTS_0102	106644	107765	106644	107672	7	DNA-binding transcriptional regulator CytR
+YPTS_0105	110362	110691	110476	110691	3	50S ribosomal protein L31
+YPTS_0106	111233	111700	111233	111688	2	YiaAB two helix domain-containing protein
+YPTS_0107	112037	112417	112037	112354	2	transcriptional repressor protein MetJ
+YPTS_0108	112651	113892	112651	113892	1	cystathionine gamma-synthase
+YPTS_0109	113856	116330	113895	116330	5	bifunctional aspartate kinase II/homoserine dehydrogenase II
+YPTS_0113	118308	121004	118308	120944	40	phosphoenolpyruvate carboxylase
+YPTS_0114	121318	122514	121318	122481	13	acetylornithine deacetylase
+YPTS_0115	122723	123736	122732	123736	9	N-acetyl-gamma-glutamyl-phosphate reductase
+YPTS_0117	123907	124692	123916	124692	6	acetylglutamate kinase
+YPTS_0118	124847	126232	124859	126232	10	argininosuccinate lyase
+YPTS_0124	134530	136077	134530	135993	1	dihydrolipoamide dehydrogenase
+YPTS_0126	136965	137882	136965	137882	13	DNA-binding transcriptional regulator OxyR
+YPTS_0127	137865	139292	137865	139265	10	soluble pyridine nucleotide transhydrogenase
+YPTS_0129	139456	140118	139483	140118	2	DNA-binding transcriptional repressor FabR
+YPTS_0131	140672	141790	140672	141775	3	tRNA (uracil-5-)-methyltransferase
+YPTS_0132	142090	144129	142237	144129	8	vitamin B12/cobalamin outer membrane transporter
+YPTS_0133	143969	144937	144074	144937	4	glutamate racemase
+YPTS_0136	151787	152758	151802	152758	6	periplasmic binding protein/LacI transcriptional regulator
+YPTS_0141	157260	157682	157344	157682	14	hypothetical protein YPTS_0141
+YPTS_0143	160155	161855	160209	161855	2	acetolactate synthase 2 catalytic subunit
+YPTS_0145	162054	163058	162132	163058	9	branched-chain amino acid aminotransferase
+YPTS_0146	163309	165219	163369	165219	15	dihydroxy-acid dehydratase
+YPTS_0147	165207	166769	165225	166769	8	threonine dehydratase
+YPTS_0154	171254	172816	171338	172816	18	ketol-acid reductoisomerase
+YPTS_0173	187673	187978	187673	187969	2	PpiC-type peptidyl-prolyl cis-trans isomerase
+YPTS_0175	188041	190179	188158	190179	5	ATP-dependent DNA helicase Rep
+YPTS_0176	190347	191843	190347	191843	3	guanosine pentaphosphate phosphohydrolase
+YPTS_0177	191847	193151	191847	193133	11	ATP-dependent RNA helicase RhlB
+YPTS_0178	193249	193578	193252	193578	9	thioredoxin
+YPTS_0179	194046	195317	194058	195317	35	transcription termination factor Rho
+YPTS_0181	196964	198046	196970	198046	14	lipopolysaccharide biosynthesis protein WzzE
+YPTS_0182	198290	199525	198395	199525	4	UDP-N-acetylglucosamine 2-epimerase
+YPTS_0183	199495	200784	199522	200784	10	UDP-N-acetyl-D-mannosamine dehydrogenase
+YPTS_0184	200763	201848	200781	201848	5	dTDP-glucose 4,6-dehydratase
+YPTS_0185	201912	203024	202092	203024	8	glucose-1-phosphate thymidylyltransferase
+YPTS_0186	202942	203739	203002	203739	1	TDP-fucosamine acetyltransferase
+YPTS_0187	203660	204871	203741	204871	11	TDP-4-oxo-6-deoxy-D-glucose transaminase
+YPTS_0189	206146	207237	206152	207237	8	4-alpha-L-fucosyltransferase
+YPTS_0191	208580	209347	208607	209347	6	putative UDP-N-acetyl-D-mannosaminuronic acid transferase
+YPTS_0193	212755	213993	212755	213975	11	putative protoheme IX biogenesis protein
+YPTS_0194	213978	215126	213978	215102	21	putative uroporphyrinogen III C-methyltransferase
+YPTS_0196	215879	217066	215879	216820	6	porphobilinogen deaminase
+YPTS_0202	223439	223642	223442	223642	1	hypothetical protein YPTS_0202
+YPTS_0203	223795	224634	223810	224634	1	diaminopimelate epimerase
+YPTS_0204	224696	225403	224699	225403	3	hypothetical protein YPTS_0204
+YPTS_0205	225301	226311	225400	226311	1	site-specific tyrosine recombinase XerC
+YPTS_0206	226275	227027	226311	227027	5	flavin mononucleotide phosphatase
+YPTS_0207	227117	229288	227126	229288	3	DNA-dependent helicase II
+YPTS_0208	229402	230106	229402	230067	1	TetR family transcriptional regulator
+YPTS_0209	230483	231727	230495	231727	14	hypothetical protein YPTS_0209
+YPTS_0210	231711	232583	231753	232583	10	hypothetical protein YPTS_0210
+YPTS_0213	233161	234183	233233	234183	6	magnesium/nickel/cobalt transporter CorA
+YPTS_0215	235258	235734	235258	235728	2	hypothetical protein YPTS_0215
+YPTS_0216	235929	236828	235950	236828	7	phospholipase A
+YPTS_0220	240328	241344	240349	241344	4	lysophospholipase L2
+YPTS_0221	241193	242188	241379	242188	8	putative sugar phosphatase
+YPTS_0223	243737	244960	243737	244852	1	glycerophosphodiester phosphodiesterase
+YPTS_0225	247104	248396	247122	248396	1	anaerobic glycerol-3-phosphate dehydrogenase subunit B
+YPTS_0227	249832	250368	249832	250359	8	hypothetical protein YPTS_0227
+YPTS_0230	251760	254285	251760	254126	1	zinc/cadmium/mercury/lead-transporting ATPase
+YPTS_0232	255432	255776	255456	255776	1	hypothetical protein YPTS_0232
+YPTS_0233	255979	256407	255988	256407	2	hypothetical protein YPTS_0233
+YPTS_0235	256846	257511	256846	257508	1	16S rRNA m(2)G966-methyltransferase
+YPTS_0236	257784	259442	257790	259442	18	signal recognition particle-docking protein FtsY
+YPTS_0237	259418	260116	259448	260116	5	cell division protein FtsE
+YPTS_0238	260079	261059	260106	261059	2	cell division protein FtsX
+YPTS_0240	262434	262940	262434	262826	1	GCN5-related N-acetyltransferase
+YPTS_0241	263230	264363	263248	264363	14	extracellular ligand-binding receptor
+YPTS_0244	266735	267517	266750	267517	1	leucine/isoleucine/valine transporter ATP-binding subunit
+YPTS_0245	267532	268263	267562	268263	1	leucine/isoleucine/valine transporter ATP-binding subunit
+YPTS_0258	280240	281007	280258	281007	5	cytoplasmic glycerophosphodiester phosphodiesterase
+YPTS_0260	282171	282869	282201	282869	1	hypothetical protein YPTS_0260
+YPTS_0264	286122	288413	286122	288413	6	5-methyltetrahydropteroyltriglutamate--homocysteine S-methyltransferase
+YPTS_0266	289714	290529	289768	290529	11	uridine phosphorylase
+YPTS_0271	296522	297280	296525	297280	8	ubiquinone/menaquinone biosynthesis methyltransferase
+YPTS_0272	297240	297944	297294	297944	2	sterol-binding domain-containing protein
+YPTS_0273	297875	299575	297944	299575	6	putative ubiquinone biosynthesis protein UbiB
+YPTS_0274	299740	300021	299755	300021	5	twin arginine-targeting protein translocase
+YPTS_0275	300022	300687	300025	300687	3	twin-arginine translocation protein, TatB subunit
+YPTS_0278	302310	303341	302319	303341	7	delta-aminolevulinic acid dehydratase
+YPTS_0280	304151	305683	304163	305683	7	3-octaprenyl-4-hydroxybenzoate decarboxylase
+YPTS_0281	305684	306439	305738	306439	7	FMN reductase
+YPTS_0282	306599	307765	306599	307762	13	3-ketoacyl-CoA thiolase
+YPTS_0283	307774	310008	307774	309963	35	multifunctional fatty acid oxidation complex subunit alpha
+YPTS_0284	310266	311621	310290	311621	29	proline dipeptidase
+YPTS_0287	313724	314278	313745	314278	1	protoporphyrinogen oxidase
+YPTS_0290	320404	321453	320416	321453	5	UDP-N-acetylenolpyruvoylglucosamine reductase
+YPTS_0291	321432	322409	321450	322409	8	biotin--protein ligase
+YPTS_0292	322444	323469	322444	323394	5	pantothenate kinase
+YPTS_0296	325112	326329	325145	326329	43	elongation factor Tu
+YPTS_0298	326956	327510	326965	327510	15	transcription antitermination protein NusG
+YPTS_0299	327701	328129	327701	328129	20	50S ribosomal protein L11
+YPTS_0300	328133	328837	328133	328837	39	50S ribosomal protein L1
+YPTS_0301	329154	329699	329202	329699	14	50S ribosomal protein L10
+YPTS_0302	329730	330134	329766	330134	26	50S ribosomal protein L7/L12
+YPTS_0304	330435	334505	330477	334505	115	DNA-directed RNA polymerase subunit beta
+YPTS_0305	334598	338854	334634	338854	117	DNA-directed RNA polymerase subunit beta'
+YPTS_0306	339159	340322	339159	340289	1	thiamine biosynthesis protein ThiH
+YPTS_0312	345179	345790	345179	345688	7	anti-RNA polymerase sigma 70 factor
+YPTS_0313	345767	346567	345785	346567	5	NADH pyrophosphatase
+YPTS_0315	347552	348631	347564	348631	11	uroporphyrinogen decarboxylase
+YPTS_0317	349438	350037	349447	350037	4	hypothetical protein YPTS_0317
+YPTS_0318	350223	350501	350226	350501	26	transcriptional regulator HU subunit alpha
+YPTS_0320	351390	352718	351390	352676	14	phosphoribosylamine--glycine ligase
+YPTS_0321	352736	354364	352736	354325	31	bifunctional phosphoribosylaminoimidazolecarboxamide formyltransferase/IMP cyclohydrolase
+YPTS_0330	365231	366895	365231	366886	2	acetate permease
+YPTS_0331	366883	367215	366883	367194	1	hypothetical protein YPTS_0331
+YPTS_0332	367251	369251	367251	369209	39	acetyl-CoA synthetase
+YPTS_0333	370061	371380	370064	371380	1	glutamate/aspartate:proton symporter
+YPTS_0359	394230	395414	394233	395414	1	cystathionine beta-lyase
+YPTS_0363	398185	399231	398185	399222	12	hemin-degrading family protein
+YPTS_0366	401779	402462	401779	402429	1	NmrA family protein
+YPTS_0369	404677	405513	404677	405477	15	methylenetetrahydrofolate reductase
+YPTS_0372	407636	408772	407636	408715	9	hypothetical protein YPTS_0372
+YPTS_0373	408708	409565	408708	409520	3	hypothetical protein YPTS_0373
+YPTS_0374	409513	410685	409513	410649	3	hypothetical protein YPTS_0374
+YPTS_0375	410661	411761	410661	411722	2	hypothetical protein YPTS_0375
+YPTS_0376	411959	412591	411998	412591	17	stress protein
+YPTS_0377	412576	413775	412591	413775	11	stress protein
+YPTS_0378	413712	414263	413808	414263	7	tellurite resistance TerB
+YPTS_0379	414279	415322	414285	415322	2	integral membrane protein TerC
+YPTS_0380	415362	415964	415386	415964	18	stress protein
+YPTS_0381	416085	416723	416148	416723	15	stress protein
+YPTS_0384	420730	421518	420775	421518	1	putative periplasmic chaperone protein
+YPTS_0389	432312	432878	432354	432878	2	chorismate pyruvate lyase
+YPTS_0391	434091	436721	434091	436586	19	glycerol-3-phosphate acyltransferase
+YPTS_0393	437165	437818	437210	437818	4	LexA repressor
+YPTS_0394	438013	438540	438013	438525	5	zinc uptake transcriptional repressor
+YPTS_0395	438777	439814	438777	439814	4	tRNA-dihydrouridine synthase A
+YPTS_0397	440893	441954	440893	441876	12	quinone oxidoreductase, NADPH-dependent
+YPTS_0398	442196	443614	442259	443614	2	replicative DNA helicase
+YPTS_0399	443708	444790	443711	444790	2	alanine racemase
+YPTS_0400	444964	446169	444976	446169	11	aromatic amino acid aminotransferase
+YPTS_0401	446675	447055	446696	447055	1	hypothetical protein YPTS_0401
+YPTS_0402	447148	449991	447148	449991	8	excinuclease ABC subunit A
+YPTS_0403	450649	451245	450697	451245	7	single-stranded DNA-binding protein
+YPTS_0413	458955	460085	458955	459989	1	rhamnose-proton symporter
+YPTS_0416	460869	461297	460869	461294	8	hypothetical protein YPTS_0416
+YPTS_0421	464930	465553	464930	465505	4	putative transcriptional regulator
+YPTS_0422	465907	467940	465925	467940	1	putative oxidoreductase Fe-S binding subunit
+YPTS_0424	468540	470690	468543	470690	1	formate dehydrogenase, alpha subunit
+YPTS_0425	470752	472551	470752	472539	2	thiol:disulfide interchange protein precursor
+YPTS_0426	472515	472898	472515	472874	4	divalent-cation tolerance protein CutA
+YPTS_0427	473059	474474	473059	474360	2	anaerobic C4-dicarboxylate transporter
+YPTS_0428	474480	475955	474480	475916	38	aspartate ammonia-lyase
+YPTS_0429	476340	476942	476340	476942	3	FxsA
+YPTS_0430	477164	477490	477197	477490	13	co-chaperonin GroES
+YPTS_0431	477504	479183	477537	479183	193	chaperonin GroEL
+YPTS_0432	479642	480205	479807	480205	3	hypothetical protein YPTS_0432
+YPTS_0433	480490	481521	480490	481494	5	lysine 2,3-aminomutase YodO family protein
+YPTS_0434	481488	482120	481554	482120	5	elongation factor P
+YPTS_0437	483219	483638	483219	483611	1	fumarate reductase subunit C
+YPTS_0438	483628	484380	483628	484362	14	fumarate reductase iron-sulfur subunit
+YPTS_0439	484355	486238	484355	486178	30	fumarate reductase flavoprotein subunit
+YPTS_0440	486570	487613	486636	487613	5	lysyl-tRNA synthetase
+YPTS_0441	487858	491229	487858	491199	4	hypothetical protein YPTS_0441
+YPTS_0442	491241	492143	491241	492122	5	phosphatidylserine decarboxylase
+YPTS_0443	492447	493505	492447	493499	8	ribosome-associated GTPase
+YPTS_0444	493549	494244	493699	494244	2	oligoribonuclease
+YPTS_0447	495500	496804	495500	496639	1	iron-sulfur cluster binding protein
+YPTS_0448	496713	498248	496734	498248	3	hypothetical protein YPTS_0448
+YPTS_0449	498241	498729	498259	498729	5	putative ATPase
+YPTS_0450	498713	500650	498737	500650	7	cell wall hydrolase/autolysin
+YPTS_0451	500651	502573	500666	502573	5	DNA mismatch repair protein
+YPTS_0452	502563	503507	502566	503507	5	tRNA delta(2)-isopentenylpyrophosphate transferase
+YPTS_0453	503612	503929	503624	503929	6	RNA-binding protein Hfq
+YPTS_0455	504016	505314	504028	505314	13	putative GTPase HflX
+YPTS_0456	505552	506817	505555	506817	18	FtsH protease regulator HflK
+YPTS_0457	506818	507825	506821	507825	27	FtsH protease regulator HflC
+YPTS_0459	508264	509595	508297	509595	30	adenylosuccinate synthetase
+YPTS_0460	509900	510409	509945	510409	1	transcriptional repressor NsrR
+YPTS_0461	510620	513184	510650	513184	33	exoribonuclease R
+YPTS_0462	513267	514043	513303	514043	9	23S rRNA (guanosine-2'-O-)-methyltransferase
+YPTS_0466	516729	517493	516744	517493	2	esterase
+YPTS_0468	517857	518252	517860	518252	26	30S ribosomal protein S6
+YPTS_0470	518565	518810	518583	518810	5	30S ribosomal protein S18
+YPTS_0471	518838	519302	518850	519302	20	50S ribosomal protein L9
+YPTS_0472	519368	519835	519368	519823	1	hypothetical protein YPTS_0472
+YPTS_0473	519963	520742	519963	520703	2	opacity-associated protein A
+YPTS_0474	521031	521672	521052	521672	12	peptidyl-prolyl cis-trans isomerase
+YPTS_0476	522564	524546	522564	524522	2	bifunctional 2',3'-cyclic nucleotide 2'-phosphodiesterase/3'-nucleotidase periplasmic precursor protein
+YPTS_0477	524971	525726	524986	525726	7	adenosine-3'(2'),5'-bisphosphate nucleotidase
+YPTS_0478	525729	526397	525729	526292	4	hypothetical protein YPTS_0478
+YPTS_0480	526948	528282	526948	528279	4	hypothetical protein YPTS_0480
+YPTS_0481	528557	529225	528557	529195	2	methionine sulfoxide reductase A
+YPTS_0482	529458	531206	529470	531206	6	surface antigen (D15)
+YPTS_0483	531200	535141	531203	535141	13	hypothetical protein YPTS_0483
+YPTS_0484	535135	535500	535144	535500	3	AIG2 family protein
+YPTS_0485	535618	536157	535618	536145	14	inorganic pyrophosphatase
+YPTS_0486	536345	537526	536345	537463	16	fructose-1,6-bisphosphatase
+YPTS_0487	537517	538914	537529	538914	6	UDP-N-acetylmuramate
+YPTS_0489	539862	540335	539862	540332	2	arginine repressor
+YPTS_0490	540772	541734	540796	541734	49	malate dehydrogenase
+YPTS_0493	543071	544066	543071	544042	10	octaprenyl diphosphate synthase
+YPTS_0494	544245	544613	544302	544613	8	50S ribosomal protein L21
+YPTS_0495	544633	544890	544633	544890	4	50S ribosomal protein L27
+YPTS_0497	545965	547137	545965	547137	15	GTPase ObgE
+YPTS_0499	548296	548967	548296	548958	1	DNA-binding transcriptional regulator BasR
+YPTS_0500	548964	550448	548964	550412	2	D-alanyl-D-alanine carboxypeptidase/endopeptidase
+YPTS_0501	550667	551146	550670	551146	9	transcription elongation factor GreA
+YPTS_0502	551274	551579	551274	551567	4	hypothetical protein YPTS_0502
+YPTS_0503	551702	552343	551714	552343	2	23S rRNA methyltransferase J
+YPTS_0504	552376	554334	552400	554334	40	ATP-dependent metalloprotease
+YPTS_0505	554433	555287	554454	555287	2	dihydropteroate synthase
+YPTS_0506	555294	556637	555297	556637	21	phosphoglucosamine mutase
+YPTS_0507	556836	557195	556860	557195	3	preprotein translocase subunit SecG
+YPTS_0508	557676	558179	557727	558179	2	hypothetical protein YPTS_0508
+YPTS_0509	558180	559688	558201	559688	29	transcription elongation factor NusA
+YPTS_0510	559692	562391	559713	562391	60	translation initiation factor IF-2
+YPTS_0511	562343	562867	562457	562867	7	ribosome-binding factor A
+YPTS_0512	562855	563841	562867	563841	8	tRNA pseudouridine synthase B
+YPTS_0513	563918	564232	563963	564232	10	30S ribosomal protein S15
+YPTS_0514	564397	566610	564496	566610	46	polynucleotide phosphorylase/polyadenylase
+YPTS_0515	566732	567619	566735	567619	6	lipoprotein NlpI
+YPTS_0516	567746	569800	567806	569800	31	ATP-dependent RNA helicase DeaD
+YPTS_0520	570994	572130	570994	572049	2	hypothetical protein YPTS_0520
+YPTS_0525	579285	580301	579285	580280	3	peptidase U32
+YPTS_0527	581054	581614	581111	581614	4	GCN5-related N-acetyltransferase
+YPTS_0530	584346	585590	584346	585569	1	hypothetical protein YPTS_0530
+YPTS_0536	591561	592052	591609	592052	1	hypothetical protein YPTS_0536
+YPTS_0537	592123	592842	592204	592842	1	hypothetical protein YPTS_0537
+YPTS_0549	601452	601958	601452	601766	1	anaerobic ribonucleoside-triphosphate reductase activating protein
+YPTS_0550	602093	604261	602093	604231	15	anaerobic ribonucleoside triphosphate reductase
+YPTS_0551	604665	605399	604665	605381	2	ABC transporter related
+YPTS_0555	608239	609891	608239	609807	20	extracellular solute-binding protein
+YPTS_0556	610395	610904	610446	610904	3	hypothetical protein YPTS_0556
+YPTS_0557	611167	612195	611167	612174	6	ornithine carbamoyltransferase subunit I
+YPTS_0558	612361	612816	612385	612816	2	hypothetical protein YPTS_0558
+YPTS_0560	613821	616730	613821	616718	44	valyl-tRNA synthetase
+YPTS_0562	617331	618857	617331	618842	22	leucyl aminopeptidase
+YPTS_0563	619074	620216	619122	620216	3	permease YjgP/YjgQ family protein
+YPTS_0564	620186	621292	620216	621292	3	permease YjgP/YjgQ family protein
+YPTS_0568	623196	626309	623196	626051	1	type III restriction protein res subunit
+YPTS_0570	628224	628739	628224	628715	4	hypothetical protein YPTS_0570
+YPTS_0571	629038	629352	629038	629328	2	autoinducer-2 (AI-2) modifying protein LsrG
+YPTS_0572	629392	630273	629392	630267	17	aldolase
+YPTS_0573	630323	631426	630323	631342	13	ABC transporter, perplasmic sugar binding protein
+YPTS_0576	633434	635155	633434	635017	1	ABC transporter related
+YPTS_0577	635317	636357	635362	636357	4	DeoR family transcriptional regulator
+YPTS_0578	636474	638120	636528	638120	8	autoinducer-2 (AI-2) kinase
+YPTS_0579	638412	639629	638436	639629	7	lipopolysaccharide heptosyltransferase III
+YPTS_0580	639656	640903	639677	640903	1	O-antigen polymerase
+YPTS_0587	647510	648643	647561	648643	6	RND family efflux transporter MFP subunit
+YPTS_0588	648631	651729	648643	651729	4	acriflavin resistance protein
+YPTS_0591	653222	654310	653225	654310	5	pectinesterase
+YPTS_0592	654851	656035	654851	656005	1	diguanylate cyclase
+YPTS_0594	657482	658558	657482	658525	7	16S ribosomal RNA m2G1207 methyltransferase
+YPTS_0596	658963	659463	659020	659463	1	ribosomal-protein-alanine N-acetyltransferase
+YPTS_0597	659602	661230	659641	661230	13	peptide chain release factor 3
+YPTS_0598	661486	662172	661558	662172	15	periplasmic protein
+YPTS_0603	666913	667764	666967	667764	2	deoxyribose-phosphate aldolase
+YPTS_0604	667765	669207	667792	669207	2	thymidine phosphorylase
+YPTS_0605	669273	670562	669339	670562	11	phosphopentomutase
+YPTS_0606	670669	671406	670687	671406	9	purine nucleoside phosphorylase
+YPTS_0608	672454	673437	672457	673437	7	phosphoserine phosphatase
+YPTS_0609	673547	674938	673556	674938	4	DNA repair protein RadA
+YPTS_0610	675076	676368	675097	676368	9	nicotinamide-nucleotide adenylyltransferase
+YPTS_0611	676444	677655	676525	677655	2	filamentation induced by cAMP protein Fic
+YPTS_0612	677816	679498	677816	679483	33	putative ABC transporter ATP-binding protein
+YPTS_0613	679666	680196	679666	680172	1	OmpA/MotB domain-containing protein
+YPTS_0615	681476	682198	681476	682099	1	hypothetical protein YPTS_0615
+YPTS_0616	682474	685212	682474	685200	3	ATPase, P-type (transporting), HAD superfamily, subfamily IC
+YPTS_0617	685734	687689	685770	687689	13	lytic murein transglycosylase
+YPTS_0618	687924	688337	687945	688337	2	Trp operon repressor
+YPTS_0619	688334	688894	688334	688876	2	NTPase
+YPTS_0620	688974	689633	688986	689633	8	phosphoglycerate mutase
+YPTS_0621	689630	690517	689630	690496	2	AraC family transcriptional regulator
+YPTS_0623	690695	691189	690722	691189	5	hypothetical protein YPTS_0623
+YPTS_0624	691363	692088	691363	692079	14	two-component response regulator
+YPTS_0626	693102	695642	693183	695642	32	bifunctional aspartokinase I/homeserine dehydrogenase I
+YPTS_0627	695579	696574	695645	696574	3	homoserine kinase
+YPTS_0628	696575	697867	696578	697867	25	threonine synthase
+YPTS_0629	698684	699469	698684	699460	8	hypothetical protein YPTS_0629
+YPTS_0630	699846	700928	699975	700928	28	transaldolase B
+YPTS_0631	701207	701803	701216	701803	7	molybdenum cofactor biosynthesis protein
+YPTS_0635	707120	709030	707120	709030	92	molecular chaperone DnaK
+YPTS_0636	709031	710281	709142	710281	13	chaperone protein DnaJ
+YPTS_0637	710479	711708	710524	711708	1	Na+/H+ antiporter NhaA
+YPTS_0639	712868	713152	712868	713131	16	30S ribosomal protein S20
+YPTS_0640	713516	714484	713546	714484	3	bifunctional riboflavin kinase/FMN adenylyltransferase
+YPTS_0641	714471	717332	714516	717332	35	isoleucyl-tRNA synthetase
+YPTS_0643	717828	718367	717843	718367	4	peptidylprolyl isomerase FKBP-type
+YPTS_0644	718117	719301	718348	719301	1	4-hydroxy-3-methylbut-2-enyl diphosphate reductase
+YPTS_0646	719715	720590	719769	720590	7	dihydrodipicolinate reductase
+YPTS_0647	721024	722238	721063	722238	18	carbamoyl phosphate synthase small subunit
+YPTS_0648	722239	725487	722254	725487	58	carbamoyl phosphate synthase large subunit
+YPTS_0652	728005	728535	728053	728535	4	dihydrofolate reductase
+YPTS_0654	729928	730821	729928	730797	4	diadenosine tetraphosphatase
+YPTS_0655	730814	731242	730814	731191	1	ApaG
+YPTS_0656	731205	732032	731205	732023	11	dimethyladenosine transferase
+YPTS_0657	732016	733029	732016	733011	3	4-hydroxythreonine-4-phosphate dehydrogenase
+YPTS_0658	732995	734332	732995	734299	24	peptidyl-prolyl cis-trans isomerase SurA
+YPTS_0659	734367	736769	734367	736619	19	organic solvent tolerance protein
+YPTS_0660	736882	737727	736894	737727	2	Dna-J like membrane chaperone protein
+YPTS_0661	738044	738676	738044	738664	1	pseudouridine synthase
+YPTS_0662	739887	740642	739887	740630	7	hypothetical protein YPTS_0662
+YPTS_0663	740906	741973	740987	741973	8	ImpA domain-containing protein
+YPTS_0664	741984	742544	741984	742544	15	type VI secretion protein
+YPTS_0665	742529	744055	742544	744055	35	EvpB family type VI secretion protein
+YPTS_0666	744203	744736	744218	744736	37	hypothetical protein YPTS_0666
+YPTS_0667	744753	745253	744810	745253	4	type VI secretion system lysozyme-related protein
+YPTS_0668	745271	747130	745286	747130	21	type VI secretion protein
+YPTS_0669	747069	748106	747123	748106	4	type VI secretion protein
+YPTS_0670	748094	750712	748124	750712	59	type VI secretion ATPase
+YPTS_0671	750783	753164	750816	753164	25	type VI secretion system Vgr family protein
+YPTS_0672	753165	755396	753177	755396	22	pentapeptide repeat-containing protein
+YPTS_0673	755350	756525	755422	756525	4	pentapeptide repeat-containing protein
+YPTS_0674	756431	757135	756518	757135	5	hypothetical protein YPTS_0674
+YPTS_0675	757069	757506	757141	757506	2	hypothetical protein YPTS_0675
+YPTS_0677	758065	759465	758110	759465	22	type VI secretion protein
+YPTS_0678	759432	761072	759462	761072	24	hypothetical protein YPTS_0678
+YPTS_0679	761009	764575	761081	764575	36	type VI secretion protein IcmF
+YPTS_0680	764576	764950	764597	764950	8	hypothetical protein YPTS_0680
+YPTS_0682	765206	768115	765206	768112	15	ATP-dependent helicase HepA
+YPTS_0685	771974	772750	771974	772684	1	thiamine transporter ATP-binding subunit
+YPTS_0687	774254	775351	774254	775330	7	thiamine transporter substrate binding subunit
+YPTS_0689	775889	777394	775892	777394	18	hypothetical protein YPTS_0689
+YPTS_0695	782065	782712	782065	782667	2	isopropylmalate isomerase small subunit
+YPTS_0696	782682	784187	782682	784112	3	isopropylmalate isomerase large subunit
+YPTS_0697	784114	785223	784114	785205	3	3-isopropylmalate dehydrogenase
+YPTS_0698	785208	786785	785208	786770	1	2-isopropylmalate synthase
+YPTS_0701	789484	791295	789490	791295	1	AMP-dependent synthetase and ligase
+YPTS_0702	791671	793482	791755	793482	13	acetolactate synthase 3 catalytic subunit
+YPTS_0703	793404	793979	793485	793979	4	acetolactate synthase 3 regulatory subunit
+YPTS_0704	794438	795457	794447	795457	16	DNA-binding transcriptional regulator FruR
+YPTS_0706	797115	797588	797130	797588	1	cell division protein MraZ
+YPTS_0707	797564	798553	797591	798553	10	S-adenosyl-methyltransferase MraW
+YPTS_0709	798930	800696	798933	800696	2	penicillin-binding protein transpeptidase
+YPTS_0710	800662	802170	800683	802170	15	UDP-N-acetylmuramoylalanyl-D-glutamate--2,6-diaminopimelate ligase
+YPTS_0711	802089	803543	802167	803543	9	UDP-N-acetylmuramoyl-tripeptide--D-alanyl-D-alanine ligase
+YPTS_0713	804472	805938	804622	805938	5	UDP-N-acetylmuramoyl-L-alanyl-D-glutamate synthetase
+YPTS_0714	805908	807140	805938	807140	1	cell division protein FtsW
+YPTS_0715	807095	808207	807137	808207	8	undecaprenyldiphospho-muramoylpentapeptide beta-N- acetylglucosaminyltransferase
+YPTS_0716	808258	809820	808318	809820	10	UDP-N-acetylmuramate--L-alanine ligase
+YPTS_0717	809798	810733	809813	810733	12	D-alanine--D-alanine ligase
+YPTS_0718	810720	811562	810735	811562	4	cell division protein FtsQ
+YPTS_0719	811556	812845	811589	812845	7	cell division protein FtsA
+YPTS_0720	812846	814069	812918	814069	45	cell division protein FtsZ
+YPTS_0721	814130	815089	814166	815089	3	UDP-3-O-
+YPTS_0722	815256	815849	815256	815780	1	hypothetical protein YPTS_0722
+YPTS_0724	816405	819134	816420	819134	40	preprotein translocase subunit SecA
+YPTS_0725	819417	819815	819429	819815	6	nucleoside triphosphate pyrophosphohydrolase
+YPTS_0728	820678	820899	820678	820884	3	zinc-binding protein
+YPTS_0729	821092	821934	821092	821844	11	hypothetical protein YPTS_0729
+YPTS_0730	821841	822470	821841	822461	1	dephospho-CoA kinase
+YPTS_0732	822754	823800	822757	823800	18	guanosine 5'-monophosphate oxidoreductase
+YPTS_0737	828936	829910	828936	829844	5	quinolinate phosphoribosyltransferase
+YPTS_0742	834198	835061	834297	835061	4	transcriptional regulator PdhR
+YPTS_0743	835242	837920	835257	837920	87	pyruvate dehydrogenase subunit E1
+YPTS_0744	837928	839508	837934	839508	35	dihydrolipoamide acetyltransferase
+YPTS_0745	839805	841238	839814	841238	55	dihydrolipoamide dehydrogenase
+YPTS_0746	841759	844395	841798	844395	82	bifunctional aconitate hydratase 2/2-methylisocitrate dehydratase
+YPTS_0747	844583	845053	844694	845053	3	hypothetical protein YPTS_0747
+YPTS_0750	846503	847303	846503	847297	10	S-adenosylmethionine decarboxylase
+YPTS_0751	847375	848352	847375	848265	19	spermidine synthase
+YPTS_0753	848848	850647	849046	850647	3	multicopper oxidase
+YPTS_0754	850852	851403	850858	851403	4	hypoxanthine phosphoribosyltransferase
+YPTS_0755	851711	852646	851711	852586	9	carbonic anhydrase
+YPTS_0756	852594	853535	852609	853535	7	ABC transporter related
+YPTS_0758	854441	855817	854504	855817	7	polysaccharide deacetylase
+YPTS_0759	855981	856382	855981	856361	3	aspartate alpha-decarboxylase
+YPTS_0760	856772	857641	856772	857626	13	pantoate--beta-alanine ligase
+YPTS_0761	857714	858661	857714	858511	2	3-methyl-2-oxobutanoate hydroxymethyltransferase
+YPTS_0763	859267	860784	859267	860733	10	poly(A) polymerase I
+YPTS_0764	860822	862027	860822	862006	3	glutamyl-Q tRNA(Asp) synthetase
+YPTS_0765	862097	862645	862097	862552	11	DnaK transcriptional regulator DksA
+YPTS_0767	863593	864189	863593	864168	1	2'-5' RNA ligase
+YPTS_0769	864194	866812	864323	866812	1	ATP-dependent RNA helicase HrpB
+YPTS_0770	866894	869401	866921	869401	14	penicillin-binding protein 1b
+YPTS_0774	873937	875247	873937	875217	13	glutamate-1-semialdehyde aminotransferase
+YPTS_0776	875529	877034	875598	877034	4	chloride channel protein
+YPTS_0777	877116	877514	877170	877514	6	iron-sulfur cluster insertion protein ErpA
+YPTS_0779	878413	879333	878413	879255	1	vitamin B12-transporter protein BtuF
+YPTS_0780	879255	879986	879255	879956	6	5'-methylthioadenosine/S-adenosylhomocysteine nucleosidase
+YPTS_0781	880238	881770	880250	881770	4	deoxyguanosinetriphosphate triphosphohydrolase
+YPTS_0782	881956	883413	881968	883413	24	serine endoprotease
+YPTS_0785	886781	889024	886790	889024	16	GDP/GTP pyrophosphokinase
+YPTS_0786	889239	890087	889245	890087	3	nucleoside triphosphate pyrophosphohydrolase
+YPTS_0787	890284	891936	890299	891936	20	CTP synthetase
+YPTS_0788	891963	893312	892017	893312	38	phosphopyruvate hydratase
+YPTS_0789	893664	894257	893688	894257	31	superoxide dismutase copper/zinc binding
+YPTS_0790	894343	895032	894361	895032	2	radical SAM domain-containing protein
+YPTS_0793	897678	899447	897717	899447	1	sulfite reductase subunit beta
+YPTS_0794	899420	900178	899444	900178	17	phosphoadenosine phosphosulfate reductase
+YPTS_0803	907125	907466	907146	907466	1	cell division protein FtsB
+YPTS_0804	907467	908195	907470	908195	3	2-C-methyl-D-erythritol 4-phosphate cytidylyltransferase
+YPTS_0805	908322	908822	908334	908822	4	2-C-methyl-D-erythritol 2,4-cyclodiphosphate synthase
+YPTS_0806	908830	909882	908833	909882	3	tRNA pseudouridine synthase D
+YPTS_0807	909845	910624	909860	910624	2	stationary phase survival protein SurE
+YPTS_0808	910612	911244	910618	911244	6	protein-L-isoaspartate O-methyltransferase
+YPTS_0809	911264	912349	911366	912349	12	lipoprotein NlpD
+YPTS_0810	912395	913402	912404	913402	3	RNA polymerase sigma factor RpoS
+YPTS_0811	913775	916351	913775	916330	26	DNA mismatch repair protein MutS
+YPTS_0814	918080	919264	918149	919264	1	alcohol dehydrogenase
+YPTS_0816	920077	921186	920098	921186	1	Dak kinase
+YPTS_0818	921988	922998	921988	922959	1	DeoR family transcriptional regulator
+YPTS_0829	933532	934332	933532	934317	3	methionine aminopeptidase, type I
+YPTS_0830	934314	934700	934314	934565	1	hypothetical protein YPTS_0830
+YPTS_0831	934748	936430	934748	936391	38	tartrate/fumarate subfamily Fe-S type hydro-lyase beta subunit
+YPTS_0832	936805	938319	936805	938301	6	carbohydrate kinase FGGY
+YPTS_0833	938312	939235	938312	939193	11	putative L-xylulose 5-phosphate 3-epimerase
+YPTS_0836	941309	942847	941309	942823	5	ABC transporter related
+YPTS_0837	942972	944159	942972	943979	20	carbohydrate ABC transporter periplasmic-binding protein
+YPTS_0838	944137	944967	944137	944946	4	DeoR family transcriptional regulator
+YPTS_0839	945592	946362	945667	946362	10	L-ribulose-5-phosphate 4-epimerase
+YPTS_0840	946776	949262	946812	949262	1	anaerobic dimethyl sulfoxide reductase subunit A
+YPTS_0845	952545	952940	952545	952928	14	cytochrome b562
+YPTS_0846	953004	955283	953004	955217	123	catalase/peroxidase HPI
+YPTS_0847	955687	956694	955753	956694	2	periplasmic binding protein/LacI transcriptional regulator
+YPTS_0852	961095	962042	961098	962042	1	transketolase domain-containing protein
+YPTS_0856	965199	966155	965199	966143	2	DeoR family transcriptional regulator
+YPTS_0858	967895	968536	968048	968536	3	competence damage-inducible protein A
+YPTS_0859	968618	969721	968651	969721	18	recombinase A
+YPTS_0861	971270	973915	971288	973915	52	alanyl-tRNA synthetase
+YPTS_0862	974147	974350	974165	974350	3	carbon storage regulator
+YPTS_0863	975599	976216	975650	976216	4	fructose-1-phosphatase
+YPTS_0865	976664	978283	976685	978283	4	glutamate--cysteine ligase
+YPTS_0866	978451	978966	978451	978966	9	S-ribosylhomocysteinase
+YPTS_0869	981313	982725	981364	982725	21	signal recognition particle protein
+YPTS_0870	982848	983201	982953	983201	11	30S ribosomal protein S16
+YPTS_0871	983202	983771	983223	983771	13	16S rRNA-processing protein RimM
+YPTS_0873	984616	984978	984631	984978	12	50S ribosomal protein L19
+YPTS_0876	988107	988940	988107	988823	1	putative two-component response-regulatory protein YehT
+YPTS_0877	989040	990125	989049	990125	6	phospho-2-dehydro-3-deoxyheptonate aldolase
+YPTS_0878	990126	991259	990138	991259	10	bifunctional chorismate mutase/prephenate dehydrogenase
+YPTS_0881	993323	994510	993323	994480	6	bifunctional chorismate mutase/prephenate dehydratase
+YPTS_0883	994842	995357	994842	995204	14	sigma 54 modulation protein/ribosomal protein S30EA
+YPTS_0884	995559	996314	995559	996290	16	outer membrane protein assembly complex subunit YfiO
+YPTS_0885	996339	997403	996426	997403	5	23S rRNA pseudouridine synthase D
+YPTS_0886	997363	998136	997405	998136	1	hypothetical protein YPTS_0886
+YPTS_0887	998230	1000839	998266	1000839	67	protein disaggregation chaperone
+YPTS_0892	1007412	1008788	1007412	1008767	6	phosphatidylserine synthase
+YPTS_0893	1008943	1011627	1008943	1011585	1	GCN5-related N-acetyltransferase
+YPTS_0895	1012547	1012987	1012547	1012984	1	thioredoxin 2
+YPTS_0896	1013185	1014402	1013236	1014402	10	putative methyltransferase
+YPTS_0898	1016109	1017296	1016109	1017281	1	efflux pump membrane protein
+YPTS_0899	1017665	1018219	1017665	1018177	5	transcriptional repressor MprA
+YPTS_0904	1021524	1022951	1021524	1022921	5	amidase
+YPTS_0905	1022918	1023181	1022918	1023121	1	hypothetical protein YPTS_0905
+YPTS_0906	1023401	1024264	1023431	1024264	2	RpiR family transcriptional regulator
+YPTS_0907	1024589	1025380	1024592	1025380	1	extracellular solute-binding protein
+YPTS_0911	1027395	1028795	1027470	1028795	4	aminotransferase class V
+YPTS_0914	1030937	1032178	1030937	1032097	1	putative aminotransferase
+YPTS_0915	1032183	1032905	1032237	1032905	1	methylthioribulose-1-phosphate dehydratase
+YPTS_0916	1032890	1033591	1032902	1033591	2	2,3-diketo-5-methylthio-1-phosphopentane phosphatase
+YPTS_0917	1033678	1034232	1033690	1034232	2	acireductone dioxygenase ARD
+YPTS_0918	1034265	1035311	1034265	1035305	2	aIF-2BI family translation initiation factor
+YPTS_0925	1048418	1050922	1048418	1050865	19	acyl-CoA dehydrogenase
+YPTS_0926	1051057	1051686	1051105	1051686	10	phosphoheptose isomerase
+YPTS_0929	1053776	1055206	1053845	1055206	21	Na(+)-translocating NADH-quinone reductase subunit A
+YPTS_0930	1055207	1056451	1055210	1056451	4	Na(+)-translocating NADH-quinone reductase subunit B
+YPTS_0931	1056357	1057241	1056441	1057241	9	Na(+)-translocating NADH-quinone reductase subunit C
+YPTS_0934	1058479	1059705	1058482	1059705	24	Na(+)-translocating NADH-quinone reductase subunit F
+YPTS_0935	1059668	1060768	1059689	1060768	11	ApbE family lipoprotein
+YPTS_0937	1061253	1062248	1061253	1062200	8	glycerophosphoryl diester phosphodiesterase
+YPTS_0939	1063728	1065233	1063728	1065188	24	aminoacyl-histidine dipeptidase
+YPTS_0943	1070901	1071425	1070967	1071425	7	xanthine-guanine phosphoribosyltransferase
+YPTS_0944	1071504	1072799	1071552	1072799	6	fermentation/respiration switch protein
+YPTS_0945	1072847	1073260	1072859	1073260	3	DNA-binding transcriptional regulator Crl
+YPTS_0946	1073401	1074540	1073437	1074540	12	gamma-glutamyl kinase
+YPTS_0947	1074541	1075809	1074550	1075809	19	gamma-glutamyl phosphate reductase
+YPTS_0948	1076134	1076895	1076137	1076895	1	YcgR family protein
+YPTS_0952	1079487	1080173	1079649	1080173	3	shikimate kinase II
+YPTS_0953	1080631	1080957	1080670	1080957	4	hypothetical protein YPTS_0953
+YPTS_0954	1081179	1082129	1081179	1082090	17	recombination associated protein
+YPTS_0955	1082417	1083337	1082423	1083337	3	fructokinase
+YPTS_0956	1083806	1087519	1083806	1087495	5	SMC domain-containing protein
+YPTS_0957	1087492	1088781	1087492	1088736	1	exonuclease subunit SbcD
+YPTS_0958	1088956	1089693	1089004	1089693	5	two component transcriptional regulator
+YPTS_0959	1089694	1091034	1089718	1091034	2	phosphate regulon sensor protein
+YPTS_0962	1093971	1095362	1093971	1095362	2	putative proline-specific permease
+YPTS_0963	1095918	1097786	1095957	1097786	5	maltodextrin glucosidase
+YPTS_0964	1097929	1098621	1097941	1098621	18	short chain dehydrogenase
+YPTS_0965	1098829	1100625	1098829	1100592	21	gamma-glutamyltransferase
+YPTS_0966	1100981	1101586	1100981	1101583	35	alkyl hydroperoxide reductase/ Thiol specific antioxidant/ Mal allergen
+YPTS_0968	1102671	1103756	1102686	1103756	2	S-adenosylmethionine:tRNA ribosyltransferase-isomerase
+YPTS_0969	1103795	1104973	1103849	1104973	6	queuine tRNA-ribosyltransferase
+YPTS_0970	1104980	1105420	1105085	1105420	9	preprotein translocase subunit YajC
+YPTS_0971	1105421	1107295	1105481	1107295	23	preprotein translocase subunit SecD
+YPTS_0972	1107231	1108274	1107306	1108274	5	preprotein translocase subunit SecF
+YPTS_0974	1109898	1110368	1109919	1110368	3	transcriptional regulator NrdR
+YPTS_0975	1110503	1111627	1110518	1111627	4	bifunctional diaminohydroxyphosphoribosylaminopyrimidine deaminase/5-amino-6-(5-phosphoribosylamino)uracil reductase
+YPTS_0976	1111628	1112233	1111763	1112233	10	6,7-dimethyl-8-ribityllumazine synthase
+YPTS_0977	1112227	1112670	1112254	1112670	6	transcription antitermination protein NusB
+YPTS_0978	1112893	1113900	1112911	1113900	4	thiamine monophosphate kinase
+YPTS_0980	1114519	1116390	1114519	1116378	2	1-deoxy-D-xylulose-5-phosphate synthase
+YPTS_0981	1116534	1117484	1116534	1117454	6	geranyltranstransferase
+YPTS_0982	1117459	1117755	1117459	1117713	4	exodeoxyribonuclease VII small subunit
+YPTS_0984	1118024	1119514	1118063	1119514	9	thiamine biosynthesis protein ThiI
+YPTS_0985	1119582	1120193	1119582	1120172	1	hypothetical protein YPTS_0985
+YPTS_0986	1120135	1121094	1120135	1121046	2	2-dehydropantoate 2-reductase
+YPTS_0987	1121188	1121769	1121278	1121769	11	putative nucleotide-binding protein
+YPTS_0992	1125578	1127626	1125578	1127569	5	cytochrome o ubiquinol oxidase, subunit I
+YPTS_0993	1127574	1128530	1127574	1128530	16	cytochrome o ubiquinol oxidase subunit II
+YPTS_0996	1131554	1132168	1131554	1132132	8	hypothetical protein YPTS_0996
+YPTS_0997	1132448	1132801	1132481	1132801	3	transcriptional regulator BolA
+YPTS_0999	1133209	1134522	1133218	1134522	59	trigger factor
+YPTS_1000	1134975	1135607	1134984	1135607	7	ATP-dependent Clp protease proteolytic subunit
+YPTS_1001	1135798	1137084	1135813	1137084	26	ATP-dependent protease ATP-binding subunit ClpX
+YPTS_1002	1137222	1139633	1137279	1139633	59	DNA-binding ATP-dependent protease La
+YPTS_1003	1139830	1140123	1139851	1140123	8	transcriptional regulator HU subunit beta
+YPTS_1004	1140376	1142310	1140424	1142310	47	peptidyl-prolyl cis-trans isomerase (rotamase D)
+YPTS_1005	1142420	1142896	1142450	1142896	1	helix-hairpin-helix repeat-containing competence protein ComEA
+YPTS_1006	1143187	1143657	1143250	1143657	1	thioesterase superfamily protein
+YPTS_1007	1143743	1144519	1143743	1144441	4	queuosine biosynthesis protein QueC
+YPTS_1010	1147571	1148653	1147571	1148611	9	pyridoxal-5'-phosphate-dependent protein beta subunit
+YPTS_1012	1149294	1151066	1149300	1151066	3	putative multidrug transporter membrane\ATP-binding components
+YPTS_1013	1151020	1152882	1151059	1152882	2	putative multidrug transporter membrane\ATP-binding components
+YPTS_1014	1153274	1153672	1153334	1153672	11	nitrogen regulatory protein P-II 2
+YPTS_1015	1153673	1155001	1153709	1155001	1	ammonium transporter
+YPTS_1017	1155263	1156165	1155263	1156123	7	acyl-CoA thioesterase II
+YPTS_1018	1156365	1156901	1156380	1156901	4	putative lipoprotein
+YPTS_1020	1158332	1158583	1158332	1158535	3	hemolysin expression-modulating protein
+YPTS_1021	1158584	1159012	1158584	1158952	2	hypothetical protein YPTS_1021
+YPTS_1022	1159111	1159467	1159111	1159464	1	hypothetical protein YPTS_1022
+YPTS_1024	1160488	1160826	1160488	1160748	3	50S ribosomal protein L31 type B
+YPTS_1025	1160934	1164089	1160934	1164086	25	hydrophobe/amphiphile efflux-1 (HAE1) family protein
+YPTS_1026	1164103	1165299	1164103	1165290	24	RND family efflux transporter MFP subunit
+YPTS_1028	1166092	1166457	1166104	1166457	4	DsrE family protein
+YPTS_1029	1166636	1170115	1166753	1170115	3	potassium efflux protein KefA
+YPTS_1034	1172124	1172717	1172154	1172717	4	adenine phosphoribosyltransferase
+YPTS_1035	1173354	1175348	1173372	1175348	4	DNA polymerase III subunits gamma and tau
+YPTS_1036	1175395	1175736	1175404	1175736	12	hypothetical protein YPTS_1036
+YPTS_1037	1175724	1176341	1175766	1176341	1	recombination protein RecR
+YPTS_1038	1176530	1178407	1176533	1178407	60	heat shock protein 90
+YPTS_1039	1178592	1179278	1178634	1179278	16	adenylate kinase
+YPTS_1040	1179335	1180330	1179368	1180330	10	ferrochelatase
+YPTS_1041	1180910	1181917	1180928	1181917	4	CDP-6-deoxy-delta-3,4-glucoseen reductase
+YPTS_1042	1181937	1182728	1181955	1182728	8	glucose-1-phosphate cytidylyltransferase
+YPTS_1043	1182619	1183806	1182733	1183806	13	CDP-glucose 4,6-dehydratase
+YPTS_1044	1183824	1185137	1183824	1185137	13	DegT/DnrJ/EryC1/StrS aminotransferase
+YPTS_1045	1185138	1186031	1185174	1186031	3	NAD-dependent epimerase/dehydratase
+YPTS_1046	1186032	1187315	1186032	1187315	3	O-antigen synthesis protein WbyH
+YPTS_1050	1190866	1191975	1190866	1191975	2	glycosyl transferase group 1
+YPTS_1054	1195522	1196559	1195531	1196559	11	NAD-dependent epimerase/dehydratase
+YPTS_1055	1196574	1197605	1196577	1197605	9	GHMP kinase
+YPTS_1056	1197578	1198183	1197593	1198183	3	phosphoheptose isomerase
+YPTS_1057	1198161	1198862	1198185	1198862	1	nucleotidyl transferase
+YPTS_1058	1198859	1199389	1198859	1199389	1	histidinol-phosphate phosphatase family protein
+YPTS_1060	1199858	1201015	1199864	1201015	6	ferric enterobactin transport protein FepE
+YPTS_1061	1201210	1202523	1201219	1202523	6	ribokinase-like domain-containing protein
+YPTS_1062	1202620	1204326	1202620	1204311	2	putative cation:proton antiport protein
+YPTS_1066	1207800	1208084	1207800	1208039	1	hypothetical protein YPTS_1066
+YPTS_1068	1208376	1208882	1208376	1208855	9	hypothetical protein YPTS_1068
+YPTS_1070	1210325	1213213	1210325	1213210	3	copper exporting ATPase
+YPTS_1073	1214487	1215434	1214487	1215401	8	band 7 protein
+YPTS_1074	1215596	1216468	1215596	1216465	16	thioredoxin domain-containing protein
+YPTS_1075	1216542	1217339	1216542	1217318	3	short chain dehydrogenase
+YPTS_1076	1217705	1218430	1217705	1218277	1	multifunctional acyl-CoA thioesterase I and protease I and lysophospholipase L1
+YPTS_1077	1218299	1218997	1218311	1218997	6	putative ABC transporter ATP-binding protein YbbA
+YPTS_1079	1221467	1222564	1221467	1222531	8	phosphoribosylaminoimidazole carboxylase ATPase subunit
+YPTS_1080	1222528	1223136	1222528	1223052	12	phosphoribosylaminoimidazole carboxylase, catalytic subunit
+YPTS_1081	1223368	1224129	1223368	1224090	1	UDP-2,3-diacylglucosamine hydrolase
+YPTS_1082	1224101	1224658	1224101	1224595	18	peptidyl-prolyl cis-trans isomerase B (rotamase B)
+YPTS_1083	1224749	1226191	1224806	1226191	22	cysteinyl-tRNA synthetase
+YPTS_1084	1226433	1226654	1226433	1226645	2	hypothetical protein YPTS_1084
+YPTS_1085	1226660	1227541	1226660	1227526	8	bifunctional 5,10-methylene-tetrahydrofolate dehydrogenase/ 5,10-methylene-tetrahydrofolate cyclohydrolase
+YPTS_1095	1232904	1234724	1232961	1234724	2	alpha/beta hydrolase fold protein
+YPTS_1100	1238072	1239076	1238072	1239061	8	aldo/keto reductase
+YPTS_1101	1239087	1239986	1239087	1239938	3	aldo/keto reductase
+YPTS_1105	1242118	1244502	1242118	1244499	33	glycoside hydrolase family 3 protein
+YPTS_1106	1244655	1245218	1244655	1245185	1	hypothetical protein YPTS_1106
+YPTS_1107	1245178	1247388	1245178	1247385	2	hypothetical protein YPTS_1107
+YPTS_1109	1247748	1248641	1247769	1248641	5	23S rRNA pseudouridine synthase F
+YPTS_1110	1248807	1249973	1248852	1249973	2	cupin 4 family protein
+YPTS_1115	1254079	1254342	1254091	1254342	2	hypothetical protein YPTS_1115
+YPTS_1116	1254357	1254845	1254366	1254845	2	Hcp1 family type VI secretion system effector
+YPTS_1123	1260385	1266408	1260385	1266363	8	alpha-2-macroglobulin domain-containing protein
+YPTS_1129	1271889	1272926	1271940	1272926	1	oxidoreductase domain-containing protein
+YPTS_1130	1273040	1273981	1273052	1273981	2	periplasmic binding protein/LacI transcriptional regulator
+YPTS_1138	1282207	1284123	1282333	1284123	1	ABC transporter related
+YPTS_1140	1284821	1285063	1284869	1285063	1	hypothetical protein YPTS_1140
+YPTS_1143	1287737	1288303	1287737	1288216	3	cold-shock DNA-binding domain-containing protein
+YPTS_1144	1288450	1288704	1288495	1288704	7	cold shock protein CspE
+YPTS_1147	1290074	1290334	1290077	1290334	2	twin arginine translocase protein A
+YPTS_1148	1290515	1291552	1290515	1291480	10	lipoyl synthase
+YPTS_1150	1292586	1292966	1292586	1292849	3	hypothetical protein YPTS_1150
+YPTS_1151	1293047	1294279	1293047	1294249	18	D-alanyl-D-alanine carboxypeptidase fraction A
+YPTS_1152	1294652	1295743	1294652	1295734	7	rare lipoprotein A
+YPTS_1154	1297042	1298973	1297042	1298937	1	penicillin-binding protein 2
+YPTS_1155	1299019	1299492	1299019	1299489	2	rRNA large subunit methyltransferase
+YPTS_1156	1299493	1299846	1299493	1299810	8	hypothetical protein YPTS_1156
+YPTS_1157	1300033	1300728	1300033	1300695	1	nicotinic acid mononucleotide adenylyltransferase
+YPTS_1158	1300685	1301758	1300685	1301719	4	DNA polymerase III subunit delta
+YPTS_1159	1301716	1302369	1301716	1302339	4	LPS-assembly lipoprotein RlpB
+YPTS_1160	1302354	1304966	1302354	1304936	37	leucyl-tRNA synthetase
+YPTS_1161	1305165	1305680	1305198	1305680	7	hypothetical protein YPTS_1161
+YPTS_1162	1305814	1306563	1305814	1306539	8	ABC transporter related
+YPTS_1164	1307213	1308082	1307213	1307953	1	polar amino acid ABC transporter, inner membrane subunit
+YPTS_1165	1308127	1309074	1308127	1309044	32	glutamate and aspartate transporter subunit
+YPTS_1166	1309793	1311388	1309793	1311340	4	apolipoprotein N-acyltransferase
+YPTS_1167	1311348	1312232	1311348	1312226	11	transporter-associated region
+YPTS_1168	1312344	1312862	1312344	1312817	1	putative metalloprotease
+YPTS_1169	1312814	1313947	1312814	1313887	10	PhoH family protein
+YPTS_1170	1314214	1315824	1314214	1315743	23	tRNA-i(6)A37 thiotransferase enzyme MiaB
+YPTS_1171	1315868	1317061	1315880	1317061	2	2-octaprenyl-3-methyl-6-methoxy-1,4-benzoquinol hydroxylase
+YPTS_1173	1318551	1320269	1318551	1320215	34	asparagine synthetase B
+YPTS_1174	1320570	1321325	1320570	1321322	6	UMP phosphatase
+YPTS_1175	1321395	1322702	1321395	1322621	8	ROK family protein
+YPTS_1176	1322638	1323792	1322638	1323783	13	N-acetylglucosamine-6-phosphate deacetylase
+YPTS_1177	1323803	1324621	1323803	1324603	11	glucosamine-6-phosphate deaminase
+YPTS_1178	1324972	1327035	1325002	1327035	18	PTS system, N-acetylglucosamine-specific IIBC subunit
+YPTS_1179	1327097	1328917	1327250	1328917	19	glutaminyl-tRNA synthetase
+YPTS_1181	1331354	1334047	1331372	1334047	1	glycoside hydrolase family protein
+YPTS_1182	1334488	1334940	1334488	1334934	7	ferric uptake regulator
+YPTS_1183	1335301	1335843	1335301	1335828	7	flavodoxin FldA
+YPTS_1187	1336884	1337663	1336884	1337651	4	hypothetical protein YPTS_1187
+YPTS_1189	1338278	1338613	1338362	1338613	3	hypothetical protein YPTS_1189
+YPTS_1205	1350879	1351607	1350879	1351604	1	hypothetical protein YPTS_1205
+YPTS_1208	1352521	1353303	1352524	1353303	1	hypothetical protein YPTS_1208
+YPTS_1210	1353498	1355120	1353501	1355120	5	chromosome segregation ATPase
+YPTS_1212	1357445	1358053	1357445	1357939	2	SsrA-binding protein
+YPTS_1215	1358949	1359305	1358949	1359290	5	hypothetical protein YPTS_1215
+YPTS_1216	1359404	1361203	1359404	1361065	4	recombination and repair protein
+YPTS_1217	1361152	1362072	1361152	1361919	4	ATP-NAD/AcoX kinase
+YPTS_1218	1362142	1362735	1362157	1362735	12	GrpE protein
+YPTS_1219	1362843	1364123	1362843	1364123	37	type II citrate synthase
+YPTS_1221	1365045	1365563	1365216	1365563	2	succinate dehydrogenase cytochrome b556 small membrane subunit
+YPTS_1222	1365564	1367330	1365564	1367330	31	succinate dehydrogenase flavoprotein subunit
+YPTS_1223	1367377	1368096	1367380	1368096	18	succinate dehydrogenase iron-sulfur subunit
+YPTS_1224	1368443	1371259	1368452	1371259	56	2-oxoglutarate dehydrogenase E1 component
+YPTS_1225	1371286	1372512	1371289	1372512	39	dihydrolipoamide succinyltransferase
+YPTS_1226	1372619	1373791	1372625	1373791	30	succinyl-CoA synthetase subunit beta
+YPTS_1227	1373788	1374663	1373791	1374663	28	succinyl-CoA synthetase subunit alpha
+YPTS_1228	1375377	1376999	1375431	1376999	14	cytochrome bd ubiquinol oxidase subunit I
+YPTS_1229	1376966	1378153	1377014	1378153	2	cytochrome d ubiquinol oxidase, subunit II
+YPTS_1232	1378649	1379110	1378709	1379110	2	acyl-CoA thioester hydrolase YbgC
+YPTS_1233	1379107	1379796	1379119	1379796	8	colicin uptake protein TolQ
+YPTS_1235	1380298	1381509	1380334	1381509	6	cell envelope integrity inner membrane protein TolA
+YPTS_1236	1381593	1382921	1381629	1382921	23	translocation protein TolB
+YPTS_1237	1382957	1383478	1382972	1383478	13	peptidoglycan-associated outer membrane lipoprotein
+YPTS_1238	1383479	1384297	1383488	1384297	11	tol-pal system protein YbgF
+YPTS_1239	1385336	1386400	1385339	1386400	11	quinolinate synthetase
+YPTS_1243	1388749	1389819	1388767	1389819	3	phospho-2-dehydro-3-deoxyheptonate aldolase
+YPTS_1244	1390001	1390837	1390001	1390753	22	phosphoglycerate mutase 1 family protein
+YPTS_1246	1391728	1392903	1391728	1392798	2	aldose 1-epimerase
+YPTS_1247	1392792	1393961	1392792	1393943	3	galactokinase
+YPTS_1248	1393940	1395001	1393940	1394992	1	galactose-1-phosphate uridylyltransferase
+YPTS_1249	1395002	1396030	1395002	1396018	8	UDP-galactose-4-epimerase
+YPTS_1252	1397413	1399008	1397413	1398903	1	putative molybdenum transport ATP-binding protein ModF
+YPTS_1253	1399013	1399864	1399013	1399804	2	DNA-binding transcriptional regulator ModE
+YPTS_1255	1400379	1401221	1400442	1401221	16	molybdate transporter periplasmic protein
+YPTS_1257	1401892	1402989	1401910	1402989	2	molybdate transporter ATP-binding protein
+YPTS_1258	1403045	1404058	1403045	1403866	2	phosphotransferase
+YPTS_1259	1404148	1405161	1404157	1405161	6	6-phosphogluconolactonase
+YPTS_1266	1412414	1414459	1412444	1414459	6	excinuclease ABC subunit B
+YPTS_1267	1414755	1415015	1414770	1415015	1	hypothetical protein YPTS_1267
+YPTS_1268	1415146	1416102	1415146	1416069	3	protein of unknown function UPF0052 and CofD
+YPTS_1270	1416547	1417581	1416601	1417581	1	molybdenum cofactor biosynthesis protein A
+YPTS_1271	1417768	1418283	1417804	1418283	3	molybdenum cofactor biosynthesis protein C
+YPTS_1273	1418492	1418980	1418525	1418980	1	molybdopterin synthase large subunit
+YPTS_1279	1426524	1427435	1426542	1427435	1	DNA-binding transcriptional activator XapR
+YPTS_1281	1428652	1429530	1428667	1429530	2	purine nucleoside phosphorylase
+YPTS_1285	1433582	1435009	1433645	1435009	1	two component, sigma54 specific, Fis family transcriptional regulator
+YPTS_1286	1435357	1436466	1435357	1436466	3	NADH:flavin oxidoreductase/NADH oxidase
+YPTS_1291	1440612	1442357	1440612	1442354	1	ABC transporter related
+YPTS_1292	1442368	1443366	1442368	1443354	4	hypothetical protein YPTS_1292
+YPTS_1293	1443406	1444131	1443406	1444116	3	putative DNA-binding transcriptional regulator
+YPTS_1294	1444339	1445862	1444507	1445862	6	ATP-dependent RNA helicase RhlE
+YPTS_1305	1451056	1452042	1451071	1452042	3	D-alanyl-D-alanine endopeptidase
+YPTS_1306	1452163	1453890	1452163	1453875	1	D-lactate dehydrogenase
+YPTS_1315	1460934	1461416	1460943	1461416	3	hypothetical protein YPTS_1315
+YPTS_1316	1461816	1463168	1461900	1463168	10	urea ABC transporter, urea binding protein
+YPTS_1319	1465765	1466802	1465966	1466802	2	urea ABC transporter, ATP-binding protein UrtD
+YPTS_1320	1466824	1467594	1466833	1467594	1	urea ABC transporter, ATP-binding protein UrtE
+YPTS_1322	1468581	1470005	1468590	1470005	1	pyridoxal-dependent decarboxylase
+YPTS_1323	1470258	1471118	1470258	1471112	5	rhodanese domain-containing protein
+YPTS_1324	1471845	1472780	1471848	1472780	8	substrate-binding region of ABC-type glycine betaine transport system
+YPTS_1326	1474159	1475130	1474192	1475130	1	ABC transporter related
+YPTS_1329	1477797	1480127	1477821	1480127	1	Orn/Lys/Arg decarboxylase major region
+YPTS_1334	1485523	1487022	1485523	1486962	37	catalase domain-containing protein
+YPTS_1335	1487314	1487865	1487323	1487865	6	YfaZ family protein
+YPTS_1337	1489897	1491102	1489909	1491102	9	competence damage-inducible protein A
+YPTS_1338	1491160	1491807	1491160	1491669	8	ecotin
+YPTS_1340	1491965	1493233	1491965	1493095	15	ribonucleotide-diphosphate reductase subunit beta
+YPTS_1341	1493257	1495590	1493257	1495545	34	ribonucleotide-diphosphate reductase subunit alpha
+YPTS_1342	1496039	1496776	1496039	1496767	6	3-demethylubiquinone-9 3-methyltransferase
+YPTS_1343	1497052	1499742	1497067	1499742	56	DNA gyrase subunit A
+YPTS_1346	1502871	1503533	1502871	1503524	12	transcriptional regulator RcsB
+YPTS_1347	1503527	1506319	1503527	1506220	8	phosphotransfer intermediate protein in two-component regulatory system with RcsBC
+YPTS_1350	1508490	1509617	1508502	1509617	17	outer membrane porin protein C
+YPTS_1351	1510357	1511553	1510357	1511523	6	beta-lactam binding protein AmpH
+YPTS_1356	1518149	1518469	1518149	1518391	3	DinI family protein
+YPTS_1357	1518597	1519322	1518597	1519319	2	XRE family transcriptional regulator
+YPTS_1360	1520229	1521587	1520283	1521587	1	type III effector Hrp-dependent outers
+YPTS_1363	1523073	1523900	1523106	1523900	1	xylose isomerase domain-containing protein
+YPTS_1365	1524431	1525093	1524476	1525093	1	hypothetical protein YPTS_1365
+YPTS_1367	1525286	1526797	1525289	1526797	3	Mu tail sheath family protein
+YPTS_1369	1527177	1527488	1527189	1527488	2	putative bacteriophage protein
+YPTS_1370	1527558	1529102	1527609	1529102	1	putative bacteriophage coat protein
+YPTS_1380	1536799	1538271	1536835	1538271	22	glycoside hydrolase family protein
+YPTS_1381	1538397	1538900	1538397	1538759	1	hypothetical protein YPTS_1381
+YPTS_1384	1539658	1539975	1539658	1539915	2	hypothetical protein YPTS_1384
+YPTS_1388	1541966	1543789	1541966	1543762	3	sulfatase
+YPTS_1389	1543790	1544053	1543790	1544017	6	hypothetical protein YPTS_1389
+YPTS_1390	1544177	1545199	1544195	1545199	13	nucleoid-associated protein NdpA
+YPTS_1391	1545287	1545601	1545287	1545571	9	50S ribosomal protein L25
+YPTS_1393	1547994	1548731	1548024	1548731	1	16S rRNA pseudouridylate synthase A
+YPTS_1395	1551058	1551411	1551067	1551411	1	hypothetical protein YPTS_1395
+YPTS_1396	1551472	1553118	1551472	1553064	10	ABC transporter related
+YPTS_1397	1553066	1554106	1553066	1554094	1	binding-protein-dependent transport systems inner membrane component
+YPTS_1398	1554094	1555203	1554094	1555194	2	binding-protein-dependent transport systems inner membrane component
+YPTS_1399	1555204	1557045	1555204	1557012	16	extracellular solute-binding protein
+YPTS_1403	1561046	1562137	1561046	1562029	11	cobalamin synthesis protein P47K
+YPTS_1406	1563724	1565244	1563724	1565196	8	mannitol dehydrogenase domain-containing protein
+YPTS_1407	1565743	1566981	1565788	1566981	3	mannonate dehydratase
+YPTS_1408	1567121	1567840	1567121	1567693	2	elongation factor P
+YPTS_1421	1578163	1579743	1578169	1579743	1	ABC transporter related
+YPTS_1424	1581572	1582720	1581587	1582720	4	bifunctional fructose-specific PTS IIA/HPr protein
+YPTS_1425	1582684	1583655	1582717	1583655	1	1-phosphofructokinase
+YPTS_1426	1583652	1585370	1583670	1585370	4	fructose-specific PTS system IIBC component
+YPTS_1432	1591435	1592403	1591435	1592292	4	endonuclease IV
+YPTS_1434	1594154	1595074	1594202	1595074	4	putative DNA-binding transcriptional regulator
+YPTS_1436	1595314	1596843	1595332	1596843	1	lysine transporter
+YPTS_1441	1602765	1603502	1602765	1603385	3	glutathione S-transferase domain-containing protein
+YPTS_1448	1608661	1609977	1608772	1609977	16	peptidase S11 D-alanyl-D-alanine carboxypeptidase 1
+YPTS_1449	1610435	1611763	1610435	1611736	2	serine transporter
+YPTS_1450	1612836	1613615	1612836	1613600	1	DNA-binding transcriptional repressor DeoR
+YPTS_1451	1613830	1614537	1613830	1614501	5	deoxyribose-phosphate aldolase
+YPTS_1455	1618610	1618909	1618610	1618873	4	glutaredoxin 1
+YPTS_1457	1619786	1620277	1619792	1620277	1	hypothetical protein YPTS_1457
+YPTS_1458	1620704	1621939	1620830	1621939	8	putrescine transporter subunit: periplasmic-binding component of ABC superfamily
+YPTS_1464	1626984	1627751	1626984	1627715	10	cationic amino acid ABC transporter, periplasmic binding protein
+YPTS_1468	1629779	1630915	1629824	1630915	19	periplasmic binding protein
+YPTS_1469	1630858	1631973	1630915	1631973	1	transport system permease protein
+YPTS_1471	1632440	1633540	1632743	1633540	10	hypothetical protein YPTS_1471
+YPTS_1472	1633491	1634903	1633533	1634903	9	hypothetical protein YPTS_1472
+YPTS_1476	1637349	1638224	1637349	1638080	17	cationic amino acid ABC transporter, periplasmic binding protein
+YPTS_1477	1638101	1638907	1638101	1638880	4	arginine transporter ATP-binding subunit
+YPTS_1478	1639124	1639744	1639124	1639684	11	chorismate mutase
+YPTS_1479	1639854	1640438	1639854	1640429	11	putative lipoprotein
+YPTS_1480	1640526	1641557	1640526	1641533	4	NAD-dependent epimerase/dehydratase
+YPTS_1482	1643120	1644214	1643120	1644139	6	L-threonine aldolase
+YPTS_1483	1644488	1646254	1644488	1646209	6	pyruvate dehydrogenase
+YPTS_1487	1650568	1652259	1650592	1652259	2	hypothetical protein YPTS_1487
+YPTS_1491	1654635	1656641	1654692	1656641	1	macrolide transporter ATP-binding /permease protein
+YPTS_1492	1656922	1657206	1656922	1657185	2	cold-shock DNA-binding domain-containing protein
+YPTS_1493	1657531	1657866	1657546	1657866	3	ATP-dependent Clp protease adaptor protein ClpS
+YPTS_1494	1657871	1660168	1657892	1660168	26	ATP-dependent Clp protease ATP-binding subunit
+YPTS_1495	1660581	1660817	1660581	1660799	11	translation initiation factor IF-1
+YPTS_1497	1661894	1663630	1661894	1663618	4	cysteine/glutathione ABC transporter membrane/ATP-binding component
+YPTS_1498	1663621	1665432	1663621	1665387	7	cysteine/glutathione ABC transporter membrane/ATP-binding component
+YPTS_1499	1665846	1666865	1665846	1666808	23	thioredoxin reductase
+YPTS_1500	1667576	1668070	1667576	1668070	7	leucine-responsive transcriptional regulator
+YPTS_1501	1668172	1672122	1668193	1672122	12	cell divisionFtsK/SpoIIIE
+YPTS_1502	1672279	1672920	1672312	1672920	4	outer-membrane lipoprotein carrier protein
+YPTS_1503	1672931	1674274	1672940	1674274	6	recombination factor protein RarA
+YPTS_1505	1674459	1675808	1674516	1675808	29	seryl-tRNA synthetase
+YPTS_1507	1677357	1678235	1677357	1678154	3	pyruvate formate lyase-activating enzyme 1
+YPTS_1508	1679057	1679752	1679078	1679752	1	glycosyl transferase family protein
+YPTS_1509	1679870	1682236	1679870	1682152	54	formate acetyltransferase
+YPTS_1510	1682208	1683077	1682208	1683065	1	formate transporter
+YPTS_1511	1683743	1685530	1683743	1685509	5	hypothetical protein YPTS_1511
+YPTS_1512	1685646	1686695	1685658	1686695	6	L-asparaginase II
+YPTS_1515	1690337	1691428	1690343	1691428	31	phosphoserine aminotransferase
+YPTS_1516	1691508	1692887	1691601	1692887	16	3-phosphoshikimate 1-carboxyvinyltransferase
+YPTS_1517	1693201	1693893	1693201	1693893	10	cytidylate kinase
+YPTS_1518	1694004	1695740	1694067	1695740	57	30S ribosomal protein S1
+YPTS_1519	1695744	1696085	1695801	1696085	11	integration host factor subunit beta
+YPTS_1522	1698920	1700707	1698959	1700707	6	lipid transporter ATP-binding/permease protein
+YPTS_1523	1700650	1701690	1700704	1701690	1	tetraacyldisaccharide 4'-kinase
+YPTS_1527	1704834	1705595	1704843	1705595	2	3-deoxy-manno-octulosonate cytidylyltransferase
+YPTS_1529	1707664	1708464	1707679	1708464	1	putative metallothionein SmtA
+YPTS_1530	1708440	1709783	1708461	1709783	9	condesin subunit F
+YPTS_1531	1709731	1710492	1709764	1710492	2	condesin subunit E
+YPTS_1532	1710483	1714946	1710489	1714946	38	cell division protein MukB
+YPTS_1533	1715176	1717050	1715194	1717050	7	hypothetical protein YPTS_1533
+YPTS_1535	1717862	1718530	1717883	1718530	2	beta-lactamase domain-containing protein
+YPTS_1536	1718954	1720162	1718954	1720144	26	aromatic amino acid aminotransferase
+YPTS_1537	1720401	1721537	1720401	1721483	18	porin
+YPTS_1538	1721781	1723193	1721781	1723181	22	asparaginyl-tRNA synthetase
+YPTS_1539	1723671	1724924	1723671	1724891	3	nicotinate phosphoribosyltransferase
+YPTS_1541	1725475	1728207	1725592	1728207	38	aminopeptidase N
+YPTS_1543	1730136	1731176	1730166	1731176	18	dihydroorotate dehydrogenase 2
+YPTS_1545	1731936	1733069	1731936	1733045	6	MOSC domain-containing protein
+YPTS_1546	1733142	1735268	1733148	1735268	9	23S rRNA m(2)G2445 methyltransferase
+YPTS_1547	1735217	1737187	1735274	1737187	10	ABC transporter ATPase component
+YPTS_1549	1738547	1740241	1738589	1740241	10	paraquat-inducible protein B
+YPTS_1550	1740226	1740798	1740238	1740798	1	hypothetical protein YPTS_1550
+YPTS_1554	1742007	1743344	1742007	1743281	7	3-oxoacyl-(acyl carrier protein) synthase II
+YPTS_1556	1743981	1744619	1743981	1744607	8	3-hydroxydecanoyl-(acyl carrier protein) dehydratase
+YPTS_1557	1744568	1746355	1744568	1746190	7	hypothetical protein YPTS_1557
+YPTS_1558	1746464	1746985	1746530	1746985	3	hypothetical protein YPTS_1558
+YPTS_1559	1747091	1748188	1747091	1748152	79	outer membrane protein A
+YPTS_1562	1749982	1752171	1749982	1752120	8	hypothetical protein YPTS_1562
+YPTS_1563	1752150	1752650	1752150	1752596	2	hypothetical protein YPTS_1563
+YPTS_1564	1752769	1754844	1752790	1754844	5	DNA helicase IV
+YPTS_1565	1754905	1755369	1754905	1755369	6	methylglyoxal synthase
+YPTS_1567	1756541	1756960	1756544	1756960	4	CoA-binding domain-containing protein
+YPTS_1569	1757447	1758703	1757447	1758637	6	PUA domain-containing protein
+YPTS_1570	1758683	1759009	1758731	1759009	3	acylphosphatase
+YPTS_1571	1759061	1759396	1759061	1759390	2	TusE/DsrC/DsvC family sulfur relay protein
+YPTS_1580	1767737	1769041	1767758	1769041	1	Beta-ketoacyl synthase
+YPTS_1587	1773838	1774104	1773856	1774104	2	putative acyl carrier protein
+YPTS_1616	1810810	1812591	1810996	1812591	13	ABC transporter related
+YPTS_1618	1813538	1814353	1813538	1814308	1	molybdopterin biosynthesis protein MoeB
+YPTS_1619	1814310	1815614	1814310	1815584	8	molybdopterin biosynthesis protein MoeA
+YPTS_1627	1823149	1824306	1823149	1824288	8	S-(hydroxymethyl)glutathione dehydrogenase/class III alcohol dehydrogenase
+YPTS_1630	1826832	1827563	1826901	1827563	6	GTP cyclohydrolase I
+YPTS_1632	1829394	1830524	1829532	1830524	29	periplasmic binding protein/LacI transcriptional regulator
+YPTS_1633	1830742	1832274	1830754	1832274	5	galactose/methyl galaxtoside transporter ATP-binding protein
+YPTS_1635	1833750	1834532	1833750	1834487	2	hypothetical protein YPTS_1635
+YPTS_1636	1834768	1836471	1834768	1836465	26	malate dehydrogenase
+YPTS_1637	1836821	1837732	1836821	1837705	1	cytidine deaminase
+YPTS_1644	1844745	1846790	1844745	1846772	31	methionyl-tRNA synthetase
+YPTS_1645	1847022	1848149	1847037	1848149	11	putative ATPase
+YPTS_1646	1848319	1849035	1848394	1849035	6	uridine kinase
+YPTS_1647	1849098	1849721	1849140	1849721	8	deoxycytidine triphosphate deaminase
+YPTS_1648	1849839	1851764	1849908	1851764	14	putative assembly protein
+YPTS_1649	1851909	1853525	1851909	1853495	3	integral membrane protein TerC
+YPTS_1661	1869575	1870513	1869623	1870513	6	UTP-glucose-1-phosphate uridylyltransferase
+YPTS_1662	1870591	1871490	1870597	1871490	5	UTP-glucose-1-phosphate uridylyltransferase
+YPTS_1663	1871801	1873285	1871876	1873285	49	6-phosphogluconate dehydrogenase
+YPTS_1664	1873485	1874120	1873485	1874099	3	bifunctional phosphoribosyl-AMP cyclohydrolase/phosphoribosyl-ATP pyrophosphatase protein
+YPTS_1665	1874093	1874887	1874093	1874869	7	imidazole glycerol phosphate synthase subunit HisF
+YPTS_1666	1874851	1875780	1874851	1875588	10	1-(5-phosphoribosyl)-5-
+YPTS_1667	1875594	1876220	1875594	1876184	5	imidazole glycerol phosphate synthase subunit HisH
+YPTS_1668	1876184	1877260	1876184	1877251	12	imidazole glycerol-phosphate dehydratase/histidinol phosphatase
+YPTS_1669	1877248	1878405	1877248	1878396	8	histidinol-phosphate aminotransferase
+YPTS_1670	1878399	1879733	1878399	1879730	17	histidinol dehydrogenase
+YPTS_1671	1879734	1880648	1879734	1880633	17	ATP phosphoribosyltransferase
+YPTS_1672	1881309	1882166	1881339	1882166	5	NAD-dependent epimerase/dehydratase
+YPTS_1673	1882473	1883159	1882473	1883129	1	hypothetical protein YPTS_1673
+YPTS_1678	1886961	1888163	1887072	1888163	3	hypothetical protein YPTS_1678
+YPTS_1680	1888620	1890014	1888623	1890014	1	amino acid permease-associated region
+YPTS_1681	1891296	1892822	1891296	1892726	4	exonuclease I
+YPTS_1683	1894532	1894879	1894562	1894879	9	hypothetical protein YPTS_1683
+YPTS_1690	1903028	1904392	1903115	1904392	1	mandelate racemase/muconate lactonizing protein
+YPTS_1692	1904619	1905815	1904670	1905815	16	L-lactate dehydrogenase
+YPTS_1693	1906020	1907390	1906020	1907387	15	argininosuccinate synthase
+YPTS_1698	1912698	1913297	1912758	1913297	6	hypothetical protein YPTS_1698
+YPTS_1708	1919304	1921391	1919304	1921325	1	TonB-dependent siderophore receptor
+YPTS_1713	1934513	1940641	1934513	1940620	1	amino acid adenylation domain-containing protein
+YPTS_1727	1955777	1958146	1955777	1957903	1	glycoside hydrolase clan GH-D
+YPTS_1729	1959625	1960659	1959643	1960659	5	LacI family transcription regulator
+YPTS_1730	1961065	1961901	1961065	1961877	1	hypothetical protein YPTS_1730
+YPTS_1731	1962267	1962578	1962267	1962551	7	YCII-related
+YPTS_1732	1962788	1963657	1962788	1963639	3	protein of unknown function RIO1
+YPTS_1733	1963742	1965469	1963742	1965460	2	ABC transporter related
+YPTS_1738	1967294	1967542	1967303	1967542	1	hypothetical protein YPTS_1738
+YPTS_1740	1968416	1968733	1968449	1968733	1	hypothetical protein YPTS_1740
+YPTS_1743	1969748	1971259	1969886	1971259	1	amino acid permease-associated region
+YPTS_1744	1971555	1972226	1971555	1972163	2	palmitoyl transferase
+YPTS_1747	1973282	1973533	1973324	1973533	5	cold shock-like protein CspC
+YPTS_1748	1973624	1974436	1973624	1974379	1	hypothetical protein YPTS_1748
+YPTS_1749	1974720	1975619	1974780	1975619	2	23S rRNA methyltransferase A
+YPTS_1755	1982908	1983801	1982908	1983786	13	mannose-specific PTS system protein IID
+YPTS_1756	1983802	1984662	1983802	1984599	1	PTS system mannose/fructose/sorbose family IIC subunit
+YPTS_1757	1984691	1985668	1984691	1985665	22	PTS system mannose/fructose/sorbose family IIB subunit
+YPTS_1759	1986208	1987920	1986376	1987920	1	integral membrane protein TerC
+YPTS_1763	1990255	1991733	1990267	1991733	1	5-carboxymethyl-2-hydroxymuconate semialdehyde dehydrogenase
+YPTS_1769	1996111	1997769	1996207	1997769	1	4-hydroxyphenylacetate 3-monooxygenase, oxygenase subunit
+YPTS_1771	1998567	1999943	1998567	1999931	9	L-serine dehydratase 1
+YPTS_1772	2000639	2001280	2000639	2001238	1	hypothetical protein YPTS_1772
+YPTS_1773	2001235	2002617	2001235	2002611	2	para-aminobenzoate synthase, subunit I
+YPTS_1775	2003159	2004373	2003159	2004340	19	phosphoribosylglycinamide formyltransferase 2
+YPTS_1776	2004536	2006035	2004653	2006035	3	ATP-dependent RNA helicase DbpA
+YPTS_1777	2006090	2006449	2006129	2006449	1	YebG family protein
+YPTS_1779	2006877	2007314	2006889	2007314	1	hypothetical protein YPTS_1779
+YPTS_1780	2007621	2009675	2007624	2009675	30	peptidase S9 prolyl oligopeptidase
+YPTS_1782	2010325	2011347	2010397	2011347	4	proline iminopeptidase
+YPTS_1783	2011407	2011706	2011407	2011637	1	DNA polymerase III subunit theta
+YPTS_1784	2011924	2012547	2012038	2012547	31	Ferritin Dps family protein
+YPTS_1785	2012752	2013312	2012926	2013312	5	copper resistance protein CopC
+YPTS_1787	2014281	2014637	2014296	2014637	3	hypothetical protein YPTS_1787
+YPTS_1788	2015160	2015489	2015160	2015486	1	hypothetical protein YPTS_1788
+YPTS_1810	2040371	2041417	2040371	2041372	1	DeoR family transcriptional regulator
+YPTS_1814	2044875	2045882	2044887	2045882	2	sugar-binding periplasmic protein
+YPTS_1817	2048551	2049558	2048599	2049558	1	ribokinase-like domain-containing protein
+YPTS_1846	2074952	2075986	2074967	2075986	9	D-cysteine desulfhydrase
+YPTS_1847	2076077	2076910	2076110	2076910	9	cystine transporter subunit
+YPTS_1849	2077554	2078336	2077575	2078336	2	putative amino-acid ABC transporter ATP-binding protein YecC
+YPTS_1851	2078628	2079050	2078628	2078999	2	hypothetical protein YPTS_1851
+YPTS_1854	2079830	2083828	2079830	2083801	71	trifunctional transcriptional regulator/proline dehydrogenase/pyrroline-5-carboxylate dehydrogenase
+YPTS_1856	2084352	2085857	2084373	2085857	6	sodium/proline symporter
+YPTS_1858	2087032	2088198	2087068	2088198	2	hypothetical protein YPTS_1858
+YPTS_1860	2089599	2090213	2089599	2090198	11	TrpR binding protein WrbA
+YPTS_1861	2090580	2091770	2090592	2091770	1	kelch repeat-containing protein
+YPTS_1866	2096077	2096337	2096077	2096301	3	hypothetical protein YPTS_1866
+YPTS_1867	2096862	2097620	2096964	2097620	1	response regulator
+YPTS_1883	2112485	2112985	2112506	2112985	4	Hcp1 family type VI secretion system effector
+YPTS_1884	2112870	2113661	2112996	2113661	4	hypothetical protein YPTS_1884
+YPTS_1898	2122589	2122942	2122664	2122942	3	hypothetical protein YPTS_1898
+YPTS_1914	2131686	2132069	2131701	2132069	3	XRE family transcriptional regulator
+YPTS_1915	2132066	2133787	2132090	2133787	2	hypothetical protein YPTS_1915
+YPTS_1961	2160212	2161279	2160266	2161279	3	oxidoreductase domain-containing protein
+YPTS_1971	2172650	2176684	2172650	2176678	3	histidine kinase
+YPTS_1972	2176653	2177366	2176653	2177285	7	two component LuxR family transcriptional regulator
+YPTS_1973	2178112	2179521	2178112	2179434	13	acetyl-CoA hydrolase/transferase
+YPTS_1974	2179457	2180110	2179457	2180107	7	dehydratase
+YPTS_1975	2180049	2180918	2180049	2180891	5	HpcH/HpaI aldolase
+YPTS_1978	2182437	2183015	2182437	2182997	1	hypothetical protein YPTS_1978
+YPTS_1983	2187645	2188871	2187711	2188871	6	GntR family transcriptional regulator
+YPTS_1984	2189067	2190605	2189067	2190596	1	amino acid permease-associated region
+YPTS_1986	2193309	2194349	2193342	2194349	9	glutaminase
+YPTS_1987	2194427	2196100	2194460	2196100	3	major facilitator transporter
+YPTS_1989	2198805	2199350	2198823	2199350	2	hypothetical protein YPTS_1989
+YPTS_1994	2203527	2204243	2203530	2204243	1	ABC transporter related
+YPTS_1996	2204706	2205041	2204727	2205041	1	cytochrome c class I
+YPTS_1999	2208062	2210596	2208128	2210596	6	outer membrane protein PgaA
+YPTS_2000	2210597	2212630	2210609	2212630	8	polysaccharide deacetylase
+YPTS_2002	2213927	2214418	2213951	2214418	1	haemin storage system, HmsS protein
+YPTS_2005	2216418	2217215	2216427	2217215	1	hypothetical protein YPTS_2005
+YPTS_2006	2217318	2218460	2217318	2218418	1	calcium/sodium:proton antiporter
+YPTS_2008	2221032	2222480	2221179	2222480	2	GntR family transcriptional regulator
+YPTS_2011	2222913	2224367	2223027	2224367	12	bifunctional succinylornithine transaminase/acetylornithine transaminase
+YPTS_2012	2224382	2225449	2224397	2225449	4	arginine succinyltransferase
+YPTS_2013	2225404	2226963	2225446	2226963	1	succinylglutamic semialdehyde dehydrogenase
+YPTS_2014	2226948	2228330	2226987	2228330	3	succinylarginine dihydrolase
+YPTS_2015	2228346	2229383	2228391	2229383	1	succinylglutamate desuccinylase
+YPTS_2026	2241600	2242625	2241618	2242625	2	3-oxoacyl-(ACP) synthase III
+YPTS_2036	2252329	2254500	2252329	2254491	1	Sel1 domain-containing protein
+YPTS_2039	2257409	2258065	2257427	2258065	2	hypothetical protein YPTS_2039
+YPTS_2040	2258200	2258871	2258200	2258859	8	methyltransferase type 12
+YPTS_2041	2258964	2259650	2258964	2259644	3	short-chain dehydrogenase/reductase SDR
+YPTS_2042	2259796	2259975	2259796	2259939	1	hypothetical protein YPTS_2042
+YPTS_2043	2259985	2260959	2259985	2260935	11	hypothetical protein YPTS_2043
+YPTS_2044	2260922	2261881	2260922	2261854	12	hypothetical protein YPTS_2044
+YPTS_2045	2261860	2262804	2261860	2262765	19	hypothetical protein YPTS_2045
+YPTS_2046	2263545	2264651	2263545	2264618	5	hypothetical protein YPTS_2046
+YPTS_2050	2267452	2268165	2267452	2268144	1	two component heavy metal response transcriptional regulator
+YPTS_2055	2272222	2273325	2272222	2273313	16	GTP-dependent nucleic acid-binding protein EngD
+YPTS_2056	2273478	2274116	2273478	2274098	5	peptidyl-tRNA hydrolase
+YPTS_2058	2274904	2275893	2274904	2275851	23	ribose-phosphate pyrophosphokinase
+YPTS_2060	2276192	2277118	2276192	2277091	9	4-diphosphocytidyl-2-C-methyl-D-erythritol kinase
+YPTS_2061	2277093	2277779	2277093	2277716	8	outer membrane lipoprotein LolB
+YPTS_2062	2277950	2279284	2277968	2279284	1	glutamyl-tRNA reductase
+YPTS_2063	2279302	2280399	2279317	2280399	9	peptide chain release factor 1
+YPTS_2064	2280369	2281229	2280399	2281229	1	N5-glutamine S-adenosyl-L-methionine-dependent methyltransferase
+YPTS_2066	2281667	2282500	2281691	2282500	1	putative transcriptional regulator
+YPTS_2067	2282566	2283450	2282596	2283450	13	2-dehydro-3-deoxyphosphooctonate aldolase
+YPTS_2068	2283998	2285695	2283998	2285695	1	putative sulfate transporter YchM
+YPTS_2071	2287949	2289088	2287949	2289031	1	extracellular solute-binding protein
+YPTS_2076	2292830	2293984	2292872	2293984	1	ROK family protein
+YPTS_2077	2294475	2295356	2294619	2295356	3	putative hydrolase
+YPTS_2078	2295393	2295953	2295393	2295953	1	cytoplasmic chaperone TorD family protein
+YPTS_2079	2296407	2297003	2296407	2296970	3	hypothetical protein YPTS_2079
+YPTS_2081	2298913	2299506	2298922	2299506	4	ribosomal-protein-S5-alanine N-acetyltransferase
+YPTS_2082	2299478	2300215	2299514	2300215	6	hypothetical protein YPTS_2082
+YPTS_2083	2300199	2301137	2300226	2301137	4	oxidoreductase domain-containing protein
+YPTS_2085	2303373	2305034	2303373	2305034	1	hemolysin activator HlyB domain-containing protein
+YPTS_2088	2310026	2311765	2310026	2311756	32	arginyl-tRNA synthetase
+YPTS_2089	2312261	2312884	2312309	2312884	4	hypothetical protein YPTS_2089
+YPTS_2090	2313053	2313880	2313116	2313880	9	copper homeostasis protein CutC
+YPTS_2091	2314073	2315083	2314073	2315044	6	methyltransferase
+YPTS_2092	2315041	2315892	2315041	2315844	6	methyltransferase
+YPTS_2093	2316035	2316478	2316035	2316430	1	hypothetical protein YPTS_2093
+YPTS_2094	2316610	2317428	2316610	2317425	1	hypothetical protein YPTS_2094
+YPTS_2095	2318272	2320083	2318287	2320083	42	aspartyl-tRNA synthetase
+YPTS_2096	2320032	2320526	2320083	2320526	1	dATP pyrophosphohydrolase
+YPTS_2097	2320566	2321327	2320584	2321327	6	hypothetical protein YPTS_2097
+YPTS_2099	2322298	2322978	2322364	2322978	2	Holliday junction DNA helicase RuvA
+YPTS_2100	2323137	2324144	2323140	2324144	5	Holliday junction DNA helicase RuvB
+YPTS_2102	2324981	2325769	2324981	2325742	4	high-affinity zinc transporter ATPase
+YPTS_2103	2325776	2326771	2325815	2326771	25	high-affinity zinc transporter periplasmic component
+YPTS_2104	2326792	2328108	2326792	2328108	2	hypothetical protein YPTS_2104
+YPTS_2105	2328348	2329337	2328375	2329337	5	lipid A biosynthesis (KDO)2-(lauroyl)-lipid IVA acyltransferase
+YPTS_2107	2329677	2331122	2329677	2331119	41	pyruvate kinase
+YPTS_2108	2331481	2332518	2331481	2332386	7	DNA-binding transcriptional regulator HexR
+YPTS_2109	2332565	2334187	2332703	2334187	30	glucose-6-phosphate 1-dehydrogenase
+YPTS_2111	2334423	2335070	2334429	2335070	8	keto-hydroxyglutarate-aldolase/keto-deoxy-phosphogluconate aldolase
+YPTS_2114	2336710	2337075	2336710	2337054	2	endoribonuclease L-PSP
+YPTS_2115	2337134	2339089	2337185	2339089	1	helicase c2
+YPTS_2116	2339023	2339859	2339161	2339859	4	peptidase M22 glycoprotease
+YPTS_2117	2339990	2340601	2339996	2340601	5	Slp family outer membrane lipoprotein
+YPTS_2118	2341195	2342943	2341255	2342943	15	long-chain-fatty-acid--CoA ligase
+YPTS_2119	2343055	2344224	2343064	2344224	3	ribonuclease D
+YPTS_2120	2344461	2344733	2344461	2344730	4	cell division topological specificity factor MinE
+YPTS_2121	2344734	2345561	2344734	2345546	20	cell division inhibitor MinD
+YPTS_2122	2345571	2346257	2345571	2346257	3	septum formation inhibitor
+YPTS_2123	2346954	2347250	2346978	2347250	1	hypothetical protein YPTS_2123
+YPTS_2125	2348499	2349203	2348547	2349203	11	hypothetical protein YPTS_2125
+YPTS_2134	2357407	2358153	2357434	2358153	5	fatty acid metabolism regulator
+YPTS_2135	2358371	2359924	2358371	2359906	3	SpoVR family protein
+YPTS_2136	2360319	2361674	2360370	2361674	10	D-amino acid dehydrogenase small subunit
+YPTS_2138	2363161	2364048	2363161	2364030	3	pirin domain-containing protein
+YPTS_2141	2366394	2367734	2366394	2367668	1	hypothetical protein YPTS_2141
+YPTS_2143	2367818	2369812	2367818	2369752	18	putative serine protein kinase, PrkA
+YPTS_2144	2370067	2370945	2370175	2370945	8	MltA-interacting MipA family protein
+YPTS_2145	2371018	2371935	2371018	2371893	7	aldose 1-epimerase
+YPTS_2146	2372217	2373224	2372217	2373212	58	glyceraldehyde-3-phosphate dehydrogenase, type I
+YPTS_2147	2373473	2373973	2373560	2373973	4	methionine sulfoxide reductase B
+YPTS_2148	2373933	2374316	2373942	2374316	3	hypothetical protein YPTS_2148
+YPTS_2150	2375112	2376221	2375112	2376128	3	cytoplasmic asparaginase I
+YPTS_2151	2376245	2378125	2376245	2378095	11	protease 4
+YPTS_2152	2378180	2378809	2378258	2378809	9	hypothetical protein YPTS_2152
+YPTS_2153	2379022	2380080	2379034	2380080	7	selenophosphate synthetase
+YPTS_2155	2380184	2382112	2380184	2382112	3	DNA topoisomerase III
+YPTS_2157	2382412	2382813	2382412	2382798	1	pyrimidine (deoxy)nucleoside triphosphate pyrophosphohydrolase
+YPTS_2158	2382876	2383700	2382876	2383682	8	exonuclease III
+YPTS_2163	2386069	2386935	2386069	2386917	5	formyltetrahydrofolate deformylase
+YPTS_2166	2390074	2391468	2390122	2391468	4	nucleotide sugar dehydrogenase
+YPTS_2169	2391903	2392325	2391903	2392310	16	global DNA-binding transcriptional dual regulator H-NS
+YPTS_2171	2394401	2397094	2394401	2397076	36	bifunctional acetaldehyde-CoA/alcohol dehydrogenase
+YPTS_2173	2399599	2401254	2399617	2401254	25	extracellular solute-binding protein
+YPTS_2174	2401338	2402261	2401341	2402261	1	oligopeptide transporter permease
+YPTS_2176	2403170	2404198	2403197	2404198	5	oligopeptide transporter ATP-binding component
+YPTS_2177	2404177	2405196	2404195	2405196	3	oligopeptide/dipeptide ABC transporter, ATPase subunit
+YPTS_2179	2406280	2406666	2406280	2406633	5	dsDNA-mimic protein
+YPTS_2184	2410027	2410317	2410054	2410317	1	hypothetical protein YPTS_2184
+YPTS_2194	2416721	2417380	2416745	2417380	13	outer membrane protein W
+YPTS_2195	2417527	2417868	2417527	2417841	3	transport-associated
+YPTS_2196	2418184	2419041	2418184	2418990	7	tryptophan synthase subunit alpha
+YPTS_2197	2418990	2420276	2418990	2420180	14	tryptophan synthase subunit beta
+YPTS_2198	2420315	2421745	2420315	2421742	14	bifunctional indole-3-glycerol phosphate synthase/phosphoribosylanthranilate isomerase
+YPTS_2199	2421746	2422786	2421746	2422744	9	anthranilate phosphoribosyltransferase
+YPTS_2200	2422759	2423394	2422759	2423337	6	anthranilate synthase component II
+YPTS_2201	2423337	2424911	2423337	2424902	7	anthranilate synthase component I
+YPTS_2203	2426261	2426890	2426270	2426890	3	hypothetical protein YPTS_2203
+YPTS_2204	2427184	2428254	2427220	2428254	7	23S rRNA pseudouridylate synthase B
+YPTS_2205	2428377	2429060	2428377	2429021	2	cob(I)yrinic acid a,c-diamide adenosyltransferase
+YPTS_2206	2428984	2429868	2428984	2429745	5	short chain dehydrogenase
+YPTS_2207	2429902	2430963	2429917	2430963	6	putative periplasmic protease
+YPTS_2208	2431082	2431342	2431082	2431333	10	hypothetical protein YPTS_2208
+YPTS_2210	2431740	2434367	2431752	2434367	21	DNA topoisomerase I
+YPTS_2211	2434752	2435738	2434764	2435738	8	transcriptional regulator CysB
+YPTS_2213	2437268	2439967	2437295	2439967	25	aconitate hydratase
+YPTS_2215	2441200	2441988	2441227	2441988	1	phosphatidylglycerophosphatase B
+YPTS_2216	2442136	2442480	2442169	2442480	1	hypothetical protein YPTS_2216
+YPTS_2217	2442481	2443656	2442487	2443656	1	tetratricopeptide repeat protein
+YPTS_2218	2443778	2444092	2443778	2444077	2	hypothetical protein YPTS_2218
+YPTS_2219	2444544	2445284	2444547	2445284	12	orotidine 5'-phosphate decarboxylase
+YPTS_2221	2445866	2446102	2445866	2446081	1	lipoprotein
+YPTS_2223	2447285	2447593	2447285	2447533	1	hypothetical protein YPTS_2223
+YPTS_2224	2447723	2448532	2447867	2448532	9	fructose-6-phosphate aldolase
+YPTS_2226	2448947	2451088	2448947	2451013	8	carbon starvation protein CstA
+YPTS_2227	2451363	2453327	2451363	2453297	20	exoribonuclease II
+YPTS_2229	2455292	2456320	2455322	2456320	5	NAD-dependent epimerase/dehydratase
+YPTS_2235	2461059	2463050	2461059	2463038	1	electron transport complex protein RnfC
+YPTS_2244	2474867	2475886	2474903	2475886	2	periplasmic binding protein/LacI transcriptional regulator
+YPTS_2248	2479876	2480952	2479903	2480952	14	putative oxidoreductase
+YPTS_2250	2482349	2483362	2482349	2483353	11	adenosine deaminase
+YPTS_2252	2485171	2486112	2485171	2486100	1	hypothetical protein YPTS_2252
+YPTS_2254	2486378	2487223	2486474	2487223	3	GntR family transcriptional regulator
+YPTS_2255	2487491	2489110	2487491	2489035	49	hypothetical protein YPTS_2255
+YPTS_2256	2489275	2490561	2489275	2490354	13	mannose-6-phosphate isomerase, class I
+YPTS_2257	2490668	2492131	2490734	2492131	13	fumarate hydratase
+YPTS_2258	2492211	2493197	2492211	2493185	4	DNA replication terminus site-binding protein
+YPTS_2259	2493351	2494658	2493351	2494649	1	major facilitator transporter
+YPTS_2260	2494808	2495776	2494862	2495776	2	LysR family transcriptional regulator
+YPTS_2262	2497366	2498064	2497396	2498064	2	putative dithiobiotin synthetase
+YPTS_2264	2499595	2499849	2499595	2499840	1	hypothetical protein YPTS_2264
+YPTS_2271	2506160	2507740	2506220	2507740	42	aldehyde dehydrogenase
+YPTS_2273	2510070	2511050	2510127	2511050	1	hypothetical protein YPTS_2273
+YPTS_2279	2514620	2515639	2514620	2515636	1	LacI family transcription regulator
+YPTS_2281	2516314	2517279	2516314	2517264	4	periplasmic binding protein/LacI transcriptional regulator
+YPTS_2289	2524583	2526124	2524583	2526073	9	AMP nucleosidase
+YPTS_2291	2527711	2530803	2527732	2530803	1	virulence protein SrfB
+YPTS_2293	2533509	2534312	2533509	2534303	11	hypothetical protein YPTS_2293
+YPTS_2294	2535026	2536819	2535152	2536819	5	acetolactate synthase catalytic subunit
+YPTS_2295	2536806	2537168	2536821	2537168	2	acetolactate synthase 1 regulatory subunit
+YPTS_2296	2537235	2537972	2537235	2537909	1	nucleotidase
+YPTS_2299	2542686	2543219	2542701	2543219	6	methylated-DNA--protein-cysteine methyltransferase
+YPTS_2300	2543280	2544044	2543292	2544044	5	fumarate/nitrate reduction transcriptional regulator
+YPTS_2301	2544170	2545135	2544179	2545135	15	universal stress protein UspE
+YPTS_2302	2545411	2546808	2545411	2546805	13	pyridine nucleotide transhydrogenase
+YPTS_2303	2546878	2548416	2546878	2548404	18	NAD(P) transhydrogenase subunit alpha
+YPTS_2304	2548826	2549887	2548934	2549887	19	hypothetical protein YPTS_2304
+YPTS_2306	2551572	2552006	2551572	2551988	2	hypothetical protein YPTS_2306
+YPTS_2308	2552986	2554335	2553031	2554335	1	sensor protein RstB
+YPTS_2309	2554410	2555912	2554413	2555912	3	peptidase M32 carboxypeptidase Taq metallopeptidase
+YPTS_2311	2560562	2561182	2560562	2561140	9	hypothetical protein YPTS_2311
+YPTS_2317	2564882	2568772	2564882	2568769	10	ATP-dependent RNA helicase HrpA
+YPTS_2318	2569205	2569819	2569214	2569819	4	azoreductase
+YPTS_2319	2569940	2570899	2569940	2570896	1	DeoR family transcriptional regulator
+YPTS_2320	2571055	2572497	2571106	2572497	1	mannitol dehydrogenase domain-containing protein
+YPTS_2321	2572697	2573077	2572697	2573068	1	hypothetical protein YPTS_2321
+YPTS_2323	2573269	2576004	2573269	2575965	1	hypothetical protein YPTS_2323
+YPTS_2324	2576171	2577223	2576231	2577223	21	D-isomer specific 2-hydroxyacid dehydrogenase NAD-binding
+YPTS_2325	2577281	2577745	2577293	2577745	3	heat-inducible protein
+YPTS_2329	2579947	2583492	2579959	2583492	5	pyruvate flavodoxin/ferredoxin oxidoreductase domain-containing protein
+YPTS_2330	2583767	2584708	2583767	2584708	8	C32 tRNA thiolase
+YPTS_2331	2584964	2585983	2584979	2585983	4	hypothetical protein YPTS_2331
+YPTS_2333	2586292	2587134	2586295	2587134	2	MerR family transcriptional regulator
+YPTS_2335	2588734	2590380	2588734	2590350	25	extracellular solute-binding protein
+YPTS_2338	2592593	2593186	2592683	2593186	23	thiol peroxidase
+YPTS_2339	2593350	2595041	2593350	2594927	9	DNA-binding transcriptional regulator TyrR
+YPTS_2340	2595237	2595710	2595264	2595710	1	hypothetical protein YPTS_2340
+YPTS_2342	2596240	2597307	2596240	2597301	2	hypothetical protein YPTS_2342
+YPTS_2343	2597298	2598719	2597298	2598695	4	protein of unknown function DUF463 YcjX family protein
+YPTS_2345	2599003	2599377	2599003	2599362	2	DNA-binding transcriptional activator PspC
+YPTS_2346	2599362	2599598	2599362	2599589	2	phage shock protein B
+YPTS_2347	2599751	2600419	2599751	2600416	18	phage shock protein PspA
+YPTS_2348	2600625	2601689	2600661	2601689	3	phage shock protein operon transcriptional activator
+YPTS_2349	2602258	2603931	2602288	2603931	3	extracellular solute-binding protein
+YPTS_2353	2606690	2607577	2606762	2607577	1	ABC transporter related
+YPTS_2355	2609828	2611396	2609861	2611396	1	putative tripeptide transporter permease
+YPTS_2357	2612446	2612751	2612488	2612751	1	hypothetical protein YPTS_2357
+YPTS_2358	2612987	2613601	2612996	2613601	32	glutathionine S-transferase
+YPTS_2359	2613661	2614530	2613661	2614521	2	pyridoxamine kinase
+YPTS_2360	2614676	2615968	2614676	2615950	19	tyrosyl-tRNA synthetase
+YPTS_2361	2616132	2616875	2616132	2616854	4	pyridoxamine 5'-phosphate oxidase
+YPTS_2362	2617209	2618111	2617209	2618105	1	aldo/keto reductase
+YPTS_2365	2620521	2621129	2620530	2621129	1	TetR family transcriptional regulator
+YPTS_2366	2621133	2622314	2621217	2622314	9	N-ethylmaleimide reductase
+YPTS_2368	2625705	2626163	2625756	2626163	2	lactoylglutathione lyase
+YPTS_2369	2626173	2626922	2626242	2626922	2	ribonuclease T
+YPTS_2370	2627231	2627602	2627231	2627581	4	hypothetical protein YPTS_2370
+YPTS_2372	2627880	2628872	2628021	2628872	1	NLP/P60 protein
+YPTS_2373	2629188	2629811	2629233	2629811	10	superoxide dismutase
+YPTS_2374	2630290	2631363	2630338	2631363	11	DNA-binding transcriptional repressor PurR
+YPTS_2377	2634317	2635507	2634356	2635507	10	cyclopropane fatty acyl phospholipid synthase
+YPTS_2378	2635558	2636226	2635558	2636214	7	riboflavin synthase subunit alpha
+YPTS_2380	2639081	2640505	2639093	2640505	27	pyruvate kinase
+YPTS_2381	2640814	2641062	2640826	2641062	16	LPP repeat-containing protein
+YPTS_2382	2641423	2642496	2641423	2642487	23	ErfK/YbiS/YcfS/YnhG family protein
+YPTS_2384	2643269	2644510	2643269	2644489	3	bifunctional cysteine desulfurase/selenocysteine lyase
+YPTS_2385	2644486	2645832	2644486	2645811	3	cysteine desulfurase activator complex subunit SufD
+YPTS_2386	2645786	2646613	2645786	2646532	2	cysteine desulfurase ATPase component
+YPTS_2387	2646717	2648228	2646717	2648228	4	cysteine desulfurase activator complex subunit SufB
+YPTS_2388	2648243	2648671	2648243	2648614	1	iron-sulfur cluster assembly scaffold protein
+YPTS_2389	2649209	2649646	2649209	2649625	4	thioesterase superfamily protein
+YPTS_2390	2649747	2652818	2649747	2652803	13	FAD linked oxidase domain-containing protein
+YPTS_2393	2655218	2657650	2655218	2657602	40	phosphoenolpyruvate synthase
+YPTS_2394	2657965	2658798	2657977	2658798	4	hypothetical protein YPTS_2394
+YPTS_2395	2658946	2660001	2658955	2660001	1	phospho-2-dehydro-3-deoxyheptonate aldolase
+YPTS_2396	2660170	2661684	2660170	2661633	3	hypothetical protein YPTS_2396
+YPTS_2397	2661685	2662731	2661685	2662701	2	lipoate-protein ligase A
+YPTS_2401	2664294	2665958	2664294	2665958	2	4-amino-4-deoxy-L-arabinose transferase
+YPTS_2403	2666857	2668875	2666857	2668860	13	bifunctional UDP-glucuronic acid decarboxylase/UDP-4-amino-4-deoxy-L-arabinose formyltransferase
+YPTS_2404	2668857	2669849	2668857	2669840	1	undecaprenyl phosphate 4-deoxy-4-formamido-L-arabinose transferase
+YPTS_2405	2669827	2671017	2669827	2670981	5	UDP-4-amino-4-deoxy-L-arabinose--oxoglutarate aminotransferase
+YPTS_2407	2672114	2672680	2672114	2672668	4	putative glutathione peroxidase
+YPTS_2410	2674779	2675087	2674779	2675075	15	integration host factor subunit alpha
+YPTS_2411	2675080	2677557	2675080	2677467	31	phenylalanyl-tRNA synthetase subunit beta
+YPTS_2412	2677481	2678557	2677481	2678464	22	phenylalanyl-tRNA synthetase, alpha subunit
+YPTS_2413	2678963	2679319	2678963	2679319	10	50S ribosomal protein L20
+YPTS_2414	2679357	2679590	2679357	2679554	1	50S ribosomal protein L35
+YPTS_2415	2679651	2680205	2679651	2680001	9	initiation factor 3
+YPTS_2416	2680206	2682143	2680206	2682134	29	threonyl-tRNA synthetase
+YPTS_2417	2682495	2682737	2682525	2682737	3	hypothetical protein YPTS_2417
+YPTS_2421	2685661	2686713	2685745	2686713	7	periplasmic solute binding protein
+YPTS_2422	2686698	2687600	2686710	2687600	1	ABC transporter related
+YPTS_2425	2689676	2690554	2689679	2690554	9	fructosamine kinase
+YPTS_2427	2690683	2691255	2690683	2691237	1	yfeABCD locus regulator
+YPTS_2428	2691648	2692313	2691648	2692313	3	2-deoxyglucose-6-phosphatase
+YPTS_2431	2693984	2694856	2694095	2694856	6	2-deoxy-D-gluconate 3-dehydrogenase
+YPTS_2432	2695177	2696868	2695201	2696868	2	periplasmic pectate lyase
+YPTS_2436	2699854	2701161	2699869	2701161	18	extracellular solute-binding protein
+YPTS_2440	2705008	2705862	2705008	2705859	5	N-acetylmuramyl-L-alanine amidase, negative regulator of AmpC, AmpD
+YPTS_2441	2706234	2707028	2706234	2707025	17	IclR family transcriptional regulator
+YPTS_2442	2707212	2708447	2707212	2708378	1	WD40 domain-containing protein
+YPTS_2443	2708700	2710112	2708745	2710112	2	major facilitator transporter
+YPTS_2450	2717003	2717896	2717003	2717884	9	heat shock protein HtpX
+YPTS_2451	2718347	2720473	2718347	2720425	33	carboxy-terminal protease
+YPTS_2452	2720445	2721170	2720445	2721158	9	putative solute/DNA competence effector
+YPTS_2453	2721254	2721814	2721254	2721751	1	hypothetical protein YPTS_2453
+YPTS_2455	2723187	2725850	2723199	2725850	7	hypothetical protein YPTS_2455
+YPTS_2463	2733027	2733419	2733027	2733416	2	hypothetical protein YPTS_2463
+YPTS_2466	2734596	2735888	2734596	2735852	2	patatin
+YPTS_2467	2736245	2736496	2736245	2736493	2	hypothetical protein YPTS_2467
+YPTS_2472	2739500	2740465	2739500	2740453	5	hypothetical protein YPTS_2472
+YPTS_2473	2740553	2743207	2740553	2743195	18	YadA domain-containing protein
+YPTS_2474	2743552	2744328	2743552	2744316	23	N-acetylmuramyl-L-alanine amidase, negative regulator of AmpC, AmpD
+YPTS_2475	2744873	2745526	2744873	2745517	2	chemotaxis regulator CheZ
+YPTS_2476	2745527	2745952	2745527	2745916	1	chemotaxis regulatory protein CheY
+YPTS_2482	2752589	2755465	2752589	2755453	1	putative integral membrane protein
+YPTS_2493	2770670	2770933	2770670	2770882	3	cold-shock DNA-binding domain-containing protein
+YPTS_2494	2771384	2774623	2771423	2774623	3	beta-D-galactosidase
+YPTS_2496	2774955	2776040	2775030	2776040	11	PIG3 family NAD(P)H quinone oxidoreductase
+YPTS_2498	2776299	2776856	2776323	2776856	2	hypothetical protein YPTS_2498
+YPTS_2501	2777859	2778806	2777907	2778806	1	hypothetical protein YPTS_2501
+YPTS_2502	2779082	2779312	2779109	2779312	4	hypothetical protein YPTS_2502
+YPTS_2506	2781991	2782863	2782006	2782863	12	NmrA family protein
+YPTS_2508	2785472	2785744	2785484	2785744	3	hypothetical protein YPTS_2508
+YPTS_2510	2787176	2788534	2787176	2788429	67	isocitrate dehydrogenase
+YPTS_2512	2789176	2789625	2789179	2789625	2	NUDIX hydrolase
+YPTS_2513	2789701	2790927	2789812	2790927	6	tRNA-specific 2-thiouridylase MnmA
+YPTS_2514	2790958	2791611	2790985	2791611	2	hypothetical protein YPTS_2514
+YPTS_2515	2791654	2793042	2791672	2793042	22	adenylosuccinate lyase
+YPTS_2518	2794043	2794735	2794064	2794735	12	DNA-binding transcriptional regulator PhoP
+YPTS_2519	2794726	2796195	2794789	2796195	2	sensor protein PhoQ
+YPTS_2520	2796192	2797400	2796279	2797400	7	cupin 4 family protein
+YPTS_2521	2797633	2798934	2797633	2798868	7	peptidase T
+YPTS_2522	2799198	2800082	2799198	2800034	4	NAD-dependent deacetylase
+YPTS_2523	2800083	2801015	2800083	2800997	4	N-acetyl-D-glucosamine kinase
+YPTS_2524	2801016	2802314	2801016	2802263	3	outer membrane-specific lipoprotein transporter subunit LolE
+YPTS_2525	2802263	2803036	2802263	2802967	7	lipoprotein transporter ATP-binding subunit
+YPTS_2527	2804426	2807878	2804432	2807878	17	transcription-repair coupling factor
+YPTS_2528	2808117	2808695	2808117	2808656	1	hypothetical protein YPTS_2528
+YPTS_2531	2810815	2812149	2810815	2812119	10	FAD-dependent pyridine nucleotide-disulphide oxidoreductase
+YPTS_2533	2813163	2814206	2813163	2814194	2	beta-hexosaminidase
+YPTS_2535	2815112	2815708	2815112	2815687	2	membrane lipoprotein lipid attachment site
+YPTS_2537	2816152	2816520	2816152	2816505	4	purine nucleoside phosphoramidase
+YPTS_2538	2816679	2817596	2816679	2817497	13	shikimate 5-dehydrogenase
+YPTS_2541	2818700	2820463	2818700	2820457	13	hypothetical protein YPTS_2541
+YPTS_2542	2820454	2820936	2820454	2820933	2	hypothetical protein YPTS_2542
+YPTS_2543	2820930	2822225	2820930	2822102	6	hypothetical protein YPTS_2543
+YPTS_2551	2824785	2826266	2824785	2826218	10	glucose-specific PTS system IIBC components
+YPTS_2552	2826524	2827399	2826524	2827333	4	putative metallodependent hydrolase
+YPTS_2553	2827348	2828424	2827348	2828370	1	DNA polymerase III subunit delta'
+YPTS_2554	2828370	2829017	2828370	2829008	7	thymidylate kinase
+YPTS_2555	2828998	2830095	2828998	2830023	5	aminodeoxychorismate lyase
+YPTS_2557	2831481	2832767	2831481	2832722	11	3-oxoacyl-(acyl carrier protein) synthase II
+YPTS_2558	2832817	2833173	2832817	2833053	7	acyl carrier protein
+YPTS_2559	2833207	2833974	2833207	2833941	15	3-ketoacyl-(acyl-carrier-protein) reductase
+YPTS_2560	2833955	2834896	2833955	2834884	7	malonyl CoA-acyl carrier protein transacylase
+YPTS_2561	2834922	2835878	2834922	2835872	9	3-oxoacyl-(acyl carrier protein) synthase III
+YPTS_2562	2835879	2836925	2835879	2836913	1	putative glycerol-3-phosphate acyltransferase PlsX
+YPTS_2563	2836947	2837126	2836947	2837114	7	50S ribosomal protein L32
+YPTS_2564	2837127	2837663	2837127	2837651	6	hypothetical protein YPTS_2564
+YPTS_2565	2837766	2838389	2837793	2838389	3	Maf-like protein
+YPTS_2566	2838512	2839576	2838512	2839474	1	23S rRNA pseudouridylate synthase C
+YPTS_2568	2839995	2843756	2840049	2843756	49	ribonuclease E
+YPTS_2569	2844014	2844328	2844014	2844301	6	antibiotic biosynthesis monooxygenase
+YPTS_2570	2844467	2845582	2844536	2845582	22	dihydroorotase
+YPTS_2571	2845877	2846140	2845895	2846140	2	DNA damage-inducible protein I
+YPTS_2572	2846637	2846900	2846646	2846900	1	biofilm formation regulatory protein BssS
+YPTS_2573	2847118	2848266	2847151	2848266	3	N-methyltryptophan oxidase
+YPTS_2574	2848506	2848763	2848533	2848763	1	LuxR family regulatory protein
+YPTS_2587	2861106	2862701	2861106	2862692	2	glucan biosynthesis protein G
+YPTS_2589	2864104	2864367	2864122	2864367	5	hypothetical protein YPTS_2589
+YPTS_2590	2864657	2866438	2864711	2866438	2	potassium/proton antiporter
+YPTS_2592	2867909	2868571	2867927	2868571	4	autoinducer synthesis protein
+YPTS_2593	2868564	2869313	2868564	2869301	1	LuxR family transcriptional regulator
+YPTS_2599	2874177	2874776	2874177	2874731	5	CRISPR-associated Csy4 family protein
+YPTS_2600	2874742	2875770	2874742	2875746	18	CRISPR-associated Csy3 family protein
+YPTS_2601	2875764	2876729	2875764	2876714	5	CRISPR-associated Csy2 family protein
+YPTS_2602	2876711	2878063	2876711	2878057	6	CRISPR-associated Csy1 family protein
+YPTS_2603	2878213	2881515	2878213	2881503	4	CRISPR-associated helicase Cas3 family protein
+YPTS_2604	2881500	2882525	2881500	2882480	3	CRISPR-associated Cas1 family protein
+YPTS_2607	2886802	2887977	2886802	2887917	1	hypothetical protein YPTS_2607
+YPTS_2609	2889005	2890069	2889005	2890060	1	glycosidase PH1107-related
+YPTS_2613	2893505	2894614	2893574	2894614	1	LacI family transcription regulator
+YPTS_2614	2894583	2896019	2894631	2896019	5	phosphoglucomutase/phosphomannomutase alpha/beta/subunit
+YPTS_2615	2896047	2897198	2896119	2897198	1	ABC transporter related
+YPTS_2621	2901085	2908854	2901085	2908680	1	filamentous haemagglutinin outer membrane protein
+YPTS_2632	2921920	2922840	2921920	2922837	8	periplasmic binding protein/LacI transcriptional regulator
+YPTS_2633	2923012	2924274	2923012	2924238	2	alcohol dehydrogenase
+YPTS_2637	2927790	2928335	2927790	2928314	8	outer membrane protein X
+YPTS_2639	2929610	2930119	2929622	2930119	1	GCN5-related N-acetyltransferase
+YPTS_2641	2931139	2931678	2931175	2931678	19	DNA starvation/stationary phase protection protein Dps
+YPTS_2642	2931995	2933125	2931998	2933125	23	hypothetical protein YPTS_2642
+YPTS_2643	2933616	2934437	2933694	2934437	20	glutamine ABC transporter periplasmic protein
+YPTS_2645	2935020	2935847	2935125	2935847	4	glutamine ABC transporter ATP-binding protein
+YPTS_2647	2938147	2939160	2938147	2939112	4	putative SAM-dependent methyltransferase
+YPTS_2649	2940087	2941061	2940087	2941046	6	glycosyl transferase family protein
+YPTS_2651	2942515	2943492	2942515	2943486	1	O-succinylbenzoate synthase
+YPTS_2652	2943486	2944466	2943486	2944343	7	naphthoate synthase
+YPTS_2653	2944357	2945256	2944357	2945175	1	acyl-CoA thioester hydrolase YfbB
+YPTS_2654	2945172	2946893	2945172	2946875	1	2-succinyl-5-enolpyruvyl-6-hydroxy-3-cyclohexene-1-carboxylate synthase
+YPTS_2657	2950214	2950558	2950214	2950522	5	protein of unknown function DUF883 ElaB
+YPTS_2660	2951452	2953377	2951452	2953368	2	phosphogluconate dehydratase
+YPTS_2662	2953923	2955362	2953923	2955239	1	major facilitator transporter
+YPTS_2663	2955785	2956753	2955785	2956735	20	D-isomer specific 2-hydroxyacid dehydrogenase NAD-binding
+YPTS_2664	2957199	2958206	2957199	2958191	1	LacI family transcription regulator
+YPTS_2665	2958674	2959981	2958677	2959981	1	hypothetical protein YPTS_2665
+YPTS_2666	2960579	2961484	2960615	2961484	14	gluconate 5-dehydrogenase
+YPTS_2667	2961485	2962069	2961533	2962069	5	carbohydrate kinase
+YPTS_2668	2962114	2962614	2962147	2962614	7	hypothetical protein YPTS_2668
+YPTS_2672	2967482	2969335	2967482	2969326	2	NADH dehydrogenase subunit L
+YPTS_2675	2970180	2970725	2970180	2970722	10	NADH dehydrogenase subunit I
+YPTS_2676	2970737	2971735	2970737	2971714	3	NADH dehydrogenase subunit H
+YPTS_2677	2971711	2974497	2971711	2974455	32	NADH dehydrogenase subunit G
+YPTS_2678	2974542	2975957	2974542	2975927	18	NADH dehydrogenase I subunit F
+YPTS_2679	2975924	2976502	2975924	2976487	9	NADH dehydrogenase subunit E
+YPTS_2680	2976490	2978289	2976490	2978286	36	bifunctional NADH:ubiquinone oxidoreductase subunit C/D
+YPTS_2681	2978429	2979118	2978429	2979106	3	NADH dehydrogenase subunit B
+YPTS_2682	2979208	2979711	2979208	2979708	2	NADH dehydrogenase subunit A
+YPTS_2683	2980386	2981378	2980386	2981348	4	LysR family transcriptional regulator
+YPTS_2684	2982105	2983418	2982204	2983418	6	aminotransferase AlaT
+YPTS_2688	2986999	2987667	2986999	2987655	8	putative phosphatase
+YPTS_2689	2987820	2988347	2987820	2988314	7	hypothetical protein YPTS_2689
+YPTS_2691	2989519	2990745	2989543	2990745	21	acetate kinase
+YPTS_2692	2990901	2993066	2990913	2993066	26	phosphate acetyltransferase
+YPTS_2694	2994718	2995176	2994733	2995176	3	putative PTS IIA-like nitrogen-regulatory protein PtsN
+YPTS_2695	2995279	2995632	2995345	2995632	5	phosphotransferase system lactose/cellobiose-specific IIB subunit
+YPTS_2696	2995633	2996901	2995645	2996901	3	ascorbate-specific PTS system enzyme IIC
+YPTS_2697	2997018	2997614	2997018	2997566	2	NUDIX hydrolase
+YPTS_2698	2997788	2998366	2997788	2998339	4	phosphodiesterase
+YPTS_2700	2999540	3000481	2999573	3000481	6	hypothetical protein YPTS_2700
+YPTS_2701	3000605	3001444	3000605	3001402	3	histidine/lysine/arginine/ornithine transporter subunit
+YPTS_2704	3002911	3004026	3002911	3003693	24	cationic amino acid ABC transporter, periplasmic binding protein
+YPTS_2706	3004245	3004841	3004245	3004817	3	3-octaprenyl-4-hydroxybenzoate carboxy-lyase
+YPTS_2707	3005064	3006593	3005064	3006581	26	amidophosphoribosyltransferase
+YPTS_2709	3007400	3008137	3007400	3008122	4	hypothetical protein YPTS_2709
+YPTS_2710	3008242	3009636	3008242	3009546	15	bifunctional folylpolyglutamate synthase/ dihydrofolate synthase
+YPTS_2711	3009795	3010868	3009795	3010709	9	acetyl-CoA carboxylase subunit beta
+YPTS_2712	3010940	3011668	3010940	3011602	1	hypothetical protein YPTS_2712
+YPTS_2713	3011759	3012730	3011759	3012658	2	tRNA pseudouridine synthase A
+YPTS_2714	3012658	3013689	3012658	3013668	13	putative semialdehyde dehydrogenase
+YPTS_2715	3013838	3015112	3013838	3014965	12	D-isomer specific 2-hydroxyacid dehydrogenase NAD-binding
+YPTS_2721	3020983	3022221	3020983	3022206	24	3-oxoacyl-(acyl carrier protein) synthase I
+YPTS_2722	3022300	3024447	3022378	3024447	1	5-methylaminomethyl-2-thiouridine methyltransferase
+YPTS_2723	3024749	3025036	3024749	3025027	3	YfcL protein
+YPTS_2727	3027370	3028470	3027370	3028455	9	chorismate synthase
+YPTS_2728	3028532	3029548	3028532	3029464	6	N5-glutamine S-adenosyl-L-methionine-dependent methyltransferase
+YPTS_2730	3030646	3031152	3030646	3031122	1	phosphohistidine phosphatase
+YPTS_2733	3031736	3034165	3031736	3034078	21	multifunctional fatty acid oxidation complex subunit alpha
+YPTS_2734	3034078	3035421	3034078	3035388	18	3-ketoacyl-CoA thiolase
+YPTS_2735	3035675	3035983	3035675	3035971	4	hypothetical protein YPTS_2735
+YPTS_2736	3036367	3037650	3036385	3037650	12	long-chain fatty acid outer membrane transporter
+YPTS_2737	3037757	3038569	3037757	3038521	9	VacJ family lipoprotein
+YPTS_2739	3039783	3040313	3039783	3040295	1	cytochrome C biogenesis protein
+YPTS_2753	3051568	3052383	3051568	3052374	3	virulence protein SciE type
+YPTS_2769	3075715	3077595	3075760	3077595	1	type VI secretion protein
+YPTS_2779	3087410	3088537	3087410	3088504	3	murein hydrolase B
+YPTS_2780	3088821	3089852	3088833	3089852	10	extracellular solute-binding protein
+YPTS_2784	3093591	3094082	3093603	3094082	4	Hcp1 family type VI secretion system effector
+YPTS_2786	3094312	3095163	3094312	3095160	1	hypothetical protein YPTS_2786
+YPTS_2787	3095880	3098417	3095991	3098417	1	anaerobic dimethyl sulfoxide reductase subunit A
+YPTS_2795	3103900	3104538	3104107	3104538	1	hypothetical protein YPTS_2795
+YPTS_2797	3105402	3106688	3105402	3106637	10	aminotransferase
+YPTS_2798	3106837	3108150	3106903	3108150	6	hypothetical protein YPTS_2798
+YPTS_2799	3108228	3109223	3108228	3109199	6	glucokinase
+YPTS_2802	3110943	3111962	3110973	3111962	5	aldo/keto reductase
+YPTS_2806	3117141	3118577	3117162	3118577	24	glutamyl-tRNA synthetase
+YPTS_2810	3120415	3120669	3120415	3120630	1	hypothetical protein YPTS_2810
+YPTS_2811	3120650	3122665	3120650	3122662	13	NAD-dependent DNA ligase LigA
+YPTS_2812	3122753	3123829	3122753	3123739	6	cell division protein ZipA
+YPTS_2814	3124837	3125847	3124879	3125847	17	cysteine synthase A
+YPTS_2815	3126310	3126603	3126346	3126603	7	phosphohistidinoprotein-hexose phosphotransferase component of PTS system (Hpr)
+YPTS_2816	3126643	3128379	3126652	3128379	33	phosphoenolpyruvate-protein phosphotransferase
+YPTS_2817	3128419	3128937	3128428	3128937	26	glucose-specific PTS system component
+YPTS_2819	3130549	3131298	3130549	3131232	8	two component transcriptional regulator
+YPTS_2822	3134920	3136572	3134920	3136566	2	FAD-dependent pyridine nucleotide-disulphide oxidoreductase
+YPTS_2825	3138423	3139664	3138423	3139643	2	peptidase M24
+YPTS_2826	3139677	3140918	3139677	3140858	5	aminotransferase class I and II
+YPTS_2827	3141447	3142976	3141558	3142976	1	von Willebrand factor type A
+YPTS_2831	3147314	3148288	3147314	3148207	1	cysteine synthase B
+YPTS_2832	3148378	3149529	3148378	3149469	1	sulfate/thiosulfate transporter subunit
+YPTS_2837	3154674	3155561	3154674	3155552	3	RpiR family transcriptional regulator
+YPTS_2843	3159518	3160498	3159605	3160498	1	dihydrodipicolinate synthetase
+YPTS_2844	3160596	3161621	3160596	3161495	7	Dyp-type peroxidase family protein
+YPTS_2846	3162635	3163060	3162647	3163060	10	hypothetical protein YPTS_2846
+YPTS_2848	3165931	3166362	3165931	3166347	1	hypothetical protein YPTS_2848
+YPTS_2851	3167873	3168622	3167873	3168580	3	hypothetical protein YPTS_2851
+YPTS_2855	3170259	3170690	3170259	3170684	2	putative acetyltransferase
+YPTS_2857	3171880	3172353	3171895	3172353	1	hypothetical protein YPTS_2857
+YPTS_2859	3172658	3174955	3172658	3174937	27	malic enzyme
+YPTS_2860	3175256	3175888	3175256	3175852	3	NUDIX hydrolase
+YPTS_2864	3177212	3179713	3177212	3179704	5	nitrate reductase catalytic subunit
+YPTS_2867	3181255	3181929	3181300	3181929	2	two component LuxR family transcriptional regulator
+YPTS_2873	3189398	3191107	3189398	3191071	5	sulfatase
+YPTS_2876	3194476	3195585	3194476	3195585	1	extracellular solute-binding protein
+YPTS_2878	3196490	3196906	3196508	3196906	3	hypothetical protein YPTS_2878
+YPTS_2879	3196845	3198035	3196908	3198035	11	succinyl-diaminopimelate desuccinylase
+YPTS_2880	3197981	3198709	3198032	3198709	1	peptidase M15B and M15C DD-carboxypeptidase VanY/endolysin
+YPTS_2885	3201824	3202753	3201824	3202693	1	protein of unknown function zinc metallopeptidase putative
+YPTS_2887	3202912	3203658	3202912	3203625	20	phosphoribosylaminoimidazole-succinocarboxamide synthase
+YPTS_2888	3203696	3204763	3203696	3204754	18	lipoprotein
+YPTS_2889	3204772	3205674	3204772	3205671	12	dihydrodipicolinate synthase
+YPTS_2890	3205668	3206387	3205773	3206387	1	glycine cleavage system transcriptional repressor
+YPTS_2891	3206372	3206860	3206390	3206860	10	thioredoxin-dependent thiol peroxidase
+YPTS_2895	3210115	3211701	3210127	3211701	8	peptidase M48 Ste24p
+YPTS_2896	3211670	3212164	3211808	3212164	10	arsenate reductase
+YPTS_2899	3214740	3215471	3214740	3215366	10	uracil phosphoribosyltransferase
+YPTS_2900	3215768	3216844	3215801	3216844	17	phosphoribosylaminoimidazole synthetase
+YPTS_2901	3216929	3217597	3216959	3217597	6	phosphoribosylglycinamide formyltransferase
+YPTS_2902	3217817	3218371	3217826	3218371	4	GCN5-related N-acetyltransferase
+YPTS_2904	3219872	3220699	3219872	3220684	1	phosphate ABC transporter, ATPase subunit
+YPTS_2907	3224836	3226989	3224926	3226989	21	polyphosphate kinase
+YPTS_2908	3226964	3228559	3227000	3228559	20	exopolyphosphatase
+YPTS_2910	3228973	3230463	3228988	3230463	5	magnesium transporter
+YPTS_2911	3230537	3231955	3230603	3231955	1	putative chaperone
+YPTS_2925	3251603	3252004	3251666	3252004	4	hypothetical protein YPTS_2925
+YPTS_2926	3252252	3253673	3252279	3253673	12	peptidase U32
+YPTS_2928	3255487	3256011	3255487	3255996	5	inhibitor of vertebrate lysozyme
+YPTS_2940	3262495	3264099	3262495	3264072	23	GMP synthase
+YPTS_2941	3264252	3265850	3264252	3265715	26	inosine 5'-monophosphate dehydrogenase
+YPTS_2942	3265855	3267264	3265885	3267264	2	exodeoxyribonuclease VII large subunit
+YPTS_2946	3269010	3270521	3269010	3270497	12	GTP-binding protein EngA
+YPTS_2947	3270645	3271850	3270645	3271826	19	outer membrane protein assembly complex subunit YfgL
+YPTS_2948	3271838	3272497	3271838	3272473	13	membrane protein
+YPTS_2949	3272487	3273770	3272487	3273761	19	histidyl-tRNA synthetase
+YPTS_2950	3273970	3275127	3273970	3275097	13	4-hydroxy-3-methylbut-2-en-1-yl diphosphate synthase
+YPTS_2951	3275201	3276292	3275201	3276289	8	hypothetical protein YPTS_2951
+YPTS_2952	3276279	3277034	3276279	3277028	1	type IV pilus biogenesis/stability protein PilW
+YPTS_2953	3277182	3278405	3277182	3278378	6	hypothetical protein YPTS_2953
+YPTS_2954	3278640	3279128	3278640	3279068	35	nucleoside diphosphate kinase
+YPTS_2959	3291325	3292281	3291325	3292278	1	enhanced serine sensitivity protein SseB
+YPTS_2960	3292357	3293658	3292357	3293655	24	aminopeptidase B
+YPTS_2962	3294025	3294369	3294025	3294360	2	ferredoxin, 2Fe-2S type, ISC system
+YPTS_2963	3294363	3296309	3294363	3296297	15	chaperone protein HscA
+YPTS_2964	3296540	3297091	3296540	3297064	5	co-chaperone HscB
+YPTS_2966	3297768	3298184	3297768	3298154	4	scaffold protein
+YPTS_2967	3298185	3299486	3298185	3299414	20	cysteine desulfurase
+YPTS_2968	3299468	3300025	3299468	3300025	10	DNA-binding transcriptional regulator IscR
+YPTS_2969	3300118	3300993	3300118	3300891	5	RNA methyltransferase
+YPTS_2970	3300998	3301813	3301010	3301813	12	inositol monophosphatase
+YPTS_2973	3303723	3305102	3303741	3305102	1	stationary phase inducible protein CsiE
+YPTS_2975	3306608	3307195	3306608	3307147	28	virulence-related outer membrane protein
+YPTS_2978	3307599	3308870	3307599	3308852	40	serine hydroxymethyltransferase
+YPTS_2979	3309384	3310583	3309393	3310583	1	nitric oxide dioxygenase
+YPTS_2980	3310999	3311946	3311014	3311946	1	hypothetical protein YPTS_2980
+YPTS_2981	3312128	3312523	3312128	3312466	3	nitrogen regulatory protein P-II 1
+YPTS_2982	3312481	3314109	3312481	3314103	17	NAD+ synthetase
+YPTS_2984	3314263	3315675	3314263	3315600	4	two component, sigma54 specific, Fis family transcriptional regulator
+YPTS_2985	3315563	3316648	3315563	3316645	6	hypothetical protein YPTS_2985
+YPTS_2986	3316649	3318112	3316649	3318085	5	integral membrane sensor signal transduction histidine kinase
+YPTS_2990	3321158	3325051	3321158	3325048	57	phosphoribosylformylglycinamidine synthase
+YPTS_2992	3326951	3327571	3326951	3327514	1	tRNA-specific adenosine deaminase
+YPTS_2994	3328546	3329454	3328546	3329433	2	N-acetylmuramic acid-6-phosphate etherase
+YPTS_2998	3331388	3332146	3331388	3332119	6	pyridoxine 5'-phosphate synthase
+YPTS_2999	3332278	3333012	3332278	3333003	1	DNA repair protein RecO
+YPTS_3000	3333013	3333924	3333013	3333924	7	GTP-binding protein Era
+YPTS_3001	3333921	3334604	3333921	3334601	8	ribonuclease III
+YPTS_3002	3334953	3335960	3334953	3335951	11	signal peptidase I
+YPTS_3003	3335961	3337760	3335961	3337760	25	GTP-binding protein LepA
+YPTS_3004	3338209	3339114	3338260	3339114	1	hypothetical protein YPTS_3004
+YPTS_3006	3339587	3340624	3339587	3340543	4	periplasmic negative regulator of sigmaE
+YPTS_3007	3340543	3341235	3340543	3341199	2	anti-RNA polymerase sigma factor SigE
+YPTS_3008	3341225	3341833	3341225	3341800	3	RNA polymerase sigma factor RpoE
+YPTS_3009	3341982	3343625	3341988	3343625	9	L-aspartate oxidase
+YPTS_3011	3344912	3346246	3344921	3346246	12	ATP-dependent RNA helicase SrmB
+YPTS_3016	3348252	3348719	3348252	3348635	9	autonomous glycyl radical cofactor GrcA
+YPTS_3017	3348937	3349674	3348988	3349674	4	uracil-DNA glycosylase
+YPTS_3018	3349765	3350421	3349765	3350412	8	pyrrolidone-carboxylate peptidase
+YPTS_3021	3352254	3353030	3352254	3352991	3	LamB/YcsF family protein
+YPTS_3022	3352988	3353968	3352988	3353938	6	urea amidolyase related protein
+YPTS_3023	3353932	3354606	3353932	3354588	9	allophanate hydrolase subunit 1
+YPTS_3025	3355207	3355968	3355207	3355953	6	putative hydrolase-oxidase
+YPTS_3039	3370146	3371852	3370146	3371789	25	phosphoglucomutase
+YPTS_3040	3371862	3372419	3371862	3372389	9	replication initiation regulator SeqA
+YPTS_3041	3372881	3373252	3372884	3373252	1	hypothetical protein YPTS_3041
+YPTS_3043	3373547	3374335	3373547	3374308	1	hypothetical protein YPTS_3043
+YPTS_3045	3375239	3375598	3375239	3375586	1	N,N'-diacetylchitobiose-specific PTS system transporter subunit IIA
+YPTS_3050	3379380	3380624	3379380	3380555	1	voltage-gated potassium channel
+YPTS_3051	3381159	3381503	3381174	3381503	6	acid-resistance protein
+YPTS_3055	3385208	3385918	3385208	3385870	9	urease accessory protein UreG
+YPTS_3056	3385997	3386704	3385997	3386683	1	urease accessory protein UreF
+YPTS_3057	3386705	3387421	3386705	3387400	5	urease accessory protein UreE
+YPTS_3058	3387696	3389459	3387696	3389414	25	urease subunit alpha
+YPTS_3059	3389504	3390064	3389504	3389980	6	urease subunit beta
+YPTS_3060	3389991	3390311	3389991	3390293	5	urease subunit gamma
+YPTS_3066	3394727	3396322	3394727	3396304	2	extracellular solute-binding protein
+YPTS_3068	3397841	3398248	3397910	3398248	2	hypothetical protein YPTS_3068
+YPTS_3076	3405066	3406400	3405201	3406400	2	glycine betaine/L-proline ABC transporter, ATPase subunit
+YPTS_3078	3407589	3408611	3407607	3408611	13	glycine betaine transporter periplasmic subunit
+YPTS_3080	3408841	3409803	3408841	3409791	2	urate catabolism protein
+YPTS_3082	3411842	3412666	3411842	3412606	4	DNA polymerase III subunit epsilon
+YPTS_3083	3412652	3413140	3412676	3413140	1	ribonuclease H
+YPTS_3085	3413719	3414714	3413959	3414714	1	hydroxyacylglutathione hydrolase
+YPTS_3087	3416217	3417008	3416217	3416978	1	hypothetical protein YPTS_3087
+YPTS_3089	3417859	3418671	3417859	3418662	1	2,5-diketo-D-gluconate reductase B
+YPTS_3092	3424810	3425376	3424810	3425376	1	D,D-heptose 1,7-bisphosphate phosphatase
+YPTS_3093	3425551	3426594	3425563	3426594	3	DL-methionine transporter ATP-binding subunit
+YPTS_3094	3426575	3427240	3426587	3427240	1	DL-methionine transporter permease subunit
+YPTS_3095	3427244	3428119	3427304	3428119	19	DL-methionine transporter substrate-binding subunit
+YPTS_3096	3428228	3428644	3428237	3428644	2	outer membrane lipoprotein
+YPTS_3098	3429437	3431170	3429452	3431170	34	prolyl-tRNA synthetase
+YPTS_3099	3431304	3432047	3431304	3431987	6	lipoprotein involved with copper homeostasis and adhesion
+YPTS_3102	3433245	3433481	3433281	3433481	4	hypothetical protein YPTS_3102
+YPTS_3103	3433462	3433728	3433468	3433728	4	Rho-binding antiterminator
+YPTS_3104	3433982	3434308	3433982	3434299	1	cytochrome c class I
+YPTS_3107	3436502	3437473	3436502	3437461	13	acetyl-CoA carboxylase carboxyltransferase subunit alpha
+YPTS_3108	3437474	3441001	3437474	3440989	9	DNA polymerase III subunit alpha
+YPTS_3109	3441119	3441751	3441119	3441715	1	ribonuclease HII
+YPTS_3110	3441712	3442899	3441712	3442896	2	lipid-A-disaccharide synthase
+YPTS_3111	3442900	3443691	3442900	3443688	6	UDP-N-acetylglucosamine acyltransferase
+YPTS_3112	3443692	3444330	3443692	3444222	11	(3R)-hydroxymyristoyl-ACP dehydratase
+YPTS_3113	3444380	3445405	3444380	3445402	5	UDP-3-O-
+YPTS_3114	3445406	3446002	3445406	3445903	16	periplasmic chaperone
+YPTS_3115	3446061	3448466	3446061	3448448	41	outer membrane protein assembly factor YaeT
+YPTS_3116	3448485	3449876	3448485	3449840	5	zinc metallopeptidase RseP
+YPTS_3118	3450727	3451494	3450727	3451485	4	undecaprenyl diphosphate synthase
+YPTS_3119	3451709	3452944	3451709	3452905	3	1-deoxy-D-xylulose 5-phosphate reductoisomerase
+YPTS_3120	3453119	3453811	3453119	3453676	18	ribosome recycling factor
+YPTS_3121	3453812	3454582	3453812	3454537	17	uridylate kinase
+YPTS_3122	3454746	3455603	3454746	3455603	40	elongation factor Ts
+YPTS_3123	3455731	3456585	3455731	3456456	36	30S ribosomal protein S2
+YPTS_3124	3456852	3457682	3456891	3457682	6	methionine aminopeptidase
+YPTS_3125	3457652	3460423	3457685	3460423	3	PII uridylyl-transferase
+YPTS_3126	3460448	3461422	3460598	3461422	26	2,3,4,5-tetrahydropyridine-2,6-carboxylate N-succinyltransferase
+YPTS_3127	3461528	3461935	3461546	3461935	13	hypothetical protein YPTS_3127
+YPTS_3128	3462025	3462501	3462025	3462474	6	flavodoxin
+YPTS_3129	3462502	3463278	3462502	3463275	2	tRNA pseudouridine synthase C
+YPTS_3130	3463275	3463769	3463275	3463607	2	hypothetical protein YPTS_3130
+YPTS_3132	3464299	3464907	3464299	3464850	2	SecY interacting protein Syd
+YPTS_3134	3465878	3467344	3465980	3467344	18	hypothetical protein YPTS_3134
+YPTS_3136	3468610	3469734	3468610	3469716	5	putative RNA 2'-O-ribose methyltransferase
+YPTS_3140	3471682	3473052	3471847	3473052	1	cysteine sulfinate desulfinase
+YPTS_3141	3473089	3473628	3473188	3473628	3	cysteine desulfurase, sulfur acceptor subunit CsdE
+YPTS_3142	3473664	3474503	3473664	3474491	1	UBA/THIF-type NAD/FAD binding protein
+YPTS_3143	3474634	3475830	3474634	3475806	1	murein transglycosylase A
+YPTS_3145	3478152	3479498	3478173	3479498	7	N-acetylglutamate synthase
+YPTS_3146	3479640	3481631	3479640	3481598	4	exonuclease V subunit alpha
+YPTS_3147	3481595	3485359	3481595	3485257	13	exonuclease V subunit beta
+YPTS_3148	3485254	3488154	3485254	3488142	63	peptidase M16 domain-containing protein
+YPTS_3149	3488224	3491640	3488224	3491595	7	exonuclease V subunit gamma
+YPTS_3155	3494015	3494815	3494015	3494809	7	thymidylate synthase
+YPTS_3156	3494816	3495688	3494816	3495688	5	prolipoprotein diacylglyceryl transferase
+YPTS_3157	3495939	3498197	3495939	3498185	8	fused phosphoenolpyruvate-protein phosphotransferase PtsP/GAF domain
+YPTS_3158	3498198	3498743	3498198	3498725	1	dinucleoside polyphosphate hydrolase
+YPTS_3159	3499386	3500108	3499422	3500108	1	DNA mismatch repair protein
+YPTS_3160	3500401	3501519	3500479	3501519	13	putative aldo-keto reductase
+YPTS_3163	3502488	3503753	3502488	3503708	1	lysophospholipid transporter LplT
+YPTS_3164	3503705	3505927	3503705	3505861	11	bifunctional acyl-
+YPTS_3165	3506310	3508598	3506310	3508571	1	molybdopterin oxidoreductase
+YPTS_3166	3508654	3509883	3508861	3509883	4	DNA-binding transcriptional regulator GalR
+YPTS_3168	3511331	3512299	3511358	3512299	1	DNA-binding transcriptional regulator LysR
+YPTS_3170	3513841	3514761	3513841	3514749	1	LysR family transcriptional regulator
+YPTS_3171	3514646	3515743	3514856	3515743	17	beta-lactamase domain-containing protein
+YPTS_3172	3515820	3516491	3515856	3516491	5	hypothetical protein YPTS_3172
+YPTS_3186	3526702	3528240	3526702	3528213	1	type II secretion system protein E
+YPTS_3190	3531943	3532776	3531943	3532698	17	carbonic anhydrase
+YPTS_3195	3540858	3542513	3540858	3542411	2	sulfatase
+YPTS_3196	3543203	3544027	3543251	3544027	7	DeoR family transcriptional regulator
+YPTS_3201	3547749	3548768	3547878	3548768	1	PTS system mannose/fructose/sorbose family IID component
+YPTS_3202	3548854	3549294	3548854	3549294	3	PTS system fructose subfamily IIA component
+YPTS_3216	3564619	3565767	3564619	3565692	4	lac repressor
+YPTS_3218	3567644	3567994	3567644	3567955	1	phosphotransferase system PTS EIIB protein
+YPTS_3219	3568067	3570136	3568067	3570127	3	glycoside hydrolase family 42 protein
+YPTS_3220	3570178	3571407	3570178	3571380	5	glycosyl hydrolase 53 protein
+YPTS_3223	3573715	3574998	3573715	3574950	15	extracellular solute-binding protein
+YPTS_3224	3575289	3576419	3575313	3576419	3	ABC transporter related
+YPTS_3225	3576792	3578456	3576948	3578456	2	ABC transporter related
+YPTS_3227	3579923	3580951	3579950	3580951	1	periplasmic binding protein/LacI transcriptional regulator
+YPTS_3230	3583912	3584604	3583924	3584604	2	PadR-like family transcriptional regulator
+YPTS_3247	3599701	3600108	3599701	3600099	3	XRE family transcriptional regulator
+YPTS_3254	3603219	3603581	3603219	3603518	1	XRE family transcriptional regulator
+YPTS_3259	3604836	3605174	3604836	3605039	4	hypothetical protein YPTS_3259
+YPTS_3281	3621181	3621483	3621208	3621483	1	hypothetical protein YPTS_3281
+YPTS_3283	3621604	3623685	3621709	3623685	1	TP901 family phage tail tape measure protein
+YPTS_3294	3633373	3634899	3633373	3634890	31	lysyl-tRNA synthetase
+YPTS_3295	3634900	3635976	3634900	3635832	10	peptide chain release factor 2
+YPTS_3296	3636177	3637916	3636177	3637910	7	ssDNA exonuclease RecJ
+YPTS_3297	3637917	3638633	3637917	3638633	4	thiol:disulfide interchange protein DsbC
+YPTS_3298	3638664	3639587	3638664	3639563	5	site-specific tyrosine recombinase XerD
+YPTS_3300	3640273	3641784	3640273	3641751	8	hypothetical protein YPTS_3300
+YPTS_3302	3643294	3644007	3643294	3643992	1	DNA-binding response regulator CreB
+YPTS_3304	3644398	3644679	3644398	3644664	2	hypothetical protein YPTS_3304
+YPTS_3305	3644978	3645973	3644981	3645973	12	putative global regulator
+YPTS_3311	3652952	3655834	3652952	3655831	44	glycine dehydrogenase
+YPTS_3312	3656043	3656438	3656043	3656429	2	glycine cleavage system protein H
+YPTS_3313	3656498	3657604	3656498	3657595	28	glycine cleavage system aminomethyltransferase T
+YPTS_3315	3658293	3659756	3658293	3659636	7	hypothetical protein YPTS_3315
+YPTS_3316	3659686	3660867	3659686	3660864	2	2-octaprenyl-6-methoxyphenyl hydroxylase
+YPTS_3317	3660916	3662268	3660916	3662229	11	proline aminopeptidase P II
+YPTS_3318	3662317	3662904	3662317	3662895	3	hypothetical protein YPTS_3318
+YPTS_3319	3663124	3663561	3663232	3663561	5	Z-ring-associated protein
+YPTS_3320	3663838	3664503	3663907	3664503	2	5-formyltetrahydrofolate cyclo-ligase
+YPTS_3321	3664768	3666126	3664768	3666009	20	D-3-phosphoglycerate dehydrogenase
+YPTS_3322	3666316	3667038	3666316	3666972	5	ribose-5-phosphate isomerase A
+YPTS_3323	3667248	3668222	3667314	3668222	3	chromosome replication initiation inhibitor protein
+YPTS_3324	3668233	3669075	3668233	3669033	15	hypothetical protein YPTS_3324
+YPTS_3326	3670082	3670951	3670082	3670951	6	MscS mechanosensitive ion channel
+YPTS_3327	3671389	3672534	3671389	3672468	42	fructose-bisphosphate aldolase
+YPTS_3328	3672588	3673775	3672588	3673751	33	phosphoglycerate kinase
+YPTS_3329	3673854	3674888	3673854	3674870	3	erythrose 4-phosphate dehydrogenase
+YPTS_3330	3675267	3677264	3675267	3677261	53	transketolase
+YPTS_3331	3677690	3678487	3677735	3678487	12	peptidase M48 Ste24p
+YPTS_3333	3679072	3681060	3679072	3681051	24	arginine decarboxylase
+YPTS_3335	3682156	3683412	3682258	3683412	27	S-adenosylmethionine synthetase
+YPTS_3339	3685228	3685968	3685237	3685968	2	16S ribosomal RNA methyltransferase RsmE
+YPTS_3340	3685985	3686953	3685994	3686953	26	glutathione synthetase
+YPTS_3341	3686961	3687632	3687069	3687632	8	hypothetical protein YPTS_3341
+YPTS_3343	3688225	3689118	3688234	3689118	9	N-carbamoylputrescine amidase
+YPTS_3344	3689119	3690237	3689122	3690237	7	agmatine deiminase
+YPTS_3347	3692312	3693142	3692321	3693142	5	pyrroline-5-carboxylate reductase
+YPTS_3349	3693415	3693984	3693430	3693984	3	protein of unknown function YGGT
+YPTS_3351	3694272	3694964	3694371	3694964	3	putative deoxyribonucleotide triphosphate pyrophosphatase
+YPTS_3352	3694939	3696087	3694957	3696087	2	coproporphyrinogen III oxidase
+YPTS_3353	3696277	3705618	3696277	3705609	1	pore forming RTX toxin family protein
+YPTS_3354	3706114	3706932	3706114	3706848	9	hypothetical protein YPTS_3354
+YPTS_3356	3707997	3708335	3707997	3708323	1	hypothetical protein YPTS_3356
+YPTS_3357	3708323	3709051	3708323	3709042	1	tRNA (guanine-N(7)-)-methyltransferase
+YPTS_3358	3709272	3710570	3709311	3710570	3	adenine DNA glycosylase
+YPTS_3359	3710727	3711020	3710748	3711020	11	hypothetical protein YPTS_3359
+YPTS_3360	3711300	3712403	3711327	3712403	5	murein transglycosylase C
+YPTS_3363	3713679	3715958	3713814	3715958	3	TonB-dependent siderophore receptor
+YPTS_3366	3718674	3719678	3718674	3719633	3	putative sugar ABC transporter periplasmic binding protein
+YPTS_3367	3720214	3722577	3720214	3722376	10	ornithine decarboxylase
+YPTS_3396	3752439	3753809	3752451	3753809	1	hypothetical protein YPTS_3396
+YPTS_3397	3754170	3755030	3754197	3755030	1	intradiol ring-cleavage dioxygenase
+YPTS_3405	3766589	3767674	3766589	3767662	1	hypothetical protein YPTS_3405
+YPTS_3406	3767953	3768975	3767956	3768975	4	LacI family transcription regulator
+YPTS_3418	3779308	3779841	3779308	3779760	4	hypothetical protein YPTS_3418
+YPTS_3419	3779765	3784273	3779765	3784249	1	YD repeat-containing protein
+YPTS_3434	3810363	3816095	3810363	3816083	1	amino acid adenylation domain-containing protein
+YPTS_3437	3830315	3831550	3830315	3831547	5	peptidase T
+YPTS_3441	3836199	3847358	3836199	3847331	1	outer membrane autotransporter
+YPTS_3445	3853773	3855071	3853773	3855065	1	RND family efflux transporter MFP subunit
+YPTS_3446	3855485	3858070	3855503	3858070	1	diguanylate cyclase/phosphodiesterase with PAS/PAC sensor(s)
+YPTS_3449	3860595	3861158	3860691	3861158	5	17 kDa surface antigen
+YPTS_3478	3885675	3885941	3885675	3885941	1	putative flagellar regulatory protein
+YPTS_3481	3887153	3888505	3887153	3888493	1	flagellum-specific ATP synthase
+YPTS_3496	3901100	3902095	3901100	3902095	2	hypothetical protein YPTS_3496
+YPTS_3499	3905369	3906094	3905369	3906088	7	Pili assembly chaperone, N-terminal
+YPTS_3522	3926599	3927033	3926599	3927030	1	biopolymer transport protein ExbD
+YPTS_3523	3927034	3928101	3927034	3928071	4	tonB-system energizer ExbB
+YPTS_3524	3928520	3929761	3928550	3929761	2	cystathionine beta-lyase
+YPTS_3526	3930708	3931652	3930708	3931601	1	AraC family transcriptional regulator
+YPTS_3527	3931984	3933156	3931999	3933156	24	iron-containing alcohol dehydrogenase
+YPTS_3528	3933560	3934408	3933575	3934408	11	2,5-diketo-D-gluconate reductase A
+YPTS_3530	3937101	3938621	3937101	3938525	7	repressor protein for FtsI
+YPTS_3532	3938704	3939444	3938704	3939435	6	1-acyl-sn-glycerol-3-phosphate acyltransferase
+YPTS_3533	3939724	3942000	3939724	3941997	17	DNA topoisomerase IV subunit A
+YPTS_3534	3942229	3942885	3942301	3942885	4	NAD(P)H dehydrogenase (quinone)
+YPTS_3536	3943858	3945771	3943858	3945753	5	DNA topoisomerase IV subunit B
+YPTS_3537	3945855	3946457	3945855	3946436	6	esterase YqiA
+YPTS_3538	3946436	3947395	3946436	3947335	2	cyclic 3',5'-adenosine monophosphate phosphodiesterase
+YPTS_3540	3947803	3948447	3947803	3948435	4	ADP-ribose pyrophosphatase NudF
+YPTS_3541	3948768	3950225	3948831	3950225	25	outer membrane channel protein
+YPTS_3543	3950523	3951212	3950526	3951212	2	hypothetical protein YPTS_3543
+YPTS_3544	3951219	3952382	3951222	3952382	3	glutathionylspermidine synthase
+YPTS_3546	3953767	3954432	3953767	3954420	8	3,4-dihydroxy-2-butanone 4-phosphate synthase
+YPTS_3548	3954981	3955271	3954990	3955271	1	hypothetical protein YPTS_3548
+YPTS_3550	3956883	3958337	3956883	3958313	15	bifunctional heptose 7-phosphate kinase/heptose 1-phosphate adenyltransferase
+YPTS_3551	3958448	3961360	3958448	3961303	9	bifunctional glutamine-synthetase adenylyltransferase/deadenyltransferase
+YPTS_3552	3961475	3962803	3961475	3962782	14	adenylate cyclase
+YPTS_3553	3963041	3963706	3963086	3963706	8	putative signal transduction protein
+YPTS_3554	3963732	3963881	3963738	3963881	1	hypothetical protein YPTS_3554
+YPTS_3555	3963851	3965122	3963884	3965122	4	multifunctional tRNA nucleotidyl transferase/2'3'-cyclic phosphodiesterase/2'nucleotidase/phosphatase
+YPTS_3558	3966797	3967567	3966917	3967567	1	putative glycerol-3-phosphate acyltransferase PlsY
+YPTS_3559	3967813	3968841	3967813	3968826	2	putative DNA-binding/iron metalloprotein/AP endonuclease
+YPTS_3560	3969227	3969454	3969239	3969454	9	30S ribosomal protein S21
+YPTS_3561	3969584	3971338	3969590	3971338	2	DNA primase
+YPTS_3562	3971436	3973334	3971496	3973334	28	RNA polymerase sigma factor RpoD
+YPTS_3563	3973635	3974606	3973776	3974606	4	hypothetical protein YPTS_3563
+YPTS_3590	3997429	3997746	3997429	3997668	1	hypothetical protein YPTS_3590
+YPTS_3596	3999605	4000207	3999629	4000207	3	CI repressor
+YPTS_3597	4000208	4001122	4000217	4001122	4	hypothetical protein YPTS_3597
+YPTS_3601	4003677	4004198	4003677	4004147	4	hypothetical protein YPTS_3601
+YPTS_3612	4011279	4011926	4011279	4011911	4	YheO domain-containing protein
+YPTS_3615	4013950	4015221	4013950	4015182	3	aminotransferase class I and II
+YPTS_3626	4026859	4027872	4026859	4027845	4	LacI family transcription regulator
+YPTS_3631	4035364	4037652	4035367	4037652	1	outer membrane autotransporter
+YPTS_3636	4039242	4039610	4039242	4039595	2	hypothetical protein YPTS_3636
+YPTS_3638	4041646	4042170	4041646	4042146	4	hypothetical protein YPTS_3638
+YPTS_3644	4049986	4050186	4049986	4050183	1	hypothetical protein YPTS_3644
+YPTS_3647	4062778	4063416	4062778	4063416	8	von Willebrand factor type A
+YPTS_3648	4063440	4064090	4063449	4064090	1	stress protein
+YPTS_3651	4065845	4067620	4065872	4067620	3	hypothetical protein YPTS_3651
+YPTS_3652	4067646	4069151	4067652	4069151	1	putative kinase protein
+YPTS_3654	4070294	4072345	4070324	4072345	8	NADH:flavin oxidoreductase/NADH oxidase
+YPTS_3655	4072461	4073678	4072461	4073648	11	methyltransferase small
+YPTS_3657	4077231	4077779	4077270	4077779	1	hypothetical protein YPTS_3657
+YPTS_3658	4077895	4078992	4077997	4078992	5	oxidoreductase domain-containing protein
+YPTS_3659	4079422	4080783	4079464	4080783	1	serine/threonine transporter SstT
+YPTS_3661	4081533	4083059	4081533	4083023	2	D-galactarate dehydratase/Altronate hydrolase domain-containing protein
+YPTS_3662	4083034	4084491	4083034	4084485	2	altronate oxidoreductase
+YPTS_3663	4084684	4086147	4084684	4086093	5	glucuronate isomerase
+YPTS_3665	4088313	4089200	4088406	4089200	4	DNA-binding transcriptional repressor ExuR
+YPTS_3668	4090949	4091344	4090955	4091344	1	hypothetical protein YPTS_3668
+YPTS_3669	4091459	4091950	4091570	4091950	6	hypothetical protein YPTS_3669
+YPTS_3670	4092054	4092410	4092105	4092410	12	protein of unknown function DUF883 ElaB
+YPTS_3671	4092338	4092808	4092413	4092808	1	hypothetical protein YPTS_3671
+YPTS_3672	4092781	4093089	4092805	4093089	1	hypothetical protein YPTS_3672
+YPTS_3673	4093366	4093788	4093393	4093788	1	DoxX family protein
+YPTS_3675	4094991	4095896	4094991	4095884	2	LysR family transcriptional regulator
+YPTS_3676	4096131	4096850	4096146	4096850	1	pirin domain-containing protein
+YPTS_3677	4097674	4098594	4097674	4098573	4	uroporphyrin-III C/tetrapyrrole methyltransferase
+YPTS_3678	4098540	4100609	4098636	4100609	8	LppC family lipoprotein
+YPTS_3680	4101326	4101922	4101332	4101922	3	DnaA initiator-associating protein DiaA
+YPTS_3681	4101888	4102508	4101933	4102508	11	hypothetical protein YPTS_3681
+YPTS_3683	4103437	4104102	4103437	4104090	6	isoprenoid biosynthesis protein with amidotransferase-like domain
+YPTS_3684	4104332	4106686	4104332	4106668	11	aerobic respiration control sensor protein ArcB
+YPTS_3685	4106699	4107016	4106699	4106917	1	hypothetical protein YPTS_3685
+YPTS_3687	4108500	4113155	4108698	4113155	15	glutamate synthase subunit alpha
+YPTS_3688	4113156	4114583	4113165	4114583	2	glutamate synthase subunit beta
+YPTS_3689	4115177	4115668	4115183	4115668	6	hypothetical protein YPTS_3689
+YPTS_3690	4115821	4116366	4115821	4116336	6	ClpXP protease specificity-enhancing factor
+YPTS_3691	4116342	4117001	4116342	4116983	19	stringent starvation protein A
+YPTS_3692	4117357	4117806	4117357	4117749	14	30S ribosomal protein S9
+YPTS_3693	4117764	4118207	4117764	4118192	20	50S ribosomal protein L13
+YPTS_3696	4119800	4120261	4119857	4120261	12	cytochrome d ubiquinol oxidase subunit III
+YPTS_3697	4120511	4121905	4120532	4121905	27	protease Do
+YPTS_3698	4121884	4123083	4121932	4123083	4	serine endoprotease
+YPTS_3699	4123264	4124547	4123264	4124526	10	UDP-N-acetylglucosamine 1-carboxyvinyltransferase
+YPTS_3700	4124680	4124949	4124680	4124943	1	BolA family protein
+YPTS_3701	4125081	4125392	4125081	4125383	4	anti-sigma B factor antagonist
+YPTS_3702	4125419	4126042	4125419	4126042	7	toluene tolerance family protein
+YPTS_3703	4126055	4126630	4126055	4126612	8	hypothetical protein YPTS_3703
+YPTS_3705	4127617	4128441	4127617	4128435	4	putative ABC transporter ATP-binding protein YrbF
+YPTS_3707	4129692	4130771	4129698	4130771	7	D-arabinose 5-phosphate isomerase
+YPTS_3709	4131690	4132304	4131741	4132304	1	hypothetical protein YPTS_3709
+YPTS_3710	4132267	4132833	4132288	4132833	11	lipopolysaccharide transport periplasmic protein LptA
+YPTS_3711	4132834	4133565	4132840	4133565	13	putative ABC transporter ATP-binding protein YhbG
+YPTS_3713	4135081	4135371	4135084	4135371	5	putative sigma(54) modulation protein
+YPTS_3714	4135478	4135972	4135490	4135972	4	PTS IIA-like nitrogen-regulatory protein PtsN
+YPTS_3715	4136146	4137132	4136278	4137132	14	hypothetical protein YPTS_3715
+YPTS_3716	4137126	4137401	4137129	4137401	2	phosphohistidinoprotein-hexose phosphotransferase component of N-regulated PTS system (Npr)
+YPTS_3717	4137704	4138675	4137740	4138675	17	aspartate carbamoyltransferase catalytic subunit
+YPTS_3718	4138615	4139151	4138684	4139151	4	aspartate carbamoyltransferase regulatory subunit
+YPTS_3719	4139169	4139675	4139289	4139675	10	endoribonuclease L-PSP
+YPTS_3720	4139953	4140450	4139974	4140450	11	hypothetical protein YPTS_3720
+YPTS_3721	4140651	4141637	4140684	4141637	1	trehalose repressor
+YPTS_3722	4141979	4143463	4142048	4143463	3	trehalose(maltose)-specific PTS system components IIBC
+YPTS_3723	4143549	4145225	4143558	4145225	7	trehalose-6-phosphate hydrolase
+YPTS_3724	4145512	4145988	4145578	4145988	4	nucleoside diphosphate kinase regulator
+YPTS_3725	4146250	4146663	4146250	4146636	3	cytochrome b562
+YPTS_3726	4146844	4147497	4146844	4147452	1	hypothetical protein YPTS_3726
+YPTS_3727	4147612	4149018	4147612	4148952	9	peptidase PmbA
+YPTS_3728	4149031	4149681	4149133	4149681	11	hypothetical protein YPTS_3728
+YPTS_3729	4149809	4150132	4149809	4150090	1	barstar (barnase inhibitor)
+YPTS_3731	4150763	4152265	4150763	4152232	10	succinic semialdehyde dehydrogenase
+YPTS_3733	4154456	4155418	4154456	4155391	1	p-hydroxybenzoic acid efflux subunit AaeA
+YPTS_3744	4170246	4173128	4170270	4173128	1	YD repeat-containing protein
+YPTS_3745	4173329	4174789	4173329	4174774	10	protease TldD
+YPTS_3746	4174786	4175661	4174786	4175655	20	Nitrilase/cyanide hydratase and apolipoprotein N-acyltransferase
+YPTS_3747	4175652	4179587	4175652	4179575	2	hypothetical protein YPTS_3747
+YPTS_3748	4179669	4181147	4179669	4181138	7	ribonuclease G
+YPTS_3749	4181128	4181769	4181128	4181721	4	Maf-like protein
+YPTS_3751	4182220	4183218	4182220	4183215	2	rod shape-determining protein MreC
+YPTS_3752	4183420	4184514	4183420	4184463	17	rod shape-determining protein MreB
+YPTS_3753	4184800	4186719	4184800	4186716	2	regulatory protein CsrD
+YPTS_3754	4187087	4188094	4187117	4188094	7	quinone oxidoreductase
+YPTS_3755	4188113	4189417	4188317	4189417	16	putative sulfite oxidase subunit YedY
+YPTS_3757	4190248	4190751	4190299	4190751	3	3-dehydroquinate dehydratase
+YPTS_3758	4190831	4191373	4190909	4191373	3	acetyl-CoA carboxylase biotin carboxyl carrier protein subunit
+YPTS_3759	4191343	4192734	4191385	4192734	29	acetyl-CoA carboxylase biotin carboxylase subunit
+YPTS_3761	4194186	4194458	4194216	4194458	1	hypothetical protein YPTS_3761
+YPTS_3763	4195903	4196859	4195978	4196859	1	ribosomal protein L11 methyltransferase
+YPTS_3764	4197313	4198413	4197448	4198413	3	tRNA-dihydrouridine synthase B
+YPTS_3765	4198414	4198734	4198438	4198734	5	DNA-binding protein Fis
+YPTS_3766	4199488	4199991	4199488	4199964	2	hypothetical protein YPTS_3766
+YPTS_3767	4200030	4200824	4200030	4200704	4	GntR family transcriptional regulator
+YPTS_3770	4202912	4203811	4202912	4203802	1	6-phosphogluconate dehydrogenase NAD-binding
+YPTS_3772	4205140	4205622	4205155	4205622	8	17 kDa surface antigen
+YPTS_3780	4210569	4211426	4210572	4211426	14	putative glutathione S-transferase YghU
+YPTS_3782	4212127	4213782	4212127	4213764	7	FGGY-family pentulose kinase
+YPTS_3785	4215720	4217249	4215720	4217216	2	ABC transporter related
+YPTS_3786	4217420	4218499	4217420	4218409	25	periplasmic binding protein
+YPTS_3789	4221696	4223381	4221696	4223345	2	Na+/H+ antiporter
+YPTS_3790	4223726	4225099	4223726	4225081	4	xanthine/uracil/vitamin C permease
+YPTS_3797	4231316	4232017	4231316	4232017	1	deoxyribose-phosphate aldolase
+YPTS_3798	4232171	4233127	4232198	4233127	2	ribokinase-like domain-containing protein
+YPTS_3799	4233022	4233636	4233133	4233636	2	RbsD or FucU transport
+YPTS_3802	4236038	4236958	4236059	4236958	1	xylose isomerase domain-containing protein
+YPTS_3804	4237669	4237962	4237669	4237950	1	hypothetical protein YPTS_3804
+YPTS_3806	4242554	4242991	4242554	4242976	1	hypothetical protein YPTS_3806
+YPTS_3807	4242979	4245198	4242979	4245177	5	type VI secretion system Vgr family protein
+YPTS_3809	4246637	4250173	4246637	4250170	3	type VI secretion protein IcmF
+YPTS_3810	4250202	4251611	4250202	4251590	1	type VI secretion-associated protein
+YPTS_3811	4251596	4252306	4251596	4252282	1	hypothetical protein YPTS_3811
+YPTS_3813	4253073	4255691	4253073	4255676	10	type VI secretion ATPase
+YPTS_3815	4256454	4257863	4256454	4257800	4	type VI secretion protein
+YPTS_3817	4258348	4259694	4258348	4259664	3	FHA domain-containing protein
+YPTS_3821	4263109	4264605	4263109	4264590	19	EvpB family type VI secretion protein
+YPTS_3822	4264658	4265173	4264658	4265155	6	type VI secretion protein
+YPTS_3823	4265646	4266197	4265679	4266197	6	Hcp1 family type VI secretion system effector
+YPTS_3826	4267099	4268034	4267099	4268010	7	maltose regulon periplasmic protein
+YPTS_3827	4268251	4269696	4268251	4269522	7	maltoporin
+YPTS_3828	4269593	4270705	4269593	4270702	3	maltose/maltodextrin transporter ATP-binding protein
+YPTS_3830	4271518	4272741	4271530	4272741	26	maltose ABC transporter periplasmic protein
+YPTS_3831	4272865	4274505	4272928	4274505	2	maltose transporter membrane protein
+YPTS_3835	4276094	4277752	4276094	4277740	29	glucose-6-phosphate isomerase
+YPTS_3836	4278110	4279495	4278110	4279495	6	aspartate kinase III
+YPTS_3839	4286824	4290534	4286824	4290519	5	B12-dependent methionine synthase
+YPTS_3840	4290731	4291576	4290734	4291576	5	transcriptional repressor IclR
+YPTS_3842	4293496	4294821	4293496	4294803	11	isocitrate lyase
+YPTS_3843	4294850	4296499	4294850	4296448	7	malate synthase
+YPTS_3851	4304523	4305077	4304535	4305077	4	hexapaptide repeat-containing transferase
+YPTS_3852	4305132	4305980	4305132	4305953	6	shikimate 5-dehydrogenase
+YPTS_3853	4305962	4306549	4305962	4306534	1	putative ribosome maturation factor
+YPTS_3857	4308811	4309329	4308817	4309329	5	peptide deformylase
+YPTS_3858	4309330	4310301	4309354	4310301	5	methionyl-tRNA formyltransferase
+YPTS_3860	4311716	4313116	4311740	4313116	1	potassium transporter peripheral membrane component
+YPTS_3864	4314938	4315351	4314938	4315327	10	50S ribosomal protein L17
+YPTS_3865	4315368	4316375	4315368	4316357	26	DNA-directed RNA polymerase subunit alpha
+YPTS_3866	4316383	4317021	4316383	4317003	25	30S ribosomal protein S4
+YPTS_3867	4317034	4317426	4317034	4317423	9	30S ribosomal protein S11
+YPTS_3868	4317440	4317805	4317440	4317796	11	30S ribosomal protein S13
+YPTS_3870	4318094	4319428	4318094	4319425	4	preprotein translocase subunit SecY
+YPTS_3871	4319433	4319870	4319433	4319867	16	50S ribosomal protein L15
+YPTS_3872	4319871	4320080	4319871	4320050	7	50S ribosomal protein L30
+YPTS_3873	4320053	4320565	4320053	4320556	42	30S ribosomal protein S5
+YPTS_3874	4320571	4320933	4320571	4320924	6	50S ribosomal protein L18
+YPTS_3875	4320934	4321551	4320934	4321467	20	50S ribosomal protein L6
+YPTS_3876	4321482	4321880	4321482	4321874	15	30S ribosomal protein S8
+YPTS_3877	4321908	4322456	4321908	4322213	5	30S ribosomal protein S14
+YPTS_3878	4322227	4322796	4322227	4322766	30	50S ribosomal protein L5
+YPTS_3879	4322781	4323137	4322781	4323095	14	50S ribosomal protein L24
+YPTS_3880	4323106	4323489	4323106	4323477	15	50S ribosomal protein L14
+YPTS_3881	4323658	4323927	4323658	4323912	4	30S ribosomal protein S17
+YPTS_3882	4323912	4324115	4323912	4324103	10	50S ribosomal protein L29
+YPTS_3883	4324103	4324525	4324103	4324513	7	50S ribosomal protein L16
+YPTS_3884	4324526	4325332	4324526	4325224	25	30S ribosomal protein S3
+YPTS_3885	4325242	4325583	4325242	4325574	18	50S ribosomal protein L22
+YPTS_3886	4325589	4325870	4325589	4325867	17	30S ribosomal protein S19
+YPTS_3887	4325882	4326709	4325882	4326706	31	50S ribosomal protein L2
+YPTS_3888	4326723	4327037	4326723	4327025	6	50S ribosomal protein L23
+YPTS_3889	4327022	4327663	4327022	4327627	32	50S ribosomal protein L4
+YPTS_3890	4327644	4328285	4327644	4328273	21	50S ribosomal protein L3
+YPTS_3891	4328306	4328653	4328306	4328617	18	ribosomal protein S10
+YPTS_3892	4329015	4329563	4329015	4329488	2	bacterioferritin
+YPTS_3894	4329900	4331114	4329900	4331084	69	elongation factor Tu
+YPTS_3895	4331156	4333273	4331156	4333264	90	elongation factor G
+YPTS_3896	4333358	4333843	4333358	4333828	28	30S ribosomal protein S7
+YPTS_3897	4333925	4334359	4333925	4334299	5	30S ribosomal protein S12
+YPTS_3901	4335504	4336241	4335504	4336226	2	YheO domain-containing protein
+YPTS_3902	4336480	4337322	4336480	4337280	34	FKBP-type peptidyl-prolyl cis-trans isomerase
+YPTS_3903	4337541	4337813	4337595	4337813	4	hypothetical protein YPTS_3903
+YPTS_3904	4338014	4338664	4338014	4338601	9	FKBP-type peptidyl-prolyl cis-trans isomerase
+YPTS_3905	4338696	4338932	4338696	4338917	1	hypothetical protein YPTS_3905
+YPTS_3906	4338933	4340744	4338933	4340741	1	glutathione-regulated potassium-efflux system protein KefB
+YPTS_3908	4341520	4343466	4341544	4343466	9	putative ABC transporter ATP-binding protein
+YPTS_3910	4344683	4345663	4344683	4345663	4	glycosyl transferase family protein
+YPTS_3916	4350062	4351078	4350098	4351078	2	putative hydrolase
+YPTS_3918	4351364	4352329	4351460	4352329	6	phosphoribulokinase/uridine kinase
+YPTS_3921	4353747	4354385	4353753	4354385	15	cAMP-regulatory protein
+YPTS_3922	4354456	4356591	4354471	4356591	9	YccS/YhfK family integral membrane protein
+YPTS_3924	4356817	4358058	4356817	4358034	9	bifunctional N-succinyldiaminopimelate-aminotransferase/acetylornithine transaminase protein
+YPTS_3925	4358167	4358781	4358167	4358742	1	para-aminobenzoate synthase component II
+YPTS_3926	4358986	4360578	4358986	4360527	6	protein of unknown function DUF853 NPT hydrolase putative
+YPTS_3927	4360853	4361470	4360853	4361422	12	peptidyl-prolyl cis-trans isomerase A (rotamase A)
+YPTS_3930	4363487	4364485	4363499	4364485	3	LacI family transcription regulator
+YPTS_3931	4364570	4366624	4364570	4366615	1	TonB-dependent copper receptor
+YPTS_3939	4375453	4376511	4375453	4376493	18	tryptophanyl-tRNA synthetase
+YPTS_3940	4376495	4377229	4376495	4377193	2	phosphoglycolate phosphatase
+YPTS_3941	4377186	4377890	4377186	4377863	13	ribulose-phosphate 3-epimerase
+YPTS_3942	4378166	4378993	4378166	4378981	1	DNA adenine methylase
+YPTS_3943	4379065	4380054	4379065	4380054	12	hypothetical protein YPTS_3943
+YPTS_3944	4380308	4381420	4380308	4381396	7	3-dehydroquinate synthase
+YPTS_3945	4381453	4382028	4381453	4381974	11	shikimate kinase I
+YPTS_3951	4386415	4389003	4386448	4389003	13	peptidoglycan synthetase
+YPTS_3952	4389140	4389697	4389140	4389685	4	ADP-ribose diphosphatase NudE
+YPTS_3954	4390443	4392665	4390518	4392665	1	intracellular growth attenuator IgaA
+YPTS_3956	4393500	4393925	4393518	4393925	2	RNA-binding S4 domain-containing protein
+YPTS_3957	4394079	4394969	4394088	4394969	6	Hsp33-like chaperonin
+YPTS_3958	4395148	4396785	4395166	4396785	48	phosphoenolpyruvate carboxykinase
+YPTS_3959	4397104	4398459	4397104	4398456	2	osmolarity sensor protein
+YPTS_3960	4398453	4399214	4398453	4399172	18	osmolarity response regulator
+YPTS_3962	4400321	4402717	4400342	4402717	26	RNA-binding S1 domain-containing protein
+YPTS_3963	4403190	4403468	4403241	4403468	1	ferrous iron transport protein A
+YPTS_3964	4403509	4405875	4403560	4405875	4	ferrous iron transport protein B
+YPTS_3965	4405887	4406168	4405911	4406168	1	hypothetical protein YPTS_3965
+YPTS_3966	4406320	4406646	4406320	4406589	4	hypothetical protein YPTS_3966
+YPTS_3969	4408374	4408958	4408383	4408958	6	putative DNA uptake protein
+YPTS_3970	4409143	4411251	4409143	4411239	11	4-alpha-glucanotransferase
+YPTS_3971	4411252	4413768	4411252	4413657	34	glycogen/starch/alpha-glucan phosphorylase
+YPTS_3972	4413948	4416686	4413975	4416686	5	transcriptional regulator MalT
+YPTS_3973	4416929	4417390	4417061	4417390	1	thiosulfate sulfurtransferase
+YPTS_3975	4418270	4419037	4418279	4419037	5	DNA-binding transcriptional repressor GlpR
+YPTS_3979	4421403	4423004	4421490	4423004	7	glycerol-3-phosphate dehydrogenase
+YPTS_3980	4423166	4425685	4423166	4425685	53	glycogen/starch/alpha-glucan phosphorylase
+YPTS_3981	4425750	4427228	4425750	4427180	8	glycogen synthase
+YPTS_3982	4427391	4428686	4427391	4428677	7	glucose-1-phosphate adenylyltransferase
+YPTS_3983	4428687	4430753	4428687	4430675	6	glycogen debranching enzyme
+YPTS_3984	4430677	4432875	4430677	4432860	6	glycogen branching enzyme
+YPTS_3987	4449050	4449472	4449050	4449433	1	hypothetical protein YPTS_3987
+YPTS_3990	4450988	4452124	4450988	4452091	13	aspartate-semialdehyde dehydrogenase
+YPTS_3992	4453229	4453639	4453229	4453618	1	hypothetical protein YPTS_3992
+YPTS_3993	4453725	4454138	4453725	4454117	1	hypothetical protein YPTS_3993
+YPTS_3995	4455543	4456061	4455543	4456046	4	carbohydrate kinase
+YPTS_3996	4456209	4457579	4456263	4457579	2	gluconate transporter
+YPTS_3997	4457671	4458747	4457671	4458609	2	LacI family transcription regulator
+YPTS_4002	4462083	4463051	4462083	4462943	6	hypothetical protein YPTS_4002
+YPTS_4004	4463727	4464701	4463727	4464671	1	periplasmic binding protein/LacI transcriptional regulator
+YPTS_4013	4475997	4477124	4476084	4477124	1	hypothetical protein YPTS_4013
+YPTS_4024	4489833	4491473	4489878	4491473	1	phosphate transporter
+YPTS_4026	4492659	4493126	4492680	4493126	14	UspA domain-containing protein
+YPTS_4027	4493355	4494716	4493373	4494716	26	glutamate dehydrogenase
+YPTS_4029	4496362	4497135	4496362	4497132	1	putative methyltransferase
+YPTS_4030	4497136	4499205	4497136	4499178	50	oligopeptidase A
+YPTS_4031	4499486	4500349	4499507	4500349	7	hypothetical protein YPTS_4031
+YPTS_4032	4500427	4501869	4500517	4501869	15	glutathione reductase
+YPTS_4039	4508153	4511410	4508153	4511356	1	outer membrane autotransporter
+YPTS_4040	4511970	4513121	4512039	4513121	1	ribonuclease
+YPTS_4041	4513122	4513922	4513125	4513922	10	CDP-diacylglycerol pyrophosphatase
+YPTS_4045	4517970	4518944	4518000	4518944	10	ribokinase-like domain-containing protein
+YPTS_4046	4519108	4520694	4519108	4520607	5	peptidase M16 domain-containing protein
+YPTS_4048	4520972	4522381	4520972	4522261	1	C4-dicarboxylate transporter DctA
+YPTS_4052	4526630	4528882	4526630	4528816	4	biofilm formation regulator HmsP
+YPTS_4054	4530178	4531272	4530178	4531254	2	dipeptide transporter ATP-binding subunit
+YPTS_4058	4534460	4536124	4534460	4536067	22	extracellular solute-binding protein
+YPTS_4061	4538608	4540020	4538608	4539999	1	filamentous haemagglutinin outer membrane protein
+YPTS_4065	4543456	4544295	4543456	4544046	2	two component LuxR family transcriptional regulator
+YPTS_4066	4544162	4545859	4544162	4545853	1	phosphoethanolamine transferase
+YPTS_4067	4546391	4547860	4546391	4547854	13	membrane protein
+YPTS_4069	4550114	4551682	4550114	4551646	3	histidine ammonia-lyase
+YPTS_4070	4551643	4553364	4551643	4553334	2	urocanate hydratase
+YPTS_4074	4555900	4557183	4555939	4557183	2	hypothetical protein YPTS_4074
+YPTS_4075	4557652	4558659	4557706	4558659	1	periplasmic binding protein
+YPTS_4095	4571863	4572819	4571863	4572777	5	restriction endonuclease
+YPTS_4097	4573654	4576941	4573654	4576932	6	HsdR family type I site-specific deoxyribonuclease
+YPTS_4099	4577972	4579213	4577972	4579201	3	restriction modification system DNA specificity subunit
+YPTS_4100	4579191	4580720	4579191	4580714	7	type I restriction-modification system, M subunit
+YPTS_4102	4581355	4581633	4581355	4581621	1	putative putative SinR-like protein
+YPTS_4107	4587816	4588826	4587816	4588811	5	D-xylose transporter subunit XylF
+YPTS_4108	4589226	4590593	4589274	4590593	2	xylose isomerase
+YPTS_4109	4590708	4592171	4590717	4592171	3	xylulokinase
+YPTS_4117	4601027	4602019	4601027	4601980	1	ornithine cyclodeaminase
+YPTS_4118	4601974	4603017	4601974	4602936	3	hypothetical protein YPTS_4118
+YPTS_4121	4605179	4605604	4605191	4605604	11	heat shock protein IbpA
+YPTS_4122	4605840	4606349	4605885	4606349	11	heat shock chaperone IbpB
+YPTS_4126	4611062	4613206	4611062	4613125	4	periplasmic alpha-amylase precursor
+YPTS_4127	4613414	4614445	4613414	4614394	14	D-isomer specific 2-hydroxyacid dehydrogenase NAD-binding
+YPTS_4129	4615706	4616374	4615706	4616365	7	putative outer membrane lipoprotein
+YPTS_4133	4618087	4619028	4618114	4619028	8	glycyl-tRNA synthetase subunit alpha
+YPTS_4134	4619029	4621107	4619038	4621107	36	glycyl-tRNA synthetase subunit beta
+YPTS_4136	4621558	4622283	4621564	4622283	19	putative lipoprotein
+YPTS_4138	4622924	4624864	4622933	4624864	10	PTS system, mannitol-specific IIC subunit
+YPTS_4139	4624893	4626164	4625001	4626164	16	mannitol-1-phosphate 5-dehydrogenase
+YPTS_4142	4627099	4627530	4627174	4627530	3	hypothetical protein YPTS_4142
+YPTS_4143	4627695	4628240	4627695	4628171	3	hypothetical protein YPTS_4143
+YPTS_4147	4631520	4632203	4631520	4632143	25	superoxide dismutase
+YPTS_4148	4632577	4633452	4632577	4633401	2	formate dehydrogenase accessory protein
+YPTS_4149	4633565	4634185	4633598	4634185	1	molybdopterin oxidoreductase Fe4S4 region
+YPTS_4150	4634186	4636645	4634234	4636645	3	formate dehydrogenase, alpha subunit
+YPTS_4153	4638264	4639229	4638300	4639229	7	formate dehydrogenase accessory protein FdhE
+YPTS_4154	4639419	4640813	4639425	4640813	4	selenocysteine synthase
+YPTS_4155	4640783	4642783	4640810	4642783	3	selenocysteinyl-tRNA-specific translation factor
+YPTS_4160	4649853	4650578	4649889	4650578	3	GntR domain-containing protein
+YPTS_4163	4652302	4653255	4652302	4653228	8	ribokinase
+YPTS_4164	4653279	4653701	4653279	4653698	3	D-ribose pyranase
+YPTS_4165	4653921	4655792	4653921	4655789	1	potassium transport protein Kup
+YPTS_4166	4656036	4657601	4656063	4657601	2	regulatory ATPase RavA
+YPTS_4168	4659170	4660180	4659170	4660162	44	asparagine synthetase AsnA
+YPTS_4170	4660886	4661326	4660886	4661326	2	flavodoxin
+YPTS_4171	4661605	4663596	4661707	4663596	6	tRNA uridine 5-carboxymethylaminomethyl modification enzyme GidA
+YPTS_4172	4663711	4664361	4663741	4664361	5	16S rRNA methyltransferase GidB
+YPTS_4174	4665412	4666275	4665451	4666275	6	F0F1 ATP synthase subunit A
+YPTS_4176	4666605	4667096	4666626	4667096	20	F0F1 ATP synthase subunit B
+YPTS_4177	4667090	4667644	4667111	4667644	17	F0F1 ATP synthase subunit delta
+YPTS_4178	4667617	4669200	4667659	4669200	57	F0F1 ATP synthase subunit alpha
+YPTS_4179	4669250	4670125	4669262	4670125	28	F0F1 ATP synthase subunit gamma
+YPTS_4180	4670143	4671663	4670281	4671663	74	F0F1 ATP synthase subunit beta
+YPTS_4181	4671673	4672107	4671685	4672107	14	F0F1 ATP synthase subunit epsilon
+YPTS_4182	4672705	4674096	4672726	4674096	21	bifunctional N-acetylglucosamine-1-phosphate uridyltransferase/glucosamine-1-phosphate acetyltransferase
+YPTS_4184	4674252	4676126	4674297	4676126	48	glucosamine--fructose-6-phosphate aminotransferase
+YPTS_4186	4676576	4677649	4676609	4677649	24	phosphate ABC transporter periplasmic substrate-binding protein PstS
+YPTS_4189	4679789	4680580	4679804	4680580	7	phosphate transporter subunit
+YPTS_4190	4680647	4681390	4680668	4681390	6	transcriptional regulator PhoU
+YPTS_4192	4682535	4683431	4682577	4683431	1	extracellular solute-binding protein
+YPTS_4195	4685143	4685823	4685143	4685811	1	6-phosphogluconate phosphatase
+YPTS_4196	4686232	4687632	4686304	4687632	1	xanthine/uracil/vitamin C permease
+YPTS_4200	4689609	4690835	4689609	4690808	19	trans-2-enoyl-CoA reductase
+YPTS_4201	4691015	4692400	4691015	4692379	16	tRNA modification GTPase TrmE
+YPTS_4202	4692522	4694177	4692522	4694162	12	putative inner membrane protein translocase component YidC
+YPTS_4204	4694386	4694760	4694386	4694712	1	ribonuclease P protein component

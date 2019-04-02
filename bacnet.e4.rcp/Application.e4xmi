@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_6wlLcMgZEeSyMNYR5xypkQ" elementId="bacnet.e4.rcp.application" bindingContexts="_6wlLecgZEeSyMNYR5xypkQ">
+  <children xsi:type="basic:TrimmedWindow" xmi:id="_6wlLccgZEeSyMNYR5xypkQ" elementId="bacnet.e4.rcp.window.main" label="Eclipse 4 RCP Application" x="500" y="500" width="500" height="500">
+    <children xsi:type="advanced:PerspectiveStack" xmi:id="_6wlLkMgZEeSyMNYR5xypkQ" elementId="org.eclipse.ui.ide.perspectivestack">
+      <children xsi:type="advanced:Perspective" xmi:id="_6wlLkcgZEeSyMNYR5xypkQ" elementId="bacnet.e4.rcp.perspective.sample">
+        <children xsi:type="basic:PartSashContainer" xmi:id="_6wlLksgZEeSyMNYR5xypkQ" elementId="bacnet.e4.rcp.partsashcontainer.sample">
+          <children xsi:type="basic:PartStack" xmi:id="_6wlLk8gZEeSyMNYR5xypkQ" elementId="bacnet.e4.rcp.partstack.sample">
+            <children xsi:type="basic:Part" xmi:id="_Tazw4MOOEeWvvM59Kp44tQ" elementId="bacnet.e4.rcp.Test" visible="false" contributionURI="bundleclass://bacnet.e4.rcp/bacnet.e4.rcp.parts.TestPart" label="Test Part"/>
+          </children>
+        </children>
+      </children>
+    </children>
+    <mainMenu xmi:id="_6wlLicgZEeSyMNYR5xypkQ" elementId="org.eclipse.ui.main.menu">
+      <children xsi:type="menu:Menu" xmi:id="_6wlLisgZEeSyMNYR5xypkQ" elementId="file" label="File">
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_6wlLi8gZEeSyMNYR5xypkQ" elementId="bacnet.e4.rcp.handleditem.file.open" label="Open" iconURI="platform:/plugin/bacnet.e4.rcp/icons/sample.png" command="_6wlLgMgZEeSyMNYR5xypkQ"/>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_6wlLjMgZEeSyMNYR5xypkQ" elementId="bacnet.e4.rcp.handleditem.save" label="Save" iconURI="platform:/plugin/bacnet.e4.rcp/icons/save_edit.png" command="_6wlLg8gZEeSyMNYR5xypkQ"/>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_6wlLjcgZEeSyMNYR5xypkQ" elementId="bacnet.e4.rcp.handleditem.quit" label="Quit" command="_6wlLfMgZEeSyMNYR5xypkQ"/>
+      </children>
+      <children xsi:type="menu:Menu" xmi:id="_RoTQwLrjEeWuqPNIkSVk0Q" elementId="bacnet.e4.rcp.menu.tools" label="Tools">
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_ED6esLrjEeWuqPNIkSVk0Q" elementId="bacnet.e4.rcp.handledmenuitem.loadexpressionmatrixawt" label="Load ExpressionMatrix AWT" tooltip="The best viewer for ExpressionMatrix, allows to save into SVG file" command="_8iLyoLriEeWuqPNIkSVk0Q"/>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_cj4m0LreEeWuqPNIkSVk0Q" elementId="bacnet.e4.rcp.handledmenuitem.loadexpressionmatrix" label="Load ExpressionMatrix" tooltip="Load an ExpressionMatrix and display it" command="_OjDJULreEeWuqPNIkSVk0Q"/>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_JVDBILrjEeWuqPNIkSVk0Q" elementId="bacnet.e4.rcp.handledmenuitem.fusionofexpressionmatrix" label="Fusion of ExpressionMatrix" command="_8iWxwLriEeWuqPNIkSVk0Q"/>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_UxOwkLrjEeWuqPNIkSVk0Q" elementId="bacnet.e4.rcp.handledmenuitem.drawavenndiagram" label="Draw a Venn Diagram" command="_8ifUoLriEeWuqPNIkSVk0Q"/>
+      </children>
+      <children xsi:type="menu:Menu" xmi:id="_6wlLjsgZEeSyMNYR5xypkQ" elementId="help" label="Help">
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_6wlLj8gZEeSyMNYR5xypkQ" elementId="bacnet.e4.rcp.handleditem.about" label="About" command="_6wlLhsgZEeSyMNYR5xypkQ"/>
+      </children>
+    </mainMenu>
+  </children>
+  <handlers xmi:id="_6wlLfcgZEeSyMNYR5xypkQ" elementId="bacnet.e4.rcp.handler.quitCommand" contributionURI="bundleclass://bacnet.e4.rcp/bacnet.e4.rcp.handlers.QuitHandler" command="_6wlLfMgZEeSyMNYR5xypkQ"/>
+  <handlers xmi:id="_6wlLgcgZEeSyMNYR5xypkQ" elementId="bacnet.e4.rcp.handler.openCommand" contributionURI="bundleclass://bacnet.e4.rcp/bacnet.e4.rcp.handlers.OpenHandler" command="_6wlLgMgZEeSyMNYR5xypkQ"/>
+  <handlers xmi:id="_6wlLhMgZEeSyMNYR5xypkQ" elementId="bacnet.e4.rcp.handler.saveCommand" contributionURI="bundleclass://bacnet.e4.rcp/bacnet.e4.rcp.handlers.SaveHandler" command="_6wlLg8gZEeSyMNYR5xypkQ"/>
+  <handlers xmi:id="_6wlLh8gZEeSyMNYR5xypkQ" elementId="bacnet.e4.rcp.handler.aboutCommand" contributionURI="bundleclass://bacnet.e4.rcp/bacnet.e4.rcp.handlers.AboutHandler" command="_6wlLhsgZEeSyMNYR5xypkQ"/>
+  <handlers xmi:id="__D1pULrdEeWuqPNIkSVk0Q" elementId="bacnet.handler.LoadExpressionMatrixHandler" contributionURI="bundleclass://bacnet/bacnet.handler.LoadExpressionMatrixHandler" command="_OjDJULreEeWuqPNIkSVk0Q"/>
+  <handlers xmi:id="_yowCYLtxEeWbBt9qG8zApQ" elementId="bacnet.e4.rcp.handler.0" contributionURI="bundleclass://bacnet.rcp/bacnet.rcp.core.LoadExpressionMatrixAWTHandler" command="_8iLyoLriEeWuqPNIkSVk0Q"/>
+  <handlers xmi:id="_258KwLtxEeWbBt9qG8zApQ" elementId="bacnet.e4.rcp.handler.1" contributionURI="bundleclass://bacnet.e4.rcp/awt.table.FusionExpressionMatrixHandler" command="_8iWxwLriEeWuqPNIkSVk0Q"/>
+  <handlers xmi:id="_48U5QLtxEeWbBt9qG8zApQ" elementId="bacnet.e4.rcp.handler.2" contributionURI="bundleclass://bacnet.rcp/bacnet.rcp.vennDiagram.VennDiagramHandler" command="_8ifUoLriEeWuqPNIkSVk0Q"/>
+  <bindingTables xmi:id="_6wlLfsgZEeSyMNYR5xypkQ" elementId="bacnet.e4.rcp.bindingtable" bindingContext="_6wlLecgZEeSyMNYR5xypkQ">
+    <bindings xmi:id="_6wlLf8gZEeSyMNYR5xypkQ" elementId="bacnet.e4.rcp.keybinding.m1q" keySequence="M1+Q" command="_6wlLfMgZEeSyMNYR5xypkQ"/>
+    <bindings xmi:id="_6wlLgsgZEeSyMNYR5xypkQ" elementId="bacnet.e4.rcp.keybinding.m1o" keySequence="M1+O" command="_6wlLgMgZEeSyMNYR5xypkQ"/>
+    <bindings xmi:id="_6wlLhcgZEeSyMNYR5xypkQ" elementId="bacnet.e4.rcp.keybinding.m1s" keySequence="M1+S" command="_6wlLg8gZEeSyMNYR5xypkQ"/>
+    <bindings xmi:id="_6wlLiMgZEeSyMNYR5xypkQ" elementId="bacnet.e4.rcp.keybinding.m1a" keySequence="M1+A" command="_6wlLhsgZEeSyMNYR5xypkQ"/>
+  </bindingTables>
+  <rootContext xmi:id="_6wlLecgZEeSyMNYR5xypkQ" elementId="org.eclipse.ui.contexts.dialogAndWindow" name="In Dialog and Windows">
+    <children xmi:id="_6wlLesgZEeSyMNYR5xypkQ" elementId="org.eclipse.ui.contexts.window" name="In Windows"/>
+    <children xmi:id="_6wlLe8gZEeSyMNYR5xypkQ" elementId="org.eclipse.ui.contexts.dialog" name="In Dialogs"/>
+  </rootContext>
+  <descriptors xmi:id="_XYC3ULoeEeWP17x1TBZCrg" elementId="bacnet.InitView" label="Home" iconURI="platform:/plugin/bacnet/icons/iconBacnet.bmp" closeable="true" contributionURI="bundleclass://bacnet/bacnet.views.InitView">
+    <menus xmi:id="_XYC3UboeEeWP17x1TBZCrg" elementId="bacnet.InitView">
+      <tags>ViewMenu</tags>
+    </menus>
+    <toolbar xmi:id="_XYC3UroeEeWP17x1TBZCrg" elementId="bacnet.InitView"/>
+  </descriptors>
+  <descriptors xmi:id="_XYProLoeEeWP17x1TBZCrg" elementId="bacnet.BannerView" label="BannerView" iconURI="platform:/plugin/bacnet/icons/iconBacnet.bmp" closeable="true" contributionURI="bundleclass://bacnet/bacnet.views.BannerView">
+    <menus xmi:id="_XYProboeEeWP17x1TBZCrg" elementId="bacnet.BannerView">
+      <tags>ViewMenu</tags>
+    </menus>
+    <toolbar xmi:id="_XYProroeEeWP17x1TBZCrg" elementId="bacnet.BannerView"/>
+  </descriptors>
+  <descriptors xmi:id="_XYY1kLoeEeWP17x1TBZCrg" elementId="bacnet.InternalBrowser" label="Internal Browser" iconURI="platform:/plugin/bacnet/icons/iconBacnet.bmp" allowMultiple="true" closeable="true" contributionURI="bundleclass://bacnet/bacnet.views.InternalBrowser">
+    <menus xmi:id="_XYY1kboeEeWP17x1TBZCrg" elementId="bacnet.InternalBrowser">
+      <tags>ViewMenu</tags>
+    </menus>
+    <toolbar xmi:id="_XYY1kroeEeWP17x1TBZCrg" elementId="bacnet.InternalBrowser"/>
+  </descriptors>
+  <descriptors xmi:id="_XYhYcLoeEeWP17x1TBZCrg" elementId="bacnet.GenomicsView" label="Genomics" iconURI="platform:/plugin/bacnet/icons/ExpDesignView.bmp" closeable="true" contributionURI="bundleclass://bacnet/bacnet.sequenceTools.GenomicsView">
+    <menus xmi:id="_XYhYcboeEeWP17x1TBZCrg" elementId="bacnet.GenomicsView">
+      <tags>ViewMenu</tags>
+    </menus>
+    <toolbar xmi:id="_XYhYcroeEeWP17x1TBZCrg" elementId="bacnet.GenomicsView"/>
+  </descriptors>
+  <descriptors xmi:id="_XYrwgLoeEeWP17x1TBZCrg" elementId="bacnet.TranscriptomicsView" label="Transcriptomics" iconURI="platform:/plugin/bacnet/icons/ExpDesignView.bmp" closeable="true" contributionURI="bundleclass://bacnet/bacnet.expressionAtlas.TranscriptomicsView">
+    <menus xmi:id="_XYrwgboeEeWP17x1TBZCrg" elementId="bacnet.TranscriptomicsView">
+      <tags>ViewMenu</tags>
+    </menus>
+    <toolbar xmi:id="_XYrwgroeEeWP17x1TBZCrg" elementId="bacnet.TranscriptomicsView"/>
+  </descriptors>
+  <descriptors xmi:id="_XY0TYLoeEeWP17x1TBZCrg" elementId="bacnet.ProteomicsView" label="Proteomics" iconURI="platform:/plugin/bacnet/icons/ExpDesignView.bmp" closeable="true" contributionURI="bundleclass://bacnet/bacnet.expressionAtlas.ProteomicsView">
+    <menus xmi:id="_XY0TYboeEeWP17x1TBZCrg" elementId="bacnet.ProteomicsView">
+      <tags>ViewMenu</tags>
+    </menus>
+    <toolbar xmi:id="_XY0TYroeEeWP17x1TBZCrg" elementId="bacnet.ProteomicsView"/>
+  </descriptors>
+  <descriptors xmi:id="_XY-EYLoeEeWP17x1TBZCrg" elementId="bacnet.GeneView" label="Gene" iconURI="platform:/plugin/bacnet/icons/mutantGene.bmp" closeable="true" contributionURI="bundleclass://bacnet/bacnet.sequenceTools.GeneView">
+    <menus xmi:id="_XY-EYboeEeWP17x1TBZCrg" elementId="bacnet.GeneView">
+      <tags>ViewMenu</tags>
+    </menus>
+    <toolbar xmi:id="_XY-EYroeEeWP17x1TBZCrg" elementId="bacnet.GeneView"/>
+  </descriptors>
+  <descriptors xmi:id="_XZH1YLoeEeWP17x1TBZCrg" elementId="bacnet.SrnaSummaryView" label="SmallRNAs" iconURI="platform:/plugin/bacnet/icons/mutantSrna.bmp" closeable="true" contributionURI="bundleclass://bacnet/bacnet.sequenceTools.SrnaSummaryView">
+    <menus xmi:id="_XZH1YboeEeWP17x1TBZCrg" elementId="bacnet.SrnaSummaryView">
+      <tags>ViewMenu</tags>
+    </menus>
+    <toolbar xmi:id="_XZH1YroeEeWP17x1TBZCrg" elementId="bacnet.SrnaSummaryView"/>
+  </descriptors>
+  <descriptors xmi:id="_XZSNcLoeEeWP17x1TBZCrg" elementId="bacnet.SrnaView" label="SmallRNA" iconURI="platform:/plugin/bacnet/icons/mutantSrna.bmp" closeable="true" contributionURI="bundleclass://bacnet/bacnet.sequenceTools.SrnaView">
+    <menus xmi:id="_XZSNcboeEeWP17x1TBZCrg" elementId="bacnet.SrnaView">
+      <tags>ViewMenu</tags>
+    </menus>
+    <toolbar xmi:id="_XZSNcroeEeWP17x1TBZCrg" elementId="bacnet.SrnaView"/>
+  </descriptors>
+  <descriptors xmi:id="_XZbXYLoeEeWP17x1TBZCrg" elementId="bacnet.TableSWTView" label="Table tools" iconURI="platform:/plugin/bacnet/icons/heatmap.bmp" allowMultiple="true" closeable="true" contributionURI="bundleclass://bacnet/bacnet.table.TableSWTView">
+    <menus xmi:id="_XZbXYboeEeWP17x1TBZCrg" elementId="bacnet.TableSWTView">
+      <tags>ViewMenu</tags>
+    </menus>
+    <toolbar xmi:id="_XZbXYroeEeWP17x1TBZCrg" elementId="bacnet.TableSWTView"/>
+  </descriptors>
+  <descriptors xmi:id="_XZmWgLoeEeWP17x1TBZCrg" elementId="bacnet.HeatMapTranscriptomicsView" label="HeatMapTranscriptomics" iconURI="platform:/plugin/bacnet/icons/heatmap.bmp" allowMultiple="true" closeable="true" contributionURI="bundleclass://bacnet/bacnet.expressionAtlas.HeatMapTranscriptomicsView">
+    <menus xmi:id="_XZmWgboeEeWP17x1TBZCrg" elementId="bacnet.HeatMapTranscriptomicsView">
+      <tags>ViewMenu</tags>
+    </menus>
+    <toolbar xmi:id="_XZmWgroeEeWP17x1TBZCrg" elementId="bacnet.HeatMapTranscriptomicsView"/>
+  </descriptors>
+  <descriptors xmi:id="_XZvgcLoeEeWP17x1TBZCrg" elementId="bacnet.HeatMapProteomicsView" label="HeatMapProteomics" iconURI="platform:/plugin/bacnet/icons/heatmap.bmp" allowMultiple="true" closeable="true" contributionURI="bundleclass://bacnet/bacnet.expressionAtlas.HeatMapProteomicsView">
+    <menus xmi:id="_XZvgcboeEeWP17x1TBZCrg" elementId="bacnet.HeatMapProteomicsView">
+      <tags>ViewMenu</tags>
+    </menus>
+    <toolbar xmi:id="_XZvgcroeEeWP17x1TBZCrg" elementId="bacnet.HeatMapProteomicsView"/>
+  </descriptors>
+  <descriptors xmi:id="_XZ4qYLoeEeWP17x1TBZCrg" elementId="bacnet.GenomeTranscriptomeView" label="Genome Viewer" iconURI="platform:/plugin/bacnet/icons/genome/genomeView2.bmp" closeable="true" contributionURI="bundleclass://bacnet/bacnet.genomeBrowser.GenomeTranscriptomeView">
+    <menus xmi:id="_XZ4qYboeEeWP17x1TBZCrg" elementId="bacnet.GenomeTranscriptomeView">
+      <tags>ViewMenu</tags>
+    </menus>
+    <toolbar xmi:id="_XZ4qYroeEeWP17x1TBZCrg" elementId="bacnet.GenomeTranscriptomeView"/>
+  </descriptors>
+  <descriptors xmi:id="_iW21kLrfEeWuqPNIkSVk0Q" elementId="bacnet.rcp.HeatMapViewAWT" label="HeatMap AWT" iconURI="platform:/plugin/bacnet.rcp/icons/heatmap.bmp" allowMultiple="true" closeable="true" contributionURI="bundleclass://bacnet.rcp/bacnet.rcp.expression.TableAWTView">
+    <menus xmi:id="_iW21kbrfEeWuqPNIkSVk0Q" elementId="bacnet.rcp.HeatMapViewAWT">
+      <tags>ViewMenu</tags>
+    </menus>
+    <toolbar xmi:id="_iW21krrfEeWuqPNIkSVk0Q" elementId="bacnet.rcp.HeatMapViewAWT"/>
+  </descriptors>
+  <descriptors xmi:id="_iX2UELrfEeWuqPNIkSVk0Q" elementId="bacnet.rcp.SVDMDSView" label="SVDMDS view" iconURI="platform:/plugin/bacnet.rcp/icons/scatter.bmp" allowMultiple="true" closeable="true" contributionURI="bundleclass://bacnet.rcp/bacnet.rcp.stat.views.SVDMDSView">
+    <menus xmi:id="_iX2UEbrfEeWuqPNIkSVk0Q" elementId="bacnet.rcp.SVDMDSView">
+      <tags>ViewMenu</tags>
+    </menus>
+    <toolbar xmi:id="_iX2UErrfEeWuqPNIkSVk0Q" elementId="bacnet.rcp.SVDMDSView"/>
+  </descriptors>
+  <descriptors xmi:id="_iYB6QLrfEeWuqPNIkSVk0Q" elementId="bacnet.rcp.HistogramView" label="Histogram" iconURI="platform:/plugin/bacnet.rcp/icons/histoView.bmp" allowMultiple="true" closeable="true" contributionURI="bundleclass://bacnet.rcp/bacnet.rcp.stat.views.HistogramView">
+    <menus xmi:id="_iYB6QbrfEeWuqPNIkSVk0Q" elementId="bacnet.rcp.HistogramView">
+      <tags>ViewMenu</tags>
+    </menus>
+    <toolbar xmi:id="_iYB6QrrfEeWuqPNIkSVk0Q" elementId="bacnet.rcp.HistogramView"/>
+  </descriptors>
+  <descriptors xmi:id="_iYMSULrfEeWuqPNIkSVk0Q" elementId="bacnet.rcp.BoxPlotView" label="BoxPlot" iconURI="platform:/plugin/bacnet.rcp/icons/boxplotView.bmp" allowMultiple="true" closeable="true" contributionURI="bundleclass://bacnet.rcp/bacnet.rcp.stat.views.BoxPlotView">
+    <menus xmi:id="_iYMSUbrfEeWuqPNIkSVk0Q" elementId="bacnet.rcp.BoxPlotView">
+      <tags>ViewMenu</tags>
+    </menus>
+    <toolbar xmi:id="_iYMSUrrfEeWuqPNIkSVk0Q" elementId="bacnet.rcp.BoxPlotView"/>
+  </descriptors>
+  <descriptors xmi:id="_iYXRcLrfEeWuqPNIkSVk0Q" elementId="bacnet.rcp.VennDiagramViewAWT" label="Venn diagram viewer" iconURI="platform:/plugin/bacnet.rcp/icons/venn.bmp" allowMultiple="true" closeable="true" contributionURI="bundleclass://bacnet.rcp/bacnet.rcp.vennDiagram.VennDiagramViewAWT">
+    <menus xmi:id="_iYXRcbrfEeWuqPNIkSVk0Q" elementId="bacnet.rcp.VennDiagramViewAWT">
+      <tags>ViewMenu</tags>
+    </menus>
+    <toolbar xmi:id="_iYXRcrrfEeWuqPNIkSVk0Q" elementId="bacnet.rcp.VennDiagramViewAWT"/>
+  </descriptors>
+  <descriptors xmi:id="_iYi3oLrfEeWuqPNIkSVk0Q" elementId="bacnet.rcp.ScatterPlotView" label="Scatter plot" iconURI="platform:/plugin/bacnet.rcp/icons/scatter.bmp" allowMultiple="true" closeable="true" contributionURI="bundleclass://bacnet.rcp/bacnet.rcp.stat.views.ScatterPlotView">
+    <menus xmi:id="_iYi3obrfEeWuqPNIkSVk0Q" elementId="bacnet.rcp.ScatterPlotView">
+      <tags>ViewMenu</tags>
+    </menus>
+    <toolbar xmi:id="_iYi3orrfEeWuqPNIkSVk0Q" elementId="bacnet.rcp.ScatterPlotView"/>
+  </descriptors>
+  <descriptors xmi:id="_iYtPsLrfEeWuqPNIkSVk0Q" elementId="bacnet.rcp.StatScatterView" label="StatScatterView" iconURI="platform:/plugin/bacnet.rcp/icons/volcanoplot.bmp" allowMultiple="true" closeable="true" contributionURI="bundleclass://bacnet.rcp/bacnet.rcp.stat.views.StatScatterView">
+    <menus xmi:id="_iYtPsbrfEeWuqPNIkSVk0Q" elementId="bacnet.rcp.StatScatterView">
+      <tags>ViewMenu</tags>
+    </menus>
+    <toolbar xmi:id="_iYtPsrrfEeWuqPNIkSVk0Q" elementId="bacnet.rcp.StatScatterView"/>
+  </descriptors>
+  <commands xmi:id="_6wlLfMgZEeSyMNYR5xypkQ" elementId="org.eclipse.ui.file.exit" commandName="quitCommand"/>
+  <commands xmi:id="_6wlLgMgZEeSyMNYR5xypkQ" elementId="org.eclipse.ui.file.open" commandName="openCommand"/>
+  <commands xmi:id="_6wlLg8gZEeSyMNYR5xypkQ" elementId="org.eclipse.ui.file.save" commandName="saveCommand"/>
+  <commands xmi:id="_6wlLhsgZEeSyMNYR5xypkQ" elementId="org.eclipse.ui.help.aboutAction" commandName="aboutCommand"/>
+  <commands xmi:id="_OjDJULreEeWuqPNIkSVk0Q" elementId="bacnet.e4.rcp.command.loadexpressionmatrix" commandName="Load ExpressionMatrix"/>
+  <commands xmi:id="_8iLyoLriEeWuqPNIkSVk0Q" elementId="bacnet.rcp.loadExpressionMatrixAWT" commandName="Load Expression Matrix AWT"/>
+  <commands xmi:id="_8iWxwLriEeWuqPNIkSVk0Q" elementId="bacnet.rcp.FusionOfExpressionMatrix" commandName="Fusion of ExpressionMatrix"/>
+  <commands xmi:id="_8ifUoLriEeWuqPNIkSVk0Q" elementId="bacnet.rcp.vennDiagramCommand" commandName="Draw a Venn diagram"/>
+  <addons xmi:id="_6wlLcsgZEeSyMNYR5xypkQ" elementId="org.eclipse.e4.core.commands.service" contributionURI="bundleclass://org.eclipse.e4.core.commands/org.eclipse.e4.core.commands.CommandServiceAddon"/>
+  <addons xmi:id="_6wlLc8gZEeSyMNYR5xypkQ" elementId="org.eclipse.e4.ui.contexts.service" contributionURI="bundleclass://org.eclipse.e4.ui.services/org.eclipse.e4.ui.services.ContextServiceAddon"/>
+  <addons xmi:id="_6wlLdMgZEeSyMNYR5xypkQ" elementId="org.eclipse.e4.ui.bindings.service" contributionURI="bundleclass://org.eclipse.e4.ui.bindings/org.eclipse.e4.ui.bindings.BindingServiceAddon"/>
+  <addons xmi:id="_6wlLdcgZEeSyMNYR5xypkQ" elementId="org.eclipse.e4.ui.workbench.commands.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.CommandProcessingAddon"/>
+  <addons xmi:id="_6wlLdsgZEeSyMNYR5xypkQ" elementId="org.eclipse.e4.ui.workbench.handler.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.HandlerProcessingAddon"/>
+  <addons xmi:id="_6wlLd8gZEeSyMNYR5xypkQ" elementId="org.eclipse.e4.ui.workbench.contexts.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.ContextProcessingAddon"/>
+  <addons xmi:id="_6wlLeMgZEeSyMNYR5xypkQ" elementId="org.eclipse.e4.ui.workbench.bindings.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.swt/org.eclipse.e4.ui.workbench.swt.util.BindingProcessingAddon"/>
+</application:Application>

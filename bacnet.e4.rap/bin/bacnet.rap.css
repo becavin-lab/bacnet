@@ -1,0 +1,103 @@
+@CHARSET "UTF-8";
+
+/* Update DEFAULT_FONT in bacnet.swt.SWTResourceManager
+ And modify SWTResourceManager.getTitleFont()
+ And modify SWTResourceManager.getBodyFont() */
+
+
+Display {
+  font: 12px Arial, sans-serif
+}
+
+Composite {
+	padding: 0px;
+	font: 12px Arial, sans-serif
+}
+
+Shell-Titlebar {
+  font: 12px Arial, sans-serif
+}
+
+ErrorBox-Titlebar {
+  font: 12px Arial, sans-serif
+}
+ErrorBox {
+  font: 12px Arial, sans-serif
+}
+
+CLabel {
+  font: 12px Arial, sans-serif
+}
+
+Text-Message {
+  font: 12px Arial, sans-serif
+}
+
+Button[PUSH] {
+  font: 12px Arial, sans-serif;
+  padding: 4px;
+  spacing: 1px;
+  box-shadow: 1px 2px 2px rgba( 0, 0, 0, 0.5 );
+}
+
+Button[RADIO] {
+  font: 12px Arial, sans-serif;
+}
+Button[CHECK] {
+  font: 12px Arial, sans-serif;
+}
+
+TabItem {
+	font: 12px Arial, sans-serif;
+}
+
+TabFolder {
+	font: 12px Arial, sans-serif;
+	border: none;
+	padding: 0px;
+}
+
+TabFolder-ContentContainer {
+	border: none;
+}
+
+TabItem {
+	font: 12px Arial, sans-serif;
+}
+Combo {
+  font: 12px Arial, sans-serif;
+}
+
+Tooltip {
+  font: 12px Arial, sans-serif
+}
+
+
+Link {
+  font: 12px Arial, sans-serif
+}
+
+
+Text {
+  font: 12px Arial, sans-serif
+}
+
+Label {
+  font: 12px Arial, sans-serif
+}
+
+List {
+  font: 12px Arial, sans-serif
+}
+
+Table {
+  font: 12px Arial, sans-serif
+}
+
+TableColumn {
+  font: 12px Arial, sans-serif
+}
+
+FileUpload {
+  font: 12px Arial, sans-serif
+}
