@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="BasicApplication">
+   <implementation class="bacnet.e4.rap.BasicApplication"/>
+   <service>
+      <provide interface="org.eclipse.rap.rwt.application.ApplicationConfiguration"/>
+   </service>
+   
+</scr:component>

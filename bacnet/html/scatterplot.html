@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style> /* set the CSS */
+<style> /* set the CSS */
+
+body { font: 12px Arial;}
+
+path { 
+    stroke: steelblue;
+    stroke-width: 2;
+    fill: none;
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: grey;
+    stroke-width: 0.25;
+    shape-rendering: crispEdges;
+}
+
+.axis text {
+    font-family: sans-serif;
+    font-size: 11px;
+}
+
+</style>
+
+<head>
+<div id="divd3" align="center" style="overflow:hidden;"></div>
+<div id="divd3legend"></div>
+
+<script src="https://d3js.org/d3.v3.min.js"></script>
+<script src="https://d3js.org/d3-queue.v1.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script> 
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+
+<script>
+
+	
+  var genes_colors = new Array();
+  genes_colors["Gene+"]  = d3.rgb(230, 50, 52);
+  genes_colors["Gene-"]  = d3.rgb(69, 130, 247);
+  genes_colors["CisReg"] = d3.rgb(37,185,13);
+  genes_colors["Srna"]   = d3.rgb(204, 51, 204);
+  genes_colors["ASrna"]  = d3.rgb(5,211,170);
+  
+
+  var loading = d3.select("#divd3").append("p").append("font").attr("size","4px").attr("color","green").append("center").text("Loading...");
+
+  var q = queue(1);
+  q.defer(load_network)
+  q.await(drawsvg)
+
+  var network_nodes = new Array();
+  var network_links = new Array();
+
+  function load_network(callback){
+  d3.tsv("_FileName") 
+    .row(function(d) {
+      network_links.push({"name": d["name"], "X": 1*d["X"], "Y": 1*d["Y"], "annotation": d["annotation"]});
+    })
+    .get(function() {
+      callback();
+    });
+  }
+  
+  
+  function drawsvg(){
+      loading.remove();
+      
+
+
+      
+      var w = window,
+        d = document,
+        e = d.documentElement,
+        g = d.getElementsByTagName('body')[0],
+        x = w.innerWidth || e.clientWidth || g.clientWidth,
+        y = w.innerHeight|| e.clientHeight|| g.clientHeight;
+      
+      var padding = 50;
+      var height = y;
+      var width  = x;
+      
+      
+
+      var xScale = d3.scale.linear()
+                     .domain([d3.min(network_links, function(d) { return d.X; }), d3.max(network_links, function(d) { return d.X; })])
+                     .range([padding, width-padding*2]);
+
+      var yScale = d3.scale.linear()
+                     .domain([d3.min(network_links, function(d) { return d.Y; }), d3.max(network_links, function(d) { return d.Y; })])
+                     .range([height-padding, padding]);
+
+      var svg = d3
+        .select("#divd3")
+        .append("svg")
+        .attr("xmlns", "http://www.w3.org/2000/svg")
+        .attr("version", 1.1)
+        .attr("id", "SVGGraphic")
+        .attr("width", width)
+        .attr("height", height)
+        //.append('svg:g')
+        .call(d3.behavior.zoom().scaleExtent([1, 100]).on("zoom", zoom))
+        .append('svg:g') ;
+      
+      var genes = svg
+        .selectAll("genes")
+        .data(network_links)
+        .enter()
+        .append("circle")
+        .attr("cx", function(d) {
+        return xScale(d["X"]);
+         })
+        .attr("cy", function(d) {
+              return yScale(d["Y"]);
+        })
+        .attr("r", 3)
+        .attr("title", function(d) { 
+          return d.name + " " + d.annotation;})
+        .attr("class", "hastitle");
+        
+      // call axis
+      var xAxis = d3.svg.axis()
+                  .scale(xScale)
+                  .orient("bottom")
+                  .ticks(5); 
+
+      svg.append("g")
+          .attr("class", "axis")
+          .attr("transform", "translate(0," + (height - padding) + ")")
+          .call(xAxis);
+
+      var yAxis = d3.svg.axis()
+                  .scale(yScale)
+                  .orient("left")
+                  .ticks(5);
+
+      svg.append("g")
+          .attr("class", "axis")
+          .attr("transform", "translate(" + padding + ",0)")
+          .call(yAxis);
+
+
+      svg.append("g")
+          .attr("class", "axis")
+          .attr("transform", "translate(0," + (height - padding) + ")")
+          .call(xAxis);
+
+
+      genes.on("mouseover", function(d){d3.select(this).style("stroke-width", "3")});
+      genes.on("mouseout", function(d){d3.select(this).style("stroke-width", "1")});
+      
+      d3.select("#divd3")
+       .select("#SVGGraphic")
+        .selectAll(".hastitle")
+        .each(function(d) {d3.select(this).append("svg:title").text(d3.select(this).attr("title"))});
+        
+      function constraint(v,min,max){
+        return(Math.max(min,Math.min(max,v)));
+       } 
+       
+
+       function zoom() {
+          svg.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+        }
+
+  }
+
+
+</script>
+</html>

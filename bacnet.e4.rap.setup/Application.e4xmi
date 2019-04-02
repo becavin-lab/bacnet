@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="ASCII"?>
+<application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmi:id="_XqkCQKknEeObFrG_clJBYA" elementId="">
+  <children xsi:type="basic:TrimmedWindow" xmi:id="_Zdy6cKknEeObFrG_clJBYA" elementId="rap4.window" selectedElement="_SqT8cL96EeWDbLadD9j-Ig" label="" x="10" y="10" width="500" height="500">
+    <persistedState key="styleOverride" value="8"/>
+    <tags>shellMaximized</tags>
+    <children xsi:type="advanced:PerspectiveStack" xmi:id="_SqT8cL96EeWDbLadD9j-Ig" elementId="bacnet.e4.rap.setup.perspectivestack.0">
+      <children xsi:type="advanced:Perspective" xmi:id="_Tft6cL96EeWDbLadD9j-Ig" elementId="bacnet.e4.rap.setup.perspective.main" selectedElement="_GBnhIL97EeWDbLadD9j-Ig">
+        <children xsi:type="basic:PartSashContainer" xmi:id="_GBnhIL97EeWDbLadD9j-Ig" elementId="bacnet.e4.rap.setup.partsashcontainer.0">
+          <children xsi:type="basic:PartStack" xmi:id="_JjdhIL-EEeWsuPw69uRWRQ" elementId="bacnet.e4.rap.partstack" containerData="85">
+            <children xsi:type="basic:Part" xmi:id="_R7sQYMmVEeWiwYu3hjSA_g" elementId="bacnet.e4.rap.setup.part.setuppart" contributionURI="bundleclass://bacnet.e4.rap.setup/bacnet.e4.rap.setup.SetupPart" label="Setup Part" closeable="true">
+              <toolbar xmi:id="_qZBxYCXuEeiaMcRqu-B8ug" elementId="bacnet.e4.rap.toolbar.0"/>
+            </children>
+          </children>
+        </children>
+      </children>
+    </children>
+  </children>
+  <addons xmi:id="_XqkCQaknEeObFrG_clJBYA" elementId="org.eclipse.e4.core.commands.service" contributionURI="bundleclass://org.eclipse.e4.core.commands/org.eclipse.e4.core.commands.CommandServiceAddon"/>
+  <addons xmi:id="_XqkCQqknEeObFrG_clJBYA" elementId="org.eclipse.e4.ui.contexts.service" contributionURI="bundleclass://org.eclipse.e4.ui.services/org.eclipse.e4.ui.services.ContextServiceAddon"/>
+  <addons xmi:id="_XqkCQ6knEeObFrG_clJBYA" elementId="org.eclipse.e4.ui.bindings.service" contributionURI="bundleclass://org.eclipse.e4.ui.bindings/org.eclipse.e4.ui.bindings.BindingServiceAddon"/>
+  <addons xmi:id="_XqkCRKknEeObFrG_clJBYA" elementId="org.eclipse.e4.ui.workbench.commands.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.CommandProcessingAddon"/>
+  <addons xmi:id="_XqkCRaknEeObFrG_clJBYA" elementId="org.eclipse.e4.ui.workbench.contexts.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.ContextProcessingAddon"/>
+  <addons xmi:id="_XqkCRqknEeObFrG_clJBYA" elementId="org.eclipse.e4.ui.workbench.bindings.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.swt/org.eclipse.e4.ui.workbench.swt.util.BindingProcessingAddon"/>
+  <addons xmi:id="_XqkCR6knEeObFrG_clJBYA" elementId="org.eclipse.e4.ui.workbench.handler.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.HandlerProcessingAddon"/>
+</application:Application>

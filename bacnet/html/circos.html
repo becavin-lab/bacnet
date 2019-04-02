@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+body {
+  font: 10px sans-serif;
+}
+
+</style>
+<body>
+
+<div id="divd3" align="center" style="overflow:hidden;"></div>
+
+<script src="https://d3js.org/d3.v3.min.js"></script>
+<script src="https://d3js.org/d3-queue.v1.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script> 
+
+<script>
+
+	// todo: no overlap
+	// todo: zoom
+	// svg:
+	
+	var genome_length = 3000000;
+
+	// grandeur du cerdle
+	var center_r = 150;
+
+	// tension des arcs (0.9 = super courbe)
+	var ten      = 0.8;
+
+	var genes_colors = new Array();
+	genes_colors["Gene+"]  = d3.rgb(230, 50, 52);
+	genes_colors["Gene-"]  = d3.rgb(69, 130, 247);
+	genes_colors["CisReg"] = d3.rgb(37,185,13);
+	genes_colors["Srna"]   = d3.rgb(204, 51, 204);
+	genes_colors["ASrna"]  = d3.rgb(5,211,170);
+	
+	var lineFunction = d3.svg.line()
+		   .x(function(d) { return d.x; })
+		   .y(function(d) { return d.y; })
+		   .interpolate("bundle")
+			.tension(ten)
+			
+	var linearScale = d3.scale.linear().domain([0,genome_length]).range([-Math.PI/2,3*Math.PI/2]);
+	
+	draw();
+
+	function draw() {
+					
+		var q = queue(1);
+		q.defer(load_network)
+		q.await(drawsvg)
+
+		var network_nodes = new Array();
+		var network_links = new Array();
+		function load_network(callback){
+		d3.tsv("_FileName") 
+		//d3.tsv("./corr.txt") 
+			.row(function(d) {
+					
+				if(network_nodes.indexOf(d["from"])==-1) 
+					network_nodes.push(d["from"]);
+				if(network_nodes.indexOf(d["to"])==-1) 
+					network_nodes.push(d["to"]);
+				
+				network_links.push({"from": d["from"], "to": d["to"], "value": +d["weight"]});
+			})
+			.get(function() {
+				callback();
+			});
+		}
+	
+		function drawsvg(){
+			
+			var w = window,
+				d = document,
+				e = d.documentElement,
+				g = d.getElementsByTagName('body')[0],
+				x = w.innerWidth || e.clientWidth || g.clientWidth,
+				y = w.innerHeight|| e.clientHeight|| g.clientHeight;
+
+			var width  = x;
+			var height = y;
+			
+			center_r = (2/3*Math.min(x,y))/2;
+			
+			var center_x  = x/2;
+			var center_y  = y/2;
+				
+			// create svg
+			var svg = d3
+				.select("#divd3")
+				.append("svg")
+				.attr("xmlns", "http://www.w3.org/2000/svg")
+				.attr("version", 1.1)
+				.attr("id", "SVGGraphic")
+				.attr("width", width)
+				.attr("height", height)
+				.call(d3.behavior.zoom().scaleExtent([1, 100]).on("zoom", zoom))
+				.append('svg:g') ;
+			
+			var size = 15
+			function zoom() {
+				  svg.attr("transform", "translate(" + d3.event.translate[0]*1 + " " +d3.event.translate[1]*1 + ")scale(" + d3.event.scale + ")");
+				  node_text.style("font-size", size/d3.event.scale+"px")	
+				}
+				
+			var center_r4 = center_r*1.225
+				
+			var imgs = svg.selectAll("image")
+				.data([0])
+				.enter()
+				.append("svg:image")
+				.attr('x',(center_x-center_r4))
+				.attr('y',(center_y-center_r4))
+				.attr('width', (center_r4*2))
+				.attr('height', (center_r4*2))
+				.attr("xlink:href","_Background")
+			
+			// create paths
+			var path = svg.selectAll("links.paths")
+				.data(network_links)
+				.enter()
+				.append("svg:path")
+				.attr("d", function(d, i) { 
+					from = d.from
+					pos_from = +from.substring(from.indexOf(";")+1, from.indexOf(")"));
+					x_1 = center_x+center_r*Math.cos(linearScale(pos_from));
+					y_1 = center_y+center_r*Math.sin(linearScale(pos_from));
+					to   = d.to
+					pos_to = +to.substring(to.indexOf(";")+1, to.indexOf(")"));
+					x_2 = center_x+center_r*Math.cos(linearScale(pos_to));
+					y_2 = center_y+center_r*Math.sin(linearScale(pos_to));
+					var lineData = [ { "x": x_1,   "y": y_1},  { "x": center_x,  "y": center_y},  { "x": x_2,  "y": y_2}]
+					return lineFunction(lineData);})
+				.attr("fill", "none")
+				.style("stroke", function(d) { if(d.value>0) return "black"; else return "grey";})
+				//.style("stroke", "white")
+				.attr("title", function(d) { 
+					return "Association between \""+d.from+"\" and \""+d.to+"\"\nrho = "+d.value; })
+				.attr("class", "hastitle")
+				
+			//var node_circles = svg.selectAll("nodes.circles")
+			//	.data(network_nodes)
+			//	.enter()
+			//	.append("svg:circle")
+			//	.attr("r", "5")
+			//	.attr("cx", function(d,i) {
+			//		pos = +d.substring(d.indexOf(";")+1, d.indexOf(")"));
+			//		return center_x+center_r*Math.cos(linearScale(pos));})
+			//	.attr("cy", function(d,i) {
+			//		pos = +d.substring(d.indexOf(";")+1, d.indexOf(")"));
+			//		return center_y+center_r*Math.sin(linearScale(pos));})
+			//	.attr("fill", function(d) {
+			//		type = d.substring(d.indexOf("(")+1, d.indexOf(";"));
+			//		return(genes_colors[type])
+			//		})
+			//	.style("stroke","black")
+			//	.attr("title", function(d) { 
+			//		annotation = d.substring(d.indexOf("{")+1, d.indexOf("}"))
+			//		return d.substring(0,d.indexOf("("))+"\n"+annotation; })
+			//	.attr("class", "hastitle")
+			
+			center_r2 = center_r*1.08
+			var node_text = svg.selectAll("nodes.labels")
+				.data(network_nodes)
+				.enter()
+				.append("svg:text")
+				.text(function(d) { 
+					name = d.substring(0, d.indexOf("("));
+					return name;
+					})
+				.attr("x", function(d,i) {
+					pos = +d.substring(d.indexOf(";")+1, d.indexOf(")"));
+					return center_x+center_r2*Math.cos(linearScale(pos));})
+				.attr("y", function(d,i) {
+					pos = +d.substring(d.indexOf(";")+1, d.indexOf(")"));
+					return center_y+center_r2*Math.sin(linearScale(pos));})
+				.attr("fill", function(d) {
+					type = d.substring(d.indexOf("(")+1, d.indexOf(";"));
+					return(genes_colors[type])
+					})
+				.attr("transform", function(d) { 
+					pos = +d.substring(d.indexOf(";")+1, d.indexOf(")"));
+					a = linearScale(pos);	
+					if(a<Math.PI/2){
+						a = 180*a/Math.PI;
+						x = center_x+center_r2*Math.cos(linearScale(pos))
+						y = center_y+center_r2*Math.sin(linearScale(pos))
+						string = "rotate("+a+" "+x+","+y+")"
+						return string;
+					}
+					else{
+						a = 180*a/Math.PI;
+						a = a-180;
+						x = center_x+center_r2*Math.cos(linearScale(pos))
+						y = center_y+center_r2*Math.sin(linearScale(pos))
+						string = "rotate("+a+" "+x+","+y+")"
+						return string;
+					}
+					})
+				.style("text-anchor", function(d) { 
+					pos = +d.substring(d.indexOf(";")+1, d.indexOf(")"));
+					a = linearScale(pos);	
+					if(a<Math.PI/2){
+						return "start";
+					}else {
+						return "end";
+						}})
+				.style("dominant-baseline", "central")
+				.style("font-size", "15px")			
+
+			//node_circles.on("mouseover", function(d){d3.select(this).style("stroke-width", "2")});
+			//node_circles.on("mouseout", function(d){d3.select(this).style("stroke-width", "1")});
+			
+			path.on("mouseover", function(d){
+					d3.select(this).style("stroke-width", "3").style("stroke", "red")});
+			path.on("mouseout", function(d){
+					var color; 	
+					if(d.value>0) color = "black"; else color = "grey";
+					d3.select(this).style("stroke-width", "1").style("stroke", color);
+					});
+			
+		//	path.each(f/* unction(d,i){
+			//	var delay    = i*250
+			//	var duration = 250
+			//	d3.select(this)
+			//		.transition()
+			//		.style("stroke", "red")
+			//		.delay(delay)
+			//		.duration(duration)
+					//.style("stroke", "black")
+				//d3.select(this)
+				//	.transition()
+				//	.style("stroke-width", "3")
+				//	.style("stroke", "black")
+				//	.delay(i+"000")
+					//.duration("1000")
+			//	console.log(""+i)
+			//	}) */
+					
+			d3.select("#divd3")
+			 .select("#SVGGraphic")
+			 .selectAll(".hastitle")
+			 .each(function(d) {d3.select(this).append("svg:title").text(d3.select(this).attr("title"))});
+			 
+		}
+		
+		
+	}
+
+</script>

@@ -1,0 +1,36 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Scripts
+Bundle-SymbolicName: bacnet.scripts; singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: bacnet.scripts.Activator
+Require-Bundle: javax.inject;bundle-version="0.0.0",
+ org.eclipse.swt;bundle-version="0.0.0";resolution:=optional,
+ org.eclipse.e4.ui.model.workbench;bundle-version="0.0.0",
+ org.eclipse.jface;bundle-version="0.0.0";resolution:=optional,
+ org.eclipse.e4.ui.services;bundle-version="0.0.0",
+ org.eclipse.e4.ui.workbench;bundle-version="0.0.0",
+ org.eclipse.e4.core.di;bundle-version="0.0.0",
+ org.eclipse.e4.ui.di;bundle-version="0.0.0",
+ org.eclipse.e4.core.contexts;bundle-version="0.0.0",
+ org.eclipse.core.runtime;bundle-version="0.0.0",
+ bacnet,
+ org.junit;bundle-version="4.12.0",
+ bacnet.lib;bundle-version="1.0.0",
+ org.apache.commons.io;bundle-version="2.2.0",
+ org.eclipse.rap.rwt;bundle-version="3.2.0";resolution:=optional,
+ org.eclipse.rap.jface
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Export-Package: 
+ bacnet.scripts,
+ bacnet.scripts.arrayexpress,
+ bacnet.scripts.core,
+ bacnet.scripts.core.normalization,
+ bacnet.scripts.core.stat,
+ bacnet.scripts.core.vennDiagram,
+ bacnet.scripts.database,
+ bacnet.scripts.genome,
+ bacnet.scripts.listeriomics,
+ bacnet.scripts.listeriomics.technology
+Automatic-Module-Name: bacnet.scripts

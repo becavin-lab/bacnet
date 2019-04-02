@@ -1,0 +1,201 @@
+<html>
+
+<div id="divd3" align="center" style="overflow:hidden;"></div>
+<div id="divd3legend"></div>
+
+<script src="https://d3js.org/d3.v3.min.js"></script>
+<script src="https://d3js.org/d3-queue.v1.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>  
+
+<script>
+
+	var circ_r = 10;
+
+	var genes_colors = new Array();
+	genes_colors["Gene+"]  = d3.rgb(230, 50, 52);
+	genes_colors["Gene-"]  = d3.rgb(69, 130, 247);
+	genes_colors["CisReg"] = d3.rgb(37,185,13);
+	genes_colors["Srna"]   = d3.rgb(204, 51, 204);
+	genes_colors["ASrna"]  = d3.rgb(5,211,170);
+	
+	var genes_colors_line = new Array();
+	genes_colors_line["Gene+"]  = d3.rgb(122, 50, 52);
+	genes_colors_line["Gene-"]  = d3.rgb(28, 61, 113);
+	genes_colors_line["CisReg"] = d3.rgb(74, 19, 74);
+	genes_colors_line["Srna"]   = d3.rgb(5,80,63);
+	genes_colors_line["ASrna"]  = d3.rgb(44,81,38);
+
+	var loading = d3.select("#divd3").append("p").append("font").attr("size","4px").attr("color","green").append("center").text("Loading...");
+
+	var q = queue(1);
+	q.defer(load_network)
+	q.await(drawsvg)
+
+	var network_nodes = new Array();
+	var network_links = new Array();
+	function load_network(callback){
+	d3.tsv("_FileName") 
+		.row(function(d) {
+
+			if(network_nodes.indexOf(d["from"])==-1) network_nodes.push(d["from"]);
+			if(network_nodes.indexOf(d["to"])==-1) network_nodes.push(d["to"]);
+			
+			var idx1 = network_nodes.indexOf(d["from"]);
+			var idx2 = network_nodes.indexOf(d["to"]);
+			
+			network_links.push({"source": idx1, "target": idx2, "value": +d["weight"]});
+		})
+		.get(function() {
+			callback();
+		});
+	}
+	
+	function drawsvg(){
+			
+			loading.remove();
+			
+			var network_nodes_new = new Array(); 
+			for(var i=0;i<network_nodes.length;i++){
+				network_nodes_new.push({"name": network_nodes[i]});
+			}
+			network_nodes = network_nodes_new;
+			
+			var w = window,
+				d = document,
+				e = d.documentElement,
+				g = d.getElementsByTagName('body')[0],
+				x = w.innerWidth || e.clientWidth || g.clientWidth,
+				y = w.innerHeight|| e.clientHeight|| g.clientHeight;
+
+			var height = y-30;
+			var width  = x-30;
+			
+			var svg = d3
+				.select("#divd3")
+				.append("svg")
+				.attr("xmlns", "http://www.w3.org/2000/svg")
+				.attr("version", 1.1)
+				.attr("id", "SVGGraphic")
+				.attr("width", width)
+				.attr("height", height)
+				//.append('svg:g')
+				.call(d3.behavior.zoom().scaleExtent([1, 100]).on("zoom", zoom))
+				.append('svg:g') ;
+			
+			function zoom() {
+				  svg.attr("transform", "translate(" + d3.event.translate[0]*1 + " " +d3.event.translate[1]*1 + ")scale(" + d3.event.scale + ")");
+				 // node_text.style("font-size", size/d3.event.scale+"px")	
+				}
+
+			var force = d3
+				.layout.force()
+				.linkDistance(100)
+				.charge(-300)
+				.size([width,height]);
+
+			force
+				.nodes(network_nodes)
+				.links(network_links)
+				.start();
+				
+			var links = svg
+				.selectAll("links")
+				.data(network_links)
+				.enter()
+				.append("line")
+				.style("stroke", function(d) { if(d.value>0) return "black"; else return "grey";})
+				//.style("stroke-width", function(d) { return Math.abs(d.value); })
+				.style("stroke-width", "2")
+				.attr("title", function(d) { 
+					return d.source.name+" and "+d.target.name+"\n correlation = "+d.value; })
+				.attr("class", "hastitle");
+				
+			var genes = svg
+				.selectAll("genes")
+				.data(network_nodes)
+				.enter()
+				.append("circle")
+				.style("stroke",function(d){ 
+					type = d.name.substring(d.name.indexOf("(")+1, d.name.indexOf(";"))
+					return genes_colors_line[type];
+						})
+				.style("stroke-width","1")
+				.attr("r", circ_r)
+				.style("fill", function(d){ 
+					type = d.name.substring(d.name.indexOf("(")+1, d.name.indexOf(";"))
+					return genes_colors[type];
+						})
+				.attr("title", function(d) { 
+					annotation = d.name.substring(d.name.indexOf("{")+1, d.name.indexOf("}"))
+					return d.name.substring(0,d.name.indexOf("("))+"\n"+annotation; })
+				.attr("class", "hastitle")
+				.call(force.drag);
+				
+			var txt = svg
+				.selectAll("txt")
+				.data(network_nodes)
+				.enter()
+				.append("text")
+				.text(function(d) { 
+					name = d.name.substring(0, d.name.indexOf("("));
+					return name; 
+					})
+				.style("fill",function(d){ 
+					type = d.name.substring(d.name.indexOf("(")+1, d.name.indexOf(";"))
+					return genes_colors_line[type];
+						})
+				.style("font-weight", "bold")
+				.call(force.drag);
+					
+			links.on("mouseover", function(d){d3.select(this).style("stroke-width", "3")});
+			links.on("mouseout", function(d){d3.select(this).style("stroke-width", "2")});
+			
+			genes.on("mouseover", function(d){d3.select(this).style("stroke-width", "3")});
+			genes.on("mouseout", function(d){d3.select(this).style("stroke-width", "1")});
+				
+			d3.select("#divd3")
+			 .select("#SVGGraphic")
+			  .selectAll(".hastitle")
+			  .each(function(d) {d3.select(this).append("svg:title").text(d3.select(this).attr("title"))});
+			  
+			force.on("tick", function() {
+			
+				links
+					.attr("x1", function(d) { 
+						return constraint(d.source.x,0,width-1);})
+					.attr("y1", function(d) {
+						return constraint(d.source.y,0,height-1);})
+					.attr("x2", function(d) { 
+						return constraint(d.target.x,0,width-1);})
+					.attr("y2", function(d) { 
+						return constraint(d.target.y,0,height-1);});
+				
+				genes
+					.attr("cx", function(d) { 
+						return constraint(d.x,0,width-1);})
+					.attr("cy", function(d) { 
+						return constraint(d.y,0,height-1);});
+				
+				txt
+					.attr("x", function(d) { 
+						return constraint(d.x,0,width-1);})
+					.attr("y", function(d) { 
+						return constraint(d.y,0,height-1);});
+						
+			 });
+		
+			 function constraint(v,min,max){
+				return(Math.max(min,Math.min(max,v)));
+			 } 
+			 
+
+			 function zoom() {
+				  svg.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+				}
+
+	}
+
+
+</script>
+
+</html>

@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="bacnet.e4.rap" default="build.jars" basedir=".">
+	
+	<property name="workspaceBacnet" value="/Users/cbecavin/Documents/BACNET/Bacnet-private/"/>
+	<property name="workspaceEclipse" value="/Users/cbecavin/Documents/WorkspaceEclipse/workspaceRAPOxygene/"/>
+	
+	<property name="p2.build.repo" value="file:${buildDirectory}/buildRepo"/>
+	<property name="basews" value="${ws}"/>
+	<property name="baseos" value="${os}"/>
+	<property name="basearch" value="${arch}"/>
+	<property name="basenl" value="${nl}"/>
+	<property name="bundleId" value="bacnet.e4.rap"/>
+	<property name="versionBacnet" value="1.0.0"/>
+	<property name="versionBacnetRap" value="1.0.0"/>
+	<property name="versionJavax" value="1.0.0"/>
+	<property name="bundleVersion" value="1.0.0.201807091129"/>
+	<property name="p2.publishonerror" value="false"/>
+
+	<!-- Compiler settings. -->
+	<property name="javacFailOnError" value="false"/>
+	<property name="javacDebugInfo" value="on"/>
+	<property name="javacVerbose" value="false"/>
+	<property name="logExtension" value=".log"/>
+	<property name="compilerArg" value=""/>
+	<property name="compilation.prereq.log" value="${buildDirectory}/prereqErrors.log"/>
+	<property name="javaVersion" value="1.8"/>
+	<property name="javacSource" value="1.8"/>
+	<property name="javacTarget" value="1.8"/>
+		
+	<condition property="dir_bootclasspath" value="${java.home}/../Classes">
+		<and>
+			<os family="mac"/>
+			<available file="${java.home}/../Classes" type="dir"/>
+		</and>
+	</condition>
+	<property name="dir_bootclasspath" value="${java.home}/lib"/>
+	<path id="path_bootclasspath">
+		<fileset dir="${dir_bootclasspath}">
+			<include name="*.jar"/>
+		</fileset>
+	</path>
+	<property name="bootclasspath" refid="path_bootclasspath"/>
+	<condition property="bundleBootClasspath" value="${JavaSE-}${javaVersion}"	>
+		<isset property="${JavaSE-}${javaVersion}"/>
+	</condition>
+	<condition property="bundleJavacSource" value="${javaVersion}"	>
+		<isset property="${JavaSE-}${javaVersion}"/>
+	</condition>
+	<condition property="bundleJavacTarget" value="${javaVersion}"	>
+		<isset property="${JavaSE-}${javaVersion}"/>
+	</condition>
+	<property name="bundleJavacSource" value="${javacSource}"/>
+	<property name="bundleJavacTarget" value="${javacTarget}"/>
+	<property name="bundleBootClasspath" value="${bootclasspath}"/>
+
+	<!-- Init all project properties. -->
+	<target name="properties" if="eclipse.running" description="Select compiler. Called by Init">
+		<property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
+	</target>
+	
+	<target name="init" depends="properties" description="Init all variables for the build. Called by JavaxMail.gather.bin.parts">
+		<condition property="pluginTemp" value="${buildTempFolder}/plugins"		>
+			<isset property="buildTempFolder"/>
+		</condition>
+		<property name="pluginTemp" value="${basedir}"/>
+		<condition property="build.result.folder" value="${pluginTemp}/bacnet.e4.rap_${bundleVersion}"		>
+			<isset property="buildTempFolder"/>
+		</condition>
+		<property name="build.result.folder" value="${basedir}"/>
+		<property name="temp.folder" value="${basedir}/temp.folder"/>
+		<property name="plugin.destination" value="${basedir}"/>
+		<condition property="p2.publish.parts" value="true"		>
+			<istrue value="${p2.gathering}"/>
+		</condition>
+		<property name="compilation.problem.marker" value="${build.result.folder}/compilation.problem"/>
+		<condition property="compilation.problem.marker.exists" value="true"		>
+			<and>
+			<available file="${compilation.problem.marker}"/>
+			<isfalse value="${p2.publishonerror}"/>
+			</and>
+		</condition>
+	</target>
+
+	<!-- copy all plugins in the war-->
+	<target name="Plugins.jar" description="Copy all .jar needed in the folder">
+		<copy todir="WEB-INF/lib" flatten ="true">
+			<path>
+				<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.equinox.servletbridge_1.3.200.v20160128-1435.jar"/>
+			</path>
+		</copy>
+		<copy todir="WEB-INF/plugins" flatten="true">
+		  	<path>
+			  	<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/javax.annotation_1.2.0.v201602091430.jar"/>
+				<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.osgi_3.12.0.v20170512-1932.JAR"/>
+				<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/javax.inject_1.0.0.v20091030.jar"/>
+				<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.e4.ui.services_1.3.0.v20170307-2032.jar"/>
+				<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/javax.xml_1.3.4.v201005080400.jar"/>
+				<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.osgi.services_3.7.0.v20180223-1712.jar"/>
+				<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.osgi.util_3.5.0.v20180219-1511.jar"/>
+				<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/javax.servlet_3.1.0.v201410161800.jar"/>
+				<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.core.commands_3.9.100.v20180404-1234.jar"/>
+				<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.equinox.common_3.10.0.v20180412-1130.jar"/>
+				<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.e4.core.services_2.1.100.v20180427-1454.jar"/>
+				<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.equinox.preferences_3.7.100.v20180510-1129.jar"/>
+				<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.equinox.registry_3.8.0.v20180426-1327.jar"/>
+				<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.core.jobs_3.10.0.v20180427-1454.jar"/>
+				<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.e4.core.di_1.7.0.v20180427-1454.jar"/>
+				<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.e4.core.di.annotations_1.6.100.v20180427-1454.jar"/>
+				<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.e4.core.contexts_1.7.0.v20180514-1409.jar"/>
+				<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.e4.ui.di_1.2.200.v20180403-0945.jar"/>
+				<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.e4.core.di.extensions.supplier_0.15.100.v20180427-1454.jar"/>
+				<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.e4.core.di.extensions_0.15.100.v20180403-1008.jar"/>
+				<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.e4.ui.model.workbench_2.1.0.v20180429-1333.jar"/>
+				<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.core.runtime_3.14.0.v20180417-0825.jar"/>
+				<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.core.contenttype_3.7.0.v20180426-1644.jar"/>
+				<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.equinox.app_1.3.500.v20171221-2204.jar"/>
+				<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.emf.ecore_2.14.0.v20180529-1144.jar"/>
+				<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.emf.common_2.14.0.v20180527-1134.jar"/>
+				<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.e4.emf.xpath_0.2.100.v20180403-0944.jar"/>
+				<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.apache.commons.jxpath_1.3.0.v200911051830.jar"/>
+				<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.e4.ui.workbench_1.3.0.rap-20171019-1311.jar"/>
+				<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/com.ibm.icu.base_58.2.0.v20170418-1837.jar"/>
+				<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.e4.core.commands_0.11.0.rap-20170515-2145.jar"/>
+				<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.core.expressions_3.6.100.v20180426-1644.jar"/>
+				<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.emf.ecore.change_2.12.0.v20180125-1130.jar"/>
+				<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.emf.ecore.xmi_2.14.0.v20180129-1548.jar"/>
+				<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.rap.filedialog_3.5.0.20180502-1429.jar"/>
+				<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.rap.rwt_3.5.0.20180613-1038.jar"/>
+				<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.rap.fileupload_3.5.0.20180502-1429.jar"/>
+				<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.apache.commons.fileupload_1.3.2.v20170320-2229.jar"/>
+				<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.apache.commons.io_2.2.0.v201405211200.jar"/>
+				<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.rap.jface_3.5.0.20180521-1036.jar"/>
+				<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.e4.ui.workbench.swt_0.13.0.rap-20180116-1250.jar"/>
+				<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.core.databinding_1.6.200.v20180509-1517.jar"/>
+				<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.core.databinding.observable_1.6.200.v20180424-1922.jar"/>
+				<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.core.databinding.property_1.6.200.v20180403-0944.jar"/>
+				<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.e4.ui.bindings_0.11.0.rap-20170515-2145.jar"/>
+				<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.equinox.event_1.4.200.v20180426-0845.jar"/>
+				<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.rap.jface.databinding_3.5.0.20171221-1713.jar"/>
+				<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.e4.ui.workbench.renderers.swt_0.13.0.rap-20170515-2147.jar"/>
+				<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.rap.e4_3.5.0.20180305-1342.jar"/>
+			  	<pathelement path="/home/hubbioit/.p2/pool/plugins/org.junit_4.12.0.v201504281640"/>
+			  	<pathelement path="/home/hubbioit/.p2/pool/plugins/org.hamcrest.core_1.3.0.v201303031735.jar"/>
+			  	<pathelement path="/home/hubbioit/.p2/pool/plugins/org.eclipse.equinox.util_1.1.0.v20180419-0833.jar"/>
+			  	<pathelement path="/home/hubbioit/.p2/pool/plugins/org.eclipse.equinox.launcher_1.5.0.v20180512-1130.jar"/>
+			  	<pathelement path="/home/hubbioit/.p2/pool/plugins/org.eclipse.equinox.http.servletbridge_1.1.0.v20180120-0803.jar"/>
+			  	<pathelement path="/home/hubbioit/.p2/pool/plugins/org.eclipse.equinox.http.servlet_1.5.0.v20180501-1936.jar"/>
+			  	<pathelement path="/home/hubbioit/.p2/pool/plugins/org.eclipse.equinox.http.registry_1.1.500.v20171221-2204.jar"/>
+			  	<pathelement path="/home/hubbioit/.p2/pool/plugins/org.eclipse.equinox.ds_1.5.100.v20171221-2204.jar"/>
+			  	<pathelement path="/home/hubbioit/.p2/pool/plugins/org.eclipse.equinox.console_1.3.0.v20180119-0630.jar"/>
+			  	<pathelement path="/home/hubbioit/.p2/pool/plugins/org.apache.felix.scr_2.0.14.v20180117-1452.jar"/>
+			  	<pathelement path="/home/hubbioit/.p2/pool/plugins/org.apache.felix.gogo.shell_1.0.0.v20170914-1324.jar"/>
+			  	<pathelement path="/home/hubbioit/.p2/pool/plugins/org.apache.felix.gogo.runtime_1.0.6.v20170914-1324.jar"/>
+			  	<pathelement path="/home/hubbioit/.p2/pool/plugins/org.apache.felix.gogo.command_1.0.2.v20170914-1324.jar"/>
+			  	<pathelement path="/home/hubbioit/eclipse-workspacePhoton-RAP-Maven/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.rap.rwt.testfixture_3.5.0.20180502-1429.jar"/>
+			  	<pathelement path="/home/hubbioit/eclipse-workspacePhoton-RAP-Maven/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.rap.rwt.osgi_3.5.0.20180502-1429.jar"/>
+			</path>
+		</copy>
+	</target>
+	
+	<!-- Create Javax.mail jar file -->
+	<target name="JavaxMail.gather.bin.parts" depends="init" if="destination.temp.folder" description="Called by JavaxMail.build.update.jar">
+			<mkdir dir="${destination.temp.folder}/javax.mail_${versionJavax}"/>
+			<copy todir="${destination.temp.folder}/javax.mail_${versionJavax}" failonerror="true" overwrite="true">
+				<fileset dir="${workspaceBacnet}/javax.mail/">
+					<include name="META-INF/"/>
+					<include name="com/"/>
+					<include name="javax/"/>
+				</fileset>
+			</copy>
+			<antcall target="apitools.generation">
+				<param name="projectLocation" value="${workspaceBacnet}javax.mail/"/>
+				<param name="binary.folders" value="${workspaceBacnet}javax.mail"/>
+				<param name="projectName" value="javax.mail_${versionJavax}"/>
+				<param name="target.folder" value="${destination.temp.folder}/javax.mail_${versionJavax}"/>
+			</antcall>
+		</target>
+	
+	<target name="JavaxMail.build.update.jar" description="Create javax.mail.jar">
+		<delete dir="${temp.folder}"/>
+		<mkdir dir="${temp.folder}"/>
+		<antcall target="JavaxMail.gather.bin.parts">
+			<param name="destination.temp.folder" value="${temp.folder}/"/>
+		</antcall>
+		<jar destfile="WEB-INF/plugins/javax.mail_${versionJavax}.jar" basedir="${temp.folder}/javax.mail_${versionJavax}" filesetmanifest="merge"/>
+		<delete dir="${temp.folder}"/>
+	</target>
+	
+	<!-- Create Bacnet jar file. -->
+	<target name="Bacnet.build.update.jar" description="Create bacnet.jar">
+		<delete dir="${temp.folder}"/>
+		<mkdir dir="${temp.folder}"/>
+		<antcall target="Bacnet.build.jars"/>
+		<antcall target="Bacnet.gather.bin.parts">
+			<param name="destination.temp.folder" value="${temp.folder}/"/>
+		</antcall>
+		<jar destfile="WEB-INF/plugins/bacnet_${versionBacnet}.jar" basedir="${temp.folder}/bacnet_${versionBacnet}" filesetmanifest="merge"/>
+		<delete dir="${temp.folder}"/>
+		<delete dir="@dot"/>
+	</target>
+	
+	<target name="Bacnet.@dot" depends="init" unless="@dot" description="Create jar: bacnet.">
+		<delete dir="${build.result.folder}/@dot"/>
+		<mkdir dir="${build.result.folder}/@dot"/>
+		<!-- compile the source code -->
+		<javac destdir="${build.result.folder}/@dot" failonerror="${javacFailOnError}" verbose="${javacVerbose}" debug="${javacDebugInfo}" includeAntRuntime="no" bootclasspath="${bundleBootClasspath}" source="${bundleJavacSource}" target="${bundleJavacTarget}"		>
+			<compilerarg line="${compilerArg}" compiler="${build.compiler}"/>
+			<src path="${workspaceBacnet}/bacnet/"/>
+			<compilerarg value="@${basedir}/javaCompiler...args" compiler="org.eclipse.jdt.core.JDTCompilerAdapter"			/>
+			<compilerarg line="-log &apos;${build.result.folder}/@dot${logExtension}&apos;" compiler="org.eclipse.jdt.core.JDTCompilerAdapter"			/>
+		</javac>
+		<antcall target="Bacnet.checkCompilationResults"/>
+		<!-- Copy necessary resources -->
+		<copy todir="${build.result.folder}/@dot" failonerror="true" overwrite="false">
+			<fileset dir="${workspaceBacnet}/bacnet/">
+				<exclude name="**/*.java"/>
+				<exclude name="**/package.htm*"/>
+				<exclude name="build.properties"/>
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="Bacnet.build.jars" depends="init" description="Compile classes and build nested jars for the plug-in: bacnet.e4.rap.">
+		<delete file="${compilation.problem.marker}" quiet="true"/>
+		<available property="@dot" file="${build.result.folder}/@dot"/>
+		<antcall target="Bacnet.@dot"/>
+	</target>
+
+	<target name="Bacnet.checkCompilationResults" if="compilation.error.occured">
+		<echo file="${compilation.problem.marker}" message="bacnet_${versionBacnet}${line.separator}compilation.error.occured=${compilation.error.occured}"/>
+		<eclipse.logCompileError log="${compilation.prereq.log}" bundle="bacnet_${versionBacnet}">
+		</eclipse.logCompileError>
+	</target>
+	
+	<target name="Bacnet.gather.bin.parts" depends="init" if="destination.temp.folder">
+		<mkdir dir="${destination.temp.folder}/bacnet_${versionBacnet}"/>
+		<copy todir="${destination.temp.folder}/bacnet_${versionBacnet}/bacnet" failonerror="true" overwrite="false">
+			<fileset dir="${build.result.folder}/@dot/bacnet">
+				<include name="**"/>
+			</fileset>
+		</copy>	
+		<copy todir="${destination.temp.folder}/bacnet_${versionBacnet}/org" failonerror="true" overwrite="false">
+			<fileset dir="${build.result.folder}/@dot/org">
+				<include name="**"/>
+			</fileset>
+		</copy>
+		<copy todir="${destination.temp.folder}/bacnet_${versionBacnet}" failonerror="true" overwrite="true">
+			<fileset dir="${workspaceBacnet}/bacnet/">
+				<include name="icons/"/>
+				<include name="META-INF/"/>
+				<include name="plugin.xml"/>
+			</fileset>
+		</copy>
+		<antcall target="apitools.generation">
+			<param name="projectLocation" value="${workspaceBacnet}/bacnet/"/>
+			<param name="binary.folders" value="${workspaceBacnet}/bacnet"/>
+			<param name="projectName" value="bacnet_${versionBacnet}"/>
+			<param name="target.folder" value="${destination.temp.folder}/bacnet_${versionBacnet}"/>
+		</antcall>
+	</target>	
+	
+	
+	
+	<target name="build.update.jar" depends="init" description="Build the plug-in: bacnet.e4.rap for an update site.">
+		<delete dir="${temp.folder}"/>
+		<mkdir dir="${temp.folder}"/>
+		<antcall target="build.jars"/>
+		<antcall target="gather.bin.parts">
+			<param name="destination.temp.folder" value="${temp.folder}/"/>
+		</antcall>
+		<jar destfile="WEB-INF/plugins/bacnet.e4.rap_1.0.0.201807091129.jar" basedir="${temp.folder}/bacnet.e4.rap_1.0.0.201807091129" filesetmanifest="merge"/>
+		<delete dir="${temp.folder}"/>
+	</target>
+	
+	
+	<target name="@dot.nestedJars">
+	</target>
+	<target name="@dot" depends="init,@dot.nestedJars" unless="@dot" description="Create jar: bacnet.e4.rap @dot.">
+		<delete dir="${build.result.folder}/@dot"/>
+		<mkdir dir="${build.result.folder}/@dot"/>
+		<path id="@dot.classpath">
+			<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/javax.annotation_*.jar"/>
+			<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.osgi_3.13.0.v20180409-1500.jar"/>
+			<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/javax.inject_1.0.0.v20091030.jar"/>
+			<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.e4.ui.services_1.3.100.v20180403-0945.jar"/>
+			<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/javax.xml_1.3.4.v201005080400.jar"/>
+			<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.osgi.services_3.7.0.v20180223-1712.jar"/>
+			<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.osgi.util_3.5.0.v20180219-1511.jar"/>
+			<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/javax.servlet_3.1.0.v201410161800.jar"/>
+			<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.core.commands_3.9.100.v20180404-1234.jar"/>
+			<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.equinox.common_3.10.0.v20180412-1130.jar"/>
+			<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.e4.core.services_2.1.100.v20180427-1454.jar"/>
+			<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.equinox.preferences_3.7.100.v20180510-1129.jar"/>
+			<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.equinox.registry_3.8.0.v20180426-1327.jar"/>
+			<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.core.jobs_3.10.0.v20180427-1454.jar"/>
+			<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.e4.core.di_1.7.0.v20180427-1454.jar"/>
+			<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.e4.core.di.annotations_1.6.100.v20180427-1454.jar"/>
+			<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.e4.core.contexts_1.7.0.v20180514-1409.jar"/>
+			<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.e4.ui.di_1.2.200.v20180403-0945.jar"/>
+			<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.e4.core.di.extensions.supplier_0.15.100.v20180427-1454.jar"/>
+			<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.e4.core.di.extensions_0.15.100.v20180403-1008.jar"/>
+			<pathelement path="../bacnet/bin/"/>
+			<pathelement path="../bacnet/@dot"/>
+			<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.e4.ui.model.workbench_2.1.0.v20180429-1333.jar"/>
+			<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.core.runtime_3.14.0.v20180417-0825.jar"/>
+			<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.core.contenttype_3.7.0.v20180426-1644.jar"/>
+			<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.equinox.app_1.3.500.v20171221-2204.jar"/>
+			<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.emf.ecore_2.14.0.v20180529-1144.jar"/>
+			<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.emf.common_2.14.0.v20180527-1134.jar"/>
+			<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.e4.emf.xpath_0.2.100.v20180403-0944.jar"/>
+			<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.apache.commons.jxpath_1.3.0.v200911051830.jar"/>
+			<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.e4.ui.workbench_1.3.0.rap-20171019-1311.jar"/>
+			<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/com.ibm.icu.base_58.2.0.v20170418-1837.jar"/>
+			<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.e4.core.commands_0.11.0.rap-20170515-2145.jar"/>
+			<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.core.expressions_3.6.100.v20180426-1644.jar"/>
+			<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.emf.ecore.change_2.12.0.v20180125-1130.jar"/>
+			<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.emf.ecore.xmi_2.14.0.v20180129-1548.jar"/>
+			<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.rap.filedialog_3.5.0.20180502-1429.jar"/>
+			<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.rap.rwt_3.5.0.20180613-1038.jar"/>
+			<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.rap.fileupload_3.5.0.20180502-1429.jar"/>
+			<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.apache.commons.fileupload_1.3.2.v20170320-2229.jar"/>
+			<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.apache.commons.io_2.2.0.v201405211200.jar"/>
+			<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.rap.jface_3.5.0.20180521-1036.jar"/>
+			<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.e4.ui.workbench.swt_0.13.0.rap-20180116-1250.jar"/>
+			<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.core.databinding_1.6.200.v20180509-1517.jar"/>
+			<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.core.databinding.observable_1.6.200.v20180424-1922.jar"/>
+			<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.core.databinding.property_1.6.200.v20180403-0944.jar"/>
+			<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.e4.ui.bindings_0.11.0.rap-20170515-2145.jar"/>
+			<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.equinox.event_1.4.200.v20180426-0845.jar"/>
+			<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.rap.jface.databinding_3.5.0.20171221-1713.jar"/>
+			<pathelement path="../javax.mail"/>
+			<pathelement path="../javax.mail/@dot"/>
+			<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.e4.ui.workbench.renderers.swt_0.13.0.rap-20170515-2147.jar"/>
+			<pathelement path="${workspaceEclipse}/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.rap.e4_3.5.0.20180305-1342.jar"/>
+		</path>
+		<!-- compile the source code -->
+		<javac destdir="${build.result.folder}/@dot" failonerror="${javacFailOnError}" verbose="${javacVerbose}" debug="${javacDebugInfo}" includeAntRuntime="no" bootclasspath="${bundleBootClasspath}" source="${bundleJavacSource}" target="${bundleJavacTarget}"		>
+			<compilerarg line="${compilerArg}" compiler="${build.compiler}"/>
+			<classpath refid="@dot.classpath" />
+			<src path="src/"			/>
+			<compilerarg value="@${basedir}/javaCompiler...args" compiler="org.eclipse.jdt.core.JDTCompilerAdapter"			/>
+			<compilerarg line="-log &apos;${build.result.folder}/@dot${logExtension}&apos;" compiler="org.eclipse.jdt.core.JDTCompilerAdapter"			/>
+		</javac>
+		<antcall target="checkCompilationResults"/>
+		<!-- Copy necessary resources -->
+		<copy todir="${build.result.folder}/@dot" failonerror="true" overwrite="false">
+			<fileset dir="src/">
+				<exclude name="**/*.java"/>
+				<exclude name="**/package.htm*"/>
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="build.jars" depends="init" description="Compile classes and build nested jars for the plug-in: bacnet.e4.rap.">
+		<delete file="${compilation.problem.marker}" quiet="true"/>
+		<available property="@dot" file="${build.result.folder}/@dot"/>
+		<antcall target="@dot"/>
+	</target>
+
+	<target name="checkCompilationResults" if="compilation.error.occured">
+		<echo file="${compilation.problem.marker}" message="bacnet.e4.rap_1.0.0.201807091129${line.separator}compilation.error.occured=${compilation.error.occured}"/>
+		<eclipse.logCompileError log="${compilation.prereq.log}" bundle="bacnet.e4.rap_1.0.0.201807091129">
+			<include name="/home/hubbioit/eclipse-workspacePhoton-RAP-Maven/Bacnet-private/bacnet/compilation.problem"/>
+			<include name="${pluginTemp}/bacnet_1.0.0.201807091129/compilation.problem"/>
+			<include name="/home/hubbioit/eclipse-workspacePhoton-RAP-Maven/Bacnet-private/javax.mail/compilation.problem"/>
+			<include name="${pluginTemp}/javax.mail_1.0.0/compilation.problem"/>
+		</eclipse.logCompileError>
+	</target>
+	<target name="gather.bin.parts" depends="init" if="destination.temp.folder">
+		<mkdir dir="${destination.temp.folder}/bacnet.e4.rap_1.0.0.201807091129"/>
+		<copy todir="${destination.temp.folder}/bacnet.e4.rap_1.0.0.201807091129" failonerror="true" overwrite="false">
+			<fileset dir="${build.result.folder}/@dot">
+				<include name="**"/>
+			</fileset>
+		</copy>
+		<copy todir="${destination.temp.folder}/bacnet.e4.rap_1.0.0.201807091129" failonerror="true" overwrite="true">
+			<fileset dir="${basedir}">
+				<include name="META-INF/"/>
+				<include name="OSGI-INF/"/>
+				<include name="Application.e4xmi"/>
+				<include name="src/d3.js/"/>
+				<include name="plugin.xml"/>
+				<include name="theme/"/>
+			</fileset>
+		</copy>
+		<eclipse.versionReplacer path="${destination.temp.folder}/bacnet.e4.rap_1.0.0.201807091129" version="1.0.0.201807091129"/>
+		<antcall target="apitools.generation">
+			<param name="projectLocation" value="${basedir}"/>
+			<param name="binary.folders" value="${build.result.folder}/@dot"/>
+			<param name="projectName" value="${bundleId}_${bundleVersion}"/>
+			<param name="target.folder" value="${destination.temp.folder}/bacnet.e4.rap_1.0.0.201807091129"/>
+		</antcall>
+	</target>
+	<target name="cleanBeginning" depends="init" description="Clean the plug-in: bacnet.e4.rap of all the zips, jars and logs created.">
+		<delete dir="${build.result.folder}/@dot"/>
+		<delete file="${build.result.folder}/src.zip"/>
+		<delete file="${plugin.destination}/bacnet.e4.rap_1.0.0.201807091129.jar"/>
+		<delete file="${plugin.destination}/bacnet.e4.rap_1.0.0.201807091129.zip"/>
+		<delete dir="${temp.folder}"/>
+		<delete file="${compilation.problem.marker}" quiet="true"/>
+		<delete dir="WEB-INF/lib"/>
+		<delete dir="WEB-INF/plugins"/>
+		<delete file="@dot.log"/>
+		<delete dir="dist"/>
+	</target>
+	<target name="cleanAfterWar" depends="init" description="Clean the plug-in: bacnet.e4.rap of all the zips, jars and logs created.">
+			<delete dir="${build.result.folder}/@dot"/>
+			<delete file="${build.result.folder}/src.zip"/>
+			<delete file="${plugin.destination}/bacnet.e4.rap_1.0.0.201807091129.jar"/>
+			<delete file="${plugin.destination}/bacnet.e4.rap_1.0.0.201807091129.zip"/>
+			<delete dir="${temp.folder}"/>
+			<delete file="${compilation.problem.marker}" quiet="true"/>
+			<delete dir="WEB-INF/lib"/>
+			<delete dir="WEB-INF/plugins"/>
+			<delete file="@dot.log"/>
+		</target>
+	<target name="apitools.generation" if="generateAPIDescription">
+		<apitooling.apigeneration  projectName="${projectName}" project="${projectLocation}" binary="${binary.folders}" target="${target.folder}" extramanifests="${extraManifests}" allownonapiproject="${allowNonApiProject}"		/>
+	</target>
+	<target name="war">
+		<war destfile="dist/bacnete4RAP.war" webxml="WEB-INF/web.xml">
+		    <webinf dir="WEB-INF"/>
+		</war> 
+	</target>
+</project>
