@@ -34,12 +34,13 @@ public class Tiling extends ExpressionData {
     private static final long serialVersionUID = -7904822758820760928L;
 
     public static String PROBES_PATH = Database.getDATA_PATH() + "StreamingData" + File.separator + "probeTiling.data";
+    public static String PROBES_PATH_2 = OmicsData.PATH_TILING_NORM + File.separator + "probeTiling.data";
+    
     public static String EXTENSION = ".gr";
     private transient TreeMap<Integer, Integer> probes;
 
     public Tiling() {
         setType(TypeData.Tiling);
-        setProbesTiling();
     }
 
     public Tiling(String name) {
@@ -51,33 +52,7 @@ public class Tiling extends ExpressionData {
         setRead(new boolean[getLength()]);
     }
 
-    public void setProbesTiling() {
-        if (probes != null) {
-            if (probes.size() == 0) {
-                probes = getProbesTiling();
-            }
-        }
-    }
-
-    public static TreeMap<Integer, Integer> getProbesTiling() {
-        TreeMap<Integer, Integer> probes = new TreeMap<Integer, Integer>();
-        String fileName = Tiling.PROBES_PATH;
-        try {
-            DataInputStream in = new DataInputStream(new BufferedInputStream(new FileInputStream(fileName)));
-            int i = 0;
-            while (true) {
-                probes.put(in.readInt(), i);
-                i++;
-            }
-        } catch (EOFException e1) {
-            System.err.println("Probe tiling has been read");
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        return probes;
-    }
-
+    
     /**
      * Transform a <code>Tiling</code> into an <code>ExpressionMatrix</code>
      * 
@@ -146,6 +121,7 @@ public class Tiling extends ExpressionData {
      * @return
      */
     public int getPosition(int bpPosition) {
+    	
         int lastProbe = probes.lastKey();
         if (bpPosition < lastProbe)
             return probes.get(probes.ceilingKey(bpPosition));
@@ -348,6 +324,8 @@ public class Tiling extends ExpressionData {
             BioCondition bioCond = BioCondition.getBioCondition(bioCondName);
             for (Tiling tiling : bioCond.getTilings()) {
                 tiling.read();
+                tiling.setProbes(Database.getInstance().getProbesTiling());
+                
                 // add to list
                 if (bioConds.containsKey(bioCondName)) {
                     bioConds.get(bioCondName).add(tiling);
@@ -375,7 +353,8 @@ public class Tiling extends ExpressionData {
             BioCondition bioCond = BioCondition.getBioCondition(bioCondName);
             for (Tiling tiling : bioCond.getTilings()) {
                 tiling.read();
-
+                tiling.setProbes(Database.getInstance().getProbesTiling());
+                
                 // add to list
                 if (bioConds.containsKey(bioCondName)) {
                     bioConds.get(bioCondName).add(tiling);
@@ -389,6 +368,8 @@ public class Tiling extends ExpressionData {
             bioCond = BioCondition.getBioCondition(bioCondName);
             for (Tiling tiling : bioCond.getTilings()) {
                 tiling.read();
+                tiling.setProbes(Database.getInstance().getProbesTiling());
+                
                 // add to list
                 if (bioConds.containsKey(bioCondName)) {
                     bioConds.get(bioCondName).add(tiling);

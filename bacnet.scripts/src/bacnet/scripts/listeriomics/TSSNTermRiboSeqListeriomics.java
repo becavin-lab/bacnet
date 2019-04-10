@@ -18,7 +18,7 @@ import bacnet.utils.VectorUtils;
 
 /**
  * List of methods to process TSS, TermSeq, and RiboSeq of Listeriomics
- *  
+ * Some TSS and NTerm lists were provided in tab-delimited format. Some methods are provided here to construct .wig files
  *
  * @author Christophe Bécavin
  *
@@ -33,7 +33,10 @@ public class TSSNTermRiboSeqListeriomics {
     public static String PATH_TermSeq_EGDe = ExpressionData.PATH_NGS_RAW + "TermSeq_data_EGDe.txt";
     public static String[] TermSeq_HEADERS = {"EGDe_37C_TermSeq"};
 
-
+    
+    /**
+     * Run createListeriomicsTSSTermSeq() to construct wig files from tab-delimited files
+     */
     public static void run() {
 
         // RiboSeq - nothing to do wig files are easy to download

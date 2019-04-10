@@ -445,7 +445,7 @@ public class ComparisonsCreation {
                     for (String bioCondName : bioCondsTemp.keySet()) {
                         for (Tiling tilingTemp : bioCondsTemp.get(bioCondName)) {
                             if (sequence.isStrand() && tilingTemp.getName().contains("+")) {
-                                double[] value = tilingTemp.get(sequence.getBegin(), sequence.getEnd(), true);
+                            	double[] value = tilingTemp.get(sequence.getBegin(), sequence.getEnd(), true);
                                 values.put(bioCondName, value);
                             } else if (!sequence.isStrand() && tilingTemp.getName().contains("-")) {
                                 double[] value = tilingTemp.get(sequence.getBegin(), sequence.getEnd(), true);

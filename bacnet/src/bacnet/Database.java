@@ -472,18 +472,22 @@ public class Database {
         return statTable;
     }
 
+    /**
+     * Read probes for Tiling in Tiling.PROBES_PATH
+     * @return
+     */
     public TreeMap<Integer, Integer> getProbesTiling() {
         if (probesTiling.size() == 0) {
-            String fileName = Tiling.PROBES_PATH;
+            File file = new File(Tiling.PROBES_PATH);
             try {
-                DataInputStream in = new DataInputStream(new BufferedInputStream(new FileInputStream(fileName)));
-                int i = 0;
-                while (true) {
-                    probesTiling.put(in.readInt(), i);
-                    i++;
-                }
-            } catch (EOFException e1) {
-                System.err.println("Probe tiling has been read");
+	                DataInputStream in = new DataInputStream(new BufferedInputStream(new FileInputStream(Tiling.PROBES_PATH)));
+	                int i = 0;
+	                while (true) {
+	                	probesTiling.put(in.readInt(), i);
+	                    i++;
+	                }
+	        } catch (EOFException e) {
+	            	System.err.println("Probe Tiling has been read");
             } catch (IOException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
@@ -496,19 +500,24 @@ public class Database {
         this.probesTiling = probesTiling;
     }
 
+    /**
+     * Read probes for GExpression in GeneExpression.PROBES_PATH
+     * @return
+     */
     public TreeMap<String, Integer> getProbesGExpression() {
         if (probesGExpression.size() == 0) {
-            String fileName = GeneExpression.PROBES_PATH;
+            File file = new File(GeneExpression.PROBES_PATH);
             try {
-                DataInputStream in = new DataInputStream(new BufferedInputStream(new FileInputStream(fileName)));
-                int i = 0;
-                while (true) {
-                    probesGExpression.put(in.readUTF(), i);
-                    i++;
-                }
-
-            } catch (EOFException e1) {
-                System.err.println("Probe GExpression has been read");
+	            if(file.exists()) { 
+	                DataInputStream in = new DataInputStream(new BufferedInputStream(new FileInputStream(GeneExpression.PROBES_PATH)));
+	                int i = 0;
+	                while (true) {
+	                    probesGExpression.put(in.readUTF(), i);
+	                    i++;
+	                }
+	            }
+	        } catch (EOFException e) {
+	            	System.err.println("Probe GExpression has been read");
             } catch (IOException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
