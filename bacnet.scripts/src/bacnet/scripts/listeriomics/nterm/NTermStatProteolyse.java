@@ -9,19 +9,19 @@ import bacnet.reader.TabDelimitedTableReader;
 
 /**
  * A list of methods to assess the quantity of proteolysis on the peptides
+ * 
  * @author UIBC
  *
  */
 public class NTermStatProteolyse {
 
-	public static String PATH = NTermUtils.getPATH()+"Proteolyse/";
-	
-	
-	public static void run(String massSpecName){
+	public static String PATH = NTermUtils.getPATH() + "Proteolyse/";
+
+	public static void run(String massSpecName) {
 		NTermData massSpec = NTermData.load(massSpecName);
-		System.out.println("nb Nterm: "+massSpec.getElements().size());
+		System.out.println("nb Nterm: " + massSpec.getElements().size());
 		ArrayList<TIS> proteolyses = massSpec.getTisList();
-		saveProteolyses(proteolyses,PATH+"TIS list.txt");
+		saveProteolyses(proteolyses, PATH + "TIS list.txt");
 //		numberElements(proteolyses);
 //		proteolyses = removeMultiModif(proteolyses);
 //		numberElements(proteolyses);
@@ -33,7 +33,7 @@ public class NTermStatProteolyse {
 //		saveProteolyses(proteolysesAtis,PATH+"aTIS proteolyse.txt");
 //		cTerminalRagging(proteolyses);
 	}
-	
+
 //	public static void cTerminalRagging(ArrayList<TIS> proteolyses){
 //	
 //		System.out.println("Nb group: "+proteolyses.size());
@@ -60,7 +60,7 @@ public class NTermStatProteolyse {
 //		System.out.println("NB of group of peptides: "+proteolyses.size()+"  nb of group of peptides containing perfect peptide (start with an M, end with an R): "+countRealaTIS);
 //		
 //	}
-	
+
 //	/**
 //	 * Remove group of peptides containing NTerm with exactly the same sequence, but different modification
 //	 * @param proteolyses
@@ -131,18 +131,22 @@ public class NTermStatProteolyse {
 //		}
 //		System.out.println("NB elements: "+number);
 //	}
-	
+
 	/**
 	 * Save list of protoelyses hashmap
+	 * 
 	 * @param proteolyses
 	 */
-	public static void saveProteolyses(ArrayList<TIS> tiss,String fileName){
+	public static void saveProteolyses(ArrayList<TIS> tiss, String fileName) {
 		ArrayList<String> results = new ArrayList<String>();
 		String header = "TIS name\tRef sequence\tList of modification\tList of overlaps\tRef peptide\t# peptides\t# spectra";
 		results.add(header);
-		
-		for(TIS tisnTerm : tiss){
-			String row = tisnTerm.getName()+"\t"+tisnTerm.getRefSequence()+"\t"+tisnTerm.getModifsString()+"\t"+tisnTerm.getOverlapsString()+"\t"+tisnTerm.getnTermRef().getName()+"\t"+tisnTerm.getnTerms().size()+"\t"+tisnTerm.getnTermsString()+"\t"+tisnTerm.getTotalSpectra();
+
+		for (TIS tisnTerm : tiss) {
+			String row = tisnTerm.getName() + "\t" + tisnTerm.getRefSequence() + "\t" + tisnTerm.getModifsString()
+					+ "\t" + tisnTerm.getOverlapsString() + "\t" + tisnTerm.getnTermRef().getName() + "\t"
+					+ tisnTerm.getnTerms().size() + "\t" + tisnTerm.getnTermsString() + "\t"
+					+ tisnTerm.getTotalSpectra();
 			results.add(row);
 //			for(NTerm nTermTemp : tisnTerm.getnTerms()){
 //				row = tisnTerm.getName()+"\t"+nTermTemp.getSequencePeptide()+"\t"+nTermTemp.getTypeModif()+"\t"+nTermTemp.getOverlap()+"\t"+nTermTemp.getSpectra()+"\t"+nTermTemp.getTypeOverlap()+"\t"+nTermTemp.getName();

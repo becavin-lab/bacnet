@@ -20,55 +20,52 @@ public class BlastWizard extends Wizard {
 
 	private BlastQueryPage page;
 	private BlastGenomeSelectionPage page2;
-	//private BlastParametersPage page3;
-	
+	// private BlastParametersPage page3;
+
 	private Shell shell;
 	private EPartService partService;
-	
-	public BlastWizard(Shell parentShell,EPartService partService) {
+
+	public BlastWizard(Shell parentShell, EPartService partService) {
 		this.shell = parentShell;
 		this.partService = partService;
 		setWindowTitle("Blast wizard");
 		page = new BlastQueryPage(shell);
 		page2 = new BlastGenomeSelectionPage();
-		//page3 = new BlastParametersPage();
+		// page3 = new BlastParametersPage();
 	}
 
 	@Override
 	public void addPages() {
 		addPage(page);
 		addPage(page2);
-		//addPage(page3);
+		// addPage(page3);
 	}
 
 	@Override
 	public boolean performFinish() {
 		// read the query sequence and test if it is a fasta file
-		String fileName = Database.getTEMP_PATH()+"tempSeq.txt";
-		
-		
-		
-		FileUtils.saveText(page.getTextQuery().getText(),fileName);
-		try{
+		String fileName = Database.getTEMP_PATH() + "tempSeq.txt";
+
+		FileUtils.saveText(page.getTextQuery().getText(), fileName);
+		try {
 			int type = 0;
 //			if(page.btnProteinBlast.getSelection()) type=1;
 //			if(page.btnBlastx.getSelection()) type = 2;
 			runBlast(type);
-			ResourceManager.openView(partService, BlastResultView.ID, BlastResultView.ID+Math.random());
-					
-		}catch(CompoundNotFoundError e1){
+			ResourceManager.openView(partService, BlastResultView.ID, BlastResultView.ID + Math.random());
+
+		} catch (CompoundNotFoundError e1) {
 			System.err.println("The query sequence cannot be read");
 			return true;
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}		
-		
+		}
+
 		return true;
 	}
 
-	public void runBlast(int typeT){
+	public void runBlast(int typeT) {
 		final int type = typeT;
 		ProgressMonitorDialog dialog = new ProgressMonitorDialog(shell);
 		try {
@@ -123,5 +120,5 @@ public class BlastWizard extends Wizard {
 			System.err.println("Problem in BLast");
 		}
 	}
-		
+
 }

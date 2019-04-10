@@ -25,21 +25,21 @@ package org.biojava3.core.sequence;
 
 /**
  * Used to map the start codon feature on a gene
+ * 
  * @author Scooter Willis
  */
 public class StartCodonSequence extends DNASequence {
-public DNASequence parentGeneSequence = null;
+	public DNASequence parentGeneSequence = null;
 
+	public StartCodonSequence(TranscriptSequence parentGeneSequence, int begin, int end) {
+		this.parentGeneSequence = parentGeneSequence;
+		setBioBegin(begin);
+		setBioEnd(end);
+	}
 
-    public StartCodonSequence(TranscriptSequence parentGeneSequence, int begin, int end){
-        this.parentGeneSequence = parentGeneSequence;
-        setBioBegin(begin);
-        setBioEnd(end);
-    }
-
-        @Override
-    public int getLength() {
-        return Math.abs(this.getBioEnd() - this.getBioBegin()) + 1;
-    }
+	@Override
+	public int getLength() {
+		return Math.abs(this.getBioEnd() - this.getBioBegin()) + 1;
+	}
 
 }

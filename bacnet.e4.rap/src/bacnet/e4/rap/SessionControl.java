@@ -39,187 +39,186 @@ import bacnet.views.CoExprNetworkView;
 
 public class SessionControl {
 
+	@Inject
+	@Named(IServiceConstants.ACTIVE_SHELL)
+	Shell shell;
 
+	public SessionControl() {
+	}
 
-    @Inject
-    @Named(IServiceConstants.ACTIVE_SHELL)
-    Shell shell;
+	/**
+	 * Performed all initialisation necessary at the running of the webapp<br>
+	 * Is runned in BannerView.createPartControl()
+	 * 
+	 * @param partService
+	 * @param modelService
+	 * @param shell
+	 */
+	public static void initBacnetApp(EPartService partService, EModelService modelService, Shell shell) {
+		Database databaseInit = Database.getInstance();
+		databaseInit.setProjectName(BasicApplication.projectName);
+		if (BasicApplication.projectName.equals(Database.BACNET)) {
+			databaseInit.setInitView(InitViewBacnet.ID);
+			System.out.println(InitViewBacnet.ID);
+			databaseInit.setLogo("icons/ToolBar/LogoBacnet.png");
 
-    public SessionControl() {}
+		} else {
+			System.out.println("Test" + BasicApplication.projectName);
 
-    /**
-     * Performed all initialisation necessary at the running of the webapp<br>
-     * Is runned in BannerView.createPartControl()
-     * 
-     * @param partService
-     * @param modelService
-     * @param shell
-     */
-    public static void initBacnetApp(EPartService partService, EModelService modelService, Shell shell) {
-        Database databaseInit = Database.getInstance();
-        databaseInit.setProjectName(BasicApplication.projectName);
-        if(BasicApplication.projectName.equals(Database.BACNET)) {
-        	databaseInit.setInitView(InitViewBacnet.ID);
-            System.out.println(InitViewBacnet.ID);
-            databaseInit.setLogo("icons/ToolBar/LogoBacnet.png");
-            
-        }else {
-        	System.out.println("Test" + BasicApplication.projectName);
-            
-        	databaseInit.initDatabase(shell);
-        }
-        
-        /*
-         * Remove persistence in the PartStack Need to be done because -clearPersistedState doesn't work
-         * anymore
-         */
-        for (MPart part : partService.getParts()) {
-            // System.out.println("Part: "+part.getElementId());
-            if (!part.getElementId().equals(Database.getInstance().getInitView())
-                    && !part.getElementId().equals(BannerView.ID)) {
-                partService.hidePart(part, true);
-            }
-        }
-        
-        partService.showPart(databaseInit.getInitView(), PartState.ACTIVATE);
-        //partService.showPart(databaseInit.getInitView(), PartState.ACTIVATE);
-        NavigationManagement.parseInitURL(partService);
-        NavigationManagement.registerServiceAndNavigationTab(partService);
-        SessionControl.registerClosingUIsession(partService, modelService, shell);
-        // SessionControl.setExitConfirmation();
+			databaseInit.initDatabase(shell);
+		}
 
-        // run tests
-        TestPart.runTests();
+		/*
+		 * Remove persistence in the PartStack Need to be done because
+		 * -clearPersistedState doesn't work anymore
+		 */
+		for (MPart part : partService.getParts()) {
+			// System.out.println("Part: "+part.getElementId());
+			if (!part.getElementId().equals(Database.getInstance().getInitView())
+					&& !part.getElementId().equals(BannerView.ID)) {
+				partService.hidePart(part, true);
+			}
+		}
 
-    }
+		partService.showPart(databaseInit.getInitView(), PartState.ACTIVATE);
+		// partService.showPart(databaseInit.getInitView(), PartState.ACTIVATE);
+		NavigationManagement.parseInitURL(partService);
+		NavigationManagement.registerServiceAndNavigationTab(partService);
+		SessionControl.registerClosingUIsession(partService, modelService, shell);
+		// SessionControl.setExitConfirmation();
 
-    public void testApplicationContext(EPartService partService) {
-        String sessionInfo = "";
-        sessionInfo = RWT.getApplicationContext().toString() + "\n";
-        sessionInfo += RWT.getClient().toString() + "\n";
-        sessionInfo += RWT.getUISession().toString() + "\n";
-        Genome genome = Genome.loadEgdeGenome();
-        sessionInfo += genome.toString();
-        // sessionInfo += RWT.getUISession().getHttpSession().toString()+"\n";
-        System.out.println(sessionInfo);
+		// run tests
+		TestPart.runTests();
 
-        MessageDialog.openInformation(shell, "Session info", sessionInfo);
-    }
+	}
 
-    public static void setExitConfirmation() {
-        ExitConfirmation service = RWT.getClient().getService(ExitConfirmation.class);
-        service.setMessage("Do you really want to leave Listeriomics ?");
-    }
+	public void testApplicationContext(EPartService partService) {
+		String sessionInfo = "";
+		sessionInfo = RWT.getApplicationContext().toString() + "\n";
+		sessionInfo += RWT.getClient().toString() + "\n";
+		sessionInfo += RWT.getUISession().toString() + "\n";
+		Genome genome = Genome.loadEgdeGenome();
+		sessionInfo += genome.toString();
+		// sessionInfo += RWT.getUISession().getHttpSession().toString()+"\n";
+		System.out.println(sessionInfo);
 
-    public static void registerClosingUIsession(EPartService partService, EModelService modelService, Shell shell) {
+		MessageDialog.openInformation(shell, "Session info", sessionInfo);
+	}
 
+	public static void setExitConfirmation() {
+		ExitConfirmation service = RWT.getClient().getService(ExitConfirmation.class);
+		service.setMessage("Do you really want to leave Listeriomics ?");
+	}
 
-        RWT.getUISession().addUISessionListener(new UISessionListener() {
-            /**
-             * 
-             */
-            private static final long serialVersionUID = 4774888041292630588L;
+	public static void registerClosingUIsession(EPartService partService, EModelService modelService, Shell shell) {
 
-            public void beforeDestroy(UISessionEvent event) {
+		RWT.getUISession().addUISessionListener(new UISessionListener() {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 4774888041292630588L;
 
-                for (MPart part : partService.getParts()) {
-                    // System.out.println(part.getElementId());
-                    if (part.getObject() != null) {
-                        // System.out.println("Cleaning - "+part);
-                        // System.out.println(part.getObject());
-                        if (part.getElementId().contains("GenomeTranscriptomeView")) {
-                            GenomeTranscriptomeView view = (GenomeTranscriptomeView) part.getObject();
-                            TracksComposite trackComposite = null;
-                            view.setTracksComposite(trackComposite);
-                            Track track = view.getTrack();
-                            track.getChromosome().clearChromosome();
-                            track.getDatas().getBioConditionHashMaps().clear();
-                            track.getDatas().setDisplay(new boolean[0]);
-                            view.setTrack(track);
-                            // partService.hidePart(part, true);
-                        } else if (part.getElementId().contains("CoExprNetworkView")) {
-                            CoExprNetworkView view = (CoExprNetworkView) part.getObject();
-                            view.setGenome(null);
-                            view.setGeneralNetwork(new Network());
-                            view.setFilteredNetwork(new Network());
-                        } else if (part.getElementId().contains("GenomicsView")) {
-                            GenomicsView view = (GenomicsView) part.getObject();
-                            view.setBioCondsArray(new String[0][0]);
-                            view.setBioCondsToDisplay(new ArrayList<>());
-                            view.setColumnNames(new ArrayList<>());
-                        } else if (part.getElementId().contains("bacnet.TranscriptomicsView")) {
-                            TranscriptomicsView view = (TranscriptomicsView) part.getObject();
-                            view.setBioConds(new ArrayList<>());
-                            view.setBioCondsArray(new String[0][0]);
-                            view.setBioCondsToDisplay(new ArrayList<>());
-                            view.setColumnNames(new ArrayList<>());
-                        } else if (part.getElementId().contains("bacnet.ProteomicsView")) {
-                            ProteomicsView view = (ProteomicsView) part.getObject();
-                            view.setBioConds(new ArrayList<>());
-                            view.setBioCondsArray(new String[0][0]);
-                            view.setBioCondsToDisplay(new ArrayList<>());
-                            view.setColumnNames(new ArrayList<>());
-                        } else if (part.getElementId().contains("SrnaView")) {
-                            SrnaView view = (SrnaView) part.getObject();
-                            view.setArrayDataList(new String[0][0]);
-                            view.setSeq(new Srna());
-                            view.setListSrnas(new ArrayList<>());
-                        } else if (part.getElementId().contains("GeneView")) {
-                            GeneView view = (GeneView) part.getObject();
-                            view.setArrayDataList(new String[0][0]);
-                            view.setArrayGeneToLocalization(new String[0][0]);
-                            view.setArrayProteomeList(new String[0][0]);
-                            view.setBioConds(new ArrayList<>());
-                            view.setBioCondsArray(new String[0][0]);
-                            view.setBioCondsToDisplay(new ArrayList<>());
-                            view.getGenome().clearGenome();
-                            view.setArrayGeneToLocalization(new String[0][0]);
-                        } else if (part.getElementId().contains("SrnaSummaryView")) {
-                            SrnaSummaryView view = (SrnaSummaryView) part.getObject();
-                            view.setArray(new String[0][0]);
-                        } else if (part.getElementId().contains("bacnet.HeatMapTranscriptomicsView")) {
-                            HeatMapTranscriptomicsView view = (HeatMapTranscriptomicsView) part.getObject();
-                            view.getTableComposite().setMatrix(new ExpressionMatrix());
-                            view.getTableComposite().setMatrixDisplayed(new ExpressionMatrix());
-                            view.getTableComposite().getExcludeColumn().clear();
-                            view.getTableComposite().getExcludeRow().clear();
-                            view.getTableComposite().getColumnNames().clear();
-                            view.getTableComposite().setColorMapperList(new ColorMapperList());
-                        } else if (part.getElementId().contains("bacnet.HeatMapProteomicsView")) {
-                            HeatMapProteomicsView view = (HeatMapProteomicsView) part.getObject();
-                            view.getTableComposite().setMatrix(new ExpressionMatrix());
-                            view.getTableComposite().setMatrixDisplayed(new ExpressionMatrix());
-                            view.getTableComposite().getExcludeColumn().clear();
-                            view.getTableComposite().getExcludeRow().clear();
-                            view.getTableComposite().getColumnNames().clear();
-                            view.getTableComposite().setColorMapperList(new ColorMapperList());
-                        }
-                    }
-                }
-                System.out.println("Session closing");
-                // System.out.println("Singleton ID: "+SingletonUtil.getSessionInstance(Database.class));
-                Database database = Database.getInstance();
-                database.cleanUpDatabase();
-                // System.out.println(database.toString());
+			public void beforeDestroy(UISessionEvent event) {
 
-            }
-        });
-    }
+				for (MPart part : partService.getParts()) {
+					// System.out.println(part.getElementId());
+					if (part.getObject() != null) {
+						// System.out.println("Cleaning - "+part);
+						// System.out.println(part.getObject());
+						if (part.getElementId().contains("GenomeTranscriptomeView")) {
+							GenomeTranscriptomeView view = (GenomeTranscriptomeView) part.getObject();
+							TracksComposite trackComposite = null;
+							view.setTracksComposite(trackComposite);
+							Track track = view.getTrack();
+							track.getChromosome().clearChromosome();
+							track.getDatas().getBioConditionHashMaps().clear();
+							track.getDatas().setDisplay(new boolean[0]);
+							view.setTrack(track);
+							// partService.hidePart(part, true);
+						} else if (part.getElementId().contains("CoExprNetworkView")) {
+							CoExprNetworkView view = (CoExprNetworkView) part.getObject();
+							view.setGenome(null);
+							view.setGeneralNetwork(new Network());
+							view.setFilteredNetwork(new Network());
+						} else if (part.getElementId().contains("GenomicsView")) {
+							GenomicsView view = (GenomicsView) part.getObject();
+							view.setBioCondsArray(new String[0][0]);
+							view.setBioCondsToDisplay(new ArrayList<>());
+							view.setColumnNames(new ArrayList<>());
+						} else if (part.getElementId().contains("bacnet.TranscriptomicsView")) {
+							TranscriptomicsView view = (TranscriptomicsView) part.getObject();
+							view.setBioConds(new ArrayList<>());
+							view.setBioCondsArray(new String[0][0]);
+							view.setBioCondsToDisplay(new ArrayList<>());
+							view.setColumnNames(new ArrayList<>());
+						} else if (part.getElementId().contains("bacnet.ProteomicsView")) {
+							ProteomicsView view = (ProteomicsView) part.getObject();
+							view.setBioConds(new ArrayList<>());
+							view.setBioCondsArray(new String[0][0]);
+							view.setBioCondsToDisplay(new ArrayList<>());
+							view.setColumnNames(new ArrayList<>());
+						} else if (part.getElementId().contains("SrnaView")) {
+							SrnaView view = (SrnaView) part.getObject();
+							view.setArrayDataList(new String[0][0]);
+							view.setSeq(new Srna());
+							view.setListSrnas(new ArrayList<>());
+						} else if (part.getElementId().contains("GeneView")) {
+							GeneView view = (GeneView) part.getObject();
+							view.setArrayDataList(new String[0][0]);
+							view.setArrayGeneToLocalization(new String[0][0]);
+							view.setArrayProteomeList(new String[0][0]);
+							view.setBioConds(new ArrayList<>());
+							view.setBioCondsArray(new String[0][0]);
+							view.setBioCondsToDisplay(new ArrayList<>());
+							view.getGenome().clearGenome();
+							view.setArrayGeneToLocalization(new String[0][0]);
+						} else if (part.getElementId().contains("SrnaSummaryView")) {
+							SrnaSummaryView view = (SrnaSummaryView) part.getObject();
+							view.setArray(new String[0][0]);
+						} else if (part.getElementId().contains("bacnet.HeatMapTranscriptomicsView")) {
+							HeatMapTranscriptomicsView view = (HeatMapTranscriptomicsView) part.getObject();
+							view.getTableComposite().setMatrix(new ExpressionMatrix());
+							view.getTableComposite().setMatrixDisplayed(new ExpressionMatrix());
+							view.getTableComposite().getExcludeColumn().clear();
+							view.getTableComposite().getExcludeRow().clear();
+							view.getTableComposite().getColumnNames().clear();
+							view.getTableComposite().setColorMapperList(new ColorMapperList());
+						} else if (part.getElementId().contains("bacnet.HeatMapProteomicsView")) {
+							HeatMapProteomicsView view = (HeatMapProteomicsView) part.getObject();
+							view.getTableComposite().setMatrix(new ExpressionMatrix());
+							view.getTableComposite().setMatrixDisplayed(new ExpressionMatrix());
+							view.getTableComposite().getExcludeColumn().clear();
+							view.getTableComposite().getExcludeRow().clear();
+							view.getTableComposite().getColumnNames().clear();
+							view.getTableComposite().setColorMapperList(new ColorMapperList());
+						}
+					}
+				}
+				System.out.println("Session closing");
+				// System.out.println("Singleton ID:
+				// "+SingletonUtil.getSessionInstance(Database.class));
+				Database database = Database.getInstance();
+				database.cleanUpDatabase();
+				// System.out.println(database.toString());
 
-    public static void closeGenomeViewer(EPartService partService) {
-        for (MPart part : partService.getParts()) {
-            System.out.println(part.getContributionURI());
-            if (part.getElementId().contains("GenomeTranscriptomeView")) {
-                GenomeTranscriptomeView view = (GenomeTranscriptomeView) part.getObject();
-                // Track track = view.getTrack();
-                // System.out.println("Track : "+track);
-                // track = new Track();
-                // track = null;
+			}
+		});
+	}
 
-                partService.hidePart(part, true);
-                System.out.println("Genome closed");
-            }
-        }
-    }
+	public static void closeGenomeViewer(EPartService partService) {
+		for (MPart part : partService.getParts()) {
+			System.out.println(part.getContributionURI());
+			if (part.getElementId().contains("GenomeTranscriptomeView")) {
+				GenomeTranscriptomeView view = (GenomeTranscriptomeView) part.getObject();
+				// Track track = view.getTrack();
+				// System.out.println("Track : "+track);
+				// track = new Track();
+				// track = null;
+
+				partService.hidePart(part, true);
+				System.out.println("Genome closed");
+			}
+		}
+	}
 
 }

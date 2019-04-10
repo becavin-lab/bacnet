@@ -19,7 +19,8 @@ Require-Bundle: javax.inject;bundle-version="0.0.0",
  bacnet.lib;bundle-version="1.0.0",
  org.apache.commons.io;bundle-version="2.2.0",
  org.eclipse.rap.rwt;bundle-version="3.2.0";resolution:=optional,
- org.eclipse.rap.jface
+ org.eclipse.rap.jface,
+ javax.annotation;bundle-version="1.2.0"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: 

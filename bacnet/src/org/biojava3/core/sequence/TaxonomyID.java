@@ -24,30 +24,30 @@ package org.biojava3.core.sequence;
 
 /**
  * A sequence can be associated with a species or Taxonomy ID
+ * 
  * @author Scooter Willis
  */
 public class TaxonomyID {
 
+	private String id = null;
+	DataSource dataSource = DataSource.UNKNOWN;
 
-    private String id = null;
-    DataSource dataSource = DataSource.UNKNOWN;
+	public TaxonomyID(String id, DataSource dataSource) {
+		this.id = id;
+		this.dataSource = dataSource;
+	}
 
-    public TaxonomyID(String id, DataSource dataSource) {
-        this.id = id;
-        this.dataSource = dataSource;
-    }
+	/**
+	 * @return the id
+	 */
+	public String getID() {
+		return id;
+	}
 
-    /**
-     * @return the id
-     */
-    public String getID() {
-        return id;
-    }
-
-    /**
-     * @return the source
-     */
-    public DataSource getDataSource() {
-        return dataSource;
-    }
+	/**
+	 * @return the source
+	 */
+	public DataSource getDataSource() {
+		return dataSource;
+	}
 }

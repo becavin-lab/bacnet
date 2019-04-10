@@ -28,9 +28,10 @@ import java.util.LinkedHashMap;
 /**
  * If a SequenceProxyReader implements this interface then that external source
  * has a list of cross reference id(s)
+ * 
  * @author Scooter Willis <willishf at gmail dot com>
  */
 public interface DatabaseReferenceInterface {
 
-    public LinkedHashMap<String,ArrayList<DBReferenceInfo>> getDatabaseReferences() throws Exception;
+	public LinkedHashMap<String, ArrayList<DBReferenceInfo>> getDatabaseReferences() throws Exception;
 }

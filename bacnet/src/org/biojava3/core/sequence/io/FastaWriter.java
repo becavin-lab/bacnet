@@ -36,134 +36,139 @@ import org.biojava3.core.sequence.template.Compound;
 import org.biojava3.core.sequence.template.Sequence;
 
 /**
- * The FastaWriter writes a collection of sequences to an outputStream. FastaWriterHelper should be
- * used to write out sequences. Each sequence loaded from a fasta file retains the original Fasta header
- * and that is used when writing to the stream. This behavior can be overwritten by implementing
- * a custom FastaHeaderFormatInterface.
+ * The FastaWriter writes a collection of sequences to an outputStream.
+ * FastaWriterHelper should be used to write out sequences. Each sequence loaded
+ * from a fasta file retains the original Fasta header and that is used when
+ * writing to the stream. This behavior can be overwritten by implementing a
+ * custom FastaHeaderFormatInterface.
  *
  * @author Scooter Willis <willishf at gmail dot com>
  */
 public class FastaWriter<S extends Sequence<?>, C extends Compound> {
 
-    OutputStream os;
-    Collection<S> sequences;
-    FastaHeaderFormatInterface<S, C> headerFormat;
-    private int lineLength = 60;
-    byte[] lineSep = System.getProperty("line.separator").getBytes();
-/**
- * Use default line length of 60
- * @param os
- * @param sequences
- * @param headerFormat
- */
-    public FastaWriter(OutputStream os, Collection<S> sequences, FastaHeaderFormatInterface<S, C> headerFormat) {
+	OutputStream os;
+	Collection<S> sequences;
+	FastaHeaderFormatInterface<S, C> headerFormat;
+	private int lineLength = 60;
+	byte[] lineSep = System.getProperty("line.separator").getBytes();
 
-        this.os = os;
-        this.sequences = sequences;
-        this.headerFormat = headerFormat;
-    }
+	/**
+	 * Use default line length of 60
+	 * 
+	 * @param os
+	 * @param sequences
+	 * @param headerFormat
+	 */
+	public FastaWriter(OutputStream os, Collection<S> sequences, FastaHeaderFormatInterface<S, C> headerFormat) {
 
-/**
- * Set custom lineLength
- * @param os
- * @param sequences
- * @param headerFormat
- * @param lineLength
- */
+		this.os = os;
+		this.sequences = sequences;
+		this.headerFormat = headerFormat;
+	}
 
-    public FastaWriter(OutputStream os, Collection<S> sequences, FastaHeaderFormatInterface<S, C> headerFormat, int lineLength) {
-        this.os = os;
-        this.sequences = sequences;
-        this.headerFormat = headerFormat;
-        this.lineLength = lineLength;
-    }
+	/**
+	 * Set custom lineLength
+	 * 
+	 * @param os
+	 * @param sequences
+	 * @param headerFormat
+	 * @param lineLength
+	 */
 
-    /**
-     * Allow an override of operating system line separator for programs that needs a specific CRLF or CR or LF option
-     * @param lineSeparator
-     */
-    public void setLineSeparator(String lineSeparator){
-        lineSep = lineSeparator.getBytes();
-    }
+	public FastaWriter(OutputStream os, Collection<S> sequences, FastaHeaderFormatInterface<S, C> headerFormat,
+			int lineLength) {
+		this.os = os;
+		this.sequences = sequences;
+		this.headerFormat = headerFormat;
+		this.lineLength = lineLength;
+	}
 
-    public void process() throws Exception {
-       // boolean closeit = false;
-       
-        
+	/**
+	 * Allow an override of operating system line separator for programs that needs
+	 * a specific CRLF or CR or LF option
+	 * 
+	 * @param lineSeparator
+	 */
+	public void setLineSeparator(String lineSeparator) {
+		lineSep = lineSeparator.getBytes();
+	}
 
-        for (S sequence : sequences) {
-            String header = headerFormat.getHeader(sequence);
-            os.write('>');
-            os.write(header.getBytes());
-            os.write(lineSep);
+	public void process() throws Exception {
+		// boolean closeit = false;
 
-            int compoundCount = 0;
-            String seq = "";
+		for (S sequence : sequences) {
+			String header = headerFormat.getHeader(sequence);
+			os.write('>');
+			os.write(header.getBytes());
+			os.write(lineSep);
 
-            seq = sequence.getSequenceAsString();
+			int compoundCount = 0;
+			String seq = "";
 
-            for (int i = 0; i < seq.length(); i++) {
-                os.write(seq.charAt(i));
-                compoundCount++;
-                if (compoundCount == lineLength) {
-                    os.write(lineSep);
-                    compoundCount = 0;
-                }
+			seq = sequence.getSequenceAsString();
 
-            }
+			for (int i = 0; i < seq.length(); i++) {
+				os.write(seq.charAt(i));
+				compoundCount++;
+				if (compoundCount == lineLength) {
+					os.write(lineSep);
+					compoundCount = 0;
+				}
 
+			}
 
-            //If we had sequence which was a reciprocal of line length
-            //then don't write the line terminator as this has already written
-            //it
-            if ((sequence.getLength() % getLineLength()) != 0) {
-                os.write(lineSep);
-            }
-        }
-        
-    }
+			// If we had sequence which was a reciprocal of line length
+			// then don't write the line terminator as this has already written
+			// it
+			if ((sequence.getLength() % getLineLength()) != 0) {
+				os.write(lineSep);
+			}
+		}
 
-    public static void main(String[] args) {
-        try {
-            FileInputStream is = new FileInputStream("/Users/Scooter/scripps/dyadic/c1-454Scaffolds.faa");
+	}
 
+	public static void main(String[] args) {
+		try {
+			FileInputStream is = new FileInputStream("/Users/Scooter/scripps/dyadic/c1-454Scaffolds.faa");
 
-            FastaReader<ProteinSequence, AminoAcidCompound> fastaReader = new FastaReader<ProteinSequence, AminoAcidCompound>(is, new GenericFastaHeaderParser<ProteinSequence, AminoAcidCompound>(), new ProteinSequenceCreator(AminoAcidCompoundSet.getAminoAcidCompoundSet()));
-            LinkedHashMap<String, ProteinSequence> proteinSequences = fastaReader.process();
-            is.close();
+			FastaReader<ProteinSequence, AminoAcidCompound> fastaReader = new FastaReader<ProteinSequence, AminoAcidCompound>(
+					is, new GenericFastaHeaderParser<ProteinSequence, AminoAcidCompound>(),
+					new ProteinSequenceCreator(AminoAcidCompoundSet.getAminoAcidCompoundSet()));
+			LinkedHashMap<String, ProteinSequence> proteinSequences = fastaReader.process();
+			is.close();
 
+			// System.out.println(proteinSequences);
 
-          //  System.out.println(proteinSequences);
+			FileOutputStream fileOutputStream = new FileOutputStream(
+					"/Users/Scooter/scripps/dyadic/c1-454Scaffolds_temp.faa");
 
-            FileOutputStream fileOutputStream = new FileOutputStream("/Users/Scooter/scripps/dyadic/c1-454Scaffolds_temp.faa");
-           
-            BufferedOutputStream bo = new BufferedOutputStream(fileOutputStream);
-            long start = System.currentTimeMillis();
-            FastaWriter<ProteinSequence, AminoAcidCompound> fastaWriter = new FastaWriter<ProteinSequence, AminoAcidCompound>(bo, proteinSequences.values(), new GenericFastaHeaderFormat<ProteinSequence, AminoAcidCompound>());
-            fastaWriter.process();
-            bo.close();
-            long end = System.currentTimeMillis();
-            System.out.println("Took " + (end - start) + " seconds");
-         
-            fileOutputStream.close();
+			BufferedOutputStream bo = new BufferedOutputStream(fileOutputStream);
+			long start = System.currentTimeMillis();
+			FastaWriter<ProteinSequence, AminoAcidCompound> fastaWriter = new FastaWriter<ProteinSequence, AminoAcidCompound>(
+					bo, proteinSequences.values(), new GenericFastaHeaderFormat<ProteinSequence, AminoAcidCompound>());
+			fastaWriter.process();
+			bo.close();
+			long end = System.currentTimeMillis();
+			System.out.println("Took " + (end - start) + " seconds");
 
+			fileOutputStream.close();
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
-    /**
-     * @return the lineLength
-     */
-    public int getLineLength() {
-        return lineLength;
-    }
+	/**
+	 * @return the lineLength
+	 */
+	public int getLineLength() {
+		return lineLength;
+	}
 
-    /**
-     * @param lineLength the lineLength to set
-     */
-    public void setLineLength(int lineLength) {
-        this.lineLength = lineLength;
-    }
+	/**
+	 * @param lineLength the lineLength to set
+	 */
+	public void setLineLength(int lineLength) {
+		this.lineLength = lineLength;
+	}
 }

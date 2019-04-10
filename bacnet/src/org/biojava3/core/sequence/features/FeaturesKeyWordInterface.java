@@ -25,16 +25,17 @@ package org.biojava3.core.sequence.features;
 import java.util.ArrayList;
 
 /**
- * Models the keywords that are annotated for a protein sequence at Uniprot. If a ProxySequenceReader
- * implements this interface then the sequence will call this method
+ * Models the keywords that are annotated for a protein sequence at Uniprot. If
+ * a ProxySequenceReader implements this interface then the sequence will call
+ * this method
  *
  * @author Scooter Willis <willishf at gmail dot com>
  */
 public interface FeaturesKeyWordInterface {
-/**
- *
- * @return
- * @throws Exception
- */
-    public ArrayList<String> getKeyWords() throws Exception;
+	/**
+	 *
+	 * @return
+	 * @throws Exception
+	 */
+	public ArrayList<String> getKeyWords() throws Exception;
 }

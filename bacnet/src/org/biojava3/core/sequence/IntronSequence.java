@@ -23,32 +23,30 @@
 
 package org.biojava3.core.sequence;
 
-
-
 /**
  *
  * @author Scooter Willis
  */
-public class IntronSequence extends DNASequence{
+public class IntronSequence extends DNASequence {
 
+	/**
+	 * Place holder for Intron sequence features
+	 * 
+	 * @param parentGeneSequence
+	 * @param begin
+	 * @param end
+	 */
 
-    /**
-     * Place holder for Intron sequence features
-     * @param parentGeneSequence
-     * @param begin
-     * @param end
-     */
+	public IntronSequence(GeneSequence parentGeneSequence, int begin, int end) {
+		this.setParentSequence(parentGeneSequence);
+		setBioBegin(begin);
+		setBioEnd(end);
 
-    public IntronSequence(GeneSequence parentGeneSequence, int begin, int end){
-        this.setParentSequence(parentGeneSequence);
-        setBioBegin(begin);
-        setBioEnd(end);
+	}
 
-    }
-
-        @Override
-    public int getLength() {
-        return Math.abs(this.getBioEnd() - this.getBioBegin()) + 1;
-    }
+	@Override
+	public int getLength() {
+		return Math.abs(this.getBioEnd() - this.getBioBegin()) + 1;
+	}
 
 }

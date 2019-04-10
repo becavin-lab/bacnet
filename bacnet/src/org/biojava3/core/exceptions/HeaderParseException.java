@@ -25,13 +25,14 @@ package org.biojava3.core.exceptions;
 
 /**
  * Currently not used
+ * 
  * @author Scooter Willis <willishf at gmail dot com>
  */
-public class HeaderParseException extends Error{
+public class HeaderParseException extends Error {
 
-  private static final long serialVersionUID = -8356845980320906455L;
+	private static final long serialVersionUID = -8356845980320906455L;
 
-    public HeaderParseException(String error){
-        super(error);
-    }
+	public HeaderParseException(String error) {
+		super(error);
+	}
 }

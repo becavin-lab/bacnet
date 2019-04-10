@@ -30,8 +30,8 @@ import java.util.zip.Checksum;
  * the bottom 32 bits. An int is 32-bit but encodes sign so we can get amusing
  * results if we don't allow for this.
  *
- * @author Unknown. Copied from Expasy4J for convenience. See <a
- *         href="http://dev.isb-sib.ch/projects/expasy4j/">http://dev.isb-sib.ch/projects/expasy4j/</a>
+ * @author Unknown. Copied from Expasy4J for convenience. See <a href=
+ *         "http://dev.isb-sib.ch/projects/expasy4j/">http://dev.isb-sib.ch/projects/expasy4j/</a>
  */
 public class CRC64Checksum implements Checksum {
 	private static final long POLY64 = 0xD800000000000000L;
@@ -73,8 +73,8 @@ public class CRC64Checksum implements Checksum {
 	}
 
 	/**
-	 * Returns a zero-padded 16 character wide string containing the current
-	 * value of this checksum in uppercase hexadecimal format.
+	 * Returns a zero-padded 16 character wide string containing the current value
+	 * of this checksum in uppercase hexadecimal format.
 	 */
 	public String toString() {
 		StringBuffer builder = new StringBuffer();

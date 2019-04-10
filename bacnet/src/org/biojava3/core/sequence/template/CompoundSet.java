@@ -32,20 +32,20 @@ import org.biojava3.core.exceptions.CompoundNotFoundError;
 
 public interface CompoundSet<C extends Compound> {
 
-    /**
-     * Returns the maximum size of a compound String this set holds
-     */
+	/**
+	 * Returns the maximum size of a compound String this set holds
+	 */
 	public int getMaxSingleCompoundStringLength();
 
-    /**
-     * Returns true if all String representations of Compounds are of the
-     * same length.
-     */
-    public boolean isCompoundStringLengthEqual();
+	/**
+	 * Returns true if all String representations of Compounds are of the same
+	 * length.
+	 */
+	public boolean isCompoundStringLengthEqual();
 
 	/**
-	 * Return null if not recognised. Throw IllegalArgumentException if string
-	 * is longer than maximum allowed by {@link #getStringForCompound(Compound)}.
+	 * Return null if not recognised. Throw IllegalArgumentException if string is
+	 * longer than maximum allowed by {@link #getStringForCompound(Compound)}.
 	 */
 	public C getCompoundForString(String string);
 
@@ -61,5 +61,5 @@ public interface CompoundSet<C extends Compound> {
 
 	public List<C> getAllCompounds();
 
-    boolean isComplementable();
+	boolean isComplementable();
 }

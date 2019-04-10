@@ -26,8 +26,8 @@
 package org.biojava3.core.sequence.template;
 
 public interface SequenceReader<C extends Compound> extends Sequence<C> {
-	
+
 	public void setCompoundSet(CompoundSet<C> compoundSet);
-	
+
 	public void setContents(String sequence);
 }

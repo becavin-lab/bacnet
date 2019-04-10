@@ -23,6 +23,7 @@ package org.biojava3.core.sequence.features;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.biojava3.core.sequence.template.AbstractSequence;
 import org.biojava3.core.sequence.template.Compound;
 
@@ -36,44 +37,44 @@ import org.biojava3.core.sequence.template.Compound;
  */
 public class QualityFeature<S extends AbstractSequence<C>, C extends Compound> extends AbstractFeature<S, C> {
 
-    private List<Number> qualities = new ArrayList<Number>();
+	private List<Number> qualities = new ArrayList<Number>();
 
-    /**
-     * @param type
-     * @param source
-     */
-    public QualityFeature(String type, String source) {
-        super(type, source);
-    }
+	/**
+	 * @param type
+	 * @param source
+	 */
+	public QualityFeature(String type, String source) {
+		super(type, source);
+	}
 
-    /**
-     * @return the qualities
-     */
-    public List<Number> getQualities() {
-        return qualities;
-    }
+	/**
+	 * @return the qualities
+	 */
+	public List<Number> getQualities() {
+		return qualities;
+	}
 
-    /**
-     * @param qualities the qualities to set
-     */
-    public void setQualities(List<Number> qualities) {
-        this.qualities = qualities;
-    }
+	/**
+	 * @param qualities the qualities to set
+	 */
+	public void setQualities(List<Number> qualities) {
+		this.qualities = qualities;
+	}
 
-    /**
-     * @param bioindex the biological index (starts with 1)
-     * @return the quality value at the given biological index (starts with 1)
-     */
-    public Number getQualityAt(int bioindex) {
-        return qualities.get(bioindex - 1);
-    }
-    
-    /**
-     * @param biostart biological start index (starts with 1)
-     * @param bioend biological end index (starts with 1)
-     * @return a sublist of the qualities between the given biological indices
-     */
-    public List<Number> getQualities(int biostart, int bioend) {
-        return qualities.subList(biostart - 1, bioend - 1);
-    }
+	/**
+	 * @param bioindex the biological index (starts with 1)
+	 * @return the quality value at the given biological index (starts with 1)
+	 */
+	public Number getQualityAt(int bioindex) {
+		return qualities.get(bioindex - 1);
+	}
+
+	/**
+	 * @param biostart biological start index (starts with 1)
+	 * @param bioend   biological end index (starts with 1)
+	 * @return a sublist of the qualities between the given biological indices
+	 */
+	public List<Number> getQualities(int biostart, int bioend) {
+		return qualities.subList(biostart - 1, bioend - 1);
+	}
 }

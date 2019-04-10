@@ -26,85 +26,84 @@ import org.biojava3.core.util.Equals;
 import org.biojava3.core.util.Hashcoder;
 
 /**
- * Used in Sequences as the unique indentifier. If possible, set the {@link DataSource} to know the
- * source of the id. This allows a SequenceProxy to gather features or related sequences
- * Protein->Gene as an example. When parsing a Blast file it is also possible
- * to identify the type of ID
+ * Used in Sequences as the unique indentifier. If possible, set the
+ * {@link DataSource} to know the source of the id. This allows a SequenceProxy
+ * to gather features or related sequences Protein->Gene as an example. When
+ * parsing a Blast file it is also possible to identify the type of ID
  *
  * @author Scooter Willis
  */
 public class AccessionID {
 
-    private String id = null;
-    private DataSource source = DataSource.LOCAL;
+	private String id = null;
+	private DataSource source = DataSource.LOCAL;
 
-    /**
-     *
-     */
+	/**
+	 *
+	 */
 
-    public AccessionID(){
-        id = "";
-        
-    }
+	public AccessionID() {
+		id = "";
 
-    /**
-     *
-     * @param id
-     */
-    public AccessionID(String id) {
-        this.id = id.trim();
-        this.source = DataSource.LOCAL;
-    }
+	}
 
-    /**
-     *
-     * @param id
-     * @param source
-     */
-    public AccessionID(String id, DataSource source) {
-        this.id = id.trim();
-        this.source = source;
-    }
+	/**
+	 *
+	 * @param id
+	 */
+	public AccessionID(String id) {
+		this.id = id.trim();
+		this.source = DataSource.LOCAL;
+	}
 
-    /**
-     * @return the id
-     */
-    public String getID() {
-        return id;
-    }
+	/**
+	 *
+	 * @param id
+	 * @param source
+	 */
+	public AccessionID(String id, DataSource source) {
+		this.id = id.trim();
+		this.source = source;
+	}
 
-    /**
-     * @return the source
-     */
-    public DataSource getDataSource() {
-        return source;
-    }
+	/**
+	 * @return the id
+	 */
+	public String getID() {
+		return id;
+	}
 
-    @Override
-    public boolean equals(Object o) {
-        boolean equals = false;
-        if (Equals.classEqual(this, o)) {
-            AccessionID l = (AccessionID) o;
-            equals = (Equals.equal(getID(), l.getID())
-                    && Equals.equal(getDataSource(), l.getDataSource()));
-        }
-        return equals;
-    }
+	/**
+	 * @return the source
+	 */
+	public DataSource getDataSource() {
+		return source;
+	}
 
-    @Override
-    public int hashCode() {
-        int r = Hashcoder.SEED;
-        r = Hashcoder.hash(r, getID());
-        r = Hashcoder.hash(r, getDataSource());
-        return r;
-    }
+	@Override
+	public boolean equals(Object o) {
+		boolean equals = false;
+		if (Equals.classEqual(this, o)) {
+			AccessionID l = (AccessionID) o;
+			equals = (Equals.equal(getID(), l.getID()) && Equals.equal(getDataSource(), l.getDataSource()));
+		}
+		return equals;
+	}
 
- //   public void setDataSource(DataSource dataSource){
- //       source = dataSource;
- //   }
+	@Override
+	public int hashCode() {
+		int r = Hashcoder.SEED;
+		r = Hashcoder.hash(r, getID());
+		r = Hashcoder.hash(r, getDataSource());
+		return r;
+	}
 
-    @Override
-    public String toString() {
-        return id;
-    }
+	// public void setDataSource(DataSource dataSource){
+	// source = dataSource;
+	// }
+
+	@Override
+	public String toString() {
+		return id;
+	}
 }

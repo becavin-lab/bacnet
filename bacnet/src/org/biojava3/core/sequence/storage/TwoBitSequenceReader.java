@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import org.biojava3.core.sequence.AccessionID;
 import org.biojava3.core.sequence.compound.NucleotideCompound;
 import org.biojava3.core.sequence.template.CompoundSet;
@@ -49,10 +50,10 @@ public class TwoBitSequenceReader<C extends NucleotideCompound> extends BitSeque
 	}
 
 	/**
-	 * Extension of the BitArrayWorker which provides the 2bit implementation
-	 * code. This is intended to work with the 4 basic nucelotide types. If you
-	 * require a different version of the encoding used here then extend
-	 * and override as required.
+	 * Extension of the BitArrayWorker which provides the 2bit implementation code.
+	 * This is intended to work with the 4 basic nucelotide types. If you require a
+	 * different version of the encoding used here then extend and override as
+	 * required.
 	 *
 	 * @param <C> Must extend NucleotideCompound
 	 */
@@ -118,12 +119,11 @@ public class TwoBitSequenceReader<C extends NucleotideCompound> extends BitSeque
 		protected List<C> generateIndexToCompounds() {
 			CompoundSet<C> cs = getCompoundSet();
 			List<C> result = new ArrayList<C>();
-			result.add( cs.getCompoundForString("T"));
+			result.add(cs.getCompoundForString("T"));
 
-
-			result.add( cs.getCompoundForString("C"));
-			result.add( cs.getCompoundForString("A"));
-			result.add( cs.getCompoundForString("G"));
+			result.add(cs.getCompoundForString("C"));
+			result.add(cs.getCompoundForString("A"));
+			result.add(cs.getCompoundForString("G"));
 			return result;
 		}
 	}

@@ -3,6 +3,7 @@ package bacnet.scripts.blast;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.inject.Named;
+
 import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.swt.SWT;
@@ -16,55 +17,59 @@ import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
+
 import bacnet.scripts.blast.BlastOutput.BlastOutputTYPE;
 
-public class BlastResultView implements SelectionListener{
+public class BlastResultView implements SelectionListener {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3579398886352775140L;
 	public static final String ID = "ListTranscript.BlastResultView";
 	private Button btnSave;
 	private Label lblSave;
 	private Browser browser;
 	private Combo combo;
 	private Button btnRefreshDisplay;
-	
-	private String archiveFile = Blast.getBLAST_RESULT_PATH()+BlastOutput.fileExtension(BlastOutputTYPE.ASN);
+
+	private String archiveFile = Blast.getBLAST_RESULT_PATH() + BlastOutput.fileExtension(BlastOutputTYPE.ASN);
 	private Button btnLoad;
 	private Button btnExport;
 
 	@Inject
 	EPartService partService;
-	
-	@ Inject
-	@ Named (IServiceConstants.ACTIVE_SHELL)
+
+	@Inject
+	@Named(IServiceConstants.ACTIVE_SHELL)
 	private Shell shell;
-	
+
 	@Inject
 	public BlastResultView() {
-		
+
 	}
 
 	@PostConstruct
 	public void createPartControl(Composite parent) {
 		parent.setLayout(new GridLayout(1, false));
-		
+
 		browser = new Browser(parent, SWT.NONE);
-		//browser.setJavascriptEnabled(true);
+		// browser.setJavascriptEnabled(true);
 		GridData gd_browser = new GridData(SWT.LEFT, SWT.CENTER, true, true, 1, 1);
 		gd_browser.heightHint = 1000;
 		gd_browser.widthHint = 1000;
 		browser.setLayoutData(gd_browser);
-		
-		
+
 		Composite composite = new Composite(parent, SWT.NONE);
 		composite.setLayout(new GridLayout(4, false));
-		
+
 		btnRefreshDisplay = new Button(composite, SWT.NONE);
 		btnRefreshDisplay.setText("Refresh display");
 		btnRefreshDisplay.addSelectionListener(this);
 		combo = new Combo(composite, SWT.NONE);
 		combo.setItems(BlastOutput.outputName);
 		combo.select(0);
-		
+
 		btnExport = new Button(composite, SWT.NONE);
 		btnExport.setText("export");
 		btnExport.addSelectionListener(this);
@@ -72,20 +77,19 @@ public class BlastResultView implements SelectionListener{
 		btnLoad = new Button(composite, SWT.NONE);
 		btnLoad.setText("Load Blast archive");
 		btnLoad.addSelectionListener(this);
-		
+
 		btnSave = new Button(composite, SWT.NONE);
 		btnSave.setText("Save Blast archive");
 		btnSave.addSelectionListener(this);
 		new Label(composite, SWT.NONE);
-		
+
 		lblSave = new Label(composite, SWT.NONE);
 
 		loadBlastData();
-		
-	
+
 	}
-	
-	public void loadBlastData(){
+
+	public void loadBlastData() {
 //		final boolean html = true;
 //	     final BlastOutputTYPE type = BlastOutput.BlastOutputTYPE.values()[combo.getSelectionIndex()];
 //	     ProgressMonitorDialog dialog = new ProgressMonitorDialog(shell);
@@ -168,7 +172,7 @@ public class BlastResultView implements SelectionListener{
 	@Override
 	public void widgetDefaultSelected(SelectionEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

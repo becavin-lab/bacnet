@@ -27,22 +27,23 @@ import org.biojava3.core.sequence.template.Compound;
 
 /**
  * A location in a sequence that keeps a reference to its parent sequence
+ * 
  * @author Scooter Willis <willishf at gmail dot com>
  */
 public class SequenceLocation<S extends AbstractSequence<C>, C extends Compound> extends SimpleLocation {
-private S sequence;
-    public SequenceLocation(int start, int end,S sequence){
-        super(start,end);
-        this.sequence = sequence;
+	private S sequence;
 
-    }
+	public SequenceLocation(int start, int end, S sequence) {
+		super(start, end);
+		this.sequence = sequence;
 
-    /**
-     * @return the sequence
-     */
-    public S getSequence() {
-        return sequence;
-    }
+	}
 
+	/**
+	 * @return the sequence
+	 */
+	public S getSequence() {
+		return sequence;
+	}
 
 }
