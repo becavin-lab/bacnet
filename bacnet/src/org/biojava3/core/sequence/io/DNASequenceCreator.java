@@ -33,55 +33,53 @@ import org.biojava3.core.sequence.template.CompoundSet;
 import org.biojava3.core.sequence.template.ProxySequenceReader;
 
 /**
- * A helper class that allows different ways to read a string and create a DNA sequence. Used in FastaReaderHelper
- * and probably a layer that isn't needed
+ * A helper class that allows different ways to read a string and create a DNA
+ * sequence. Used in FastaReaderHelper and probably a layer that isn't needed
  *
  * @author Scooter Willis <willishf at gmail dot com>
  */
-public class DNASequenceCreator implements
-    SequenceCreatorInterface<NucleotideCompound> {
+public class DNASequenceCreator implements SequenceCreatorInterface<NucleotideCompound> {
 
-  private final CompoundSet<NucleotideCompound> compoundSet;
+	private final CompoundSet<NucleotideCompound> compoundSet;
 
-  /**
-   *
-   * @param compoundSet
-   */
-  public DNASequenceCreator(CompoundSet<NucleotideCompound> compoundSet) {
-    this.compoundSet = compoundSet;
-  }
+	/**
+	 *
+	 * @param compoundSet
+	 */
+	public DNASequenceCreator(CompoundSet<NucleotideCompound> compoundSet) {
+		this.compoundSet = compoundSet;
+	}
 
-/**
- *
- * @param sequence The Sequence from a String
- * @param index Currently not used
- * @return
- */
-  public AbstractSequence<NucleotideCompound> getSequence(String sequence,
-      long index) {
-    return new DNASequence(sequence, compoundSet);
-  }
-/**
- *
- * @param proxyLoader The Sequence from a ProxySequenceReader
- * @param index Currently not used
- * @return
- */
-  public AbstractSequence<NucleotideCompound> getSequence(
-      ProxySequenceReader<NucleotideCompound> proxyLoader, long index) {
-    return new DNASequence(proxyLoader, compoundSet);
-  }
+	/**
+	 *
+	 * @param sequence The Sequence from a String
+	 * @param index    Currently not used
+	 * @return
+	 */
+	public AbstractSequence<NucleotideCompound> getSequence(String sequence, long index) {
+		return new DNASequence(sequence, compoundSet);
+	}
 
-  /**
-   *
-   * @param list
-   * @return
-   */
-  public AbstractSequence<NucleotideCompound> getSequence(
-      List<NucleotideCompound> list) {
-    ArrayListProxySequenceReader<NucleotideCompound> store = new ArrayListProxySequenceReader<NucleotideCompound>();
-    store.setCompoundSet(compoundSet);
-    store.setContents(list);
-    return new DNASequence(store);
-  }
+	/**
+	 *
+	 * @param proxyLoader The Sequence from a ProxySequenceReader
+	 * @param index       Currently not used
+	 * @return
+	 */
+	public AbstractSequence<NucleotideCompound> getSequence(ProxySequenceReader<NucleotideCompound> proxyLoader,
+			long index) {
+		return new DNASequence(proxyLoader, compoundSet);
+	}
+
+	/**
+	 *
+	 * @param list
+	 * @return
+	 */
+	public AbstractSequence<NucleotideCompound> getSequence(List<NucleotideCompound> list) {
+		ArrayListProxySequenceReader<NucleotideCompound> store = new ArrayListProxySequenceReader<NucleotideCompound>();
+		store.setCompoundSet(compoundSet);
+		store.setContents(list);
+		return new DNASequence(store);
+	}
 }

@@ -16,8 +16,9 @@ import org.eclipse.rap.rwt.service.ServiceHandler;
 import org.eclipse.rap.rwt.service.ServiceManager;
 
 /**
- * Specific tools for downloading files from eclipse.rap instance
- * NEED TO BE COMMENTED FOR Eclipse.RCP to work !!!
+ * Specific tools for downloading files from eclipse.rap instance NEED TO BE
+ * COMMENTED FOR Eclipse.RCP to work !!!
+ * 
  * @author cbecavin
  *
  */
@@ -27,12 +28,12 @@ public class DownloadServiceHandler implements ServiceHandler {
 	private String text = "";
 	private File file = null;
 
-	public DownloadServiceHandler(String fileName,String text){
+	public DownloadServiceHandler(String fileName, String text) {
 		this.fileName = fileName;
 		this.text = text;
 	}
-	
-	public DownloadServiceHandler(String fileName,File file){
+
+	public DownloadServiceHandler(String fileName, File file) {
 		this.fileName = fileName;
 		this.file = file;
 	}
@@ -43,45 +44,44 @@ public class DownloadServiceHandler implements ServiceHandler {
 		// Which file to download? String or File
 		// Get the file content
 		byte[] download = new byte[0];
-		if(file!=null){
+		if (file != null) {
 			Path path = Paths.get(file.getAbsolutePath());
 			download = Files.readAllBytes(path);
-		}else{
+		} else {
 			download = this.getText().getBytes();
 		}
-		// Send the file in the response    
+		// Send the file in the response
 		response.setContentType("application/octet-stream");
-		response.setContentLength( download.length );
+		response.setContentLength(download.length);
 		String contentDisposition = "attachment; filename=\"" + this.getFileName() + "\"";
-		response.setHeader("Content-Disposition",contentDisposition);
+		response.setHeader("Content-Disposition", contentDisposition);
 		response.getOutputStream().write(download);
 	}
 
-	public static String getDownloadUrl(String fileName,String textToSave,EPartService partService) {
+	public static String getDownloadUrl(String fileName, String textToSave, EPartService partService) {
 		ServiceManager manager = RWT.getServiceManager();
-		ServiceHandler handler = new DownloadServiceHandler(fileName,textToSave);
+		ServiceHandler handler = new DownloadServiceHandler(fileName, textToSave);
 		double random = Math.random();
-		manager.registerServiceHandler("dlServiceHandler_"+fileName+"_"+random,handler);
+		manager.registerServiceHandler("dlServiceHandler_" + fileName + "_" + random, handler);
 		StringBuilder url = new StringBuilder();
-		url.append(RWT.getServiceManager().getServiceHandlerUrl("dlServiceHandler_"+fileName+"_"+random));
-		url.append('&').append("filename").append('=').append(fileName);
-		System.out.println(url.toString());
-		return url.toString();
-	}
-	
-	public static String getDownloadUrl(String fileName,File fileToSave,EPartService partService) {
-		ServiceManager manager = RWT.getServiceManager();
-		ServiceHandler handler = new DownloadServiceHandler(fileName,fileToSave);
-		double random = Math.random();
-		manager.registerServiceHandler("dlServiceHandler_"+fileName+"_"+random,handler);
-		StringBuilder url = new StringBuilder();
-		url.append(RWT.getServiceManager().getServiceHandlerUrl("dlServiceHandler_"+fileName+"_"+random));
+		url.append(RWT.getServiceManager().getServiceHandlerUrl("dlServiceHandler_" + fileName + "_" + random));
 		url.append('&').append("filename").append('=').append(fileName);
 		System.out.println(url.toString());
 		return url.toString();
 	}
 
-	
+	public static String getDownloadUrl(String fileName, File fileToSave, EPartService partService) {
+		ServiceManager manager = RWT.getServiceManager();
+		ServiceHandler handler = new DownloadServiceHandler(fileName, fileToSave);
+		double random = Math.random();
+		manager.registerServiceHandler("dlServiceHandler_" + fileName + "_" + random, handler);
+		StringBuilder url = new StringBuilder();
+		url.append(RWT.getServiceManager().getServiceHandlerUrl("dlServiceHandler_" + fileName + "_" + random));
+		url.append('&').append("filename").append('=').append(fileName);
+		System.out.println(url.toString());
+		return url.toString();
+	}
+
 	public String getText() {
 		return text;
 	}

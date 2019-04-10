@@ -29,12 +29,12 @@ import java.io.DataInput;
  * @author Scooter Willis <willishf at gmail dot com>
  */
 public interface SequenceParserInterface {
-/**
- *
- * @param dataInput
- * @param sequenceLength
- * @return
- * @throws Exception
- */
-    public String getSequence(DataInput dataInput,int sequenceLength) throws Exception;
+	/**
+	 *
+	 * @param dataInput
+	 * @param sequenceLength
+	 * @return
+	 * @throws Exception
+	 */
+	public String getSequence(DataInput dataInput, int sequenceLength) throws Exception;
 }

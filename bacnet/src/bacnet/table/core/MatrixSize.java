@@ -5,58 +5,58 @@ import java.util.HashMap;
 
 public class MatrixSize implements Serializable {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 3440001575014228874L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3440001575014228874L;
 
-    private int widthRowNameDefault = 120;
-    private int widthDefault = 120;
-    private int heightDefault = 30;
-    private HashMap<String, Integer> width = new HashMap<String, Integer>();
-    private HashMap<String, Integer> height = new HashMap<String, Integer>();
+	private int widthRowNameDefault = 120;
+	private int widthDefault = 120;
+	private int heightDefault = 30;
+	private HashMap<String, Integer> width = new HashMap<String, Integer>();
+	private HashMap<String, Integer> height = new HashMap<String, Integer>();
 
-    public MatrixSize() {
-        
-    }
+	public MatrixSize() {
 
-    public int getWidthRowNameDefault() {
-        return widthRowNameDefault;
-    }
+	}
 
-    public void setWidthRowNameDefault(int widthRowNameDefault) {
-        this.widthRowNameDefault = widthRowNameDefault;
-    }
+	public int getWidthRowNameDefault() {
+		return widthRowNameDefault;
+	}
 
-    public int getWidthDefault() {
-        return widthDefault;
-    }
+	public void setWidthRowNameDefault(int widthRowNameDefault) {
+		this.widthRowNameDefault = widthRowNameDefault;
+	}
 
-    public void setWidthDefault(int widthDefault) {
-        this.widthDefault = widthDefault;
-    }
+	public int getWidthDefault() {
+		return widthDefault;
+	}
 
-    public int getHeightDefault() {
-        return heightDefault;
-    }
+	public void setWidthDefault(int widthDefault) {
+		this.widthDefault = widthDefault;
+	}
 
-    public void setHeightDefault(int heightDefault) {
-        this.heightDefault = heightDefault;
-    }
+	public int getHeightDefault() {
+		return heightDefault;
+	}
 
-    public HashMap<String, Integer> getWidth() {
-        return width;
-    }
+	public void setHeightDefault(int heightDefault) {
+		this.heightDefault = heightDefault;
+	}
 
-    public void setWidth(HashMap<String, Integer> width) {
-        this.width = width;
-    }
+	public HashMap<String, Integer> getWidth() {
+		return width;
+	}
 
-    public HashMap<String, Integer> getHeight() {
-        return height;
-    }
+	public void setWidth(HashMap<String, Integer> width) {
+		this.width = width;
+	}
 
-    public void setHeight(HashMap<String, Integer> height) {
-        this.height = height;
-    }
+	public HashMap<String, Integer> getHeight() {
+		return height;
+	}
+
+	public void setHeight(HashMap<String, Integer> height) {
+		this.height = height;
+	}
 }

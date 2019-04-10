@@ -40,19 +40,18 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.xml.sax.SAXException;
 
-
 /**
- * A utility class for common {@link String} manipulation tasks.
- * All functions are static methods.
+ * A utility class for common {@link String} manipulation tasks. All functions
+ * are static methods.
  * 
  * @author Amr AL-Hossary
  */
-public class StringManipulationHelper  {
+public class StringManipulationHelper {
 
 	/**
-	 * we are using Unix endline here, since this is used for testing XML and it
-	 * is part of the XML recommendations: <a href
-	 * ="http://www.w3.org/TR/REC-xml/#sec-line-ends"
+	 * we are using Unix endline here, since this is used for testing XML and it is
+	 * part of the XML recommendations:
+	 * <a href ="http://www.w3.org/TR/REC-xml/#sec-line-ends"
 	 * >http://www.w3.org/TR/REC-xml/#sec-line-ends</a>
 	 */
 	private static final String UNIX_NEWLINE = "\n";
@@ -60,10 +59,6 @@ public class StringManipulationHelper  {
 	private StringManipulationHelper() {
 		// to prevent instantiation
 	}
-
-	
-
-	
 
 	/**
 	 * @author andreas
@@ -78,7 +73,7 @@ public class StringManipulationHelper  {
 		try {
 			while ((line = reader.readLine()) != null) {
 
-                sb.append(line).append(UNIX_NEWLINE);
+				sb.append(line).append(UNIX_NEWLINE);
 			}
 		} catch (IOException e) {
 			// e.printStackTrace();
@@ -92,13 +87,13 @@ public class StringManipulationHelper  {
 
 		return sb.toString();
 	}
-	
+
 	/**
-	 * compares two strings for equality, line by line, ignoring any difference
-	 * of end line delimiters contained within the 2 Strings. This method should
-	 * be used if and only if two Strings are considered identical when all nodes
-	 * are identical including their relative order. Generally useful when
-	 * asserting identity of <b>automatically regenerated</b> XML or PDB.
+	 * compares two strings for equality, line by line, ignoring any difference of
+	 * end line delimiters contained within the 2 Strings. This method should be
+	 * used if and only if two Strings are considered identical when all nodes are
+	 * identical including their relative order. Generally useful when asserting
+	 * identity of <b>automatically regenerated</b> XML or PDB.
 	 * 
 	 * @param expected
 	 * @param actual
@@ -110,13 +105,15 @@ public class StringManipulationHelper  {
 		if (expected != null ^ actual != null) {
 			return false;
 		}
+		@SuppressWarnings("resource")
 		Scanner scanner1 = new Scanner(expected);
+		@SuppressWarnings("resource")
 		Scanner scanner2 = new Scanner(actual);
 		String line1, line2;
 		while (scanner1.hasNextLine()) {
 			line1 = scanner1.nextLine();
 			line2 = scanner2.nextLine();
-			if (! line1.equals(line2))
+			if (!line1.equals(line2))
 				return false;
 		}
 		if (scanner2.hasNextLine()) {
@@ -125,11 +122,10 @@ public class StringManipulationHelper  {
 
 		return true;
 	}
-	
-	
+
 	public static boolean equalsToXml(String expected, String actual) {
-		Document expectedDocument=null;
-		Document actualDocument=null;
+		Document expectedDocument = null;
+		Document actualDocument = null;
 		try {
 			DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
@@ -147,23 +143,23 @@ public class StringManipulationHelper  {
 		}
 		final DocumentType doctype1 = expectedDocument.getDoctype();
 		final DocumentType doctype2 = actualDocument.getDoctype();
-		if (doctype1==null ^ doctype2 == null) {
+		if (doctype1 == null ^ doctype2 == null) {
 			return false;
-		}else if (doctype1!= null /*&& doctype2 != null*/) {
+		} else if (doctype1 != null /* && doctype2 != null */) {
 			NamedNodeMap expectedNotations = doctype1.getNotations();
 			NamedNodeMap actualNotations = doctype2.getNotations();
 			if (expectedNotations.getLength() == actualNotations.getLength()) {
 				for (int i = 0; i < expectedNotations.getLength(); i++) {
-					Node node= expectedNotations.item(i);
+					Node node = expectedNotations.item(i);
 					node.isEqualNode(null);
 				}
-			}else{
+			} else {
 				return false;
 			}
-			
+
 		}
-		
+
 		throw new UnsupportedOperationException("not yet implemented");
 	}
-	
+
 }

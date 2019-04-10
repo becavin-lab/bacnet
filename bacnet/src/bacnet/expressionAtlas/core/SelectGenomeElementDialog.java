@@ -29,8 +29,12 @@ import bacnet.reader.TabDelimitedTableReader;
 import bacnet.swt.ResourceManager;
 import bacnet.views.InternalBrowser;
 
-public class SelectGenomeElementDialog extends TitleAreaDialog implements SelectionListener{
-	
+public class SelectGenomeElementDialog extends TitleAreaDialog implements SelectionListener {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3481072975746172059L;
 	private Button btnDeselRNA;
 	private Button btnSelectRNA;
 	private Button btnDeselGene;
@@ -59,11 +63,12 @@ public class SelectGenomeElementDialog extends TitleAreaDialog implements Select
 
 	private Shell shell;
 	private EPartService partService;
-	
+
 	/**
 	 * Create the wizard.
 	 */
-	public SelectGenomeElementDialog(Shell shell,EPartService partService,TreeSet<String> includeElements,TreeSet<String> excludedElements,String genomeName) {
+	public SelectGenomeElementDialog(Shell shell, EPartService partService, TreeSet<String> includeElements,
+			TreeSet<String> excludedElements, String genomeName) {
 		super(shell);
 		this.shell = shell;
 		this.partService = partService;
@@ -71,26 +76,26 @@ public class SelectGenomeElementDialog extends TitleAreaDialog implements Select
 		this.includeElements = includeElements;
 		this.excludedElements = excludedElements;
 		this.egde = genomeName.equals(Genome.EGDE_NAME);
-		if(egde){
+		if (egde) {
 			listGenes = Database.getInstance().getGeneListEGDe();
-			listsRNAs= Database.getInstance().getsRNAListEGDe();
+			listsRNAs = Database.getInstance().getsRNAListEGDe();
 			listasRNAs = Database.getInstance().getAsRNAListEGDe();
 			listcisRegs = Database.getInstance().getCisRegRNAListEGDe();
-		}else{
+		} else {
 			listGenes = new ArrayList<>();
-			for(String gene : Genome.loadGenome(genomeName).getChromosomes().get(0).getGenes().keySet()){
+			for (String gene : Genome.loadGenome(genomeName).getChromosomes().get(0).getGenes().keySet()) {
 				listGenes.add(gene);
 			}
 			listsRNAs = new ArrayList<>();
-			for(String sRNA : Genome.loadGenome(genomeName).getChromosomes().get(0).getsRNAs().keySet()){
+			for (String sRNA : Genome.loadGenome(genomeName).getChromosomes().get(0).getsRNAs().keySet()) {
 				listsRNAs.add(sRNA);
 			}
 			listasRNAs = new ArrayList<>();
-			for(String asRNA : Genome.loadGenome(genomeName).getChromosomes().get(0).getAsRNAs().keySet()){
+			for (String asRNA : Genome.loadGenome(genomeName).getChromosomes().get(0).getAsRNAs().keySet()) {
 				listasRNAs.add(asRNA);
 			}
 			listcisRegs = new ArrayList<>();
-			for(String asRNA : Genome.loadGenome(genomeName).getChromosomes().get(0).getCisRegs().keySet()){
+			for (String asRNA : Genome.loadGenome(genomeName).getChromosomes().get(0).getCisRegs().keySet()) {
 				listcisRegs.add(asRNA);
 			}
 		}
@@ -98,6 +103,7 @@ public class SelectGenomeElementDialog extends TitleAreaDialog implements Select
 
 	/**
 	 * Create contents of the wizard.
+	 * 
 	 * @param parent
 	 */
 	@Override
@@ -105,111 +111,111 @@ public class SelectGenomeElementDialog extends TitleAreaDialog implements Select
 		setTitle("Select Element to display");
 		setMessage("Select element of the genome to display. You can load and save your selection");
 		Composite container = (Composite) super.createDialogArea(parent);
-		
+
 		container.setLayout(new GridLayout(1, false));
-		
+
 		scrolledComposite = new ScrolledComposite(container, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
 		scrolledComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		scrolledComposite.setExpandHorizontal(true);
 		scrolledComposite.setExpandVertical(true);
-		
+
 		composite = new Composite(scrolledComposite, SWT.NONE);
 		composite.setLayout(new GridLayout(3, false));
-		
-				Composite compositeGene = new Composite(composite, SWT.NONE);
-				compositeGene.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
-				compositeGene.setSize(181, 421);
-				compositeGene.setLayout(new GridLayout(1, false));
-				
-						Composite composite_2 = new Composite(compositeGene, SWT.NONE);
-						composite_2.setLayout(new GridLayout(3, false));
-						
-								Label lblGenes = new Label(composite_2, SWT.NONE);
-								lblGenes.setText("Genes");
-								
-										btnSelectGene = new Button(composite_2, SWT.NONE);
-										btnSelectGene.setImage(ResourceManager.getPluginImage("bacnet", "icons/select.bmp"));
-										btnSelectGene.setToolTipText("Select all genes");
-										
-												btnDeselGene = new Button(composite_2, SWT.NONE);
-												btnDeselGene.setImage(ResourceManager.getPluginImage("bacnet", "icons/deselect.bmp"));
-												btnDeselGene.setToolTipText("Deselect all genes");
-												
-														tableGenes = new Table(compositeGene, SWT.BORDER | SWT.V_SCROLL | SWT.MULTI |SWT.VIRTUAL);
-														tableGenes.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
-														
-																Composite compositeSrna = new Composite(composite, SWT.NONE);
-																compositeSrna.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
-																compositeSrna.setLayout(new GridLayout(1, false));
-																
-																		Composite composite_3 = new Composite(compositeSrna, SWT.NONE);
-																		composite_3.setLayout(new GridLayout(3, false));
-																		
-																				Label lblSrna = new Label(composite_3, SWT.NONE);
-																				lblSrna.setText("sRNA");
-																				
-																						btnSelectRNA = new Button(composite_3, SWT.NONE);
-																						btnSelectRNA.setToolTipText("Select all sRNA");
-																						btnSelectRNA.setImage(ResourceManager.getPluginImage("bacnet", "icons/select.bmp"));
-																						
-																								btnDeselRNA = new Button(composite_3, SWT.NONE);
-																								btnDeselRNA.setToolTipText("Deselect all sRNA");
-																								btnDeselRNA.setImage(ResourceManager.getPluginImage("bacnet", "icons/deselect.bmp"));
-																								
-																										tableSRNAs = new Table(compositeSrna, SWT.BORDER | SWT.V_SCROLL | SWT.MULTI |SWT.VIRTUAL);
-																										tableSRNAs.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
-																										
-																												Composite compositeASrna = new Composite(composite, SWT.NONE);
-																												compositeASrna.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
-																												compositeASrna.setLayout(new GridLayout(1, false));
-																												
-																														Composite composite_5 = new Composite(compositeASrna, SWT.NONE);
-																														composite_5.setLayout(new GridLayout(3, false));
-																														
-																																Label lblAsrna = new Label(composite_5, SWT.NONE);
-																																lblAsrna.setText("asRNA");
-																																
-																																		btnSelectAS = new Button(composite_5, SWT.NONE);
-																																		btnSelectAS.setToolTipText("Select all asRNA");
-																																		btnSelectAS.setImage(ResourceManager.getPluginImage("bacnet", "icons/select.bmp"));
-																																		
-																																				btnDeselAS = new Button(composite_5, SWT.NONE);
-																																				btnDeselAS.setToolTipText("Deselect all asRNA");
-																																				btnDeselAS.setImage(ResourceManager.getPluginImage("bacnet", "icons/deselect.bmp"));
-																																				
-																																						tableASRNAs = new Table(compositeASrna, SWT.BORDER | SWT.V_SCROLL | SWT.MULTI |SWT.VIRTUAL);
-																																						tableASRNAs.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
-																																						
-																																								compositeButton = new Composite(composite, SWT.NONE);
-																																								compositeButton.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, true, false, 3, 1));
-																																								compositeButton.setLayout(new GridLayout(3, false));
-																																								
-																																										btnLoad = new Button(compositeButton, SWT.NONE);
-																																										btnLoad.setToolTipText("Load a list of genome elements");
-																																										btnLoad.setImage(ResourceManager.getPluginImage("bacnet", "icons/fileIO/sigLoad.bmp"));
-																																										btnLoad.setText("Load");
-																																										
-																																												btnSave = new Button(compositeButton, SWT.NONE);
-																																												btnSave.setImage(ResourceManager.getPluginImage("bacnet", "icons/fileIO/sigSave.bmp"));
-																																												btnSave.setToolTipText("Save your list of genome elements selected");
-																																												btnSave.setText("Save");
-																																												
-																																														btnSelectSpecificList = new Button(compositeButton, SWT.NONE);
-																																														btnSelectSpecificList.setText("Use list of genes with common functions");
-																																														btnSelectSpecificList.addSelectionListener(this);
-																																														btnSave.addSelectionListener(this);
-																																														btnLoad.addSelectionListener(this);
-																																														scrolledComposite.setContent(composite);
-																																														scrolledComposite.setMinSize(composite.computeSize(SWT.DEFAULT, SWT.DEFAULT));
-																																														
-																																																// add Listener
-																																																btnDeselAS.addSelectionListener(this);
-																																																btnSelectAS.addSelectionListener(this);
-																																																btnDeselRNA.addSelectionListener(this);
-																																																btnSelectRNA.addSelectionListener(this);
-																																																btnDeselGene.addSelectionListener(this);
-																																																btnSelectGene.addSelectionListener(this);
-		if(!egde){
+
+		Composite compositeGene = new Composite(composite, SWT.NONE);
+		compositeGene.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		compositeGene.setSize(181, 421);
+		compositeGene.setLayout(new GridLayout(1, false));
+
+		Composite composite_2 = new Composite(compositeGene, SWT.NONE);
+		composite_2.setLayout(new GridLayout(3, false));
+
+		Label lblGenes = new Label(composite_2, SWT.NONE);
+		lblGenes.setText("Genes");
+
+		btnSelectGene = new Button(composite_2, SWT.NONE);
+		btnSelectGene.setImage(ResourceManager.getPluginImage("bacnet", "icons/select.bmp"));
+		btnSelectGene.setToolTipText("Select all genes");
+
+		btnDeselGene = new Button(composite_2, SWT.NONE);
+		btnDeselGene.setImage(ResourceManager.getPluginImage("bacnet", "icons/deselect.bmp"));
+		btnDeselGene.setToolTipText("Deselect all genes");
+
+		tableGenes = new Table(compositeGene, SWT.BORDER | SWT.V_SCROLL | SWT.MULTI | SWT.VIRTUAL);
+		tableGenes.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+
+		Composite compositeSrna = new Composite(composite, SWT.NONE);
+		compositeSrna.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		compositeSrna.setLayout(new GridLayout(1, false));
+
+		Composite composite_3 = new Composite(compositeSrna, SWT.NONE);
+		composite_3.setLayout(new GridLayout(3, false));
+
+		Label lblSrna = new Label(composite_3, SWT.NONE);
+		lblSrna.setText("sRNA");
+
+		btnSelectRNA = new Button(composite_3, SWT.NONE);
+		btnSelectRNA.setToolTipText("Select all sRNA");
+		btnSelectRNA.setImage(ResourceManager.getPluginImage("bacnet", "icons/select.bmp"));
+
+		btnDeselRNA = new Button(composite_3, SWT.NONE);
+		btnDeselRNA.setToolTipText("Deselect all sRNA");
+		btnDeselRNA.setImage(ResourceManager.getPluginImage("bacnet", "icons/deselect.bmp"));
+
+		tableSRNAs = new Table(compositeSrna, SWT.BORDER | SWT.V_SCROLL | SWT.MULTI | SWT.VIRTUAL);
+		tableSRNAs.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+
+		Composite compositeASrna = new Composite(composite, SWT.NONE);
+		compositeASrna.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		compositeASrna.setLayout(new GridLayout(1, false));
+
+		Composite composite_5 = new Composite(compositeASrna, SWT.NONE);
+		composite_5.setLayout(new GridLayout(3, false));
+
+		Label lblAsrna = new Label(composite_5, SWT.NONE);
+		lblAsrna.setText("asRNA");
+
+		btnSelectAS = new Button(composite_5, SWT.NONE);
+		btnSelectAS.setToolTipText("Select all asRNA");
+		btnSelectAS.setImage(ResourceManager.getPluginImage("bacnet", "icons/select.bmp"));
+
+		btnDeselAS = new Button(composite_5, SWT.NONE);
+		btnDeselAS.setToolTipText("Deselect all asRNA");
+		btnDeselAS.setImage(ResourceManager.getPluginImage("bacnet", "icons/deselect.bmp"));
+
+		tableASRNAs = new Table(compositeASrna, SWT.BORDER | SWT.V_SCROLL | SWT.MULTI | SWT.VIRTUAL);
+		tableASRNAs.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+
+		compositeButton = new Composite(composite, SWT.NONE);
+		compositeButton.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, true, false, 3, 1));
+		compositeButton.setLayout(new GridLayout(3, false));
+
+		btnLoad = new Button(compositeButton, SWT.NONE);
+		btnLoad.setToolTipText("Load a list of genome elements");
+		btnLoad.setImage(ResourceManager.getPluginImage("bacnet", "icons/fileIO/sigLoad.bmp"));
+		btnLoad.setText("Load");
+
+		btnSave = new Button(compositeButton, SWT.NONE);
+		btnSave.setImage(ResourceManager.getPluginImage("bacnet", "icons/fileIO/sigSave.bmp"));
+		btnSave.setToolTipText("Save your list of genome elements selected");
+		btnSave.setText("Save");
+
+		btnSelectSpecificList = new Button(compositeButton, SWT.NONE);
+		btnSelectSpecificList.setText("Use list of genes with common functions");
+		btnSelectSpecificList.addSelectionListener(this);
+		btnSave.addSelectionListener(this);
+		btnLoad.addSelectionListener(this);
+		scrolledComposite.setContent(composite);
+		scrolledComposite.setMinSize(composite.computeSize(SWT.DEFAULT, SWT.DEFAULT));
+
+		// add Listener
+		btnDeselAS.addSelectionListener(this);
+		btnSelectAS.addSelectionListener(this);
+		btnDeselRNA.addSelectionListener(this);
+		btnSelectRNA.addSelectionListener(this);
+		btnDeselGene.addSelectionListener(this);
+		btnSelectGene.addSelectionListener(this);
+		if (!egde) {
 			tableSRNAs.setEnabled(false);
 			tableASRNAs.setEnabled(false);
 			btnDeselRNA.setEnabled(false);
@@ -225,13 +231,14 @@ public class SelectGenomeElementDialog extends TitleAreaDialog implements Select
 		return container;
 	}
 
-	private void initData(){
+	private void initData() {
 		// Fill tables only with the number of data needed
 		tableGenes.addListener(SWT.SetData, new Listener() {
 			private static final long serialVersionUID = 6744063943372593076L;
+
 			@Override
 			public void handleEvent(Event event) {
-				TableItem item = (TableItem)event.item;
+				TableItem item = (TableItem) event.item;
 				int index = event.index;
 				item.setText(listGenes.get(index));
 			}
@@ -240,9 +247,10 @@ public class SelectGenomeElementDialog extends TitleAreaDialog implements Select
 		// Fill tables only with the number of data needed
 		tableSRNAs.addListener(SWT.SetData, new Listener() {
 			private static final long serialVersionUID = 8429132651820570430L;
+
 			@Override
 			public void handleEvent(Event event) {
-				TableItem item = (TableItem)event.item;
+				TableItem item = (TableItem) event.item;
 				int index = event.index;
 				item.setText(listsRNAs.get(index));
 			}
@@ -251,140 +259,148 @@ public class SelectGenomeElementDialog extends TitleAreaDialog implements Select
 		// Fill tables only with the number of data needed
 		tableASRNAs.addListener(SWT.SetData, new Listener() {
 			private static final long serialVersionUID = -7858199108743075609L;
+
 			@Override
 			public void handleEvent(Event event) {
-				TableItem item = (TableItem)event.item;
+				TableItem item = (TableItem) event.item;
 				int index = event.index;
 				item.setText(listasRNAs.get(index));
 			}
 		});
-		tableASRNAs.setItemCount(listasRNAs.size());	
+		tableASRNAs.setItemCount(listasRNAs.size());
 	}
 
 	/**
 	 * When Ok is pressed, update the different genome elements sleected
+	 * 
 	 * @return
 	 */
 	@Override
-	public void okPressed(){
-		try{
+	public void okPressed() {
+		try {
 			includeElements.clear();
-			for(TableItem element:tableGenes.getSelection()) includeElements.add(element.getText());
-			for(TableItem element:tableSRNAs.getSelection()) includeElements.add(element.getText());
-			for(TableItem element:tableASRNAs.getSelection()) includeElements.add(element.getText());
-			
+			for (TableItem element : tableGenes.getSelection())
+				includeElements.add(element.getText());
+			for (TableItem element : tableSRNAs.getSelection())
+				includeElements.add(element.getText());
+			for (TableItem element : tableASRNAs.getSelection())
+				includeElements.add(element.getText());
+
 			excludedElements.clear();
 			/*
-			 * Exclude all genome elements 
+			 * Exclude all genome elements
 			 */
-			for(String element : listGenes){
+			for (String element : listGenes) {
 				excludedElements.add(element);
 			}
-			for(String element : listsRNAs){
+			for (String element : listsRNAs) {
 				excludedElements.add(element);
 			}
-			for(String element : listasRNAs){
+			for (String element : listasRNAs) {
 				excludedElements.add(element);
 			}
-			for(String element : listcisRegs){
+			for (String element : listcisRegs) {
 				excludedElements.add(element);
 			}
 			/*
 			 * Remove only the ones selected
 			 */
-			for(String element:includeElements){
+			for (String element : includeElements) {
 				excludedElements.remove(element);
 			}
-			
-		    this.close();
-		}catch(Exception e1){
+
+			this.close();
+		} catch (Exception e1) {
 			System.err.println("Cannot parse the cutOff");
 			this.close();
 		}
 	}
-	
+
 	@Override
 	public void widgetSelected(SelectionEvent e) {
-		if(e.getSource()==btnSelectGene){
+		if (e.getSource() == btnSelectGene) {
 			tableGenes.selectAll();
-		}else if(e.getSource()==btnSelectRNA){
+		} else if (e.getSource() == btnSelectRNA) {
 			tableSRNAs.selectAll();
-		}else if(e.getSource()==btnSelectAS){
+		} else if (e.getSource() == btnSelectAS) {
 			tableASRNAs.selectAll();
-		}else if(e.getSource()==btnDeselGene){
+		} else if (e.getSource() == btnDeselGene) {
 			tableGenes.deselectAll();
-		}else if(e.getSource()==btnDeselRNA){
+		} else if (e.getSource() == btnDeselRNA) {
 			tableSRNAs.deselectAll();
-		}else if(e.getSource()==btnDeselAS){
+		} else if (e.getSource() == btnDeselAS) {
 			tableASRNAs.deselectAll();
-		}else if(e.getSource()==btnLoad){
-			try{
+		} else if (e.getSource() == btnLoad) {
+			try {
 				FileDialog fd = new FileDialog(shell, SWT.OPEN);
 				fd.setText("Open a signature (list of genome elements)");
 				String fileName = fd.open();
-				if(fileName!=null){
+				if (fileName != null) {
 					ArrayList<String> signature = TabDelimitedTableReader.readList(fileName);
 					tableGenes.deselectAll();
 					tableASRNAs.deselectAll();
 					tableSRNAs.deselectAll();
-					for(int i=0;i<signature.size();i++){
+					for (int i = 0; i < signature.size(); i++) {
 						String element = signature.get(i);
-						//System.out.println(element);
+						// System.out.println(element);
 						// search in Gene list
 						int index = listGenes.indexOf(element);
-						if(index!=-1){
+						if (index != -1) {
 							tableGenes.select(index);
 						}
 						index = listsRNAs.indexOf(element);
-						if(index!=-1){
+						if (index != -1) {
 							tableSRNAs.select(index);
 						}
 						index = listasRNAs.indexOf(element);
-						if(index!=-1){
+						if (index != -1) {
 							tableASRNAs.select(index);
 						}
 					}
 				}
-			}catch(Exception e1){
+			} catch (Exception e1) {
 				System.out.println("Cannot read the signature");
 			}
-		}else if(e.getSource()==btnSave){
-			try{
+		} else if (e.getSource() == btnSave) {
+			try {
 				includeElements.clear();
-				for(TableItem element:tableGenes.getSelection()) includeElements.add(element.getText());
-				for(TableItem element:tableSRNAs.getSelection()) includeElements.add(element.getText());
-				for(TableItem element:tableASRNAs.getSelection()) includeElements.add(element.getText());
+				for (TableItem element : tableGenes.getSelection())
+					includeElements.add(element.getText());
+				for (TableItem element : tableSRNAs.getSelection())
+					includeElements.add(element.getText());
+				for (TableItem element : tableASRNAs.getSelection())
+					includeElements.add(element.getText());
 				ArrayList<String> signature = new ArrayList<>();
-				for(String include : includeElements){
+				for (String include : includeElements) {
 					signature.add(include);
 				}
-				InternalBrowser.openList(signature,"Signature",partService);
-			}catch(Exception e1){
+				InternalBrowser.openList(signature, "Signature", partService);
+			} catch (Exception e1) {
 				System.out.println("Cannot save the signature");
 
 			}
-		}else if(e.getSource()==btnSelectSpecificList){
+		} else if (e.getSource() == btnSelectSpecificList) {
 			SignatureSelectionDialog dialog = new SignatureSelectionDialog(shell);
-			if(dialog.open()==0){
+			if (dialog.open() == 0) {
 				Signature signature = dialog.getSignature();
 				System.out.println(signature.getName());
 				tableGenes.deselectAll();
 				tableASRNAs.deselectAll();
 				tableSRNAs.deselectAll();
-				for(int i=0;i<signature.getSize();i++){
+				for (int i = 0; i < signature.getSize(); i++) {
 					String element = signature.getElements().get(i);
-					//System.out.println(element);
+					// System.out.println(element);
 					// search in Gene list
 					int index = listGenes.indexOf(element);
-					if(index!=-1){
+					if (index != -1) {
 						tableGenes.select(index);
 					}
 					index = listsRNAs.indexOf(element);
-					if(index!=-1){
+					if (index != -1) {
 						tableSRNAs.select(index);
 					}
 					index = listasRNAs.indexOf(element);
-					if(index!=-1){
+					if (index != -1) {
 						tableASRNAs.select(index);
 					}
 				}

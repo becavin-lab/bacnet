@@ -30,7 +30,7 @@ import org.biojava3.core.sequence.template.ProxySequenceReader;
  *
  * @param <C>
  */
-public class ArrayListProxySequenceReader<C extends Compound>
-  extends ArrayListSequenceReader<C> implements ProxySequenceReader<C>{
+public class ArrayListProxySequenceReader<C extends Compound> extends ArrayListSequenceReader<C>
+		implements ProxySequenceReader<C> {
 
 }

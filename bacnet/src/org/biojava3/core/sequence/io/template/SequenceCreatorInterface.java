@@ -33,25 +33,27 @@ import org.biojava3.core.sequence.template.ProxySequenceReader;
  * @author Scooter Willis <willishf at gmail dot com>
  */
 public interface SequenceCreatorInterface<C extends Compound> {
-/**
- *
- * @param sequence
- * @param index
- * @return
- */
-    public AbstractSequence<C> getSequence(String sequence, long index);
- /**
-  * 
-  * @param proxyLoader
-  * @param index
-  * @return
-  */
-    public AbstractSequence<C> getSequence(ProxySequenceReader<C> proxyLoader, long index);
- /**
-  * 
-  * @param list
-  * @return
-  */
-    public AbstractSequence<C> getSequence(List<C> list);
+	/**
+	 *
+	 * @param sequence
+	 * @param index
+	 * @return
+	 */
+	public AbstractSequence<C> getSequence(String sequence, long index);
+
+	/**
+	 * 
+	 * @param proxyLoader
+	 * @param index
+	 * @return
+	 */
+	public AbstractSequence<C> getSequence(ProxySequenceReader<C> proxyLoader, long index);
+
+	/**
+	 * 
+	 * @param list
+	 * @return
+	 */
+	public AbstractSequence<C> getSequence(List<C> list);
 
 }

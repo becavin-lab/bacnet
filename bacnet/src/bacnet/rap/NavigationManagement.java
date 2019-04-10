@@ -39,20 +39,22 @@ public class NavigationManagement {
 	public static String GENOME = "genome";
 	public static String GENE = "gene";
 	public static String STYLE = "style";
-	
+
 	public static String CoExprID = "bacnet.e4.rap.CoExprNetworkView";
-	
+
 	/**
-	 * Register service navigation management to be able to use Previous and Next buttons
+	 * Register service navigation management to be able to use Previous and Next
+	 * buttons
+	 * 
 	 * @param partService
 	 */
-	public static void registerServiceAndNavigationTab(EPartService partService){
+	public static void registerServiceAndNavigationTab(EPartService partService) {
 		/*
 		 * For eclipse.rap
 		 */
-		BrowserNavigation service = RWT.getClient().getService( BrowserNavigation.class );
+		BrowserNavigation service = RWT.getClient().getService(BrowserNavigation.class);
 		service.removeBrowserNavigationListener(Database.getInstance().getNavigationListener());
-		service.addBrowserNavigationListener( new BrowserNavigationListener() {
+		service.addBrowserNavigationListener(new BrowserNavigationListener() {
 			/**
 			 * 
 			 */
@@ -62,123 +64,126 @@ public class NavigationManagement {
 			public void navigated(BrowserNavigationEvent event) {
 				String sourceID = event.getSource().getClass().toString();
 				String stateID = event.getState();
-				//System.out.println("source: "+sourceID+" state: "+stateID);
+				// System.out.println("source: "+sourceID+" state: "+stateID);
 				/*
 				 * Parse State
 				 */
 				String viewID = stateID;
-				if(stateID.contains("?")){
+				if (stateID.contains("?")) {
 					viewID = stateID.substring(0, stateID.indexOf('?'));
 				}
 				Database.getInstance().setCurrentState(stateID);
 				MPart part = partService.findPart(viewID);
-				if(part!=null){
+				if (part != null) {
 					partService.showPart(part, PartState.ACTIVATE);
 				}
 			}
-		} );
-		
+		});
+
 		/*
 		 * for eclipse.rcp
 		 */
 	}
-	
+
 	/**
 	 * Return the current URL of your RAP project
 	 */
-	public static String getURL(){
-		
+	public static String getURL() {
+
 		/*
 		 * for eclise.rap
 		 */
 		return RWT.getRequest().getRequestURL().toString();
-		 
+
 		/*
 		 * for eclipse.rcp
 		 */
-		//return "";
+		// return "";
 	}
-	
+
 	/**
 	 * Push state puttin viewId and state parameters <br>
-	 * stateName = viewID + key + "=" + parameters.get(key) + ";" 
+	 * stateName = viewID + key + "=" + parameters.get(key) + ";"
+	 * 
 	 * @param viewID
 	 * @param parameters
 	 */
-	public static void pushStateView(String viewID,HashMap<String, String> parameters){
+	public static void pushStateView(String viewID, HashMap<String, String> parameters) {
 		/*
 		 * for eclipse.rap
 		 */
 		String stateName = viewID;
-		if(parameters.size()>0) stateName+='?';
-		for(String key : parameters.keySet()){
-			stateName+=key+"="+parameters.get(key)+";";
+		if (parameters.size() > 0)
+			stateName += '?';
+		for (String key : parameters.keySet()) {
+			stateName += key + "=" + parameters.get(key) + ";";
 		}
-		BrowserNavigation service = RWT.getClient().getService( BrowserNavigation.class );
-		service.pushState(stateName,Database.getInstance().getProjectName());
-		
+		BrowserNavigation service = RWT.getClient().getService(BrowserNavigation.class);
+		service.pushState(stateName, Database.getInstance().getProjectName());
+
 		/*
 		 * for eclipse.rcp
 		 */
 	}
-	
-	public static void pushStateView(String viewID){
+
+	public static void pushStateView(String viewID) {
 		pushStateView(viewID, new HashMap<>());
 	}
-	
+
 	/**
 	 * Parse init URL and display the correct View with the correct view parameters
+	 * 
 	 * @param partService
 	 */
-	public static void parseInitURL(EPartService partService){
+	public static void parseInitURL(EPartService partService) {
 		String state = Database.getInstance().getCurrentState();
 		state = FileUtils.cleanStringFromHex(state);
-		//System.out.println("Access url: "+getURL());
-		//System.out.println("Access door: "+Database.getInstance().getCurrentState());
-		if(!state.equals("")){
-			if(state.contains("?")){
+		// System.out.println("Access url: "+getURL());
+		// System.out.println("Access door: "+Database.getInstance().getCurrentState());
+		if (!state.equals("")) {
+			if (state.contains("?")) {
 				String viewId = state.substring(0, state.indexOf('?'));
-				HashMap<String,String> parameters = parseStateParemeters(state.substring(state.indexOf('?')+1));
-				if(viewId.equals(GenomicsView.ID)){
+				HashMap<String, String> parameters = parseStateParemeters(state.substring(state.indexOf('?') + 1));
+				if (viewId.equals(GenomicsView.ID)) {
 					GenomicsView.displayGenomeView(partService, parameters);
-				}else if(viewId.equals(TranscriptomicsView.ID)){
-					TranscriptomicsView.displayTranscriptomicsView(partService,parameters);
-				}else if(viewId.equals(ProteomicsView.ID)){
-					ProteomicsView.displayProteomicsView(partService,parameters);
-				}else if(viewId.equals(CoExprNetworkView.ID)){
-					CoExprNetworkView.displayCoExpNetworkView(partService,parameters);
-				}else if(viewId.equals(NTerminomicsView.ID)){
-					NTerminomicsView.displayNTerminomicsView(partService,parameters);
-				}else if(viewId.contains(AnnotationView.ID)){
-					AnnotationView.displayAnnotationView(partService,parameters);
-				}else if(viewId.contains(GeneView.ID)){
+				} else if (viewId.equals(TranscriptomicsView.ID)) {
+					TranscriptomicsView.displayTranscriptomicsView(partService, parameters);
+				} else if (viewId.equals(ProteomicsView.ID)) {
+					ProteomicsView.displayProteomicsView(partService, parameters);
+				} else if (viewId.equals(CoExprNetworkView.ID)) {
+					CoExprNetworkView.displayCoExpNetworkView(partService, parameters);
+				} else if (viewId.equals(NTerminomicsView.ID)) {
+					NTerminomicsView.displayNTerminomicsView(partService, parameters);
+				} else if (viewId.contains(AnnotationView.ID)) {
+					AnnotationView.displayAnnotationView(partService, parameters);
+				} else if (viewId.contains(GeneView.ID)) {
 					GeneView.displayGeneView(partService, parameters);
-				}else if(viewId.contains(SrnaView.ID)){
+				} else if (viewId.contains(SrnaView.ID)) {
 					SrnaView.displaySrnaView(partService, parameters);
-				}else if(viewId.contains(HeatMapTranscriptomicsView.ID)){
+				} else if (viewId.contains(HeatMapTranscriptomicsView.ID)) {
 					HeatMapTranscriptomicsView.displayHeatMapTranscriptomicsView(partService, parameters);
-				}else if(viewId.contains(HeatMapProteomicsView.ID)){
+				} else if (viewId.contains(HeatMapProteomicsView.ID)) {
 					HeatMapProteomicsView.displayHeatMapProteomicsView(partService, parameters);
-				}else if(viewId.contains(GenomeTranscriptomeView.ID)){
+				} else if (viewId.contains(GenomeTranscriptomeView.ID)) {
 					GenomeTranscriptomeView.displayGenomeTranscriptomesView(partService, parameters);
 				}
-			}else{
-				if(state.contains("-")){ // Multi instance view without parameters
-					if(state.contains(GeneView.ID)){
+			} else {
+				if (state.contains("-")) { // Multi instance view without parameters
+					if (state.contains(GeneView.ID)) {
 						GeneView.openGeneView(partService);
-					}				
-				}else{
-					partService.showPart(state,PartState.ACTIVATE);
+					}
+				} else {
+					partService.showPart(state, PartState.ACTIVATE);
 				}
 			}
-		}	
+		}
 	}
-		
-	public static HashMap<String,String> parseStateParemeters(String state){
-		HashMap<String,String> parameters = new HashMap<>();
-		for(String params : state.split(";")){
-			System.out.println(params.split("=")[0]+" - "+params.split("=")[1]);
-			parameters.put(params.split("=")[0],params.split("=")[1]);			
+
+	public static HashMap<String, String> parseStateParemeters(String state) {
+		HashMap<String, String> parameters = new HashMap<>();
+		for (String params : state.split(";")) {
+			System.out.println(params.split("=")[0] + " - " + params.split("=")[1]);
+			parameters.put(params.split("=")[0], params.split("=")[1]);
 		}
 		return parameters;
 	}

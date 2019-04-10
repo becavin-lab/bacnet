@@ -5,6 +5,7 @@
 package org.biojava3.genome.parsers.gff;
 
 import java.util.Collection;
+
 import org.biojava3.core.sequence.DNASequence;
 
 /**
@@ -13,37 +14,37 @@ import org.biojava3.core.sequence.DNASequence;
  */
 public class GCStats {
 
-    public static double getGCStats(Collection<DNASequence> sequences) {
-        double gcCount = 0;
-        double total = 0;
+	public static double getGCStats(Collection<DNASequence> sequences) {
+		double gcCount = 0;
+		double total = 0;
 
-        for (DNASequence sequence : sequences) {
-            char[] dna = sequence.toString().toCharArray();
-            for (char d : dna) {
-                if (d == 'G' || d == 'C' || d == 'g' || d == 'c') {
-                    gcCount++;
-                }
-                total++;
-            }
-        }
+		for (DNASequence sequence : sequences) {
+			char[] dna = sequence.toString().toCharArray();
+			for (char d : dna) {
+				if (d == 'G' || d == 'C' || d == 'g' || d == 'c') {
+					gcCount++;
+				}
+				total++;
+			}
+		}
 
-        return (gcCount / total) * 100.0;
-    }
+		return (gcCount / total) * 100.0;
+	}
 
-    public static double getGCStatsString(Collection<String> sequences) {
-        double gcCount = 0;
-        double total = 0;
+	public static double getGCStatsString(Collection<String> sequences) {
+		double gcCount = 0;
+		double total = 0;
 
-        for (String sequence : sequences) {
-            char[] dna = sequence.toCharArray();
-            for (char d : dna) {
-                if (d == 'G' || d == 'C' || d == 'g' || d == 'c') {
-                    gcCount++;
-                }
-                total++;
-            }
-        }
+		for (String sequence : sequences) {
+			char[] dna = sequence.toCharArray();
+			for (char d : dna) {
+				if (d == 'G' || d == 'C' || d == 'g' || d == 'c') {
+					gcCount++;
+				}
+				total++;
+			}
+		}
 
-        return (gcCount / total) * 100.0;
-    }
+		return (gcCount / total) * 100.0;
+	}
 }

@@ -13,11 +13,12 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
-import bacnet.Database;
-import bacnet.utils.FileUtils;
+public class BlastQueryPage extends WizardPage implements SelectionListener {
 
-public class BlastQueryPage extends WizardPage implements SelectionListener{
-
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5725807534323834458L;
 	private Text textQuery;
 	private Button btnLoad;
 	private Label lblLoadFile;
@@ -26,6 +27,7 @@ public class BlastQueryPage extends WizardPage implements SelectionListener{
 	public Combo cmbFileFormat;
 
 	private Shell shell;
+
 	/**
 	 * Create the wizard.
 	 */
@@ -38,47 +40,49 @@ public class BlastQueryPage extends WizardPage implements SelectionListener{
 
 	/**
 	 * Create contents of the wizard.
+	 * 
 	 * @param parent
 	 */
+	@Override
 	public void createControl(Composite parent) {
 		Composite container = new Composite(parent, SWT.NONE);
 
 		setControl(container);
 		container.setLayout(new GridLayout(1, false));
-		
+
 		Label lblNewLabel = new Label(container, SWT.NONE);
 		lblNewLabel.setText("Enter FASTA sequence(s)");
-		
+
 		textQuery = new Text(container, SWT.BORDER | SWT.FULL_SELECTION | SWT.WRAP);
 		textQuery.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
-		
+
 		Composite composite_1 = new Composite(container, SWT.NONE);
 		composite_1.setLayout(new GridLayout(2, false));
-		
+
 		btnLoad = new Button(composite_1, SWT.NONE);
 		btnLoad.setText("Load");
 		btnLoad.addSelectionListener(this);
-		
+
 		lblLoadFile = new Label(composite_1, SWT.NONE);
 		GridData gd_lblLoadFile = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
 		gd_lblLoadFile.widthHint = 430;
 		lblLoadFile.setLayoutData(gd_lblLoadFile);
-		
+
 		btnSave = new Button(composite_1, SWT.NONE);
 		btnSave.setText("Save");
 		btnSave.addSelectionListener(this);
-		
+
 		lblSave = new Label(composite_1, SWT.NONE);
 		GridData gd_lblSave = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
 		gd_lblSave.widthHint = 400;
 		lblSave.setLayoutData(gd_lblSave);
-		
+
 		Composite composite = new Composite(container, SWT.NONE);
 		composite.setLayout(new GridLayout(2, false));
-		
+
 		Label lblExportFormat = new Label(composite, SWT.NONE);
 		lblExportFormat.setText("Export format");
-		
+
 		cmbFileFormat = new Combo(composite, SWT.NONE);
 		cmbFileFormat.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		cmbFileFormat.add("ASN");
@@ -122,7 +126,7 @@ public class BlastQueryPage extends WizardPage implements SelectionListener{
 	@Override
 	public void widgetDefaultSelected(SelectionEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public Text getTextQuery() {

@@ -33,7 +33,6 @@ import org.biojava3.core.exceptions.CompoundNotFoundError;
 import org.biojava3.core.util.Equals;
 import org.biojava3.core.util.Hashcoder;
 
-
 /**
  *
  * @author Andy Yates
@@ -42,164 +41,162 @@ import org.biojava3.core.util.Hashcoder;
  */
 public abstract class AbstractCompoundSet<C extends Compound> implements CompoundSet<C> {
 
-  private Map<CharSequence, C> charSeqToCompound = new HashMap<CharSequence, C>();
-  private int maxCompoundCharSequenceLength = -1;
-  private Boolean compoundStringLengthEqual = null;
-  
-  Map<C,Set<C>> equivalentsMap = new HashMap<C, Set<C>>();
+	private Map<CharSequence, C> charSeqToCompound = new HashMap<CharSequence, C>();
+	private int maxCompoundCharSequenceLength = -1;
+	private Boolean compoundStringLengthEqual = null;
 
-  protected void addCompound(C compound, C lowerCasedCompound, Iterable<C> equivalents) {
-    addCompound(compound);
-    addCompound(lowerCasedCompound);
+	Map<C, Set<C>> equivalentsMap = new HashMap<C, Set<C>>();
 
-    addEquivalent(compound, lowerCasedCompound);
-    addEquivalent(lowerCasedCompound, compound);
+	protected void addCompound(C compound, C lowerCasedCompound, Iterable<C> equivalents) {
+		addCompound(compound);
+		addCompound(lowerCasedCompound);
 
-    for(C equivalent: equivalents) {
-      addEquivalent(compound, equivalent);
-      addEquivalent(equivalent, compound);
-      addEquivalent(lowerCasedCompound, equivalent);
-      addEquivalent(equivalent, lowerCasedCompound);
-    }
-  }
+		addEquivalent(compound, lowerCasedCompound);
+		addEquivalent(lowerCasedCompound, compound);
 
-  protected void addCompound(C compound, C lowerCasedCompound, C... equivalents) {
-    List<C> equiv = new ArrayList<C>(equivalents.length);
-    equiv.addAll(Arrays.asList(equivalents));
-    addCompound(compound, lowerCasedCompound, equiv);
-  }
+		for (C equivalent : equivalents) {
+			addEquivalent(compound, equivalent);
+			addEquivalent(equivalent, compound);
+			addEquivalent(lowerCasedCompound, equivalent);
+			addEquivalent(equivalent, lowerCasedCompound);
+		}
+	}
 
-  protected void addEquivalent(C compound, C equivalent) {
-	 Set<C> s = equivalentsMap.get(compound);
-	 if ( s == null){
-		 s = new HashSet<C>();
-		 equivalentsMap.put(compound, s);
-	 }
-	  
-    s.add( equivalent);
-  }
+	protected void addCompound(C compound, C lowerCasedCompound, C... equivalents) {
+		List<C> equiv = new ArrayList<C>(equivalents.length);
+		equiv.addAll(Arrays.asList(equivalents));
+		addCompound(compound, lowerCasedCompound, equiv);
+	}
 
-  protected void addCompound(C compound) {
-    charSeqToCompound.put(compound.toString(), compound);
-    maxCompoundCharSequenceLength = -1;
-    compoundStringLengthEqual = null;
-  }
+	protected void addEquivalent(C compound, C equivalent) {
+		Set<C> s = equivalentsMap.get(compound);
+		if (s == null) {
+			s = new HashSet<C>();
+			equivalentsMap.put(compound, s);
+		}
 
-  public String getStringForCompound(C compound) {
-    return compound.toString();
-  }
+		s.add(equivalent);
+	}
 
-  public C getCompoundForString(String string) {
-    if(string == null) {
-      throw new IllegalArgumentException("Given a null CharSequence to process");
-    }
+	protected void addCompound(C compound) {
+		charSeqToCompound.put(compound.toString(), compound);
+		maxCompoundCharSequenceLength = -1;
+		compoundStringLengthEqual = null;
+	}
 
-    if (string.length()==0) {
-      return null;
-    }
+	public String getStringForCompound(C compound) {
+		return compound.toString();
+	}
 
-    if (string.length() > getMaxSingleCompoundStringLength()) {
-      throw new IllegalArgumentException("CharSequence supplied is too long.");
-    }
+	public C getCompoundForString(String string) {
+		if (string == null) {
+			throw new IllegalArgumentException("Given a null CharSequence to process");
+		}
 
-    return charSeqToCompound.get(string);
-  }
+		if (string.length() == 0) {
+			return null;
+		}
 
-  public int getMaxSingleCompoundStringLength() {
-    if(maxCompoundCharSequenceLength == -1) {
-      for(C compound: charSeqToCompound.values()) {
-        int size = getStringForCompound(compound).length();
-        if(size > maxCompoundCharSequenceLength) {
-          maxCompoundCharSequenceLength = size;
-        }
-      }
-    }
-    return maxCompoundCharSequenceLength;
-  }
+		if (string.length() > getMaxSingleCompoundStringLength()) {
+			throw new IllegalArgumentException("CharSequence supplied is too long.");
+		}
 
-    @Override
-    public boolean isCompoundStringLengthEqual() {
-        if(compoundStringLengthEqual == null) {
-            int lastSize = -1;
-            compoundStringLengthEqual = Boolean.TRUE;
-            for(CharSequence c: charSeqToCompound.keySet()) {
-                int size = c.length();
-                if(lastSize != -1) {
-                    lastSize = size;
-                    continue;
-                }
-                if(lastSize != size) {
-                    compoundStringLengthEqual = Boolean.FALSE;
-                    break;
-                }
-            }
-        }
-        return compoundStringLengthEqual;
-    }
+		return charSeqToCompound.get(string);
+	}
 
-  public boolean hasCompound(C compound) {
-    C retrievedCompound = getCompoundForString(compound.toString());
-    return (retrievedCompound == null) ? false : true;
-  }
+	public int getMaxSingleCompoundStringLength() {
+		if (maxCompoundCharSequenceLength == -1) {
+			for (C compound : charSeqToCompound.values()) {
+				int size = getStringForCompound(compound).length();
+				if (size > maxCompoundCharSequenceLength) {
+					maxCompoundCharSequenceLength = size;
+				}
+			}
+		}
+		return maxCompoundCharSequenceLength;
+	}
 
-  public boolean compoundsEquivalent(C compoundOne, C compoundTwo) {
-    assertCompound(compoundOne);
-    assertCompound(compoundTwo);
-    return equivalentsMap.get(compoundOne).contains(compoundTwo);
-  }
+	@Override
+	public boolean isCompoundStringLengthEqual() {
+		if (compoundStringLengthEqual == null) {
+			int lastSize = -1;
+			compoundStringLengthEqual = Boolean.TRUE;
+			for (CharSequence c : charSeqToCompound.keySet()) {
+				int size = c.length();
+				if (lastSize != -1) {
+					lastSize = size;
+					continue;
+				}
+				if (lastSize != size) {
+					compoundStringLengthEqual = Boolean.FALSE;
+					break;
+				}
+			}
+		}
+		return compoundStringLengthEqual;
+	}
 
-  public Set<C> getEquivalentCompounds(C compound) {
-    return equivalentsMap.get(compound);
-  }
+	public boolean hasCompound(C compound) {
+		C retrievedCompound = getCompoundForString(compound.toString());
+		return (retrievedCompound == null) ? false : true;
+	}
 
-  public boolean compoundsEqual(C compoundOne, C compoundTwo) {
-    assertCompound(compoundOne);
-    assertCompound(compoundTwo);
-    return compoundOne.equalsIgnoreCase(compoundTwo);
-  }
+	public boolean compoundsEquivalent(C compoundOne, C compoundTwo) {
+		assertCompound(compoundOne);
+		assertCompound(compoundTwo);
+		return equivalentsMap.get(compoundOne).contains(compoundTwo);
+	}
 
-  public void verifySequence(Sequence<C> sequence) throws CompoundNotFoundError {
-    for(C compound: sequence) {
-      assertCompound(compound);
-    }
-  }
+	public Set<C> getEquivalentCompounds(C compound) {
+		return equivalentsMap.get(compound);
+	}
 
-  public List<C> getAllCompounds() {
-    return new ArrayList<C>(charSeqToCompound.values());
-  }
+	public boolean compoundsEqual(C compoundOne, C compoundTwo) {
+		assertCompound(compoundOne);
+		assertCompound(compoundTwo);
+		return compoundOne.equalsIgnoreCase(compoundTwo);
+	}
 
-  private void assertCompound(C compound) {
-    boolean okay = hasCompound(compound);
-    if(! okay) {
-      throw new CompoundNotFoundError("The CompoundSet "+
-          getClass().getSimpleName()+" knows nothing about the compound "+
-          compound);
-    }
-  }
+	public void verifySequence(Sequence<C> sequence) throws CompoundNotFoundError {
+		for (C compound : sequence) {
+			assertCompound(compound);
+		}
+	}
 
-    @Override
-    public boolean isComplementable() {
-        return false;
-    }
+	public List<C> getAllCompounds() {
+		return new ArrayList<C>(charSeqToCompound.values());
+	}
 
-    @Override
-    public int hashCode() {
-        int s = Hashcoder.SEED;
-        s = Hashcoder.hash(s, charSeqToCompound);
-        s = Hashcoder.hash(s, equivalentsMap);
-        return s;
-    }
+	private void assertCompound(C compound) {
+		boolean okay = hasCompound(compound);
+		if (!okay) {
+			throw new CompoundNotFoundError(
+					"The CompoundSet " + getClass().getSimpleName() + " knows nothing about the compound " + compound);
+		}
+	}
 
-    @Override
-    @SuppressWarnings("unchecked")
-    public boolean equals(Object o) {
-        if(Equals.classEqual(this, o)) {
-            AbstractCompoundSet<C> that = (AbstractCompoundSet<C>)o;
-            return  Equals.equal(charSeqToCompound, that.charSeqToCompound) &&
-                    Equals.equal(equivalentsMap, that.equivalentsMap);
-        }
-        return false;
-    }
+	@Override
+	public boolean isComplementable() {
+		return false;
+	}
 
+	@Override
+	public int hashCode() {
+		int s = Hashcoder.SEED;
+		s = Hashcoder.hash(s, charSeqToCompound);
+		s = Hashcoder.hash(s, equivalentsMap);
+		return s;
+	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public boolean equals(Object o) {
+		if (Equals.classEqual(this, o)) {
+			AbstractCompoundSet<C> that = (AbstractCompoundSet<C>) o;
+			return Equals.equal(charSeqToCompound, that.charSeqToCompound)
+					&& Equals.equal(equivalentsMap, that.equivalentsMap);
+		}
+		return false;
+	}
 
 }

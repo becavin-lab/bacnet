@@ -28,13 +28,13 @@ import org.biojava3.core.sequence.template.AbstractSequence;
 
 /**
  * Used to sort sequences
+ * 
  * @author Scooter Willis <willishf at gmail dot com>
  */
-public class SequenceComparator implements Comparator<AbstractSequence<?>>{
+public class SequenceComparator implements Comparator<AbstractSequence<?>> {
 
-   
-    public int compare(AbstractSequence<?> o1, AbstractSequence<?> o2) {
-        return o1.getBioBegin() - o2.getBioBegin();
-    }
+	public int compare(AbstractSequence<?> o1, AbstractSequence<?> o2) {
+		return o1.getBioBegin() - o2.getBioBegin();
+	}
 
 }

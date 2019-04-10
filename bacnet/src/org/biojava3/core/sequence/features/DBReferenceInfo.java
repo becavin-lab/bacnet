@@ -23,90 +23,92 @@
 package org.biojava3.core.sequence.features;
 
 import java.util.LinkedHashMap;
+
 import org.biojava3.core.sequence.loader.UniprotProxySequenceReader;
 
 /**
- * If you have a uniprot ID then it is possible to get a collection
- * of other id(s) that the protein is known by. This is a place holder
- * for the alternative source database and the id for the same protein.
- * Currently implement when the {@link UniprotProxySequenceReader} is used
- * to load a protein sequence
+ * If you have a uniprot ID then it is possible to get a collection of other
+ * id(s) that the protein is known by. This is a place holder for the
+ * alternative source database and the id for the same protein. Currently
+ * implement when the {@link UniprotProxySequenceReader} is used to load a
+ * protein sequence
  *
  * @author Scooter Willis <willishf at gmail dot com>
  */
 public class DBReferenceInfo {
-    private LinkedHashMap<String, String> properties = new LinkedHashMap<String, String>();
-    private String database = "";
-    private String id = "";
+	private LinkedHashMap<String, String> properties = new LinkedHashMap<String, String>();
+	private String database = "";
+	private String id = "";
 
-    /**
-     * The source database and id
-     * @param database
-     * @param id
-     */
-    public DBReferenceInfo(String database, String id){
-        this.database = database;
-        this.id = id;
-    }
+	/**
+	 * The source database and id
+	 * 
+	 * @param database
+	 * @param id
+	 */
+	public DBReferenceInfo(String database, String id) {
+		this.database = database;
+		this.id = id;
+	}
 
-    /**
-     * Add a property and type to associate with this DBReferenceInfo
-     * @param type
-     * @param value
-     */
+	/**
+	 * Add a property and type to associate with this DBReferenceInfo
+	 * 
+	 * @param type
+	 * @param value
+	 */
 
-    public void addProperty(String type, String value){
-        properties.put(type, value);
-    }
+	public void addProperty(String type, String value) {
+		properties.put(type, value);
+	}
 
-    /**
-     * Get the properties
-     * @return the properties
-     */
-    public LinkedHashMap<String, String> getProperties() {
-        return properties;
-    }
+	/**
+	 * Get the properties
+	 * 
+	 * @return the properties
+	 */
+	public LinkedHashMap<String, String> getProperties() {
+		return properties;
+	}
 
-    /**
-     * @param properties the properties to set
-     */
-    public void setProperties(LinkedHashMap<String, String> properties) {
-        this.properties = properties;
-    }
+	/**
+	 * @param properties the properties to set
+	 */
+	public void setProperties(LinkedHashMap<String, String> properties) {
+		this.properties = properties;
+	}
 
-    /**
-     * @return the database
-     */
-    public String getDatabase() {
-        return database;
-    }
+	/**
+	 * @return the database
+	 */
+	public String getDatabase() {
+		return database;
+	}
 
-    /**
-     * @param database the database to set
-     */
-    public void setDatabase(String database) {
-        this.database = database;
-    }
+	/**
+	 * @param database the database to set
+	 */
+	public void setDatabase(String database) {
+		this.database = database;
+	}
 
-    /**
-     * @return the id
-     */
-    public String getId() {
-        return id;
-    }
+	/**
+	 * @return the id
+	 */
+	public String getId() {
+		return id;
+	}
 
-    /**
-     * @param id the id to set
-     */
-    public void setId(String id) {
-        this.id = id;
-    }
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(String id) {
+		this.id = id;
+	}
 
-    @Override
-    public String toString() {
-        return database + ":" + id + ":" + properties;
-    }
-
-
+	@Override
+	public String toString() {
+		return database + ":" + id + ":" + properties;
+	}
 
 }
