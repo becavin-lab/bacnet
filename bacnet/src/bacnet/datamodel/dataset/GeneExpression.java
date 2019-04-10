@@ -31,6 +31,7 @@ public class GeneExpression extends ExpressionData {
     private static final long serialVersionUID = -947282303133711974L;
     public static String PROBES_PATH =
             Database.getDATA_PATH() + "StreamingData" + File.separator + "probeGExpression.data";
+    public static String PROBES_PATH_2 = OmicsData.PATH_GENEXPR_NORM + File.separator + "probeGExpression.data";
     public static String EXTENSION = ".ge";
     public static int COL_NUMBER = 5;
 
@@ -384,6 +385,7 @@ public class GeneExpression extends ExpressionData {
             BioCondition bioCond = BioCondition.getBioCondition(bioCondName);
             for (GeneExpression geneExpr : bioCond.getGeneExprs()) {
                 geneExpr.read();
+                geneExpr.setProbes(Database.getInstance().getProbesGExpression());
                 // add to list
                 bioConds.put(bioCondName, geneExpr);
             }
@@ -405,6 +407,8 @@ public class GeneExpression extends ExpressionData {
             BioCondition bioCond = BioCondition.getBioCondition(bioCondName);
             for (GeneExpression geneExpr : bioCond.getGeneExprs()) {
                 geneExpr.read();
+                geneExpr.setProbes(Database.getInstance().getProbesGExpression());
+                
                 // add to list
                 bioConds.put(bioCondName, geneExpr);
             }
@@ -412,12 +416,21 @@ public class GeneExpression extends ExpressionData {
             bioCond = BioCondition.getBioCondition(bioCondName);
             for (GeneExpression geneExpr : bioCond.getGeneExprs()) {
                 geneExpr.read();
-
+                geneExpr.setProbes(Database.getInstance().getProbesGExpression());
+                
                 // add to list
                 bioConds.put(bioCondName, geneExpr);
             }
         }
         return bioConds;
     }
+
+	public TreeMap<String, Integer> getProbes() {
+		return probes;
+	}
+
+	public void setProbes(TreeMap<String, Integer> probes) {
+		this.probes = probes;
+	}
 
 }
