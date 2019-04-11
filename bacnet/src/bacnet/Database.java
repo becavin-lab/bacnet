@@ -6,8 +6,6 @@ import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.lang.management.ManagementFactory;
-import java.lang.management.RuntimeMXBean;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,7 +25,7 @@ import bacnet.datamodel.dataset.Tiling;
 import bacnet.datamodel.expdesign.BioCondition;
 import bacnet.datamodel.expdesign.Experiment;
 import bacnet.datamodel.sequence.Genome;
-import bacnet.datamodel.sequence.GenomeNCBI;
+import bacnet.datamodel.sequenceNCBI.GenomeNCBI;
 import bacnet.reader.TabDelimitedTableReader;
 
 /**
@@ -37,9 +35,6 @@ import bacnet.reader.TabDelimitedTableReader;
  * 
  * @author UIBC
  *
- */
-/*
- * For eclipse.rap
  */
 public class Database {
 	/*
@@ -220,11 +215,6 @@ public class Database {
 	 */
 	private ArrayList<String> geneListEGDe = new ArrayList<String>();
 	/**
-	 * List of genes in lmo (to increase loading of viewers), including
-	 * altzernatives genes and ncRNAs
-	 */
-	private ArrayList<String> allGeneListEGDe = new ArrayList<String>();
-	/**
 	 * List of sRNAs in lmo (to increase loading of viewers)
 	 */
 	private ArrayList<String> sRNAListEGDe = new ArrayList<String>();
@@ -273,7 +263,7 @@ public class Database {
 		/**
 		 * Check values of the JVM
 		 */
-		RuntimeMXBean runtimeMxBean = ManagementFactory.getRuntimeMXBean();
+//		RuntimeMXBean runtimeMxBean = ManagementFactory.getRuntimeMXBean();
 //		List<String> arguments = runtimeMxBean.getInputArguments();
 //		for (String argument : arguments) {
 //			System.out.println(argument);
@@ -548,7 +538,6 @@ public class Database {
 		probesTiling = new TreeMap<Integer, Integer>();
 		probesGExpression = new TreeMap<String, Integer>();
 		geneListEGDe = new ArrayList<String>();
-		allGeneListEGDe = new ArrayList<String>();
 		sRNAListEGDe = new ArrayList<String>();
 		asRNAListEGDe = new ArrayList<String>();
 		cisRegRNAListEGDe = new ArrayList<String>();

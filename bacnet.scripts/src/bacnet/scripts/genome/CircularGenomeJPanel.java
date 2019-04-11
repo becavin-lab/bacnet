@@ -15,13 +15,13 @@ import org.biojava3.core.sequence.DNASequence;
 import bacnet.datamodel.dataset.ExpressionMatrix;
 import bacnet.datamodel.sequence.Gene;
 import bacnet.datamodel.sequence.Genome;
-import bacnet.datamodel.sequence.GenomeNCBI;
 import bacnet.datamodel.sequence.NcRNA;
 import bacnet.datamodel.sequence.Operon;
 import bacnet.datamodel.sequence.Sequence;
 import bacnet.datamodel.sequence.Srna;
 import bacnet.datamodel.sequence.Srna.TypeSrna;
 import bacnet.datamodel.sequenceNCBI.GeneNCBITools;
+import bacnet.datamodel.sequenceNCBI.GenomeNCBI;
 import bacnet.utils.BasicColor;
 import ca.ualberta.stothard.cgview.Cgview;
 import ca.ualberta.stothard.cgview.CgviewConstants;
@@ -30,7 +30,7 @@ import ca.ualberta.stothard.cgview.FeatureRange;
 import ca.ualberta.stothard.cgview.FeatureSlot;
 
 /**
- * Circular Genome Panel created for displaying Small RNAs
+ * Circular Genome Panel created for displaying Small RNAs in CGView
  * 
  * @author UIBC
  *
@@ -49,7 +49,7 @@ public class CircularGenomeJPanel extends JPanel {
 
 	public CircularGenomeJPanel(int width, int height, GenomeNCBI genome, String title) {
 
-		int length = genome.getChromosomes().get(0).getLength();
+		int length = genome.getFirstChromosome().getLength();
 		cgview = new Cgview(length);
 
 		// some optional settings
@@ -225,7 +225,7 @@ public class CircularGenomeJPanel extends JPanel {
 	}
 
 	public void sRNACircularGenome(int width, int height, Genome genome, String title) {
-		int length = genome.getChromosomes().get(0).getLength();
+		int length = genome.getFirstChromosome().getLength();
 		cgview = new Cgview(length);
 
 		// some optional settings
@@ -255,19 +255,18 @@ public class CircularGenomeJPanel extends JPanel {
 		// Cgview.REVERSE_STRAND);
 		ArrayList<Sequence> sequences = new ArrayList<>();
 
-		for (Sequence seq : genome.getChromosomes().get(0).getGenes().values())
+		for (Sequence seq : genome.getFirstChromosome().getGenes().values())
 			sequences.add(seq);
-		for (Sequence seq : genome.getChromosomes().get(0).getsRNAs().values())
+		for (Sequence seq : genome.getFirstChromosome().getsRNAs().values())
 			sequences.add(seq);
-		for (Sequence seq : genome.getChromosomes().get(0).getAsRNAs().values())
+		for (Sequence seq : genome.getFirstChromosome().getAsRNAs().values())
 			sequences.add(seq);
-		for (Sequence seq : genome.getChromosomes().get(0).getNcRNAs().values())
+		for (Sequence seq : genome.getFirstChromosome().getNcRNAs().values())
 			sequences.add(seq);
-		for (Sequence seq : genome.getChromosomes().get(0).getCisRegs().values())
+		for (Sequence seq : genome.getFirstChromosome().getCisRegs().values())
 			sequences.add(seq);
 
 		for (Sequence sequence : sequences) {
-			char strand = sequence.getStrand();
 			Color color = Color.black;
 			if (sequence instanceof Srna) {
 				Srna sRNA = (Srna) sequence;
@@ -358,7 +357,6 @@ public class CircularGenomeJPanel extends JPanel {
 			sequences.add(seq);
 
 		for (Sequence sequence : sequences) {
-			char strand = sequence.getStrand();
 			Color color = Color.GRAY;
 			// if(sequence instanceof Srna){
 			// Srna sRNA = (Srna) sequence;

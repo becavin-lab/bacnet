@@ -132,7 +132,7 @@ public class BannerView implements SelectionListener {
 
 		}
 
-		ToolItem toolItem_3 = new ToolItem(toolBar, SWT.SEPARATOR);
+		new ToolItem(toolBar, SWT.SEPARATOR);
 
 		tltmAbout = new ToolItem(toolBar, SWT.NONE);
 		tltmAbout.setImage(ResourceManager.getPluginImage("bacnet", "icons/ToolBar/howto.png"));

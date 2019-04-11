@@ -6,26 +6,39 @@ import bacnet.datamodel.sequence.Gene;
 import bacnet.datamodel.sequence.Genome;
 import bacnet.datamodel.sequence.NcRNA;
 
+/**
+ * GenBankl reader tools
+ * <br>
+	 * TO BE FIXED for adding other chromosomes
+ * @author christophebecavin
+ *
+ */
 public class GBKReader {
 
+	/**
+	 * Create GenBank file with first chromosome<br>
+	 * TO BE FIXED for adding other chromosomes
+	 * @param genome
+	 * @param fileName
+	 */
 	public static void createGenBankFile(Genome genome, String fileName) {
 		ArrayList<String> results = new ArrayList<>();
-		results.add("LOCUS       PRJEB4153            " + genome.getChromosomes().get(0).getLength()
+		results.add("LOCUS       PRJEB4153            " + genome.getFirstChromosome().getLength()
 				+ " bp    DNA     circular CON 13-JUN-2013");
 		results.add("DEFINITION  Listeria monocytogenes EGD, complete genome.");
 		results.add("ACCESSION   PRJEB4153");
 		results.add("VERSION     PRJEB4153  ERP003412");
 
 		results.add("FEATURES             Location/Qualifiers");
-		results.add(addSpaces(5) + "source" + addSpaces(10) + "1.." + genome.getChromosomes().get(0).getLength());
+		results.add(addSpaces(5) + "source" + addSpaces(10) + "1.." + genome.getFirstChromosome().getLength());
 		results.add(addSpaces(21) + "/organism=\"" + genome.getSpecies() + "\"");
 		results.add(addSpaces(21) + "/mol_type=\"genomic DNA\"");
 		results.add(addSpaces(21) + "/strain=\" \"");
 		results.add(addSpaces(21) + "/db_xref=\" \"");
 
-		for (String locus : genome.getChromosomes().get(0).getGenes().keySet()) {
+		for (String locus : genome.getFirstChromosome().getGenes().keySet()) {
 			// String locus = "lmo0001";
-			Gene gene = genome.getChromosomes().get(0).getGenes().get(locus);
+			Gene gene = genome.getFirstChromosome().getGenes().get(locus);
 			locus = locus.replaceFirst("lmpc", "LMON_");
 
 			String position = gene.getBegin() + ".." + gene.getEnd();
@@ -55,8 +68,8 @@ public class GBKReader {
 			// results.add(addSpaces(21)+"/translation=\""+gene.getSequenceAA()+"\"");
 		}
 
-		for (String locus : genome.getChromosomes().get(0).getNcRNAs().keySet()) {
-			NcRNA rna = genome.getChromosomes().get(0).getNcRNAs().get(locus);
+		for (String locus : genome.getFirstChromosome().getNcRNAs().keySet()) {
+			NcRNA rna = genome.getFirstChromosome().getNcRNAs().get(locus);
 
 			locus = locus.replaceFirst("lmpcr", "LMONR_");
 			locus = locus.replaceFirst("lmpct", "LMONT_");
@@ -88,19 +101,19 @@ public class GBKReader {
 	public static ArrayList<String> formatSequence(Genome genome) {
 		ArrayList<String> sequences = new ArrayList<>();
 		// int nbA =
-		// genome.getChromosomes().get(0).countCompounds(DNACompoundSet.getDNACompoundSet().getCompoundForString("A"));
+		// genome.getFirstChromosome().countCompounds(DNACompoundSet.getDNACompoundSet().getCompoundForString("A"));
 		// int nbC =
-		// genome.getChromosomes().get(0).countCompounds(DNACompoundSet.getDNACompoundSet().getCompoundForString("C"));
+		// genome.getFirstChromosome().countCompounds(DNACompoundSet.getDNACompoundSet().getCompoundForString("C"));
 		// int nbG =
-		// genome.getChromosomes().get(0).countCompounds(DNACompoundSet.getDNACompoundSet().getCompoundForString("G"));
+		// genome.getFirstChromosome().countCompounds(DNACompoundSet.getDNACompoundSet().getCompoundForString("G"));
 		// int nbT =
-		// genome.getChromosomes().get(0).countCompounds(DNACompoundSet.getDNACompoundSet().getCompoundForString("T"));
+		// genome.getFirstChromosome().countCompounds(DNACompoundSet.getDNACompoundSet().getCompoundForString("T"));
 		// String firstLine = "SQ Sequence
-		// "+genome.getChromosomes().get(0).getLength()+" BP; "+nbA+" A; "+nbC+" C;
+		// "+genome.getFirstChromosome().getLength()+" BP; "+nbA+" A; "+nbC+" C;
 		// "+nbG+" G; "+nbT+" T; 0 other;";
 		// sequences.add(firstLine);
 
-		String seq = genome.getChromosomes().get(0).getSequenceAsString();
+		String seq = genome.getFirstChromosome().getSequenceAsString();
 		for (int i = 0; i < seq.length(); i = i + 60) {
 			String line = "        " + (i + 1) + " ";
 			if (seq.length() - i < 60) {

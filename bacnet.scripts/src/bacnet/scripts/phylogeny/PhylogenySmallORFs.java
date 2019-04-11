@@ -13,6 +13,7 @@ import bacnet.Database;
 import bacnet.datamodel.sequence.Sequence;
 import bacnet.datamodel.sequenceNCBI.GenomeNCBITools;
 import bacnet.reader.TabDelimitedTableReader;
+import bacnet.scripts.blast.Blast;
 import bacnet.scripts.blast.GenomeNCBIFolderTools;
 import bacnet.utils.ArrayUtils;
 import bacnet.utils.FileUtils;
@@ -34,16 +35,15 @@ public class PhylogenySmallORFs {
 	// Annotation/All-Firmicutes-Species_NCBI_ID.txt";
 	// public static String PATH_GENOMES_LIST =
 	// GenomeNCBITools.PATH_NCBI_WIN+"listBacteria.excel";
-	private static String FTP_PATH = "";
-
-	public static void run() {
+	
+	public static void run(EPartService partService) {
 		String tableGenomes = "D:/GenomeNCBI/bacteria_assembly_summary.txt";
 		String pathGenomes = "D:/GenomeNCBI/AllBacteria";
 
 		/*
 		 * Get list of bacteria genomes
 		 */
-		// cleanListGenome();
+		cleanListGenome();
 
 		/*
 		 * downloadGenomes
@@ -53,24 +53,26 @@ public class PhylogenySmallORFs {
 		/*
 		 * Create blastN database and BlastP database
 		 */
-//		String[][] newGenomes = TabDelimitedTableReader.read(tableGenomes);
-//		String[] genomes = new String[newGenomes.length];
-//		for(int i=1;i<newGenomes.length;i++){
-//			genomes[i] = newGenomes[i][ArrayUtils.findColumn(newGenomes, "folder_name")];
-//		}
-//		Blast.createBlastDatabases(pathGenomes, genomes, true, false);
+		String[][] newGenomes = TabDelimitedTableReader.read(tableGenomes);
+		String[] genomes = new String[newGenomes.length];
+		for(int i=1;i<newGenomes.length;i++){
+			genomes[i] = newGenomes[i][ArrayUtils.findColumn(newGenomes, "folder_name")];
+		}
+		Blast.createBlastDatabases(pathGenomes, genomes, true, false);
 //		Blast.createBlastDatabases(pathGenomes, genomes, false, false);
 
 		/*
 		 * Run BlastP
 		 */
-//			MultiSequenceBlastProtein.run("D:/smallORF.txt", true);
+		//MultiSequenceBlastProtein.run("D:/smallORF.txt", true);
 
 		/*
 		 * assuming that Lite.excel table have been reduced manually by removing
 		 * doublons
 		 */
-		// createPhylogenyFile(smallORFs);
+		ArrayList<Sequence> smallORFs = new ArrayList<Sequence>();
+		// Load your list of smallORFs here !!!
+		createPhylogenyFile(smallORFs);
 
 		/*
 		 * ALIGN using ClustalW and create phylogeny file using MEGA6<br> Display
@@ -80,12 +82,12 @@ public class PhylogenySmallORFs {
 		/*
 		 * Display multi align with appropriate colors
 		 */
-		// displayMultiAlign(partService);
+		displayMultiAlign(partService);
 
 		/*
 		 * Displaying the newly created tree with Archaeopteryx. OBSOLETE
 		 */
-		// displayPhylogeny(smallORFs);
+		displayPhylogeny(smallORFs);
 	}
 
 	/**
@@ -224,6 +226,7 @@ public class PhylogenySmallORFs {
 	 * 
 	 * @return
 	 */
+	@SuppressWarnings("unused")
 	private static ArrayList<String> getAllGenomesFromNewick() {
 		/**
 		 * Read Newick files and extract the list of all genomes
@@ -269,7 +272,7 @@ public class PhylogenySmallORFs {
 					genomes.add(genome);
 					// System.out.println(genome);
 				}
-				String number = genomeTemp.split(",")[0];
+				//String number = genomeTemp.split(",")[0];
 				// System.err.println(number);
 			} else {
 				// System.err.println(genomeTemp);
@@ -282,6 +285,7 @@ public class PhylogenySmallORFs {
 	/**
 	 * Remove all files of the blast database
 	 */
+	@SuppressWarnings("unused")
 	private static void cleanFolders() {
 		final ArrayList<String> listBacteria = TabDelimitedTableReader
 				.readList(GenomeNCBIFolderTools.PATH_GENOMES_LIST);

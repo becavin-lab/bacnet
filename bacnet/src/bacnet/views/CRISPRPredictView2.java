@@ -75,6 +75,7 @@ public class CRISPRPredictView2 implements SelectionListener {
 	/**
 	 * Create contents of the view part.
 	 */
+	@SuppressWarnings("unused")
 	@PostConstruct
 	public void createControls(Composite parent) {
 		parent.setLayout(new GridLayout(1, false));
@@ -225,7 +226,7 @@ public class CRISPRPredictView2 implements SelectionListener {
 			}
 		} else {
 			// Run on server
-			String prediction_cas = PYTHON_SERVER + "/prediction_cas_prod.py";
+			//String prediction_cas = PYTHON_SERVER + "/prediction_cas_prod.py";
 			String execProcess = "/usr/local/bin/singularity run " + SINGULARITY_PATH + " -f " + fasta + " -m " + model
 					+ " -o " + output;
 			try {

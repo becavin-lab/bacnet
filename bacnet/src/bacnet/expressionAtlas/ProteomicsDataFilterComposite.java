@@ -80,7 +80,7 @@ public class ProteomicsDataFilterComposite extends org.eclipse.swt.widgets.Compo
 			}
 		});
 
-		Label label_6 = new Label(this, SWT.NONE);
+		new Label(this, SWT.NONE);
 		{
 			Label lblGenome = new Label(this, SWT.NONE);
 			lblGenome.setFont(SWTResourceManager.getBodyFont(SWT.BOLD));
@@ -94,7 +94,7 @@ public class ProteomicsDataFilterComposite extends org.eclipse.swt.widgets.Compo
 			comboGenome.addSelectionListener(this);
 		}
 		{
-			Label label_1 = new Label(this, SWT.NONE);
+			new Label(this, SWT.NONE);
 		}
 		{
 			Label lblNewLabel_2 = new Label(this, SWT.NONE);
@@ -128,7 +128,7 @@ public class ProteomicsDataFilterComposite extends org.eclipse.swt.widgets.Compo
 
 		}
 
-		Label label_2 = new Label(this, SWT.NONE);
+		new Label(this, SWT.NONE);
 
 		Label lblGrowth = new Label(this, SWT.NONE);
 		lblGrowth.setFont(SWTResourceManager.getBodyFont(SWT.BOLD));

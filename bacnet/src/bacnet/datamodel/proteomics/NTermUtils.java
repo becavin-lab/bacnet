@@ -155,6 +155,7 @@ public class NTermUtils {
 		Sequence allNterm = new Sequence("allNterm", 643800, 643979);
 		// Sequence allNterm = new Sequence("allNterm", 652414, 652370);
 
+		@SuppressWarnings("unused")
 		String finalResult = "";
 		boolean found = false;
 		for (int i = 0; i < allNterm.getSequence().length(); i++) {

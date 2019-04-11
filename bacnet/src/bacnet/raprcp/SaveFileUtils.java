@@ -13,6 +13,12 @@ import bacnet.utils.FileUtils;
 import bacnet.utils.HTMLUtils;
 import bacnet.views.InternalBrowser;
 
+/**
+ * Utils methods for managinf files. <br>
+ * SOME PARTS NEED TO BE COMMENTED FOR RAP OR RCP TO WORK
+ * @author christophebecavin
+ *
+ */
 public class SaveFileUtils {
 
 	/**

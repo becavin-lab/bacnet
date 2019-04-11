@@ -15,6 +15,7 @@ import org.biojava3.core.sequence.template.SequenceReader;
 
 import bacnet.datamodel.annotation.Annotation;
 import bacnet.datamodel.sequence.Sequence.SeqType;
+import bacnet.datamodel.sequenceNCBI.GenomeNCBI;
 import bacnet.reader.TabDelimitedTableReader;
 import bacnet.utils.ArrayUtils;
 

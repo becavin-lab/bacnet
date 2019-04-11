@@ -14,7 +14,6 @@ import bacnet.datamodel.sequence.Chromosome;
 import bacnet.datamodel.sequence.ChromosomeBacteriaSequence;
 import bacnet.datamodel.sequence.Gene;
 import bacnet.datamodel.sequence.Genome;
-import bacnet.datamodel.sequence.GenomeNCBI;
 import bacnet.datamodel.sequence.NcRNA;
 import bacnet.datamodel.sequence.Operon;
 import bacnet.datamodel.sequence.Sequence;
@@ -368,6 +367,13 @@ public class GenomeConversion {
 				case unknown:
 					annot[i][6] = seq.getComment();
 					types.add(SeqType.unknown);
+					break;
+				case ASrna:
+					annot[i][6] = ((Srna) seq).getTypeSrna() + "";
+					annot[i][6] = ((Srna) seq).getRef();
+					types.add(SeqType.Srna);
+					break;
+				default:
 					break;
 				}
 				i++;

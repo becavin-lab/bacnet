@@ -171,7 +171,7 @@ public class Febit {
 					"Reporter Database Entry [genbank]")];
 			if (locus.equals("")) {
 				System.out.println(genBank + "  " + description);
-				for (Gene gene : genome.getChromosomes().get(0).getGenes().values()) {
+				for (Gene gene : genome.getFirstChromosome().getGenes().values()) {
 					String genBankGene = gene.getProtein_id();
 					if (genBankGene.equals(genBank)) {
 						System.out.println("found " + genBankGene + "  " + gene.getComment());

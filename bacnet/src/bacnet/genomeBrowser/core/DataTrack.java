@@ -147,7 +147,6 @@ public class DataTrack {
 		if (track.getDisplayType() == DisplayType.BIOCOND) { // OverlayBC, the color will be the same for all BC
 			for (BioCondition bioCond : getBioConditionHashMaps().values()) {
 				ArrayList<OmicsData> tscDatas = bioCond.getOmicsData();
-				int k = 2;
 				for (OmicsData tscData : tscDatas) {
 					if (tscData instanceof Tiling) {
 						if (tscData.getName().contains("+"))
@@ -165,7 +164,6 @@ public class DataTrack {
 							dataColors.put(tscData.getName(), BasicColor.BLUE);
 						} else
 							dataColors.put(tscData.getName(), BasicColor.RNASEQ_NOSTRAND);
-						k++;
 					} else if (tscData instanceof NTermData) {
 						dataColors.put(tscData.getName(), BasicColor.GREY);
 					} else if (tscData instanceof ExpressionMatrix) {

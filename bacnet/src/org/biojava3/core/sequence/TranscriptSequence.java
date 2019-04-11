@@ -38,6 +38,7 @@ import org.biojava3.core.sequence.transcription.TranscriptionEngine;
  */
 public class TranscriptSequence extends DNASequence {
 
+	@SuppressWarnings("unused")
 	private static final Logger log = Logger.getLogger(TranscriptSequence.class.getName());
 	private final ArrayList<CDSSequence> cdsSequenceList = new ArrayList<CDSSequence>();
 	private final LinkedHashMap<String, CDSSequence> cdsSequenceHashMap = new LinkedHashMap<String, CDSSequence>();

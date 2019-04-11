@@ -363,7 +363,6 @@ public class CoExprNetworkView implements SelectionListener {
 			/*
 			 * Register the network data in corr.txt
 			 */
-			String dataName = "corr" + Math.random() + ".txt";
 			File file = File.createTempFile("corr" + Math.random(), ".txt");
 			String dataPath = file.getAbsolutePath();
 			// System.out.println("Corr data - "+dataPath);

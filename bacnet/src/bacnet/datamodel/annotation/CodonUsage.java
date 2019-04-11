@@ -134,7 +134,7 @@ public class CodonUsage {
 	 * count the number of AAA, ATG and CCC codons
 	 */
 	public static void verifyCodonUsage() {
-		Chromosome chromo = Genome.loadEgdeGenome().getChromosomes().get(0);
+		Chromosome chromo = Genome.loadEgdeGenome().getFirstChromosome();
 		double totalNumber = 0;
 		double codonAAA = 0;
 		double codonATG = 0;

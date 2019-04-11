@@ -28,7 +28,7 @@ import org.biojava3.core.sequence.io.ProteinSequenceCreator;
 import bacnet.Database;
 import bacnet.datamodel.sequence.Gene;
 import bacnet.datamodel.sequence.Genome;
-import bacnet.datamodel.sequence.GenomeNCBI;
+import bacnet.datamodel.sequenceNCBI.GenomeNCBI;
 import bacnet.reader.NCBIFastaHeaderParser;
 import bacnet.reader.TabDelimitedTableReader;
 import bacnet.scripts.blast.BlastOutput.BlastOutputTYPE;

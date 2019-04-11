@@ -26,14 +26,11 @@ public class BlastQueryPage extends WizardPage implements SelectionListener {
 	private Button btnSave;
 	public Combo cmbFileFormat;
 
-	private Shell shell;
-
 	/**
 	 * Create the wizard.
 	 */
 	public BlastQueryPage(Shell parentShell) {
 		super("wizardPage");
-		this.shell = parentShell;
 		setTitle("Enter query sequence");
 		setDescription("Provide a query nucleotide sequence");
 	}

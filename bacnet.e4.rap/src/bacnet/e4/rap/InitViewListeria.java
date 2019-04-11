@@ -59,7 +59,6 @@ public class InitViewListeria implements SelectionListener {
 
 	private Button btnBHI37;
 	private Button btnSrnas;
-	private Label lblTzest;
 	private Button btnCoExpression;
 	private Button btnStat;
 	private Button btnNTerm;
@@ -92,6 +91,7 @@ public class InitViewListeria implements SelectionListener {
 	public InitViewListeria() {
 	}
 
+	@SuppressWarnings("unused")
 	@PostConstruct
 	public void createPartControl(Composite parent) {
 

@@ -12,6 +12,7 @@ import bacnet.datamodel.dataset.NGS;
 import bacnet.datamodel.dataset.OmicsData.TypeData;
 import bacnet.datamodel.expdesign.BioCondition;
 import bacnet.datamodel.expdesign.Experiment;
+import bacnet.datamodel.sequence.Chromosome;
 import bacnet.datamodel.sequence.Gene;
 import bacnet.datamodel.sequence.Genome;
 import bacnet.datamodel.sequence.Sequence;
@@ -24,6 +25,7 @@ import bacnet.utils.CMD;
  * @author UIBC
  *
  */
+@SuppressWarnings("unused")
 public class SummaryListeriomics {
 
 	public static String DATA_PATH = Database.getInstance().getPath() + "Listeriomics";
@@ -240,6 +242,7 @@ public class SummaryListeriomics {
 	/**
 	 * Create metadata analysis network of transcriptomic datasets
 	 */
+	@SuppressWarnings("unused")
 	private static void createSummaryNetwork() {
 		// TreeSet<String> listnode = new TreeSet<String>();
 		// ArrayList<String> network = new ArrayList<String>();
@@ -381,6 +384,7 @@ public class SummaryListeriomics {
 	/**
 	 * Create metanalysis network of proteomics datasets
 	 */
+	@SuppressWarnings("unused")
 	private static void createSummaryNetworkProteome() {
 		ArrayList<BioCondition> bioCondTemps = BioCondition.getAllBioConditions();
 		ArrayList<BioCondition> bioConds = new ArrayList<>();
@@ -516,6 +520,7 @@ public class SummaryListeriomics {
 	/**
 	 * Create summary tables of RNAseq datasets
 	 */
+	@SuppressWarnings("unused")
 	private static void createSummaryRNASeq() {
 		ArrayList<String> list = new ArrayList<String>();
 		for (BioCondition bioCondition : Experiment.getGeneralExp().getBioConditions()) {
@@ -563,7 +568,7 @@ public class SummaryListeriomics {
 	}
 
 	/**
-	 * Create Table 1 with the list of Genomes and different infos<br>
+	 * Create Table 1 for Listeriomics paper with the list of Genomes and different infos<br>
 	 * Save in: Project.getPath()+"Table 1 - Genomes.txt"
 	 */
 	public static void createGenomeTable() {
@@ -579,33 +584,25 @@ public class SummaryListeriomics {
 		for (String genomeName : genomesList) {
 			Genome genome = Genome.loadGenome(genomeName);
 			String strain = genome.getSpecies();
-			String accession = genome.getChromosomes().get(0).getAccession().toString();
-			if (genome.getChromosomes().size() == 2)
-				accession += " (" + genome.getChromosomes().get(1).getAccession().toString() + ")";
-			String length = genome.getChromosomes().get(0).getLength() + "";
-			if (genome.getChromosomes().size() == 2)
-				length += " (" + genome.getChromosomes().get(1).getLength() + ")";
-			String GC = ((double) genome.getChromosomes().get(0).getLength()
-					/ (double) genome.getChromosomes().get(0).getGCCount()) + "";
-			if (genome.getChromosomes().size() == 2)
-				GC += " (" + ((double) genome.getChromosomes().get(1).getLength()
-						/ (double) genome.getChromosomes().get(1).getGCCount()) + ")";
-			String CDS = genome.getChromosomes().get(0).getGenes().size() + "";
-			if (genome.getChromosomes().size() == 2)
-				CDS += " (" + genome.getChromosomes().get(1).getGenes().size() + ")";
-			String rRNAtRNA = genome.getChromosomes().get(0).getNcRNAs().size() + "";
-			if (genome.getChromosomes().size() == 2)
-				rRNAtRNA += " (" + genome.getChromosomes().get(1).getNcRNAs().size() + ")";
-			String sRNA = genome.getChromosomes().get(0).getsRNAs().size() + "";
-			if (genome.getChromosomes().size() == 2)
-				sRNA += " (" + genome.getChromosomes().get(1).getsRNAs().size() + ")";
-			String cisRegs = genome.getChromosomes().get(0).getCisRegs().size() + "";
-			if (genome.getChromosomes().size() == 2)
-				cisRegs += " (" + genome.getChromosomes().get(1).getCisRegs().size() + ")";
-			String asRNAs = genome.getChromosomes().get(0).getAsRNAs().size() + "";
-			if (genome.getChromosomes().size() == 2)
-				asRNAs += " (" + genome.getChromosomes().get(1).getAsRNAs().size() + ")";
-
+			String accession = "";
+			String length = "";
+			String GC = "";
+			String CDS = "";
+			String rRNAtRNA = "";
+			String sRNA = "";
+			String cisRegs = "";
+			String asRNAs = "";
+			for(String chromoName : genome.getChromosomes().keySet()) {
+				accession += genome.getFirstChromosome().getAccession().toString() + " - ";
+				length += genome.getFirstChromosome().getLength() + " - ";
+				GC += ((double) genome.getFirstChromosome().getLength() 
+					/ (double) genome.getFirstChromosome().getGCCount()) + " - ";
+				CDS += genome.getFirstChromosome().getGenes().size() + " - ";
+				rRNAtRNA = genome.getFirstChromosome().getNcRNAs().size() + " - ";
+				sRNA += genome.getFirstChromosome().getsRNAs().size() + " - ";
+				cisRegs += genome.getFirstChromosome().getCisRegs().size() + " - ";
+				asRNAs += genome.getFirstChromosome().getAsRNAs().size() + " - ";
+			}
 			String[] rows = { strain, accession, length, GC, CDS, rRNAtRNA, sRNA, cisRegs, asRNAs };
 			String row = "";
 			for (String temp : rows)
@@ -890,7 +887,7 @@ public class SummaryListeriomics {
 		// }
 
 		ArrayList<String> cgViewTabFile = new ArrayList<>();
-		cgViewTabFile.add("%" + genome.getChromosomes().get(0).getLength());
+		cgViewTabFile.add("%" + genome.getFirstChromosome().getLength());
 		cgViewTabFile.add("!strand\tslot\tstart\tstop\ttype\tlabel");
 		for (String elementName : mutantsSet) {
 

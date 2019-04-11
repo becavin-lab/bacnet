@@ -580,7 +580,7 @@ public class ArrayUtils {
 	 * @param index column index
 	 * @return
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static double[][] sortColumn(double[][] array, int index) {
 		double[][] arrayTemp = array.clone();
 		// double[] colToSort = getColumn(array, index);

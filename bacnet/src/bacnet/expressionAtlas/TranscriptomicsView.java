@@ -57,6 +57,11 @@ import bacnet.utils.ArrayUtils;
 import bacnet.utils.RWTUtils;
 import bacnet.views.HelpPage;
 
+/**
+ * View in which is displayed the table with all transcriptomics data available
+ * @author christophebecavin
+ *
+ */
 public class TranscriptomicsView implements SelectionListener {
 
 	/**
@@ -673,10 +678,20 @@ public class TranscriptomicsView implements SelectionListener {
 
 	}
 
+	/**
+	 * Run thread for opening BioCondition, Comparisons, detect Genome and open corresponding LogFC ExpressionMatrix
+	 * @author christophebecavin
+	 *
+	 */
 	public static class OpenExpressionMatrixAndComparisons implements IRunnableWithProgress {
 		private ArrayList<String> bioConditions = new ArrayList<>();
 		private HashMap<String, ArrayList<String>> genomeToComparisons;
 
+		/**
+		 * Open BioCondition, Comparisons, detect Genome and open corresponding LogFC ExpressionMatrix
+		 * @param bioConditions
+		 * @param genomeToComparisons
+		 */
 		public OpenExpressionMatrixAndComparisons(ArrayList<String> bioConditions,
 				HashMap<String, ArrayList<String>> genomeToComparisons) {
 			this.bioConditions = bioConditions;
@@ -708,6 +723,7 @@ public class TranscriptomicsView implements SelectionListener {
 			for (String genomeName : genomeToComparisons.keySet()) {
 				monitor.subTask("Loading ExpressionAtlas for : " + genomeName);
 				monitor.worked(1);
+				@SuppressWarnings("unused")
 				ExpressionMatrix logFCMatrix = Database.getInstance().getLogFCTranscriptomesTable(genomeName);
 			}
 

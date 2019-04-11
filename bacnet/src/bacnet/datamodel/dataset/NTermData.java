@@ -573,7 +573,6 @@ public class NTermData extends OmicsData implements Serializable {
 		String[][] annot = getAnnotation().getAnnotation();
 		for (int i = 1; i < annot.length; i++) {
 			if (annot[i][0].equals(nTerm.getName())) {
-				int k = i;
 				while (i < (annot.length - 1)) {
 					i++;
 					String nTermName = annot[i][0];

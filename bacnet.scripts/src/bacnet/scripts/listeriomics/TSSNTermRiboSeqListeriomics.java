@@ -313,7 +313,6 @@ public class TSSNTermRiboSeqListeriomics {
 
 			String[] elements = line.split(",");
 			for (String element : elements) {
-				int index = -1;
 				String pos = element.split("\\(")[0].trim();
 				String subElement = element.substring(element.indexOf("str") + 3, element.indexOf(')'));
 				String strand = subElement.split("\\#")[0];

@@ -18,8 +18,12 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 
-import bacnet.scripts.blast.BlastOutput.BlastOutputTYPE;
-
+/**
+ * Old classes to display Blast Results in Eclipse.rcp
+ * 
+ * @author christophebecavin
+ *
+ */
 public class BlastResultView implements SelectionListener {
 
 	/**
@@ -28,12 +32,11 @@ public class BlastResultView implements SelectionListener {
 	private static final long serialVersionUID = 3579398886352775140L;
 	public static final String ID = "ListTranscript.BlastResultView";
 	private Button btnSave;
-	private Label lblSave;
 	private Browser browser;
 	private Combo combo;
 	private Button btnRefreshDisplay;
 
-	private String archiveFile = Blast.getBLAST_RESULT_PATH() + BlastOutput.fileExtension(BlastOutputTYPE.ASN);
+	//private String archiveFile = Blast.getBLAST_RESULT_PATH() + BlastOutput.fileExtension(BlastOutputTYPE.ASN);
 	private Button btnLoad;
 	private Button btnExport;
 
@@ -83,7 +86,8 @@ public class BlastResultView implements SelectionListener {
 		btnSave.addSelectionListener(this);
 		new Label(composite, SWT.NONE);
 
-		lblSave = new Label(composite, SWT.NONE);
+		@SuppressWarnings("unused")
+		Label lblSave = new Label(composite, SWT.NONE);
 
 		loadBlastData();
 

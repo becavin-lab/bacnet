@@ -89,8 +89,11 @@ public class AddProteomicsDataDialog extends TitleAreaDialog implements Selectio
 	private ArrayList<String[]> bioCondsToDisplay;
 
 	private final Image imageTSS;
+	@SuppressWarnings("unused") // loaded after
 	private final Image imageRNASeq;
+	@SuppressWarnings("unused") // loaded after
 	private final Image imageTSSTilingGeneExpr;
+	@SuppressWarnings("unused") // loaded after
 	private final Image imageTilingGeneExpr;
 	private final Image imageGeneExpr;
 	private Button btnCytoplasm;
@@ -133,6 +136,7 @@ public class AddProteomicsDataDialog extends TitleAreaDialog implements Selectio
 	 * 
 	 * @param parent
 	 */
+	@SuppressWarnings("unused")
 	@Override
 	protected Control createDialogArea(Composite parent) {
 		setMessage("The list below shows you the different type of proteomics data available for display");
@@ -245,8 +249,7 @@ public class AddProteomicsDataDialog extends TitleAreaDialog implements Selectio
 
 		}
 
-		@SuppressWarnings("unused")
-		Label label_2 = new Label(composite_3, SWT.NONE);
+		new Label(composite_3, SWT.NONE);
 
 		Label lblGrowth = new Label(composite_3, SWT.NONE);
 		lblGrowth.setFont(SWTResourceManager.getBodyFont(SWT.BOLD));
@@ -827,6 +830,7 @@ public class AddProteomicsDataDialog extends TitleAreaDialog implements Selectio
 	 * 
 	 * @return
 	 */
+	@SuppressWarnings("unused")
 	private HashMap<String, ArrayList<String>> getSelectedBioConditions() {
 		HashMap<String, ArrayList<String>> genomeToBioConds = new HashMap<>();
 		for (int index : tableBioCondition.getTable().getSelectionIndices()) {

@@ -261,7 +261,7 @@ public class ArrayExpressTechnology {
 		String[][] array = TabDelimitedTableReader.read(ArrayExpressTechnology.PATH + "A-GEOD-17774.adfTable.txt");
 		for (int i = 1; i < array.length; i++) {
 			String sequence = array[i][2];
-			for (Gene gene : genome.getChromosomes().get(0).getGenes().values()) {
+			for (Gene gene : genome.getFirstChromosome().getGenes().values()) {
 				String geneSeq = gene.getSequence();
 				if (geneSeq.contains(sequence)) {
 					array[i][1] = gene.getName();

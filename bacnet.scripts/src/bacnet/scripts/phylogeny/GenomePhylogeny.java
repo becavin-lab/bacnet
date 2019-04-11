@@ -15,7 +15,6 @@ import bacnet.utils.FileUtils;
  * @author christophebecavin
  *
  */
-@Deprecated
 public class GenomePhylogeny {
 
 	/**

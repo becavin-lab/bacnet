@@ -10,7 +10,7 @@ import bacnet.Database;
 import bacnet.datamodel.dataset.ExpressionMatrix;
 import bacnet.datamodel.sequence.Gene;
 import bacnet.datamodel.sequence.Genome;
-import bacnet.datamodel.sequence.GenomeNCBI;
+import bacnet.datamodel.sequenceNCBI.GenomeNCBI;
 import bacnet.reader.TabDelimitedTableReader;
 import bacnet.utils.ArrayUtils;
 
@@ -105,7 +105,7 @@ public class COGannotation {
 			String cogName = table[i][1];
 			System.out.println(cogName);
 			int count = 0;
-			for (Gene gene : genome.getChromosomes().get(0).getGenes().values()) {
+			for (Gene gene : genome.getGenes().values()) {
 				System.out.println(gene.getCog());
 				if (cogName.equals(gene.getCog())) {
 					count++;

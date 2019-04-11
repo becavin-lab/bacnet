@@ -6,8 +6,8 @@ import java.util.HashMap;
 import bacnet.Database;
 import bacnet.datamodel.sequence.Gene;
 import bacnet.datamodel.sequence.Genome;
-import bacnet.datamodel.sequence.GenomeNCBI;
 import bacnet.datamodel.sequenceNCBI.GenomeConversion;
+import bacnet.datamodel.sequenceNCBI.GenomeNCBI;
 import bacnet.reader.TabDelimitedTableReader;
 
 /**
@@ -36,6 +36,7 @@ public class RASTEGDeGenome {
 				String figFam = array[i][9];
 				String evidence = array[i][10];
 				String name = "RAST_lmo" + i;
+				@SuppressWarnings("unused")
 				String oldName = array[i][0];
 				Gene geneRAST = new Gene(name, begin, end, strand);
 				geneRAST.setProduct(product);

@@ -7,6 +7,11 @@ import bacnet.datamodel.sequence.Codon;
 import bacnet.datamodel.sequence.Genome;
 import bacnet.reader.TabDelimitedTableReader;
 
+/**
+ * Calculate presence of start codon on firrst chromosome of bacterial genomes
+ * @author christophebecavin
+ *
+ */
 public class StartCodonProfile {
 
 	public static int SD_ENERGY_CUTOFF = -7;
@@ -56,15 +61,15 @@ public class StartCodonProfile {
 		String[][] arrayMinus = TabDelimitedTableReader.read(fileName);
 
 		// Fill Start codon table
-		String[][] data = new String[genome.getChromosomes().get(0).getLength() + 1][2];
+		String[][] data = new String[genome.getFirstChromosome().getLength() + 1][2];
 		data[0][0] = "0";
 		data[0][1] = "0";
 		data[1][0] = "0";
 		data[1][1] = "0";
-		data[genome.getChromosomes().get(0).getLength()][0] = "0";
-		data[genome.getChromosomes().get(0).getLength()][1] = "0";
-		for (int i = 2; i < genome.getChromosomes().get(0).getLength(); i++) {
-			String codon = genome.getChromosomes().get(0).getSequenceAsString(i - 1, i + 1, Strand.POSITIVE);
+		data[genome.getFirstChromosome().getLength()][0] = "0";
+		data[genome.getFirstChromosome().getLength()][1] = "0";
+		for (int i = 2; i < genome.getFirstChromosome().getLength(); i++) {
+			String codon = genome.getFirstChromosome().getSequenceAsString(i - 1, i + 1, Strand.POSITIVE);
 			data[i][0] = i + "";
 			data[i][1] = "0";
 			switch (typeData) {
@@ -95,12 +100,12 @@ public class StartCodonProfile {
 		TabDelimitedTableReader.save(data, SDProfile.PATH + dataName + "_f.wig");
 		TabDelimitedTableReader.save(data, OmicsData.PATH_NGS_RAW + dataName + "_f.wig");
 
-		for (int i = 2; i < genome.getChromosomes().get(0).getLength(); i++) {
+		for (int i = 2; i < genome.getFirstChromosome().getLength(); i++) {
 			data[i][0] = i + "";
 			data[i][1] = "0";
 		}
-		for (int i = 2; i < genome.getChromosomes().get(0).getLength(); i++) {
-			String codon = genome.getChromosomes().get(0).getSequenceAsString(i - 1, i + 1, Strand.NEGATIVE);
+		for (int i = 2; i < genome.getFirstChromosome().getLength(); i++) {
+			String codon = genome.getFirstChromosome().getSequenceAsString(i - 1, i + 1, Strand.NEGATIVE);
 			switch (typeData) {
 			case 0:
 				Double energy = Double.parseDouble(arrayMinus[i][1]);
@@ -115,7 +120,7 @@ public class StartCodonProfile {
 				break;
 			case 2:
 				if (Codon.isStart(codon)) {
-					for (int j = 0; j < 20 && (i + j) < genome.getChromosomes().get(0).getLength(); j++) {
+					for (int j = 0; j < 20 && (i + j) < genome.getFirstChromosome().getLength(); j++) {
 						energy = Double.parseDouble(arrayMinus[i + j][1]);
 						if (energy < SD_ENERGY_CUTOFF) {
 							data[i][1] = "-2";

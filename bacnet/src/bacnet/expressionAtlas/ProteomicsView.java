@@ -16,8 +16,6 @@ import org.eclipse.e4.ui.workbench.modeling.EPartService.PartState;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
-import org.eclipse.jface.viewers.ITableLabelProvider;
-import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
@@ -588,24 +586,6 @@ public class ProteomicsView implements SelectionListener {
 	public void widgetDefaultSelected(SelectionEvent e) {
 		// TODO Auto-generated method stub
 
-	}
-
-	private class TableLabelProvider extends LabelProvider implements ITableLabelProvider {
-
-		/**
-		 * 
-		 */
-		private static final long serialVersionUID = -2546838660698175537L;
-
-		@Override
-		public Image getColumnImage(Object element, int columnIndex) {
-			return null;
-		}
-
-		@Override
-		public String getColumnText(Object element, int columnIndex) {
-			return element.toString();
-		}
 	}
 
 	public String[][] getBioCondsArray() {

@@ -26,6 +26,12 @@ import bacnet.sequenceTools.SrnaView;
 import bacnet.utils.FileUtils;
 import bacnet.views.CoExprNetworkView;
 
+/**
+ * Every lmethods for managing navigation state in eclipse.rap application. <br>
+ * SOME PARTS NEED TO BE COMMENTED FOR RAP OR RCP TO WORK
+ * @author christophebecavin
+ *
+ */
 public class NavigationManagement {
 
 	public static String SEARCH = "search";
@@ -41,8 +47,6 @@ public class NavigationManagement {
 	public static String GENOME = "genome";
 	public static String GENE = "gene";
 	public static String STYLE = "style";
-
-	public static String CoExprID = "bacnet.e4.rap.CoExprNetworkView";
 
 	/**
 	 * Show the help page in an external browser
@@ -81,7 +85,7 @@ public class NavigationManagement {
 
 			@Override
 			public void navigated(BrowserNavigationEvent event) {
-				String sourceID = event.getSource().getClass().toString();
+				//String sourceID = event.getSource().getClass().toString();
 				String stateID = event.getState();
 				// System.out.println("source: "+sourceID+" state: "+stateID);
 				/*

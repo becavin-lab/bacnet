@@ -111,10 +111,8 @@ public class NTermFilter {
 		 */
 		String typeOverlapDuplicate = "duplicates";
 		typeOverlapSet.add(typeOverlapDuplicate);
-		int i = 0;
 		for (NTerm nTerm : this.getnTermExp().getElements().values()) {
 			if (this.getDuplicateSequenceToRemove().contains(nTerm.getName())) {
-				i++;
 				nTerm.setTypeOverlap(typeOverlapDuplicate);
 				nTerm.setOverlap(nTerm.getName() + " : " + (nTerm.getDuplicates().size() + 1));
 				// System.out.println("Duplicate sequence: "+i+" "+nTerm.getSequencePeptide()+"

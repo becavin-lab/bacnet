@@ -20,6 +20,11 @@ import java.util.zip.ZipFile;
 
 import org.biojava3.core.sequence.io.BufferedReaderBytesRead;
 
+/**
+ * Utils for file manipulation. Mostly override from org.apache.commons.io
+ * @author christophebecavin
+ *
+ */
 public class FileUtils {
 
 	/**
@@ -117,6 +122,7 @@ public class FileUtils {
 	 */
 	public static ArrayList<Integer> searchPosition(String query, String database) {
 		int len = query.length();
+		@SuppressWarnings("unused")
 		int result = 0;
 		ArrayList<Integer> positions = new ArrayList<Integer>();
 		if (len > 0) {

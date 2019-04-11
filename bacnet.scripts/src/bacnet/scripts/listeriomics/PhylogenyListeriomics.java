@@ -10,8 +10,8 @@ import bacnet.Database;
 import bacnet.datamodel.sequence.Chromosome;
 import bacnet.datamodel.sequence.Gene;
 import bacnet.datamodel.sequence.Genome;
-import bacnet.datamodel.sequence.GenomeNCBI;
 import bacnet.datamodel.sequence.Sequence;
+import bacnet.datamodel.sequenceNCBI.GenomeNCBI;
 import bacnet.reader.TabDelimitedTableReader;
 import bacnet.utils.FileUtils;
 
@@ -70,6 +70,7 @@ public class PhylogenyListeriomics {
 	 * Go through all BlastP datasets and verify that each locus can be found in
 	 * Listeriomics genomes Save in a file the ocustag to take into account
 	 */
+	@SuppressWarnings("unused")
 	private static void confirmPresenceOfAllLocus() {
 		HashMap<String, String> idToGenomeFirstChromo = new HashMap<>();
 		HashMap<String, String> idToGenomeAllChromo = new HashMap<>();
@@ -291,6 +292,7 @@ public class PhylogenyListeriomics {
 					Sequence geneTargetObject = genome.getElement(geneTarget);
 					if (geneTargetObject == null) {
 						if (oldLocusToLocusTag.containsKey(geneTarget)) {
+							@SuppressWarnings("unused")
 							String oldGeneTarget = geneTarget;
 							geneTarget = oldLocusToLocusTag.get(geneTarget);
 							geneTargetObject = genome.getElement(geneTarget);
@@ -359,7 +361,6 @@ public class PhylogenyListeriomics {
 		}
 		for (String genomeID : idToGenome.keySet()) {
 			String genomeName = idToGenome.get(genomeID);
-			HashMap<String, String> geneToHomologs = new HashMap<>();
 			System.out.println(genomeID);
 			String fileName = PATH + "RawData" + File.separator + genomeID + "_prot_vs_all.tab";
 			System.out.println("Load " + PATH + "RawData" + File.separator + genomeID + "_prot_vs_all.tab");
@@ -464,7 +465,6 @@ public class PhylogenyListeriomics {
 	 * @param genomeName
 	 */
 	public static String findLocusTag(String locus, String genomeName) {
-		ArrayList<String> listLocusTag = new ArrayList<>();
 		File path = new File(GenomeNCBI.PATH_GENOMES + genomeName);
 		for (File file : path.listFiles()) {
 			if (file.getAbsolutePath().endsWith(".gff")) {
@@ -481,7 +481,6 @@ public class PhylogenyListeriomics {
 			}
 		}
 
-		listLocusTag = new ArrayList<>();
 		path = new File(Database.getInstance().getPath() + "/NCBIGenomesNew/" + genomeName);
 		// System.out.println(path.getAbsolutePath());
 		for (File file : path.listFiles()) {
@@ -500,7 +499,6 @@ public class PhylogenyListeriomics {
 
 		}
 
-		listLocusTag = new ArrayList<>();
 		path = new File(GenomeNCBI.PATH_GENOMES + genomeName);
 		// System.out.println(path.getAbsolutePath());
 		for (File file : path.listFiles()) {

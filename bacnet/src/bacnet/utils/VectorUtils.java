@@ -201,7 +201,6 @@ public class VectorUtils {
 		Arrays.sort(vectorB);
 		quantiles[0] = vectorB[0];
 		for (int j = 1; j < k + 1; j++) {
-			int i = 0;
 			double q = (double) (vector.length * j) / (double) k;
 			int index = 0;
 			if (MathUtils.isInteger(q)) {

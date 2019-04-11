@@ -48,10 +48,10 @@ public class SrnaAlignmentBlastN {
 		Genome genome = Genome.loadEgdeGenome();
 
 		ArrayList<Srna> sRNAs = new ArrayList<>();
-//		for(Srna sRNA : genome.getChromosomes().get(0).getsRNAs().values()) sRNAs.add(sRNA);
-		for (Srna sRNA : genome.getChromosomes().get(0).getAsRNAs().values())
+//		for(Srna sRNA : genome.getsRNAs().values()) sRNAs.add(sRNA);
+		for (Srna sRNA : genome.getAsRNAs().values())
 			sRNAs.add(sRNA);
-		for (Srna sRNA : genome.getChromosomes().get(0).getCisRegs().values())
+		for (Srna sRNA : genome.getCisRegs().values())
 			sRNAs.add(sRNA);
 
 		for (Srna sRNA : SrnaTables.getOliverInfo()) {

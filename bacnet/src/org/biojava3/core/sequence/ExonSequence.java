@@ -31,6 +31,7 @@ import java.util.logging.Logger;
  */
 public class ExonSequence extends DNASequence {
 
+	@SuppressWarnings("unused")
 	private static final Logger log = Logger.getLogger(ExonSequence.class.getName());
 
 	/**

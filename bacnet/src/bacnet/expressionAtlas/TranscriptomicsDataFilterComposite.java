@@ -64,7 +64,6 @@ public class TranscriptomicsDataFilterComposite extends org.eclipse.swt.widgets.
 			TranscriptomicsView view) {
 		super(parent, style);
 		this.setLayout(new GridLayout(1, false));
-		final TranscriptomicsView viewer = view;
 		this.view = view;
 
 		Label lblSearch = new Label(this, SWT.NONE);
@@ -97,7 +96,7 @@ public class TranscriptomicsDataFilterComposite extends org.eclipse.swt.widgets.
 			}
 		});
 
-		Label label_6 = new Label(this, SWT.NONE);
+		new Label(this, SWT.NONE);
 		{
 			Label lblGenome = new Label(this, SWT.NONE);
 			lblGenome.setFont(SWTResourceManager.getBodyFont(SWT.BOLD));
@@ -111,7 +110,7 @@ public class TranscriptomicsDataFilterComposite extends org.eclipse.swt.widgets.
 			comboGenome.addSelectionListener(this);
 		}
 		{
-			Label label_1 = new Label(this, SWT.NONE);
+			new Label(this, SWT.NONE);
 		}
 		{
 			Label lblNewLabel_2 = new Label(this, SWT.NONE);
@@ -158,7 +157,7 @@ public class TranscriptomicsDataFilterComposite extends org.eclipse.swt.widgets.
 		btnUnpublished.setText("Unpublished (0)");
 		btnUnpublished.addSelectionListener(this);
 
-		Label label_2 = new Label(this, SWT.NONE);
+		new Label(this, SWT.NONE);
 
 		Label lblIntracellularGrowth = new Label(this, SWT.NONE);
 		lblIntracellularGrowth.setFont(SWTResourceManager.getBodyFont(SWT.BOLD));
@@ -197,7 +196,7 @@ public class TranscriptomicsDataFilterComposite extends org.eclipse.swt.widgets.
 		btnPorcineBileCells.addSelectionListener(this);
 		btnTurkeyDeliMeat.addSelectionListener(this);
 
-		Label label_1 = new Label(this, SWT.NONE);
+		new Label(this, SWT.NONE);
 
 		Label lblBroth = new Label(this, SWT.NONE);
 		lblBroth.setFont(SWTResourceManager.getBodyFont(SWT.BOLD));
@@ -224,7 +223,7 @@ public class TranscriptomicsDataFilterComposite extends org.eclipse.swt.widgets.
 		btnLbBroth.addSelectionListener(this);
 		btnMinimalMediaBroth.addSelectionListener(this);
 
-		Label label_4 = new Label(this, SWT.NONE);
+		new Label(this, SWT.NONE);
 
 		Label lblMutantgenesAnd = new Label(this, SWT.NONE);
 		lblMutantgenesAnd.setFont(SWTResourceManager.getBodyFont(SWT.BOLD));
@@ -254,7 +253,7 @@ public class TranscriptomicsDataFilterComposite extends org.eclipse.swt.widgets.
 		btnNoneMutant.addSelectionListener(this);
 		btnChooseOneMutant.addSelectionListener(this);
 
-		Label label_5 = new Label(this, SWT.NONE);
+		new Label(this, SWT.NONE);
 
 		Label lblGrowthPhases = new Label(this, SWT.NONE);
 		lblGrowthPhases.setFont(SWTResourceManager.getBodyFont(SWT.BOLD));

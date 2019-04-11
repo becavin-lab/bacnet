@@ -472,6 +472,7 @@ public class BioCondition implements Serializable {
 	 * @param bioCondName
 	 * @return
 	 */
+	@SuppressWarnings("static-access")
 	public static BioCondition getBioCondition(String bioCondName) {
 		// test if the file exists
 		File file = new File(Database.getInstance().getBIOCONDITION_PATH() + bioCondName);

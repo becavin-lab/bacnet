@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import bacnet.Database;
 import bacnet.datamodel.dataset.OmicsData;
-import bacnet.datamodel.sequence.GenomeNCBI;
+import bacnet.datamodel.sequenceNCBI.GenomeNCBI;
 import bacnet.utils.FileUtils;
 
 public class DataFolder {

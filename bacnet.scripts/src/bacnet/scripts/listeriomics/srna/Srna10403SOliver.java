@@ -10,9 +10,9 @@ import org.biojava3.core.sequence.Strand;
 import bacnet.Database;
 import bacnet.datamodel.dataset.OmicsData;
 import bacnet.datamodel.sequence.Genome;
-import bacnet.datamodel.sequence.GenomeNCBI;
 import bacnet.datamodel.sequence.Srna;
 import bacnet.datamodel.sequence.Srna.TypeSrna;
+import bacnet.datamodel.sequenceNCBI.GenomeNCBI;
 import bacnet.datamodel.sequenceNCBI.GenomeNCBITools;
 import bacnet.reader.TabDelimitedTableReader;
 import bacnet.scripts.blast.Blast;
@@ -75,7 +75,7 @@ public class Srna10403SOliver {
 		 */
 		GenomeNCBI pseudoChromo10403S = GenomeNCBITools.loadGenome("10403S pseudo_chromosome", Srna.PATH, true, false);
 		for (Srna sRNA : sRNAs) {
-			String sequence = pseudoChromo10403S.getChromosomes().get(0).getSequenceAsString(sRNA.getBegin(),
+			String sequence = pseudoChromo10403S.getFirstChromosome().getSequenceAsString(sRNA.getBegin(),
 					sRNA.getEnd(), Strand.POSITIVE);
 			// save query sequence
 			String blastQuery = ">" + sRNA.getName() + "\n" + sequence;
@@ -121,6 +121,7 @@ public class Srna10403SOliver {
 	 */
 	public static void createDatabase() {
 		// Blast.createBlastDatabases();
+		@SuppressWarnings("unused")
 		String tempDatabase = Database.getTEMP_PATH() + "tempBlastDatabase";
 		ArrayList<String> databases = new ArrayList<String>();
 		// save map between genomeNCBI name and NWK ID in the phylogeny tree
@@ -129,7 +130,7 @@ public class Srna10403SOliver {
 		String genome3 = Genome.DP10403S_NAME;
 		databases.add(GenomeNCBITools.getPATH() + genome3 + File.separator + genome3);
 
-		String title = "Database containing " + databases.size() + " bacterial genomes";
+		// String title = "Database containing " + databases.size() + " bacterial genomes";
 		// Blast.createFusionBlastDatabase(databases, title, tempDatabase,true);
 
 	}

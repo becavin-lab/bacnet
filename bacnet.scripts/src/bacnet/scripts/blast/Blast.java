@@ -434,7 +434,6 @@ public class Blast {
 
 		ExecutorService executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
 
-		int k = 0;
 		for (String genomeTemp : genomes) {
 			final String genome = genomeTemp;
 			final boolean smallORFTemp = smallORF;

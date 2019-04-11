@@ -259,7 +259,7 @@ public class TrackCanvasData extends Canvas implements MouseMoveListener {
 						i++;
 					}
 					// TabDelimitedTableReader.save(saveDataFinal,"D:/"+getName()+"_"+this.hashCode()+".excel");
-					TabDelimitedTableReader.save(saveDataFinal, "D:/" + getName() + ".excel");
+					TabDelimitedTableReader.save(saveDataFinal, "D:/" + getCanvasName() + ".excel");
 				}
 			}
 		});
@@ -840,7 +840,6 @@ public class TrackCanvasData extends Canvas implements MouseMoveListener {
 		/*
 		 * Display TSS data
 		 */
-		ArrayList<ExpressionData> tssDatasetsTemp = new ArrayList<ExpressionData>();
 		for (ExpressionData seqData : track.getDatas().getTSSDatas()) {
 			if (!alreadyDisplayedData.contains(seqData.getName())
 					&& !track.getDatas().getDataNOTDisplayed().contains(seqData.getName())) {
@@ -871,7 +870,6 @@ public class TrackCanvasData extends Canvas implements MouseMoveListener {
 		/*
 		 * Display TermSeq data
 		 */
-		ArrayList<ExpressionData> termSeqDatasTemp = new ArrayList<ExpressionData>();
 		for (ExpressionData seqData : track.getDatas().getTermSeqDatas()) {
 			if (!alreadyDisplayedData.contains(seqData.getName())
 					&& !track.getDatas().getDataNOTDisplayed().contains(seqData.getName())) {
@@ -1073,7 +1071,6 @@ public class TrackCanvasData extends Canvas implements MouseMoveListener {
 		/*
 		 * Go from beginProbe to LastProbe and display them
 		 */
-		int dataDisplayed = 0;
 		for (int i : probes.subMap(beginProbe, endProbe).keySet()) {
 			int k = 0;
 			for (Tiling tiling : tilings) {
@@ -1127,7 +1124,6 @@ public class TrackCanvasData extends Canvas implements MouseMoveListener {
 					if (i == beginProbe) {
 						previousPositions.add(position);
 					} else if (drawProbe) {
-						dataDisplayed++;
 						int[] polygon = { position[0], minPos[1], previousPositions.get(k)[0], minPos[1],
 								previousPositions.get(k)[0], previousPositions.get(k)[1], position[0], position[1] };
 						gc.fillPolygon(polygon);
@@ -1184,7 +1180,6 @@ public class TrackCanvasData extends Canvas implements MouseMoveListener {
 				int[] minPos = getDataPosition(dataName, track.getDisplayRegion().getX1(), dataIndex, 0, min, max,
 						minPosition);
 
-				int pointDrawn = 0;
 				ArrayList<Integer> polygonList = new ArrayList<>();
 				double[] values = seqData.read(track.getDisplayRegion().getX1(), track.getDisplayRegion().getX2());
 				int k = 0;
@@ -1286,7 +1281,6 @@ public class TrackCanvasData extends Canvas implements MouseMoveListener {
 				int[] minPos = getDataPosition(dataName, track.getDisplayRegion().getX1(), dataIndex, 0, min, max,
 						minPosition);
 
-				int pointDrawn = 0;
 				ArrayList<Integer> polygonList = new ArrayList<>();
 				double[] values = seqData.read(track.getDisplayRegion().getX1(), track.getDisplayRegion().getX2());
 				int k = 0;
@@ -1919,6 +1913,7 @@ public class TrackCanvasData extends Canvas implements MouseMoveListener {
 			this.redraw();
 		} else {
 			System.out.println(e.getSource() + " " + e.x + " y " + e.y);
+			@SuppressWarnings("unused")
 			String info = "";
 			int basePair = convertXtoBP(e.x);
 
@@ -2089,7 +2084,7 @@ public class TrackCanvasData extends Canvas implements MouseMoveListener {
 		this.testData = testData;
 	}
 
-	public String getName() {
+	public String getCanvasName() {
 		return Name;
 	}
 

@@ -89,6 +89,7 @@ public class BannerView implements SelectionListener {
 		tltmGenomics.setImage(ResourceManager.getPluginImage("bacnet", "icons/ToolBar/genomics.png"));
 		tltmGenomics.addSelectionListener(this);
 
+		@SuppressWarnings("unused")
 		ToolItem toolItem_3 = new ToolItem(toolBar, SWT.SEPARATOR);
 
 		tltmAbout = new ToolItem(toolBar, SWT.NONE);

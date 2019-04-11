@@ -102,22 +102,23 @@ public class SystemsBiologyListeriomics {
 	/**
 	 * Calculate co-expression matrix from Database.LOGFC_MATRIX_TRANSCRIPTOMES_PATH
 	 */
+	@SuppressWarnings("unused")
 	private static void createCoExpressionMatrixEGDeFromLOGFC(Experiment exp, Genome genome) {
 		ExpressionMatrix logFCMatrix = new ExpressionMatrix();
 		int i = 0;
-		for (String gene : genome.getChromosomes().get(0).getGenes().keySet()) {
+		for (String gene : genome.getGenes().keySet()) {
 			logFCMatrix.getRowNames().put(gene, i);
 			i++;
 		}
-		for (String sRNA : genome.getChromosomes().get(0).getsRNAs().keySet()) {
+		for (String sRNA : genome.getsRNAs().keySet()) {
 			logFCMatrix.getRowNames().put(sRNA, i);
 			i++;
 		}
-		for (String asRNA : genome.getChromosomes().get(0).getAsRNAs().keySet()) {
+		for (String asRNA : genome.getAsRNAs().keySet()) {
 			logFCMatrix.getRowNames().put(asRNA, i);
 			i++;
 		}
-		for (String cisReg : genome.getChromosomes().get(0).getCisRegs().keySet()) {
+		for (String cisReg : genome.getCisRegs().keySet()) {
 			logFCMatrix.getRowNames().put(cisReg, i);
 			i++;
 		}
@@ -144,7 +145,7 @@ public class SystemsBiologyListeriomics {
 			if (file.exists()) {
 				ExpressionMatrix matrix = ExpressionMatrix.loadTab(fileName, true);
 				String headerGE = "LOGFC_" + comp + GeneExpression.EXTENSION;
-				for (String gene : genome.getChromosomes().get(0).getGenes().keySet()) {
+				for (String gene : genome.getGenes().keySet()) {
 					// System.out.println(header+" "+gene+" "+comp);
 					if (matrix.getRowNames().containsKey(gene)) {
 						logFCMatrix.setValue(matrix.getValue(gene, headerGE), gene, comp);
@@ -155,7 +156,7 @@ public class SystemsBiologyListeriomics {
 				if (file.exists()) {
 					ExpressionMatrix matrixTiling = ExpressionMatrix.loadTab(fileName, true);
 					String headerTiling = "LOGFC_" + comp + Tiling.EXTENSION;
-					for (String gene : genome.getChromosomes().get(0).getGenes().keySet()) {
+					for (String gene : genome.getGenes().keySet()) {
 						// System.out.println(header+" "+gene+" "+comp);
 						if (matrixTiling.getHeaders().contains(headerTiling)) {
 							double value = matrixTiling.getValue(gene, headerTiling);
@@ -173,7 +174,7 @@ public class SystemsBiologyListeriomics {
 			ExpressionMatrix matrix = ExpressionMatrix.loadTab(fileName, true);
 			if (matrix != null) {
 				String header = "LOGFC_" + comp + Tiling.EXTENSION;
-				for (String sRNA : genome.getChromosomes().get(0).getsRNAs().keySet()) {
+				for (String sRNA : genome.getsRNAs().keySet()) {
 					logFCMatrix.setValue(matrix.getValue(sRNA, header), sRNA, comp);
 				}
 			}
@@ -185,7 +186,7 @@ public class SystemsBiologyListeriomics {
 			matrix = ExpressionMatrix.loadTab(fileName, true);
 			if (matrix != null) {
 				String header = "LOGFC_" + comp + Tiling.EXTENSION;
-				for (String asRNA : genome.getChromosomes().get(0).getAsRNAs().keySet()) {
+				for (String asRNA : genome.getAsRNAs().keySet()) {
 					logFCMatrix.setValue(matrix.getValue(asRNA, header), asRNA, comp);
 				}
 			}
@@ -197,7 +198,7 @@ public class SystemsBiologyListeriomics {
 			matrix = ExpressionMatrix.loadTab(fileName, true);
 			if (matrix != null) {
 				String header = "LOGFC_" + comp + Tiling.EXTENSION;
-				for (String cisReg : genome.getChromosomes().get(0).getCisRegs().keySet()) {
+				for (String cisReg : genome.getCisRegs().keySet()) {
 					logFCMatrix.setValue(matrix.getValue(cisReg, header), cisReg, comp);
 				}
 			}
@@ -216,6 +217,7 @@ public class SystemsBiologyListeriomics {
 	/**
 	 * Calculate co-expression matrix from Database.LOGFC_MATRIX_TRANSCRIPTOMES_PATH
 	 */
+	@SuppressWarnings("unused")
 	private static void createCoExpressionMatrix(Experiment exp, Genome genome) {
 		ExpressionMatrix matrixLOGFC = ExpressionMatrix
 				.load(Database.getLOGFC_MATRIX_TRANSCRIPTOMES_PATH() + "_" + genome.getSpecies());
