@@ -15,7 +15,6 @@ bacnet.genomeBrowser.core
 bacnet.genomeBrowser.dialog
 bacnet.genomeBrowser.tracksGUI
 bacnet.handler
-bacnet.rap
 bacnet.raprcp
 bacnet.reader
 bacnet.scripts
