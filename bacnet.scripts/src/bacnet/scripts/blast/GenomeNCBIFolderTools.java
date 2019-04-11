@@ -133,6 +133,12 @@ public class GenomeNCBIFolderTools {
 		}
 	}
 
+	/**
+	 * Verify md5 of everything just downloaded
+	 * @param path
+	 * @param folderFTP
+	 */
+	@SuppressWarnings("unused")
 	private static void verifyMD5checksum(String path, String folderFTP) {
 		/*
 		 * MD5 Checksum

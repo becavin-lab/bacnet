@@ -29,6 +29,11 @@ import bacnet.reader.TabDelimitedTableReader;
 import bacnet.swt.ResourceManager;
 import bacnet.views.InternalBrowser;
 
+/**
+ * Dialog which allow specific selection of genes, smallRNAs and cisRegs
+ * @author christophebecavin
+ *
+ */
 public class SelectGenomeElementDialog extends TitleAreaDialog implements SelectionListener {
 
 	/**
@@ -83,7 +88,7 @@ public class SelectGenomeElementDialog extends TitleAreaDialog implements Select
 			listcisRegs = Database.getInstance().getCisRegRNAListEGDe();
 		} else {
 			listGenes = new ArrayList<>();
-			for (String gene : Genome.loadGenome(genomeName).getChromosomes().get(0).getGenes().keySet()) {
+			for (String gene : Genome.loadGenome(genomeName).getGeneNames()) {
 				listGenes.add(gene);
 			}
 			listsRNAs = new ArrayList<>();

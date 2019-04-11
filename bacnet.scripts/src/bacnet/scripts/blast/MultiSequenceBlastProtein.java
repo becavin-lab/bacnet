@@ -369,6 +369,7 @@ public class MultiSequenceBlastProtein {
 	 * @param smallORF
 	 * @param best
 	 */
+	@SuppressWarnings("unused")
 	private static void extractLiteInfoORF(ArrayList<String> oRFs, double evalueCutoff, String suffix,
 			String listBacteriaFileName) {
 		// final ArrayList<String> listBacteria =
@@ -414,7 +415,6 @@ public class MultiSequenceBlastProtein {
 				ArrayList<String> blastHit = TabDelimitedTableReader.readList(Database.getTEMP_PATH() + orfName
 						+ "/Blast/resultBlast_" + orfName + "_" + genomeName + suffix + ".txt", true);
 
-				String[][] orfList = new String[0][0];
 				System.out.println(orfName + "  " + genomeName);
 
 				int length = blastHit.size();
@@ -447,7 +447,7 @@ public class MultiSequenceBlastProtein {
 	public static void filterSmallORF(ArrayList<String> smallORFs, double eValueCutoff) {
 		for (String smallORF : smallORFs) {
 			String name = smallORF.split(";")[0];
-			String seq = smallORF.split(";")[1];
+			smallORF.split(";");
 			String[][] summary = TabDelimitedTableReader
 					.read(Database.getTEMP_PATH() + "/" + name + "/Summary-" + name + ".excel");
 			ArrayList<String> hitList = new ArrayList<String>();
@@ -482,6 +482,7 @@ public class MultiSequenceBlastProtein {
 	 * @param evalueCutoff
 	 * @param bestHit
 	 */
+	@SuppressWarnings("unused")
 	private static void extractInfoSmallORF(ArrayList<String> smallORFs, double evalueCutoff, boolean bestHit) {
 		final ArrayList<String> listBacteria = TabDelimitedTableReader.readList(PATH_GENOMES_LIST);
 		// for(int i=1;i<11;i++){
@@ -494,7 +495,7 @@ public class MultiSequenceBlastProtein {
 		firstResult.add(header);
 		for (String orf : smallORFs) {
 			String name = orf.split(";")[0];
-			String seq = orf.split(";")[1];
+			orf.split(";");
 			for (String genomeName : listBacteria) {
 				ArrayList<String> seqNames = new ArrayList<>();
 				seqNames.add(name);

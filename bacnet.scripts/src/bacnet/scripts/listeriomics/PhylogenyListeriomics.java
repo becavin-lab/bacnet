@@ -10,8 +10,8 @@ import bacnet.Database;
 import bacnet.datamodel.sequence.Chromosome;
 import bacnet.datamodel.sequence.Gene;
 import bacnet.datamodel.sequence.Genome;
-import bacnet.datamodel.sequence.GenomeNCBI;
 import bacnet.datamodel.sequence.Sequence;
+import bacnet.datamodel.sequenceNCBI.GenomeNCBI;
 import bacnet.reader.TabDelimitedTableReader;
 import bacnet.utils.FileUtils;
 
@@ -291,6 +291,7 @@ public class PhylogenyListeriomics {
 					Sequence geneTargetObject = genome.getElement(geneTarget);
 					if (geneTargetObject == null) {
 						if (oldLocusToLocusTag.containsKey(geneTarget)) {
+							@SuppressWarnings("unused")
 							String oldGeneTarget = geneTarget;
 							geneTarget = oldLocusToLocusTag.get(geneTarget);
 							geneTargetObject = genome.getElement(geneTarget);

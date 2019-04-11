@@ -17,6 +17,7 @@ public class CMD {
 	 * @throws IOException
 	 */
 	public static String runProcess(String execProcess, boolean print, String dir) throws IOException {
+		@SuppressWarnings("unused")
 		String os = System.getProperty("os.arch");
 		// if(!os.equals("amd64")) execProcess = execProcess.replaceAll("\"","");
 		if (print) {

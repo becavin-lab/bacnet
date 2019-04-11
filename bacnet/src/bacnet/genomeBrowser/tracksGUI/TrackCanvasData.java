@@ -1919,6 +1919,7 @@ public class TrackCanvasData extends Canvas implements MouseMoveListener {
 			this.redraw();
 		} else {
 			System.out.println(e.getSource() + " " + e.x + " y " + e.y);
+			@SuppressWarnings("unused")
 			String info = "";
 			int basePair = convertXtoBP(e.x);
 

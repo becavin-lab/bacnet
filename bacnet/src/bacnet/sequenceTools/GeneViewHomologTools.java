@@ -235,7 +235,6 @@ public class GeneViewHomologTools {
 		});
 
 		for (int i = 0; i < bioCondsArray[0].length; i++) {
-			final int k = i;
 			TableViewerColumn col2 = createTableViewerColumn(tableHomolog, bioCondsArray[0][i], i + 1,
 					comparatorBioCondition);
 			col2.setLabelProvider(new CellLabelProvider() {

@@ -92,6 +92,7 @@ public class ProteinSequence extends AbstractSequence<AminoAcidCompound> {
 	 * @param begin
 	 * @param end
 	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void setParentDNASequence(AbstractSequence parentDNASequence, Integer begin, Integer end) {
 		this.setParentSequence(parentDNASequence);
 		setBioBegin(begin);

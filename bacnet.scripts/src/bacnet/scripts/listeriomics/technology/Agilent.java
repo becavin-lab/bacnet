@@ -131,7 +131,7 @@ public class Agilent {
 		 * Read Comparison and extract the data fileName of the corresponding data
 		 */
 		String[][] array = TabDelimitedTableReader.read(Database.getInstance().getExperimentComparisonTablePath());
-		TreeSet<String> comparisons = new TreeSet<>();
+		new TreeSet<>();
 		HashMap<String, ArrayList<String>> comparisonToFileName = new HashMap<>();
 
 		/**

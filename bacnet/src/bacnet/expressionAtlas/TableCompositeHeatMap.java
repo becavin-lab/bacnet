@@ -103,7 +103,6 @@ public class TableCompositeHeatMap extends Composite implements SelectionListene
 	 * @param genomeName  name of the genome used here
 	 * @param packColumns true if columns of the table need to be packed
 	 */
-	@SuppressWarnings("restriction")
 	public TableCompositeHeatMap(Composite parent, int style, String genomeName, boolean packColumns,
 			EPartService partService, Shell shell) {
 		super(parent, SWT.BORDER);

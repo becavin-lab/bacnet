@@ -411,6 +411,7 @@ public class GenomeTranscriptomeView {
 	private static class OpenBioConditionAndGenomeElementThread implements IRunnableWithProgress {
 		private String genome;
 		private ArrayList<String> bioConditions = new ArrayList<>();
+		@SuppressWarnings("unused")
 		private String genomeElement;
 		private GenomeTranscriptomeView view;
 

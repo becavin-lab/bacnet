@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit;
 
 import bacnet.datamodel.sequence.ChromosomeBacteriaSequence;
 import bacnet.datamodel.sequence.Codon;
-import bacnet.datamodel.sequence.GenomeNCBI;
+import bacnet.datamodel.sequenceNCBI.GenomeNCBI;
 import bacnet.datamodel.sequenceNCBI.GenomeNCBITools;
 import bacnet.reader.TabDelimitedTableReader;
 import bacnet.utils.FileUtils;
@@ -90,9 +90,8 @@ public class BlastDatabase {
 		ExecutorService executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() - 2);
 		for (String genomeNameTemp : listBacteria) {
 			final String genomeName = genomeNameTemp;
-			File file = new File(
+			new File(
 					GenomeNCBITools.PATH_NCBI_BacGenome + genomeName + File.separator + genomeName + ".excel");
-			// if(file.length()<1000){
 
 			Runnable runnable = new Runnable() {
 				@Override
@@ -184,7 +183,7 @@ public class BlastDatabase {
 
 						File fileExcel = new File(GenomeNCBITools.PATH_NCBI_BacGenome + genomeName + File.separator
 								+ genomeName + ".excel");
-						File fileFAA = new File(GenomeNCBITools.PATH_NCBI_BacGenome + genomeName + File.separator
+						new File(GenomeNCBITools.PATH_NCBI_BacGenome + genomeName + File.separator
 								+ genomeName + ".SmallORF.faa");
 						// if(file.length()<1000 && fileExcel.exists() && fileFAA.length()<1000){
 						// if(fileExcel.exists() && fileFAA.length()<1000){
@@ -263,9 +262,9 @@ public class BlastDatabase {
 		ArrayList<String> addGenome = new ArrayList<>();
 		// for(int i=1;i<11;i++){
 		for (String genomeName : listBacteria) {
-			File file = new File(
+			new File(
 					GenomeNCBITools.PATH_NCBI_BacGenome + genomeName + File.separator + genomeName + ".SmallORF.phr");
-			File fileFaa = new File(
+			new File(
 					GenomeNCBITools.PATH_NCBI_BacGenome + genomeName + File.separator + genomeName + ".SmallORF.faa");
 			// if(file.length()<1000 && fileFaa.exists()){
 			addGenome.add(genomeName);

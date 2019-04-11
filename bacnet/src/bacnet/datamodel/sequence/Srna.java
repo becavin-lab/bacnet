@@ -8,6 +8,7 @@ import java.util.TreeSet;
 import java.util.zip.GZIPInputStream;
 
 import bacnet.Database;
+import bacnet.datamodel.sequenceNCBI.GenomeNCBI;
 import bacnet.reader.TabDelimitedTableReader;
 
 public class Srna extends Sequence {

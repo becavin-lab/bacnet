@@ -369,6 +369,7 @@ public class SrnaFinalList {
 	 * @param finalList
 	 * @param oliver
 	 */
+	@SuppressWarnings("unused")
 	private static void addOliverInfo(ArrayList<Srna> finalList, ArrayList<Srna> oliver) {
 		for (Srna sRNA : finalList) {
 			for (Srna sRNAOliver : oliver) {

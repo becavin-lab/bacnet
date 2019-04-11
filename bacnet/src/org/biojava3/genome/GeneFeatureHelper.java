@@ -36,6 +36,7 @@ import org.biojava3.genome.parsers.gff.GeneMarkGTFReader;
  */
 public class GeneFeatureHelper {
 
+	@SuppressWarnings("unused")
 	private static final Logger log = Logger.getLogger(GeneFeatureHelper.class.getName());
 
 	static public LinkedHashMap<String, ChromosomeSequence> loadFastaAddGeneFeaturesFromUpperCaseExonFastaFile(

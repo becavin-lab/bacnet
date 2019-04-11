@@ -81,6 +81,7 @@ public class GenomicsView implements SelectionListener {
 	private BioConditionComparator comparatorBioCondition;
 	private Table tableGenome;
 	private ArrayList<String> selectedGenomes = new ArrayList<>();
+	@SuppressWarnings("unused")
 	private String url = "";
 
 	/**
@@ -172,7 +173,7 @@ public class GenomicsView implements SelectionListener {
 		lblSearch.setText("Search");
 		lblSearch.setFont(SWTResourceManager.getBodyFont(10, SWT.NORMAL));
 
-		Label label = new Label(composite_2, SWT.NONE);
+		new Label(composite_2, SWT.NONE);
 
 		btnSelectall = new Button(composite_2, SWT.NONE);
 		btnSelectall.setToolTipText("Select all genomes");
@@ -190,7 +191,7 @@ public class GenomicsView implements SelectionListener {
 		lblUnselectAll.setText("Unselect all");
 		lblUnselectAll.setFont(SWTResourceManager.getBodyFont(10, SWT.NORMAL));
 
-		Label label_1 = new Label(composite_2, SWT.NONE);
+		new Label(composite_2, SWT.NONE);
 
 		btnSaveTxt = new Button(composite_2, SWT.NONE);
 		btnSaveTxt.setImage(ResourceManager.getPluginImage("bacnet", "icons/fileIO/txt.bmp"));
@@ -442,7 +443,6 @@ public class GenomicsView implements SelectionListener {
 		});
 
 		for (int i = 0; i < bioCondsArray[0].length; i++) {
-			final int k = i;
 			TableViewerColumn col2 = createTableViewerColumn(bioCondsArray[0][i], i + 1);
 			col2.setLabelProvider(new CellLabelProvider() {
 

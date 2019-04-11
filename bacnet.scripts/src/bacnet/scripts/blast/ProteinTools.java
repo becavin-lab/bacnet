@@ -209,7 +209,7 @@ public class ProteinTools {
 	 */
 	public static void createUTRDB() {
 		String[][] tssTable = TabDelimitedTableReader.read(DATABASE + "table_s1_tss_table.txt");
-		ArrayList<DNASequence> seqs = new ArrayList<DNASequence>();
+		new ArrayList<DNASequence>();
 
 		ArrayList<String> sequencesFinal = new ArrayList<String>();
 		for (int i = 1; i < tssTable.length; i++) {
@@ -342,7 +342,6 @@ public class ProteinTools {
 	 * @param fileName
 	 */
 	private static void createGenomeFasta(String seqAA, String prefix, String fileName) {
-		String seqAAComplete = seqAA;
 		seqAA = seqAA.replace('*', '-');
 		seqAA = seqAA.replaceAll("-", "-Stop\nStop-");
 		seqAA = seqAA.replaceAll("M", "-Start\nStart-");
@@ -483,7 +482,7 @@ public class ProteinTools {
 			int indexStop = subSeqAA.indexOf('*');
 			int indexR = indexStop;
 			int index = indexR;
-			String subSeqAATemp = subSeqAA.substring(0, index + 1); // keep in memeory the whole aa sequence to verify
+			subSeqAA.substring(0, index + 1);
 																	// the results
 			if (index == -1 && index == -1) {
 				// System.err.println(subSeqAA);
@@ -533,23 +532,8 @@ public class ProteinTools {
 	 * <li>Every EGD-e gene should be in this database
 	 */
 	public static void verifyTISDB() {
-		ArrayList<String> peptides = TabDelimitedTableReader.readList(DATABASE + "TISDB.fasta");
-		/*
-		 * Check if every peptide has either "no R" or "an R at the end", because no R
-		 * in the middle of the peptide is allowed
-		 */
-		ArrayList<String> results = new ArrayList<String>();
-//		for(String peptide : peptides){
-//			if(!peptide.contains(">")){
-//				if(peptide.indexOf('R')>0 && peptide.indexOf('R')<peptide.length()-1){
-//					System.err.println(peptide);
-//				}
-//				if(peptide.indexOf('R')!=-1){
-//					results.add(peptide+"\t"+(peptide.length()-peptide.indexOf('R')));
-//					System.out.println(peptide+"\t"+(peptide.length()-peptide.indexOf('R')));
-//				}
-//			}
-//		}
+		TabDelimitedTableReader.readList(DATABASE + "TISDB.fasta");
+		new ArrayList<String>();
 
 		/*
 		 * Check if all EGD-e gene start peptide are included in this database

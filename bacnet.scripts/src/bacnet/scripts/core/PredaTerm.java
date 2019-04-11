@@ -150,6 +150,7 @@ public class PredaTerm {
 			String chromo = infoSeq[2];
 			int begin = Integer.parseInt(infoSeq[3]);
 			int end = Integer.parseInt(infoSeq[4]);
+			@SuppressWarnings("unused")
 			int length = Integer.parseInt(infoSeq[5]);
 			char strand = infoSeq[6].charAt(0);
 

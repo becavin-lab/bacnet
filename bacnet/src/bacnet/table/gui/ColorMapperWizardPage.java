@@ -215,7 +215,7 @@ public class ColorMapperWizardPage extends WizardPage implements Listener {
 		gd_label.widthHint = 378;
 		label.setLayoutData(gd_label);
 
-		Label label_1 = new Label(container, SWT.NONE);
+		new Label(container, SWT.NONE);
 
 		composite_8 = new Composite(container, SWT.NONE);
 		composite_8.setLayoutData(new GridData(SWT.CENTER, SWT.FILL, true, true, 1, 1));

@@ -10,7 +10,7 @@ import bacnet.Database;
 import bacnet.datamodel.dataset.ExpressionMatrix;
 import bacnet.datamodel.sequence.Gene;
 import bacnet.datamodel.sequence.Genome;
-import bacnet.datamodel.sequence.GenomeNCBI;
+import bacnet.datamodel.sequenceNCBI.GenomeNCBI;
 import bacnet.reader.TabDelimitedTableReader;
 import bacnet.utils.ArrayUtils;
 

@@ -142,6 +142,7 @@ public class AddTranscriptomicsDataDialog extends TitleAreaDialog implements Sel
 	 * 
 	 * @param parent
 	 */
+	@SuppressWarnings("unused")
 	@Override
 	protected Control createDialogArea(Composite parent) {
 		setMessage("The list below shows you the different type of transcriptomics data available for display");

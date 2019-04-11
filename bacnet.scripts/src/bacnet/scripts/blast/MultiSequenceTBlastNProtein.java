@@ -29,7 +29,7 @@ import org.biojava3.core.sequence.io.ProteinSequenceCreator;
 import bacnet.Database;
 import bacnet.datamodel.sequence.ChromosomeBacteriaSequence;
 import bacnet.datamodel.sequence.Codon;
-import bacnet.datamodel.sequence.GenomeNCBI;
+import bacnet.datamodel.sequenceNCBI.GenomeNCBI;
 import bacnet.datamodel.sequenceNCBI.GenomeNCBITools;
 import bacnet.reader.NCBIFastaHeaderParser;
 import bacnet.reader.TabDelimitedTableReader;
@@ -284,7 +284,7 @@ public class MultiSequenceTBlastNProtein {
 	public static void filterSmallORF(ArrayList<String> smallORFs, double eValueCutoff) {
 		for (String smallORF : smallORFs) {
 			String name = smallORF.split(";")[0];
-			String seq = smallORF.split(";")[1];
+			smallORF.split(";");
 			String[][] summary = TabDelimitedTableReader
 					.read(Database.getTEMP_PATH() + "/" + name + "/Summary-" + name + ".excel");
 			ArrayList<String> hitList = new ArrayList<String>();
@@ -319,6 +319,7 @@ public class MultiSequenceTBlastNProtein {
 	 * @param evalueCutoff
 	 * @param bestHit
 	 */
+	@SuppressWarnings("unused")
 	private static void extractInfoSmallORF(ArrayList<String> smallORFs, double evalueCutoff, boolean bestHit) {
 		final ArrayList<String> listBacteria = TabDelimitedTableReader.readList(PATH_GENOMES_LIST);
 		// for(int i=1;i<11;i++){
@@ -331,7 +332,7 @@ public class MultiSequenceTBlastNProtein {
 		firstResult.add(header);
 		for (String orf : smallORFs) {
 			String name = orf.split(";")[0];
-			String seq = orf.split(";")[1];
+			orf.split(";");
 			for (String genomeName : listBacteria) {
 				ArrayList<String> seqNames = new ArrayList<>();
 				seqNames.add(name);

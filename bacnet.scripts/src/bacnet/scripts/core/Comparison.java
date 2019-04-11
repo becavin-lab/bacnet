@@ -97,6 +97,7 @@ public class Comparison {
 	 * 
 	 * @param bioConds
 	 */
+	@SuppressWarnings("unused")
 	private void curateComparisonGexpression(TreeMap<String, GeneExpression> bioConds) {
 		int k = 0;
 		while (k < leftBCs.size()) {

@@ -55,8 +55,7 @@ public class FilterDialog extends Dialog implements SelectionListener {
 	private Composite composite_5;
 	private Composite composite_6;
 	private Label lblSetTheProperties;
-	private Label label;
-
+	
 	/**
 	 * Create the dialog.
 	 * 
@@ -85,7 +84,7 @@ public class FilterDialog extends Dialog implements SelectionListener {
 		lblSetTheProperties.setText("Set Filter properties");
 		new Label(container, SWT.NONE);
 
-		label = new Label(container, SWT.NONE);
+		new Label(container, SWT.NONE);
 
 		composite_3 = new Composite(container, SWT.NONE);
 		composite_3.setLayout(new GridLayout(2, false));

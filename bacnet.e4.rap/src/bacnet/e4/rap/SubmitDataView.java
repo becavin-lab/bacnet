@@ -186,7 +186,7 @@ public class SubmitDataView implements SelectionListener {
 					txtDataID.setLayoutData(gd_txtDataID);
 				}
 				{
-					Label label = new Label(composite, SWT.NONE);
+					new Label(composite, SWT.NONE);
 				}
 				new Label(composite, SWT.NONE);
 				{
@@ -300,10 +300,16 @@ public class SubmitDataView implements SelectionListener {
 		return summary;
 	}
 
+	/**
+	 * Send an email describe by subject and body
+	 * @param to
+	 * @param subject
+	 * @param body
+	 */
 	public static void sendEmail(String[] to, String subject, String body) {
 		String server = "smtp.pasteur.fr";
-		String username = "cbecavin";
-		String password = "2010List";
+		//String username = "cbecavin";
+		//String password = "2010List";
 		String from = "listeriomics@pasteur.fr";
 
 		try {

@@ -3,7 +3,7 @@
  *
  * $Id$
  */
-package bacnet.datamodel.sequence;
+package bacnet.datamodel.sequenceNCBI;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -23,6 +23,9 @@ import bacnet.Database;
 import bacnet.datamodel.annotation.Annotation;
 import bacnet.datamodel.annotation.COGannotation;
 import bacnet.datamodel.annotation.GlaserFCannotation;
+import bacnet.datamodel.sequence.ChromosomeBacteriaSequence;
+import bacnet.datamodel.sequence.Genome;
+import bacnet.datamodel.sequence.Operon;
 import bacnet.reader.FastaFileReader;
 import bacnet.reader.GFFNCBIReader;
 import bacnet.reader.NCBIFastaHeaderParser;
@@ -254,8 +257,8 @@ public class GenomeNCBI {
 				}
 			}
 		} else {
-			for (String accession : chromosomes.get(0).getCodingSequenceHashMap().keySet()) {
-				listCoding.add(chromosomes.get(0).getCodingRegion(accession));
+			for (String accession : getFirstChromosome().getCodingSequenceHashMap().keySet()) {
+				listCoding.add(getFirstChromosome().getCodingRegion(accession));
 			}
 		}
 		return listCoding;
@@ -278,9 +281,9 @@ public class GenomeNCBI {
 				}
 			}
 		} else {
-			for (String accession : chromosomes.get(0).getCodingSequenceHashMap().keySet()) {
-				if (locusTag.contains(chromosomes.get(0).getCodingRegion(accession).getAccession().toString())) {
-					listSubCoding.add(chromosomes.get(0).getCodingRegion(accession));
+			for (String accession : getFirstChromosome().getCodingSequenceHashMap().keySet()) {
+				if (locusTag.contains(getFirstChromosome().getCodingRegion(accession).getAccession().toString())) {
+					listSubCoding.add(getFirstChromosome().getCodingRegion(accession));
 				}
 			}
 		}
@@ -302,7 +305,7 @@ public class GenomeNCBI {
 				}
 			}
 		} else {
-			for (String locusTag : chromosomes.get(0).getCodingSequenceHashMap().keySet()) {
+			for (String locusTag : getFirstChromosome().getCodingSequenceHashMap().keySet()) {
 				listLocusTag.add(locusTag);
 			}
 		}
@@ -332,7 +335,7 @@ public class GenomeNCBI {
 				}
 			}
 		} else {
-			for (String accession : chromosomes.get(0).getLocusTagToGeneNameMap().keySet()) {
+			for (String accession : getFirstChromosome().getLocusTagToGeneNameMap().keySet()) {
 				listLocusTag.add(accession);
 			}
 		}
@@ -362,8 +365,8 @@ public class GenomeNCBI {
 				}
 			}
 		} else {
-			for (String accession : chromosomes.get(0).getNoncodingSequenceHashMap().keySet()) {
-				listNonCoding.add(chromosomes.get(0).getNonCodingRegion(accession));
+			for (String accession : getFirstChromosome().getNoncodingSequenceHashMap().keySet()) {
+				listNonCoding.add(getFirstChromosome().getNonCodingRegion(accession));
 			}
 		}
 		return listNonCoding;
@@ -467,6 +470,18 @@ public class GenomeNCBI {
 		this.species = species;
 	}
 
+	/**
+	 * Get the first chromosome in the HashMap
+	 * 
+	 * Is Used to replace: GenomeNCBI.getChromosomes().get(0)
+	 * 
+	 * @return
+	 */
+	public ChromosomeBacteriaSequence getFirstChromosome() {
+		String accession = this.getChromosomes().keySet().iterator().next();
+		ChromosomeBacteriaSequence chromosome = this.getChromosomes().get(accession);
+		return chromosome;
+	}
 	public LinkedHashMap<String, ChromosomeBacteriaSequence> getChromosomes() {
 		return chromosomes;
 	}

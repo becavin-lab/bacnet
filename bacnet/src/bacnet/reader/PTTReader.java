@@ -98,8 +98,7 @@ public class PTTReader {
 				System.out.println(listLocusTag.size() + " sequences are not in the gene list.");
 				System.out.println(
 						"They might be pseudo-gene or RefSeq provisional - Consequently they are added with the AccessionID : PROV_i");
-				int j = 0;
-
+				
 				/*
 				 * Element in listLocusTag here are not found in gene list So we describe them
 				 * has pseudo-gene or refSeq

@@ -14,7 +14,6 @@ import bacnet.datamodel.sequence.Chromosome;
 import bacnet.datamodel.sequence.ChromosomeBacteriaSequence;
 import bacnet.datamodel.sequence.Gene;
 import bacnet.datamodel.sequence.Genome;
-import bacnet.datamodel.sequence.GenomeNCBI;
 import bacnet.datamodel.sequence.NcRNA;
 import bacnet.datamodel.sequence.Operon;
 import bacnet.datamodel.sequence.Sequence;

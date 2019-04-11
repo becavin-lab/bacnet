@@ -254,6 +254,7 @@ public class UNAfold {
 		// \""+FileUtils.removeExtension(fileName)+".ann\" -o \""+output+"\"
 		// \""+(PATH_DATA+fileName)+"\"";
 		try {
+			@SuppressWarnings("unused")
 			String out = CMD.runProcess(execProcess, true);
 		} catch (IOException e) {
 			e.printStackTrace();

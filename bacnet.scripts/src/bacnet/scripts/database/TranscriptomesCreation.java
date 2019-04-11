@@ -469,7 +469,7 @@ public class TranscriptomesCreation {
 								// System.out.println(header+" "+gene+" "+comp);
 								if (matrixTiling.getRowNames().containsKey(gene)) {
 									if (matrixTiling.getHeaders().contains(headerTiling)) {
-										double value = matrixTiling.getValue(gene, headerTiling);
+										//double value = matrixTiling.getValue(gene, headerTiling);
 										logFCMatrix.setValue(matrixTiling.getValue(gene, headerTiling), gene, comp);
 									}
 								}
@@ -634,6 +634,7 @@ public class TranscriptomesCreation {
 	 * 
 	 * @param exp
 	 */
+	@SuppressWarnings("unused")
 	private static void qualityControl(Experiment exp) {
 		Database.initDatabase(Database.LISTERIOMICS_PROJECT);
 		Signature hkGenes = Signature.getSignatureFromName("House-Keeping genes");

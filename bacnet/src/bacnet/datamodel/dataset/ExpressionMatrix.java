@@ -582,7 +582,6 @@ public class ExpressionMatrix extends OmicsData implements Cloneable, Serializab
 	 * @param colIndex
 	 * @param ascending
 	 */
-	@SuppressWarnings("unchecked")
 	public ExpressionMatrix sort(int colIndex, boolean ascending) {
 		// ArrayList<String> orderedRowNames = new ArrayList<String>();
 		// double[][] values = this.getValues();
@@ -860,11 +859,9 @@ public class ExpressionMatrix extends OmicsData implements Cloneable, Serializab
 		subExpr.setRowNames(this.getRowNames());
 		double[][] newValues = new double[getNumberRow()][subExpr.getHeaders().size()];
 		subExpr.setValues(newValues);
-		int k = 0;
 		for (String colName : includeColNames) {
 			if (this.getHeaders().contains(colName)) {
 				subExpr.copyColumnAt(colName, this.getColumn(colName));
-				k++;
 			}
 
 		}
@@ -1085,6 +1082,7 @@ public class ExpressionMatrix extends OmicsData implements Cloneable, Serializab
 					 */
 					// int i = 1;
 					if (!array[i][j].equals("") && !array[i][j].equals("null")) {
+						@SuppressWarnings("unused")
 						double value = Double.parseDouble(array[i][j]);
 
 						// System.out.println("null value at position: "+i+" : "+j+" "+);

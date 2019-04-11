@@ -609,7 +609,7 @@ public abstract class AbstractSequence<C extends Compound> implements Sequence<C
 	 * @param compounds
 	 * @return
 	 */
-	public int countCompounds(C... compounds) {
+	public int countCompounds(@SuppressWarnings("unchecked") C... compounds) {
 		return SequenceMixin.countCompounds(this, compounds);
 	}
 

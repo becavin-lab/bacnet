@@ -168,7 +168,7 @@ public class LegendDialog extends TitleAreaDialog implements SelectionListener {
 		btnRemoveSelectedBiological.setText("Remove selected biological condition");
 		btnRemoveSelectedBiological.addSelectionListener(this);
 
-		Label label_8 = new Label(container, SWT.NONE);
+		new Label(container, SWT.NONE);
 
 		Label lblDataDisplayed = new Label(container, SWT.NONE);
 		lblDataDisplayed.setText("Data displayed");

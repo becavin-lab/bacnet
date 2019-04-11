@@ -102,6 +102,7 @@ public class SystemsBiologyListeriomics {
 	/**
 	 * Calculate co-expression matrix from Database.LOGFC_MATRIX_TRANSCRIPTOMES_PATH
 	 */
+	@SuppressWarnings("unused")
 	private static void createCoExpressionMatrixEGDeFromLOGFC(Experiment exp, Genome genome) {
 		ExpressionMatrix logFCMatrix = new ExpressionMatrix();
 		int i = 0;
@@ -216,6 +217,7 @@ public class SystemsBiologyListeriomics {
 	/**
 	 * Calculate co-expression matrix from Database.LOGFC_MATRIX_TRANSCRIPTOMES_PATH
 	 */
+	@SuppressWarnings("unused")
 	private static void createCoExpressionMatrix(Experiment exp, Genome genome) {
 		ExpressionMatrix matrixLOGFC = ExpressionMatrix
 				.load(Database.getLOGFC_MATRIX_TRANSCRIPTOMES_PATH() + "_" + genome.getSpecies());

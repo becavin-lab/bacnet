@@ -12,7 +12,6 @@ import bacnet.datamodel.sequence.Gene;
 import bacnet.datamodel.sequence.Genome;
 import bacnet.datamodel.sequence.Srna;
 import bacnet.reader.TabDelimitedTableReader;
-import bacnet.scripts.phylogeny.PhylogenySmallORFs;
 import bacnet.utils.ArrayUtils;
 
 /**
@@ -86,7 +85,7 @@ public class NTermMain {
 		/*
 		 * Some methods for small ORFs finding
 		 */
-		PhylogenySmallORFs.run();
+//		PhylogenySmallORFs.run();
 //		PhylogenyRli42vsRsbR.run();
 //		System.out.println(">WholeRegion");
 //		System.out.println(Genome.loadEgdeGenome().getFirstChromosome().getSequenceAsString(1399327, 		1399616, Strand.POSITIVE));

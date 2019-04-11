@@ -322,6 +322,7 @@ public class GFFNCBIReader {
 		System.out.println("Finish parsing all genes");
 	}
 
+	@SuppressWarnings("unused")
 	private static boolean comparePosition(DNASequence sequence, FeatureI feature) {
 		int beginSeq = sequence.getBioBegin();
 		int endSeq = sequence.getBioEnd();

@@ -7,6 +7,13 @@ import org.biojava3.core.sequence.DNASequence;
 import bacnet.reader.TabDelimitedTableReader;
 import bacnet.utils.FileUtils;
 
+/**
+ * Class for managing triplet of nucleotides.<br>
+ * Allo<s detection of start and stop codons in nucleotide sequences
+ * 
+ * @author christophebecavin
+ *
+ */
 public class Codon {
 
 	public static String[][] startCodon = { { "ATG", "M" }, { "TTG", "L" }, { "CTG", "L" }, { "ATT", "I" },
@@ -111,7 +118,7 @@ public class Codon {
 	 * @param fileName
 	 */
 	public static void getCodonProportion(Genome genome, String fileName) {
-		String sequence = genome.getChromosomes().get(0).getSequenceAsString()
+		String sequence = genome.getFirstChromosome().getSequenceAsString()
 				+ genome.getChromosomes().get(0).getReverseComplement().getSequenceAsString();
 		TreeSet<String> allCodons = getAllCodons();
 		double[] codonValue = new double[allCodons.size()];

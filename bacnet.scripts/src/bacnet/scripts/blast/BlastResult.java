@@ -74,10 +74,12 @@ public class BlastResult {
 			Document document = sxb.build(fileName);
 			Element racine = document.getRootElement();
 			Element child = racine.getChild("BlastOutput_iterations", racine.getNamespace());
+			@SuppressWarnings("unchecked")
 			List<Element> iterations = child.getChildren();
 			System.out.println("number of blast results: " + iterations.size());
 			for (Element iteration : iterations) {
 				child = iteration.getChild("Iteration_hits", racine.getNamespace());
+				@SuppressWarnings("unchecked")
 				List<Element> hits = child.getChildren();
 				int countHypothetical = 0;
 				for (Element hit : hits) {
@@ -85,6 +87,7 @@ public class BlastResult {
 //			     	System.out.println("id: "+hit.getChildText("Hit_id"));
 //			     	System.out.println("Accession: "+hit.getChildText("Hit_accession"));
 					Element hitHsp = hit.getChild("Hit_hsps");
+					@SuppressWarnings("unchecked")
 					List<Element> hsps = hitHsp.getChildren();
 					// fill the list of results
 					for (Element hsp : hsps) {

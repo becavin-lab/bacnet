@@ -479,7 +479,6 @@ public class HeatMapMultiOmicsView implements SelectionListener {
 
 	private void updateScatteRPlot(ArrayList<String> displayGene) {
 		try {
-			String dataName = "omics" + Math.random() + ".txt";
 			File file = File.createTempFile("omics" + Math.random(), ".txt");
 			String dataPath = file.getAbsolutePath();
 			ArrayList<String> pointList = new ArrayList<>();

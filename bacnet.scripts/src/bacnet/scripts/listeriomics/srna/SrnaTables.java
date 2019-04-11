@@ -4,9 +4,9 @@ import java.io.File;
 import java.util.ArrayList;
 
 import bacnet.datamodel.dataset.OmicsData;
-import bacnet.datamodel.sequence.GenomeNCBI;
 import bacnet.datamodel.sequence.Srna;
 import bacnet.datamodel.sequence.Srna.TypeSrna;
+import bacnet.datamodel.sequenceNCBI.GenomeNCBI;
 import bacnet.reader.TabDelimitedTableReader;
 
 /**

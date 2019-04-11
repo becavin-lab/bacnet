@@ -61,6 +61,7 @@ public class BasicApplication implements ApplicationConfiguration {
 		});
 	}
 
+	@SuppressWarnings("unused")
 	private static ResourceLoader createResourceLoader(final String resourceName) {
 		return new ResourceLoader() {
 			@Override

@@ -112,6 +112,7 @@ public class TilingGeneExprDataBase {
 		}
 	}
 
+	@SuppressWarnings("unused")
 	private static void convert(Experiment exp) {
 		/*
 		 * wait for all normalization to finish before converting
@@ -199,6 +200,7 @@ public class TilingGeneExprDataBase {
 	 * 
 	 * @param exp
 	 */
+	@SuppressWarnings("unused")
 	private static void qualityControl(Experiment exp) {
 		Expression.summarize(exp, Genome.loadEgdeGenome());
 		Database database = Database.initDatabase(Database.LISTERIOMICS_PROJECT);

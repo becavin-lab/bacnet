@@ -176,6 +176,7 @@ public class Filter implements Serializable {
 		this.excludeColumn = excludeColumn;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Filter clone() {
 		Filter cloned = new Filter(matrix);

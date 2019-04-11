@@ -364,6 +364,7 @@ public class ComparisonsCreation {
 	 * 
 	 * @throws IOException
 	 */
+	@SuppressWarnings("unused")
 	private static void summarizeInHTML(String path, String comparison) throws IOException {
 		String html = FileUtils.readText(Database.getDATA_PATH() + "ComparisonReport.html");
 		html = html.replaceAll("VName", comparison);

@@ -27,7 +27,7 @@ import bacnet.datamodel.dataset.Tiling;
 import bacnet.datamodel.expdesign.BioCondition;
 import bacnet.datamodel.expdesign.Experiment;
 import bacnet.datamodel.sequence.Genome;
-import bacnet.datamodel.sequence.GenomeNCBI;
+import bacnet.datamodel.sequenceNCBI.GenomeNCBI;
 import bacnet.reader.TabDelimitedTableReader;
 
 /**
@@ -219,11 +219,6 @@ public class Database {
 	 * List of genes in lmo (to increase loading of viewers)
 	 */
 	private ArrayList<String> geneListEGDe = new ArrayList<String>();
-	/**
-	 * List of genes in lmo (to increase loading of viewers), including
-	 * altzernatives genes and ncRNAs
-	 */
-	private ArrayList<String> allGeneListEGDe = new ArrayList<String>();
 	/**
 	 * List of sRNAs in lmo (to increase loading of viewers)
 	 */
@@ -548,7 +543,6 @@ public class Database {
 		probesTiling = new TreeMap<Integer, Integer>();
 		probesGExpression = new TreeMap<String, Integer>();
 		geneListEGDe = new ArrayList<String>();
-		allGeneListEGDe = new ArrayList<String>();
 		sRNAListEGDe = new ArrayList<String>();
 		asRNAListEGDe = new ArrayList<String>();
 		cisRegRNAListEGDe = new ArrayList<String>();
