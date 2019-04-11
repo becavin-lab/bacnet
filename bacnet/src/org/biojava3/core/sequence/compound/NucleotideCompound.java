@@ -1,25 +1,23 @@
 /*
- *                    BioJava development code
+ * BioJava development code
  *
- * This code may be freely distributed and modified under the
- * terms of the GNU Lesser General Public Licence.  This should
- * be distributed with the code.  If you do not have a copy,
- * see:
+ * This code may be freely distributed and modified under the terms of the GNU Lesser General Public
+ * Licence. This should be distributed with the code. If you do not have a copy, see:
  *
- *      http://www.gnu.org/copyleft/lesser.html
+ * http://www.gnu.org/copyleft/lesser.html
  *
- * Copyright for this code is held jointly by the individual
- * authors.  These should be listed in @author doc comments.
+ * Copyright for this code is held jointly by the individual authors. These should be listed
+ * in @author doc comments.
  *
- * For more information on the BioJava project and its aims,
- * or to join the biojava-l mailing list, visit the home page
- * at:
+ * For more information on the BioJava project and its aims, or to join the biojava-l mailing list,
+ * visit the home page at:
  *
- *      http://www.biojava.org/
+ * http://www.biojava.org/
  *
  * Created on 01-21-2010
  *
  * @author Richard Holland
+ * 
  * @auther Scooter Willis
  *
  */
@@ -27,10 +25,8 @@ package org.biojava3.core.sequence.compound;
 
 import static java.util.Arrays.asList;
 import static java.util.Collections.unmodifiableSet;
-
 import java.util.HashSet;
 import java.util.Set;
-
 import org.biojava3.core.sequence.template.AbstractCompound;
 import org.biojava3.core.sequence.template.ComplementCompound;
 import org.biojava3.core.sequence.template.Compound;
@@ -43,65 +39,65 @@ import org.biojava3.core.sequence.template.CompoundSet;
  */
 public class NucleotideCompound extends AbstractCompound implements ComplementCompound {
 
-	private final CompoundSet<NucleotideCompound> compoundSet;
-	private final String complementStr;
-	private final Set<NucleotideCompound> constituents;
+    private final CompoundSet<NucleotideCompound> compoundSet;
+    private final String complementStr;
+    private final Set<NucleotideCompound> constituents;
 
-	public NucleotideCompound(String base, CompoundSet<NucleotideCompound> compoundSet, String complementStr) {
-		super(base);
-		this.compoundSet = compoundSet;
-		this.complementStr = complementStr;
-		this.constituents = unmodifiableSet(new HashSet<NucleotideCompound>(asList(this)));
-	}
+    public NucleotideCompound(String base, CompoundSet<NucleotideCompound> compoundSet, String complementStr) {
+        super(base);
+        this.compoundSet = compoundSet;
+        this.complementStr = complementStr;
+        this.constituents = unmodifiableSet(new HashSet<NucleotideCompound>(asList(this)));
+    }
 
-	public NucleotideCompound(String base, CompoundSet<NucleotideCompound> compoundSet, String complementStr,
-			NucleotideCompound[] constituents) {
-		super(base);
-		this.compoundSet = compoundSet;
-		this.complementStr = complementStr;
-		this.constituents = unmodifiableSet(new HashSet<NucleotideCompound>(asList(constituents)));
-	}
+    public NucleotideCompound(String base, CompoundSet<NucleotideCompound> compoundSet, String complementStr,
+            NucleotideCompound[] constituents) {
+        super(base);
+        this.compoundSet = compoundSet;
+        this.complementStr = complementStr;
+        this.constituents = unmodifiableSet(new HashSet<NucleotideCompound>(asList(constituents)));
+    }
 
-	@Override
-	public String getShortName() {
-		return getBase();
-	}
+    @Override
+    public String getShortName() {
+        return getBase();
+    }
 
-	public ComplementCompound getComplement() {
-		return compoundSet.getCompoundForString(complementStr);
-	}
+    public ComplementCompound getComplement() {
+        return compoundSet.getCompoundForString(complementStr);
+    }
 
-	public boolean equals(Object obj) {
-		if (obj == null) {
-			return false;
-		}
-		if (!(obj instanceof NucleotideCompound)) {
-			return false;
-		}
-		NucleotideCompound them = (NucleotideCompound) obj;
-		return toString().equals(them.toString());
-	}
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (!(obj instanceof NucleotideCompound)) {
+            return false;
+        }
+        NucleotideCompound them = (NucleotideCompound) obj;
+        return toString().equals(them.toString());
+    }
 
-	public int hashCode() {
-		return toString().hashCode();
-	}
+    public int hashCode() {
+        return toString().hashCode();
+    }
 
-	public boolean equalsIgnoreCase(Compound compound) {
-		if (compound == null) {
-			return false;
-		}
-		if (!(compound instanceof NucleotideCompound)) {
-			return false;
-		}
-		NucleotideCompound them = (NucleotideCompound) compound;
-		return toString().equalsIgnoreCase(them.toString());
-	}
+    public boolean equalsIgnoreCase(Compound compound) {
+        if (compound == null) {
+            return false;
+        }
+        if (!(compound instanceof NucleotideCompound)) {
+            return false;
+        }
+        NucleotideCompound them = (NucleotideCompound) compound;
+        return toString().equalsIgnoreCase(them.toString());
+    }
 
-	public Set<NucleotideCompound> getConsituents() {
-		return constituents;
-	}
+    public Set<NucleotideCompound> getConsituents() {
+        return constituents;
+    }
 
-	public boolean isAmbiguous() {
-		return !constituents.isEmpty();
-	}
+    public boolean isAmbiguous() {
+        return !constituents.isEmpty();
+    }
 }

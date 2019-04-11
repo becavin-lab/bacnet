@@ -9,9 +9,9 @@ import org.biojava3.core.sequence.AccessionID;
  */
 public interface Accessioned {
 
-	/**
-	 * Returns the AccessionID this location is currently bound with
-	 */
-	AccessionID getAccession();
+    /**
+     * Returns the AccessionID this location is currently bound with
+     */
+    AccessionID getAccession();
 
 }
