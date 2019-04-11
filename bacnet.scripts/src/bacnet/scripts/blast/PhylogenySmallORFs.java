@@ -28,8 +28,7 @@ public class PhylogenySmallORFs {
 	// Annotation/All-Firmicutes-Species_NCBI_ID.txt";
 	// public static String PATH_GENOMES_LIST =
 	// GenomeNCBITools.PATH_NCBI_WIN+"listBacteria.excel";
-	private static String FTP_PATH = "";
-
+	
 	public static void run() {
 		String tableGenomes = "D:/GenomeNCBI/bacteria_assembly_summary.txt";
 		String pathGenomes = "D:/GenomeNCBI/AllBacteria";
@@ -87,6 +86,7 @@ public class PhylogenySmallORFs {
 	 * bacteria_assembly_summary.txt is the final output
 	 * 
 	 */
+	@SuppressWarnings("unused")
 	private static void cleanListGenome() {
 		/*
 		 * correct strain names
@@ -167,6 +167,7 @@ public class PhylogenySmallORFs {
 	 * 
 	 * @return
 	 */
+	@SuppressWarnings("unused")
 	private static ArrayList<String> getAllGenomesFromNewick() {
 		/**
 		 * Read Newick files and extract the list of all genomes
@@ -212,8 +213,7 @@ public class PhylogenySmallORFs {
 					genomes.add(genome);
 					// System.out.println(genome);
 				}
-				String number = genomeTemp.split(",")[0];
-				// System.err.println(number);
+				genomeTemp.split(",");
 			} else {
 				// System.err.println(genomeTemp);
 			}
@@ -225,6 +225,7 @@ public class PhylogenySmallORFs {
 	/**
 	 * Remove all files of the blast database
 	 */
+	@SuppressWarnings("unused")
 	private static void cleanFolders() {
 		final ArrayList<String> listBacteria = TabDelimitedTableReader
 				.readList(GenomeNCBIFolderTools.PATH_GENOMES_LIST);

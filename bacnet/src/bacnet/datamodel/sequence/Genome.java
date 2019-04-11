@@ -287,6 +287,97 @@ public class Genome {
 		}
 		return geneNames;
 	}
+	
+	/**
+	 * Return all Genes in all chromosomes
+	 * 
+	 * @return the LinkedHashMap<String, Sequence>
+	 */
+	public LinkedHashMap<String, Gene> getGenes() {
+		LinkedHashMap<String, Gene> elements = new LinkedHashMap<String, Gene>();
+		for (Chromosome chromo : this.getChromosomes().values()) {
+			for (String key : chromo.getGenes().keySet()) {
+				elements.put(key, chromo.getGenes().get(key));
+			}
+		}
+		return elements;
+	}
+	
+	/**
+	 * Return all NcRNAs in all chromosomes
+	 * 
+	 * @return the LinkedHashMap<String, Sequence>
+	 */
+	public LinkedHashMap<String, NcRNA> getNcRNAs() {
+		LinkedHashMap<String, NcRNA> elements = new LinkedHashMap<String, NcRNA>();
+		for (Chromosome chromo : this.getChromosomes().values()) {
+			for (String key : chromo.getNcRNAs().keySet()) {
+				elements.put(key, chromo.getNcRNAs().get(key));
+			}
+		}
+		return elements;
+	}
+
+	/**
+	 * Return all Operon in all chromosomes
+	 * 
+	 * @return the LinkedHashMap<String, Sequence>
+	 */
+	public LinkedHashMap<String, Operon> getOperons() {
+		LinkedHashMap<String, Operon> elements = new LinkedHashMap<String, Operon>();
+		for (Chromosome chromo : this.getChromosomes().values()) {
+			for (String key : chromo.getOperons().keySet()) {
+				elements.put(key, chromo.getOperons().get(key));
+			}
+		}
+		return elements;
+	}
+	
+	/**
+	 * Return all Srnas in all chromosomes
+	 * 
+	 * @return the LinkedHashMap<String, Sequence>
+	 */
+	public LinkedHashMap<String, Srna> getsRNAs() {
+		LinkedHashMap<String, Srna> elements = new LinkedHashMap<String, Srna>();
+		for (Chromosome chromo : this.getChromosomes().values()) {
+			for (String key : chromo.getsRNAs().keySet()) {
+				elements.put(key, chromo.getsRNAs().get(key));
+			}
+		}
+		return elements;
+	}
+
+	/**
+	 * Return all AsRNas in all chromosomes
+	 * 
+	 * @return the LinkedHashMap<String, Sequence>
+	 */
+	public LinkedHashMap<String, Srna> getAsRNAs() {
+		LinkedHashMap<String, Srna> elements = new LinkedHashMap<String, Srna>();
+		for (Chromosome chromo : this.getChromosomes().values()) {
+			for (String key : chromo.getAsRNAs().keySet()) {
+				elements.put(key, chromo.getAsRNAs().get(key));
+			}
+		}
+		return elements;
+	}
+
+	/**
+	 * Return all CisRegs in all chromosomes
+	 * 
+	 * @return the LinkedHashMap<String, Sequence>
+	 */
+	public LinkedHashMap<String, Srna> getCisRegs() {
+		LinkedHashMap<String, Srna> elements = new LinkedHashMap<String, Srna>();
+		for (Chromosome chromo : this.getChromosomes().values()) {
+			for (String key : chromo.getCisRegs().keySet()) {
+				elements.put(key, chromo.getCisRegs().get(key));
+			}
+		}
+		return elements;
+	}
+
 
 	/**
 	 * Search in locustag names, gene name, and newlocustag if a gene is present or

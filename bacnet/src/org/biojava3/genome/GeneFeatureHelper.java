@@ -31,13 +31,15 @@ import org.biojava3.genome.parsers.gff.GeneIDGFF2Reader;
 import org.biojava3.genome.parsers.gff.GeneMarkGTFReader;
 
 /**
- *
+ * Allow to process genome elements annotation
  * @author Scooter Willis <willishf at gmail dot com>
  */
 public class GeneFeatureHelper {
 
+	@SuppressWarnings("unused")
 	private static final Logger log = Logger.getLogger(GeneFeatureHelper.class.getName());
 
+	@SuppressWarnings("unused")
 	static public LinkedHashMap<String, ChromosomeSequence> loadFastaAddGeneFeaturesFromUpperCaseExonFastaFile(
 			File fastaSequenceFile, File uppercaseFastaFile, boolean throwExceptionGeneNotFound) throws Exception {
 		LinkedHashMap<String, ChromosomeSequence> chromosomeSequenceList = new LinkedHashMap<String, ChromosomeSequence>();
@@ -201,6 +203,7 @@ public class GeneFeatureHelper {
 	 * @param listGenes
 	 * @throws Exception
 	 */
+	@SuppressWarnings("unused")
 	static public void addGeneIDGFF2GeneFeatures(LinkedHashMap<String, ChromosomeSequence> chromosomeSequenceList,
 			FeatureList listGenes) throws Exception {
 		Collection<String> geneIds = listGenes.attributeValues("gene_id");
@@ -359,6 +362,7 @@ public class GeneFeatureHelper {
 	 * @param listGenes
 	 * @throws Exception
 	 */
+	@SuppressWarnings("unused")
 	static public void addGmodGFF3GeneFeatures(LinkedHashMap<String, ChromosomeSequence> chromosomeSequenceList,
 			FeatureList listGenes) throws Exception {
 
@@ -549,6 +553,7 @@ public class GeneFeatureHelper {
 		return chromosomeSequenceList;
 	}
 
+	@SuppressWarnings("unused")
 	static public void addGlimmerGFF3GeneFeatures(LinkedHashMap<String, ChromosomeSequence> chromosomeSequenceList,
 			FeatureList listGenes) throws Exception {
 		FeatureList mRNAFeatures = listGenes.selectByType("mRNA");
@@ -683,6 +688,7 @@ public class GeneFeatureHelper {
 		return chromosomeSequenceList;
 	}
 
+	@SuppressWarnings("unused")
 	static public void addGeneMarkGTFGeneFeatures(LinkedHashMap<String, ChromosomeSequence> chromosomeSequenceList,
 			FeatureList listGenes) throws Exception {
 		Collection<String> geneIds = listGenes.attributeValues("gene_id");
@@ -891,6 +897,7 @@ public class GeneFeatureHelper {
 			if (true) {
 				File fastaSequenceFile = new File("Scaffolds.fna");
 				File gff3File = new File("geneid-v6.gff3");
+				@SuppressWarnings("unused")
 				LinkedHashMap<String, ChromosomeSequence> chromosomeSequenceHashMap = GeneFeatureHelper
 						.loadFastaAddGeneFeaturesFromGmodGFF3(fastaSequenceFile, gff3File, true);
 			}

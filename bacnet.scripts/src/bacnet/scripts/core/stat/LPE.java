@@ -77,6 +77,7 @@ public class LPE {
 			// // ScatterPlotView.displayMatrix(amR, "A vs M");
 			//
 
+			@SuppressWarnings("unused")
 			ExpressionMatrix leyMatrix = ExpressionMatrix
 					.loadTab(Database.getInstance().getPath() + "/Leypreprocess 1.txt", true);
 			// leyMatrix = ExpressionMatrixStat.log2(leyMatrix);
@@ -84,7 +85,7 @@ public class LPE {
 			// ExpressionMatrix leyMatrix =
 			// ExpressionMatrix.readFromFile(Project.getProjectFolder()+"/Ley
 			// dataset.txt", true);
-			PolynomialSplineFunction lpe1 = estimate(leyMatrix);
+			// PolynomialSplineFunction lpe1 = estimate(leyMatrix);
 
 			// leyMatrix = AMtools.getExpressionMatrix(AMtools.AM(leyMatrix.getValues()));
 			//

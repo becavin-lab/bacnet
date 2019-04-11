@@ -20,7 +20,7 @@ import bacnet.reader.TabDelimitedTableReader;
 import bacnet.utils.VectorUtils;
 
 /*
- * Convert all DNASeq data
+ * Convert all DNASeq data to NGS class
  */
 public class DNASeqCreation {
 
@@ -39,8 +39,6 @@ public class DNASeqCreation {
 			}
 		}
 
-		Genome genome = Genome.loadGenome(Genome.Donovani_NAME);
-		ArrayList<String> chromoNames = genome.getChromosomeNames();
 		ArrayList<String> meanCoverages = new ArrayList<>();
 		for (BioCondition bioCond : dnaSeqBioConds) {
 			for (NGS rnaSeq : bioCond.getNGSSeqs()) {

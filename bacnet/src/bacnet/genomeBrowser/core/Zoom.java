@@ -57,7 +57,7 @@ public class Zoom implements Serializable, Cloneable {
 	public double calcZoomRatio() {
 		// calc (nbBP/minnbBP)^(-zoomNB)
 		double zoomRatio = Math.pow((double) totalBP / (double) MINIMAL_BP_NB, 1 / (double) (zoomNumber - 1));
-		double verif = MINIMAL_BP_NB * Math.pow(zoomRatio, zoomNumber);
+		// double verif = MINIMAL_BP_NB * Math.pow(zoomRatio, zoomNumber);
 		// System.out.println("Verif: "+verif);
 
 		return zoomRatio;

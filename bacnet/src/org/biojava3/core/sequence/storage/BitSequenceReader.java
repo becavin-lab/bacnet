@@ -68,7 +68,7 @@ public class BitSequenceReader<C extends Compound> implements ProxySequenceReade
 	 * Counts the number of times a compound appears in this sequence store
 	 */
 
-	public int countCompounds(C... compounds) {
+	public int countCompounds(@SuppressWarnings("unchecked") C... compounds) {
 		return SequenceMixin.countCompounds(this, compounds);
 	}
 

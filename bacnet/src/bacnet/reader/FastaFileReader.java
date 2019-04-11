@@ -254,6 +254,7 @@ public class FastaFileReader<S extends Sequence<?>, C extends Compound> {
 		long fileIndex = 0;
 		long sequenceIndex = 0;
 		boolean keepGoing = true;
+		@SuppressWarnings("unused")
 		int i = 0;
 		do {
 			i++;

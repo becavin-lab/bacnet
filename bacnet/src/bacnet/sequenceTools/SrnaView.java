@@ -743,7 +743,7 @@ public class SrnaView implements SelectionListener, MouseListener {
 	 * @return
 	 */
 	public ArrayList<String> search(String text) {
-		Chromosome chromosome = genome.getChromosomes().get(0);
+		Chromosome chromosome = genome.getFirstChromosome();
 		ArrayList<String> searchResult = new ArrayList<>();
 		try {
 			/*

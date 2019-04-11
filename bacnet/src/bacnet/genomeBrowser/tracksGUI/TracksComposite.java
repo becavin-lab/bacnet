@@ -135,7 +135,6 @@ public class TracksComposite extends Composite implements SelectionListener, Mou
 	private Composite compositeGenome_1;
 	private Composite compositeChromosome;
 	private Combo comboChromosome;
-	private Button btnAnimate;
 	private Label lblTutorial;
 
 	/**

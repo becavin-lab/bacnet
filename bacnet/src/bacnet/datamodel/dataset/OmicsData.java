@@ -205,6 +205,7 @@ public class OmicsData implements Serializable {
 	/**
 	 * Reinit static variables of OmicsData when database path is changed
 	 */
+	@SuppressWarnings("static-access")
 	public static void initStaticVariables() {
 		PATH_STREAMING = Database.getInstance().getDATA_PATH() + "/StreamingData" + File.separator;
 		PATH_RAW = Database.getInstance().getPath() + "/RawData" + File.separator;

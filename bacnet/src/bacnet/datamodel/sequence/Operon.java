@@ -7,6 +7,8 @@ import java.util.zip.GZIPInputStream;
 
 import org.biojava3.core.sequence.DNASequence;
 
+import bacnet.datamodel.sequenceNCBI.GenomeNCBI;
+
 public class Operon extends Sequence {
 
 	/**

@@ -233,6 +233,7 @@ public class GenomeTranscriptomeView {
 			if (!genomeElement.equals("")) {
 				view.getTracksComposite().search(genomeElement);
 				try {
+					@SuppressWarnings("unused")
 					int position = Integer.parseInt(genomeElement);
 				} catch (Exception e) {
 					view.getTracksComposite().displaySpecificRegion(genomeElement);
@@ -411,6 +412,7 @@ public class GenomeTranscriptomeView {
 	private static class OpenBioConditionAndGenomeElementThread implements IRunnableWithProgress {
 		private String genome;
 		private ArrayList<String> bioConditions = new ArrayList<>();
+		@SuppressWarnings("unused")
 		private String genomeElement;
 		private GenomeTranscriptomeView view;
 

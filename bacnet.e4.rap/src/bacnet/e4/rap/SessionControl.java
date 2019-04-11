@@ -110,6 +110,12 @@ public class SessionControl {
 		service.setMessage("Do you really want to leave Listeriomics ?");
 	}
 
+	/**
+	 * Register the closing of UI session and close every part manually !
+	 * @param partService
+	 * @param modelService
+	 * @param shell
+	 */
 	public static void registerClosingUIsession(EPartService partService, EModelService modelService, Shell shell) {
 
 		RWT.getUISession().addUISessionListener(new UISessionListener() {
@@ -118,6 +124,10 @@ public class SessionControl {
 			 */
 			private static final long serialVersionUID = 4774888041292630588L;
 
+			/**
+			 * Before destroying the UI we need to close manually every Part<br>
+			 * This is due to an Eclipse RAP bug
+			 */
 			public void beforeDestroy(UISessionEvent event) {
 
 				for (MPart part : partService.getParts()) {
@@ -205,10 +215,15 @@ public class SessionControl {
 		});
 	}
 
+	/**
+	 * Test function for closing a Genomeviewer and check if it is kept in JVM
+	 * @param partService
+	 */
 	public static void closeGenomeViewer(EPartService partService) {
 		for (MPart part : partService.getParts()) {
 			System.out.println(part.getContributionURI());
 			if (part.getElementId().contains("GenomeTranscriptomeView")) {
+				@SuppressWarnings("unused")
 				GenomeTranscriptomeView view = (GenomeTranscriptomeView) part.getObject();
 				// Track track = view.getTrack();
 				// System.out.println("Track : "+track);

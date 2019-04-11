@@ -253,7 +253,6 @@ public class SWTResourceManager {
 		Image result = decoratedMap.get(decorator);
 		if (result == null) {
 			Rectangle bib = baseImage.getBounds();
-			Rectangle dib = decorator.getBounds();
 			//
 			result = new Image(Display.getCurrent(), bib.width, bib.height);
 			//

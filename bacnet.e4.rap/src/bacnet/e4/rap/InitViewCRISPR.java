@@ -161,7 +161,7 @@ public class InitViewCRISPR implements SelectionListener {
 		link.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
 		link.setText("Contact us: <a>david.bikard AT pasteur DOT fr</a>");
 
-		Label label = new Label(composite_10, SWT.NONE);
+		new Label(composite_10, SWT.NONE);
 
 		Label lblCredits = new Label(composite_10, SWT.NONE);
 		lblCredits.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
@@ -191,7 +191,7 @@ public class InitViewCRISPR implements SelectionListener {
 		new Label(composite_3, SWT.NONE);
 		new Label(composite_3, SWT.NONE);
 
-		Label label_1 = new Label(composite_10, SWT.NONE);
+		new Label(composite_10, SWT.NONE);
 
 		Label lblImagelicence = new Label(composite_10, SWT.CENTER);
 		lblImagelicence.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));

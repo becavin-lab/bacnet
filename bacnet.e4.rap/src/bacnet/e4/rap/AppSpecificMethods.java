@@ -21,6 +21,7 @@ public class AppSpecificMethods {
 		if (appName.equals("CRISPRGo")) {
 			if (viewID.equals(BannerView.ID)) {
 				MPart part = partService.findPart(viewID);
+				@SuppressWarnings("unused")
 				BannerView view = (BannerView) part.getObject();
 				// System.out.println(view.getClass());
 				// view.getToolBar().dispose();

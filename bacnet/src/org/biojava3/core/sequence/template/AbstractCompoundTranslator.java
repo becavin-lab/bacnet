@@ -46,7 +46,7 @@ public abstract class AbstractCompoundTranslator<F extends Compound, T extends C
 		}
 	}
 
-	protected void addCompounds(F source, T... targets) {
+	protected void addCompounds(F source, @SuppressWarnings("unchecked") T... targets) {
 
 		List<T> l = mapper.get(source);
 		if (l == null) {

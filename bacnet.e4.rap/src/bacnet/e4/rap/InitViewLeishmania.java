@@ -39,7 +39,6 @@ public class InitViewLeishmania implements SelectionListener {
 	 */
 	private boolean focused = false;
 
-	private Label lblTzest;
 	private Button btnStat;
 	private Button btnLeisheild;
 

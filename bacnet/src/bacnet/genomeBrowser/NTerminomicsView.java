@@ -68,6 +68,7 @@ public class NTerminomicsView implements SelectionListener {
 	private ArrayList<String[]> bioCondsToDisplay;
 	private ArrayList<String[]> bioConds;
 
+	@SuppressWarnings("unused")
 	private ArrayList<String> selectedNTerms = new ArrayList<>();
 
 	private ArrayList<String> columnNames = new ArrayList<>();

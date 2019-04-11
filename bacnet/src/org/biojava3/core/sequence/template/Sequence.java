@@ -100,7 +100,7 @@ public interface Sequence<C extends Compound> extends Iterable<C>, Accessioned {
 	 * @param compounds Vargs of the compounds to count
 	 * @return Number of times a compound was found
 	 */
-	public int countCompounds(C... compounds);
+	public int countCompounds(@SuppressWarnings("unchecked") C... compounds);
 
 	/**
 	 * Does the <em>right thing</em> to get the inverse of the current Sequence.

@@ -162,6 +162,7 @@ public class VennDiagram {
 
 	public void save(String path) {
 		for (int i = 0; i < subsets.size(); i++) {
+			@SuppressWarnings("unlikely-arg-type")
 			ArrayList<String> subset = subsets.get(i);
 			TabDelimitedTableReader.saveList(subset, path + subsetNames.get(i) + ".txt");
 		}

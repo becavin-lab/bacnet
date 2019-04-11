@@ -1,7 +1,5 @@
 package bacnet.e4.rap;
 
-import java.util.ArrayList;
-
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
@@ -56,7 +54,7 @@ public class TestPart {
 		// matrix = Annotation.addAnnotation(matrix, Genome.loadEgdeGenome());
 		// matrix.saveTab("/Users/cbecavin/Documents/RNABindingProtein/DiffExpression/RNABinding_All_Annot.txt","Locustag");
 
-		ArrayList<String> finalList = new ArrayList<>();
+		// ArrayList<String> finalList = new ArrayList<>();
 		// Genome genome = Genome.loadEgdeGenome();
 		// for(Gene gene : genome.getFirstChromosome().getGenes().values()){
 		// String row ="";

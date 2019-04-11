@@ -13,6 +13,12 @@ import bacnet.datamodel.sequence.Gene;
 import bacnet.datamodel.sequence.Genome;
 import bacnet.reader.TabDelimitedTableReader;
 
+/**
+ * Genertal class for creation of NTerminomics tables
+ * 
+ * @author christophebecavin
+ *
+ */
 public class NTermCreateFinalData {
 
 	private NTermData massSpecData;
@@ -45,7 +51,7 @@ public class NTermCreateFinalData {
 	 */
 	public NTermCreateFinalData(String nameMassSpecData, String nameMassSpecDataFinal) {
 		this.massSpecData = NTermData.load(nameMassSpecData);
-		this.nameMassSpecDataFinal = nameMassSpecDataFinal;
+		this.setNameMassSpecDataFinal(nameMassSpecDataFinal);
 		this.genome = Genome.loadEgdeGenome();
 
 		/*
@@ -106,6 +112,7 @@ public class NTermCreateFinalData {
 			 */
 			ArrayList<NTerm> aTISGroup = new ArrayList<>();
 			String tisName = "TIS_" + i;
+			@SuppressWarnings("unchecked")
 			ArrayList<NTerm> allNtermTemp = (ArrayList<NTerm>) allNterms.clone();
 			for (NTerm nTerm : allNtermTemp) {
 				if (nTerm.isStrand()) {
@@ -217,6 +224,7 @@ public class NTermCreateFinalData {
 			 */
 			ArrayList<NTerm> aTISGroup = new ArrayList<>();
 			String tisName = "TIS_" + i;
+			@SuppressWarnings("unchecked")
 			ArrayList<NTerm> allNtermTemp = (ArrayList<NTerm>) allNterms.clone();
 			for (NTerm nTerm : allNtermTemp) {
 				if (nTerm.isStrand()) {
@@ -329,6 +337,7 @@ public class NTermCreateFinalData {
 			 */
 			ArrayList<NTerm> aTISGroup = new ArrayList<>();
 			String tisName = "TIS_" + i;
+			@SuppressWarnings("unchecked")
 			ArrayList<NTerm> allNtermTemp = (ArrayList<NTerm>) allNterms.clone();
 			for (NTerm nTerm : allNtermTemp) {
 				if (nTerm.isStrand()) {
@@ -698,7 +707,7 @@ public class NTermCreateFinalData {
 		System.out.println(count + " : peptides uncategorized remaining (for a total of: "
 				+ massSpecDataNew.getNTerms().size() + " peptides)");
 	}
-
+	@SuppressWarnings("unused")
 	private void createATISTable() {
 		ArrayList<String> results = new ArrayList<>();
 		String header = "Gene\tTIS_Name\tFormylation\tFormylated?\trefSequence\tList NTermSequences found\tTotal Spectra\tNTerm Ref Seq\tNTerm ref score\tNterm ref threshold\tUTR length";
@@ -721,6 +730,14 @@ public class NTermCreateFinalData {
 		}
 		TabDelimitedTableReader.saveList(results, PATH_LIST + "/aTISSummary.txt");
 
+	}
+
+	public String getNameMassSpecDataFinal() {
+		return nameMassSpecDataFinal;
+	}
+
+	public void setNameMassSpecDataFinal(String nameMassSpecDataFinal) {
+		this.nameMassSpecDataFinal = nameMassSpecDataFinal;
 	}
 
 }

@@ -134,7 +134,7 @@ public class StringProxySequenceReader<C extends Compound> implements ProxySeque
 		throw new UnsupportedOperationException("Not supported yet.");
 	}
 
-	public int countCompounds(C... compounds) {
+	public int countCompounds(@SuppressWarnings("unchecked") C... compounds) {
 		throw new UnsupportedOperationException("Not supported yet.");
 	}
 

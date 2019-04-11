@@ -258,6 +258,7 @@ public class UNAfold {
 		// \""+(PATH_DATA+fileName)+"\"";
 		try {
 
+			@SuppressWarnings("unused")
 			String out = CMD.runProcess(execProcess, false);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -279,6 +280,7 @@ public class UNAfold {
 
 			String execProcess = hybrid_min + " -o \"" + (PATH_DATA + fileName) + "\" \"" + file1.getAbsolutePath()
 					+ "\" \"" + file2.getAbsolutePath() + "\"";
+			@SuppressWarnings("unused")
 			String out = CMD.runProcess(execProcess, false);
 			/*
 			 * Get energy

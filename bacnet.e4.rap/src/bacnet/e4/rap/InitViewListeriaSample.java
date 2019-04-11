@@ -55,7 +55,6 @@ public class InitViewListeriaSample implements SelectionListener {
 	 * Indicates if we focus the view, so we can pushState navigation
 	 */
 	private boolean focused = false;
-	private Label lblTzest;
 	private Button btnBHI37;
 	private Button btnLoadData;
 	private Button btnSubmitData;
@@ -410,7 +409,7 @@ public class InitViewListeriaSample implements SelectionListener {
 		link.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
 		link.setText("Contact us: <a>listeriomics AT pasteur DOT fr</a>");
 
-		Label label_1 = new Label(composite_19, SWT.NONE);
+		new Label(composite_19, SWT.NONE);
 
 		Label lblImagelicence = new Label(composite_19, SWT.CENTER);
 		lblImagelicence.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
@@ -425,7 +424,7 @@ public class InitViewListeriaSample implements SelectionListener {
 		linkLicenceField.setText("<a>Creative Commons Attribution 4.0 International License</a>");
 		linkLicenceField.addSelectionListener(this);
 
-		Label label = new Label(composite_19, SWT.NONE);
+		new Label(composite_19, SWT.NONE);
 
 		Label lblCredits = new Label(composite_19, SWT.NONE);
 		lblCredits.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));

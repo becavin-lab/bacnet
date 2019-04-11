@@ -8,7 +8,6 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
-import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
@@ -28,7 +27,6 @@ public class InitView implements SelectionListener {
 	public static final String ID = "bacnet.InitView"; //$NON-NLS-1$
 	private Button btnBHI37;
 	private Button btnSrnas;
-	private Label lblTzest;
 	private Button btnStat;
 	private Button btnIntracellular;
 
@@ -73,10 +71,7 @@ public class InitView implements SelectionListener {
 
 		Composite composite = new Composite(scrolledComposite, SWT.NONE);
 		composite.setLayout(new GridLayout(1, false));
-		FontData fontData = new FontData("Arial", 35, SWT.BOLD);
-
-		fontData = new FontData("Arial", 12, SWT.BOLD);
-
+		
 		Composite composite_6 = new Composite(composite, SWT.BORDER);
 		composite_6.setLayout(new GridLayout(1, false));
 		composite_6.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
@@ -187,8 +182,7 @@ public class InitView implements SelectionListener {
 		Label lblErc = new Label(composite_10, SWT.NONE);
 		lblErc.setImage(ResourceManager.getPluginImage("bacnet", "icons/logos/erc-logo-small.png"));
 		new Label(composite_8, SWT.NONE);
-		fontData = new FontData("Arial", 16, SWT.BOLD);
-
+		
 		scrolledComposite.setContent(composite);
 		scrolledComposite.setMinSize(composite.computeSize(SWT.DEFAULT, SWT.DEFAULT));
 

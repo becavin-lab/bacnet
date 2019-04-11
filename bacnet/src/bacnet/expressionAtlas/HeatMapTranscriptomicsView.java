@@ -56,8 +56,7 @@ public class HeatMapTranscriptomicsView implements SelectionListener {
 	private Combo cmbDataUsed;
 	private Text txtCutoffLogFC;
 	private Button btnUpdateCutoff;
-	private Button btnPrint;
-
+	
 	@Inject
 	EPartService partService;
 

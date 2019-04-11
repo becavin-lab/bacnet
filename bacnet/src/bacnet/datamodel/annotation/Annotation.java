@@ -15,11 +15,11 @@ import bacnet.datamodel.dataset.ExpressionMatrix;
 import bacnet.datamodel.sequence.Chromosome;
 import bacnet.datamodel.sequence.Gene;
 import bacnet.datamodel.sequence.Genome;
-import bacnet.datamodel.sequence.GenomeNCBI;
 import bacnet.datamodel.sequence.NcRNA;
 import bacnet.datamodel.sequence.Operon;
 import bacnet.datamodel.sequence.Sequence;
 import bacnet.datamodel.sequence.Sequence.SeqType;
+import bacnet.datamodel.sequenceNCBI.GenomeNCBI;
 import bacnet.datamodel.sequence.Srna;
 
 public class Annotation implements Serializable {

@@ -711,6 +711,7 @@ public class Location implements Iterable<Location> {
 		return new Location(s, e);
 	}
 
+	@SuppressWarnings("unused")
 	static private Location R(int s, int e) {
 		return new Location(-e, -s);
 	}
@@ -719,6 +720,7 @@ public class Location implements Iterable<Location> {
 	 * @deprecated
 	 */
 	public static void main(String args[]) throws Exception {
+		@SuppressWarnings("unused")
 		Location p3_7 = new Location(3, 7);
 		Location p16_19 = new Location(16, 19);
 		Location p15_19 = new Location(15, 19);
@@ -726,6 +728,7 @@ public class Location implements Iterable<Location> {
 		Location p10_17 = new Location(10, 17);
 		Location p10_12 = new Location(10, 12);
 		Location p14_17 = new Location(14, 17);
+		@SuppressWarnings("unused")
 		Location p14_14 = new Location(14, 14);
 
 		Location r13_17 = new Location(13, 17);

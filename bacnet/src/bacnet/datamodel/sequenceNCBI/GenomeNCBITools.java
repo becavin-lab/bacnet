@@ -23,7 +23,6 @@ import bacnet.datamodel.annotation.CodonUsage;
 import bacnet.datamodel.annotation.RfamElement;
 import bacnet.datamodel.dataset.ExpressionMatrix;
 import bacnet.datamodel.sequence.Genome;
-import bacnet.datamodel.sequence.GenomeNCBI;
 import bacnet.reader.NCBIFastaHeaderParser;
 import bacnet.reader.TabDelimitedTableReader;
 import bacnet.utils.FileUtils;
@@ -527,12 +526,12 @@ public class GenomeNCBITools {
 				String goodLocus = correctGeneName[i][3];
 				String previousLocus = correctGeneName[i][1];
 				String otherLocus = correctGeneName[i][2];
-				genome.getChromosomes().get(0).getLocusTagToGeneNameMap().remove(previousLocus);
-				genome.getChromosomes().get(0).getLocusTagToGeneNameMap().remove(otherLocus);
+				genome.getFirstChromosome().getLocusTagToGeneNameMap().remove(previousLocus);
+				genome.getFirstChromosome().getLocusTagToGeneNameMap().remove(otherLocus);
 				if (!goodLocus.equals("")) {
 					System.err.println(geneName + "  " + goodLocus);
-					genome.getChromosomes().get(0).getGeneNameToLocusTagMap().put(geneName, goodLocus);
-					genome.getChromosomes().get(0).getLocusTagToGeneNameMap().put(goodLocus, geneName);
+					genome.getFirstChromosome().getGeneNameToLocusTagMap().put(geneName, goodLocus);
+					genome.getFirstChromosome().getLocusTagToGeneNameMap().put(goodLocus, geneName);
 				}
 			}
 

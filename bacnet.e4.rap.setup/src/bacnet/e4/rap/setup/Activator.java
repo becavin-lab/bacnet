@@ -5,8 +5,20 @@ import org.osgi.framework.BundleContext;
 import org.osgi.framework.BundleEvent;
 import org.osgi.framework.BundleListener;
 
+/**
+ * OSGI Activator of bacnet.e4.rap.setup
+ * @author christophebecavin
+ *
+ */
 public class Activator implements BundleActivator, BundleListener {
 
+	/**
+	 * Print the type of activation for each bundle
+	 * <br> Use it only if needed for debugging. Commented otherwise
+	 * @param event
+	 * @return
+	 */
+	@SuppressWarnings("unused")
 	private static String typeAsString(BundleEvent event) {
 		if (event == null) {
 			return "null";
@@ -49,9 +61,9 @@ public class Activator implements BundleActivator, BundleListener {
 	}
 
 	public void bundleChanged(BundleEvent event) {
-		String symbolicName = event.getBundle().getSymbolicName();
-		String type = typeAsString(event);
-		// System.out.println("BundleChanged bacnet.e4.rap: " + symbolicName + ",
-		// event.type: " + type);
+//		String symbolicName = event.getBundle().getSymbolicName();
+//		String type = typeAsString(event);
+//		System.out.println("BundleChanged bacnet.e4.rap: " + symbolicName + ",
+//		event.type: " + type);
 	}
 }

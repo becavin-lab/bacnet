@@ -33,8 +33,8 @@ import org.eclipse.swt.widgets.Text;
 import bacnet.Database;
 import bacnet.datamodel.dataset.OmicsData;
 import bacnet.datamodel.sequence.Genome;
-import bacnet.datamodel.sequence.GenomeNCBI;
 import bacnet.datamodel.sequenceNCBI.GenomeConversion;
+import bacnet.datamodel.sequenceNCBI.GenomeNCBI;
 import bacnet.datamodel.sequenceNCBI.GenomeNCBITools;
 import bacnet.reader.TabDelimitedTableReader;
 import bacnet.scripts.database.BioConditionCreation;
@@ -111,7 +111,6 @@ public class SetupPart implements SelectionListener {
 	private Button btnValidateComparisonsDatabase;
 	private Button btnAddComparisonsFrom;
 	private Button btnCreateTranscriptomicsComparisons;
-	private Button button_3;
 	private Button btnCreateLogfcTranscriptome;
 	private Button btnCreateExprPrteome;
 	private Button btnDownloadGenomesFrom;

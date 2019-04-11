@@ -62,6 +62,7 @@ public class CRISPRPredictView implements SelectionListener {
 	private Shell shell;
 	private TableViewer tableViewer;
 	private Table table;
+	@SuppressWarnings("unused")
 	private Button btnUploadFastaFile;
 	private Button btnRunPredicition;
 	private ArrayList<String> columnNames = new ArrayList<>();
@@ -78,6 +79,7 @@ public class CRISPRPredictView implements SelectionListener {
 	/**
 	 * Create contents of the view part.
 	 */
+	@SuppressWarnings("unused")
 	@PostConstruct
 	public void createControls(Composite parent) {
 		parent.setLayout(new GridLayout(1, false));

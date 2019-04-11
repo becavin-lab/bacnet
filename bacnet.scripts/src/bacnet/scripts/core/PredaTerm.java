@@ -79,6 +79,7 @@ public class PredaTerm {
 				pAthreshold = 34; // Statistical cutoff for limiting false poly(A) positives to < 5%. Default 34
 		SJthreshold = 1506; // Same threshold for linear splice junction scoring scheme. Default 1506
 		String CurrLine = "", SeqLocation = "";
+		@SuppressWarnings("unused")
 		boolean wholeIR = false, pAcutoff = false, SJcutoff = false, alldone = false, noSJ = false;
 		BufferedReader keyboard = new BufferedReader(new InputStreamReader(System.in));
 		// Import sequences
@@ -122,7 +123,6 @@ public class PredaTerm {
 		// Predict Splice Junctions
 		int[] SJposTAB = PredictSJ(SeqTAB);
 		// Build PSSM
-		@SuppressWarnings("resource")
 		Scanner Line = new Scanner(new BufferedReader(new FileReader(pssmFileName))).useDelimiter("\n");
 		while (Line.hasNext()) {
 			pssmsize++;
@@ -150,6 +150,7 @@ public class PredaTerm {
 			String chromo = infoSeq[2];
 			int begin = Integer.parseInt(infoSeq[3]);
 			int end = Integer.parseInt(infoSeq[4]);
+			@SuppressWarnings("unused")
 			int length = Integer.parseInt(infoSeq[5]);
 			char strand = infoSeq[6].charAt(0);
 
@@ -366,6 +367,7 @@ public class PredaTerm {
 	// This method processes a .fasta formatted sequence file input into predaterm
 	private static String[][] ImportFasta(String File_location) throws IOException {
 		int sequences = 0;
+		@SuppressWarnings("unused")
 		String Sequence = "", TempScan = "";
 		String[][] SeqTAB;
 		// create String array

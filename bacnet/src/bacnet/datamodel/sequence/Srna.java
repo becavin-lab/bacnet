@@ -8,6 +8,7 @@ import java.util.TreeSet;
 import java.util.zip.GZIPInputStream;
 
 import bacnet.Database;
+import bacnet.datamodel.sequenceNCBI.GenomeNCBI;
 import bacnet.reader.TabDelimitedTableReader;
 
 public class Srna extends Sequence {
@@ -148,7 +149,7 @@ public class Srna extends Sequence {
 		Genome genome = Genome.loadEgdeGenome();
 		ArrayList<Srna> sRNAs = new ArrayList<Srna>();
 		for (String sRNAName : getSrnaOrder()) {
-			sRNAs.add(genome.getChromosomes().get(0).getsRNAs().get(sRNAName));
+			sRNAs.add(genome.getsRNAs().get(sRNAName));
 		}
 		return sRNAs;
 	}
@@ -161,8 +162,8 @@ public class Srna extends Sequence {
 	public static ArrayList<Srna> getEGDcSrnas() {
 		Genome genome = Genome.loadGenome("FINAL_" + Genome.EGDC_NAME);
 		ArrayList<Srna> sRNAs = new ArrayList<Srna>();
-		for (String sRNAName : genome.getChromosomes().get(0).getsRNAs().keySet()) {
-			sRNAs.add(genome.getChromosomes().get(0).getsRNAs().get(sRNAName));
+		for (String sRNAName : genome.getsRNAs().keySet()) {
+			sRNAs.add(genome.getsRNAs().get(sRNAName));
 		}
 		return sRNAs;
 	}
@@ -175,8 +176,8 @@ public class Srna extends Sequence {
 	public static ArrayList<Srna> get10403SSrnas() {
 		Genome genome = Genome.loadGenome("FINAL_" + Genome.DP10403S_NAME);
 		ArrayList<Srna> sRNAs = new ArrayList<Srna>();
-		for (String sRNAName : genome.getChromosomes().get(0).getsRNAs().keySet()) {
-			sRNAs.add(genome.getChromosomes().get(0).getsRNAs().get(sRNAName));
+		for (String sRNAName : genome.getsRNAs().keySet()) {
+			sRNAs.add(genome.getsRNAs().get(sRNAName));
 		}
 		return sRNAs;
 	}
@@ -190,13 +191,13 @@ public class Srna extends Sequence {
 		Genome genome = Genome.loadEgdeGenome();
 		ArrayList<Srna> sRNAs = new ArrayList<Srna>();
 		for (String sRNAName : getSrnaOrder()) {
-			sRNAs.add(genome.getChromosomes().get(0).getsRNAs().get(sRNAName));
+			sRNAs.add(genome.getsRNAs().get(sRNAName));
 		}
-		for (String name : genome.getChromosomes().get(0).getCisRegs().keySet()) {
-			sRNAs.add(genome.getChromosomes().get(0).getCisRegs().get(name));
+		for (String name : genome.getCisRegs().keySet()) {
+			sRNAs.add(genome.getCisRegs().get(name));
 		}
-		for (String name : genome.getChromosomes().get(0).getAsRNAs().keySet()) {
-			sRNAs.add(genome.getChromosomes().get(0).getAsRNAs().get(name));
+		for (String name : genome.getAsRNAs().keySet()) {
+			sRNAs.add(genome.getAsRNAs().get(name));
 		}
 
 		return sRNAs;
@@ -208,7 +209,7 @@ public class Srna extends Sequence {
 	public static void extractAllSrnaToGff() {
 		ArrayList<String> results = new ArrayList<>();
 		Genome genome = Genome.loadEgdeGenome();
-		for (Srna sRNA : genome.getChromosomes().get(0).getsRNAs().values()) {
+		for (Srna sRNA : genome.getFirstChromosome().getsRNAs().values()) {
 			String text = "NC_003210.1\tListeriomics\t";
 			text += sRNA.getTypeSrna() + "\t" + sRNA.getBegin() + "\t" + sRNA.getEnd() + "\t.\t" + sRNA.getStrand()
 					+ "\t.\t";
@@ -216,7 +217,7 @@ public class Srna extends Sequence {
 			results.add(text);
 			System.out.println(text);
 		}
-		for (Srna sRNA : genome.getChromosomes().get(0).getAsRNAs().values()) {
+		for (Srna sRNA : genome.getFirstChromosome().getAsRNAs().values()) {
 			String text = "NC_003210.1\tListeriomics\t";
 			text += sRNA.getTypeSrna() + "\t" + sRNA.getBegin() + "\t" + sRNA.getEnd() + "\t.\t" + sRNA.getStrand()
 					+ "\t.\t";
@@ -224,7 +225,7 @@ public class Srna extends Sequence {
 			results.add(text);
 			System.out.println(text);
 		}
-		for (Srna sRNA : genome.getChromosomes().get(0).getCisRegs().values()) {
+		for (Srna sRNA : genome.getFirstChromosome().getCisRegs().values()) {
 			String text = "NC_003210.1\tListeriomics\t";
 			text += sRNA.getTypeSrna() + "\t" + sRNA.getBegin() + "\t" + sRNA.getEnd() + "\t.\t" + sRNA.getStrand()
 					+ "\t.\t";

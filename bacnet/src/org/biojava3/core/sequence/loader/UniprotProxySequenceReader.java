@@ -263,7 +263,7 @@ public class UniprotProxySequenceReader<C extends Compound>
 	 * @param compounds
 	 * @return
 	 */
-	public int countCompounds(C... compounds) {
+	public int countCompounds(@SuppressWarnings("unchecked") C... compounds) {
 		throw new UnsupportedOperationException("Not supported yet.");
 	}
 

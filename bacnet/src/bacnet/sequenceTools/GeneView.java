@@ -126,6 +126,7 @@ public class GeneView implements SelectionListener, MouseListener {
 	private Label lblGene;
 	private TrackCanvasGenome canvasGenome;
 	private Text txtSearch;
+	@SuppressWarnings("unused")
 	private boolean browserIsFocus = false;
 
 	private String[][] arrayDataList = new String[0][0];

@@ -49,6 +49,7 @@ public class HTMLUtils {
 	 */
 	private static String getPluginHTMLFromUrl(URL url) {
 		try {
+			@SuppressWarnings("unused")
 			String key = url.toExternalForm();
 
 			InputStream stream;

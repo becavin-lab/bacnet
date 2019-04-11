@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
-
-
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            class="bacnet.scripts.blast.BlastResultView"
+            id="ListTranscript.BlastResultView"
+            name="BlastResults"
+            restorable="true">
+      </view>
+   </extension>
+   
 </plugin>

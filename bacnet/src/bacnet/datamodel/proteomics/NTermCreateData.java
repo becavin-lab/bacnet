@@ -11,7 +11,6 @@ import org.biojava3.core.sequence.DNASequence;
 import org.biojava3.core.sequence.Strand;
 
 import bacnet.datamodel.annotation.CodonUsage;
-import bacnet.datamodel.dataset.ExpressionData;
 import bacnet.datamodel.dataset.NGS;
 import bacnet.datamodel.dataset.NTermData;
 import bacnet.datamodel.expdesign.BioCondition;
@@ -237,7 +236,7 @@ public class NTermCreateData {
 		BioCondition bioCond = BioCondition.getBioCondition("EGDe_Complete_TSS");
 		NGS tssNGSPlus = bioCond.getNGSSeqs().get(0);
 		NGS tssNGSMinus = bioCond.getNGSSeqs().get(1);
-		String[][] tssArray = TabDelimitedTableReader.read(ExpressionData.PATH_NGS_RAW + "TSS_data_EGDe.txt");
+		//String[][] tssArray = TabDelimitedTableReader.read(ExpressionData.PATH_NGS_RAW + "TSS_data_EGDe.txt");
 		tssNGSPlus.read();
 		tssNGSMinus.read();
 		for (NTerm nTerm : nTermExp.getElements().values()) {

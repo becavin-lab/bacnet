@@ -147,7 +147,7 @@ public class SingleCompoundSequenceReader<C extends Compound> implements ProxySe
 	 * {@link SequenceMixin#countCompounds(org.biojava3.core.sequence.template.Sequence, C[]) }
 	 */
 
-	public int countCompounds(C... compounds) {
+	public int countCompounds(@SuppressWarnings("unchecked") C... compounds) {
 		return SequenceMixin.countCompounds(this, compounds);
 	}
 

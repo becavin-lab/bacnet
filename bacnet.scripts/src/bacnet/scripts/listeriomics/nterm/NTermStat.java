@@ -7,7 +7,6 @@ import org.apache.commons.lang.StringUtils;
 import org.biojava3.core.sequence.Strand;
 
 import bacnet.Database;
-import bacnet.datamodel.dataset.ExpressionMatrix;
 import bacnet.datamodel.dataset.GeneExpression;
 import bacnet.datamodel.dataset.NTermData;
 import bacnet.datamodel.expdesign.BioCondition;
@@ -71,24 +70,15 @@ public class NTermStat {
 
 	public NTermStat() {
 		genome = Genome.loadEgdeGenome();
-		ArrayList<String> listGenesTemp = new ArrayList<>();
-		// listGenes = getiTIS();
+		listGenes = getiTIS();
 		for (Gene gene : genome.getFirstChromosome().getGenes().values()) {
 			listGenes.add(gene);
 		}
 
-//		setSDBindingEnergy();
-//		setTIRStructureEnergy();
-//		setGeneSequence();
-//		setTIRSequence();
-	}
-
-	public void display() {
-		ExpressionMatrix matrix = ExpressionMatrix.loadTab(NTermUtils.getPATH() + "Statistics/Statistics Genes.excel",
-				true);
-
-//		HistogramView.displayMatrix(matrix, "aTIS and iTIS");
-//		TableAWTView.displayMatrix(matrix, "heatMap");
+		setSDBindingEnergy();
+		setTIRStructureEnergy();
+		setGeneSequence();
+		setTIRSequence();
 	}
 
 	public ArrayList<Gene> getiTIS() {
@@ -936,16 +926,14 @@ public class NTermStat {
 		/**
 		 * Logo of aTIS
 		 */
-		// ArrayList<String> lmosaTIS =
-		// TabDelimitedTableReader.readList(NTermUtils.getPATH()+"List peptides/aTIS
-		// List.txt");
-		// for(String aTISlmo : lmosaTIS){
-		// Sequence gene = genome.getElement(aTISlmo);
-		// fastaFile.add(">"+aTISlmo);
-		// fastaFile.add(getLogo(gene));
-		// }
-		// TabDelimitedTableReader.saveList(fastaFile, NTermUtils.getPATH()+"List
-		// peptides/aTIS logo.fasta");
+		ArrayList<String> lmosaTIS = TabDelimitedTableReader
+				.readList(NTermUtils.getPATH() + "List peptides/aTISList.txt");
+		for (String aTISlmo : lmosaTIS) {
+			Sequence gene = genome.getElement(aTISlmo);
+			fastaFile.add(">" + aTISlmo);
+			fastaFile.add(getLogo(gene));
+		}
+		TabDelimitedTableReader.saveList(fastaFile, NTermUtils.getPATH() + "Listpeptides/aTIS logo.fasta");
 		/*
 		 * Logo of all Lmos
 		 */
@@ -954,9 +942,9 @@ public class NTermStat {
 		for (Gene gene : genome.getFirstChromosome().getGenes().values()) {
 			fastaFile.add(">" + gene.getName());
 			fastaFile.add(getLogo(gene));
-			// if(!lmosaTIS.contains(gene.getName())){
-			// noATISfound.add(gene.getName());
-			// }
+			if (!lmosaTIS.contains(gene.getName())) {
+				noATISfound.add(gene.getName());
+			}
 		}
 		TabDelimitedTableReader.saveList(fastaFile, NTermUtils.getPATH() + "Statistics/lmos logo.fasta");
 		// /*

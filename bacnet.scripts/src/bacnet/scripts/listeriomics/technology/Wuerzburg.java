@@ -3,7 +3,6 @@ package bacnet.scripts.listeriomics.technology;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.TreeSet;
 
 import bacnet.Database;
 import bacnet.datamodel.dataset.ExpressionMatrix;
@@ -22,7 +21,6 @@ public class Wuerzburg {
 		 * Read Comparison and extract the data fileName of the corresponding data
 		 */
 		String[][] array = TabDelimitedTableReader.read(Database.getInstance().getExperimentComparisonTablePath());
-		TreeSet<String> comparisons = new TreeSet<>();
 		HashMap<String, ArrayList<String>> comparisonToFileName = new HashMap<>();
 
 		/**

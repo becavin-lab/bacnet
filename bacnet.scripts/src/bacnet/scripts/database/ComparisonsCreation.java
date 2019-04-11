@@ -60,7 +60,7 @@ public class ComparisonsCreation {
 		for (Chromosome chromo : genome.getChromosomes().values()) {
 			for (String gene : chromo.getGenes().keySet())
 				genes.add(gene);
-			// for(String gene : genome.getChromosomes().get(0).getOperons().keySet())
+			// for(String gene : genome.getOperons().keySet())
 			// operons.add(gene);
 			for (String gene : chromo.getNcRNAs().keySet())
 				ncRNAs.add(gene);
@@ -364,6 +364,7 @@ public class ComparisonsCreation {
 	 * 
 	 * @throws IOException
 	 */
+	@SuppressWarnings("unused")
 	private static void summarizeInHTML(String path, String comparison) throws IOException {
 		String html = FileUtils.readText(Database.getDATA_PATH() + "ComparisonReport.html");
 		html = html.replaceAll("VName", comparison);
@@ -993,19 +994,19 @@ public class ComparisonsCreation {
 		 */
 		ExpressionMatrix logFCMatrix = new ExpressionMatrix();
 		int i = 0;
-		for (String gene : genome.getChromosomes().get(0).getGenes().keySet()) {
+		for (String gene : genome.getGenes().keySet()) {
 			logFCMatrix.getRowNames().put(gene, i);
 			i++;
 		}
-		for (String sRNA : genome.getChromosomes().get(0).getsRNAs().keySet()) {
+		for (String sRNA : genome.getsRNAs().keySet()) {
 			logFCMatrix.getRowNames().put(sRNA, i);
 			i++;
 		}
-		for (String asRNA : genome.getChromosomes().get(0).getAsRNAs().keySet()) {
+		for (String asRNA : genome.getAsRNAs().keySet()) {
 			logFCMatrix.getRowNames().put(asRNA, i);
 			i++;
 		}
-		for (String cisReg : genome.getChromosomes().get(0).getCisRegs().keySet()) {
+		for (String cisReg : genome.getCisRegs().keySet()) {
 			logFCMatrix.getRowNames().put(cisReg, i);
 			i++;
 		}
@@ -1031,7 +1032,7 @@ public class ComparisonsCreation {
 				if (matrix != null) {
 					String headerGE = "LOGFC_" + comp + GeneExpression.EXTENSION;
 					String headerTiling = "LOGFC_" + comp + Tiling.EXTENSION;
-					for (String gene : genome.getChromosomes().get(0).getGenes().keySet()) {
+					for (String gene : genome.getGenes().keySet()) {
 						// System.out.println(header+" "+gene+" "+comp);
 						if (matrix.getRowNames().containsKey(gene)) {
 							logFCMatrix.setValue(matrix.getValue(gene, headerGE), gene, comp);
@@ -1052,7 +1053,7 @@ public class ComparisonsCreation {
 				matrix = ExpressionMatrix.loadTab(fileName, true);
 				if (matrix != null) {
 					String header = "LOGFC_" + comp + Tiling.EXTENSION;
-					for (String sRNA : genome.getChromosomes().get(0).getsRNAs().keySet()) {
+					for (String sRNA : genome.getsRNAs().keySet()) {
 						logFCMatrix.setValue(matrix.getValue(sRNA, header), sRNA, comp);
 					}
 				}
@@ -1064,7 +1065,7 @@ public class ComparisonsCreation {
 				matrix = ExpressionMatrix.loadTab(fileName, true);
 				if (matrix != null) {
 					String header = "LOGFC_" + comp + Tiling.EXTENSION;
-					for (String asRNA : genome.getChromosomes().get(0).getAsRNAs().keySet()) {
+					for (String asRNA : genome.getAsRNAs().keySet()) {
 						logFCMatrix.setValue(matrix.getValue(asRNA, header), asRNA, comp);
 					}
 				}
@@ -1076,7 +1077,7 @@ public class ComparisonsCreation {
 				matrix = ExpressionMatrix.loadTab(fileName, true);
 				if (matrix != null) {
 					String header = "LOGFC_" + comp + Tiling.EXTENSION;
-					for (String cisReg : genome.getChromosomes().get(0).getCisRegs().keySet()) {
+					for (String cisReg : genome.getCisRegs().keySet()) {
 						logFCMatrix.setValue(matrix.getValue(cisReg, header), cisReg, comp);
 					}
 				}
@@ -1103,19 +1104,19 @@ public class ComparisonsCreation {
 		 */
 		ExpressionMatrix logStatTable = new ExpressionMatrix();
 		int i = 0;
-		for (String gene : genome.getChromosomes().get(0).getGenes().keySet()) {
+		for (String gene : genome.getGenes().keySet()) {
 			logStatTable.getRowNames().put(gene, i);
 			i++;
 		}
-		for (String sRNA : genome.getChromosomes().get(0).getsRNAs().keySet()) {
+		for (String sRNA : genome.getsRNAs().keySet()) {
 			logStatTable.getRowNames().put(sRNA, i);
 			i++;
 		}
-		for (String asRNA : genome.getChromosomes().get(0).getAsRNAs().keySet()) {
+		for (String asRNA : genome.getAsRNAs().keySet()) {
 			logStatTable.getRowNames().put(asRNA, i);
 			i++;
 		}
-		for (String cisReg : genome.getChromosomes().get(0).getCisRegs().keySet()) {
+		for (String cisReg : genome.getCisRegs().keySet()) {
 			logStatTable.getRowNames().put(cisReg, i);
 			i++;
 		}
@@ -1141,7 +1142,7 @@ public class ComparisonsCreation {
 				if (matrix != null) {
 					String headerGE = "STAT_" + comp + "_" + StatTest.TypeStat.FDRBY + GeneExpression.EXTENSION;
 					String headerTiling = "STAT_" + comp + "_" + StatTest.TypeStat.TSTUDENTTILING + Tiling.EXTENSION;
-					for (String gene : genome.getChromosomes().get(0).getGenes().keySet()) {
+					for (String gene : genome.getGenes().keySet()) {
 						// System.out.println(header+" "+gene+" "+comp);
 						if (matrix.getRowNames().containsKey(gene)) {
 							logStatTable.setValue(matrix.getValue(gene, headerGE), gene, comp);
@@ -1160,7 +1161,7 @@ public class ComparisonsCreation {
 				matrix = ExpressionMatrix.loadTab(fileName, true);
 				if (matrix != null) {
 					String header = "STAT_" + comp + "_" + StatTest.TypeStat.TSTUDENTTILING + Tiling.EXTENSION;
-					for (String sRNA : genome.getChromosomes().get(0).getsRNAs().keySet()) {
+					for (String sRNA : genome.getsRNAs().keySet()) {
 						logStatTable.setValue(matrix.getValue(sRNA, header), sRNA, comp);
 					}
 				}
@@ -1172,7 +1173,7 @@ public class ComparisonsCreation {
 				matrix = ExpressionMatrix.loadTab(fileName, true);
 				if (matrix != null) {
 					String header = "STAT_" + comp + "_" + StatTest.TypeStat.TSTUDENTTILING + Tiling.EXTENSION;
-					for (String asRNA : genome.getChromosomes().get(0).getAsRNAs().keySet()) {
+					for (String asRNA : genome.getAsRNAs().keySet()) {
 						logStatTable.setValue(matrix.getValue(asRNA, header), asRNA, comp);
 					}
 				}
@@ -1184,7 +1185,7 @@ public class ComparisonsCreation {
 				matrix = ExpressionMatrix.loadTab(fileName, true);
 				if (matrix != null) {
 					String header = "STAT_" + comp + "_" + StatTest.TypeStat.TSTUDENTTILING + Tiling.EXTENSION;
-					for (String cisReg : genome.getChromosomes().get(0).getCisRegs().keySet()) {
+					for (String cisReg : genome.getCisRegs().keySet()) {
 						logStatTable.setValue(matrix.getValue(cisReg, header), cisReg, comp);
 					}
 				}
@@ -1216,19 +1217,19 @@ public class ComparisonsCreation {
 		 */
 		ExpressionMatrix diffExprTable = new ExpressionMatrix();
 		int i = 0;
-		for (String gene : genome.getChromosomes().get(0).getGenes().keySet()) {
+		for (String gene : genome.getGenes().keySet()) {
 			diffExprTable.getRowNames().put(gene, i);
 			i++;
 		}
-		for (String sRNA : genome.getChromosomes().get(0).getsRNAs().keySet()) {
+		for (String sRNA : genome.getsRNAs().keySet()) {
 			diffExprTable.getRowNames().put(sRNA, i);
 			i++;
 		}
-		for (String asRNA : genome.getChromosomes().get(0).getAsRNAs().keySet()) {
+		for (String asRNA : genome.getAsRNAs().keySet()) {
 			diffExprTable.getRowNames().put(asRNA, i);
 			i++;
 		}
-		for (String cisReg : genome.getChromosomes().get(0).getCisRegs().keySet()) {
+		for (String cisReg : genome.getCisRegs().keySet()) {
 			diffExprTable.getRowNames().put(cisReg, i);
 			i++;
 		}

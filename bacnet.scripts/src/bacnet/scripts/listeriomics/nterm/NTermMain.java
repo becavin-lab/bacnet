@@ -12,7 +12,6 @@ import bacnet.datamodel.sequence.Gene;
 import bacnet.datamodel.sequence.Genome;
 import bacnet.datamodel.sequence.Srna;
 import bacnet.reader.TabDelimitedTableReader;
-import bacnet.scripts.phylogeny.PhylogenySmallORFs;
 import bacnet.utils.ArrayUtils;
 
 /**
@@ -38,6 +37,7 @@ public class NTermMain {
 		 */
 //		String nameRawData = NTermCreateData.PATH_RAW_DATA+"NTerm_Combine_07032014.txt";
 //		String nameRawData = NTermCreateData.PATH_RAW_DATA+"NTerm_Blood_TIS_Final_06032015.txt";
+		@SuppressWarnings("unused")
 		String nameMassSpecData = "EGDe_Combine_TIS";
 //		String nameMassSpecData = "Blood_TIS_Final";
 //		String maxQuant = NTermCreateData.PATH_RAW_DATA+"MQ_NTerm_Combine_07032014";
@@ -86,7 +86,7 @@ public class NTermMain {
 		/*
 		 * Some methods for small ORFs finding
 		 */
-		PhylogenySmallORFs.run();
+//		PhylogenySmallORFs.run();
 //		PhylogenyRli42vsRsbR.run();
 //		System.out.println(">WholeRegion");
 //		System.out.println(Genome.loadEgdeGenome().getFirstChromosome().getSequenceAsString(1399327, 		1399616, Strand.POSITIVE));

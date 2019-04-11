@@ -289,7 +289,7 @@ public class SequenceFileProxyLoader<C extends Compound> implements ProxySequenc
 	 * @param compounds
 	 * @return
 	 */
-	public int countCompounds(C... compounds) {
+	public int countCompounds(@SuppressWarnings("unchecked") C... compounds) {
 		return SequenceMixin.countCompounds(this, compounds);
 	}
 

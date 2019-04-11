@@ -57,12 +57,11 @@ public class NTermSummaryTable {
 				"Overlap in frame", "Operon", "Description", "COG", "TSS up type (-position)", "TSS up distance",
 				"TSS up coverage", "TSS down type (-position)", "TSS down distance", "TSS down coverage", "Codon Usage",
 				"SD ?", "SD sequence (20bp upstream)" };
-		
+
 		String header = "";
 		for (String temp : headers)
 			header += temp + "\t";
 		finalTable.add(header);
-		int k = 0;
 		for (NTerm nTerm : nTermData.getNTerms()) {
 			if (nTerm.getTypeOverlap() == typeOverlap) {
 				NTerm acD3Nterm = new NTerm();
@@ -159,7 +158,6 @@ public class NTermSummaryTable {
 				for (String temp : rows2)
 					row += temp + "\t";
 
-				
 				finalTable.add(row);
 			}
 		}

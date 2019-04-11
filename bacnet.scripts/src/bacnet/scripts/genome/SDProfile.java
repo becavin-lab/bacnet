@@ -19,6 +19,13 @@ import bacnet.reader.TabDelimitedTableReader;
 import bacnet.scripts.database.NGSCreation;
 import bacnet.utils.UNAfold;
 
+/**
+ * Calculate Shine-Dalgarno profile for bacterial genome. <br>
+ * Only first chromosome is taken into account
+ * 
+ * @author christophebecavin
+ *
+ */
 public class SDProfile {
 
 	public static String PATH = Database.getInstance().getPath() + "SD Profile/";
@@ -85,8 +92,8 @@ public class SDProfile {
 
 	public static void calculateSDProfile(Genome genome) {
 		int step = 10;
-		int nbstep = genome.getChromosomes().get(0).getLength() / step + 1;
-		// System.out.println(genome.getChromosomes().get(0).getLength()+" "+nbstep+"
+		// int nbstep = genome.getFirstChromosome().getLength() / step + 1;
+		// System.out.println(genome.getFirstChromosome().getLength()+" "+nbstep+"
 		// "+(nbstep*500));
 		ExecutorService executor = Executors.newFixedThreadPool(10);
 		for (int i = 30000; i < 30100; i++) {
@@ -123,8 +130,8 @@ public class SDProfile {
 	public static void calculateOneSDProfile(Genome genome, int begin, int end, Strand strand, String fileName) {
 		ArrayList<String> results = new ArrayList<>();
 		for (int i = begin; i < end; i++) {
-			if (i > 6 && i < (genome.getChromosomes().get(0).getLength() - 6)) {
-				String sequence = genome.getChromosomes().get(0).getSequenceAsString(i - 6, i + 6, strand);
+			if (i > 6 && i < (genome.getFirstChromosome().getLength() - 6)) {
+				String sequence = genome.getFirstChromosome().getSequenceAsString(i - 6, i + 6, strand);
 				// System.out.println(sequence);
 				double energy = UNAfold.hybridRNA(sequence, i + "" + strand, Sequence.ANTI_SD_SEQ,
 						i + "" + strand + "anti-SD", true);
@@ -275,12 +282,12 @@ public class SDProfile {
 		/*
 		 * Organize RawData by copying the coverage value at the right base pair index
 		 */
-		System.out.println(genome.getChromosomes().get(0).getLength());
+		System.out.println(genome.getFirstChromosome().getLength());
 		String[][] arrayPlus = TabDelimitedTableReader.read(PATH + genomeName + "_+_ - RawData.wig");
 		String[][] arrayMinus = TabDelimitedTableReader.read(PATH + genomeName + "_-_ - RawData.wig");
 		System.out.println("length: " + arrayPlus.length);
-		String[][] arrayPlusNew = new String[genome.getChromosomes().get(0).getLength() + 1][2];
-		String[][] arrayMinusNew = new String[genome.getChromosomes().get(0).getLength() + 1][2];
+		String[][] arrayPlusNew = new String[genome.getFirstChromosome().getLength() + 1][2];
+		String[][] arrayMinusNew = new String[genome.getFirstChromosome().getLength() + 1][2];
 		for (int i = 0; i < arrayPlusNew.length; i++) {
 			arrayPlusNew[i][0] = i + "";
 			arrayPlusNew[i][1] = 0 + "";
@@ -312,7 +319,7 @@ public class SDProfile {
 	 */
 	public static void verifyResults(String genomeName) {
 		Genome genome = Genome.loadGenome(genomeName);
-		System.out.println(genome.getChromosomes().get(0).getLength());
+		System.out.println(genome.getFirstChromosome().getLength());
 		genomeName = genomeName.replaceAll(" ", "_");
 		// /*
 		// * Organize RawData by copying the coverage value at the right base pair index
@@ -321,7 +328,7 @@ public class SDProfile {
 		String[][] arrayPlus = TabDelimitedTableReader.read(PATH + genomeName + "_+_.wig");
 		String[][] arrayMinus = TabDelimitedTableReader.read(PATH + genomeName + "_-_.wig");
 		System.out.println(arrayPlus.length + "  -  " + arrayMinus.length);// int countdiff = 0;
-		for (Gene gene : genome.getChromosomes().get(0).getGenes().values()) {
+		for (Gene gene : genome.getFirstChromosome().getGenes().values()) {
 			// if(gene.getName().equals("b0001")){
 			// verifyGene(gene, arrayPlus, arrayMinus);
 			// }
@@ -330,7 +337,7 @@ public class SDProfile {
 				results.add(result);
 			}
 		}
-		System.out.println("Diff: " + results.size() + " on " + genome.getChromosomes().get(0).getGenes().size());
+		System.out.println("Diff: " + results.size() + " on " + genome.getFirstChromosome().getGenes().size());
 		TabDelimitedTableReader.saveList(results, "D:/DiffEnergy.txt");
 	}
 
@@ -459,13 +466,13 @@ public class SDProfile {
 		// postivie strand
 		int decay = 6;
 		for (int i = seq.getBegin() - 20; i < seq.getBegin() + 3; i++) {
-			String sequence = genome.getChromosomes().get(0).getSequenceAsString(i - decay, i + decay, Strand.POSITIVE);
+			String sequence = genome.getFirstChromosome().getSequenceAsString(i - decay, i + decay, Strand.POSITIVE);
 			energy = UNAfold.hybridRNA(sequence, seq.getName(), Sequence.ANTI_SD_SEQ, seq.getName() + "anti-SD", true);
 			System.out.println(seq.getName() + " SD: " + energy);
 		}
 		// negative strand
 		for (int i = seq.getEnd() - 3; i < seq.getEnd() + 20; i++) {
-			String sequence = genome.getChromosomes().get(0).getSequenceAsString(i - decay, i + decay, Strand.NEGATIVE);
+			String sequence = genome.getFirstChromosome().getSequenceAsString(i - decay, i + decay, Strand.NEGATIVE);
 			energy = UNAfold.hybridRNA(sequence, seq.getName(), Sequence.ANTI_SD_SEQ, seq.getName() + "anti-SD", true);
 			System.out.println(seq.getName() + " SD: " + energy);
 		}

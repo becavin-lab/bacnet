@@ -214,8 +214,7 @@ public class NTermDatabase {
 	 */
 	public static void createUTRDB() {
 		String[][] tssTable = TabDelimitedTableReader.read(DATABASE + "table_s1_tss_table.txt");
-		ArrayList<DNASequence> seqs = new ArrayList<DNASequence>();
-
+		
 		ArrayList<String> sequencesFinal = new ArrayList<String>();
 		for (int i = 1; i < tssTable.length; i++) {
 			String name = tssTable[i][0];
@@ -347,7 +346,6 @@ public class NTermDatabase {
 	 * @param fileName
 	 */
 	private static void createGenomeFasta(String seqAA, String prefix, String fileName) {
-		String seqAAComplete = seqAA;
 		seqAA = seqAA.replace('*', '-');
 		seqAA = seqAA.replaceAll("-", "-Stop\nStop-");
 		seqAA = seqAA.replaceAll("M", "-Start\nStart-");
@@ -470,6 +468,7 @@ public class NTermDatabase {
 	 * @param peptides
 	 * @param codon
 	 */
+	@SuppressWarnings("unused")
 	public static void getAllPeptides(String sequence, ArrayList<Integer> startOccurences, ArrayList<String> peptides,
 			char codon, String codonNucleotide, int genomeSize, boolean strand, int cutoff) {
 		// System.out.println("occurence: "+startOccurences.size()+" with codon:
@@ -544,36 +543,36 @@ public class NTermDatabase {
 		 * in the middle of the peptide is allowed
 		 */
 		ArrayList<String> results = new ArrayList<String>();
-//		for(String peptide : peptides){
-//			if(!peptide.contains(">")){
-//				if(peptide.indexOf('R')>0 && peptide.indexOf('R')<peptide.length()-1){
-//					System.err.println(peptide);
-//				}
-//				if(peptide.indexOf('R')!=-1){
-//					results.add(peptide+"\t"+(peptide.length()-peptide.indexOf('R')));
-//					System.out.println(peptide+"\t"+(peptide.length()-peptide.indexOf('R')));
-//				}
-//			}
-//		}
+		for(String peptide : peptides){
+			if(!peptide.contains(">")){
+				if(peptide.indexOf('R')>0 && peptide.indexOf('R')<peptide.length()-1){
+					System.err.println(peptide);
+				}
+				if(peptide.indexOf('R')!=-1){
+					results.add(peptide+"\t"+(peptide.length()-peptide.indexOf('R')));
+					System.out.println(peptide+"\t"+(peptide.length()-peptide.indexOf('R')));
+				}
+			}
+		}
 
 		/*
 		 * Check if all EGD-e gene start peptide are included in this database
 		 */
-//		Genome genome = Genome.loadEgdeGenome();
-//		for(Gene gene : genome.getFirstChromosome().getGenes().values()){
-//			String seqAA = gene.getSequenceAA();
-//			if(seqAA.indexOf('R')!=-1) seqAA = seqAA.substring(0, seqAA.indexOf('R')+1);
-//			if(seqAA.length()>4){
-//				if(peptides.contains(seqAA)){
-//					System.out.println(gene.getName()+"\t"+seqAA);
-//					results.add(gene.getName()+"\t"+seqAA);
-//				}else{
-//					System.err.println(gene.getName()+"\tDont contain");
-//					results.add(gene.getName()+"\tDont contain");
-//				}
-//			}
-//		}
-//		TabDelimitedTableReader.saveList(results, "D:/listPeptide.txt");
+		Genome genome = Genome.loadEgdeGenome();
+		for(Gene gene : genome.getFirstChromosome().getGenes().values()){
+			String seqAA = gene.getSequenceAA();
+			if(seqAA.indexOf('R')!=-1) seqAA = seqAA.substring(0, seqAA.indexOf('R')+1);
+			if(seqAA.length()>4){
+				if(peptides.contains(seqAA)){
+					System.out.println(gene.getName()+"\t"+seqAA);
+					results.add(gene.getName()+"\t"+seqAA);
+				}else{
+					System.err.println(gene.getName()+"\tDont contain");
+					results.add(gene.getName()+"\tDont contain");
+				}
+			}
+		}
+		TabDelimitedTableReader.saveList(results, "D:/listPeptide.txt");
 	}
 
 	public static void createMDB() {

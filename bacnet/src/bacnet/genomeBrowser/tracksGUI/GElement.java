@@ -217,6 +217,7 @@ public class GElement {
 	public static void displayOperon(GC gc, String accession, int[] position, int geneSize, int height, Zoom zoom) {
 		// System.out.println(accession+" "+position[0]+" "+geneSize+ "
 		// "+zoom.getZoomPosition());
+		@SuppressWarnings("unused")
 		int zoomPos = zoom.getZoomNumber() - zoom.getZoomPosition();
 		if (geneSize == 0)
 			geneSize = 1;

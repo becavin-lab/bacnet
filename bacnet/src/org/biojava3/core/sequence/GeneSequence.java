@@ -112,6 +112,7 @@ public class GeneSequence extends DNASequence {
 		if (getStrand() == Strand.NEGATIVE) {
 			shift = 1;
 		}
+		@SuppressWarnings("unused")
 		ExonSequence firstExonSequence = exonSequenceList.get(0);
 		int intronIndex = 1;
 		// if (firstExonSequence.getBioBegin().intValue() != getBioBegin().intValue()) {

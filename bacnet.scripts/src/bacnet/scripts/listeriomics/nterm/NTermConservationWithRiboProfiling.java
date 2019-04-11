@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import bacnet.Database;
-import bacnet.datamodel.sequence.Genome;
 import bacnet.datamodel.sequence.Sequence;
 import bacnet.datamodel.sequenceNCBI.GenomeNCBITools;
 import bacnet.scripts.blast.Blast;
@@ -28,7 +27,7 @@ public class NTermConservationWithRiboProfiling {
 
 	public static void run() {
 
-		String[] genomesInput = { Genome.BACSUBTILIS_NAME, Genome.ECOLI_NAME };
+//		String[] genomesInput = { Genome.BACSUBTILIS_NAME, Genome.ECOLI_NAME };
 //		Blast.createBlastDatabases(GenomeNCBITools.getPATH(), genomesInput, false);
 //		String tempDatabase = Database.getTEMP_PATH()+"tempBlastDatabase";
 //		String title = "Database containing "+2+" bacterial genomes";

@@ -9,7 +9,6 @@ import org.biojava3.core.sequence.DNASequence;
 
 import bacnet.datamodel.annotation.Annotation;
 import bacnet.datamodel.sequence.Gene;
-import bacnet.datamodel.sequence.GenomeNCBI;
 import bacnet.datamodel.sequence.NcRNA;
 import bacnet.datamodel.sequence.NcRNA.TypeNcRNA;
 import bacnet.datamodel.sequence.Operon;
@@ -151,7 +150,7 @@ public class GenomeConversionElement {
 
 	public static ArrayList<Operon> getEgdeOperonList() throws Exception {
 		GenomeNCBI genome = GenomeNCBITools.loadEgdeGenome();
-		ArrayList<Operon> operons = genome.getChromosomes().get(0).getOperons();
+		ArrayList<Operon> operons = genome.getFirstChromosome().getOperons();
 		if (operons.size() == 0) {
 			File file = new File(Annotation.EGDE_SUPPTABLE);
 			if (file.exists()) {
@@ -164,7 +163,7 @@ public class GenomeConversionElement {
 					}
 				}
 				System.out.println("Egde operons list read");
-				genome.getChromosomes().get(0).setOperons(operons);
+				genome.getFirstChromosome().setOperons(operons);
 				return operons;
 			}
 		}

@@ -69,7 +69,6 @@ public class SrnaFinalList {
 		displayListSrnas(listSrnas);
 
 		// verif that every srna has been included
-		int countMap = 0;
 		ArrayList<String> sRNAsMap = new ArrayList<String>();
 		for (String key : listSrnas.keySet()) {
 			for (Srna sRNA : listSrnas.get(key)) {
@@ -369,6 +368,7 @@ public class SrnaFinalList {
 	 * @param finalList
 	 * @param oliver
 	 */
+	@SuppressWarnings("unused")
 	private static void addOliverInfo(ArrayList<Srna> finalList, ArrayList<Srna> oliver) {
 		for (Srna sRNA : finalList) {
 			for (Srna sRNAOliver : oliver) {
@@ -485,17 +485,17 @@ public class SrnaFinalList {
 	public static void createFoldingFigures() {
 		Genome genome = Genome.loadEgdeGenome();
 		for (int i = 0; i < Srna.getSrnaOrder().size(); i++) {
-			Srna sRNA = genome.getChromosomes().get(0).getsRNAs().get(Srna.getSrnaOrder().get(i));
+			Srna sRNA = genome.getsRNAs().get(Srna.getSrnaOrder().get(i));
 			UNAfold.foldRNA(sRNA, sRNA.getName(), true);
 		}
 
-		for (String name : genome.getChromosomes().get(0).getAsRNAs().keySet()) {
-			Srna sRNA = genome.getChromosomes().get(0).getAsRNAs().get(name);
+		for (String name : genome.getAsRNAs().keySet()) {
+			Srna sRNA = genome.getAsRNAs().get(name);
 			UNAfold.foldRNA(sRNA, sRNA.getName(), true);
 		}
 
-		for (String name : genome.getChromosomes().get(0).getCisRegs().keySet()) {
-			Srna sRNA = genome.getChromosomes().get(0).getCisRegs().get(name);
+		for (String name : genome.getCisRegs().keySet()) {
+			Srna sRNA = genome.getCisRegs().get(name);
 			UNAfold.foldRNA(sRNA, sRNA.getName(), true);
 		}
 
