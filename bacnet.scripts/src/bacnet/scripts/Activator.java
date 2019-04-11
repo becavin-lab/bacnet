@@ -49,9 +49,14 @@ public class Activator implements BundleActivator, BundleListener {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Print the type of activation for each bundle <br>
 	 * Use it only if needed for debugging. Commented otherwise
 	 * 
+=======
+	 * Print the type of activation for each bundle
+	 * <br> Use it only if needed for debugging. Commented otherwise
+>>>>>>> branch 'master' of git@github.com:drbecavin/bacnet-private.git
 	 * @param event
 	 * @return
 	 */
@@ -89,6 +94,8 @@ public class Activator implements BundleActivator, BundleListener {
 	public void bundleChanged(BundleEvent event) {
 		// String symbolicName = event.getBundle().getSymbolicName();
 		// String type = typeAsString(event);
+		//String symbolicName = event.getBundle().getSymbolicName();
+		//String type = typeAsString(event);
 		// System.out.println("BundleChanged bacnet.scripts: " + symbolicName + ",
 		// event.type: " + type);
 	}

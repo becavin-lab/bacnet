@@ -242,6 +242,7 @@ public class SummaryListeriomics {
 	/**
 	 * Create metadata analysis network of transcriptomic datasets
 	 */
+	@SuppressWarnings("unused")
 	private static void createSummaryNetwork() {
 		// TreeSet<String> listnode = new TreeSet<String>();
 		// ArrayList<String> network = new ArrayList<String>();
@@ -383,6 +384,7 @@ public class SummaryListeriomics {
 	/**
 	 * Create metanalysis network of proteomics datasets
 	 */
+	@SuppressWarnings("unused")
 	private static void createSummaryNetworkProteome() {
 		ArrayList<BioCondition> bioCondTemps = BioCondition.getAllBioConditions();
 		ArrayList<BioCondition> bioConds = new ArrayList<>();
@@ -518,6 +520,7 @@ public class SummaryListeriomics {
 	/**
 	 * Create summary tables of RNAseq datasets
 	 */
+	@SuppressWarnings("unused")
 	private static void createSummaryRNASeq() {
 		ArrayList<String> list = new ArrayList<String>();
 		for (BioCondition bioCondition : Experiment.getGeneralExp().getBioConditions()) {

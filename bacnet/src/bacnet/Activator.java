@@ -7,7 +7,7 @@ import org.osgi.framework.BundleListener;
 
 /**
  * OSGI Activator of bacnet plugin
- * 
+ *
  * @author christophebecavin
  *
  */
@@ -46,9 +46,14 @@ public class Activator implements BundleActivator, BundleListener {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Print the type of activation for each bundle <br>
 	 * Use it only if needed for debugging. Commented otherwise
 	 * 
+=======
+	 * Print the type of activation for each bundle
+	 * <br> Use it only if needed for debugging. Commented otherwise
+>>>>>>> branch 'master' of git@github.com:drbecavin/bacnet-private.git
 	 * @param event
 	 * @return
 	 */
@@ -84,8 +89,8 @@ public class Activator implements BundleActivator, BundleListener {
 
 	@Override
 	public void bundleChanged(BundleEvent event) {
-		// String symbolicName = event.getBundle().getSymbolicName();
-		// String type = typeAsString(event);
+		//String symbolicName = event.getBundle().getSymbolicName();
+		//String type = typeAsString(event);
 		// System.out.println("BundleChanged bacnet: " + symbolicName + ", event.type: "
 		// + type);
 	}
