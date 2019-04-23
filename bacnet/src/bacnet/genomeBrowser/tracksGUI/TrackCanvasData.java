@@ -463,9 +463,21 @@ public class TrackCanvasData extends Canvas implements MouseMoveListener {
         int[] position = getDataPosition("All", 1, 0, 0, min, max, 0);
         displayDataLegend(gc, "all Data", position, min, max, 0, 0, TypeData.unknown);
         GElement.setExpressionAlpha(gc);
+        /*
+         * Display Tiling datasets
+         */
         displayTiling(gc, track.getDatas().getTilings(), min, max, 0, 0);
+        /*
+         * Display GeneExpression datasets
+         */
         displayGeneExpression(gc, track.getDatas().getGeneExprs(), min, max, 0, 0);
+        /*
+         * Display ExpressionMatrices
+         */
         displayExpressionMatrix(gc, track.getDatas().getMatrices(), min, max, 0, 0);
+        /*
+         * Select only TSS and display them
+         */
         ArrayList<ExpressionData> seqDatasTemp = new ArrayList<ExpressionData>();
         for (ExpressionData seqData : track.getDatas().getTSSDatas()) {
             if (seqData.getChromosomeID().equals(chromoID)) {
@@ -473,6 +485,9 @@ public class TrackCanvasData extends Canvas implements MouseMoveListener {
             }
         }
         displayTSS(gc, seqDatasTemp, min, max, 0, 0);
+        /*
+         * Select only TermSeqs and display them
+         */
         seqDatasTemp.clear();
         for (ExpressionData seqData : track.getDatas().getTermSeqDatas()) {
             if (seqData.getChromosomeID().equals(chromoID)) {
@@ -480,6 +495,9 @@ public class TrackCanvasData extends Canvas implements MouseMoveListener {
             }
         }
         displayTermSeq(gc, seqDatasTemp, min, max, 0, 0);
+        /*
+         * Select only RNASeq and display them
+         */
         seqDatasTemp.clear();
         for (ExpressionData seqData : track.getDatas().getRNASeqDatas()) {
             if (seqData.getChromosomeID().equals(chromoID)) {
@@ -487,6 +505,9 @@ public class TrackCanvasData extends Canvas implements MouseMoveListener {
             }
         }
         displayRNASeq(gc, seqDatasTemp, min, max, 0, 0);
+        /*
+         * Select only DNASeq and display them
+         */
         seqDatasTemp.clear();
         for (ExpressionData seqData : track.getDatas().getDNASeqDatas()) {
             if (seqData.getChromosomeID().equals(chromoID)) {
@@ -494,6 +515,9 @@ public class TrackCanvasData extends Canvas implements MouseMoveListener {
             }
         }
         displayRNASeq(gc, seqDatasTemp, min, max, 0, 0);
+        /*
+         * Select only Riboseq and display them
+         */
         seqDatasTemp.clear();
         seqDatasTemp = new ArrayList<ExpressionData>();
         for (ExpressionData seqData : track.getDatas().getRiboSeqDatas()) {
@@ -501,11 +525,20 @@ public class TrackCanvasData extends Canvas implements MouseMoveListener {
                 seqDatasTemp.add(seqData);
             }
         }
-        displayRiboSeq(gc, seqDatasTemp, min, max, 0, 0);
+        displayRNASeq(gc, seqDatasTemp, min, max, 0, 0);
+        /*
+         * Display Proteomics datasets 
+         */
         displayProteomicsData(gc, track.getDatas().getProteomes(), min, max, 0, 0);
         GElement.setDefaultAlpha(gc);
+        /*
+         * Display NTerminomics datsets 
+         */
         displayNTerm(gc, track.getDatas().getNTermDatas(), min, max, 0, 0);
         GElement.setExpressionAlpha(gc);
+        /*
+         * Finalize data display
+         */
         gc.setBackground(BasicColor.WHITE);
         gc.setForeground(BasicColor.BLACK);
         GElement.setDataNameFont(gc);
@@ -597,7 +630,7 @@ public class TrackCanvasData extends Canvas implements MouseMoveListener {
                         seqDatasTemp.add(rnaSeq);
                     }
                 }
-                displayRiboSeq(gc, seqDatasTemp, min, max, k, dataMinimumPosition);
+                displayRNASeq(gc, seqDatasTemp, min, max, k, dataMinimumPosition);
             }
             GElement.setExpressionAlpha(gc);
             if (track.getDatas().getTSSDatas(bcName).size() != 0) {
@@ -617,7 +650,7 @@ public class TrackCanvasData extends Canvas implements MouseMoveListener {
                         seqDatasTemp.add(rnaSeq);
                     }
                 }
-                displayTSS(gc, seqDatasTemp, min, max, k, dataMinimumPosition);
+                displayTermSeq(gc, seqDatasTemp, min, max, k, dataMinimumPosition);
             }
             GElement.setExpressionAlpha(gc);
             if (track.getDatas().getProteomes(bcName).size() != 0)
@@ -819,7 +852,7 @@ public class TrackCanvasData extends Canvas implements MouseMoveListener {
                     displayDataLegend(gc, seqData.getName(), position, min, seqData.getMax(), k, dataMinimumPosition,
                             seqData.getType());
                     GElement.setExpressionAlpha(gc);
-                    displayRiboSeq(gc, seqDatasTemp, min, max, k, dataMinimumPosition);
+                    displayRNASeq(gc, seqDatasTemp, min, max, k, dataMinimumPosition);
                     gc.setBackground(BasicColor.WHITE);
                     gc.setForeground(BasicColor.BLACK);
                     GElement.setDataNameFont(gc);
@@ -973,7 +1006,11 @@ public class TrackCanvasData extends Canvas implements MouseMoveListener {
                 gc.drawLine(1, minPos, 20, minPos);
                 gc.drawLine(1, maxPos, 20, maxPos);
                 int i = Math.round((float) (min));
-                if (typeData == TypeData.RNASeq) {
+                /*
+                 * Manage logTransformed or not HERE !
+                 * Add : if data is NGS -> if logTransformed then ...
+                 */
+                if (typeData == TypeData.RNASeq || typeData == TypeData.TSS || typeData == TypeData.TermSeq || typeData == TypeData.RiboSeq) {
                     // System.out.println(name);
                     if (name.contains("DNA") || name.contains("LC-E75") || name.contains("dCas9")) {
                         while (i < max) {
@@ -986,7 +1023,11 @@ public class TrackCanvasData extends Canvas implements MouseMoveListener {
                         while (i < max) {
                             int valuePosition = getDataPosition(name, 1, dataIndex, i, min, max, minPosition)[1];
                             gc.drawLine(1, valuePosition, 3, valuePosition);
-                            gc.drawString(Math.rint(Math.pow(2, i)) + "", 5, valuePosition - 4);
+                            if(i>0) {
+                                gc.drawString(Math.rint(Math.pow(2, i)) + "", 5, valuePosition - 4);
+                            } else {
+                                gc.drawString(Math.rint(Math.pow(2, -i)) + "", 5, valuePosition - 4);
+                            }
                             i = i + 2;
                         }
                     }
@@ -1252,101 +1293,6 @@ public class TrackCanvasData extends Canvas implements MouseMoveListener {
      * @param seqDatas
      * @param dataIndex
      */
-    private void displayRiboSeq(GC gc, ArrayList<ExpressionData> seqDatas, double min, double max, int dataIndex,
-            int minPosition) {
-
-        // for(ExpressionData seqData : seqDatas){
-        // // read the position between this positions
-        // if(!seqData.isAlreadyRead()){
-        // seqData.read(track.getDisplayRegion().getX1(),
-        // track.getDisplayRegion().getX2());
-        // }
-        // }
-
-        for (ExpressionData seqData : seqDatas) {
-            if (!track.getDatas().getDataNOTDisplayed().contains(seqData.getName())) {
-                String dataName = seqData.getName();
-                if (track.getDisplayType() == DisplayType.BIOCOND)
-                    dataName = seqData.getBioCondName();
-                int[] minPos = getDataPosition(dataName, track.getDisplayRegion().getX1(), dataIndex, 0, min, max,
-                        minPosition);
-
-                ArrayList<Integer> polygonList = new ArrayList<>();
-                double[] values = seqData.read(track.getDisplayRegion().getX1(), track.getDisplayRegion().getX2());
-                int k = 0;
-                for (int i = track.getDisplayRegion().getX1(); i < track.getDisplayRegion().getX2(); i++) {
-                    double value = values[k];
-                    // System.out.println(value+" "+min+" "+max);
-                    k++;
-                    if (testData) {
-                        String[][] saveDataArray = saveData.get(seqData.getName());
-                        saveDataArray[0][i - track.getDisplayRegion().getX1()] = (i) + "";
-                        saveDataArray[1][i - track.getDisplayRegion().getX1()] = value + "";
-
-                    }
-
-                    /*
-                     * get position in the canvas
-                     */
-                    int[] position = getDataPosition(dataName, i, dataIndex, value, min, max, minPosition);
-                    // set colors
-                    if (track.getDatas().getDisplay()[i]) {
-                        gc.setForeground(track.getDatas().getDataColors().get(seqData.getName()));
-                        gc.setBackground(track.getDatas().getDataColors().get(seqData.getName()));
-                    } else
-                        gc.setForeground(BasicColor.GREY);
-
-                    /*
-                     * Get a random number to decide if we display the point or not If Math.random()<(bpSizeH)*8), we
-                     * will have maximum 9000 points displayed
-                     * 
-                     */
-                    boolean drawProbe = false;
-                    if (bpSizeH > 1) {
-                        drawProbe = true;
-                    } else {
-                        if (Math.random() < (bpSizeH) * 8) {
-                            drawProbe = true;
-                        }
-                    }
-
-                    // draw a line if we are not at the first position
-                    if (i == track.getDisplayRegion().getX1()) {
-                        polygonList.add(position[0]);
-                        polygonList.add(minPos[1]);
-                        polygonList.add(position[0]);
-                        polygonList.add(position[1]);
-
-                    } else {
-                        if (drawProbe) {
-                            polygonList.add(position[0]);
-                            polygonList.add(position[1]);
-                            // pointDrawn++;
-                        }
-                    }
-                }
-                polygonList.add(polygonList.get(polygonList.size() - 2));
-                polygonList.add(minPos[1]);
-                int[] polygon = new int[polygonList.size()];
-                for (int i = 0; i < polygon.length; i++) {
-                    polygon[i] = polygonList.get(i);
-                }
-
-                gc.fillPolygon(polygon);
-
-                // System.out.println(pointDrawn+" pointDrawn on
-                // "+track.getDisplayRegion().getWidth());
-            }
-        }
-    }
-
-    /**
-     * Function to display a list of GeneExpressionStreaming data in a GC (Graphic context)
-     * 
-     * @param gc
-     * @param seqDatas
-     * @param dataIndex
-     */
     private void displayTSS(GC gc, ArrayList<ExpressionData> seqDatas, double min, double max, int dataIndex,
             int minPosition) {
 
@@ -1377,7 +1323,6 @@ public class TrackCanvasData extends Canvas implements MouseMoveListener {
                     k++;
                     if (value != 0) {
                         int[] position = getDataPosition(dataName, i, dataIndex, value, min, max, minPosition);
-                        // System.out.println(i);
                         if (track.getDatas().getDisplay()[i]) {
                             gc.setForeground(track.getDatas().getDataColors().get(seqData.getName()));
                         } else {
@@ -1397,14 +1342,22 @@ public class TrackCanvasData extends Canvas implements MouseMoveListener {
                         }
 
                         gc.drawLine(position[0], minPos[1], position[0], position[1]);
-                        if (seqData.getName().contains("+")) {
+                        if (seqData.getName().contains("TSS_f")) {
                             gc.drawRectangle(position[0], position[1], 5, 5);
                             if (size > 0.5)
-                                gc.drawString(Math.rint(Math.pow(2, value)) + "", position[0] + 13, position[1]);
+                                if(value>0) {
+                                    gc.drawString(Math.rint(Math.pow(2, value)) + "", position[0] + 13, position[1]);
+                                } else {
+                                    gc.drawString(Math.rint(Math.pow(2, -value)) + "", position[0] + 13, position[1]);
+                                }
                         } else {
                             gc.drawRectangle(position[0] - 5, position[1], 5, 5);
                             if (size > 0.5)
-                                gc.drawString(Math.rint(Math.pow(2, -value)) + "", position[0] + 5, position[1]);
+                                if(value>0) {
+                                    gc.drawString(Math.rint(Math.pow(2, value)) + "", position[0] + 13, position[1]);
+                                } else {
+                                    gc.drawString(Math.rint(Math.pow(2, -value)) + "", position[0] + 13, position[1]);
+                                }
                         }
                         gc.setLineWidth(1);
 
@@ -1477,14 +1430,22 @@ public class TrackCanvasData extends Canvas implements MouseMoveListener {
                         }
 
                         gc.drawLine(position[0], minPos[1], position[0], position[1]);
-                        if (seqData.getName().contains("+")) {
+                        if (seqData.getName().contains("TermSeq_f")) {
                             gc.drawLine(position[0], position[1], position[0] - 5, position[1]);
                             if (size > 0.5)
-                                gc.drawString(Math.rint(Math.pow(2, value)) + "", position[0] + 13, position[1]);
+                                if(value>0) {
+                                    gc.drawString(Math.rint(Math.pow(2, value)) + "", position[0] + 13, position[1]);
+                                } else {
+                                    gc.drawString(Math.rint(Math.pow(2, -value)) + "", position[0] + 13, position[1]);
+                                }
                         } else {
                             gc.drawLine(position[0], position[1], position[0] + 5, position[1]);
                             if (size > 0.5)
-                                gc.drawString(Math.rint(Math.pow(2, -value)) + "", position[0] + 5, position[1]);
+                                if(value>0) {
+                                    gc.drawString(Math.rint(Math.pow(2, value)) + "", position[0] + 13, position[1]);
+                                } else {
+                                    gc.drawString(Math.rint(Math.pow(2, -value)) + "", position[0] + 13, position[1]);
+                                }
                         }
                         gc.setLineWidth(1);
 

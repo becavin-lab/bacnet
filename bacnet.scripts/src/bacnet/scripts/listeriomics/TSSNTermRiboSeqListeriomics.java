@@ -89,9 +89,9 @@ public class TSSNTermRiboSeqListeriomics {
                     strand = false;
                 if (value != 0) {
                     if (strand) {
-                        valuesPlus[position - 1] = Math.log(value) / Math.log(2);
+                        valuesPlus[position - 1] = value;
                     } else {
-                        valuesMinus[position - 1] = -Math.log(value) / Math.log(2);
+                        valuesMinus[position - 1] = -value;
                     }
                 }
             }
@@ -120,49 +120,49 @@ public class TSSNTermRiboSeqListeriomics {
         /*
          * Innocua TSS
          */
-        tssArray = TabDelimitedTableReader.read(PATH_TSS_Innocua);
-        genome = Genome.loadGenome("Listeria innocua Clip11262");
-        for (String header : TSS_Innocua_HEADERS) {
-            int j = ArrayUtils.findColumn(tssArray, header);
-
-            double[] valuesPlus = new double[genome.getFirstChromosome().getLength()];
-            double[] valuesMinus = new double[genome.getFirstChromosome().getLength()];
-
-            for (int i = 1; i < tssArray.length; i++) {
-                int position = Integer.parseInt(tssArray[i][0]);
-                boolean strand = true;
-                int value = Integer.parseInt(tssArray[i][j]);
-                if (tssArray[i][1].contains("-"))
-                    strand = false;
-                if (value != 0) {
-                    if (strand) {
-                        valuesPlus[position - 1] = Math.log(value) / Math.log(2);
-                    } else {
-                        valuesMinus[position - 1] = -Math.log(value) / Math.log(2);
-                    }
-                }
-            }
-
-            /*
-             * Create wig file
-             */
-            ArrayList<String> plusWig = new ArrayList<>();
-            ArrayList<String> minusWig = new ArrayList<>();
-            plusWig.add("variableStep chrom=" + genome.getFirstChromosome().getChromosomeID());
-            minusWig.add("variableStep chrom=" + genome.getFirstChromosome().getChromosomeID());
-            for (int i = 1; i < valuesPlus.length; i++) {
-                plusWig.add((i + 1) + "\t" + valuesPlus[i]);
-                minusWig.add((i + 1) + "\t" + valuesMinus[i]);
-            }
-
-            String dataName = header;
-            if (!dataName.contains("_TSS")) {
-                dataName = dataName + "_TSS";
-            }
-            TabDelimitedTableReader.saveList(plusWig, OmicsData.PATH_NGS_NORM + "/" + dataName + "_f.wig");
-            TabDelimitedTableReader.saveList(minusWig, OmicsData.PATH_NGS_NORM + "/" + dataName + "_r.wig");
-
-        }
+//        tssArray = TabDelimitedTableReader.read(PATH_TSS_Innocua);
+//        genome = Genome.loadGenome("Listeria innocua Clip11262");
+//        for (String header : TSS_Innocua_HEADERS) {
+//            int j = ArrayUtils.findColumn(tssArray, header);
+//
+//            double[] valuesPlus = new double[genome.getFirstChromosome().getLength()];
+//            double[] valuesMinus = new double[genome.getFirstChromosome().getLength()];
+//
+//            for (int i = 1; i < tssArray.length; i++) {
+//                int position = Integer.parseInt(tssArray[i][0]);
+//                boolean strand = true;
+//                int value = Integer.parseInt(tssArray[i][j]);
+//                if (tssArray[i][1].contains("-"))
+//                    strand = false;
+//                if (value != 0) {
+//                    if (strand) {
+//                        valuesPlus[position - 1] = value;
+//                    } else {
+//                        valuesMinus[position - 1] = -value;
+//                    }
+//                }
+//            }
+//
+//            /*
+//             * Create wig file
+//             */
+//            ArrayList<String> plusWig = new ArrayList<>();
+//            ArrayList<String> minusWig = new ArrayList<>();
+//            plusWig.add("variableStep chrom=" + genome.getFirstChromosome().getChromosomeID());
+//            minusWig.add("variableStep chrom=" + genome.getFirstChromosome().getChromosomeID());
+//            for (int i = 1; i < valuesPlus.length; i++) {
+//                plusWig.add((i + 1) + "\t" + valuesPlus[i]);
+//                minusWig.add((i + 1) + "\t" + valuesMinus[i]);
+//            }
+//
+//            String dataName = header;
+//            if (!dataName.contains("_TSS")) {
+//                dataName = dataName + "_TSS";
+//            }
+//            TabDelimitedTableReader.saveList(plusWig, OmicsData.PATH_NGS_NORM + "/" + dataName + "_f.wig");
+//            TabDelimitedTableReader.saveList(minusWig, OmicsData.PATH_NGS_NORM + "/" + dataName + "_r.wig");
+//
+//        }
 
         /*
          * EGD-e TermSeq
@@ -179,13 +179,13 @@ public class TSSNTermRiboSeqListeriomics {
                 int position = Integer.parseInt(tssArray[i][0]);
                 boolean strand = true;
                 int value = Integer.parseInt(tssArray[i][j]);
-                if (tssArray[i][1].contains("-"))
-                    strand = false;
+                if (tssArray[i][1].contains("+"))
+                    strand = false; // In TermSeq file the strand is in opposite direction
                 if (value != 0) {
                     if (strand) {
-                        valuesPlus[position - 1] = Math.log(value) / Math.log(2);
+                        valuesPlus[position - 1] = value;
                     } else {
-                        valuesMinus[position - 1] = -Math.log(value) / Math.log(2);
+                        valuesMinus[position - 1] = - value;
                     }
                 }
             }

@@ -41,6 +41,7 @@ import bacnet.scripts.database.DatabaseCreation;
 import bacnet.scripts.database.GenomesCreation;
 import bacnet.scripts.database.ProteomicsCreation;
 import bacnet.scripts.database.TranscriptomesCreation;
+import bacnet.scripts.listeriomics.TSSNTermRiboSeqListeriomics;
 import bacnet.swt.ResourceManager;
 import bacnet.utils.ArrayUtils;
 import bacnet.utils.FileUtils;
@@ -668,14 +669,15 @@ public class SetupPart implements SelectionListener {
 
     @Focus
     public void setFocus() {
-        // TODO Set the focus to control
+        //System.out.println("Convert TSS and TermSeq");
+        TSSNTermRiboSeqListeriomics.run();
     }
 
     /**
      * Ran when the BannerView is opened
      */
     public static void runTests() {
-
+                 
     }
 
     @Override
