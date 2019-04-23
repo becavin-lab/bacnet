@@ -18,6 +18,7 @@ import org.biojava3.core.sequence.io.BufferedReaderBytesRead;
 import bacnet.datamodel.sequence.Chromosome;
 import bacnet.datamodel.sequence.Genome;
 import bacnet.utils.ArrayUtils;
+import bacnet.utils.MathUtils;
 import bacnet.utils.VectorUtils;
 
 /**
@@ -186,6 +187,11 @@ public class NGS extends OmicsData implements Serializable {
         return value;
     }
 
+    /**
+     * Run the conversion of wigfiles
+     * @param data
+     * @param logTransformed
+     */
     public void convert(NGS data, boolean logTransformed) {
         convertWigFile(data, logTransformed);
     }
@@ -277,11 +283,20 @@ public class NGS extends OmicsData implements Serializable {
              * Log2 transform for better visualisation
              */
             if (logTransformed) {
+                double[] newValues = new double[values.length];
                 for (int i = 0; i < values.length; i++) {
-                    if (values[i] < 1)
-                        values[i] = 1; // log2(0)=null so we transform to 1
+                    if (values[i] < 0) {
+                        newValues[i] = - MathUtils.log2(-values[i]);
+                    } else if (values[i] == 0) {
+                        newValues[i] = 0; // log2(0)=null so we transform to 1
+                    } else if (values[i] < 1) {
+                        newValues[i] = 1; // log2(0.5) is negative so we transform to 1
+                    } else {
+                        newValues[i] = MathUtils.log2(values[i]);
+                    }
+                    
                 }
-                values = VectorUtils.log2(values);
+                values = newValues;
             }
             /*
              * Copy values into the data

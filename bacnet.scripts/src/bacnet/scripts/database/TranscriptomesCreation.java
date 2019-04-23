@@ -61,7 +61,7 @@ public class TranscriptomesCreation {
          * RNASeq, RiboSeq, TSS, TermSeq
          */
         logs += "Convert all Seq data: RNASeq, RiboSeq, TSS, TermSeq\n";
-        // NGSCreation.convertCoverageFiles(exp, logTransformed);
+        NGSCreation.convertCoverageFiles(exp, logTransformed);
         /*
          * Optional NGSCreation.normalizeCountFiles(exp);
          */
@@ -71,8 +71,8 @@ public class TranscriptomesCreation {
          */
         logs += "Convert all GeneExpression and Tiling\n";
         try {
-            FileUtils.copy(GeneExpression.PROBES_PATH_2, GeneExpression.PROBES_PATH);
-            FileUtils.copy(Tiling.PROBES_PATH_2, Tiling.PROBES_PATH);
+            // FileUtils.copy(GeneExpression.PROBES_PATH_2, GeneExpression.PROBES_PATH);
+            // FileUtils.copy(Tiling.PROBES_PATH_2, Tiling.PROBES_PATH);
             // GeneExpression.convert(exp);
             // Tiling.convert(exp);
             // TilingGeneExprDataBase.calcGenExprTilingComparisons(exp);
@@ -85,7 +85,7 @@ public class TranscriptomesCreation {
          * ExpressionMatrix
          */
         logs += "Convert all ExpressionMatrix\n";
-        convertExpressionMatrix(exp);
+        //convertExpressionMatrix(exp);
 
         return logs;
 

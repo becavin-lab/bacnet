@@ -219,10 +219,14 @@ public class NTermCreateData {
 
     /**
      * Search for upstream and downstream TSS for each <code>NTerm</code><br>
-     * It uses EGDe_Complete_TSS data for this search
+     * It uses EGDe_Complete_TSS data for this search <br><br>
+     * IT IS NOT WORKING since we changed <code>TSS</code> to <code>NGS</code> object
+     * 
+     * 
      * 
      * @param nameNTermData
      */
+    @Deprecated
     public static void findTSS(String nameNTermData) {
         System.out.println("Search TSS");
         NTermData nTermExp = NTermData.load(nameNTermData);
@@ -237,7 +241,7 @@ public class NTermCreateData {
         // "TSS_data_EGDe.txt");
         tssNGSPlus.read();
         tssNGSMinus.read();
-        for (NTerm nTerm : nTermExp.getElements().values()) {
+        for (@SuppressWarnings("unused") NTerm nTerm : nTermExp.getElements().values()) {
             /*
              * get sequence and search overlapping surrounding TSS in EGD-e
              */
