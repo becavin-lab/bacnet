@@ -164,6 +164,10 @@ public class Database {
      */
     private String proteomesArrayPath = "";
     /**
+     * Path for coexpression table
+     */
+    private String coExprNetworkArrayPath = "";
+    /**
      * Path for the table with all biological conditions for database creation
      */
     private String bioconditionsArrayPath = "";
@@ -304,6 +308,7 @@ public class Database {
             setTranscriptomesArrayPath(getTRANSCRIPTOMES_PATH() + "Transcriptomes.txt");
             setTranscriptomesComparisonsArrayPath(getTRANSCRIPTOMES_PATH() + "ComparisonsTranscriptomes.txt");
             setProteomesArrayPath(getPROTEOMES_PATH() + "Proteomes.txt");
+            setCoExprNetworkArrayPath(getNETWORK_PATH() + "CoExpressionNetworks.txt");
             setBioConditionsArrayPath(getDATA_PATH() + "BioConditions.txt");
             setExperimentComparisonTablePath(getDATA_PATH() + "Comparisons.txt");
 
@@ -570,6 +575,10 @@ public class Database {
     public static String getMULTIOMICS_PATH() {
         return getDATA_PATH() + "Multiomics" + File.separator;
     }
+    
+    public static String getNETWORK_PATH() {
+        return getDATA_PATH() + "Network" + File.separator;
+    }
 
     public static String getBLAST_PATH() {
         return getDATA_PATH() + "Blast" + File.separator;
@@ -601,26 +610,26 @@ public class Database {
     public static String getMULTIOMICS_MATRIX_PATH() {
         return Database.getMULTIOMICS_PATH() + "Table_OMICS";
     }
-
-    /**
-     * Path for loading Transcriptomes matrix data showing Log(Fold Change) values
-     */
-    public static String getLOGFC_MATRIX_TRANSCRIPTOMES_PATH() {
-        return Database.getTRANSCRIPTOMES_PATH() + "Table_LOGFC";
-    }
-
+    
     /**
      * Path for loading Transcriptomes matrix data showing Log(Fold Change) values
      */
     public static String getCOEXPR_NETWORK_TRANSCRIPTOMES_PATH() {
-        return Database.getTRANSCRIPTOMES_PATH() + "Network_CoExpr";
+        return Database.getNETWORK_PATH() + "Network_CoExpr";
     }
 
     /**
      * Path for loading Transcriptomes matrix data showing Log(Fold Change) values
      */
     public static String getLISTDATA_COEXPR_NETWORK_TRANSCRIPTOMES_PATH() {
-        return Database.getTRANSCRIPTOMES_PATH() + "ListData_Network_CoExpr";
+        return Database.getNETWORK_PATH() + "Network_CoExpr_ListData";
+    }
+    
+    /**
+     * Path for loading Transcriptomes matrix data showing Log(Fold Change) values
+     */
+    public static String getLOGFC_MATRIX_TRANSCRIPTOMES_PATH() {
+        return Database.getTRANSCRIPTOMES_PATH() + "Table_LOGFC";
     }
 
     /**
@@ -737,6 +746,14 @@ public class Database {
 
     public void setProteomesArrayPath(String proteomesArrayPath) {
         this.proteomesArrayPath = proteomesArrayPath;
+    }
+
+    public String getCoExprNetworkArrayPath() {
+        return coExprNetworkArrayPath;
+    }
+
+    public void setCoExprNetworkArrayPath(String coExprNetworkArrayPath) {
+        this.coExprNetworkArrayPath = coExprNetworkArrayPath;
     }
 
     public Experiment getGeneralExperiment() {

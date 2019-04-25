@@ -278,16 +278,17 @@ public class CoExprNetworkView implements SelectionListener {
      */
     private void updateGenomeInfo() {
         listGenomeElements = new ArrayList<>();
-        for (String gene : Database.getInstance().getGeneListEGDe()) {
+        Genome genome = Genome.loadEgdeGenome();
+        for (String gene : genome.getGeneNames()) {
             listGenomeElements.add(gene);
         }
-        for (String srna : Database.getInstance().getsRNAListEGDe()) {
+        for (String srna : genome.getsRNAs().keySet()) {
             listGenomeElements.add(srna);
         }
-        for (String cireg : Database.getInstance().getCisRegRNAListEGDe()) {
+        for (String cireg : genome.getCisRegs().keySet()) {
             listGenomeElements.add(cireg);
         }
-        for (String asrna : Database.getInstance().getAsRNAListEGDe()) {
+        for (String asrna : genome.getAsRNAs().keySet()) {
             listGenomeElements.add(asrna);
         }
 

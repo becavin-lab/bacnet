@@ -39,6 +39,7 @@ import bacnet.scripts.database.DataFolder;
 import bacnet.scripts.database.DataValidation;
 import bacnet.scripts.database.DatabaseCreation;
 import bacnet.scripts.database.GenomesCreation;
+import bacnet.scripts.database.NetworkCreation;
 import bacnet.scripts.database.ProteomicsCreation;
 import bacnet.scripts.database.TranscriptomesCreation;
 import bacnet.scripts.listeriomics.TSSNTermRiboSeqListeriomics;
@@ -112,6 +113,12 @@ public class SetupPart implements SelectionListener {
     private Button btnCreateLogfcTranscriptome;
     private Button btnCreateExprPrteome;
     private Button btnDownloadGenomesFrom;
+    private Table tableNetwork;
+    private Button btnCreateCoExpressionDataList;
+    private Button btnCreateCoExpressionNetwork;
+    private Label labelNetwork;
+    private Label lblNetworkPath;
+    private Button btnValidateCoExpr;
 
     public SetupPart() {}
 
@@ -127,7 +134,7 @@ public class SetupPart implements SelectionListener {
         SessionControl.initBacnetApp(partService, modelService, shell);
 
         Composite composite = new Composite(parent, SWT.NONE);
-        composite.setBounds(0, 0, 613, 448);
+        composite.setBounds(0, 0, 628, 452);
         composite.setLayout(new GridLayout(1, false));
 
         Label lblNewLabel = new Label(composite, SWT.NONE);
@@ -361,7 +368,47 @@ public class SetupPart implements SelectionListener {
         btnCreateExprPrteome.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false, false, 1, 1));
         btnCreateExprPrteome.setText("Create ProteomeAtlas");
         btnCreateExprPrteome.addSelectionListener(this);
+        
+        TabItem tbtmNetworks = new TabItem(tabFolder, SWT.NONE);
+        tbtmNetworks.setText("Co-expression network");
 
+        Composite composite_10 = new Composite(tabFolder, SWT.NONE);
+        tbtmNetworks.setControl(composite_10);
+        composite_10.setLayout(new GridLayout(2, false));
+
+        tableNetwork = new Table(composite_10, SWT.BORDER | SWT.FULL_SELECTION);
+        tableNetwork.setLinesVisible(true);
+        tableNetwork.setHeaderVisible(true);
+        tableNetwork.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 7));
+        new Label(composite_10, SWT.NONE);
+
+        Label label_2 = new Label(composite_10, SWT.NONE);
+        label_2.setText("Read list of Data for co-expression network : ");
+
+        lblNetworkPath = new Label(composite_10, SWT.NONE);
+        lblNetworkPath.setText("Read of data for co-expression network in : ");
+
+        labelNetwork = new Label(composite_10, SWT.WRAP);
+        labelNetwork.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false, false, 1, 1));
+        labelNetwork.setText("New Label");
+
+        btnCreateCoExpressionDataList = new Button(composite_10, SWT.NONE);
+        btnCreateCoExpressionDataList.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false, false, 1, 1));
+        btnCreateCoExpressionDataList.setText("Create co-expression network table");
+        btnCreateCoExpressionDataList.addSelectionListener(this);
+        btnValidateCoExpr = new Button(composite_10, SWT.NONE);
+        btnValidateCoExpr.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false, false, 1, 1));
+        btnValidateCoExpr.setText("Validate co-expression networks");
+        btnValidateCoExpr.addSelectionListener(this);
+        btnCreateCoExpressionNetwork = new Button(composite_10, SWT.NONE);
+        btnCreateCoExpressionNetwork.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false, false, 1, 1));
+        btnCreateCoExpressionNetwork.setText("Add unvalidated co-expression networks");
+        new Label(composite_10, SWT.NONE);
+        new Label(composite_10, SWT.NONE);
+        btnCreateCoExpressionNetwork.addSelectionListener(this);
+        
+
+        
         Composite composite_7 = new Composite(composite, SWT.NONE);
         composite_7.setLayout(new GridLayout(1, false));
         composite_7.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
@@ -401,6 +448,7 @@ public class SetupPart implements SelectionListener {
         initComparisons();
         initTranscriptomics();
         initProteomics();
+        initNetwork();
         updateConsole();
     }
 
@@ -590,7 +638,7 @@ public class SetupPart implements SelectionListener {
             logs += "Have you clicked on Create Transcriptomics table in BioConditions panel?\n";
             updateConsole();
         }
-        logs += "Have you clicked on Create TranscriptomeAtlas?\n";
+        logs += "Have you clicked on Create Transcriptomics table in BioConditions panel?\n";
         updateConsole();
     }
 
@@ -617,7 +665,6 @@ public class SetupPart implements SelectionListener {
         if (FileUtils.exists(Database.getInstance().getProteomesArrayPath())) {
             String[][] bioConds = TabDelimitedTableReader.read(Database.getInstance().getProteomesArrayPath());
             labelProteomics.setText("Found : " + bioConds.length + " Proteomes in the database");
-            labelProteomics.setText("Found : " + bioConds.length + " Proteomes in the database");
             tableProteomics.setLinesVisible(true);
             tableProteomics.setHeaderVisible(true);
             String[] titles = {"Proteomes", "Validated"};
@@ -639,7 +686,7 @@ public class SetupPart implements SelectionListener {
                     + "\n";
             updateConsole();
         }
-        logs += "Have you clicked on Create ProteomeAtlas?\n";
+        logs += "Have you clicked on Create Proteome table in BioConditions panel??\n";
         updateConsole();
     }
 
@@ -659,6 +706,59 @@ public class SetupPart implements SelectionListener {
         logs += "Please create a ProteomeAtlas, if you have just added proteomes\n";
         updateConsole();
     }
+    
+    /**
+     * Init Coexpression Network table showing every co-expression network available
+     */
+    private void initNetwork() {
+        lblNetworkPath.setText(Database.getInstance().getCoExprNetworkArrayPath());
+        tableNetwork.removeAll();
+        if (FileUtils.exists(Database.getInstance().getCoExprNetworkArrayPath())) {
+            String[][] bioConds = TabDelimitedTableReader.read(Database.getInstance().getCoExprNetworkArrayPath());
+            labelNetwork.setText("Found : " + bioConds.length + " CoExpression Networks in the database");
+            tableNetwork.setLinesVisible(true);
+            tableNetwork.setHeaderVisible(true);
+            String[] titles = {"CoExpr network", "Validated"};
+            for (int i = 0; i < titles.length; i++) {
+                TableColumn column = new TableColumn(tableNetwork, SWT.NONE);
+                column.setText(titles[i]);
+            }
+            for (int i = 1; i < bioConds.length; i++) {
+                dataValidation.getCoExprNetworks().put(bioConds[i][0], false);
+                TableItem item = new TableItem(tableNetwork, SWT.NONE);
+                item.setText(0, bioConds[i][0]);
+                item.setImage(1, ResourceManager.getPluginImage("bacnet", "icons/unchecked.bmp"));
+            }
+            for (int i = 0; i < titles.length; i++) {
+                tableNetwork.getColumn(i).pack();
+            }
+        } else {
+            logs += "No CoExpr Network available\nCannot find file: " + Database.getInstance().getCoExprNetworkArrayPath()
+                    + "\n";
+            logs += "Have you clicked on co-expression network table button\n";
+            updateConsole();
+        }
+        updateConsole();
+    }
+    
+    /**
+     * Update Netwok table
+     */
+    private void updateNetworks() {
+        int i = 0;
+        for (String genomeName : dataValidation.getCoExprNetworks().keySet()) {
+            TableItem item = tableProteomics.getItem(i);
+            item.setText(0, genomeName);
+            boolean validated = dataValidation.getCoExprNetworks().get(genomeName);
+            if (validated) {
+                item.setImage(1, ResourceManager.getPluginImage("bacnet", "icons/checked.bmp"));
+            } else {
+                item.setImage(1, ResourceManager.getPluginImage("bacnet", "icons/unchecked.bmp"));
+            }
+            i++;
+        }
+        updateConsole();
+    }
 
     private void updateConsole() {
         console.setText(logs);
@@ -669,8 +769,7 @@ public class SetupPart implements SelectionListener {
 
     @Focus
     public void setFocus() {
-        //System.out.println("Convert TSS and TermSeq");
-        TSSNTermRiboSeqListeriomics.run();
+        
     }
 
     /**
@@ -833,7 +932,30 @@ public class SetupPart implements SelectionListener {
             }
             ProteomicsCreation.createProteomeTable(bioConds, logs);
             updateConsole();
-        }
+        } else if (e.getSource() == btnCreateCoExpressionDataList) {
+            logs += "--- Create Co-Expression Network table\n";
+            logs = NetworkCreation.createCoExprTable(logs);
+            updateConsole();
+            initNetwork();
+        } else if (e.getSource() == btnValidateCoExpr) {
+            logs += "--- Validate CoExp networks\n";
+            logs = dataValidation.validateCoExprNetworks(logs);
+            updateConsole();
+            updateNetworks();
+        } else if (e.getSource() == btnCreateCoExpressionNetwork) {
+            logs += "--- Create Co-Expression networks\n";
+            ArrayList<String> networks = new ArrayList<>();
+            for (String genomeName : dataValidation.getCoExprNetworks().keySet()) {
+                if (!dataValidation.getCoExprNetworks().get(genomeName)) {
+                    networks.add(genomeName);
+                }
+            }
+            logs = NetworkCreation.createCoExpressionNetwork(networks, logs);
+            System.out.println(logs);
+            logs = dataValidation.validateCoExprNetworks(logs);
+            updateConsole();
+            updateNetworks();
+        } 
     }
 
     @Override

@@ -2,6 +2,7 @@ package bacnet.scripts.listeriomics;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.TreeSet;
 import bacnet.Database;
 import bacnet.datamodel.annotation.Annotation;
 import bacnet.datamodel.dataset.ExpressionMatrix;
@@ -13,6 +14,8 @@ import bacnet.datamodel.dataset.Tiling;
 import bacnet.datamodel.expdesign.BioCondition;
 import bacnet.datamodel.expdesign.Experiment;
 import bacnet.datamodel.sequence.Genome;
+import bacnet.reader.TabDelimitedTableReader;
+import bacnet.scripts.core.Expression;
 import bacnet.scripts.genome.CircularGenomeJPanel;
 import bacnet.utils.FileUtils;
 import bacnet.utils.VectorUtils;
@@ -26,45 +29,48 @@ import ca.ualberta.stothard.cgview.CgviewIO;
  */
 public class SystemsBiologyListeriomics {
 
+    /**
+     * Create the co-expression network
+     */
     public static void run() {
 
         /*
-         * Get the list of data
+         * Get the list of data to include in 
          */
-        // Experiment geneExp = Experiment.getGeneralExp();
-        // TreeSet<String> list = new TreeSet<String>();
-        // for(BioCondition bioCond : geneExp.getBioConditions()){
-        // if(bioCond.getReference().contains("Unpublished")){
-        // //list.add(bioCond.getName());
-        // }else{
-        // if(bioCond.getTypeDataContained().contains(TypeData.Tiling)){
-        // list.add(bioCond.getName()+"["+TypeData.Tiling+"]");
-        // }
-        // if(bioCond.getTypeDataContained().contains(TypeData.RNASeq)){
-        // String name = bioCond.getName();
-        // if(name.contains("Long") || name.contains("Short")
-        // ||name.contains("Medium") || name.contains("BHI_2011_EGDe")){
-        // System.out.println("Not included");
-        // }else{
-        // list.add(bioCond.getName()+"["+TypeData.RNASeq+"]");
-        // }
-        // }
-        // }
-        // }
-        // TabDelimitedTableReader.saveTreeSet(list,
-        // Database.LISTDATA_COEXPR_NETWORK_TRANSCRIPTOMES_PATH+"_"+Genome.EGDE_NAME+".txt");
-        //
-        // /*
-        // * Filter expression matrix : Need to first run
-        // Expression.summarize(expTemp,Genome.loadGenome(genome));
-        // */
-        // ExpressionMatrix expression =
-        // ExpressionMatrix.loadTab(Expression.PATH_ALLDataType+"_"+Genome.EGDE_NAME+".excel",
-        // false);
-        // expression =
-        // expression.getSubMatrixColumn(TabDelimitedTableReader.readList(Database.LISTDATA_COEXPR_NETWORK_TRANSCRIPTOMES_PATH+"_"+Genome.EGDE_NAME+".txt"));
-        // expression.save(Database.COEXPR_NETWORK_TRANSCRIPTOMES_PATH+"_Temp_"+Genome.EGDE_NAME);
-        // expression.saveTab(Database.COEXPR_NETWORK_TRANSCRIPTOMES_PATH+"_Temp_"+Genome.EGDE_NAME+".excel","GenomeElements");
+        Experiment geneExp = Experiment.getGeneralExp();
+        TreeSet<String> list = new TreeSet<String>();
+        for (BioCondition bioCond : geneExp.getBioConditions()) {
+            if (bioCond.getReference().contains("Unpublished")) {
+                // list.add(bioCond.getName());
+            } else {
+                if (bioCond.getTypeDataContained().contains(TypeData.Tiling)) {
+                    list.add(bioCond.getName() + "[" + TypeData.Tiling + "]");
+                }
+                if (bioCond.getTypeDataContained().contains(TypeData.RNASeq)) {
+                    String name = bioCond.getName();
+                    if (name.contains("Long") || name.contains("Short") || name.contains("Medium")
+                            || name.contains("BHI_2011_EGDe")) {
+                        System.out.println("Not included");
+                    } else {
+                        list.add(bioCond.getName() + "[" + TypeData.RNASeq + "]");
+                    }
+                }
+            }
+        }
+        TabDelimitedTableReader.saveTreeSet(list,Database.getLISTDATA_COEXPR_NETWORK_TRANSCRIPTOMES_PATH()
+                + "_" + Genome.EGDE_NAME + ".txt");
+
+        /*
+         * Filter expression matrix : Need to first run
+         * Expression.summarize(expTemp,Genome.loadGenome(genome));
+         */
+        ExpressionMatrix expression =
+                ExpressionMatrix.loadTab(Expression.PATH_ALLDataType + "_" + Genome.EGDE_NAME + ".excel", false);
+        expression = expression.getSubMatrixColumn(TabDelimitedTableReader
+                .readList(Database.getLISTDATA_COEXPR_NETWORK_TRANSCRIPTOMES_PATH() + "_" + Genome.EGDE_NAME + ".txt"));
+        expression.save(Database.getCOEXPR_NETWORK_TRANSCRIPTOMES_PATH() + "_Temp_" + Genome.EGDE_NAME);
+        expression.saveTab(Database.getCOEXPR_NETWORK_TRANSCRIPTOMES_PATH() + "_Temp_" + Genome.EGDE_NAME + ".excel",
+                "GenomeElements");
 
         /*
          * Compute Network

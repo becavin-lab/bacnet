@@ -1,6 +1,7 @@
 package bacnet.scripts.database;
 
 import java.util.HashMap;
+import bacnet.Database;
 import bacnet.datamodel.dataset.ExpressionMatrix;
 import bacnet.datamodel.dataset.GeneExpression;
 import bacnet.datamodel.dataset.NGS;
@@ -39,6 +40,12 @@ public class DataValidation {
      */
     private HashMap<String, Boolean> proteomes = new HashMap<>();
 
+    /**
+     * HashMap for validation of proteomes
+     */
+    private HashMap<String, Boolean> coExprNetworks = new HashMap<>();
+
+    
     public DataValidation() {
 
     }
@@ -218,6 +225,33 @@ public class DataValidation {
         }
         return logs;
     }
+    
+    
+    /**
+     * Validate Transcriptomes data by looking if streamingdata files exists
+     * 
+     * @param logs
+     * @return
+     */
+    public String validateCoExprNetworks(String logs) {
+        for (String genomeName : this.getCoExprNetworks().keySet()) {
+            if (!this.getCoExprNetworks().get(genomeName)) {
+                String networkPath = Database.getCOEXPR_NETWORK_TRANSCRIPTOMES_PATH() + "_" + genomeName;
+                // logs+= "Validate proteomes in: "+biocondName+"\n";
+                boolean validate = true;
+                if (!FileUtils.exists(networkPath)) {
+                    validate = false;
+                }
+                if (validate) {
+                    this.getCoExprNetworks().put(genomeName, true);
+                } else {
+                    logs += "Missing coExpr networks for " + genomeName
+                            + " - Click: Add unvalidated CoExpr Networks to the database" + "\n";
+                }
+            }
+        }
+        return logs;
+    }
 
     /***************************************
      * GETTER AND SETTER
@@ -261,6 +295,14 @@ public class DataValidation {
 
     public void setComparisons(HashMap<String, Boolean> comparisons) {
         this.comparisons = comparisons;
+    }
+
+    public HashMap<String, Boolean> getCoExprNetworks() {
+        return coExprNetworks;
+    }
+
+    public void setCoExprNetworks(HashMap<String, Boolean> coExprNetworks) {
+        this.coExprNetworks = coExprNetworks;
     }
 
 }

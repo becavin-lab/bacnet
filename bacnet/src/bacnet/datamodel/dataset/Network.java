@@ -18,6 +18,11 @@ import bacnet.reader.TabDelimitedTableReader;
 import bacnet.utils.FileUtils;
 import bacnet.utils.VectorUtils;
 
+/**
+ * Network object for co-expression network analysis and visualisation
+ * @author christophebecavin
+ *
+ */
 public class Network extends OmicsData {
 
     public static double CORR_CUTOFF = 0.50;
