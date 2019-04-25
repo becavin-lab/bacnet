@@ -38,6 +38,7 @@ import bacnet.sequenceTools.GenomicsView;
 import bacnet.swt.ResourceManager;
 import bacnet.swt.SWTResourceManager;
 import bacnet.utils.FileUtils;
+import bacnet.views.CoExprNetworkView;
 
 public class InitViewListeriaSample implements SelectionListener {
 
@@ -54,9 +55,9 @@ public class InitViewListeriaSample implements SelectionListener {
     private boolean focused = false;
     private Button btnBHI37;
     private Button btnLoadData;
-    private Button btnSubmitData;
+    private Button btnWiki;
     private Button btnGeneView;
-    private Button btnAccessWiki;
+    private Button btnNetwork;
     private Link linkUIBC;
     private Link linkPubli;
     private Link linkHUB;
@@ -329,21 +330,20 @@ public class InitViewListeriaSample implements SelectionListener {
         composite_20.setLayoutData(new GridData(SWT.CENTER, SWT.TOP, false, false, 1, 1));
         composite_20.setLayout(new GridLayout(1, false));
         composite_20.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
-        btnAccessWiki = new Button(composite_20, SWT.BORDER);
-        btnAccessWiki.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
-        btnAccessWiki.setText("Access Listeriomics wiki");
-        btnAccessWiki.setFont(SWTResourceManager.getTitleFont(SWT.NORMAL));
-        btnAccessWiki.addSelectionListener(this);
-        Label lblGoToThe = new Label(composite_20, SWT.WRAP);
-        lblGoToThe.setAlignment(SWT.CENTER);
-        lblGoToThe.setFont(SWTResourceManager.getBodyFont(SWT.NORMAL));
-        GridData gd_lblGoToThe = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
-        gd_lblGoToThe.widthHint = 200;
-        lblGoToThe.setLayoutData(gd_lblGoToThe);
-        lblGoToThe.setText(
-                "Go to the Listeriomics wiki page for tutorials and description of the different tools included in Listeriomics. "
-                        + "Be careful, it might not display if you disallow your internet browser to display pop-up webpage.");
-        lblGoToThe.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
+        btnNetwork = new Button(composite_20, SWT.BORDER);
+        btnNetwork.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
+        btnNetwork.setText("Co-Expression Network");
+        btnNetwork.setFont(SWTResourceManager.getTitleFont(SWT.NORMAL));
+        btnNetwork.addSelectionListener(this);
+        Label lblNetwork = new Label(composite_20, SWT.WRAP);
+        lblNetwork.setAlignment(SWT.CENTER);
+        lblNetwork.setFont(SWTResourceManager.getBodyFont(SWT.NORMAL));
+        GridData gd_lblNetwork = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
+        gd_lblNetwork.widthHint = 200;
+        lblNetwork.setLayoutData(gd_lblNetwork);
+        lblNetwork.setText(
+                "Access to the co-expression network tool to search for potential regulations");
+        lblNetwork.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
 
         Composite composite_18 = new Composite(composite_16, SWT.NONE);
         composite_18.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false, false, 1, 1));
@@ -369,10 +369,10 @@ public class InitViewListeriaSample implements SelectionListener {
         composite_5.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false, false, 1, 1));
         composite_5.setLayout(new GridLayout(1, false));
         composite_5.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
-        btnSubmitData = new Button(composite_5, SWT.BORDER | SWT.CENTER);
-        btnSubmitData.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
-        btnSubmitData.setText("Submit to Listeriomics");
-        btnSubmitData.setFont(SWTResourceManager.getTitleFont(SWT.NORMAL));
+        btnWiki = new Button(composite_5, SWT.BORDER | SWT.CENTER);
+        btnWiki.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
+        btnWiki.setText("Access Listeriomics Wiki");
+        btnWiki.setFont(SWTResourceManager.getTitleFont(SWT.NORMAL));
 
         Label lblContactUsIf = new Label(composite_5, SWT.WRAP);
         GridData gd_lblContactUsIf = new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1);
@@ -381,9 +381,10 @@ public class InitViewListeriaSample implements SelectionListener {
         lblContactUsIf.setAlignment(SWT.CENTER);
         lblContactUsIf.setFont(SWTResourceManager.getBodyFont(SWT.NORMAL));
         lblContactUsIf.setText(
-                "Contact us if you have a recently published \"omics\" dataset you want to be integrated to Listeriomics");
+                "Go to the Listeriomics wiki page for tutorials and description of the different tools included in Listeriomics. "
+                        + "Be careful, it might not display if you disallow your internet browser to display pop-up webpage.");
         lblContactUsIf.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
-        btnSubmitData.addSelectionListener(this);
+        btnWiki.addSelectionListener(this);
         new Label(composite_16, SWT.NONE);
         new Label(composite_16, SWT.NONE);
         new Label(composite_16, SWT.NONE);
@@ -508,9 +509,9 @@ public class InitViewListeriaSample implements SelectionListener {
 
     @Override
     public void widgetSelected(SelectionEvent e) {
-        if (e.getSource() == btnSubmitData) {
-            partService.showPart(SubmitDataView.ID, PartState.ACTIVATE);
-            NavigationManagement.pushStateView(SubmitDataView.ID);
+        if (e.getSource() == btnWiki) {
+            UrlLauncher launcher = RWT.getClient().getService(UrlLauncher.class);
+            launcher.openURL("https://listeriomics.pasteur.fr/WikiListeriomics/index.php/Summary");
         } else if (e.getSource() == btnBHI37) {
             GenomeTranscriptomeView.displayBHI37View(partService);
         } else if (e.getSource() == btnProteomics) {
@@ -542,9 +543,9 @@ public class InitViewListeriaSample implements SelectionListener {
             }
             partService.showPart(TranscriptomicsView.ID, PartState.ACTIVATE);
             NavigationManagement.pushStateView(TranscriptomicsView.ID);
-        } else if (e.getSource() == btnAccessWiki) {
-            UrlLauncher launcher = RWT.getClient().getService(UrlLauncher.class);
-            launcher.openURL("https://listeriomics.pasteur.fr/WikiListeriomics/index.php/Summary");
+        } else if (e.getSource() == btnNetwork) {
+            partService.showPart(CoExprNetworkView.ID, PartState.ACTIVATE);
+            NavigationManagement.pushStateView(CoExprNetworkView.ID);
         } else if (e.getSource() == btnGeneView) {
             GeneView.openGeneView(partService);
         } else if (e.getSource() == linkPubli) {

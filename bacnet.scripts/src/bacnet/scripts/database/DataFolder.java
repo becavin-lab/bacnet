@@ -18,6 +18,7 @@ public class DataFolder {
         folders.add(Database.getTRANSCRIPTOMES_PATH());
         folders.add(Database.getPROTEOMES_PATH());
         folders.add(Database.getMULTIOMICS_PATH());
+        folders.add(Database.getNETWORK_PATH());
         folders.add(Database.getBLAST_PATH());
         folders.add(Database.getGENOMES_PATH());
         folders.add(Database.getANNOTATIONDATA_PATH());
@@ -45,7 +46,7 @@ public class DataFolder {
         folders.add(OmicsData.PATH_NGS_NORM);
         folders.add(OmicsData.PATH_EXPR_NORM);
         folders.add(OmicsData.PATH_EXPR_RAW);
-
+        
         folders.add(OmicsData.PATH_PROTEOMICS_RAW);
         folders.add(OmicsData.PATH_PROTEOMICS_NORM);
 
