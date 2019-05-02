@@ -1,5 +1,5 @@
 # Compiled class file
-*.class
+bin/
 
 # MACOSX files
 .DS_Store
