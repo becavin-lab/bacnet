@@ -570,8 +570,7 @@ public class GenomicsView implements SelectionListener {
                 File tempSVGFile = File.createTempFile("Highlightstrain", "Phylogeny.svg");
                 FileUtils.saveText(textSVG, tempSVGFile.getAbsolutePath());
                 File tempPNGFile = File.createTempFile("Highlightstrain", "Phylogeny.png");
-                CMD.runProcess(ImageMagick.getConvertPATH() + " " + tempSVGFile.getAbsolutePath() + " " + tempPNGFile,
-                        true);
+                CMD.runProcess(ImageMagick.getConvertPATH() + " " + tempSVGFile.getAbsolutePath() + " " + tempPNGFile);
                 SaveFileUtils.saveFile("Listeria_Phylogenomic_Tree.png", tempPNGFile, "PNG image file", partService,
                         shell);
             } catch (IOException e1) {

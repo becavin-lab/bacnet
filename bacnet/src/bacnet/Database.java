@@ -90,7 +90,7 @@ public class Database {
     /**
      * Path for website database on Windows
      */
-    public static String PATH_WIN = "C:\\Users\\hub\\Documents\\Bacnet-private\\BacnetDatabases.ini";
+    public static String PATH_WIN = "C:\\Users\\ipmc\\Documents\\BACNET\\Bacnet-private\\BacnetDatabases.ini";
 
     /**
      * Path for website database on Pasteur Virtual Machine
@@ -280,7 +280,16 @@ public class Database {
             path_list_database = Database.PATH_WIN;
         else
             path_list_database = Database.PATH_WEBSITE;
-        listDatabases = TabDelimitedTableReader.readHashMap(path_list_database);
+        
+        /*
+         * Check if database .ini file can be found
+         */
+        File file = new File(path_list_database);
+        if(file.exists()) {
+            listDatabases = TabDelimitedTableReader.readHashMap(path_list_database);        	
+        }else {
+        	System.err.println("Cannot read list of databases in : " + path_list_database);
+        }
         for (String project_name : listDatabases.keySet()) {
             System.out.println(project_name + " ; " + listDatabases.get(project_name));
         }
@@ -290,28 +299,38 @@ public class Database {
     /**
      * MOST IMPORTANT INIT METHOD : Set all variables for the website
      */
-    public void setVariables() {
+    public boolean setVariables() {
         if (Database.getInstance() != null) {
-            System.out.println("Read database variables: " + getDATA_PATH() + "database.ini");
-            databaseFeatures = TabDelimitedTableReader.readHashMap(getDATA_PATH() + "database.ini");
-            System.out.println("Read database parameters:");
-            for (String project_name : databaseFeatures.keySet()) {
-                System.out.println(project_name + " ; " + databaseFeatures.get(project_name));
+        	String initFileName = getDATA_PATH() + "database.ini";
+            System.out.println("Read database variables: " + initFileName);
+            File file = new File(initFileName);
+            if(file.exists()) {
+            	databaseFeatures = TabDelimitedTableReader.readHashMap(initFileName); 
+            	databaseFeatures = TabDelimitedTableReader.readHashMap(getDATA_PATH() + "database.ini");
+                System.out.println("Read database parameters:");
+                for (String project_name : databaseFeatures.keySet()) {
+                    System.out.println(project_name + " ; " + databaseFeatures.get(project_name));
+                }
+                setWebpageTitle(databaseFeatures.get("WEB_PAGE_TITLE"));
+                setGoogleId(databaseFeatures.get("GOOGLE_ID"));
+                setInitView(databaseFeatures.get("INIT_VIEW"));
+                setSpecies(databaseFeatures.get("SPECIES"));
+                setLogo(databaseFeatures.get("LOGO"));
+
+                setGenomeArrayPath(getDATA_PATH() + "Genomes.txt");
+                setTranscriptomesArrayPath(getTRANSCRIPTOMES_PATH() + "Transcriptomes.txt");
+                setTranscriptomesComparisonsArrayPath(getTRANSCRIPTOMES_PATH() + "ComparisonsTranscriptomes.txt");
+                setProteomesArrayPath(getPROTEOMES_PATH() + "Proteomes.txt");
+                setCoExprNetworkArrayPath(getNETWORK_PATH() + "CoExpressionNetworks.txt");
+                setBioConditionsArrayPath(getDATA_PATH() + "BioConditions.txt");
+                setExperimentComparisonTablePath(getDATA_PATH() + "Comparisons.txt");
+                return true;
+            }else {
+            	System.err.println("Cannot read .ini file in : " + initFileName);
+            	return false;
             }
-            setWebpageTitle(databaseFeatures.get("WEB_PAGE_TITLE"));
-            setGoogleId(databaseFeatures.get("GOOGLE_ID"));
-            setInitView(databaseFeatures.get("INIT_VIEW"));
-            setSpecies(databaseFeatures.get("SPECIES"));
-            setLogo(databaseFeatures.get("LOGO"));
-
-            setGenomeArrayPath(getDATA_PATH() + "Genomes.txt");
-            setTranscriptomesArrayPath(getTRANSCRIPTOMES_PATH() + "Transcriptomes.txt");
-            setTranscriptomesComparisonsArrayPath(getTRANSCRIPTOMES_PATH() + "ComparisonsTranscriptomes.txt");
-            setProteomesArrayPath(getPROTEOMES_PATH() + "Proteomes.txt");
-            setCoExprNetworkArrayPath(getNETWORK_PATH() + "CoExpressionNetworks.txt");
-            setBioConditionsArrayPath(getDATA_PATH() + "BioConditions.txt");
-            setExperimentComparisonTablePath(getDATA_PATH() + "Comparisons.txt");
-
+        }else {
+        	return true;
         }
     }
 
@@ -358,29 +377,37 @@ public class Database {
         monitor.beginTask("Init " + database.getProjectName() + " database : ", 2);
         database.readListDatabases();
         database.setPath(database.listDatabases.get(database.getProjectName()));
-        database.setVariables();
-        database.setAllBioConditions(BioCondition.getAllBioConditionNames());
-        monitor.worked(1);
-        database.setGenomeList(Genome.getAvailableGenomes());
-        monitor.worked(1);
-        if (database.getProjectName().equals(LISTERIOMICS_PROJECT)
-                || database.getProjectName().equals(UIBCLISTERIOMICS_PROJECT)) {
-            database.setGeneListEGDe(TabDelimitedTableReader
-                    .readList(getANNOTATIONDATA_PATH() + database.getDatabaseFeatures().get("EGDE_GENE")));
-            monitor.worked(1);
-            database.setsRNAListEGDe(TabDelimitedTableReader
-                    .readList(getANNOTATIONDATA_PATH() + database.getDatabaseFeatures().get("EGDe_SRNA")));
-            monitor.worked(1);
-            database.setAsRNAListEGDe(TabDelimitedTableReader
-                    .readList(getANNOTATIONDATA_PATH() + database.getDatabaseFeatures().get("EGDe_ASRNA")));
-            monitor.worked(1);
-            database.setCisRegRNAListEGDe(TabDelimitedTableReader
-                    .readList(getANNOTATIONDATA_PATH() + database.getDatabaseFeatures().get("EGDE_CISREG")));
-            monitor.worked(1);
-            database.setSignaturesNametoID(Signature.loadSignaturesNametoID(
-                    getANNOTATIONDATA_PATH() + database.getDatabaseFeatures().get("SIGNATURES")));
+        if(database.setVariables()) {
+        	/*
+        	 * If database.ini was read pursue with database loading
+        	 */
+	        database.setAllBioConditions(BioCondition.getAllBioConditionNames());
+	        monitor.worked(1);
+	        database.setGenomeList(Genome.getAvailableGenomes());
+	        monitor.worked(1);
+	        if (database.getProjectName().equals(LISTERIOMICS_PROJECT)
+	                || database.getProjectName().equals(UIBCLISTERIOMICS_PROJECT)) {
+	            database.setGeneListEGDe(TabDelimitedTableReader
+	                    .readList(getANNOTATIONDATA_PATH() + database.getDatabaseFeatures().get("EGDE_GENE")));
+	            monitor.worked(1);
+	            database.setsRNAListEGDe(TabDelimitedTableReader
+	                    .readList(getANNOTATIONDATA_PATH() + database.getDatabaseFeatures().get("EGDe_SRNA")));
+	            monitor.worked(1);
+	            database.setAsRNAListEGDe(TabDelimitedTableReader
+	                    .readList(getANNOTATIONDATA_PATH() + database.getDatabaseFeatures().get("EGDe_ASRNA")));
+	            monitor.worked(1);
+	            database.setCisRegRNAListEGDe(TabDelimitedTableReader
+	                    .readList(getANNOTATIONDATA_PATH() + database.getDatabaseFeatures().get("EGDE_CISREG")));
+	            monitor.worked(1);
+	            database.setSignaturesNametoID(Signature.loadSignaturesNametoID(
+	                    getANNOTATIONDATA_PATH() + database.getDatabaseFeatures().get("SIGNATURES")));
+	        }
+	        System.out.println("Database have been read");
+        }else {
+        	System.out.println("Setup correctly database.ini file");
         }
-        System.out.println("Database have been read");
+        	
+        
     }
 
     /**
@@ -389,30 +416,34 @@ public class Database {
      * @param database
      * @param monitor
      */
-    public static Database initDatabase(String project_name) {
+    public static void initDatabase(String project_name) {
         System.out.println("initDatabase()");
         Database database = Database.getInstance();
         database.readListDatabases();
         database.setPath(database.listDatabases.get(database.getProjectName()));
-        database.setVariables();
-
-        database.setAllBioConditions(BioCondition.getAllBioConditionNames());
-        database.setAllBioConditions(BioCondition.getAllBioConditionNames());
-        database.setGenomeList(Genome.getAvailableGenomes());
-        if (database.getProjectName().equals(Database.LISTERIOMICS_PROJECT)
-                || database.getProjectName().equals(Database.UIBCLISTERIOMICS_PROJECT)) {
-            database.setGeneListEGDe(
-                    TabDelimitedTableReader.readList(getDATA_PATH() + database.getDatabaseFeatures().get("EGDE_GENE")));
-            database.setsRNAListEGDe(
-                    TabDelimitedTableReader.readList(getDATA_PATH() + database.getDatabaseFeatures().get("EGDe_SRNA")));
-            database.setAsRNAListEGDe(TabDelimitedTableReader
-                    .readList(getDATA_PATH() + database.getDatabaseFeatures().get("EGDe_ASRNA")));
-            database.setCisRegRNAListEGDe(TabDelimitedTableReader
-                    .readList(getDATA_PATH() + database.getDatabaseFeatures().get("EGDE_CISREG")));
-            database.setSignaturesNametoID(Signature
-                    .loadSignaturesNametoID(getDATA_PATH() + database.getDatabaseFeatures().get("SIGNATURES")));
+        if(database.setVariables()) {
+        	/*
+        	 * If database.ini was read pursue with database loading
+        	 */
+	        database.setAllBioConditions(BioCondition.getAllBioConditionNames());
+	        database.setAllBioConditions(BioCondition.getAllBioConditionNames());
+	        database.setGenomeList(Genome.getAvailableGenomes());
+	        if (database.getProjectName().equals(Database.LISTERIOMICS_PROJECT)
+	                || database.getProjectName().equals(Database.UIBCLISTERIOMICS_PROJECT)) {
+	            database.setGeneListEGDe(
+	                    TabDelimitedTableReader.readList(getDATA_PATH() + database.getDatabaseFeatures().get("EGDE_GENE")));
+	            database.setsRNAListEGDe(
+	                    TabDelimitedTableReader.readList(getDATA_PATH() + database.getDatabaseFeatures().get("EGDe_SRNA")));
+	            database.setAsRNAListEGDe(TabDelimitedTableReader
+	                    .readList(getDATA_PATH() + database.getDatabaseFeatures().get("EGDe_ASRNA")));
+	            database.setCisRegRNAListEGDe(TabDelimitedTableReader
+	                    .readList(getDATA_PATH() + database.getDatabaseFeatures().get("EGDE_CISREG")));
+	            database.setSignaturesNametoID(Signature
+	                    .loadSignaturesNametoID(getDATA_PATH() + database.getDatabaseFeatures().get("SIGNATURES")));
+	        }
+        }else {
+        	System.out.println("Setup correctly database.ini file");
         }
-        return database;
     }
 
     public ExpressionMatrix getLogFCTranscriptomesTable(String genomeName) {
@@ -557,7 +588,7 @@ public class Database {
      */
 
     public static String getDATA_PATH() {
-        return Database.getInstance().getPath() + "/Database/";
+        return Database.getInstance().getPath() + File.separator + "Database" + File.separator;
     }
 
     public static String getBIOCONDITION_PATH() {

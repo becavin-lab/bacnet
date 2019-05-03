@@ -203,7 +203,8 @@ public class TilingGeneExprDataBase {
     @SuppressWarnings("unused")
     private static void qualityControl(Experiment exp) {
         Expression.summarize(exp, Genome.loadEgdeGenome());
-        Database database = Database.initDatabase(Database.LISTERIOMICS_PROJECT);
+        Database.initDatabase(Database.LISTERIOMICS_PROJECT);
+        Database database = Database.getInstance();
         Signature hkGenes = Signature.getSignatureFromName("House-Keeping genes");
 
         ExpressionMatrix allGeneExpr = ExpressionMatrix.load(Expression.PATH_ALLGENEXPR);

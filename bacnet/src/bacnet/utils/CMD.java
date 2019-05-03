@@ -35,11 +35,11 @@ public class CMD {
      * @return
      * @throws IOException
      */
-    public static String runProcess(String execProcess, boolean print) throws IOException {
+    public static String runProcess(String execProcess) throws IOException {
         String os = System.getProperty("os.arch");
         if (!os.equals("amd64"))
             execProcess = execProcess.replaceAll("\"", "");
-        runProcess(execProcess.split(" "), print);
+        runProcess(execProcess.split(" "));
         return "";
     }
 
@@ -84,7 +84,7 @@ public class CMD {
      * @return
      * @throws IOException
      */
-    public static String runProcess(String[] args, boolean print) throws IOException {
+    public static String runProcess(String[] args) throws IOException {
         try {
             ProcessBuilder pb = new ProcessBuilder(args);
             // pb.directory(new File(dir));

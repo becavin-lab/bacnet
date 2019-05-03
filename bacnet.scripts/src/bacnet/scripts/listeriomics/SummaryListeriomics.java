@@ -911,7 +911,7 @@ public class SummaryListeriomics {
         // \""+output+"\" -f svg";
         String execProcess = "\"C:/cgview/cgview.jar\" -i \"" + input + "\" -o \"" + output + "\" -f svg";
         try {
-            CMD.runProcess(execProcess, true);
+            CMD.runProcess(execProcess);
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

@@ -102,7 +102,7 @@ public class SmallPeptidesSearch {
             String fileName = FileUtils.removeExtension(files[i].getAbsolutePath()) + ".PATRIC.faa";
             execProcess = Blast.makeblastdb + " -in \"" + fileName + "\" -out \"" + out + "\" -title \"" + genome
                     + "\" -parse_seqids -dbtype " + "prot";
-            CMD.runProcess(execProcess, true);
+            CMD.runProcess(execProcess);
         }
         TabDelimitedTableReader.saveList(listGenomes, GENOME_PATH + "ListGenomes.txt");
 
@@ -153,7 +153,7 @@ public class SmallPeptidesSearch {
                     "-evalue 0.001", "-word_size 4"};
             try {
                 // run Blast
-                CMD.runProcess(args, true);
+                CMD.runProcess(args);
                 // convert asn in different format
                 String blastResultHTML =
                         Database.getTEMP_PATH() + File.separator + FileUtils.removeExtensionAndPath(blastResult);
@@ -186,7 +186,7 @@ public class SmallPeptidesSearch {
                     "-evalue 0.001", "-word_size 4"};
             try {
                 // run Blast
-                CMD.runProcess(args, true);
+                CMD.runProcess(args);
                 // convert asn in different format
                 String blastResultHTML =
                         Database.getTEMP_PATH() + File.separator + FileUtils.removeExtensionAndPath(blastResult);

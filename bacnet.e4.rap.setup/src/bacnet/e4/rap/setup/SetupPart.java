@@ -29,6 +29,7 @@ import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 import bacnet.Database;
 import bacnet.datamodel.dataset.OmicsData;
+import bacnet.datamodel.phylogeny.Phylogenomic;
 import bacnet.datamodel.sequence.Genome;
 import bacnet.datamodel.sequenceNCBI.GenomeConversion;
 import bacnet.datamodel.sequenceNCBI.GenomeNCBI;
@@ -40,6 +41,7 @@ import bacnet.scripts.database.DataValidation;
 import bacnet.scripts.database.DatabaseCreation;
 import bacnet.scripts.database.GenomesCreation;
 import bacnet.scripts.database.NetworkCreation;
+import bacnet.scripts.database.PhylogenomicsCreation;
 import bacnet.scripts.database.ProteomicsCreation;
 import bacnet.scripts.database.TranscriptomesCreation;
 import bacnet.scripts.listeriomics.TSSNTermRiboSeqListeriomics;
@@ -119,6 +121,15 @@ public class SetupPart implements SelectionListener {
     private Label labelNetwork;
     private Label lblNetworkPath;
     private Button btnValidateCoExpr;
+    private TabItem tbtmPhylogeny;
+    private Composite composite_9;
+    private Label lblPhylogenomicsfigure;
+    private Label lblPhylofigfound;
+    private Label lblHomologpath;
+    private Label lblHomopathfound;
+    private Button btnAddHomologsInformation;
+    private Button btnRunPhylogenomicTree;
+    private Button btnRunHomologsSearch;
 
     public SetupPart() {}
 
@@ -134,7 +145,7 @@ public class SetupPart implements SelectionListener {
         SessionControl.initBacnetApp(partService, modelService, shell);
 
         Composite composite = new Composite(parent, SWT.NONE);
-        composite.setBounds(0, 0, 628, 452);
+        composite.setBounds(0, 0, 1030, 632);
         composite.setLayout(new GridLayout(1, false));
 
         Label lblNewLabel = new Label(composite, SWT.NONE);
@@ -182,7 +193,7 @@ public class SetupPart implements SelectionListener {
         composite_4.setLayout(new GridLayout(2, false));
 
         tableGenome = new Table(composite_4, SWT.BORDER | SWT.FULL_SELECTION | SWT.MULTI);
-        tableGenome.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 7));
+        tableGenome.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 8));
         tableGenome.setHeaderVisible(true);
         tableGenome.setLinesVisible(true);
 
@@ -210,6 +221,43 @@ public class SetupPart implements SelectionListener {
         btnAddGenomes.addSelectionListener(this);
         btnAddGenomes.setToolTipText("! Validate first your datasets !");
         new Label(composite_4, SWT.NONE);
+        new Label(composite_4, SWT.NONE);
+        
+        tbtmPhylogeny = new TabItem(tabFolder, SWT.NONE);
+        tbtmPhylogeny.setText("Phylogeny");
+        
+        composite_9 = new Composite(tabFolder, SWT.NONE);
+        tbtmPhylogeny.setControl(composite_9);
+        composite_9.setLayout(new GridLayout(1, false));
+        
+        Label lblPhylogenomicsFigureIs = new Label(composite_9, SWT.NONE);
+        lblPhylogenomicsFigureIs.setText("Phylogenomic tree is in :");
+        
+        lblPhylogenomicsfigure = new Label(composite_9, SWT.NONE);
+        
+        lblPhylofigfound = new Label(composite_9, SWT.NONE);
+        
+        btnRunPhylogenomicTree = new Button(composite_9, SWT.NONE);
+        btnRunPhylogenomicTree.setText("Run Phylogenomic tree creation");
+        btnRunPhylogenomicTree.addSelectionListener(this);
+        new Label(composite_9, SWT.NONE);
+        
+        Label lblHomologsInformationIs = new Label(composite_9, SWT.NONE);
+        lblHomologsInformationIs.setText("Homologs information is in :");
+        
+        lblHomologpath = new Label(composite_9, SWT.NONE);
+        
+        lblHomopathfound = new Label(composite_9, SWT.NONE);
+        
+        btnRunHomologsSearch = new Button(composite_9, SWT.NONE);
+        btnRunHomologsSearch.setToolTipText("WARNING : LONG RUN");
+        btnRunHomologsSearch.setText("Run Homologs search");
+        btnRunHomologsSearch.addSelectionListener(this);
+        btnAddHomologsInformation = new Button(composite_9, SWT.NONE);
+        btnAddHomologsInformation.setText("Add Homologs information to Genomes");
+        btnAddHomologsInformation.addSelectionListener(this);
+        
+        
         TabItem tbtmBiologicalConditions = new TabItem(tabFolder, SWT.NONE);
         tbtmBiologicalConditions.setText("Biological Conditions");
 
@@ -436,6 +484,7 @@ public class SetupPart implements SelectionListener {
         database.initDatabase(shell);
         OmicsData.initStaticVariables();
         GenomeNCBI.initStaticVariables();
+        Phylogenomic.initStaticVariables();
     }
 
     private void initProjectInfo() {
@@ -445,6 +494,7 @@ public class SetupPart implements SelectionListener {
         dataValidation = new DataValidation();
         initGenomics();
         initBioconditions();
+        initPhylogeny();
         initComparisons();
         initTranscriptomics();
         initProteomics();
@@ -484,7 +534,10 @@ public class SetupPart implements SelectionListener {
             updateConsole();
         }
     }
-
+    
+    /**
+     * Update BioCondition validation table
+     */
     private void updateBioConditions() {
         int i = 0;
         for (String bioCondName : dataValidation.getBioconditions().keySet()) {
@@ -497,6 +550,37 @@ public class SetupPart implements SelectionListener {
                 item.setImage(1, ResourceManager.getPluginImage("bacnet", "icons/unchecked.bmp"));
             }
             i++;
+        }
+    }
+    
+    
+    /**
+     * Initi Phylogeny information = Phylogenomic presence and homologs information
+     */
+    private void initPhylogeny() {
+        lblPhylogenomicsfigure.setText(Phylogenomic.PHYLO_GENOME_SVG);
+        if (FileUtils.exists(Phylogenomic.PHYLO_GENOME_SVG)) {
+            lblPhylofigfound.setText("Phylogenomic tree was found");
+        } else {
+        	String message = "No phylogenomic tree was found. Create it by clicking below. (IQTree software will be used)";
+        	lblPhylofigfound.setText(message);
+            logs += "No phylogenomic tree was found.\n";
+            updateConsole();
+        }
+    }
+
+    
+    /**
+     * Update phylogeny information
+     */
+    private void updatePhylogeny() {
+    	if (FileUtils.exists(Phylogenomic.PHYLO_GENOME_SVG)) {
+            lblPhylofigfound.setText("Phylogenomic tree was found");
+        } else {
+        	String message = "No phylogenomic tree was found. Create it by clicking below. (IQTree software will be used)";
+        	lblPhylofigfound.setText(message);
+            logs += "No phylogenomic tree was found.\n";
+            updateConsole();
         }
     }
 
@@ -828,6 +912,10 @@ public class SetupPart implements SelectionListener {
             }
             updateConsole();
             updateGenomics();
+        } else if (e.getSource() == btnRunPhylogenomicTree) {
+        	logs = PhylogenomicsCreation.createPhylogenomicFigure(logs);
+        	updatePhylogeny();
+        	updateConsole();        	
         } else if (e.getSource() == btnValidateBioconditionsDatabase) {
             logs += "--- Validate bioconditions\n";
             logs = dataValidation.validateBioConditions(logs);

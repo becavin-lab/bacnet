@@ -210,7 +210,7 @@ public class TabDelimitedTableReader {
             String line = br.readLine();
             // Read the lines and put them in ArrayList
             while (line != null) {
-                hashmap.put(line.split("\t")[0], line.split("\t")[1]);
+                hashmap.put(line.split("\t")[0], line.split("\t")[1].trim());
                 line = br.readLine();
             }
             br.close();

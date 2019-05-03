@@ -40,7 +40,7 @@ public class BlastOutput {
         String[] args = {Blast.blast_formatter, "-archive", "\"" + blastResult + "\"", "-out", "\"" + out + "\"",
                 "-outfmt", type.ordinal() + "", htmlArg};
         try {
-            CMD.runProcess(args, true);
+            CMD.runProcess(args);
 
             //
             // if(type == BlastOutputTYPE.XML){
