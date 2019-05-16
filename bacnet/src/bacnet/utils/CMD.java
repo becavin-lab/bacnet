@@ -37,6 +37,7 @@ public class CMD {
      */
     public static String runProcess(String execProcess) throws IOException {
         String os = System.getProperty("os.arch");
+        System.out.println("Arch: "+os);
         if (!os.equals("amd64"))
             execProcess = execProcess.replaceAll("\"", "");
         runProcess(execProcess.split(" "));
@@ -94,7 +95,7 @@ public class CMD {
             // System.out.println(entry.getKey() + " : " + entry.getValue());
             // }
             // env.put("MonArg", "Valeur");
-
+            
             Process p = pb.start();
             DisplayFlux fluxSortie = new DisplayFlux(p.getInputStream());
             DisplayFlux fluxErreur = new DisplayFlux(p.getErrorStream());

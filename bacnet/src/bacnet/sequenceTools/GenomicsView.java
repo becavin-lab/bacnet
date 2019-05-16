@@ -42,6 +42,7 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 import bacnet.Database;
+import bacnet.datamodel.phylogeny.Phylogenomic;
 import bacnet.datamodel.sequence.Gene;
 import bacnet.datamodel.sequence.Genome;
 import bacnet.raprcp.NavigationManagement;
@@ -301,22 +302,8 @@ public class GenomicsView implements SelectionListener {
         /*
          * Add genomes
          */
-        if (Database.getInstance().getProjectName() == Database.LISTERIOMICS_PROJECT
-                || Database.getInstance().getProjectName() == Database.UIBCLISTERIOMICS_PROJECT) {
-            url = Database.getDATA_PATH() + Database.getInstance().getDatabaseFeatures().get("PHYLO_GENOME");
+        url = Phylogenomic.PHYLO_GENOME_SVG;
             loadPhylogenomicFigure(new ArrayList<>());
-
-            /*
-             * Load Table
-             */
-            bioCondsArray = TabDelimitedTableReader.read(Database.getInstance().getGenomeArrayPath());
-            bioCondsToDisplay =
-                    TabDelimitedTableReader.readList(Database.getInstance().getGenomeArrayPath(), true, true);
-            bioCondsToDisplay.remove(0);
-            updateGenomeTable();
-            lblXxSrnas.setText("Browse through " + (bioCondsArray.length - 1) + " Listeria complete genomes");
-        } else {
-            browserPhylo.dispose();
             /*
              * Load Table
              */
@@ -327,7 +314,7 @@ public class GenomicsView implements SelectionListener {
             updateGenomeTable();
             lblXxSrnas.setText(
                     (bioCondsArray.length - 1) + " " + Database.getInstance().getSpecies() + " complete genomes");
-        }
+        
 
     }
 
@@ -514,6 +501,7 @@ public class GenomicsView implements SelectionListener {
             File tempSVGFile = File.createTempFile("Highlightstrain", "Phylogeny.svg");
             FileUtils.saveText(textSVG, tempSVGFile.getAbsolutePath());
             String html = SaveFileUtils.modifyHTMLwithFile(tempSVGFile.getAbsolutePath(), HTMLUtils.SVG);
+            System.out.println(html);
             browserPhylo.setText(html);
             browserPhylo.redraw();
             tempSVGFile.deleteOnExit();
@@ -535,7 +523,7 @@ public class GenomicsView implements SelectionListener {
          * Replace strain name by homolog info
          */
         String textSVG = FileUtils
-                .readText(Database.getDATA_PATH() + Database.getInstance().getDatabaseFeatures().get("PHYLO_GENOME"));
+                .readText(Phylogenomic.PHYLO_GENOME_SVG);
         String textNew = "fill=\"#276FA0\" font-family=\"'ArialMT'\" font-size=\"11.9468\">";
         String textOld = "font-family=\"'ArialMT'\" font-size=\"11.9468\">";
         for (String genomeName : genomeNames) {

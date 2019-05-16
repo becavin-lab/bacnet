@@ -61,6 +61,11 @@ public class GenomeNCBI {
      */
     public static String PATH_PHYLOGENY = Database.getInstance().getPath() + "/GenomeNCBI/Phylogeny/";
     /**
+     * Path for all Temp fils, mainly created during Genome related operations. Database.getInstance().getPath() + "/Temp/";
+     */
+    public static String PATH_TEMP = Database.getInstance().getPath() + "/Temp/";
+    
+    /**
      * Path for all homologs calculation file : Database.getInstance().getPath() +
      * "/GenomeNCBI/Homologs/";
      */
