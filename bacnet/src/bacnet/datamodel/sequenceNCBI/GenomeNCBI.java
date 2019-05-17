@@ -45,36 +45,34 @@ public class GenomeNCBI {
     /**
      * Path for all raw data for Genomes : Database.getInstance().getPath() + "/GenomeNCBI/";
      */
-    public static String PATH_RAW = Database.getInstance().getPath() + "/GenomeNCBI/";
+    public static String PATH_RAW = Database.getInstance().getPath() + File.separator + "GenomeNCBI" + File.separator;
     /**
      * Path for all Genomes : Database.getInstance().getPath() + "/GenomeNCBI/Genomes/";
      */
-    public static String PATH_GENOMES = Database.getInstance().getPath() + "/GenomeNCBI/Genomes/";
+    public static String PATH_GENOMES = PATH_RAW + "Genomes"+ File.separator;
+    
     /**
      * Path for all new Genomes : Database.getInstance().getPath() + "/GenomeNCBI/GenomesNew/"; This
      * might be used if all IDs have been changed on NCBI servers like it was the cas in Sept 2016
+     * @deprecated only used in Old Listeriomics database
      */
-    public static String PATH_GENOMES_NEW = Database.getInstance().getPath() + "/GenomeNCBI/GenomesNew/";
-    /**
-     * Path for all new Genomes : Database.getInstance().getPath() + "/GenomeNCBI/GenomesNew/"; This
-     * might be used if all IDs have been changed on NCBI servers like it was the cas in Sept 2016
-     */
-    public static String PATH_PHYLOGENY = Database.getInstance().getPath() + "/GenomeNCBI/Phylogeny/";
+    @Deprecated
+    public static String PATH_GENOMES_NEW = PATH_RAW + "GenomesNew" + File.separator;
     /**
      * Path for all Temp fils, mainly created during Genome related operations. Database.getInstance().getPath() + "/Temp/";
      */
-    public static String PATH_TEMP = Database.getInstance().getPath() + "/Temp/";
+    public static String PATH_TEMP = PATH_RAW + "Temp" + File.separator;
     
     /**
      * Path for all homologs calculation file : Database.getInstance().getPath() +
      * "/GenomeNCBI/Homologs/";
      */
-    public static String PATH_HOMOLOGS = Database.getInstance().getPath() + "/GenomeNCBI/Homologs/";
+    public static String PATH_HOMOLOGS = PATH_RAW + "Homologs"+ File.separator ;
     /**
      * Path for all supplementary information for genome annotation : Database.getInstance().getPath() +
      * "/GenomeNCBI/Annotation/";
      */
-    public static String PATH_ANNOTATION = Database.getInstance().getPath() + "/GenomeNCBI/Annotation/";
+    public static String PATH_ANNOTATION = PATH_RAW + "Annotation"+ File.separator;
 
     private LinkedHashMap<String, ChromosomeBacteriaSequence> chromosomes = new LinkedHashMap<>();
     private String species;
@@ -437,13 +435,12 @@ public class GenomeNCBI {
      * Initi static variables after Database change
      */
     public static void initStaticVariables() {
-        PATH_RAW = Database.getInstance().getPath() + "/GenomeNCBI/";
-        PATH_GENOMES = Database.getInstance().getPath() + "/GenomeNCBI/Genomes/";
-        PATH_GENOMES_NEW = Database.getInstance().getPath() + "/GenomeNCBI/GenomesNew/";
-        PATH_PHYLOGENY = Database.getInstance().getPath() + "/GenomeNCBI/Phylogeny/";
-        PATH_HOMOLOGS = Database.getInstance().getPath() + "/GenomeNCBI/Homologs/";
-        PATH_ANNOTATION = Database.getInstance().getPath() + "/GenomeNCBI/Annotation/";
-
+        PATH_RAW = Database.getInstance().getPath() + "GenomeNCBI" + File.separator;
+        PATH_GENOMES = PATH_RAW + "Genomes"+ File.separator;
+        PATH_GENOMES_NEW = PATH_RAW + "GenomesNew" + File.separator;
+        PATH_HOMOLOGS = PATH_RAW + "Homologs"+ File.separator ;
+        PATH_ANNOTATION = PATH_RAW + "Annotation"+ File.separator;
+        PATH_TEMP = PATH_RAW + "Temp" + File.separator;
     }
 
     /**
