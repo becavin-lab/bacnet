@@ -157,7 +157,7 @@ public class GenomeNCBI {
                     chromosome.setDNAType(DNAType.PLASMID);
                 if (chromosome.getDescription().contains("contig"))
                     chromosome.setDNAType(DNAType.CONTIG);
-                if (chromosome.getLength() < 20000)
+                if (chromosome.getLength() < 2500)
                     chromosome.setDNAType(DNAType.CONTIG);
                 chromosome.setParentGenome(this);
                 /*

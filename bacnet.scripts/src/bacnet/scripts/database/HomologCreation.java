@@ -36,26 +36,33 @@ import bacnet.utils.CMD;
 import bacnet.utils.FileUtils;
 
 public class HomologCreation {
+	
+	/**
+	 * Path for Blast+ on windows
+	 */
 	public static String PATH_BLAST_WIN = "C:/Program Files/NCBI/blast-2.9.0+/bin/";
+	/**
+	 * Path for Blast+ on MacOSX
+	 */
 	public static String PATH_BLAST_MAC = "/opt/ncbi-blast-2.7.1+/bin/";
 
-	public static String tblastN = getBlastFolder() + "tblastn" + getBlastExtension() + " -task tblastn";
-	public static String blastN = getBlastFolder() + "blastn" + getBlastExtension() + " -task blastn";
+	/**
+	 * Shortcut for running blastP
+	 */
 	public static String blastP = getBlastFolder() + "blastp" + getBlastExtension();
-	public static String blastX = getBlastFolder() + "blastx" + getBlastExtension() + " -num_threads "
-			+ (Runtime.getRuntime().availableProcessors());
-	public static String blastdbcmd = getBlastFolder() + "blastdbcmd" + getBlastExtension();
+	/**
+	 * Shortcut for running makeblastdb
+	 */
 	public static String makeblastdb = "\"" + getBlastFolder() + "makeblastdb\"" + getBlastExtension();
-	public static String blastdb_aliastool = getBlastFolder() + "blastdb_aliastool" + getBlastExtension();
-	public static String blast_formatter = getBlastFolder() + "blast_formatter" + getBlastExtension();
-
-	public static String PATH_BLASTDB = GenomeNCBI.PATH_TEMP + File.separator + "BLASTDB/";
-	public static String PATH_GENOMES_LIST = Database.getInstance().getPath() + File.separator
-			+ "List_Genomes_BLAST.txt";
-
-	public static String getBLAST_RESULT_PATH() {
-		return Database.getTEMP_PATH() + "resultBlast";
-	}
+	/**
+	 * Path for BlastDB folder
+	 */
+	public static String PATH_BLASTDB = GenomeNCBI.PATH_TEMP + File.separator + "BLASTDB" + File.separator;
+	/**
+	 * Cutoff for indeityt value
+	 */
+	public static float IDENTITY_CUTOFF = 0.2f;
+	
 
 	/**
 	 * Create blastP databases
@@ -81,55 +88,7 @@ public class HomologCreation {
 		return logs;
 	}
 	
-	/**
-	 * Create Blast search bash script
-	 */
 	
-
-	/**
-	 * Run blast script for each genome against the other
-	 */
-	public static void run() {
-		folderCreation(PATH_BLASTDB);
-		ArrayList<String> listGenomes = TabDelimitedTableReader.readList(PATH_GENOMES_LIST);
-
-		/*
-		 * Create Blast database
-		 */
-		// createFAA();
-		// createBlastDB();
-		// verifyDatabase();
-		// System.err.println("Blast database created");
-
-		/*
-		 * Create the blast.txt file needed later to create the file containing command
-		 * lines
-		 */
-		// createCommandFileGeneral();
-
-		/*
-		 * Create the blast commands
-		 */
-		 createBlastCommands(".ORF", 0.01);
-
-		/*
-		 * Once the commands have been runned on the shell, launch the creation of the
-		 * final table
-		 */
-		ArrayList<String> listTable = TabDelimitedTableReader
-				.readList(Database.getInstance().getPath() + "/ListTable.txt");
-		for (int i = 10; i < listTable.size(); i++) {
-			String genome_pivot = listGenomes.get(i);
-			genome_pivot = genome_pivot.replaceAll(" ", "_");
-			String genome_pivot_path = getFAAPath(genome_pivot);
-			System.err.println(genome_pivot);
-			if ((i + 1) < listGenomes.size()) {
-				ArrayList<String> list_genomes_toBlast = extractList(listGenomes, i + 1, listGenomes.size());
-				runBlast(genome_pivot, genome_pivot_path, 0.01, GenomeNCBI.PATH_RAW, list_genomes_toBlast, true);
-			}
-		}
-	}
-
 	/**
 	 * Create a FAA file in the BLASTDB folder for each genome. Will be use to
 	 * create the db.
@@ -269,15 +228,24 @@ public class HomologCreation {
 	 */
 	public static String createBlastScript(String logs) {
 		folderCreation(GenomeNCBI.PATH_TEMP + "Threads/");
+		//String blastDBFolder = PATH_BLASTDB;
+		//String scriptFolder = GenomeNCBI.PATH_TEMP + "Threads";
+		/*
+		 * Change DB directory if you want to run it on a cluster
+		 */
+		String blastDBFolder = "/pasteur/homes/cbecavin/Yersiniomics/BLASTDB/";
+		String scriptFolder = "/pasteur/homes/cbecavin/Yersiniomics/";
+		
 		ArrayList<String> blastFile = new ArrayList<>();
-		blastFile.add("@blastP -query " + PATH_BLASTDB + "fileGenomePivot -db " + PATH_BLASTDB + "databaseTarget -out "
-				+ PATH_BLASTDB
-				+ "blastP_VS_T -evalue 0.01 -max_target_seqs 1 -outfmt '6 qseqid sseqid qlen slen length nident positive evalue bitscore'");
-		blastFile.add("@blastP -query " + PATH_BLASTDB + "fileGenomeTarget -db " + PATH_BLASTDB + "databasePivot -out "
-				+ PATH_BLASTDB
-				+ "blastT_VS_P -evalue 0.01 -max_target_seqs 1 -outfmt '6 qseqid sseqid qlen slen length nident positive evalue bitscore'");
-		blastFile.add("@echo Blast fileGenomePivot VS fileGenomeTarget done >" + PATH_BLASTDB
-				+ "RunThreads/BlastControl/fileGenomePivotVSfileGenomeTarget.control.txt");
+		blastFile.add("blastp -query " + blastDBFolder + "_fileGenomePivot -db " + blastDBFolder + "_databaseTarget -out "
+				+ blastDBFolder
+				+ "_blastP_VS_T -evalue 0.01 -max_target_seqs 1 -outfmt \"6 qseqid sseqid qlen slen length nident positive evalue bitscore\"");
+		blastFile.add("blastp -query " + blastDBFolder + "_fileGenomeTarget -db " + blastDBFolder + "_databasePivot -out "
+				+ blastDBFolder
+				+ "_blastT_VS_P -evalue 0.01 -max_target_seqs 1 -outfmt \"6 qseqid sseqid qlen slen length nident positive evalue bitscore\"");
+		blastFile.add("echo _fileGenomePivot VS _fileGenomeTarget Blast search completed");
+		// ">" + scriptFolder + "_fileGenomePivotVS_fileGenomeTarget.control.txt");
+		
 		TabDelimitedTableReader.saveList(blastFile, GenomeNCBI.PATH_TEMP + "Threads/Blast.txt");
 		/*
 		 * Create the blast commands
@@ -337,21 +305,22 @@ public class HomologCreation {
 				Runnable runnable = new Runnable() {
 					@Override
 					public void run() {
-						String databaseTarget = genomeName + File.separator + genomeName + suffixFinal;
-						String databasePivot = genomePivot + File.separator + genomePivot + suffixFinal;
-						String fileGenomePivot = genomePivot + File.separator + genomePivot + suffix + ".faa";
-						String fileGenomeTarget = genomeName + File.separator + genomeName + suffix + ".faa";
-						String blastP_VS_T = genomePivot + File.separator + "resultBlast_" + genomeName + ".blast.txt";
-						String blastT_VS_P = genomeName + File.separator + "resultBlast_" + genomePivot + ".blast.txt";
+						String separator = "/";
+						String databaseTarget = genomeName + separator + genomeName + suffixFinal;
+						String databasePivot = genomePivot + separator  + genomePivot + suffixFinal;
+						String fileGenomePivot = genomePivot + separator + genomePivot + suffix + ".faa";
+						String fileGenomeTarget = genomeName + separator + genomeName + suffix + ".faa";
+						String blastP_VS_T = "Results" + separator + "resultBlast_" + genomePivot + "_vs_" + genomeName + ".blast.txt";
+						String blastT_VS_P = "Results" + separator + "resultBlast_" + genomeName +"_vs_"+ genomePivot + ".blast.txt";
 						String args = FileUtils.readText(GenomeNCBI.PATH_TEMP + "Threads"+ File.separator+"Blast.txt");
-						args = args.replaceAll("fileGenomePivot", fileGenomePivot);
-						args = args.replaceAll("fileGenomeTarget", fileGenomeTarget);
-						args = args.replaceAll("blastP_VS_T", blastP_VS_T);
-						args = args.replaceAll("blastT_VS_P", blastT_VS_P);
-						args = args.replaceAll("databasePivot", databasePivot);
-						args = args.replaceAll("databaseTarget", databaseTarget);
+						args = args.replaceAll("_fileGenomePivot", fileGenomePivot);
+						args = args.replaceAll("_fileGenomeTarget", fileGenomeTarget);
+						args = args.replaceAll("_blastP_VS_T", blastP_VS_T);
+						args = args.replaceAll("_blastT_VS_P", blastT_VS_P);
+						args = args.replaceAll("_databasePivot", databasePivot);
+						args = args.replaceAll("_databaseTarget", databaseTarget);
 						FileUtils.saveText(args,
-								GenomeNCBI.PATH_TEMP + "Threads"+ File.separator+"Commands"+ File.separator + genomePivot + "_" + genomeName + ".bat");
+								GenomeNCBI.PATH_TEMP + "Threads"+ File.separator+"Commands"+ File.separator + genomePivot + "_vs_" + genomeName + ".sh");
 					}
 				};
 				executor.execute(runnable);
@@ -365,38 +334,50 @@ public class HomologCreation {
 			System.err.println("Interrupted exception");
 		}
 	}
+	
+
 
 	/**
-	 * Run blast for one genome, fasta file in fileName, against all other genomes
-	 * in the list
-	 * 
-	 * @param fileName
-	 * @param evalueCutoff
-	 * @param pathGenome
-	 * @param listGenomes
-	 * @param best
+	 * Run blast script for each genome against the other
 	 */
-	public static void runBlast(String genome_pivot, String fileName, double evalueCutoff, String pathGenome,
-			ArrayList<String> listGenomes, boolean best) {
-
-		/*
-		 * Add identity value
-		 */
-		addColumnIdentity(genome_pivot, listGenomes);
-		System.err.println("Identity added to table for: " + genome_pivot);
-
-		/*
-		 * Create one summary table for the genome
-		 */
-		createSummaryTable(genome_pivot);
-		System.err.println("Summary table created for: " + genome_pivot);
-
-		/*
-		 * Add the phylogeny to the gene object
-		 */
-		// addPhylogenyToGenes(genome_pivot, listGenomes);
-		// System.err.println("Phylogeny added to gene of: " + genome_pivot);
+	public static String extractBlastResults(String logs) {
+		ArrayList<String> listGenomes = Genome.getAvailableGenomes();
+		int size_list = 10;
+		for (int i = 0; i < size_list; i++) {
+			String genome_pivot = listGenomes.get(i);
+			genome_pivot = genome_pivot.replaceAll(" ", "_");
+			String message = "Extract blast results for " + genome_pivot + " vs all other genomes "+i+"/"+size_list;
+			logs += message;
+			System.out.println(genome_pivot);
+			if ((i + 1) < size_list) {
+			//if ((i + 1) < listGenomes.size()) {
+				ArrayList<String> list_genomes_toBlast = extractList(listGenomes, i + 1, size_list);
+				/*
+				 * Calulate identity value
+				 */
+				//addColumnIdentity(genome_pivot, list_genomes_toBlast);
+			}
+			
+			/*
+			 * Combine all homologs in on table 
+			 */
+			message = "Summary table creation for: " + genome_pivot;
+			logs += message;
+			ArrayList<String> list_genomes_toBlast = extractList(listGenomes, 0, size_list);
+			//createSummaryTable(genome_pivot, list_genomes_toBlast);
+			
+			/*
+			 * Add the phylogeny to the gene object
+			 */
+			message = "Phylogeny added to gene of: " + genome_pivot;
+			logs += message;
+			addPhylogenyToGenes(genome_pivot, list_genomes_toBlast);
+			// System.err.println("Phylogeny added to gene of: " + genome_pivot);
+			
+		}
+		return logs;
 	}
+
 
 	/**
 	 * For each blast go through the table and add the column identity (compare
@@ -406,15 +387,19 @@ public class HomologCreation {
 	 * @param listGenomes
 	 */
 	public static void addColumnIdentity(String genome_pivot, ArrayList<String> listGenomes) {
-		folderCreation(PATH_BLASTDB + genome_pivot + "/AddedColumnIdentity/");
+		String addedcolumn_folder = PATH_BLASTDB + File.separator + "AddedColumnIdentity" + File.separator;
+		folderCreation(addedcolumn_folder);
+		String results_folder = PATH_BLASTDB + File.separator + "Results" + File.separator;
+		folderCreation(results_folder);
 		for (String genome_target : listGenomes) {
-			folderCreation(PATH_BLASTDB + genome_target + "/AddedColumnIdentity/");
+			
 			String[][] genomeP_vs_genomeT = TabDelimitedTableReader
-					.read(PATH_BLASTDB + genome_pivot + "/resultBlast_" + genome_target + "_" + ".blast.txt");
+					.read(results_folder + "resultBlast_" + genome_pivot + "_vs_" + genome_target + ".blast.txt");
 			String[][] genomeT_vs_genomeP = TabDelimitedTableReader
-					.read(PATH_BLASTDB + genome_target + "/resultBlast_" + genome_pivot + "_" + ".blast.txt");
+					.read(results_folder + "resultBlast_" + genome_target + "_vs_" + genome_pivot + ".blast.txt");
 			String[] columToAdd_P_VS_T = new String[genomeP_vs_genomeT.length];
 			String[] columToAdd_T_VS_P = new String[genomeT_vs_genomeP.length];
+			
 			for (int i = 0; i < genomeP_vs_genomeT.length; i++) {
 				String id_genomeT = genomeP_vs_genomeT[i][1].split("\\|")[1];
 				HashMap<String, Integer> indexRow_T_vs_P = indexRows(genomeT_vs_genomeP);
@@ -448,10 +433,10 @@ public class HomologCreation {
 			genomeP_vs_genomeT = ArrayUtils.addColumn(genomeP_vs_genomeT, columToAdd_P_VS_T);
 			genomeT_vs_genomeP = ArrayUtils.addColumn(genomeT_vs_genomeP, columToAdd_T_VS_P);
 			TabDelimitedTableReader.save(genomeP_vs_genomeT,
-					PATH_BLASTDB + genome_pivot + "/AddedColumnIdentity/" + genome_target + ".blast.txt");
+					addedcolumn_folder + genome_pivot + "_vs_" + genome_target + ".blast.txt");
 			TabDelimitedTableReader.save(genomeT_vs_genomeP,
-					PATH_BLASTDB + genome_target + "/AddedColumnIdentity/" + genome_pivot + ".blast.txt");
-			System.err.println("Column added: " + genome_pivot + " vs " + genome_target);
+					addedcolumn_folder + genome_target + "_vs_" + genome_pivot + ".blast.txt");
+			System.out.println("Column added: " + genome_pivot + " vs " + genome_target);
 		}
 	}
 
@@ -461,23 +446,24 @@ public class HomologCreation {
 	 * 
 	 * @param genome_pivot
 	 */
-	public static void createSummaryTable(String genome_pivot) {
-		folderCreation(PATH_BLASTDB + "Homologs/");
-		ArrayList<String> listGenomes = TabDelimitedTableReader.readList(PATH_GENOMES_LIST);
+	public static void createSummaryTable(String genome_pivot, ArrayList<String> listGenomes) {
 		ArrayList<String> proteinList = getProteinList(genome_pivot);
 		String[][] newTable = new String[proteinList.size()][2];
 		for (String genome_target : listGenomes) {
 			if (!genome_target.equals(genome_pivot)) {
 				String[][] homologyTable = TabDelimitedTableReader
-						.read(PATH_BLASTDB + genome_pivot + "/AddedColumnIdentity/" + genome_target + ".blast.txt");
+						.read(PATH_BLASTDB + File.separator + "AddedColumnIdentity" + File.separator + genome_pivot + "_vs_" + genome_target + ".blast.txt");
 				HashMap<String, Integer> indexRowHashmap = indexRows(homologyTable);
 				int i = 0;
 				for (String proteinName : proteinList) {
 					newTable[i][0] = proteinName;
 					if (indexRowHashmap.containsKey(proteinName)) {
 						int indexRow = indexRowHashmap.get(proteinName);
-						newTable[i][1] += genome_target + ";" + homologyTable[indexRow][1].split("\\|")[1] + ";"
+						float identity = Float.parseFloat(homologyTable[indexRow][homologyTable[indexRow].length - 1]);
+						if(identity > IDENTITY_CUTOFF) {
+							newTable[i][1] += genome_target + ";" + homologyTable[indexRow][1].split("\\|")[1] + ";"
 								+ homologyTable[indexRow][homologyTable[indexRow].length - 1] + ";-;;";
+						}
 					}
 					i++;
 				}
@@ -490,7 +476,8 @@ public class HomologCreation {
 			} catch (NullPointerException e) {
 			}
 		}
-		TabDelimitedTableReader.save(newTable, PATH_BLASTDB + "Homologs/" + genome_pivot + ".Allhomologs.txt");
+		System.out.println("Save : "+ GenomeNCBI.PATH_HOMOLOGS + genome_pivot + ".Allhomologs.txt");
+		TabDelimitedTableReader.save(newTable, GenomeNCBI.PATH_HOMOLOGS + genome_pivot + ".Allhomologs.txt");
 	}
 
 	/**
@@ -540,34 +527,39 @@ public class HomologCreation {
 	 * Go through all result files and create Conservation HadhMap for each Gene
 	 */
 	public static void addPhylogenyToGenes(String genome, ArrayList<String> genomeList) {
+		Genome genomeLoaded = Genome.loadGenome(genome.replaceAll("_", " "));
 		for (String genomeName : genomeList) {
-			Genome genomeLoaded = Genome.loadGenome(genome);
-			String[][] blastArray = TabDelimitedTableReader
-					.read(PATH_BLASTDB + genome + File.separator + genome + "_AllBlasts.excel");
-			for (int i = 0; i < blastArray.length; i++) {
-				String locus = blastArray[i][0];
-				String allInfo = blastArray[i][1];
-				// System.out.println(locus);
-				Gene gene = genomeLoaded.getGeneFromName(locus);
-				if (gene != null) {
-					// System.out.println(gene.getName());
-					String[] conservations = allInfo.split(";;");
-					LinkedHashMap<String, String> conservationHashMap = new LinkedHashMap<>();
-					for (String conservation : conservations) {
-						String genomeTarget = conservation.split(";")[0];
-						String geneTarget = conservation.split(";")[1] + ";" + conservation.split(";")[2] + ";";
-						if (conservation.split(";").length == 4) {
-							geneTarget += conservation.split(";")[3];
-						} else {
-							geneTarget += " ;";
+			System.out.println(genomeName + " " + genome);
+			if(!genome.equals(genomeName)) {
+				String[][] blastArray = TabDelimitedTableReader
+						.read(GenomeNCBI.PATH_HOMOLOGS + genomeName + ".Allhomologs.txt");
+				for (int i = 0; i < blastArray.length; i++) {
+					String locus = blastArray[i][0];
+					String allInfo = blastArray[i][1];
+					// System.out.println(locus);
+					Gene gene = genomeLoaded.getGeneFromName(locus);
+					if (gene != null) {
+						// System.out.println(gene.getName());
+						String[] conservations = allInfo.split(";;");
+						LinkedHashMap<String, String> conservationHashMap = new LinkedHashMap<>();
+						for (String conservation : conservations) {
+							String genomeTarget = conservation.split(";")[0];
+							String geneTarget = conservation.split(";")[1] + ";" + conservation.split(";")[2] + ";";
+							if (conservation.split(";").length == 4) {
+								geneTarget += conservation.split(";")[3];
+							} else {
+								geneTarget += " ;";
+							}
+							System.out.println(genomeTarget+" -----" + geneTarget);
+							conservationHashMap.put(genomeTarget, geneTarget);
 						}
-						// System.out.println(genomeTarget+" -----" + geneTarget);
-						conservationHashMap.put(genomeTarget, geneTarget);
+						gene.setConservationHashMap(conservationHashMap);
+						gene.setConservation(conservationHashMap.size());
+						String genepath = Database.getGENOMES_PATH() + genomeName.replaceAll("_", " ") + File.separator + "Sequences" + File.separator + gene.getName();
+						System.out.println(genepath);
+						gene.save(genepath);
+	
 					}
-					gene.setConservationHashMap(conservationHashMap);
-					gene.setConservation(conservationHashMap.size());
-					gene.save(Database.getGENOMES_PATH() + genomeName + "/Sequences/" + gene.getName());
-
 				}
 			}
 		}

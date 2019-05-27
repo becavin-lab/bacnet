@@ -105,7 +105,7 @@ public class PhylogenomicsCreation {
 	         */
 	        System.out.println(fileMax.getAbsolutePath());
 	        try {
-				FileUtils.copy(fileMax.getAbsolutePath(), fastaFolder + genomeName + ".fna");
+				FileUtils.copy(fileMax.getAbsolutePath(), fastaFolder + genomeName.replace(" ", "_") + ".fna");
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

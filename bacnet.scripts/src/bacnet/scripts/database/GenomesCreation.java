@@ -28,8 +28,6 @@ import bacnet.utils.FileUtils;
  */
 public class GenomesCreation {
 
-    public static String GENOME_Table = Database.getInstance().getPath() + "Listeriomics/Genomics/SummaryGenomes.txt";
-
     /**
      * Download all genomes available in the database
      */
@@ -38,7 +36,8 @@ public class GenomesCreation {
         for (String genomeName : Genome.getAvailableGenomes()) {
             listGenomes.add(genomeName);
         }
-        downloadGenomes(listGenomes);
+        String logs = "";
+        downloadGenomes(listGenomes, logs);
     }
 
     /**
@@ -78,17 +77,23 @@ public class GenomesCreation {
     /**
      * Download new genomes taken from a text file and open all gzip files
      */
-    public static void downloadGenomes(ArrayList<String> listGenomes) {
+    public static String downloadGenomes(ArrayList<String> listGenomes, String logs) {
+    	System.out.println("Download Genomes");
         String[][] newGenomes = TabDelimitedTableReader.read(Database.getInstance().getGenomeArrayPath());
         for (int i = 1; i < newGenomes.length; i++) {
             String strain = newGenomes[i][ArrayUtils.findColumn(newGenomes, "Name")];
             if (listGenomes.contains(strain)) {
                 String refSeqFTP = newGenomes[i][ArrayUtils.findColumn(newGenomes, "RefSeq FTP")];
-                String genBankFTP = newGenomes[i][ArrayUtils.findColumn(newGenomes, "GenBank FTP")];
                 String ftp = refSeqFTP;
                 System.out.println("Ref:" + refSeqFTP);
                 if (refSeqFTP.equals("")) {
-                    ftp = genBankFTP;
+                	int index = ArrayUtils.findColumn(newGenomes, "GenBank FTP");
+                    if (index == -1) {
+                        logs += "No \"RefSeq FTP\" and \"GenBank FTP\" columns available in " + Database.getInstance().getGenomeArrayPath() + "\n";
+                        logs += "Impossible to download the genomes";
+                    } else {
+                    	ftp = newGenomes[i][ArrayUtils.findColumn(newGenomes, "GenBank FTP")];
+                    }
                 }
                 System.out.println(ftp);
 
@@ -193,17 +198,24 @@ public class GenomesCreation {
                 try {
                     FileUtils.extractGZIP(namefnagz, newfna);
                     FileUtils.extractGZIP(namegffgz, newgff);
-                    org.apache.commons.io.FileUtils.forceDelete(new File(namefnagz));
-                    org.apache.commons.io.FileUtils.forceDelete(new File(namegffgz));
                     FileUtils.extractGZIP(namefaagz, newfaa);
-                    org.apache.commons.io.FileUtils.forceDelete(new File(namefaagz));
                 } catch (IOException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
-
+                
+                
+                try {
+					org.apache.commons.io.FileUtils.forceDelete(new File(namefnagz));
+					org.apache.commons.io.FileUtils.forceDelete(new File(namegffgz));
+	                org.apache.commons.io.FileUtils.forceDelete(new File(namefaagz));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
             }
         }
+        return logs;
 
     }
 
@@ -211,10 +223,10 @@ public class GenomesCreation {
      * Create Table 1 with the list of Genomes and different infos<br>
      * Save in: Project.getPath()+"Table 1 - Genomes.txt"
      */
-    public static void createGenomeTable() {
+    public static String createGenomeTable(String logs) {
         ArrayList<String> table = new ArrayList<>();
-        String[] headers = {"Strain", "Accession (Plasmid)", "Length Chromosomes", "G+C content", "CDS",
-                "rRNA and tRNA", "sRNAs from EGD-e", "CisRegs from EGD-e", "asRNAs from EGD-e", "Prophage"};
+        String[] headers = {"Strain", "Length", "Nb Chromosomes", "CDS",
+                "rRNA and tRNA"};
         String header = "";
         for (String temp : headers)
             header += temp + "\t";
@@ -224,62 +236,23 @@ public class GenomesCreation {
         for (String genomeName : genomesList) {
             Genome genome = Genome.loadGenome(genomeName);
             String strain = genome.getSpecies();
-
-            ArrayList<String> chromoList = genome.getChromosomeNames(); // create an ArrayList with the key for the
-                                                                        // LinkedHashMap genome.getChromosomes() to
-                                                                        // access
-
-            String accession = genome.getChromosomes().get(chromoList.get(0)).getAccession().toString();
-            String length = genome.getChromosomes().get(chromoList.get(0)).getLength() + "";
-            String GC = ((double) genome.getChromosomes().get(chromoList.get(0)).getLength()
-                    / (double) genome.getChromosomes().get(chromoList.get(0)).getGCCount()) + "";
-            String CDS = genome.getChromosomes().get(chromoList.get(0)).getGenes().size() + "";
-            String rRNAtRNA = genome.getChromosomes().get(chromoList.get(0)).getNcRNAs().size() + "";
-            String sRNA = genome.getChromosomes().get(chromoList.get(0)).getsRNAs().size() + "";
-            String cisRegs = genome.getChromosomes().get(chromoList.get(0)).getCisRegs().size() + "";
-            String asRNAs = genome.getChromosomes().get(chromoList.get(0)).getAsRNAs().size() + "";
-
-            String[] rows = {strain, accession, length, GC, CDS, rRNAtRNA, sRNA, cisRegs, asRNAs};
+            
+            String length = genome.getLengthGenome() + "";
+            String nbChromo = genome.getChromosomes().size()+"";
+            String CDS = genome.getGenes().size()+"";
+            String rRNAtRNA = genome.getNcRNAs().size()+"";
+            String[] rows = {strain, length, nbChromo, CDS, rRNAtRNA};
             String row = "";
             for (String temp : rows)
                 row += temp + "\t";
             table.add(row);
-            if (genome.getChromosomes().size() == 2) {
-                accession = genome.getChromosomes().get(chromoList.get(1)).getAccession().toString();
-                length = genome.getChromosomes().get(chromoList.get(1)).getLength() + "";
-                GC = ((double) genome.getChromosomes().get(chromoList.get(1)).getLength()
-                        / (double) genome.getChromosomes().get(chromoList.get(1)).getGCCount()) + "";
-                CDS = genome.getChromosomes().get(chromoList.get(1)).getGenes().size() + "";
-                rRNAtRNA = genome.getChromosomes().get(chromoList.get(1)).getNcRNAs().size() + "";
-                sRNA = genome.getChromosomes().get(chromoList.get(1)).getsRNAs().size() + "";
-                cisRegs = genome.getChromosomes().get(chromoList.get(1)).getCisRegs().size() + "";
-                asRNAs = genome.getChromosomes().get(chromoList.get(1)).getAsRNAs().size() + "";
-                String[] rows1 = {strain, accession, length, GC, CDS, rRNAtRNA, sRNA, cisRegs, asRNAs};
-                String row1 = "";
-                for (String temp : rows1)
-                    row1 += temp + "\t";
-                table.add(row1);
-            }
+            
         }
-
+        
         TabDelimitedTableReader.saveList(table, Database.getInstance().getPath() + "/Genomes_summary.txt");
-
-    }
-
-    /**
-     * Read modify version GENOMENCBI_Table where "chromosome ID"column is first, and create an HTML
-     * summary page, allowing to acces quickly to all genome info
-     **/
-    public static void createHTMLPageSummary() {
-        System.out.println(GENOME_Table);
-        String[][] array = TabDelimitedTableReader.read(GENOME_Table);
-        for (int i = 1; i < array.length; i++) {
-            array[i][0] = "<a href=\"http://www.ncbi.nlm.nih.gov/nuccore/" + array[i][0] + "\">" + array[i][0] + "</a>";
-        }
-
-        TabDelimitedTableReader.saveInHTML(array,
-                Database.getInstance().getPath() + "Listeriomics/Genomics/ListGenomes.html", "Listeria Genomics data");
-
+        logs += "Genome summary table saved in : "+ Database.getInstance().getPath() + "/Genomes_summary.txt\n";
+        logs += "Modify your Genomes.txt file using this summary table\n";
+        return logs;
     }
 
     /**

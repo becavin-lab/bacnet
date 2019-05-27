@@ -628,11 +628,11 @@ public class Database {
     }
 
     public static String getTEMP_PATH() {
-        return Database.getInstance().getPath() + "Temp" + File.separator;
+        return Database.getInstance().getPath() + File.separator + "Temp" + File.separator;
     }
 
     public static String getANALYSIS_PATH() {
-        return Database.getInstance().getPath() + "Analysis" + File.separator;
+        return Database.getInstance().getPath() + File.separator + "Analysis" + File.separator;
     }
 
     /**

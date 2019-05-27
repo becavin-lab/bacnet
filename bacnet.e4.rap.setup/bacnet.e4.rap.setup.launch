@@ -34,7 +34,7 @@
 <stringAttribute key="org.eclipse.rap.launch.dataLocation" value="${workspace_loc}/.metadata/.plugins/org.eclipse.rap.tools.launch/bacnet.e4.rap.setup"/>
 <booleanAttribute key="org.eclipse.rap.launch.developmentMode" value="false"/>
 <booleanAttribute key="org.eclipse.rap.launch.openBrowser" value="true"/>
-<intAttribute key="org.eclipse.rap.launch.port" value="10081"/>
+<intAttribute key="org.eclipse.rap.launch.port" value="10091"/>
 <stringAttribute key="org.eclipse.rap.launch.servletPath" value="/"/>
 <intAttribute key="org.eclipse.rap.launch.sessionTimeout" value="0"/>
 <booleanAttribute key="org.eclipse.rap.launch.terminatePrevious" value="true"/>

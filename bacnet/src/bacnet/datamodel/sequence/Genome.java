@@ -172,7 +172,7 @@ public class Genome {
             chromo.clearChromosome();
         }
     }
-
+    
     /**
      * Go through all chromosomes and each Genes map and GeneName map to find the corresponding gene
      * 

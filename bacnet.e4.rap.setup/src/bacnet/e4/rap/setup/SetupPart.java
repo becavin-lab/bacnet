@@ -132,6 +132,7 @@ public class SetupPart implements SelectionListener {
     private Button btnRunPhylogenomicTree;
     private Button btnCreateBlast;
     private Button btnCreatBlastpScript;
+    private Button btnCreateGenomeSummary;
 
     public SetupPart() {}
 
@@ -222,7 +223,10 @@ public class SetupPart implements SelectionListener {
         btnAddGenomes.setText("Add unvalidated Genomes to the database");
         btnAddGenomes.addSelectionListener(this);
         btnAddGenomes.setToolTipText("! Validate first your datasets !");
-        new Label(composite_4, SWT.NONE);
+        
+        btnCreateGenomeSummary = new Button(composite_4, SWT.NONE);
+        btnCreateGenomeSummary.setText("Create Genome summary table");
+        btnCreateGenomeSummary.addSelectionListener(this);
         new Label(composite_4, SWT.NONE);
         
         tbtmPhylogeny = new TabItem(tabFolder, SWT.NONE);
@@ -828,7 +832,7 @@ public class SetupPart implements SelectionListener {
     }
     
     /**
-     * Init Coexpression Network table showing every co-expression network available
+     * Init Co-expression Network table showing every co-expression network available
      */
     private void initNetwork() {
         lblNetworkPath.setText(Database.getInstance().getCoExprNetworkArrayPath());
@@ -915,9 +919,9 @@ public class SetupPart implements SelectionListener {
             System.out.println("yo");
             String[][] newGenomes = TabDelimitedTableReader.read(Database.getInstance().getGenomeArrayPath());
             int index = ArrayUtils.findColumn(newGenomes, "RefSeq FTP");
-            System.out.println("yes");
+            System.out.println("yes"+ index);
             if (index == -1) {
-                logs += "No RefSeq available in " + Database.getInstance().getGenomeArrayPath() + "\n";
+                logs += "No \"RefSeq FTP\" column available in " + Database.getInstance().getGenomeArrayPath() + "\n";
                 logs += "Impossible to download the genomes";
             } else {
                 ArrayList<String> listGenomes = new ArrayList<>();
@@ -926,8 +930,9 @@ public class SetupPart implements SelectionListener {
                         listGenomes.add(genome);
                     }
                 }
-                GenomesCreation.downloadGenomes(listGenomes);
+                logs = GenomesCreation.downloadGenomes(listGenomes, logs);
             }
+            updateConsole();
         } else if (e.getSource() == btnAddGenomes) {
             logs += "--- Add genomes to database\n";
             for (String genome : dataValidation.getGenomes().keySet()) {
@@ -948,9 +953,16 @@ public class SetupPart implements SelectionListener {
             }
             updateConsole();
             updateGenomics();
-        } else if (e.getSource() == btnRunPhylogenomicTree) {
-        	logs = PhylogenomicsCreation.createPhylogenomicFigure(logs);
+        } else if (e.getSource() == btnCreateGenomeSummary) {
+        	logs = GenomesCreation.createGenomeTable(logs);
+        	updateConsole();
+        } if (e.getSource() == btnRunPhylogenomicTree) {
+           	logs = PhylogenomicsCreation.createPhylogenomicFigure(logs);
         	updatePhylogeny();
+        	updateConsole(); 
+        } if (e.getSource() == btnAddHomologsInformation) {
+        	logs = HomologCreation.extractBlastResults(logs);
+            updatePhylogeny();
         	updateConsole();        	
         } else if (e.getSource() == btnCreateBlast) {
         	logs = HomologCreation.createBlastDB(logs);
