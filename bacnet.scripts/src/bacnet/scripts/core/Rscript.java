@@ -20,7 +20,7 @@ public class Rscript {
 
         String rcommand = Rscript + " \"" + fileName + "\" --vanilla --verbose";
         System.out.println(rcommand);
-        CMD.runProcess(rcommand, true);
+        CMD.runProcess(rcommand);
     }
 
     /**

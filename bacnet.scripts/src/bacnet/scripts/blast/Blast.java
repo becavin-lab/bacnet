@@ -44,17 +44,17 @@ public class Blast {
 
     public static String showSearchPath() throws IOException {
         String execProcess = Blast.blastdbcmd + " -show_blastdb_search_path";
-        return CMD.runProcess(execProcess, true);
+        return CMD.runProcess(execProcess);
     }
 
     public static String listAllDB(String path) throws IOException {
         String execProcess = Blast.blastdbcmd + " -list " + path + " -recursive";
-        return CMD.runProcess(execProcess, true);
+        return CMD.runProcess(execProcess);
     }
 
     public static String getBlastDBInfo(String database) throws IOException {
         String[] args = {Blast.blastdbcmd, "-db", database, "-entry", "all"};
-        return CMD.runProcess(args, true);
+        return CMD.runProcess(args);
     }
 
     /**
@@ -101,7 +101,7 @@ public class Blast {
             }
             try {
                 // run Blast
-                CMD.runProcess(args, true);
+                CMD.runProcess(args);
                 // convert asn in different format
                 String blastResultHTML =
                         Database.getTEMP_PATH() + File.separator + FileUtils.removeExtensionAndPath(blastResult);
@@ -159,7 +159,7 @@ public class Blast {
 
         try {
             // run Blast
-            CMD.runProcess(args, true);
+            CMD.runProcess(args);
             // convert asn in different format
             String blastResultHTML = tempPath + File.separator + FileUtils.removeExtensionAndPath(blastResult);
             // convert in HTML to put in the webpage
@@ -223,7 +223,7 @@ public class Blast {
 
         try {
             // run Blast
-            CMD.runProcess(args, true);
+            CMD.runProcess(args);
             // convert asn in different format
             String blastResultHTML = tempPath + File.separator + FileUtils.removeExtensionAndPath(blastResult);
             // convert in HTML to put in the webpage
@@ -271,7 +271,7 @@ public class Blast {
 
         try {
             // run Blast
-            CMD.runProcess(args, true);
+            CMD.runProcess(args);
             // convert asn in different format
             String blastResultHTML = tempPath + File.separator + FileUtils.removeExtensionAndPath(blastResult);
             // convert in HTML to put in the webpage
@@ -465,7 +465,7 @@ public class Blast {
                         String execProcess = Blast.makeblastdb + " -in \"" + files[0].getCanonicalPath()
                                 + "\" -parse_seqids -out \"" + out + "\" -dbtype " + dbtypeFinal + " -title " + genome;
                         System.out.println(execProcess);
-                        CMD.runProcess(execProcess, true);
+                        CMD.runProcess(execProcess);
 
                     } catch (Exception e) {
                         // TODO Auto-generated catch block

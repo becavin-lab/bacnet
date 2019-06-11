@@ -160,6 +160,7 @@ public class SaveFileUtils {
         String fileNameResource = registerTextFile(dataName, new File(fileName));
         System.out.println("Add: " + fileNameResource + " to " + htmlFile);
         String htmlText = HTMLUtils.getPluginTextFile("bacnet", "html/" + htmlFile);
+        
         htmlText = htmlText.replaceFirst("_FileName", fileNameResource);
         return htmlText;
     }

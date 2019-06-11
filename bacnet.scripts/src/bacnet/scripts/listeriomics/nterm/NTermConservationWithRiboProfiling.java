@@ -80,7 +80,7 @@ public class NTermConservationWithRiboProfiling {
                     "\"" + tempDatabase + "\"", "-out", "\"" + blastResult + "\"", "-outfmt", outType.ordinal() + ""};
             try {
                 // run Blast
-                CMD.runProcess(args, true);
+                CMD.runProcess(args);
                 // convert asn in different format
                 String blastResultHTML =
                         Database.getTEMP_PATH() + File.separator + FileUtils.removeExtensionAndPath(blastResult);

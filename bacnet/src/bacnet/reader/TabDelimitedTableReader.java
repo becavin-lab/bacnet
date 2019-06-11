@@ -38,7 +38,14 @@ public class TabDelimitedTableReader {
     public static String[][] read(File file, String separator) {
         ArrayList<String> rowList = readList(file.getAbsolutePath(), true);
         int nbRow = rowList.size();
-        int nbColumn = rowList.get(0).split(separator).length;
+        int nbColumn = -1;
+        // Get nbColumn on first 10 lines
+        for(int i=0; i < Math.min(50, rowList.size()); i++) {
+        	int nbColumnTemp = rowList.get(0).split(separator).length;
+        	if(nbColumn < nbColumnTemp) {
+        		nbColumn = nbColumnTemp;
+        	}
+        }
         String[][] ret = new String[nbRow][nbColumn];
         for (int i = 0; i < rowList.size(); i++) {
             int j = 0;
@@ -210,7 +217,7 @@ public class TabDelimitedTableReader {
             String line = br.readLine();
             // Read the lines and put them in ArrayList
             while (line != null) {
-                hashmap.put(line.split("\t")[0], line.split("\t")[1]);
+                hashmap.put(line.split("\t")[0], line.split("\t")[1].trim());
                 line = br.readLine();
             }
             br.close();

@@ -16,6 +16,7 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 import bacnet.Database;
+import bacnet.datamodel.phylogeny.Phylogenomic;
 import bacnet.datamodel.sequence.Gene;
 import bacnet.datamodel.sequence.Genome;
 import bacnet.datamodel.sequence.Sequence;
@@ -90,12 +91,19 @@ public class GeneViewHomologTools {
         return bioCondsArray;
     }
 
+    
+    /**
+     * Read Phylogenomic figure and modify the labels with homolog table
+     * @param sequence
+     * @param genomes
+     * @return
+     */
     public static String getPhyloFigure(Gene sequence, ArrayList<String> genomes) {
         /*
          * Replace strain name by homolog info
          */
         String textSVG = FileUtils
-                .readText(Database.getDATA_PATH() + Database.getInstance().getDatabaseFeatures().get("PHYLO_GENOME"));
+                .readText(Phylogenomic.getPhylogenomicFigurePath());
         String textNew = "fill=\"#276FA0\" font-family=\"'ArialMT'\" font-size=\"11.9468\">";
         String textOld = "font-family=\"'ArialMT'\" font-size=\"11.9468\">";
 

@@ -24,110 +24,112 @@ public class GeneViewLocalizationTools {
      * Save to JPG file and display it
      */
     public static void loadLocalizationFigure(Browser browserLocalization, String[][] arrayGeneToLocalization,
-            Sequence sequence, String[][] bioCondsArray, Table tableLocalization, Genome genome) {
+        Sequence sequence, String[][] bioCondsArray, Table tableLocalization, Genome genome) {
         // String os = System.getProperty("os.name");
         // if(!os.equals("Mac OS X")){
         /*
          * Replace strain name by homolog info
          */
-        String textSVG = FileUtils
-                .readText(Database.getDATA_PATH() + Database.getInstance().getDatabaseFeatures().get("PROTEIN_LOC"));
-        String suffix = "fill=\"#414042\" font-family=\"'ArialMT'\" font-size=\"12\">";
-        String newSuffix = "fill=\"#ED1C24\" font-family=\"'Arial-BoldMT'\" font-size=\"12\">";
-
-        /*
-         * Extract localization
-         */
-        String[] info = new String[arrayGeneToLocalization[0].length];
-        for (int i = 0; i < info.length; i++)
-            info[i] = "";
-        info[1] = "CP";
-        if (genome.getSpecies().equals(Genome.EGDE_NAME)) {
-            boolean found = false;
-            for (int i = 0; i < arrayGeneToLocalization.length && !found; i++) {
-                if (arrayGeneToLocalization[i][0].equals(sequence.getName())) {
-                    info = ArrayUtils.getRow(arrayGeneToLocalization, i);
-                    found = true;
-                }
-            }
-        } else {
-            String locus = "";
-            for (int i = 0; i < bioCondsArray.length; i++) {
-                if (bioCondsArray[i][ArrayUtils.findColumn(bioCondsArray, "Name")].equals(Genome.EGDE_NAME)) {
-                    locus = bioCondsArray[i][ArrayUtils.findColumn(bioCondsArray, "Homolog")];
-                    System.out.println(locus);
-                }
-            }
-
-            if (locus.equals("")) {
-                info[1] = "Unknown";
-            } else {
-                boolean found = false;
-                for (int i = 0; i < arrayGeneToLocalization.length && !found; i++) {
-                    if (arrayGeneToLocalization[i][0].equals(locus)) {
-                        info = ArrayUtils.getRow(arrayGeneToLocalization, i);
-                        found = true;
-                    }
-                }
-            }
-        }
-
-        String[] geneLocalization =
-                info[ArrayUtils.findColumn(arrayGeneToLocalization, "Subcellular location")].split("/");
-        for (String compartment : geneLocalization) {
-            if (!compartment.equals("Unknown")) {
-                String nameCompartment =
-                        SubCellCompartment.COMPARTMENT_NAMES[TypeCompartment.valueOf(compartment).ordinal()];
-                /*
-                 * Some of the compartment names are displayed in two lines so we need to modify the 2 lines in the
-                 * SVG to display them in RED
-                 */
-                if (nameCompartment.equals("anchored to CM")) {
-                    String nameToReplace = "anchored";
-                    textSVG = textSVG.replaceFirst(suffix + nameToReplace, newSuffix + nameToReplace);
-                    nameToReplace = "to CM";
-                    textSVG = textSVG.replaceFirst(suffix + nameToReplace, newSuffix + nameToReplace);
-                } else if (nameCompartment.equals("Protein complex")) {
-                    String nameToReplace = "Protein";
-                    textSVG = textSVG.replaceFirst(suffix + nameToReplace, newSuffix + nameToReplace);
-                    nameToReplace = "complex";
-                    textSVG = textSVG.replaceFirst(suffix + nameToReplace, newSuffix + nameToReplace);
-                } else if (nameCompartment.equals("integral to CM")) {
-                    String nameToReplace = "integral";
-                    textSVG = textSVG.replaceFirst(suffix + nameToReplace, newSuffix + nameToReplace);
-                    nameToReplace = "to  CM";
-                    textSVG = textSVG.replaceFirst(suffix + nameToReplace, newSuffix + nameToReplace);
-                } else if (nameCompartment.equals("Cytoplasmic Membrane")) {
-                    String nameToReplace = "Cytoplasmic";
-                    textSVG = textSVG.replaceFirst(suffix + nameToReplace, newSuffix + nameToReplace);
-                    nameToReplace = "Membrane";
-                    textSVG = textSVG.replaceFirst(suffix + nameToReplace, newSuffix + nameToReplace);
-                } else {
-                    textSVG = textSVG.replaceFirst(suffix + nameCompartment, newSuffix + nameCompartment);
-                }
-            }
-
-        }
-
-        if (tableLocalization != null) {
-            updateTableSecretion(info, tableLocalization, arrayGeneToLocalization);
-        }
-
-        /*
-         * Display homolog figure after conversion from SVG to JPG
-         */
-        try {
-            File tempSVGFile = File.createTempFile(sequence.getName(), "Localization.svg");
-            FileUtils.saveText(textSVG, tempSVGFile.getAbsolutePath());
-            String html = SaveFileUtils.modifyHTMLwithFile(tempSVGFile.getAbsolutePath(), HTMLUtils.SVG);
-            browserLocalization.setText(html);
-            browserLocalization.redraw();
-            tempSVGFile.deleteOnExit();
-
-        } catch (IOException e1) {
-            // TODO Auto-generated catch block
-            e1.printStackTrace();
-        }
+    	if(Database.getInstance().getDatabaseFeatures().get("PROTEIN_LOC")!=null) {
+	        String textSVG = FileUtils
+	                .readText(Database.getDATA_PATH() + Database.getInstance().getDatabaseFeatures().get("PROTEIN_LOC"));
+	        String suffix = "fill=\"#414042\" font-family=\"'ArialMT'\" font-size=\"12\">";
+	        String newSuffix = "fill=\"#ED1C24\" font-family=\"'Arial-BoldMT'\" font-size=\"12\">";
+	
+	        /*
+	         * Extract localization
+	         */
+	        String[] info = new String[arrayGeneToLocalization[0].length];
+	        for (int i = 0; i < info.length; i++)
+	            info[i] = "";
+	        info[1] = "CP";
+	        if (genome.getSpecies().equals(Genome.EGDE_NAME)) {
+	            boolean found = false;
+	            for (int i = 0; i < arrayGeneToLocalization.length && !found; i++) {
+	                if (arrayGeneToLocalization[i][0].equals(sequence.getName())) {
+	                    info = ArrayUtils.getRow(arrayGeneToLocalization, i);
+	                    found = true;
+	                }
+	            }
+	        } else {
+	            String locus = "";
+	            for (int i = 0; i < bioCondsArray.length; i++) {
+	                if (bioCondsArray[i][ArrayUtils.findColumn(bioCondsArray, "Name")].equals(Genome.EGDE_NAME)) {
+	                    locus = bioCondsArray[i][ArrayUtils.findColumn(bioCondsArray, "Homolog")];
+	                    System.out.println(locus);
+	                }
+	            }
+	
+	            if (locus.equals("")) {
+	                info[1] = "Unknown";
+	            } else {
+	                boolean found = false;
+	                for (int i = 0; i < arrayGeneToLocalization.length && !found; i++) {
+	                    if (arrayGeneToLocalization[i][0].equals(locus)) {
+	                        info = ArrayUtils.getRow(arrayGeneToLocalization, i);
+	                        found = true;
+	                    }
+	                }
+	            }
+	        }
+	
+	        String[] geneLocalization =
+	                info[ArrayUtils.findColumn(arrayGeneToLocalization, "Subcellular location")].split("/");
+	        for (String compartment : geneLocalization) {
+	            if (!compartment.equals("Unknown")) {
+	                String nameCompartment =
+	                        SubCellCompartment.COMPARTMENT_NAMES[TypeCompartment.valueOf(compartment).ordinal()];
+	                /*
+	                 * Some of the compartment names are displayed in two lines so we need to modify the 2 lines in the
+	                 * SVG to display them in RED
+	                 */
+	                if (nameCompartment.equals("anchored to CM")) {
+	                    String nameToReplace = "anchored";
+	                    textSVG = textSVG.replaceFirst(suffix + nameToReplace, newSuffix + nameToReplace);
+	                    nameToReplace = "to CM";
+	                    textSVG = textSVG.replaceFirst(suffix + nameToReplace, newSuffix + nameToReplace);
+	                } else if (nameCompartment.equals("Protein complex")) {
+	                    String nameToReplace = "Protein";
+	                    textSVG = textSVG.replaceFirst(suffix + nameToReplace, newSuffix + nameToReplace);
+	                    nameToReplace = "complex";
+	                    textSVG = textSVG.replaceFirst(suffix + nameToReplace, newSuffix + nameToReplace);
+	                } else if (nameCompartment.equals("integral to CM")) {
+	                    String nameToReplace = "integral";
+	                    textSVG = textSVG.replaceFirst(suffix + nameToReplace, newSuffix + nameToReplace);
+	                    nameToReplace = "to  CM";
+	                    textSVG = textSVG.replaceFirst(suffix + nameToReplace, newSuffix + nameToReplace);
+	                } else if (nameCompartment.equals("Cytoplasmic Membrane")) {
+	                    String nameToReplace = "Cytoplasmic";
+	                    textSVG = textSVG.replaceFirst(suffix + nameToReplace, newSuffix + nameToReplace);
+	                    nameToReplace = "Membrane";
+	                    textSVG = textSVG.replaceFirst(suffix + nameToReplace, newSuffix + nameToReplace);
+	                } else {
+	                    textSVG = textSVG.replaceFirst(suffix + nameCompartment, newSuffix + nameCompartment);
+	                }
+	            }
+	
+	        }
+	
+	        if (tableLocalization != null) {
+	            updateTableSecretion(info, tableLocalization, arrayGeneToLocalization);
+	        }
+	
+	        /*
+	         * Display localization figure after conversion from SVG to JPG
+	         */
+	        try {
+	            File tempSVGFile = File.createTempFile(sequence.getName(), "Localization.svg");
+	            FileUtils.saveText(textSVG, tempSVGFile.getAbsolutePath());
+	            String html = SaveFileUtils.modifyHTMLwithFile(tempSVGFile.getAbsolutePath(), HTMLUtils.SVG);
+	            browserLocalization.setText(html);
+	            browserLocalization.redraw();
+	            tempSVGFile.deleteOnExit();
+	
+	        } catch (IOException e1) {
+	            // TODO Auto-generated catch block
+	            e1.printStackTrace();
+	        }
+    	}
     }
 
     /**

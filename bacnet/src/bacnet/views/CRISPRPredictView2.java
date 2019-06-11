@@ -212,7 +212,7 @@ public class CRISPRPredictView2 implements SelectionListener {
                 FileUtils.saveText(bash_process, tempPNGFile.getAbsolutePath());
                 System.out.println(tempPNGFile);
                 String[] command = {"sh", tempPNGFile.getAbsolutePath()};
-                CMD.runProcess(command, true);
+                CMD.runProcess(command);
                 String[][] results = TabDelimitedTableReader.read(output);
                 updateTable(results);
             } catch (IOException e) {
@@ -230,7 +230,7 @@ public class CRISPRPredictView2 implements SelectionListener {
                 FileUtils.saveText(bash_process, tempPNGFile.getAbsolutePath());
                 System.out.println(tempPNGFile);
                 String[] command = {"sh", tempPNGFile.getAbsolutePath()};
-                CMD.runProcess(command, true);
+                CMD.runProcess(command);
                 String[][] results = TabDelimitedTableReader.read(output);
                 updateTable(results);
             } catch (IOException e) {

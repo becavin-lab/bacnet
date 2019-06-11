@@ -52,7 +52,15 @@ public class Chromosome extends ChromosomeSequence {
     private LinkedHashMap<String, Sequence> elements = new LinkedHashMap<String, Sequence>();
 
     private LinkedHashMap<String, String> locusTagToGeneNameMap = new LinkedHashMap<String, String>();
+    
+    /**
+     * Map of the gene name to locus tag
+     */
     private LinkedHashMap<String, String> geneNameToLocusTagMap = new LinkedHashMap<String, String>();
+    /**
+     * Map proteinId to locustag
+     */
+    private LinkedHashMap<String, String> proteinIDTolocusTag = new LinkedHashMap<String, String>();
 
     public Chromosome() {}
 
@@ -122,7 +130,7 @@ public class Chromosome extends ChromosomeSequence {
 
             if (chromosome.getLength() < 50000)
                 chromosome.setDNAType(DNAType.PLASMID);
-            if (chromosome.getLength() < 20000)
+            if (chromosome.getLength() < 2500)
                 chromosome.setDNAType(DNAType.CONTIG);
             if (chromosome.getDescription().contains("contig"))
                 chromosome.setDNAType(DNAType.CONTIG);
@@ -165,6 +173,11 @@ public class Chromosome extends ChromosomeSequence {
                         if (!gene.getGeneName().equals("-")) {
                             getLocusTagToGeneNameMap().put(name, gene.getGeneName());
                             getGeneNameToLocusTagMap().put(gene.getGeneName(), name);
+                        }
+                        
+                        String proteinId = gene.getProtein_id();
+                        if(!proteinId.equals("")) {
+                        	getProteinIDTolocusTag().put(proteinId, name);
                         }
                     }
                     break;
@@ -385,7 +398,15 @@ public class Chromosome extends ChromosomeSequence {
         this.geneNameToLocusTagMap = geneNameToLocusTagMap;
     }
 
-    public String getName() {
+    public LinkedHashMap<String, String> getProteinIDTolocusTag() {
+		return proteinIDTolocusTag;
+	}
+
+	public void setProteinIDTolocusTag(LinkedHashMap<String, String> proteinIDTolocusTag) {
+		this.proteinIDTolocusTag = proteinIDTolocusTag;
+	}
+
+	public String getName() {
         return name;
     }
 

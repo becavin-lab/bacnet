@@ -90,7 +90,7 @@ public class Srna10403SOliver {
                     "-evalue 0.001", "-word_size 4"};
             try {
                 // run Blast
-                CMD.runProcess(args, true);
+                CMD.runProcess(args);
                 // convert asn in different format
                 String blastResultHTML =
                         Database.getTEMP_PATH() + File.separator + FileUtils.removeExtensionAndPath(blastResult);

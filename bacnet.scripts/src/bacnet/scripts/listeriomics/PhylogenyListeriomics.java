@@ -22,10 +22,10 @@ import bacnet.utils.FileUtils;
  */
 public class PhylogenyListeriomics {
 
-    public static String PATH = GenomeNCBI.PATH_PHYLOGENY;
-    public static String LOCUSTAG_CHANGE_PATH = GenomeNCBI.PATH_PHYLOGENY + "LocusTagChangeForPhylogeny.txt";
-    public static String NOTFOUND_LOCUSTAG_CHANGE_PATH = GenomeNCBI.PATH_PHYLOGENY + "NotFound_LocusTagChange.txt";
-    public static String bigDataset = GenomeNCBI.PATH_PHYLOGENY + "blastp_all_vs_all.tab";
+    public static String PATH = GenomeNCBI.PATH_HOMOLOGS;
+    public static String LOCUSTAG_CHANGE_PATH = GenomeNCBI.PATH_HOMOLOGS + "LocusTagChangeForPhylogeny.txt";
+    public static String NOTFOUND_LOCUSTAG_CHANGE_PATH = GenomeNCBI.PATH_HOMOLOGS + "NotFound_LocusTagChange.txt";
+    public static String bigDataset = GenomeNCBI.PATH_HOMOLOGS + "blastp_all_vs_all.tab";
 
     public static void run() {
         // String before = "NZ_CM001052";

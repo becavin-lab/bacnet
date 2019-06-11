@@ -39,7 +39,7 @@ public class UNAfold {
             File fileTemp = File.createTempFile("UnaFold", seq.getName());
             FileUtils.saveText(fastaFile, fileTemp.getAbsolutePath());
             String execProcess = unafold + " \"" + fileTemp.getAbsolutePath() + "\"";
-            CMD.runProcess(execProcess, true);
+            CMD.runProcess(execProcess);
             fileTemp.delete();
         } catch (IOException e) {
             // TODO Auto-generated catch block
@@ -70,7 +70,7 @@ public class UNAfold {
                     hybrid_ss_min + " -o \"" + (PATH_DATA + fileName) + "\" \"" + fileTemp.getAbsolutePath() + "\"";
             // String execProcess = hybrid_ss+" -o \""+(PATH_DATA+fileName)+"\"
             // \""+fileTemp.getAbsolutePath()+"\"";
-            CMD.runProcess(execProcess, true);
+            CMD.runProcess(execProcess);
             fileTemp.delete();
             selectFirstResult(fileName + ".ct");
             // plot2Ann(fileName+".37.ct", fileName+".37.plot",fileName+".37.ann");
@@ -172,7 +172,7 @@ public class UNAfold {
     public static double[] calcEnergy(String fileName) {
         String execProcess = ct_energy + " " + (PATH_DATA + fileName) + "\"";
         try {
-            String out = CMD.runProcess(execProcess, false);
+            String out = CMD.runProcess(execProcess);
             String[] freeEnergiesString = out.split("\n");
             System.out.println("nb of folding: " + freeEnergiesString.length);
             double[] freeEnergies = new double[freeEnergiesString.length];
@@ -205,7 +205,7 @@ public class UNAfold {
     public static double[][] plot2Ann(String fileNameCT, String fileNamePlot, String fileNameAnn) {
         String execProcess = plot2ann + " \"" + (PATH_DATA + fileNamePlot) + "\" \"" + (PATH_DATA + fileNameCT) + "\"";
         try {
-            String out = CMD.runProcess(execProcess, false);
+            String out = CMD.runProcess(execProcess);
             String[] annotString = out.split("\n");
             System.out.println("nb of folding: " + annotString.length);
             double[][] annot = new double[annotString.length][annotString[0].split("\t").length];
@@ -254,7 +254,7 @@ public class UNAfold {
         // \""+(PATH_DATA+fileName)+"\"";
         try {
             @SuppressWarnings("unused")
-            String out = CMD.runProcess(execProcess, true);
+            String out = CMD.runProcess(execProcess);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -275,7 +275,7 @@ public class UNAfold {
             String execProcess = hybrid_min + " -o \"" + (PATH_DATA + fileName) + "\" \"" + file1.getAbsolutePath()
                     + "\" \"" + file2.getAbsolutePath() + "\"";
             @SuppressWarnings("unused")
-            String out = CMD.runProcess(execProcess, false);
+            String out = CMD.runProcess(execProcess);
             /*
              * Get energy
              */

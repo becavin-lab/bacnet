@@ -84,12 +84,12 @@ public class NCBIFastaHeaderParser<S extends AbstractSequence<C>, C extends Comp
                 sequence.setAccession(new AccessionID(tempString[0], DataSource.NCBI));
                 String description = data[0].replaceFirst(tempString[0], "").trim();
                 sequence.setDescription(description);
-                System.out.println("chromo:" + description);
-                System.out.println("chromoID:" + tempString[0]);
+                //System.out.println("chromo:" + description);
+                //System.out.println("chromoID:" + tempString[0]);
             } else {
                 sequence.setAccession(new AccessionID(data[0]));
                 sequence.setDescription(data[0]);
-                System.out.println("chromo and ID:" + data[0]);
+                //System.out.println("chromo and ID:" + data[0]);
             }
         } else if (data[0].equalsIgnoreCase("gi")) {
 

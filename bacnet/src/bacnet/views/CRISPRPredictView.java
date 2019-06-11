@@ -247,7 +247,7 @@ public class CRISPRPredictView implements SelectionListener {
             FileUtils.saveText(bash_process, tempPNGFile.getAbsolutePath());
             System.out.println(tempPNGFile);
             String[] command = {"sh", tempPNGFile.getAbsolutePath()};
-            CMD.runProcess(command, true);
+            CMD.runProcess(command);
             if (os.equals("Mac OS X")) {
                 results = TabDelimitedTableReader.read(output);
             } else {

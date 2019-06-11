@@ -29,6 +29,7 @@ import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 import bacnet.Database;
 import bacnet.datamodel.dataset.OmicsData;
+import bacnet.datamodel.phylogeny.Phylogenomic;
 import bacnet.datamodel.sequence.Genome;
 import bacnet.datamodel.sequenceNCBI.GenomeConversion;
 import bacnet.datamodel.sequenceNCBI.GenomeNCBI;
@@ -39,7 +40,9 @@ import bacnet.scripts.database.DataFolder;
 import bacnet.scripts.database.DataValidation;
 import bacnet.scripts.database.DatabaseCreation;
 import bacnet.scripts.database.GenomesCreation;
+import bacnet.scripts.database.HomologCreation;
 import bacnet.scripts.database.NetworkCreation;
+import bacnet.scripts.database.PhylogenomicsCreation;
 import bacnet.scripts.database.ProteomicsCreation;
 import bacnet.scripts.database.TranscriptomesCreation;
 import bacnet.scripts.listeriomics.TSSNTermRiboSeqListeriomics;
@@ -119,6 +122,17 @@ public class SetupPart implements SelectionListener {
     private Label labelNetwork;
     private Label lblNetworkPath;
     private Button btnValidateCoExpr;
+    private TabItem tbtmPhylogeny;
+    private Composite composite_9;
+    private Label lblPhylogenomicsfigure;
+    private Label lblPhylofigfound;
+    private Label lblHomologpath;
+    private Label lblHomopathfound;
+    private Button btnAddHomologsInformation;
+    private Button btnRunPhylogenomicTree;
+    private Button btnCreateBlast;
+    private Button btnCreatBlastpScript;
+    private Button btnCreateGenomeSummary;
 
     public SetupPart() {}
 
@@ -134,7 +148,7 @@ public class SetupPart implements SelectionListener {
         SessionControl.initBacnetApp(partService, modelService, shell);
 
         Composite composite = new Composite(parent, SWT.NONE);
-        composite.setBounds(0, 0, 628, 452);
+        composite.setBounds(0, 0, 1030, 632);
         composite.setLayout(new GridLayout(1, false));
 
         Label lblNewLabel = new Label(composite, SWT.NONE);
@@ -182,7 +196,7 @@ public class SetupPart implements SelectionListener {
         composite_4.setLayout(new GridLayout(2, false));
 
         tableGenome = new Table(composite_4, SWT.BORDER | SWT.FULL_SELECTION | SWT.MULTI);
-        tableGenome.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 7));
+        tableGenome.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 8));
         tableGenome.setHeaderVisible(true);
         tableGenome.setLinesVisible(true);
 
@@ -209,7 +223,51 @@ public class SetupPart implements SelectionListener {
         btnAddGenomes.setText("Add unvalidated Genomes to the database");
         btnAddGenomes.addSelectionListener(this);
         btnAddGenomes.setToolTipText("! Validate first your datasets !");
+        
+        btnCreateGenomeSummary = new Button(composite_4, SWT.NONE);
+        btnCreateGenomeSummary.setText("Create Genome summary table");
+        btnCreateGenomeSummary.addSelectionListener(this);
         new Label(composite_4, SWT.NONE);
+        
+        tbtmPhylogeny = new TabItem(tabFolder, SWT.NONE);
+        tbtmPhylogeny.setText("Phylogeny");
+        
+        composite_9 = new Composite(tabFolder, SWT.NONE);
+        tbtmPhylogeny.setControl(composite_9);
+        composite_9.setLayout(new GridLayout(1, false));
+        
+        Label lblPhylogenomicsFigureIs = new Label(composite_9, SWT.NONE);
+        lblPhylogenomicsFigureIs.setText("Phylogenomic tree is in :");
+        
+        lblPhylogenomicsfigure = new Label(composite_9, SWT.NONE);
+        
+        lblPhylofigfound = new Label(composite_9, SWT.NONE);
+        
+        btnRunPhylogenomicTree = new Button(composite_9, SWT.NONE);
+        btnRunPhylogenomicTree.setText("Run Phylogenomic tree creation");
+        btnRunPhylogenomicTree.addSelectionListener(this);
+        new Label(composite_9, SWT.NONE);
+        
+        Label lblHomologsInformationIs = new Label(composite_9, SWT.NONE);
+        lblHomologsInformationIs.setText("Homologs information is in :");
+        
+        lblHomologpath = new Label(composite_9, SWT.NONE);
+        
+        lblHomopathfound = new Label(composite_9, SWT.NONE);
+        
+        btnCreateBlast = new Button(composite_9, SWT.NONE);
+        btnCreateBlast.setToolTipText("WARNING : LONG RUN");
+        btnCreateBlast.setText("Create Blast database for Homolog search");
+        btnCreateBlast.addSelectionListener(this);
+        
+        btnCreatBlastpScript = new Button(composite_9, SWT.NONE);
+        btnCreatBlastpScript.setText("Creat BlastP script");
+        btnCreatBlastpScript.addSelectionListener(this);
+        btnAddHomologsInformation = new Button(composite_9, SWT.NONE);
+        btnAddHomologsInformation.setText("Add Homologs information to Genomes");
+        btnAddHomologsInformation.addSelectionListener(this);
+        
+        
         TabItem tbtmBiologicalConditions = new TabItem(tabFolder, SWT.NONE);
         tbtmBiologicalConditions.setText("Biological Conditions");
 
@@ -436,6 +494,7 @@ public class SetupPart implements SelectionListener {
         database.initDatabase(shell);
         OmicsData.initStaticVariables();
         GenomeNCBI.initStaticVariables();
+        Phylogenomic.initStaticVariables();
     }
 
     private void initProjectInfo() {
@@ -445,6 +504,7 @@ public class SetupPart implements SelectionListener {
         dataValidation = new DataValidation();
         initGenomics();
         initBioconditions();
+        initPhylogeny();
         initComparisons();
         initTranscriptomics();
         initProteomics();
@@ -484,7 +544,10 @@ public class SetupPart implements SelectionListener {
             updateConsole();
         }
     }
-
+    
+    /**
+     * Update BioCondition validation table
+     */
     private void updateBioConditions() {
         int i = 0;
         for (String bioCondName : dataValidation.getBioconditions().keySet()) {
@@ -497,6 +560,67 @@ public class SetupPart implements SelectionListener {
                 item.setImage(1, ResourceManager.getPluginImage("bacnet", "icons/unchecked.bmp"));
             }
             i++;
+        }
+    }
+    
+    
+    /**
+     * Initi Phylogeny information = Phylogenomic presence and homologs information
+     */
+    private void initPhylogeny() {
+    	/*
+    	 * Phylogenomics figure
+    	 */
+        lblPhylogenomicsfigure.setText(Phylogenomic.PHYLO_GENOME_SVG);
+        if (FileUtils.exists(Phylogenomic.PHYLO_GENOME_SVG)) {
+            lblPhylofigfound.setText("Phylogenomic tree was found");
+        } else {
+        	String message = "No phylogenomic tree was found. Create it by clicking below. (JolyTree and FigTree software will be used)";
+        	lblPhylofigfound.setText(message);
+            logs += "No phylogenomic tree was found.\n";
+            updateConsole();
+        }
+        /*
+         * Homologs search
+         */
+        lblHomologpath.setText(Phylogenomic.HOMOLOG_SUMMARY);
+        if (FileUtils.exists(Phylogenomic.HOMOLOG_SUMMARY)) {
+            lblHomopathfound.setText("Homologs final file was found");
+        } else {
+        	String message = "No homologs final file found. Create first a Blast Database, then create the bash script, and run it on your computer. "
+        			+ "Finalize homolog search by creating HomoloStats.txt. (BlastP will be used)";
+        	lblHomopathfound.setText(message);
+            updateConsole();
+        }
+    }
+
+    
+    /**
+     * Update phylogeny information
+     */
+    private void updatePhylogeny() {
+    	/*
+    	 * Phylogenomics figure
+    	 */
+    	if (FileUtils.exists(Phylogenomic.PHYLO_GENOME_SVG)) {
+            lblPhylofigfound.setText("Phylogenomic tree was found");
+        } else {
+        	String message = "No phylogenomic tree was found. Create first a Blast Database, then create the bash script, and run it on your computer. "
+        			+ "Finalize homolog search by creating HomoloStats.txt. (BlastP will be used)";
+        	lblPhylofigfound.setText(message);
+            logs += "No phylogenomic tree was found.\n";
+            updateConsole();
+        }
+    	/*
+         * Homologs search
+         */
+        if (FileUtils.exists(Phylogenomic.HOMOLOG_SUMMARY)) {
+            lblHomopathfound.setText("Homologs final file was found");
+        } else {
+        	String message = "No homologs final file found. Create first a Blast Database, then create the bash script, and run it on your computer. "
+        			+ "Finalize homolog search by creating HomoloStats.txt. (BlastP will be used)";
+        	lblHomopathfound.setText(message);
+            updateConsole();
         }
     }
 
@@ -708,7 +832,7 @@ public class SetupPart implements SelectionListener {
     }
     
     /**
-     * Init Coexpression Network table showing every co-expression network available
+     * Init Co-expression Network table showing every co-expression network available
      */
     private void initNetwork() {
         lblNetworkPath.setText(Database.getInstance().getCoExprNetworkArrayPath());
@@ -795,9 +919,9 @@ public class SetupPart implements SelectionListener {
             System.out.println("yo");
             String[][] newGenomes = TabDelimitedTableReader.read(Database.getInstance().getGenomeArrayPath());
             int index = ArrayUtils.findColumn(newGenomes, "RefSeq FTP");
-            System.out.println("yes");
+            System.out.println("yes"+ index);
             if (index == -1) {
-                logs += "No RefSeq available in " + Database.getInstance().getGenomeArrayPath() + "\n";
+                logs += "No \"RefSeq FTP\" column available in " + Database.getInstance().getGenomeArrayPath() + "\n";
                 logs += "Impossible to download the genomes";
             } else {
                 ArrayList<String> listGenomes = new ArrayList<>();
@@ -806,8 +930,9 @@ public class SetupPart implements SelectionListener {
                         listGenomes.add(genome);
                     }
                 }
-                GenomesCreation.downloadGenomes(listGenomes);
+                logs = GenomesCreation.downloadGenomes(listGenomes, logs);
             }
+            updateConsole();
         } else if (e.getSource() == btnAddGenomes) {
             logs += "--- Add genomes to database\n";
             for (String genome : dataValidation.getGenomes().keySet()) {
@@ -828,6 +953,25 @@ public class SetupPart implements SelectionListener {
             }
             updateConsole();
             updateGenomics();
+        } else if (e.getSource() == btnCreateGenomeSummary) {
+        	logs = GenomesCreation.createGenomeTable(logs);
+        	updateConsole();
+        } if (e.getSource() == btnRunPhylogenomicTree) {
+           	logs = PhylogenomicsCreation.createPhylogenomicFigure(logs);
+        	updatePhylogeny();
+        	updateConsole(); 
+        } if (e.getSource() == btnAddHomologsInformation) {
+        	logs = HomologCreation.extractBlastResults(logs);
+            updatePhylogeny();
+        	updateConsole();        	
+        } else if (e.getSource() == btnCreateBlast) {
+        	logs = HomologCreation.createBlastDB(logs);
+        	updatePhylogeny();
+        	updateConsole();        	
+        } else if (e.getSource() == btnCreatBlastpScript) {
+        	logs = HomologCreation.createBlastScript(logs);
+        	updatePhylogeny();
+        	updateConsole();        	
         } else if (e.getSource() == btnValidateBioconditionsDatabase) {
             logs += "--- Validate bioconditions\n";
             logs = dataValidation.validateBioConditions(logs);

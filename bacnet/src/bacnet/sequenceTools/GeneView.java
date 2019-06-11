@@ -1026,7 +1026,6 @@ public class GeneView implements SelectionListener, MouseListener {
             }
             comboGenome.add(genomeTemp);
         }
-        tbtmHomologs.dispose();
         tbtmSynteny.dispose();
         composite_localization.dispose();
         // arrayGeneToLocalization =
@@ -1142,7 +1141,8 @@ public class GeneView implements SelectionListener, MouseListener {
         if (sequence != null) {
             updateGeneBasicInfo();
             if (Database.getInstance().getProjectName() == Database.LISTERIOMICS_PROJECT
-                    || Database.getInstance().getProjectName() == Database.UIBCLISTERIOMICS_PROJECT) {
+                    || Database.getInstance().getProjectName() == Database.UIBCLISTERIOMICS_PROJECT
+                    || Database.getInstance().getProjectName() == Database.YERSINIOMICS_PROJECT) {
                 updateAllGeneOmicsInfo();
             } else if (Database.getInstance().getProjectName() != Database.CRISPRGO_PROJECT) {
                 updateGeneOmicsInfo();
@@ -1224,9 +1224,9 @@ public class GeneView implements SelectionListener, MouseListener {
             lblOperon.setText("Not in an operon");
         }
         lblConservation.setText("Homologs in " + (sequence.getConservation() - 1) + "/"
-                + Genome.getAvailableGenomes().size() + " Listeria genomes");
+                + Genome.getAvailableGenomes().size() + " "+Database.getInstance().getSpecies()+" genomes");
         lblConservation2.setText("Homologs in " + (sequence.getConservation() - 1) + "/"
-                + Genome.getAvailableGenomes().size() + " Listeria genomes");
+                + Genome.getAvailableGenomes().size() + " "+Database.getInstance().getSpecies()+" genomes");
         lblProduct.setText("Product: " + sequence.getProduct());
         lblProtID.setText("ProteinId: " + RWTUtils.setProteinNCBILink(sequence.getProtein_id()));
         lblCog.setText("COG: " + sequence.getCog());
@@ -1513,8 +1513,7 @@ public class GeneView implements SelectionListener, MouseListener {
                 File tempSVGFile = File.createTempFile("Highlightstrain", "Phylogeny.svg");
                 FileUtils.saveText(textSVG, tempSVGFile.getAbsolutePath());
                 File tempPNGFile = File.createTempFile("Highlightstrain", "Phylogeny.png");
-                CMD.runProcess(ImageMagick.getConvertPATH() + " " + tempSVGFile.getAbsolutePath() + " " + tempPNGFile,
-                        true);
+                CMD.runProcess(ImageMagick.getConvertPATH() + " " + tempSVGFile.getAbsolutePath() + " " + tempPNGFile);
                 SaveFileUtils.saveFile("Listeria_Phylogenomic_Tree_" + sequence.getName() + ".png", tempPNGFile,
                         "PNG image file", partService, shell);
             } catch (IOException e1) {
