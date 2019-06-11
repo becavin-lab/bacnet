@@ -1,11 +1,16 @@
 package bacnet.datamodel.sequenceNCBI;
 
+import java.util.ArrayList;
+
 import org.biojava3.core.sequence.AccessionID;
 import org.biojava3.core.sequence.DNASequence;
 import bacnet.datamodel.annotation.COGannotation;
 import bacnet.datamodel.annotation.GlaserFCannotation;
 import bacnet.datamodel.sequence.Srna;
+import bacnet.utils.ArrayUtils;
+import bacnet.utils.ListUtils;
 import bacnet.utils.StringColor;
+import bacnet.utils.VectorUtils;
 
 /**
  * 
@@ -17,7 +22,7 @@ import bacnet.utils.StringColor;
  */
 public class GeneNCBITools {
 
-    public static String[] displayedAttributes = {"CDS", "mRNA", "Strand : ", "Gene : ", "note : ", "protein_Id : ",
+    public static String[] displayedAttributes = {"CDS", "mRNA", "Strand : ", "Gene : ", "note : ", "protein_id : ","protein_Id : ",
             "product : ", "COG : ", "Gene length : ", "Protein length : ", "Molecular mass ", "Operon : "};
 
     /**
@@ -32,9 +37,31 @@ public class GeneNCBITools {
             String[] notes = notess.split("\n");
             for (String note : notes) {
                 if (note.contains(attribute)) {
-                    return note.replaceAll(attribute, "").replaceAll("\t", "").trim();
+                	return note.replaceAll(attribute, "").replaceAll("\t", "").trim();
                 }
             }
+        }
+        return "";
+    }
+    
+    /**
+     * Search an element in the Note part of a DNASequence in a sectio of the note :
+     * Section = gene, CDS, etc...
+     * 
+     * @param seq DNASequence to search in
+     * @param attribute name of the attribute to search
+     * @return value of the attribute ; empty string if the attribute does not exists
+     */
+    public static String searchElement(DNASequence seq, String attribute, String section) {
+        for (String notess : seq.getNotesList()) {
+        	if(notess.startsWith(section)) {
+        		String[] notes = notess.split("\n");
+	            for (String note : notes) {
+	                if (note.contains(attribute)) {
+	                	return note.replaceAll(attribute, "").replaceAll("\t", "").trim();
+	                }
+	            }
+        	}
         }
         return "";
     }
@@ -55,8 +82,35 @@ public class GeneNCBITools {
         return searchElement(seq, "note : ");
     }
 
+    /**
+     * Search for protein-id in the Note section of Gene<br>
+     * Search first : protein_id attribute<br>
+     * Search then : protein_Id attribute <br>
+     * Finally in CDS section of Note search for: "Dbxref :" and "Genbank:" protein id
+     * 
+     * @param seq
+     * @return
+     */
     public static String getProteinID(DNASequence seq) {
-        return searchElement(seq, "protein_Id : ");
+    	String resultSearch = searchElement(seq, "protein_id : ");
+    	if(resultSearch.equals("")) {
+    		resultSearch = searchElement(seq, "protein_Id : ");
+    		if(resultSearch.equals("")) {
+    	    	if(searchElement(seq, "gene_biotype : ").equals("protein_coding")) {
+    	    		resultSearch = searchElement(seq, "Dbxref : ", "CDS");
+	    			if(!resultSearch.equals("")) {
+	    				for(String resultTemp : resultSearch.split(",")) {
+	    					if(resultTemp.startsWith("Genbank")) {
+	    						return resultTemp.replaceFirst("Genbank:","").trim();
+	    					}
+	    				}
+	    			}
+	        	}
+    		}else {
+    			return resultSearch;
+    		}
+    	}
+    	return resultSearch;
     }
 
     public static String getProduct(DNASequence seq) {

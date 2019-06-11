@@ -1026,7 +1026,6 @@ public class GeneView implements SelectionListener, MouseListener {
             }
             comboGenome.add(genomeTemp);
         }
-        tbtmHomologs.dispose();
         tbtmSynteny.dispose();
         composite_localization.dispose();
         // arrayGeneToLocalization =
@@ -1225,9 +1224,9 @@ public class GeneView implements SelectionListener, MouseListener {
             lblOperon.setText("Not in an operon");
         }
         lblConservation.setText("Homologs in " + (sequence.getConservation() - 1) + "/"
-                + Genome.getAvailableGenomes().size() + " Listeria genomes");
+                + Genome.getAvailableGenomes().size() + " "+Database.getInstance().getSpecies()+" genomes");
         lblConservation2.setText("Homologs in " + (sequence.getConservation() - 1) + "/"
-                + Genome.getAvailableGenomes().size() + " Listeria genomes");
+                + Genome.getAvailableGenomes().size() + " "+Database.getInstance().getSpecies()+" genomes");
         lblProduct.setText("Product: " + sequence.getProduct());
         lblProtID.setText("ProteinId: " + RWTUtils.setProteinNCBILink(sequence.getProtein_id()));
         lblCog.setText("COG: " + sequence.getCog());

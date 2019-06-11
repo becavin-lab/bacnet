@@ -219,6 +219,24 @@ public class Genome {
         return null;
     }
 
+    
+    /**
+     * Go through all chromosomes and Gene from corresponding proteinid
+     * 
+     * @param name
+     * @return
+     */
+    public Gene getGeneFromProteinId(String proteinId) {
+        for (String accessionChromo : this.getChromosomes().keySet()) {
+        	Chromosome chromo = this.getChromosomes().get(accessionChromo);
+        	if(chromo.getProteinIDTolocusTag().containsKey(proteinId)) {
+        		return chromo.getGenes().get(chromo.getProteinIDTolocusTag().get(proteinId));
+        	}
+        }
+        return null;
+    }
+    
+    
     /**
      * Return all element names contained in all chromosomes
      * 
