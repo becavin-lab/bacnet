@@ -227,7 +227,8 @@ public class GenomicsView implements SelectionListener {
                         }
                     }
                     if (Database.getInstance().getProjectName() == Database.LISTERIOMICS_PROJECT
-                            || Database.getInstance().getProjectName() == Database.UIBCLISTERIOMICS_PROJECT) {
+                            || Database.getInstance().getProjectName() == Database.UIBCLISTERIOMICS_PROJECT
+                            || Database.getInstance().getProjectName() == Database.YERSINIOMICS_PROJECT) {
                         loadPhylogenomicFigure(selectedGenomes);
                     }
                 }
@@ -524,8 +525,8 @@ public class GenomicsView implements SelectionListener {
          */
         String textSVG = FileUtils
                 .readText(Phylogenomic.PHYLO_GENOME_SVG);
-        String textNew = "fill=\"#276FA0\" font-family=\"'ArialMT'\" font-size=\"11.9468\">";
-        String textOld = "font-family=\"'ArialMT'\" font-size=\"11.9468\">";
+        String textNew = "fill=\"#276FA0\" font-family=\"'ArialMT'\" font-size=\"13\">";
+        String textOld = "font-family=\"'ArialMT'\" font-size=\"13\">";
         for (String genomeName : genomeNames) {
             textSVG = textSVG.replaceAll(textOld + genomeName + "<", textNew + genomeName + "<");
         }

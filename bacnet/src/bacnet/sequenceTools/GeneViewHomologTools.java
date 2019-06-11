@@ -104,8 +104,8 @@ public class GeneViewHomologTools {
          */
         String textSVG = FileUtils
                 .readText(Phylogenomic.getPhylogenomicFigurePath());
-        String textNew = "fill=\"#276FA0\" font-family=\"'ArialMT'\" font-size=\"11.9468\">";
-        String textOld = "font-family=\"'ArialMT'\" font-size=\"11.9468\">";
+        String textNew = "fill=\"#276FA0\" font-family=\"'ArialMT'\" font-size=\"13\">";
+        String textOld = "font-family=\"'ArialMT'\" font-size=\"13\">";
 
         for (String genome : Genome.getAvailableGenomes()) {
             String newText = "";
