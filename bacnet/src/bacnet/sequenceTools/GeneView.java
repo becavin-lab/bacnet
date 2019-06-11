@@ -1142,7 +1142,8 @@ public class GeneView implements SelectionListener, MouseListener {
         if (sequence != null) {
             updateGeneBasicInfo();
             if (Database.getInstance().getProjectName() == Database.LISTERIOMICS_PROJECT
-                    || Database.getInstance().getProjectName() == Database.UIBCLISTERIOMICS_PROJECT) {
+                    || Database.getInstance().getProjectName() == Database.UIBCLISTERIOMICS_PROJECT
+                    || Database.getInstance().getProjectName() == Database.YERSINIOMICS_PROJECT) {
                 updateAllGeneOmicsInfo();
             } else if (Database.getInstance().getProjectName() != Database.CRISPRGO_PROJECT) {
                 updateGeneOmicsInfo();

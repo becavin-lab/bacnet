@@ -237,6 +237,35 @@ public class GenomeNCBI {
         // System.out.println("Number of locus_Tag "+getLocusTagList().size());
 
     }
+    
+    /**
+     * Replace all spaces in genomeName by "_" to have folder name compatible for Blast search<br>
+     * All "_" already present are replaced by "--"
+     * @param genomeName
+     * @return
+     */
+    public static String processGenomeName(String genomeName) {
+    	// Detect first if genomeName contain "_" and replace them by "--"
+    	genomeName = genomeName.replaceAll("_", "--");
+    	// then replace all " " by "_"
+    	genomeName = genomeName.replaceAll(" ", "_");
+    	return genomeName;
+    }
+    
+    /**
+     * Go back to previous genomeName by eplacing all "_" by spaces<br>
+     * All "_" present before processing where replaced by "--" and are processed back
+     * @param genomeName
+     * @return
+     */
+    public static String unprocessGenomeName(String genomeName) {
+    	// replace all "_" by " "
+    	genomeName = genomeName.replaceAll("_", " ");
+    	// Detect first if genomeName contain "--" and replace them by "_"
+    	genomeName = genomeName.replaceAll("--", "_");
+    	return genomeName;
+    }
+    
 
     /**
      * Put in a list all the CodingSequence found
