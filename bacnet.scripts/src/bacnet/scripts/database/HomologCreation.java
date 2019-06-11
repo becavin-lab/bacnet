@@ -553,7 +553,7 @@ public class HomologCreation {
 			Gene gene = genomeLoaded.getGeneFromName(locus);
 			if (gene != null) {
 				LinkedHashMap<String, String> conservationHashMap = new LinkedHashMap<>();
-				conservationHashMap.put(genome, locus +";1.0");
+				conservationHashMap.put(GenomeNCBI.unprocessGenomeName(genome), locus +";1.0");
 				if(!allInfo.equals("")) {
 					String[] conservations = allInfo.split(";;");
 					for (String conservation : conservations) {
