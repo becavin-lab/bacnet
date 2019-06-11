@@ -8,10 +8,6 @@ bin/
 # MACOSX files
 .DS_Store
 
-
-# MACOSX files
-.DS_Store
-
 # Log file
 *.log
 
