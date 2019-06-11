@@ -133,6 +133,7 @@ public class SetupPart implements SelectionListener {
     private Button btnCreateBlast;
     private Button btnCreatBlastpScript;
     private Button btnCreateGenomeSummary;
+    private Button btnOrganizeGenomeTable;
 
     public SetupPart() {}
 
@@ -246,6 +247,10 @@ public class SetupPart implements SelectionListener {
         btnRunPhylogenomicTree = new Button(composite_9, SWT.NONE);
         btnRunPhylogenomicTree.setText("Run Phylogenomic tree creation");
         btnRunPhylogenomicTree.addSelectionListener(this);
+        
+        btnOrganizeGenomeTable = new Button(composite_9, SWT.NONE);
+        btnOrganizeGenomeTable.setText("Organize genome table with phylogenomic tree");
+        btnOrganizeGenomeTable.addSelectionListener(this);
         new Label(composite_9, SWT.NONE);
         
         Label lblHomologsInformationIs = new Label(composite_9, SWT.NONE);
@@ -958,6 +963,10 @@ public class SetupPart implements SelectionListener {
         	updateConsole();
         } if (e.getSource() == btnRunPhylogenomicTree) {
            	logs = PhylogenomicsCreation.createPhylogenomicFigure(logs);
+        	updatePhylogeny();
+        	updateConsole(); 
+        } if (e.getSource() == btnOrganizeGenomeTable) {
+           	logs = PhylogenomicsCreation.organizePhyloTable(logs);
         	updatePhylogeny();
         	updateConsole(); 
         } if (e.getSource() == btnAddHomologsInformation) {

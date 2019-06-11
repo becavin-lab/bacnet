@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.TreeMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -24,6 +25,7 @@ import org.biojava3.core.sequence.compound.AminoAcidCompoundSet;
 import org.biojava3.core.sequence.io.FastaReader;
 import org.biojava3.core.sequence.io.ProteinSequenceCreator;
 import bacnet.Database;
+import bacnet.datamodel.dataset.ExpressionMatrix;
 import bacnet.datamodel.phylogeny.Phylogenomic;
 import bacnet.datamodel.sequence.Gene;
 import bacnet.datamodel.sequence.Genome;
@@ -34,19 +36,17 @@ import bacnet.scripts.blast.BlastOutput.BlastOutputTYPE;
 import bacnet.utils.ArrayUtils;
 import bacnet.utils.CMD;
 import bacnet.utils.FileUtils;
+import bacnet.utils.VectorUtils;
 
 public class PhylogenomicsCreation {
     
-	public static String IQTREE_PATH_WIN = "C:\\Users\\ipmc\\Documents\\BACNET\\Bacnet-private\\bacnet.scripts\\external\\iqtree-1.6.10-Windows\\bin\\iqtree.exe";
-	
-	public static String IQTREE_PATH = IQTREE_PATH_WIN;
-	
-	
-	// ADD MAFFT parameters and run it on genomes
-	// Run IQTree
-	// Run FigTree
-	
-	
+	/**
+	 * Method to create a Phylogenomic figure using:<br>
+	 * JolyTree - https://gitlab.pasteur.fr/GIPhy/JolyTree for alignment and tree construction<br>
+	 * FigTree for Drawing Phylogenomic tree
+	 * @param logs
+	 * @return
+	 */
 	public static String createPhylogenomicFigure(String logs) {
 		String output = "PhylogenyGenomes";
 		String fastaFolder = GenomeNCBI.PATH_RAW + "Fasta/";
@@ -54,6 +54,7 @@ public class PhylogenomicsCreation {
 		logs = copyFastafile(fastaFolder, logs);
 		logs = runJOLYTree(fastaFolder, output, logs);
 		logs = runFigTree(output, logs);
+		
 		return logs;
 	}
 	
@@ -145,6 +146,59 @@ public class PhylogenomicsCreation {
 		logs += "Run FigTree and load "+output+".nwk\n";
 		logs+= "Select \"Align Tip Labels\" and \"Trees>Transform branches>Proportional\"\n";
 		logs+="Resize FigTree to have a vertical image and save it to: "+Phylogenomic.PHYLO_GENOME_SVG+"\n"; 
+		return logs;
+	}
+	
+	public static String organizePhyloTable(String logs) {
+		String message = "Load genome table: "+Database.getInstance().getGenomeArrayPath()+"\n";
+		ExpressionMatrix genomesMatrix = ExpressionMatrix.loadTab(Database.getInstance().getGenomeArrayPath(),true);
+		message += "Load phylogenomic tree: "+Phylogenomic.PHYLO_GENOME_SVG+"\n";
+		ArrayList<String> phyloTree = TabDelimitedTableReader.readList(Phylogenomic.PHYLO_GENOME_SVG,true);
+		LinkedHashMap<String, Integer> strainToPyloId = new LinkedHashMap<String, Integer>();
+		TreeMap<Double, String> heightToStrain = new TreeMap<Double, String>();
+		// Organize strain by phyloId
+		for(String line : phyloTree) {
+			for(String genome : Genome.getAvailableGenomes()) {
+				if(line.contains(">"+genome+"<")) {
+					// Find strain position in the tree
+					String[] linesTemp = line.split("=");
+					for(String lineTemp : linesTemp){
+						if(lineTemp.startsWith("\"matrix(")) {
+							String[] parseLine = lineTemp.split(" ");
+							//VectorUtils.displayVector("yo", parseLine);
+							String heigth = parseLine[parseLine.length-2];
+							double value = Double.valueOf(heigth.substring(0, heigth.length()-2));
+							heightToStrain.put(value,  genome);
+						}
+					}
+				}
+			}
+		}
+		
+		int phyloId = 1;
+		for(Double value : heightToStrain.keySet()) {
+			strainToPyloId.put(heightToStrain.get(value), phyloId);
+			phyloId++;
+		}
+		
+		// reorganize rownames
+		message += "Reorganize genome table with PhyloId = Tree architecture\n";
+		TreeMap<String,Integer> newRowNames = new TreeMap<String, Integer>();
+		for(String key : genomesMatrix.getRowNames().keySet()) {
+			Integer value = genomesMatrix.getRowNames().get(key);
+			String strain = genomesMatrix.getValueAnnotation(key, "Name");
+			String phyloIdStrain = String.valueOf(strainToPyloId.get(strain));
+			if(phyloIdStrain.length()==1) {
+				phyloIdStrain = "0"+phyloIdStrain;
+			}
+			newRowNames.put(phyloIdStrain, value);
+		}
+		
+		genomesMatrix.setRowNames(newRowNames);
+		genomesMatrix.setOrdered(false);
+		genomesMatrix.saveTab(Database.getInstance().getGenomeArrayPath(), "PhyloID");
+		message += "Saved: "+Database.getInstance().getGenomeArrayPath();
+		logs += message+"\n";
 		return logs;
 	}
 	
