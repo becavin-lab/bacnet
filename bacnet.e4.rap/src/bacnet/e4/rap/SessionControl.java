@@ -55,12 +55,10 @@ public class SessionControl {
         databaseInit.setProjectName(BasicApplication.projectName);
         if (BasicApplication.projectName.equals(Database.BACNET)) {
             databaseInit.setInitView(InitViewBacnet.ID);
-            System.out.println(InitViewBacnet.ID);
+            System.out.println("Set InitView:" + InitViewBacnet.ID);
             databaseInit.setLogo("icons/ToolBar/LogoBacnet.png");
-
         } else {
-            System.out.println("Test" + BasicApplication.projectName);
-
+            System.out.println("Test " + BasicApplication.projectName);
             databaseInit.initDatabase(shell);
         }
 
@@ -68,6 +66,7 @@ public class SessionControl {
          * Remove persistence in the PartStack Need to be done because -clearPersistedState doesn't work
          * anymore
          */
+        System.out.println("Init MParts");
         for (MPart part : partService.getParts()) {
             // System.out.println("Part: "+part.getElementId());
             if (!part.getElementId().equals(Database.getInstance().getInitView())
@@ -76,13 +75,13 @@ public class SessionControl {
             }
         }
 
+        System.out.println("Init Navigation management");
         partService.showPart(databaseInit.getInitView(), PartState.ACTIVATE);
-        // partService.showPart(databaseInit.getInitView(), PartState.ACTIVATE);
         NavigationManagement.parseInitURL(partService);
         NavigationManagement.registerServiceAndNavigationTab(partService);
         SessionControl.registerClosingUIsession(partService, modelService, shell);
-        // SessionControl.setExitConfirmation();
-
+        //SessionControl.setExitConfirmation();
+        
         // run tests
         TestPart.runTests();
 

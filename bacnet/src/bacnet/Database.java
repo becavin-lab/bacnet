@@ -324,6 +324,7 @@ public class Database {
                 setCoExprNetworkArrayPath(getNETWORK_PATH() + "CoExpressionNetworks.txt");
                 setBioConditionsArrayPath(getDATA_PATH() + "BioConditions.txt");
                 setExperimentComparisonTablePath(getDATA_PATH() + "Comparisons.txt");
+                System.out.println("Every file path has been setup");
                 return true;
             }else {
             	System.err.println("Cannot read .ini file in : " + initFileName);
@@ -426,8 +427,8 @@ public class Database {
         	 * If database.ini was read pursue with database loading
         	 */
 	        database.setAllBioConditions(BioCondition.getAllBioConditionNames());
-	        database.setAllBioConditions(BioCondition.getAllBioConditionNames());
 	        database.setGenomeList(Genome.getAvailableGenomes());
+	        System.out.println("finished");
 	        if (database.getProjectName().equals(Database.LISTERIOMICS_PROJECT)
 	                || database.getProjectName().equals(Database.UIBCLISTERIOMICS_PROJECT)) {
 	            database.setGeneListEGDe(

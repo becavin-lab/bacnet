@@ -15,6 +15,7 @@ import org.eclipse.rap.rwt.application.Application.OperationMode;
 import org.eclipse.rap.rwt.application.ApplicationConfiguration;
 import org.eclipse.rap.rwt.application.ExceptionHandler;
 import org.eclipse.rap.rwt.client.WebClient;
+import org.eclipse.rap.rwt.internal.service.ServletLog;
 import org.eclipse.rap.rwt.service.ResourceLoader;
 import org.eclipse.swt.widgets.Shell;
 import bacnet.Database;
@@ -37,8 +38,8 @@ public class BasicApplication implements ApplicationConfiguration {
 
     public void configure(Application application) {
 
-        // System.out.println(System.getProperty(CONFIGURATION_PARAM));
-
+        //System.out.println("prop: " + System.getProperty("enableFrameworkControls")+" - "+System.getProperty(CONFIGURATION_PARAM));
+    	
         Map<String, String> properties = new HashMap<String, String>();
         String title = "";
         String googleId = "1";
@@ -98,9 +99,10 @@ public class BasicApplication implements ApplicationConfiguration {
                 System.out.println("Error : " + exception.getMessage());
             }
         });
+        System.out.println("Application started");
     }
 
-    private static ResourceLoader createResourceLoader(final String resourceName) {
+    public static ResourceLoader createResourceLoader(final String resourceName) {
         return new ResourceLoader() {
             @Override
             public InputStream getResourceAsStream(String resourceName) throws IOException {
