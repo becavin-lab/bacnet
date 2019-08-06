@@ -3,6 +3,8 @@ package bacnet.sequenceTools;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.CellLabelProvider;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
@@ -20,6 +22,7 @@ import bacnet.datamodel.phylogeny.Phylogenomic;
 import bacnet.datamodel.sequence.Gene;
 import bacnet.datamodel.sequence.Genome;
 import bacnet.datamodel.sequence.Sequence;
+import bacnet.datamodel.sequenceNCBI.GenomeNCBI;
 import bacnet.raprcp.SaveFileUtils;
 import bacnet.reader.TabDelimitedTableReader;
 import bacnet.swt.ResourceManager;
@@ -98,26 +101,42 @@ public class GeneViewHomologTools {
      * @param genomes
      * @return
      */
-    public static String getPhyloFigure(Gene sequence, ArrayList<String> genomes) {
-        /*
+    public static String getPhyloFigure(Gene sequence, ArrayList<String> genomeNames) {
+    	/*
          * Replace strain name by homolog info
          */
         String textSVG = FileUtils
                 .readText(Phylogenomic.getPhylogenomicFigurePath());
-        String textNew = "fill=\"#276FA0\" font-family=\"'ArialMT'\" font-size=\"13\">";
-        String textOld = "font-family=\"'ArialMT'\" font-size=\"13\">";
+        HashMap<String, String> genomeToAttribute = Phylogenomic.parsePhylogenomicFigure(textSVG);
 
-        for (String genome : Genome.getAvailableGenomes()) {
-            String newText = "";
-            if (sequence.getConservationHashMap().containsKey(genome)) {
-                String gene = sequence.getConservationHashMap().get(genome).split(";")[0];
-                String similarity = sequence.getConservationHashMap().get(genome).split(";")[1];
-                newText = similarity + "  --  " + gene;
-            }
-            if (genomes.contains(genome)) {
-                textSVG = textSVG.replaceAll(textOld + genome.trim() + "</text>", textNew + newText.trim() + "</text>");
-            } else {
-                textSVG = textSVG.replaceAll(genome.trim() + "</text>", newText.trim() + "</text>");
+        /*
+		 * Highlight selected strain
+		 */
+		for (String genome : genomeNames) {
+			String lineAttribute = genomeToAttribute.get(genome);
+			int indexOfLine = textSVG.indexOf(lineAttribute);
+			int indexOfstyle = lineAttribute.indexOf("style");
+			int lengthStyle = "style=\"".length();
+			int posToADD = indexOfLine + indexOfstyle + lengthStyle;
+			String textToADD = "fill:purple; ";
+			textSVG = textSVG.substring(0, posToADD) + textToADD + textSVG.substring(posToADD, textSVG.length());
+        }
+		
+		/*
+		 * Modify strain name by their similarity value
+		 */
+        for (String genome : genomeToAttribute.keySet()) {
+        	if (sequence.getConservationHashMap().containsKey(GenomeNCBI.unprocessGenomeName(genome))) {
+        		String accession = sequence.getConservationHashMap().get(GenomeNCBI.unprocessGenomeName(genome));
+        		String gene = accession.split(";")[0];
+                String similarity = accession.split(";")[1];
+        		int indexOfGenome = textSVG.indexOf(">"+genome+"<");
+        		String textToADD = similarity + "  --  " + gene;
+                textSVG = textSVG.substring(0, indexOfGenome+1) + textToADD + textSVG.substring(indexOfGenome + genome.length() + 1, textSVG.length());
+            }else {
+            	int indexOfGenome = textSVG.indexOf(">"+genome+"<");
+        		String textToADD = "";
+                textSVG = textSVG.substring(0, indexOfGenome+1) + textToADD + textSVG.substring(indexOfGenome + genome.length() + 1, textSVG.length());
             }
         }
         return textSVG;
@@ -223,7 +242,7 @@ public class GeneViewHomologTools {
             public void update(ViewerCell cell) {
                 String[] bioCond = (String[]) cell.getElement();
                 Image image = null;
-                if (selectedGenomes.contains(bioCond[3])) {
+                if (selectedGenomes.contains(GenomeNCBI.processGenomeName(bioCond[3]))) {
                     image = ResourceManager.getPluginImage("bacnet", "icons/checked.bmp");
                 } else {
                     image = ResourceManager.getPluginImage("bacnet", "icons/unchecked.bmp");

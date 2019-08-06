@@ -57,6 +57,7 @@ import bacnet.datamodel.sequence.Genome.OpenGenomesThread;
 import bacnet.datamodel.sequence.Operon;
 import bacnet.datamodel.sequence.Sequence;
 import bacnet.datamodel.sequence.Srna;
+import bacnet.datamodel.sequenceNCBI.GenomeNCBI;
 import bacnet.expressionAtlas.HeatMapTranscriptomicsView;
 import bacnet.genomeBrowser.GenomeTranscriptomeView;
 import bacnet.genomeBrowser.core.Track;
@@ -621,7 +622,7 @@ public class GeneView implements SelectionListener, MouseListener {
 
         Label lblClickOneTime = new Label(composite_16, SWT.NONE);
         lblClickOneTime.setText(
-                "Click for highlighting gene on the phylogenomic tree. Double click to acces gene information");
+                "Select strain to highlight. Double click to acces gene information");
         lblClickOneTime.setFont(SWTResourceManager.getBodyFont(10, SWT.NORMAL));
 
         tableHomologViewer = new TableViewer(composite_16, SWT.BORDER | SWT.FULL_SELECTION | SWT.MULTI);
@@ -637,6 +638,7 @@ public class GeneView implements SelectionListener, MouseListener {
             public void selectionChanged(SelectionChangedEvent event) {
                 for (int i : tableHomolog.getSelectionIndices()) {
                     String selectedGenome = tableHomolog.getItem(i).getText(columnNames.indexOf("Name") + 1);
+                    selectedGenome = GenomeNCBI.processGenomeName(selectedGenome);
                     if (selectedGenomes.contains(selectedGenome)) {
                         if (tableHomolog.getSelectionIndices().length == 1) {
                             selectedGenomes.remove(selectedGenome);
@@ -1513,6 +1515,7 @@ public class GeneView implements SelectionListener, MouseListener {
                 File tempSVGFile = File.createTempFile("Highlightstrain", "Phylogeny.svg");
                 FileUtils.saveText(textSVG, tempSVGFile.getAbsolutePath());
                 File tempPNGFile = File.createTempFile("Highlightstrain", "Phylogeny.png");
+                System.out.println("Convert Phylogeny.svg to Phylogeny.png\nHave you set ImageMagick PATH in ImageMagick.getConvertPATH()\nYours is set to: "+ImageMagick.getConvertPATH());
                 CMD.runProcess(ImageMagick.getConvertPATH() + " " + tempSVGFile.getAbsolutePath() + " " + tempPNGFile);
                 SaveFileUtils.saveFile("Listeria_Phylogenomic_Tree_" + sequence.getName() + ".png", tempPNGFile,
                         "PNG image file", partService, shell);
@@ -1545,7 +1548,7 @@ public class GeneView implements SelectionListener, MouseListener {
             selectedGenomes.clear();
             tableHomolog.selectAll();
             for (int i : tableHomolog.getSelectionIndices()) {
-                String selectedGenome = tableHomolog.getItem(i).getText(columnNames.indexOf("Name") + 1);
+                String selectedGenome = GenomeNCBI.processGenomeName(tableHomolog.getItem(i).getText(columnNames.indexOf("Name") + 1));
                 if (!selectedGenomes.contains(selectedGenome)) {
                     selectedGenomes.add(selectedGenome);
                 }

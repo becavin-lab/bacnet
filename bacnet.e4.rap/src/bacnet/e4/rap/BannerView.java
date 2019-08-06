@@ -103,6 +103,7 @@ public class BannerView implements SelectionListener {
                 // event.gc.setForeground(BasicColor.BANNER_BACKGROUND);
                 // event.gc.fillGradientRectangle(0, event.height/2, event.width,
                 // event.height/2, true);
+                //System.out.println("Logo:"+Database.getInstance().getLogo());
                 Image image = ResourceManager.getPluginImage("bacnet", Database.getInstance().getLogo());
                 if(image!=null) {
 	                int xPosition = event.x + 20;

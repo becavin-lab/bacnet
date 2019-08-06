@@ -45,7 +45,7 @@ public class TestPart {
         /*
          * Run Scripts here!
          */
-    	System.out.println("Genome: "+Genome.getAvailableGenomes());
+    	//System.out.println("Genome: "+Genome.getAvailableGenomes());
         // BioCondition bioCond = BioCondition.getBioCondition("EGDe_TIS_Final");
 
         // ExpressionMatrix matrix =

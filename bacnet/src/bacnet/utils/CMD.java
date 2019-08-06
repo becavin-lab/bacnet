@@ -37,7 +37,7 @@ public class CMD {
      */
     public static String runProcess(String execProcess) throws IOException {
         String os = System.getProperty("os.arch");
-        System.out.println("Arch: "+os);
+        System.out.println("Run Process: "+execProcess);
         if (!os.equals("amd64"))
             execProcess = execProcess.replaceAll("\"", "");
         runProcess(execProcess.split(" "));
