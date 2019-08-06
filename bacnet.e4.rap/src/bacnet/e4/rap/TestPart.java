@@ -5,6 +5,8 @@ import javax.annotation.PreDestroy;
 import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.swt.widgets.Composite;
 
+import bacnet.datamodel.sequence.Genome;
+
 public class TestPart {
 
     public TestPart() {}
@@ -43,6 +45,7 @@ public class TestPart {
         /*
          * Run Scripts here!
          */
+    	//System.out.println("Genome: "+Genome.getAvailableGenomes());
         // BioCondition bioCond = BioCondition.getBioCondition("EGDe_TIS_Final");
 
         // ExpressionMatrix matrix =
@@ -128,7 +131,7 @@ public class TestPart {
         // }
         // TabDelimitedTableReader.saveList(finalList,"/Users/cbecavin/Documents/RNABindingProtein/NC_003210.cog");
         ////
-        // System.out.println("Finished init script!");
+        System.out.println("Finished init scripts!");
 
     }
 

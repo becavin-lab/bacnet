@@ -4,5 +4,4 @@
    <service>
       <provide interface="org.eclipse.rap.rwt.application.ApplicationConfiguration"/>
    </service>
-   
 </scr:component>

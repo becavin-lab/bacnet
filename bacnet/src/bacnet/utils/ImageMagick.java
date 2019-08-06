@@ -21,9 +21,11 @@ public class ImageMagick {
         System.out.println("OS: " + os);
         @SuppressWarnings("unused")
         String path = "/Data" + File.separator;
-        if (os.equals("Mac OS X"))
+        if (os.equals("Mac OS X")) {
             return "/usr/local/Cellar/imagemagick/6.9.7-3/bin/convert";
-        else {
+    	} else if(os.equals("Windows 10")){ 
+        	return "C:\\Program Files\\ImageMagick-7.0.8-Q16\\magick convert";
+        } else {
             return "/usr/bin/convert";
         }
 

@@ -23,7 +23,7 @@ public class BacnetE4PointFactory extends E4EntryPointFactory {
                 BrowserNavigation service = RWT.getClient().getService(BrowserNavigation.class);
                 BrowserNavigationListener listener = new BrowserNavigationListener() {
                     /**
-                     * 
+                     *  
                      */
                     private static final long serialVersionUID = -5943067476931651570L;
 

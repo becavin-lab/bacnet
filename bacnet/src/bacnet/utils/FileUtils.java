@@ -327,8 +327,11 @@ public class FileUtils {
      */
     public static String cleanStringFromHex(String query) {
         int index = query.indexOf('%');
+        /*
+         * Be careful it is not working when %25 is present !!!
+         */
         while (index != -1) {
-            String hex = query.substring(index + 1, index + 3);
+        	String hex = query.substring(index + 1, index + 3);
             // System.out.println(hex);
             query = query.replaceAll("%" + hex, convertHexToString(hex));
             index = query.indexOf('%');

@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.TreeMap;
+
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -45,6 +48,7 @@ import bacnet.Database;
 import bacnet.datamodel.phylogeny.Phylogenomic;
 import bacnet.datamodel.sequence.Gene;
 import bacnet.datamodel.sequence.Genome;
+import bacnet.datamodel.sequenceNCBI.GenomeNCBI;
 import bacnet.raprcp.NavigationManagement;
 import bacnet.raprcp.SaveFileUtils;
 import bacnet.reader.TabDelimitedTableReader;
@@ -201,7 +205,7 @@ public class GenomicsView implements SelectionListener {
         btnSaveTxt.addSelectionListener(this);
         Label lblClickOneTime = new Label(compositeSummary, SWT.NONE);
         lblClickOneTime.setText(
-                "Click for highlighting strain on the phylogenomic tree. Double click to acces strain information");
+                "Select strain to highlight. Double click to acces strain information");
         lblClickOneTime.setFont(SWTResourceManager.getBodyFont(10, SWT.NORMAL));
         {
             tableGenomeViewer = new TableViewer(compositeSummary, SWT.BORDER | SWT.MULTI);
@@ -214,8 +218,10 @@ public class GenomicsView implements SelectionListener {
 
                 @Override
                 public void selectionChanged(SelectionChangedEvent event) {
+                	
                     for (int i : tableGenome.getSelectionIndices()) {
                         String selectedGenome = tableGenome.getItem(i).getText(columnNames.indexOf("Name") + 1);
+                        selectedGenome = GenomeNCBI.processGenomeName(selectedGenome);
                         if (selectedGenomes.contains(selectedGenome)) {
                             if (tableGenome.getSelectionIndices().length == 1) {
                                 selectedGenomes.remove(selectedGenome);
@@ -410,7 +416,7 @@ public class GenomicsView implements SelectionListener {
             public void update(ViewerCell cell) {
                 String[] bioCond = (String[]) cell.getElement();
                 Image image = null;
-                if (selectedGenomes.contains(bioCond[1])) {
+                if (selectedGenomes.contains(GenomeNCBI.processGenomeName(bioCond[1]))) {
                     image = ResourceManager.getPluginImage("bacnet", "icons/checked.bmp");
                 } else {
                     image = ResourceManager.getPluginImage("bacnet", "icons/unchecked.bmp");
@@ -502,7 +508,7 @@ public class GenomicsView implements SelectionListener {
             File tempSVGFile = File.createTempFile("Highlightstrain", "Phylogeny.svg");
             FileUtils.saveText(textSVG, tempSVGFile.getAbsolutePath());
             String html = SaveFileUtils.modifyHTMLwithFile(tempSVGFile.getAbsolutePath(), HTMLUtils.SVG);
-            System.out.println(html);
+            //System.out.println(textSVG);
             browserPhylo.setText(html);
             browserPhylo.redraw();
             tempSVGFile.deleteOnExit();
@@ -514,6 +520,7 @@ public class GenomicsView implements SelectionListener {
     }
 
     /**
+	 * DO NOT WORK WITH NEW VERSION OF FIGTREE
      * Return the text file of the SVG figure, modified with highlighted strains
      * 
      * @param genomeNames
@@ -524,13 +531,22 @@ public class GenomicsView implements SelectionListener {
          * Replace strain name by homolog info
          */
         String textSVG = FileUtils
-                .readText(Phylogenomic.PHYLO_GENOME_SVG);
-        String textNew = "fill=\"#276FA0\" font-family=\"'ArialMT'\" font-size=\"13\">";
-        String textOld = "font-family=\"'ArialMT'\" font-size=\"13\">";
-        for (String genomeName : genomeNames) {
-            textSVG = textSVG.replaceAll(textOld + genomeName + "<", textNew + genomeName + "<");
+                .readText(Phylogenomic.getPhylogenomicFigurePath());
+        HashMap<String, String> genomeToAttribute = Phylogenomic.parsePhylogenomicFigure(textSVG);
+
+		/*
+		 * Highlight selected strain
+		 */
+		for (String genome : genomeNames) {
+			String lineAttribute = genomeToAttribute.get(genome);
+			int indexOfLine = textSVG.indexOf(lineAttribute);
+			int indexOfstyle = lineAttribute.indexOf("style");
+			int lengthStyle = "style=\"".length();
+			int posToADD = indexOfLine + indexOfstyle + lengthStyle;
+			String textToADD = "fill:purple; ";
+			textSVG = textSVG.substring(0, posToADD) + textToADD + textSVG.substring(posToADD, textSVG.length());
         }
-        return textSVG;
+		return textSVG;
     }
 
     /**
@@ -559,6 +575,8 @@ public class GenomicsView implements SelectionListener {
                 File tempSVGFile = File.createTempFile("Highlightstrain", "Phylogeny.svg");
                 FileUtils.saveText(textSVG, tempSVGFile.getAbsolutePath());
                 File tempPNGFile = File.createTempFile("Highlightstrain", "Phylogeny.png");
+                System.out.println("Convert Phylogeny.svg to Phylogeny.png\nHave you set ImageMagick PATH in ImageMagick.getConvertPATH()\nYours is set to: "+ImageMagick.getConvertPATH());
+                
                 CMD.runProcess(ImageMagick.getConvertPATH() + " " + tempSVGFile.getAbsolutePath() + " " + tempPNGFile);
                 SaveFileUtils.saveFile("Listeria_Phylogenomic_Tree.png", tempPNGFile, "PNG image file", partService,
                         shell);
@@ -578,7 +596,7 @@ public class GenomicsView implements SelectionListener {
             int k = 1;
             for (int i = 1; i < bioCondsArray.length; i++) {
                 String genomeName = bioCondsArray[i][1];
-                if (selectedGenomes.contains(genomeName)) {
+                if (selectedGenomes.contains(GenomeNCBI.processGenomeName(genomeName))) {
                     arrayToSave = ArrayUtils.addRow(arrayToSave, ArrayUtils.getRow(bioCondsArray, i), k);
                     k++;
                 }
@@ -591,7 +609,7 @@ public class GenomicsView implements SelectionListener {
             selectedGenomes = new ArrayList<>();
             tableGenome.selectAll();
             for (int i : tableGenome.getSelectionIndices()) {
-                String selectedGenome = tableGenome.getItem(i).getText(columnNames.indexOf("Name") + 1);
+                String selectedGenome = GenomeNCBI.processGenomeName(tableGenome.getItem(i).getText(columnNames.indexOf("Name") + 1));
                 if (!selectedGenomes.contains(selectedGenome)) {
                     selectedGenomes.add(selectedGenome);
                 }

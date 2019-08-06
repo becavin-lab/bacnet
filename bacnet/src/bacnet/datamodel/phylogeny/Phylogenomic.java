@@ -1,6 +1,9 @@
 package bacnet.datamodel.phylogeny;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.TreeMap;
 
 import bacnet.Database;
 import bacnet.datamodel.sequenceNCBI.GenomeNCBI;
@@ -20,10 +23,34 @@ public class Phylogenomic {
     		return PHYLO_GENOME_SVG;
     	}else {
     		return null;
-    	}
-    	
-    	
+    	}	
     }
+    
+    /**
+     * Parse phylogenomic SVG figure and extract attributes corresponding to each genome
+     * @param svgTxt
+     * @return HashMap<String, String> genomeToAttribute
+     */
+    public static HashMap<String, String> parsePhylogenomicFigure(String svgTxt) {
+    	HashMap<String, String> genomeToAttribute = new HashMap<String, String>();
+    	String yo = svgTxt.replaceAll("\n","");
+    	String[] phyloTree = svgTxt.replaceAll("\n","").split("<text");
+		
+    	/*
+    	 * Go through all text line
+    	 */
+    	for(String line : phyloTree) {
+    		if(line.contains("/text") && line.contains(Database.getInstance().getSpecies())) {
+    			line = line.split("/text")[0].trim();
+    			String attribute = line.substring(0,line.indexOf(">")).trim();
+				String genomeTemp = line.substring(line.indexOf(">")+1, line.indexOf("<")).trim();
+				genomeToAttribute.put(genomeTemp, attribute);
+    		}
+		}
+    	return genomeToAttribute;
+    }
+    
+    
     
     /**
      * Init static variables after Database change

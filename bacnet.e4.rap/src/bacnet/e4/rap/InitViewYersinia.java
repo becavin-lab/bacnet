@@ -492,8 +492,8 @@ public class InitViewYersinia implements SelectionListener {
     @Focus
     public void onFocus() {
         if (!focused) {
-            System.out.println("focus");
             pushState();
+            System.out.println("InitView Focused");
             focused = true;
         } else {
             focused = false;

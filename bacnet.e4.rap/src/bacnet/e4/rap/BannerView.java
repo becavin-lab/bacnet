@@ -75,10 +75,10 @@ public class BannerView implements SelectionListener {
      */
     @PostConstruct
     public void createPartControl(Composite parent) {
-
+    	
         SessionControl.initBacnetApp(partService, modelService, shell);
         String appName = Database.getInstance().getProjectName();
-
+        
         Composite container = new Composite(parent, SWT.BORDER);
         container.setLayout(new GridLayout(3, false));
 
@@ -103,10 +103,15 @@ public class BannerView implements SelectionListener {
                 // event.gc.setForeground(BasicColor.BANNER_BACKGROUND);
                 // event.gc.fillGradientRectangle(0, event.height/2, event.width,
                 // event.height/2, true);
+                //System.out.println("Logo:"+Database.getInstance().getLogo());
                 Image image = ResourceManager.getPluginImage("bacnet", Database.getInstance().getLogo());
-                int xPosition = event.x + 20;
-                int yPosition = event.y + event.height / 2 - image.getBounds().height / 2;
-                event.gc.drawImage(image, xPosition, yPosition);
+                if(image!=null) {
+	                int xPosition = event.x + 20;
+	                int yPosition = event.y + event.height / 2 - image.getBounds().height / 2;
+	                event.gc.drawImage(image, xPosition, yPosition);
+                }else {
+                	System.out.println("Cannot read logo : "+Database.getInstance().getLogo()+" check value in database.ini");
+                }
             }
         });
 
