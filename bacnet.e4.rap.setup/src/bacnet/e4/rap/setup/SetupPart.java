@@ -29,6 +29,8 @@ import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 import bacnet.Database;
 import bacnet.datamodel.dataset.OmicsData;
+import bacnet.datamodel.dataset.OmicsData.TypeData;
+import bacnet.datamodel.expdesign.BioCondition;
 import bacnet.datamodel.phylogeny.Phylogenomic;
 import bacnet.datamodel.sequence.Genome;
 import bacnet.datamodel.sequenceNCBI.GenomeConversion;
@@ -485,9 +487,8 @@ public class SetupPart implements SelectionListener {
         console.setLayoutData(gd_console);
 
         initProjectInfo();
-
-        DatabaseCreation.preProcessing();
-
+        
+        runTest();
     }
 
     /*
@@ -515,6 +516,16 @@ public class SetupPart implements SelectionListener {
         initProteomics();
         initNetwork();
         updateConsole();
+    }
+    
+    /**
+     * Run Test functions before running database creation
+     * Put every functions you want to test HERE
+     */
+    private void runTest() {
+    	//BioCondition bioCond1 = BioCondition.getBioCondition("22Enterocolitica_Y11_IHS2000_2015_cDNA");
+    	
+    	   	
     }
 
     private void initBioconditions() {

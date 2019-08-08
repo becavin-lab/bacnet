@@ -65,7 +65,8 @@ public class TranscriptomesCreation {
         /*
          * Optional NGSCreation.normalizeCountFiles(exp);
          */
-
+        NGSCreation.normalizeCountFiles(exp);
+        
         /*
          * Tiling and GeneExpressionData
          */
@@ -85,7 +86,7 @@ public class TranscriptomesCreation {
          * ExpressionMatrix
          */
         logs += "Convert all ExpressionMatrix\n";
-        //convertExpressionMatrix(exp);
+        convertExpressionMatrix(exp);
 
         return logs;
 
