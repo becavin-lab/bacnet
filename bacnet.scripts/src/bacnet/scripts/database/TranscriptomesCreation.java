@@ -14,6 +14,7 @@ import bacnet.datamodel.dataset.OmicsData.TypeData;
 import bacnet.datamodel.dataset.Tiling;
 import bacnet.datamodel.expdesign.BioCondition;
 import bacnet.datamodel.expdesign.Experiment;
+import bacnet.datamodel.sequence.Gene;
 import bacnet.datamodel.sequence.Genome;
 import bacnet.reader.TabDelimitedTableReader;
 import bacnet.scripts.arrayexpress.ArrayExpress;
@@ -166,7 +167,7 @@ public class TranscriptomesCreation {
          */
         logs += "Apply variance normalization to all datasets (Long calculation)\n";
         if (varianceNorm) {
-            // varianceNormalization(exp);
+            //varianceNormalization(exp);
         }
 
         /*
@@ -420,6 +421,12 @@ public class TranscriptomesCreation {
                     for (String gene : genome.getAllElementNames()) {
                         if (matrix.getRowNames().containsKey(gene)) {
                             logFCMatrix.setValue(matrix.getValue(gene, ColNames.LOGFC + ""), gene, comp);
+                        } else { // test if we can find the gene by its gene name
+                        	Gene geneTemp = genome.getGeneFromName(gene);
+                        	String geneName = geneTemp.getGeneName();
+                        	if (matrix.getRowNames().containsKey(geneName)) {
+                            	logFCMatrix.setValue(matrix.getValue(geneName, ColNames.LOGFC + ""), gene, comp);
+                        	}
                         }
                     }
                 } else if (bioCond.getTypeDataContained().contains(TypeData.RNASeq)) {
@@ -431,6 +438,12 @@ public class TranscriptomesCreation {
                         for (String gene : genome.getAllElementNames()) {
                             if (matrix.getRowNames().containsKey(gene)) {
                                 logFCMatrix.setValue(matrix.getValue(gene, ColNames.LOGFC + ""), gene, comp);
+                            } else { // test if we can find the gene by its gene name
+                            	Gene geneTemp = genome.getGeneFromName(gene);
+                            	String geneName = geneTemp.getGeneName();
+                            	if (matrix.getRowNames().containsKey(geneName)) {
+	                            	logFCMatrix.setValue(matrix.getValue(geneName, ColNames.LOGFC + ""), gene, comp);
+                            	}
                             }
                         }
                     }

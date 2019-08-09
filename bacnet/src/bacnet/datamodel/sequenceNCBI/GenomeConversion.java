@@ -127,6 +127,7 @@ public class GenomeConversion {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+        
         Database.getInstance().getGenomes().put(genomeName, genome);
         return genome;
     }
@@ -425,6 +426,25 @@ public class GenomeConversion {
             @Override
             public boolean accept(File dir, String name) {
                 if (name.endsWith(".fna"))
+                    return true;
+                return false;
+            }
+        });
+        for (int i = 0; i < files.length; i++) {
+            String accession = FileUtils.removePath(files[i].getAbsolutePath());
+            System.out.println(accession);
+            try {
+                FileUtils.copy(files[i].getAbsolutePath(), path + File.separator + accession);
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+        
+        files = file.listFiles(new FilenameFilter() {
+        @Override
+            public boolean accept(File dir, String name) {
+                if (name.endsWith(".faa"))
                     return true;
                 return false;
             }

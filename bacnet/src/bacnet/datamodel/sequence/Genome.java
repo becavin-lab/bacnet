@@ -209,11 +209,11 @@ public class Genome {
             return chromo.getGenes().get(name);
         }
         if (chromo.getGenesAlternative().containsKey(name)) {
-            System.out.println("return: " + name);
+            //System.out.println("return: " + name);
             return chromo.getGenesAlternative().get(name);
         }
         if (chromo.getNcRNAs().containsKey(name)) {
-            System.out.println("return: " + name);
+            //System.out.println("return: " + name);
             return chromo.getNcRNAs().get(name);
         }
         return null;

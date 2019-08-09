@@ -470,18 +470,21 @@ public class TranscriptomicsView implements SelectionListener {
                 public String getText(Object element) {
                     String[] bioCond = (String[]) element;
                     String colName = columnNames.get(k);
-                    // System.out.println(k + " b "+bioCond.length);
-                    String text = bioCond[k];
-                    if (colName.equals("Type")) {
-                        return "";
-                    } else if (colName.equals("Reference")) {
-                        return RWTUtils.setPubMedLink(text);
-                    } else if (colName.equals("ArrayExpressId")) {
-                        return RWTUtils.setArrayExpressExpLink(text);
-                    } else if (colName.equals("ArrayExpressTechnoID")) {
-                        return RWTUtils.setArrayExpressArrayLink(text);
+                    if(k!=bioCond.length) {
+                    	String text = bioCond[k];
+	                    if (colName.equals("Type")) {
+	                        return "";
+	                    } else if (colName.equals("Reference")) {
+	                        return RWTUtils.setPubMedLink(text);
+	                    } else if (colName.equals("ArrayExpressId")) {
+	                        return RWTUtils.setArrayExpressExpLink(text);
+	                    } else if (colName.equals("ArrayExpressTechnoID")) {
+	                        return RWTUtils.setArrayExpressArrayLink(text);
+	                    } else {
+	                        return text;
+	                    }
                     } else {
-                        return text;
+                    	return "";
                     }
                 }
 
