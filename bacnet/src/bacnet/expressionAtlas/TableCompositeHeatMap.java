@@ -586,7 +586,7 @@ public class TableCompositeHeatMap extends Composite implements SelectionListene
                 TreeSet<String> includeElements = new TreeSet<>();
                 TreeSet<String> excludeElements = new TreeSet<>();
                 SelectGenomeElementDialog dialog =
-                        new SelectGenomeElementDialog(shell, partService, includeElements, excludeElements, genomeName);
+                        new SelectGenomeElementDialog(shell, partService, includeElements, excludeElements, Genome.loadGenome(genomeName));
                 if (dialog.open() == 0) {
                     excludeRow.clear();
                     for (String row : excludeElements) {

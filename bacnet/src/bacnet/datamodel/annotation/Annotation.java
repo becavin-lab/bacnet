@@ -289,8 +289,8 @@ public class Annotation implements Serializable {
      * @return
      */
     public static String[][] getAnnotationGenes(Genome genome, ArrayList<String> elements) {
-        String[] headers = {"Locus tag", "Strand", "Chr", "Begin", "End", "Length (bp)", "Length (aa)", "Gene Name",
-                "Start codon", "Operon", "Product", "Description", "RAST info.", "COG"};
+        String[] headers = {"Locus tag", "Strand", "Chr", "Begin", "End", "Length (bp)", "Gene Name",
+                "Product", "Description", "Start codon", "Operon"};
         String[][] annotation = new String[elements.size() + 1][headers.length];
         annotation[0] = headers;
         for (int i = 0; i < elements.size(); i++) {
@@ -303,17 +303,13 @@ public class Annotation implements Serializable {
             annotation[index][previousSize + 2] = gene.getBegin() + "";
             annotation[index][previousSize + 3] = gene.getEnd() + "";
             annotation[index][previousSize + 4] = gene.getLength() + "";
-            annotation[index][previousSize + 5] = gene.getLengthAA() + "";
-            annotation[index][previousSize + 6] = gene.getGeneName();
-            annotation[index][previousSize + 7] = gene.getSequence().substring(0, 3);
-            annotation[index][previousSize + 8] = gene.getOperon();
-            annotation[index][previousSize + 9] =
+            annotation[index][previousSize + 5] = gene.getGeneName();
+            annotation[index][previousSize + 6] =
                     gene.getProduct().replace('\n', ' ').replace('\t', ' ').replace(';', ' ').replaceAll("	", "");
-            annotation[index][previousSize + 10] =
+            annotation[index][previousSize + 7] =
                     gene.getComment().replace('\n', ' ').replace('\t', ' ').replace(';', ' ').replaceAll("	", "");
-            annotation[index][previousSize + 11] =
-                    gene.getRASTinfo().replace('\n', ' ').replace('\t', ' ').replace(';', ' ').replaceAll("	", "");
-            annotation[index][previousSize + 12] = gene.getCog();
+            annotation[index][previousSize + 8] = gene.getSequence().substring(0, 3);
+            annotation[index][previousSize + 9] = gene.getOperon();
         }
         return annotation;
     }

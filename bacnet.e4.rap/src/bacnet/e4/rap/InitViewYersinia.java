@@ -1,6 +1,9 @@
 package bacnet.e4.rap;
 
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
@@ -154,7 +157,7 @@ public class InitViewYersinia implements SelectionListener {
 
         btnBHI37 = new Button(composite_1, SWT.BORDER);
         btnBHI37.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
-        btnBHI37.setText("Exponential phase");
+        btnBHI37.setText("Y. entero. Y11 omics");
         btnBHI37.setFont(SWTResourceManager.getTitleFont(SWT.NORMAL));
         btnBHI37.addSelectionListener(this);
 
@@ -166,9 +169,7 @@ public class InitViewYersinia implements SelectionListener {
         lblExpressionAtlas.setFont(SWTResourceManager.getBodyFont(SWT.NORMAL));
         lblExpressionAtlas.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
         lblExpressionAtlas.setData(RWT.MARKUP_ENABLED, Boolean.TRUE);
-        lblExpressionAtlas.setText("Browse RNA-seq, tiling arrays, transcription start sites (TSS), "
-                + "transcription termination sites (TermSeq),"
-                + " and Ribosome Profiling (RiboSeq) of <i>Yersinia monocytogenes</i> EGD-e strain grown in BHI at 37°C to exponential phase");
+        lblExpressionAtlas.setText("Browse RNA-seq of <i>Yersinia enterocolitica subsp palearctica Y11</i>");
 
         Composite composite_9 = new Composite(composite_11, SWT.NONE);
         GridData gd_composite_9 = new GridData(SWT.LEFT, SWT.CENTER, false, true, 1, 1);
@@ -180,7 +181,7 @@ public class InitViewYersinia implements SelectionListener {
         btnIntracellular = new Button(composite_9, SWT.BORDER);
         btnIntracellular.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
         btnIntracellular.addSelectionListener(this);
-        btnIntracellular.setText("Intracellular growth");
+        btnIntracellular.setText("Y. pseudotu. YPIII omics");
         btnIntracellular.setFont(SWTResourceManager.getTitleFont(SWT.NORMAL));
 
         Label lblIntracellularMouse = new Label(composite_9, SWT.WRAP);
@@ -191,8 +192,7 @@ public class InitViewYersinia implements SelectionListener {
         lblIntracellularMouse.setFont(SWTResourceManager.getBodyFont(SWT.NORMAL));
         lblIntracellularMouse.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
         lblIntracellularMouse.setData(RWT.MARKUP_ENABLED, Boolean.TRUE);
-        lblIntracellularMouse.setText("Browse RNA-seq, and transcription start sites (TSS) "
-                + "of <i>Yersinia monocytogenes</i> EGD-e strain grown in mouse macrophages");
+        lblIntracellularMouse.setText("Browse gene expression array of <i>Yersinia pseudotuberculosis YPIII</i>");
         gd_composite_11.widthHint = 850;
         gd_lblExpressionAtlas.widthHint = 200;
         gd_composite_9.heightHint = 180;
@@ -486,7 +486,7 @@ public class InitViewYersinia implements SelectionListener {
         pushState();
 
         System.out.println("InitView loaded");
-
+ 
     }
 
     @Focus
@@ -515,14 +515,11 @@ public class InitViewYersinia implements SelectionListener {
         } else if (e.getSource() == btnSubmitData) {
             partService.showPart(SubmitDataView.ID, PartState.ACTIVATE);
             NavigationManagement.pushStateView(SubmitDataView.ID);
-        }
-        // else if (e.getSource() == btnBHI37) {
-        // // AnnotationView.openAnnotationView(partService, Genome.loadEgdeGenome());
-        // GenomeTranscriptomeView.displayBHI37View(partService);
-        // } else if (e.getSource() == btnIntracellular) {
-        // GenomeTranscriptomeView.displayIntracellularMacrophagesView(partService);
-        // }
-        else if (e.getSource() == btnProteomics) {
+        }else if (e.getSource() == btnBHI37) {
+        	GenomeTranscriptomeView.displayYersiY11(partService);
+        } else if (e.getSource() == btnIntracellular) {
+        	GenomeTranscriptomeView.displayYersiYPIII(partService);
+        }else if (e.getSource() == btnProteomics) {
             partService.showPart(ProteomicsView.ID, PartState.ACTIVATE);
             NavigationManagement.pushStateView(ProteomicsView.ID);
         } else if (e.getSource() == btnGenomics) {

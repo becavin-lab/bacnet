@@ -30,16 +30,6 @@ public class TranscriptomicsDataFilterComposite extends org.eclipse.swt.widgets.
     private Button btnTss;
     private Button btnRiboSeq;
     private Button btnTermSeq;
-    private Button btnBhiBroth;
-    private Button btnMinimalMediaBroth;
-    private Button btnTrypticSoyBroth;
-    private Button btnCacoCells;
-    private Button btnTurkeyDeliMeat;
-    private Button btnPorcineBileCells;
-    private Button btnMouseSpleenCells;
-    private Button btnMouseMacrophagesCells;
-    private Button btnMouseIntestineCells;
-    private Button btnHumanBloodCells;
     private Button btnLagPhase;
     private Button btnExponential;
     private Button btnStationnary;
@@ -47,7 +37,6 @@ public class TranscriptomicsDataFilterComposite extends org.eclipse.swt.widgets.
     private Button btnDeath;
     private Button btnRegrowth;
     private Button btnTiling;
-    private Button btnLbBroth;
     private Combo comboMutant;
     private Button btnChooseOneMutant;
     private Button btnNoneMutant;
@@ -155,72 +144,7 @@ public class TranscriptomicsDataFilterComposite extends org.eclipse.swt.widgets.
         btnUnpublished.setText("Unpublished (0)");
         btnUnpublished.addSelectionListener(this);
 
-        new Label(this, SWT.NONE);
-
-        Label lblIntracellularGrowth = new Label(this, SWT.NONE);
-        lblIntracellularGrowth.setFont(SWTResourceManager.getBodyFont(SWT.BOLD));
-        lblIntracellularGrowth.setText("Intracellular growth");
-
-        Composite composite_1_1 = new Composite(this, SWT.NONE);
-        composite_1_1.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
-        composite_1_1.setLayout(new GridLayout(1, false));
-
-        btnCacoCells = new Button(composite_1_1, SWT.CHECK);
-        btnCacoCells.setText("Caco-2 cells");
-
-        btnHumanBloodCells = new Button(composite_1_1, SWT.CHECK);
-        btnHumanBloodCells.setText("Human blood cells");
-
-        btnMouseIntestineCells = new Button(composite_1_1, SWT.CHECK);
-        btnMouseIntestineCells.setText("Mouse intestine cells");
-
-        btnMouseMacrophagesCells = new Button(composite_1_1, SWT.CHECK);
-        btnMouseMacrophagesCells.setText("Mouse macrophages cells");
-
-        btnMouseSpleenCells = new Button(composite_1_1, SWT.CHECK);
-        btnMouseSpleenCells.setText("Mouse spleen cells");
-
-        btnPorcineBileCells = new Button(composite_1_1, SWT.CHECK);
-        btnPorcineBileCells.setText("Porcine Bile cells");
-
-        btnTurkeyDeliMeat = new Button(composite_1_1, SWT.CHECK);
-        btnTurkeyDeliMeat.setText("Turkey Deli Meat cells");
-
-        btnCacoCells.addSelectionListener(this);
-        btnHumanBloodCells.addSelectionListener(this);
-        btnMouseIntestineCells.addSelectionListener(this);
-        btnMouseMacrophagesCells.addSelectionListener(this);
-        btnMouseSpleenCells.addSelectionListener(this);
-        btnPorcineBileCells.addSelectionListener(this);
-        btnTurkeyDeliMeat.addSelectionListener(this);
-
-        new Label(this, SWT.NONE);
-
-        Label lblBroth = new Label(this, SWT.NONE);
-        lblBroth.setFont(SWTResourceManager.getBodyFont(SWT.BOLD));
-        lblBroth.setText("Broth");
-
-        Composite composite = new Composite(this, SWT.NONE);
-        composite.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
-        composite.setLayout(new GridLayout(1, false));
-
-        btnBhiBroth = new Button(composite, SWT.CHECK);
-        btnBhiBroth.setText("BHI Broth");
-
-        btnTrypticSoyBroth = new Button(composite, SWT.CHECK);
-        btnTrypticSoyBroth.setText("Tryptic Soy Broth");
-
-        btnLbBroth = new Button(composite, SWT.CHECK);
-        btnLbBroth.setText("LB Broth");
-
-        btnMinimalMediaBroth = new Button(composite, SWT.CHECK);
-        btnMinimalMediaBroth.setText("Minimal Media Broth");
-
-        btnBhiBroth.addSelectionListener(this);
-        btnTrypticSoyBroth.addSelectionListener(this);
-        btnLbBroth.addSelectionListener(this);
-        btnMinimalMediaBroth.addSelectionListener(this);
-
+        
         new Label(this, SWT.NONE);
 
         Label lblMutantgenesAnd = new Label(this, SWT.NONE);
@@ -296,18 +220,6 @@ public class TranscriptomicsDataFilterComposite extends org.eclipse.swt.widgets.
             getComboGenome().add(genome);
         }
         getComboGenome().select(0);
-
-        allButtons.add(btnCacoCells);
-        allButtons.add(btnHumanBloodCells);
-        allButtons.add(btnMouseIntestineCells);
-        allButtons.add(btnMouseMacrophagesCells);
-        allButtons.add(btnMouseSpleenCells);
-        allButtons.add(btnPorcineBileCells);
-        allButtons.add(btnBhiBroth);
-        allButtons.add(btnTurkeyDeliMeat);
-        allButtons.add(btnTrypticSoyBroth);
-        allButtons.add(btnLbBroth);
-        allButtons.add(btnMinimalMediaBroth);
         allButtons.add(btnLagPhase);
         allButtons.add(btnExponential);
         allButtons.add(btnStationnary);
@@ -337,17 +249,6 @@ public class TranscriptomicsDataFilterComposite extends org.eclipse.swt.widgets.
         int termseq = 0;
         int riboseq = 0;
         int rnaSeq = 0;
-        int caco2 = 0;
-        int humanblood = 0;
-        int mouseintest = 0;
-        int mousemacro = 0;
-        int mousespleen = 0;
-        int porcine = 0;
-        int turkey = 0;
-        int bhi = 0;
-        int trypticsoy = 0;
-        int lb = 0;
-        int mm = 0;
         int lag = 0;
         int expo = 0;
         int stat = 0;
@@ -359,6 +260,8 @@ public class TranscriptomicsDataFilterComposite extends org.eclipse.swt.widgets.
             // Data type
             String dataType = row[ArrayUtils.findColumn(view.getBioCondsArray(), "Type")];
             if (dataType.contains("GeneExpression"))
+                geneExpr++;
+            if (dataType.contains("GeneExpr"))
                 geneExpr++;
             if (dataType.contains("Tiling"))
                 tiling++;
@@ -375,34 +278,6 @@ public class TranscriptomicsDataFilterComposite extends org.eclipse.swt.widgets.
             String reference = row[ArrayUtils.findColumn(view.getBioCondsArray(), "Reference")];
             if (reference.contains("Unpublished"))
                 unpublished++;
-
-            // intracellular type
-            String intracellular = row[ArrayUtils.findColumn(view.getBioCondsArray(), "Media")];
-            if (intracellular.contains("Caco-2 cells"))
-                caco2++;
-            if (intracellular.contains("Human blood cells"))
-                humanblood++;
-            if (intracellular.contains("Mouse intestine cells"))
-                mouseintest++;
-            if (intracellular.contains("Mouse macrophages cells"))
-                mousemacro++;
-            if (intracellular.contains("Mouse spleen cells"))
-                mousespleen++;
-            if (intracellular.contains("Porcine Bile cells"))
-                porcine++;
-            if (intracellular.contains("Turkey Deli Meat cells"))
-                turkey++;
-
-            // Broth type
-            String broth = row[ArrayUtils.findColumn(view.getBioCondsArray(), "Media")];
-            if (broth.contains("BHI"))
-                bhi++;
-            if (broth.contains("Tryptic Soy Broth"))
-                trypticsoy++;
-            if (broth.contains("LB Broth"))
-                lb++;
-            if (broth.contains("Minimal Media Broth"))
-                mm++;
 
             // growth type
             String growth = row[ArrayUtils.findColumn(view.getBioCondsArray(), "Growth")];
@@ -435,17 +310,6 @@ public class TranscriptomicsDataFilterComposite extends org.eclipse.swt.widgets.
         } else {
             btnUnpublished.setText("Unpublished (" + unpublished + ")");
         }
-        btnCacoCells.setText("Caco-2 cells (" + caco2 + ")");
-        btnHumanBloodCells.setText("Human blood cells (" + humanblood + ")");
-        btnMouseIntestineCells.setText("Mouse intestine cells (" + mouseintest + ")");
-        btnMouseMacrophagesCells.setText("Mouse macrophages cells (" + mousemacro + ")");
-        btnMouseSpleenCells.setText("Mouse spleen cells (" + mousespleen + ")");
-        btnPorcineBileCells.setText("Porcine Bile cells (" + porcine + ")");
-        btnTurkeyDeliMeat.setText("Turkey Deli Meat cells (" + turkey + ")");
-        btnBhiBroth.setText("BHI Broth (" + bhi + ")");
-        btnTrypticSoyBroth.setText("Tryptic Soy Broth (" + trypticsoy + ")");
-        btnLbBroth.setText("LB Broth (" + lb + ")");
-        btnMinimalMediaBroth.setText("Minimal Media Broth (" + mm + ")");
         btnLagPhase.setText("Lag (" + lag + ")");
         btnExponential.setText("Exponential (" + expo + ")");
         btnStationnary.setText("Stationnary (" + stat + ")");
@@ -506,6 +370,10 @@ public class TranscriptomicsDataFilterComposite extends org.eclipse.swt.widgets.
             for (String[] row : view.getBioCondsToDisplay()) {
                 String info = row[ArrayUtils.findColumn(view.getBioCondsArray(), "Type")];
                 if (info.contains("GeneExpression")) {
+                    if (!bioCondsToDisplayTemp.contains(row))
+                        bioCondsToDisplayTemp.add(row);
+                }
+                if (info.contains("GeneExpr")) {
                     if (!bioCondsToDisplayTemp.contains(row))
                         bioCondsToDisplayTemp.add(row);
                 }
@@ -595,76 +463,7 @@ public class TranscriptomicsDataFilterComposite extends org.eclipse.swt.widgets.
          */
         bioCondsToDisplayTemp = new ArrayList<>();
         selected = false;
-        if (btnCacoCells.getSelection()) {
-            selected = true;
-            for (String[] row : view.getBioCondsToDisplay()) {
-                String info = row[ArrayUtils.findColumn(view.getBioCondsArray(), "Media")];
-                if (info.contains("Caco-2 cells")) {
-                    if (!bioCondsToDisplayTemp.contains(row))
-                        bioCondsToDisplayTemp.add(row);
-                }
-            }
-        }
-        if (btnHumanBloodCells.getSelection()) {
-            selected = true;
-            for (String[] row : view.getBioCondsToDisplay()) {
-                String info = row[ArrayUtils.findColumn(view.getBioCondsArray(), "Media")];
-                if (info.contains("Human blood cells")) {
-                    if (!bioCondsToDisplayTemp.contains(row))
-                        bioCondsToDisplayTemp.add(row);
-                }
-            }
-        }
-        if (btnMouseIntestineCells.getSelection()) {
-            selected = true;
-            for (String[] row : view.getBioCondsToDisplay()) {
-                String info = row[ArrayUtils.findColumn(view.getBioCondsArray(), "Media")];
-                if (info.contains("Mouse intestine cells")) {
-                    if (!bioCondsToDisplayTemp.contains(row))
-                        bioCondsToDisplayTemp.add(row);
-                }
-            }
-        }
-        if (btnMouseMacrophagesCells.getSelection()) {
-            selected = true;
-            for (String[] row : view.getBioCondsToDisplay()) {
-                String info = row[ArrayUtils.findColumn(view.getBioCondsArray(), "Media")];
-                if (info.contains("Mouse macrophages cells")) {
-                    if (!bioCondsToDisplayTemp.contains(row))
-                        bioCondsToDisplayTemp.add(row);
-                }
-            }
-        }
-        if (btnMouseSpleenCells.getSelection()) {
-            selected = true;
-            for (String[] row : view.getBioCondsToDisplay()) {
-                String info = row[ArrayUtils.findColumn(view.getBioCondsArray(), "Media")];
-                if (info.contains("Mouse spleen cells")) {
-                    if (!bioCondsToDisplayTemp.contains(row))
-                        bioCondsToDisplayTemp.add(row);
-                }
-            }
-        }
-        if (btnPorcineBileCells.getSelection()) {
-            selected = true;
-            for (String[] row : view.getBioCondsToDisplay()) {
-                String info = row[ArrayUtils.findColumn(view.getBioCondsArray(), "Media")];
-                if (info.contains("Porcine Bile cells")) {
-                    if (!bioCondsToDisplayTemp.contains(row))
-                        bioCondsToDisplayTemp.add(row);
-                }
-            }
-        }
-        if (btnTurkeyDeliMeat.getSelection()) {
-            selected = true;
-            for (String[] row : view.getBioCondsToDisplay()) {
-                String info = row[ArrayUtils.findColumn(view.getBioCondsArray(), "Media")];
-                if (info.contains("Turkey Deli Meat cells")) {
-                    if (!bioCondsToDisplayTemp.contains(row))
-                        bioCondsToDisplayTemp.add(row);
-                }
-            }
-        }
+        
         if (selected) {
             view.getBioCondsToDisplay().clear();
             for (String[] row : bioCondsToDisplayTemp)
@@ -676,46 +475,7 @@ public class TranscriptomicsDataFilterComposite extends org.eclipse.swt.widgets.
          */
         bioCondsToDisplayTemp = new ArrayList<>();
         selected = false;
-        if (btnBhiBroth.getSelection()) {
-            selected = true;
-            for (String[] row : view.getBioCondsToDisplay()) {
-                String info = row[ArrayUtils.findColumn(view.getBioCondsArray(), "Media")];
-                if (info.contains("BHI")) {
-                    if (!bioCondsToDisplayTemp.contains(row))
-                        bioCondsToDisplayTemp.add(row);
-                }
-            }
-        }
-        if (btnTrypticSoyBroth.getSelection()) {
-            selected = true;
-            for (String[] row : view.getBioCondsToDisplay()) {
-                String info = row[ArrayUtils.findColumn(view.getBioCondsArray(), "Media")];
-                if (info.contains("Tryptic Soy Broth")) {
-                    if (!bioCondsToDisplayTemp.contains(row))
-                        bioCondsToDisplayTemp.add(row);
-                }
-            }
-        }
-        if (btnLbBroth.getSelection()) {
-            selected = true;
-            for (String[] row : view.getBioCondsToDisplay()) {
-                String info = row[ArrayUtils.findColumn(view.getBioCondsArray(), "Media")];
-                if (info.contains("LB Broth")) {
-                    if (!bioCondsToDisplayTemp.contains(row))
-                        bioCondsToDisplayTemp.add(row);
-                }
-            }
-        }
-        if (btnMinimalMediaBroth.getSelection()) {
-            selected = true;
-            for (String[] row : view.getBioCondsToDisplay()) {
-                String info = row[ArrayUtils.findColumn(view.getBioCondsArray(), "Media")];
-                if (info.contains("Minimal Media Broth")) {
-                    if (!bioCondsToDisplayTemp.contains(row))
-                        bioCondsToDisplayTemp.add(row);
-                }
-            }
-        }
+        
         if (selected) {
             view.getBioCondsToDisplay().clear();
             for (String[] row : bioCondsToDisplayTemp)
@@ -881,6 +641,7 @@ public class TranscriptomicsDataFilterComposite extends org.eclipse.swt.widgets.
         pushState();
         view.updateBioConditionTable();
         updateInfo();
+        redraw();
     }
 
     public Combo getComboMutant() {
@@ -901,7 +662,9 @@ public class TranscriptomicsDataFilterComposite extends org.eclipse.swt.widgets.
 
     @Override
     public void widgetSelected(SelectionEvent e) {
-        updateView();
+    	updateView();  	
+    	
+    	
     }
 
     @Override
@@ -950,85 +713,7 @@ public class TranscriptomicsDataFilterComposite extends org.eclipse.swt.widgets.
         this.btnTermSeq = btnTermSeq;
     }
 
-    public Button getBtnBhiBroth() {
-        return btnBhiBroth;
-    }
-
-    public void setBtnBhiBroth(Button btnBhiBroth) {
-        this.btnBhiBroth = btnBhiBroth;
-    }
-
-    public Button getBtnMinimalMediaBroth() {
-        return btnMinimalMediaBroth;
-    }
-
-    public void setBtnMinimalMediaBroth(Button btnMinimalMediaBroth) {
-        this.btnMinimalMediaBroth = btnMinimalMediaBroth;
-    }
-
-    public Button getBtnTrypticSoyBroth() {
-        return btnTrypticSoyBroth;
-    }
-
-    public void setBtnTrypticSoyBroth(Button btnTrypticSoyBroth) {
-        this.btnTrypticSoyBroth = btnTrypticSoyBroth;
-    }
-
-    public Button getBtnCacoCells() {
-        return btnCacoCells;
-    }
-
-    public void setBtnCacoCells(Button btnCacoCells) {
-        this.btnCacoCells = btnCacoCells;
-    }
-
-    public Button getBtnTurkeyDeliMeat() {
-        return btnTurkeyDeliMeat;
-    }
-
-    public void setBtnTurkeyDeliMeat(Button btnTurkeyDeliMeat) {
-        this.btnTurkeyDeliMeat = btnTurkeyDeliMeat;
-    }
-
-    public Button getBtnPorcineBileCells() {
-        return btnPorcineBileCells;
-    }
-
-    public void setBtnPorcineBileCells(Button btnPorcineBileCells) {
-        this.btnPorcineBileCells = btnPorcineBileCells;
-    }
-
-    public Button getBtnMouseSpleenCells() {
-        return btnMouseSpleenCells;
-    }
-
-    public void setBtnMouseSpleenCells(Button btnMouseSpleenCells) {
-        this.btnMouseSpleenCells = btnMouseSpleenCells;
-    }
-
-    public Button getBtnMouseMacrophagesCells() {
-        return btnMouseMacrophagesCells;
-    }
-
-    public void setBtnMouseMacrophagesCells(Button btnMouseMacrophagesCells) {
-        this.btnMouseMacrophagesCells = btnMouseMacrophagesCells;
-    }
-
-    public Button getBtnMouseIntestineCells() {
-        return btnMouseIntestineCells;
-    }
-
-    public void setBtnMouseIntestineCells(Button btnMouseIntestineCells) {
-        this.btnMouseIntestineCells = btnMouseIntestineCells;
-    }
-
-    public Button getBtnHumanBloodCells() {
-        return btnHumanBloodCells;
-    }
-
-    public void setBtnHumanBloodCells(Button btnHumanBloodCells) {
-        this.btnHumanBloodCells = btnHumanBloodCells;
-    }
+    
 
     public Button getBtnLagPhase() {
         return btnLagPhase;
@@ -1084,14 +769,6 @@ public class TranscriptomicsDataFilterComposite extends org.eclipse.swt.widgets.
 
     public void setBtnTiling(Button btnTiling) {
         this.btnTiling = btnTiling;
-    }
-
-    public Button getBtnLbBroth() {
-        return btnLbBroth;
-    }
-
-    public void setBtnLbBroth(Button btnLbBroth) {
-        this.btnLbBroth = btnLbBroth;
     }
 
     public Button getBtnChooseOneMutant() {

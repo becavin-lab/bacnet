@@ -484,6 +484,32 @@ public class GenomeTranscriptomeView {
     }
 
     /**
+     * Display omics data for Yersinia pseudotuberculosis YPIII
+     * @param partService
+     */
+    public static void displayYersiYPIII(EPartService partService) {
+        ArrayList<String> bioConditions = new ArrayList<>();
+        bioConditions.add("37PseudotuberculosisStat_Agilent_IP32953");
+        bioConditions.add("26PseudotuberculosisStat_Agilent_IP32953");
+        bioConditions.add("25PseudotuberculosisExponentialAerobic_YPIII_Agilent_2014_YPIII");
+        bioConditions.add("26PseudotuberculosisExp_Agilent_IP32953");
+        displayGenomeElementAndBioConditions(partService, "Yersinia pseudotuberculosis YPIII", bioConditions, "");
+    }
+    
+    /**
+     * Display omics data for Yersinia enterocolitica subsp palearctica Y11
+     * @param partService
+     */
+    public static void displayYersiY11(EPartService partService) {
+        ArrayList<String> bioConditions = new ArrayList<>();
+        bioConditions.add("22Enterocolitica_Y11_IHS2000_2015_cDNA");
+        bioConditions.add("37Enterocolitica_Y11_IHS2000_2015_cDNA");
+        bioConditions.add("22Enterocolitica_Y11_IHS2000_2014_cDNA");
+        bioConditions.add("37Enterocolitica_Y11_IHS2000_2014_cDNA");
+        displayGenomeElementAndBioConditions(partService, "Yersinia enterocolitica subsp palearctica Y11", bioConditions, "");
+    }
+    
+    /**
      * Load the minimal number of data for Amastigote versus Promastigote view
      */
     public static void displayLeishmaniaAmavsPro(EPartService partService) {

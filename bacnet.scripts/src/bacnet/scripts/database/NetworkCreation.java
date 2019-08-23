@@ -16,6 +16,7 @@ import bacnet.datamodel.expdesign.BioCondition;
 import bacnet.datamodel.expdesign.Experiment;
 import bacnet.datamodel.proteomics.NTerm;
 import bacnet.datamodel.sequence.Genome;
+import bacnet.datamodel.sequenceNCBI.GenomeNCBI;
 import bacnet.reader.TabDelimitedTableReader;
 import bacnet.scripts.core.Expression;
 import bacnet.utils.ArrayUtils;
@@ -49,12 +50,12 @@ public class NetworkCreation {
                     }
                 }
             }
-            System.out.println(list.size());
             if (list.size() > 4) {
+            	System.out.println("Found: "+list.size()+" datasets for network construction for "+ genomeName);
                 String path_list = Database.getLISTDATA_COEXPR_NETWORK_TRANSCRIPTOMES_PATH() + "_" + genomeName + ".txt";
                 logs += "Load dataset list : " + path_list +"\n";
                 TabDelimitedTableReader.saveTreeSet(list,path_list);
-                String row = genomeName + "\t" + path_list.replaceFirst(Database.getNETWORK_PATH(), "") + "\t" + list.size();
+                String row = genomeName + "\t" + FileUtils.removeExtensionAndPath(path_list) + "\t" + list.size();
                 coExprTable.add(row);
             } else {
                 logs += "CoExpression Network will not be created for " + genomeName + " because not enough transcriptomes datasets are available\n";
@@ -82,20 +83,22 @@ public class NetworkCreation {
             expression.save(Database.getCOEXPR_NETWORK_TRANSCRIPTOMES_PATH() + "_Temp_" + genomeName);
             expression.saveTab(Database.getCOEXPR_NETWORK_TRANSCRIPTOMES_PATH() + "_Temp_" + genomeName + ".excel",
                     "GenomeElements");
-    
+//    
             /*
              * Compute Network
              */
-            System.out.println("yep");
+            System.out.println("Compute network");
             logs += "Compute network for " + genomeName;
             Network.getCoExpressionGlobalMatrix(Genome.loadGenome(genomeName));
             
             /*
              * Create circular genome figure for CircosPlot 
              */
-            // createCircularGenomeView();
+            //@Deprecated
+            //GenomesCreation.createCircularGenomeView(Genome.loadGenome(genomeName), genomeName);
         }
         return logs;
     }
 
 }
+

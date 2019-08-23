@@ -613,10 +613,6 @@ public class Database {
         return getDATA_PATH() + "Network" + File.separator;
     }
 
-    public static String getBLAST_PATH() {
-        return getDATA_PATH() + "Blast" + File.separator;
-    }
-
     public static String getGENOMES_PATH() {
         return getDATA_PATH() + "Genomes" + File.separator;
     }

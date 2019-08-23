@@ -162,7 +162,7 @@ public class Network extends OmicsData {
 
     /**
      * Calculate all pearson correlation and put it in a list of network interactions<br>
-     * Remove correlation <0.85<br>
+     * Remove correlation CORR_CUTOFF<br>
      * Nedd to load: Database.COEXPR_NETWORK_TRANSCRIPTOMES_PATH+"_Temp_"+genome.getSpecies()
      * 
      * @param genome

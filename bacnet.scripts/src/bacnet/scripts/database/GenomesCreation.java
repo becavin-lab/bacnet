@@ -18,8 +18,10 @@ import bacnet.datamodel.sequenceNCBI.GenomeNCBI;
 import bacnet.datamodel.sequenceNCBI.GenomeNCBITools;
 import bacnet.reader.FastaFileReader;
 import bacnet.reader.TabDelimitedTableReader;
+import bacnet.scripts.genome.CircularGenomeJPanel;
 import bacnet.utils.ArrayUtils;
 import bacnet.utils.FileUtils;
+import ca.ualberta.stothard.cgview.CgviewIO;
 
 /**
  * List of tools available for genome creation
@@ -345,4 +347,23 @@ public class GenomesCreation {
         TabDelimitedTableReader.saveList(cisRegs,
                 Database.getANNOTATIONDATA_PATH() + Database.getInstance().getDatabaseFeatures().get("EGDE_CISREG"));
     }
+    
+    /**
+     * Display a circular genome view from a specific genome
+     * @param genome
+     * @param title
+     */
+    @Deprecated
+    public static void createCircularGenomeView(Genome genome, String title) {
+    	 // create Circular genome images
+         CircularGenomeJPanel panel = new CircularGenomeJPanel(1000, 1000, genome, title);
+         try {
+        	 CgviewIO.writeToPNGFile(panel.getCgview(), "c:/circularView.png");
+         } catch (IOException e) {
+         // TODO Auto-generated catch block
+         e.printStackTrace();
+         }
+    }
+    
+    
 }

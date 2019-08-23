@@ -541,7 +541,7 @@ public class Genome {
     }
 
     /**
-     * Return defaut genome for a databse>br> For the moment -> first element of getAvailableGenomes()
+     * Return defaut genome for a databse <br> For the moment -> first element of getAvailableGenomes()
      * 
      * @return
      */

@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.TreeSet;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -373,7 +374,11 @@ public class HomologCreation {
 		/*
 		 * Combine everything together per genomes
 		 */
+		TreeSet<String> proteinNotFound = new TreeSet<String>();
+		TreeSet<String> noHomologs = new TreeSet<String>();
+		TreeSet<String> lowHomologs = new TreeSet<String>();
 		for (int i = 0; i < size_list; i++) {
+		//for (int i = 0; i < 4; i++) {
 			/*
 			 * Combine all homologs in on table
 			 */
@@ -382,7 +387,7 @@ public class HomologCreation {
 			String message = "Summary table creation for: " + genome_pivot;
 			logs += message + "\n";
 			ArrayList<String> list_genomes_toBlast = extractList(listGenomes, 0, size_list);
-			// createSummaryTable(genome_pivot, list_genomes_toBlast);
+			createSummaryTable(genome_pivot, list_genomes_toBlast, proteinNotFound, noHomologs,lowHomologs);
 
 			/*
 			 * Add the phylogeny to the gene object
@@ -393,6 +398,9 @@ public class HomologCreation {
 			System.out.println("Phylogeny added to gene of: " + genome_pivot);
 
 		}
+		TabDelimitedTableReader.saveTreeSet(proteinNotFound, GenomeNCBI.PATH_HOMOLOGS + "ProteinNotfFound.homologs.txt");
+		TabDelimitedTableReader.saveTreeSet(noHomologs, GenomeNCBI.PATH_HOMOLOGS + "NoHomologsFound.homologs.txt");
+		TabDelimitedTableReader.saveTreeSet(lowHomologs, GenomeNCBI.PATH_HOMOLOGS + "LowHomologsFound.homologs.txt");
 		System.out.println("Finish extraction of Blast results");
 		return logs;
 	}
@@ -530,13 +538,16 @@ public class HomologCreation {
 	 * 
 	 * @param genome_pivot
 	 */
-	private static void createSummaryTable(String genome_pivot, ArrayList<String> listGenomes) {
+	private static void createSummaryTable(String genome_pivot, ArrayList<String> listGenomes, TreeSet<String> proteinNotFound, TreeSet<String> noHomologs, TreeSet<String> lowHomologs) {
 		ArrayList<String> proteinList = getProteinList(genome_pivot);
 		String[][] newTable = new String[proteinList.size() + 1][2];
 		newTable[0][0] = "Gene_Id";
 		newTable[0][1] = "Homologs";
 		Genome genomePivotLoad = Genome.loadGenome(GenomeNCBI.unprocessGenomeName(genome_pivot));
 		for (String genome_target : listGenomes) {
+		//for(int w=0; w < 4 ;w++) {
+			//String genome_target = listGenomes.get(w);
+		
 			if (!genome_target.equals(genome_pivot)) {
 				Genome genomeTargetLoad = Genome.loadGenome(GenomeNCBI.unprocessGenomeName(genome_target));
 				String pathBlast = PATH_BLASTDB + File.separator + "AddedColumnIdentity" + File.separator + genome_pivot
@@ -545,32 +556,46 @@ public class HomologCreation {
 				HashMap<String, Integer> indexRowHashmap = indexRows(homologyTable);
 				int i = 1;
 				for (String proteinName : proteinList) {
-					// Replace proteinId by locustag
+					// add gene_name to protein id
 					Gene gene = genomePivotLoad.getGeneFromProteinId(proteinName);
 					if (gene == null) {
+						String rowNotFound = genome_pivot + "\t" + proteinName;
+						proteinNotFound.add(rowNotFound);
 						System.err.println("Cannot find gene for :" + proteinName);
 					}
 					newTable[i][0] = gene.getName();
 					if (indexRowHashmap.containsKey(proteinName)) {
 						int indexRow = indexRowHashmap.get(proteinName);
 						float identity = Float.parseFloat(homologyTable[indexRow][homologyTable[indexRow].length - 1]);
+						String proteinTargetName = homologyTable[indexRow][1].replaceAll("ref|", "")
+								.replace('|', ' ').trim();
 						if (identity > IDENTITY_CUTOFF) {
-							String proteinTargetName = homologyTable[indexRow][1].replaceAll("ref|", "")
-									.replace('|', ' ').trim();
 							// Replace proteinId by locustag
 							Gene geneTarget = genomeTargetLoad.getGeneFromProteinId(proteinTargetName);
 							if (geneTarget == null) {
 								System.err.println("Cannot find gene for : " + proteinTargetName);
+								String rowNotFound = genome_target + "\t" + proteinTargetName;
+								proteinNotFound.add(rowNotFound);
 							}
 
 							newTable[i][1] += GenomeNCBI.unprocessGenomeName(genome_target) + ";" + geneTarget.getName()
-									+ ";" + homologyTable[indexRow][homologyTable[indexRow].length - 1] + ";;";
+									+ ";"+proteinTargetName+ ";" + homologyTable[indexRow][homologyTable[indexRow].length - 1] + ";;";
+						}else {
+							String rowNotFound = genome_pivot + "\t" + proteinName + "\t" + genome_target + "\t" + proteinTargetName +"\t"+ identity;
+							lowHomologs.add(rowNotFound);
 						}
+					} else {
+						String rowNotFound = genome_pivot + "\t" + proteinName + "\t" + genome_target;
+						noHomologs.add(rowNotFound);
 					}
 					i++;
 				}
 			}
-			System.out.println("Data for: " + genome_target + " added.");
+			System.out.println("Data for: " + genome_target + " created.");
+			TabDelimitedTableReader.saveTreeSet(proteinNotFound, GenomeNCBI.PATH_HOMOLOGS + "ProteinNotfFound.homologs.txt");
+			TabDelimitedTableReader.saveTreeSet(noHomologs, GenomeNCBI.PATH_HOMOLOGS + "NoHomologsFound.homologs.txt");	
+			TabDelimitedTableReader.saveTreeSet(lowHomologs, GenomeNCBI.PATH_HOMOLOGS + "LowHomologsFound.homologs.txt");
+			
 		}
 		for (int i = 1; i < newTable.length; i++) {
 			try {
@@ -592,6 +617,7 @@ public class HomologCreation {
 	private static HashMap<String, Integer> indexRows(String[][] table) {
 		HashMap<String, Integer> hashMap = new HashMap<>();
 		for (int i = 0; i < table.length; i++) {
+			//System.out.println("Put "+table[i][0] + " "+ i);
 			hashMap.put(table[i][0], i);
 		}
 		return hashMap;
@@ -644,7 +670,7 @@ public class HomologCreation {
 					String[] conservations = allInfo.split(";;");
 					for (String conservation : conservations) {
 						String genomeTarget = conservation.split(";")[0];
-						String geneTarget = conservation.split(";")[1] + ";" + conservation.split(";")[2];
+						String geneTarget = conservation.split(";")[1] + ";" + conservation.split(";")[2] + ";" + conservation.split(";")[3];
 						// System.out.println(genomeTarget + " -----" + geneTarget);
 						conservationHashMap.put(genomeTarget, geneTarget);
 					}

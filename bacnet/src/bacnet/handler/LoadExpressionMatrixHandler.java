@@ -11,6 +11,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Shell;
 import bacnet.datamodel.dataset.ExpressionMatrix;
+import bacnet.datamodel.sequence.Genome;
 import bacnet.table.TableSWTView;
 import bacnet.utils.FileUtils;
 
@@ -35,7 +36,7 @@ public class LoadExpressionMatrixHandler {
                     System.out.println(path + fileName);
                     ExpressionMatrix matrix = ExpressionMatrix.loadTab(path + fileName, true);
                     System.out.println("Loaded:" + path + fileName);
-                    TableSWTView.displayMatrix(matrix, fileName, partService);
+                    TableSWTView.displayMatrix(matrix, Genome.loadEgdeGenome(), fileName, partService);
 
                 }
             }
