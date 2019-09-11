@@ -53,17 +53,19 @@ public class GeneViewHomologTools {
         /*
          * Add two columnsd for homologs information
          */
-        bioCondsArray = new String[bioCondsTemp.length][bioCondsTemp[0].length + 2];
+        bioCondsArray = new String[bioCondsTemp.length][bioCondsTemp[0].length + 3];
         for (int i = 0; i < bioCondsArray.length; i++) {
             bioCondsArray[i][0] = bioCondsTemp[i][0];
             bioCondsArray[i][1] = "";
             bioCondsArray[i][2] = "";
+            bioCondsArray[i][3] = "";
             for (int j = 1; j < bioCondsTemp[0].length; j++) {
-                bioCondsArray[i][j + 2] = bioCondsTemp[i][j];
+                bioCondsArray[i][j + 3] = bioCondsTemp[i][j];
             }
         }
-        bioCondsArray[0][1] = "Homolog";
-        bioCondsArray[0][2] = "Similarity";
+        bioCondsArray[0][1] = "Homolog Gene";
+        bioCondsArray[0][2] = "Homolog Protein";
+        bioCondsArray[0][3] = "Similarity";
 
         /*
          * Add homologs information
@@ -74,6 +76,7 @@ public class GeneViewHomologTools {
             if (sequence.getConservationHashMap().containsKey(genome)) {
                 bioCondsArray[i][1] = sequence.getConservationHashMap().get(genome).split(";")[0];
                 bioCondsArray[i][2] = sequence.getConservationHashMap().get(genome).split(";")[1];
+                bioCondsArray[i][3] = String.format("%.2f", Float.parseFloat(sequence.getConservationHashMap().get(genome).split(";")[2]));
             }
         }
 
@@ -129,7 +132,7 @@ public class GeneViewHomologTools {
         	if (sequence.getConservationHashMap().containsKey(GenomeNCBI.unprocessGenomeName(genome))) {
         		String accession = sequence.getConservationHashMap().get(GenomeNCBI.unprocessGenomeName(genome));
         		String gene = accession.split(";")[0];
-                String similarity = accession.split(";")[1];
+                String similarity = String.format("%.2f", Float.parseFloat(accession.split(";")[2]));
         		int indexOfGenome = textSVG.indexOf(">"+genome+"<");
         		String textToADD = similarity + "  --  " + gene;
                 textSVG = textSVG.substring(0, indexOfGenome+1) + textToADD + textSVG.substring(indexOfGenome + genome.length() + 1, textSVG.length());
@@ -242,7 +245,7 @@ public class GeneViewHomologTools {
             public void update(ViewerCell cell) {
                 String[] bioCond = (String[]) cell.getElement();
                 Image image = null;
-                if (selectedGenomes.contains(GenomeNCBI.processGenomeName(bioCond[3]))) {
+                if (selectedGenomes.contains(GenomeNCBI.processGenomeName(bioCond[4]))) {
                     image = ResourceManager.getPluginImage("bacnet", "icons/checked.bmp");
                 } else {
                     image = ResourceManager.getPluginImage("bacnet", "icons/unchecked.bmp");

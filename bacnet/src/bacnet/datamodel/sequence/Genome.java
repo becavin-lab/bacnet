@@ -22,6 +22,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import bacnet.Database;
 import bacnet.datamodel.annotation.Annotation;
+import bacnet.datamodel.sequenceNCBI.GenomeNCBI;
 import bacnet.reader.FastaFileReader;
 import bacnet.reader.GFFNCBIReader;
 import bacnet.reader.NCBIFastaHeaderParser;
@@ -110,7 +111,7 @@ public class Genome {
      */
     public Genome(String genomePath, boolean annotation) throws Exception {
         this.species = FileUtils.removeExtensionAndPath(genomePath);
-        System.out.println("g : " + genomePath);
+        //System.out.println("g : " + genomePath);
         File file = new File(genomePath);
         System.out.println("Load " + this.species);
         File[] files = file.listFiles(new FilenameFilter() {
@@ -234,6 +235,31 @@ public class Genome {
         	}
         }
         return null;
+    }
+    
+    /**
+     * Save proteinIdnToLocusTag in a file for HomologCreation
+     * @return
+     */
+    public void saveProteinIdToLocusTag() {
+    	ArrayList<String> hashMapProteinId = new ArrayList<String>();
+        for (String accessionChromo : this.getChromosomes().keySet()) {
+        	Chromosome chromo = this.getChromosomes().get(accessionChromo);
+        	for(String proteinId : chromo.getProteinIDTolocusTag().keySet()) {
+        		hashMapProteinId.add(proteinId+"\t"+chromo.getProteinIDTolocusTag().get(proteinId));
+        	}
+        }
+        TabDelimitedTableReader.saveList(hashMapProteinId, GenomeNCBI.PATH_PROTEINID + this.getSpecies() + "_protein.txt");
+    }
+    
+    /**
+     * Load proteinIdnToLocusTag hashmap for HomologCreation
+     * @param genomeName
+     * @return
+     */
+    public static HashMap<String,String> loadGeneFromProteinId(String genomeName) {
+    	HashMap<String,String> proteinIDTolocusTag = TabDelimitedTableReader.readHashMap(GenomeNCBI.PATH_PROTEINID + genomeName + "_protein.txt");
+    	return proteinIDTolocusTag;
     }
     
     
@@ -455,11 +481,23 @@ public class Genome {
      * @throws Exception
      */
     public static Genome loadGenome(String genomeAccession) {
-        // System.err.println("Load: "+genomeAccession);
-        if (genomeAccession.equals("Listeria_monocytogenes_EGD_e_uid61583")) {
-            genomeAccession = EGDE_NAME;
-        }
         return loadGenome(genomeAccession, Database.getGENOMES_PATH(), true, true);
+    }
+    
+    /**
+     * Find in ModelProvider if Genome Accession is already loaded If not search load it
+     * If keepInMemory is true : Find in ModelProvider if Genome Accession is already loaded if not load
+     * it <br>
+     * If keepInMemory is false : Only load the Genome without saving it <br>
+     * <br>
+     * 
+     * @param genomeAccession
+     * @param keepInMemory
+     * @return
+     * @throws Exception
+     */
+    public static Genome loadGenome(String genomeAccession, boolean keepInMemory) {
+        return loadGenome(genomeAccession, Database.getGENOMES_PATH(), keepInMemory, true);
     }
 
     /**
@@ -495,7 +533,7 @@ public class Genome {
                 genome = genomes.get(genomeAccession);
                 if (genome == null) { // if this genome has not been loaded -> load it
                     try {
-                        System.out.println(path + File.separator + genomeAccession);
+                        //System.out.println(path + File.separator + genomeAccession);
                         genome = new Genome(path + File.separator + genomeAccession, annotation);
                     } catch (Exception e) {
                         // TODO Auto-generated catch block
@@ -601,11 +639,11 @@ public class Genome {
 
     public static class GetMultiFastaThread implements IRunnableWithProgress {
         private HashMap<String, String> genomeToGenes = new HashMap<>();
-        private ArrayList<String> fastaFile = new ArrayList<>();
-
         public GetMultiFastaThread(HashMap<String, String> genomeToGenes) {
-            this.genomeToGenes = genomeToGenes;
-        }
+		    this.genomeToGenes = genomeToGenes;
+		}
+
+		private ArrayList<String> fastaFile = new ArrayList<>();
 
         @Override
         public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
