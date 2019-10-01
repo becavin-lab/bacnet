@@ -78,8 +78,8 @@ public class CoExprNetworkView implements SelectionListener {
     private Genome genome;
     private TabFolder tabFolder;
     private TabItem tbtmGraphVisualization;
-    private TabItem tbtmRadialNetwork;
-    private Browser browserRadial;
+    //private TabItem tbtmRadialNetwork;
+    //private Browser browserRadial;
     private Button btnCorrPlus;
     private Button btnCorrMinus;
 
@@ -202,10 +202,10 @@ public class CoExprNetworkView implements SelectionListener {
         browserGraph = new Browser(tabFolder, SWT.BORDER);
         tbtmGraphVisualization.setControl(browserGraph);
 
-        tbtmRadialNetwork = new TabItem(tabFolder, SWT.NONE);
-        tbtmRadialNetwork.setText("Circular visualization");
-        browserRadial = new Browser(tabFolder, SWT.NONE);
-        tbtmRadialNetwork.setControl(browserRadial);
+//        tbtmRadialNetwork = new TabItem(tabFolder, SWT.NONE);
+//        tbtmRadialNetwork.setText("Circular visualization");
+//        browserRadial = new Browser(tabFolder, SWT.NONE);
+//        tbtmRadialNetwork.setControl(browserRadial);
 
         tabFolder.addSelectionListener(new SelectionAdapter() {
             /**
@@ -222,7 +222,7 @@ public class CoExprNetworkView implements SelectionListener {
         /*
          * Register the background SVG
          */
-        SaveFileUtils.registerTextFile(svgName, new File(Network.CIRCOS_BACK_PATH));
+        //SaveFileUtils.registerTextFile(svgName, new File(Network.CIRCOS_BACK_PATH));
 
         try {
             InitNetworkThread thread = new InitNetworkThread(this);
@@ -248,7 +248,6 @@ public class CoExprNetworkView implements SelectionListener {
         public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
             monitor.beginTask("Display Co-expression network", 3);
             monitor.worked(1);
-            monitor.subTask("Load " + Genome.EGDE_NAME);
             view.initComboGenome();
             monitor.subTask("Load Co-expression network");
             monitor.worked(1);
@@ -260,7 +259,11 @@ public class CoExprNetworkView implements SelectionListener {
     }
 
     public void initComboGenome() {
-        genomeName = Genome.EGDE_NAME;
+    	if(Database.getInstance().getProjectName() == Database.LISTERIOMICS_PROJECT) {
+    		genomeName = Genome.EGDE_NAME;
+    	}else if(Database.getInstance().getProjectName() == Database.YERSINIOMICS_PROJECT) {
+    		genomeName = "Yersinia enterocolitica subsp palearctica Y11";
+    	}
         genome = Genome.loadGenome(genomeName);
     }
 
@@ -278,7 +281,7 @@ public class CoExprNetworkView implements SelectionListener {
      */
     private void updateGenomeInfo() {
         listGenomeElements = new ArrayList<>();
-        Genome genome = Genome.loadEgdeGenome();
+        Genome genome = Genome.loadGenome(genomeName);
         for (String gene : genome.getGeneNames()) {
             listGenomeElements.add(gene);
         }
@@ -383,12 +386,12 @@ public class CoExprNetworkView implements SelectionListener {
                 /*
                  * Update circos.html
                  */
-                String html = SaveFileUtils.modifyHTMLwithFile(dataPath, HTMLUtils.CIRCOS);
-                String fileNameResource = SaveFileUtils.registerTextFile(svgName, new File(dataPath));
-                System.out.println("Add: " + fileNameResource + " to " + HTMLUtils.CIRCOS);
-                html = html.replaceFirst("_Background", fileNameResource);
-                browserRadial.setText(html);
-                browserRadial.redraw();
+//                String html = SaveFileUtils.modifyHTMLwithFile(dataPath, HTMLUtils.CIRCOS);
+//                String fileNameResource = SaveFileUtils.registerTextFile(svgName, new File(dataPath));
+//                System.out.println("Add: " + fileNameResource + " to " + HTMLUtils.CIRCOS);
+//                html = html.replaceFirst("_Background", fileNameResource);
+//                browserRadial.setText(html);
+//                browserRadial.redraw();
             }
             file.delete();
         } catch (IOException e) {
@@ -508,7 +511,7 @@ public class CoExprNetworkView implements SelectionListener {
         for (String stateId : parameters.keySet()) {
             String stateValue = parameters.get(stateId);
             if (stateId.equals(NavigationManagement.ITEM)) {
-                view.getTabFolder().setSelection(view.getTabFolder().indexOf(view.getTbtmRadialNetwork()));
+                //view.getTabFolder().setSelection(view.getTabFolder().indexOf(view.getTbtmRadialNetwork()));
             }
             if (stateId.contains(NavigationManagement.CUTOFF)) {
                 view.getTextCutOff().setText(stateValue);
@@ -558,7 +561,7 @@ public class CoExprNetworkView implements SelectionListener {
             TreeSet<String> includeElements = new TreeSet<>();
             TreeSet<String> excludeElements = new TreeSet<>();
             SelectGenomeElementDialog dialog =
-                    new SelectGenomeElementDialog(shell, partService, includeElements, excludeElements, genomeName);
+                    new SelectGenomeElementDialog(shell, partService, includeElements, excludeElements, genome);
             if (dialog.open() == 0) {
                 listGenomeElements.clear();
                 for (String row : includeElements) {
@@ -639,13 +642,13 @@ public class CoExprNetworkView implements SelectionListener {
         this.tbtmGraphVisualization = tbtmGraphVisualization;
     }
 
-    public TabItem getTbtmRadialNetwork() {
-        return tbtmRadialNetwork;
-    }
-
-    public void setTbtmRadialNetwork(TabItem tbtmRadialNetwork) {
-        this.tbtmRadialNetwork = tbtmRadialNetwork;
-    }
+//    public TabItem getTbtmRadialNetwork() {
+//        return tbtmRadialNetwork;
+//    }
+//
+//    public void setTbtmRadialNetwork(TabItem tbtmRadialNetwork) {
+//        this.tbtmRadialNetwork = tbtmRadialNetwork;
+//    }
 
     public TabFolder getTabFolder() {
         return tabFolder;

@@ -19,7 +19,6 @@ public class DataFolder {
         folders.add(Database.getPROTEOMES_PATH());
         folders.add(Database.getMULTIOMICS_PATH());
         folders.add(Database.getNETWORK_PATH());
-        folders.add(Database.getBLAST_PATH());
         folders.add(Database.getGENOMES_PATH());
         folders.add(Database.getANNOTATIONDATA_PATH());
         folders.add(Database.getSIGNATURES_PATH());

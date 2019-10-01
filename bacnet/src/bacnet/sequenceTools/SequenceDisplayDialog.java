@@ -21,12 +21,12 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
+
 import bacnet.Database;
 import bacnet.datamodel.sequence.Chromosome;
 import bacnet.datamodel.sequence.Genome;
 import bacnet.raprcp.SaveFileUtils;
 import bacnet.swt.SWTResourceManager;
-import bacnet.utils.BlastUtils;
 
 public class SequenceDisplayDialog extends Dialog implements SelectionListener {
 
@@ -53,8 +53,7 @@ public class SequenceDisplayDialog extends Dialog implements SelectionListener {
     private Button btnStrandMinus;
     private Label lblInfo;
     private Button btnSaveToFasta;
-    private Button btnSendToBlast;
-
+    
     private Shell shell;
     private EPartService partService;
 
@@ -195,9 +194,7 @@ public class SequenceDisplayDialog extends Dialog implements SelectionListener {
         btnSaveToFasta = new Button(composite, SWT.NONE);
         btnSaveToFasta.setText("Save to Fasta file");
         btnSaveToFasta.addSelectionListener(this);
-        btnSendToBlast = new Button(composite, SWT.NONE);
-        btnSendToBlast.setText("Send to Blast");
-        btnSendToBlast.addSelectionListener(this);
+        
         initView();
         updateView();
         return container;
@@ -356,13 +353,7 @@ public class SequenceDisplayDialog extends Dialog implements SelectionListener {
         } else if (e.getSource() == btnSaveToFasta) {
             SaveFileUtils.saveTextFile("SavedSequence.fa", textSequence.getText(), true, "SavedSequence.fa",
                     textSequence.getText(), partService, shell);
-        } else if (e.getSource() == btnSendToBlast) {
-            if (isNucleotide()) {
-                BlastUtils.openBlastN(textSequence.getText(), partService);
-            } else {
-                BlastUtils.openBlastP(textSequence.getText(), partService);
-            }
-        }
+        } 
     }
 
     @Override

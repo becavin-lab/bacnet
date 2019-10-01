@@ -11,7 +11,7 @@ import bacnet.datamodel.sequenceNCBI.GenomeNCBI;
 public class Phylogenomic {
 
     static public String PHYLO_GENOME_SVG = Database.getANNOTATIONDATA_PATH() + "PhylogenyGenomes.svg";
-    static public String HOMOLOG_SUMMARY = GenomeNCBI.PATH_HOMOLOGS + "HomologsStats.txt";
+    static public String HOMOLOG_SUMMARY = Database.getInstance().getPath() + "/HomologsStats.txt";
     
     /**
      * Test if the Phylogenomic figure exist and rturn its path

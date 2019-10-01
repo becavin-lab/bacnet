@@ -64,6 +64,7 @@ public class TableSWTComposite extends Composite implements SelectionListener {
      */
     private ExpressionMatrix matrix;
     private ExpressionMatrix matrixDisplayed;
+    private Genome genome;
 
     private ArrayList<String> columnNames = new ArrayList<>();
     private ColorMapperList colorMapperList = new ColorMapperList();
@@ -219,8 +220,9 @@ public class TableSWTComposite extends Composite implements SelectionListener {
      * 
      * @param matrix
      */
-    public void initData(ExpressionMatrix matrix) {
+    public void initData(ExpressionMatrix matrix, Genome genome) {
         this.matrix = matrix;
+        this.genome = genome;
         excludeRow = new ArrayList<String>();
         excludeColumn = new ArrayList<String>();
         searchFilter = new TableFilter();
@@ -640,7 +642,7 @@ public class TableSWTComposite extends Composite implements SelectionListener {
                 displayValues = btnDisplayValues.getSelection();
                 tableViewer.refresh();
             } else if (e.getSource() == btnHide) {
-                HideExpressionMatrixDialog dialog = new HideExpressionMatrixDialog(matrix, hideDialogExcludeRow,
+                HideExpressionMatrixDialog dialog = new HideExpressionMatrixDialog(matrix, genome, hideDialogExcludeRow,
                         hideDialogExcludeColumn, shell, partService);
                 int ok = dialog.open();
                 if (ok == Status.OK) {

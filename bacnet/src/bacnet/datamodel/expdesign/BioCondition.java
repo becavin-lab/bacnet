@@ -423,14 +423,7 @@ public class BioCondition implements Serializable {
             bioConditionCompare.getNGSSeqs().add(compData);
             bioConditionCompare.getTypeDataContained().add(TypeData.RNASeq);
         }
-        // for(int i=0;i<this.getNewRnaSeqs().size();i++){
-        // NewRNASeq data1 = this.getNewRnaSeqs().get(i);
-        // NewRNASeq data2 = bioCond2.getNewRnaSeqs().get(i);
-        // NewRNASeq compData = data1.compare(data2,calcData);
-        // bioConditionCompare.getNewRnaSeqs().add(compData);
-        // bioConditionCompare.getTypeDataContained().add(TypeData.NewRNASeq);
-        // }
-
+        
         /*
          * Proteomics data comparison if they exists
          */

@@ -63,10 +63,11 @@ public class NGSCreation {
      */
     public static void normalizeCountFiles(Experiment exp) {
         for (BioCondition bioCond : exp.getBioConditions()) {
-            for (NGS data : bioCond.getNGSSeqs()) {
+            if(bioCond.getTypeDataContained().contains(TypeData.RNASeq)) {
                 for (String bioCondName2 : bioCond.getComparisons()) {
                     BioCondition compBioCond = bioCond.compare(BioCondition.getBioCondition(bioCondName2), false);
-                    String fileName = OmicsData.PATH_NGS_NORM + data.getName() + "_vs_" + bioCondName2 + ".rnaseq";
+                    String fileName = OmicsData.PATH_NGS_NORM + bioCond.getName() + "_vs_" + bioCondName2 + ".rnaseq";
+                    System.out.println("Search "+fileName);
                     File file = new File(fileName);
                     if (file.exists()) {
                         System.out.println("Modify: " + fileName);
@@ -99,12 +100,12 @@ public class NGSCreation {
         /*
          * Process expression matrix
          */
-        for (BioCondition rnaSeq : exp.getBioConditions()) {
-            if (rnaSeq.getTypeDataContained().contains(TypeData.RNASeq)) {
-                int nbDuplicate = rnaSeq.getNGSSeqs().get(0).getRawDatas().size();
-                System.out.println(rnaSeq.getName() + " dupl:" + nbDuplicate);
+        for (BioCondition bioCond : exp.getBioConditions()) {
+            if (bioCond.getTypeDataContained().contains(TypeData.RNASeq)) {
+                int nbDuplicate = bioCond.getNGSSeqs().get(0).getRawDatas().size();
+                System.out.println(bioCond.getName() + " dupl:" + nbDuplicate);
                 if (nbDuplicate == 1) {
-                    String fileName = OmicsData.PATH_NGS_NORM + rnaSeq.getName() + ".rnaseq";
+                    String fileName = OmicsData.PATH_NGS_NORM + bioCond.getName() + ".rnaseq";
                     File file = new File(fileName);
                     if (file.exists()) {
                         String[][] array = TabDelimitedTableReader.read(new File(fileName), ",");
@@ -136,12 +137,12 @@ public class NGSCreation {
                         }
                         matrix.addColumn("VALUE", logValues);
                         matrix = MedianNormalization.norm(matrix, "VALUE");
-                        matrix.saveTab(OmicsData.PATH_NGS_NORM + rnaSeq.getName() + NGS.EXTENSION, "GenomeElements");
+                        matrix.saveTab(OmicsData.PATH_NGS_NORM + bioCond.getName() + NGS.EXTENSION, "GenomeElements");
                     }
                 } else {
                     ArrayList<ExpressionMatrix> matrices = new ArrayList<ExpressionMatrix>();
                     for (int i = 1; i < (nbDuplicate + 1); i++) {
-                        String fileName = OmicsData.PATH_NGS_NORM + rnaSeq.getName() + "_" + i + ".rnaseq";
+                        String fileName = OmicsData.PATH_NGS_NORM + bioCond.getName() + "_" + i + ".rnaseq";
                         File file = new File(fileName);
                         if (file.exists()) {
                             String[][] array = TabDelimitedTableReader.read(new File(fileName), ",");
@@ -181,7 +182,7 @@ public class NGSCreation {
                         matrix.addColumn("UNLOGVALUE", medianS);
                         matrix.addColumn("VALUE", logMedians);
                         matrix = MedianNormalization.norm(matrix, "VALUE");
-                        matrix.saveTab(OmicsData.PATH_NGS_NORM + rnaSeq.getName() + NGS.EXTENSION, "GenomeElements");
+                        matrix.saveTab(OmicsData.PATH_NGS_NORM + bioCond.getName() + NGS.EXTENSION, "GenomeElements");
                     }
                 }
             }

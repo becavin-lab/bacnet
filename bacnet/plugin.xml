@@ -133,6 +133,13 @@
             name="LoadExpressionMatrix">
       </command>
    </extension>
+   <extension
+      point="org.eclipse.equinox.http.registry.resources">
+   <resource
+         alias="/html"
+         base-name="html">
+   </resource>
+</extension>
    
    
 

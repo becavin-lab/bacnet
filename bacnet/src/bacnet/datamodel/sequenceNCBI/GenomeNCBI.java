@@ -69,6 +69,11 @@ public class GenomeNCBI {
      */
     public static String PATH_HOMOLOGS = PATH_RAW + "Homologs"+ File.separator ;
     /**
+     * Path for all homologs calculation file : Database.getInstance().getPath() +
+     * "/GenomeNCBI/Homologs/";
+     */
+    public static String PATH_PROTEINID = PATH_RAW + "ProteinId"+ File.separator ;
+    /**
      * Path for all supplementary information for genome annotation : Database.getInstance().getPath() +
      * "/GenomeNCBI/Annotation/";
      */

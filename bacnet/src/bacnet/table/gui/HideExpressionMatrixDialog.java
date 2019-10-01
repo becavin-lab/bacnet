@@ -50,6 +50,7 @@ public class HideExpressionMatrixDialog extends TitleAreaDialog implements Selec
     private Button btnLoadColumn;
     private Button btnSignaturesLoader;
     private Button btnSelectGenes;
+    private Genome genome;
 
     // data
     private ArrayList<String> showRow = new ArrayList<>();
@@ -65,10 +66,11 @@ public class HideExpressionMatrixDialog extends TitleAreaDialog implements Selec
      * 
      * @param parentShell
      */
-    public HideExpressionMatrixDialog(ExpressionMatrix matrix, ArrayList<String> hideDialogExcludeRow,
+    public HideExpressionMatrixDialog(ExpressionMatrix matrix, Genome genome, ArrayList<String> hideDialogExcludeRow,
             ArrayList<String> hideDialogExcludeColumn, Shell shell, EPartService partService) {
         super(shell);
         this.shell = shell;
+        this.genome = genome;
         this.partService = partService;
         this.matrix = matrix;
         this.hideDialogExcludeColumn = hideDialogExcludeColumn;
@@ -337,7 +339,7 @@ public class HideExpressionMatrixDialog extends TitleAreaDialog implements Selec
             TreeSet<String> includeElements = new TreeSet<>();
             TreeSet<String> excludeElements = new TreeSet<>();
             SelectGenomeElementDialog dialog = new SelectGenomeElementDialog(shell, partService, includeElements,
-                    excludeElements, Genome.EGDE_NAME);
+                    excludeElements, genome);
             if (dialog.open() == 0) {
                 ArrayList<String> signature = new ArrayList<>();
                 for (String row : includeElements) {

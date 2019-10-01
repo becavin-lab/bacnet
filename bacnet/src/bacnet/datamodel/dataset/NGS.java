@@ -336,7 +336,7 @@ public class NGS extends OmicsData implements Serializable {
     }
 
     /**
-     * Create Tiling data from the comparison of this one and data2
+     * Create RNASeq data from the comparison of this one and data2
      * 
      * @param data2
      * @param calcData true if we want to calculate the data

@@ -1,6 +1,9 @@
 package bacnet.e4.rap;
 
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
@@ -56,7 +59,6 @@ public class InitViewYersinia implements SelectionListener {
     private Button btnCoExpression;
     private Button btnIntracellular;
     private Button btnLoadData;
-    private Button btnSubmitData;
     private Button btnGeneView;
     private Button btnAccessWiki;
     private Link linkPubli;
@@ -154,7 +156,7 @@ public class InitViewYersinia implements SelectionListener {
 
         btnBHI37 = new Button(composite_1, SWT.BORDER);
         btnBHI37.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
-        btnBHI37.setText("Exponential phase");
+        btnBHI37.setText("Y. entero. Y11 omics");
         btnBHI37.setFont(SWTResourceManager.getTitleFont(SWT.NORMAL));
         btnBHI37.addSelectionListener(this);
 
@@ -166,9 +168,7 @@ public class InitViewYersinia implements SelectionListener {
         lblExpressionAtlas.setFont(SWTResourceManager.getBodyFont(SWT.NORMAL));
         lblExpressionAtlas.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
         lblExpressionAtlas.setData(RWT.MARKUP_ENABLED, Boolean.TRUE);
-        lblExpressionAtlas.setText("Browse RNA-seq, tiling arrays, transcription start sites (TSS), "
-                + "transcription termination sites (TermSeq),"
-                + " and Ribosome Profiling (RiboSeq) of <i>Yersinia monocytogenes</i> EGD-e strain grown in BHI at 37°C to exponential phase");
+        lblExpressionAtlas.setText("Browse RNA-seq of <i>Yersinia enterocolitica subsp palearctica Y11</i>");
 
         Composite composite_9 = new Composite(composite_11, SWT.NONE);
         GridData gd_composite_9 = new GridData(SWT.LEFT, SWT.CENTER, false, true, 1, 1);
@@ -180,7 +180,7 @@ public class InitViewYersinia implements SelectionListener {
         btnIntracellular = new Button(composite_9, SWT.BORDER);
         btnIntracellular.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
         btnIntracellular.addSelectionListener(this);
-        btnIntracellular.setText("Intracellular growth");
+        btnIntracellular.setText("Y. pseudotu. YPIII omics");
         btnIntracellular.setFont(SWTResourceManager.getTitleFont(SWT.NORMAL));
 
         Label lblIntracellularMouse = new Label(composite_9, SWT.WRAP);
@@ -191,8 +191,7 @@ public class InitViewYersinia implements SelectionListener {
         lblIntracellularMouse.setFont(SWTResourceManager.getBodyFont(SWT.NORMAL));
         lblIntracellularMouse.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
         lblIntracellularMouse.setData(RWT.MARKUP_ENABLED, Boolean.TRUE);
-        lblIntracellularMouse.setText("Browse RNA-seq, and transcription start sites (TSS) "
-                + "of <i>Yersinia monocytogenes</i> EGD-e strain grown in mouse macrophages");
+        lblIntracellularMouse.setText("Browse gene expression array of <i>Yersinia pseudotuberculosis YPIII</i>");
         gd_composite_11.widthHint = 850;
         gd_lblExpressionAtlas.widthHint = 200;
         gd_composite_9.heightHint = 180;
@@ -375,31 +374,12 @@ public class InitViewYersinia implements SelectionListener {
         composite_5.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false, false, 1, 1));
         composite_5.setLayout(new GridLayout(1, false));
         composite_5.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
-        btnSubmitData = new Button(composite_5, SWT.BORDER | SWT.CENTER);
-        btnSubmitData.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
-        btnSubmitData.setText("Submit to Yersiniomics");
-        btnSubmitData.setFont(SWTResourceManager.getTitleFont(SWT.NORMAL));
-
-        Label lblContactUsIf = new Label(composite_5, SWT.WRAP);
-        GridData gd_lblContactUsIf = new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1);
-        gd_lblContactUsIf.widthHint = 200;
-        lblContactUsIf.setLayoutData(gd_lblContactUsIf);
-        lblContactUsIf.setAlignment(SWT.CENTER);
-        lblContactUsIf.setFont(SWTResourceManager.getBodyFont(SWT.NORMAL));
-        lblContactUsIf.setText(
-                "Contact us if you have a recently published \"omics\" dataset you want to be integrated to Yersiniomics");
-        lblContactUsIf.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
-        btnSubmitData.addSelectionListener(this);
-        Composite composite_20 = new Composite(composite_16, SWT.NONE);
-        composite_20.setLayoutData(new GridData(SWT.CENTER, SWT.TOP, false, false, 1, 1));
-        composite_20.setLayout(new GridLayout(1, false));
-        composite_20.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
-        btnAccessWiki = new Button(composite_20, SWT.BORDER);
+        btnAccessWiki = new Button(composite_5, SWT.BORDER);
         btnAccessWiki.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
         btnAccessWiki.setText("Access Yersiniomics wiki");
         btnAccessWiki.setFont(SWTResourceManager.getTitleFont(SWT.NORMAL));
         btnAccessWiki.addSelectionListener(this);
-        Label lblGoToThe = new Label(composite_20, SWT.WRAP);
+        Label lblGoToThe = new Label(composite_5, SWT.WRAP);
         lblGoToThe.setAlignment(SWT.CENTER);
         lblGoToThe.setFont(SWTResourceManager.getBodyFont(SWT.NORMAL));
         GridData gd_lblGoToThe = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
@@ -418,7 +398,7 @@ public class InitViewYersinia implements SelectionListener {
 
         Label lblLastUpdate = new Label(composite_19, SWT.NONE);
         lblLastUpdate.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, true, 1, 1));
-        lblLastUpdate.setText("Last update: July 2017");
+        lblLastUpdate.setText("Last update: October 2019");
 
         linkPubli = new Link(composite_19, SWT.NONE);
         linkPubli.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
@@ -427,7 +407,7 @@ public class InitViewYersinia implements SelectionListener {
 
         Link link = new Link(composite_19, SWT.NONE);
         link.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
-        link.setText("Contact us: <a>Yersiniomics AT pasteur DOT fr</a>");
+        link.setText("Contact us if you have a recently published \"omics\" dataset you want to be integrated to Yersiniomics<br><a>becavin AT impc.cnrs.fr DOT fr</a>");
 
         new Label(composite_19, SWT.NONE);
 
@@ -486,7 +466,7 @@ public class InitViewYersinia implements SelectionListener {
         pushState();
 
         System.out.println("InitView loaded");
-
+ 
     }
 
     @Focus
@@ -512,17 +492,11 @@ public class InitViewYersinia implements SelectionListener {
         if (e.getSource() == btnCoExpression) {
             partService.showPart(CoExprNetworkView.ID, PartState.ACTIVATE);
             NavigationManagement.pushStateView(CoExprNetworkView.ID);
-        } else if (e.getSource() == btnSubmitData) {
-            partService.showPart(SubmitDataView.ID, PartState.ACTIVATE);
-            NavigationManagement.pushStateView(SubmitDataView.ID);
-        }
-        // else if (e.getSource() == btnBHI37) {
-        // // AnnotationView.openAnnotationView(partService, Genome.loadEgdeGenome());
-        // GenomeTranscriptomeView.displayBHI37View(partService);
-        // } else if (e.getSource() == btnIntracellular) {
-        // GenomeTranscriptomeView.displayIntracellularMacrophagesView(partService);
-        // }
-        else if (e.getSource() == btnProteomics) {
+        }else if (e.getSource() == btnBHI37) {
+        	GenomeTranscriptomeView.displayYersiY11(partService);
+        } else if (e.getSource() == btnIntracellular) {
+        	GenomeTranscriptomeView.displayYersiYPIII(partService);
+        }else if (e.getSource() == btnProteomics) {
             partService.showPart(ProteomicsView.ID, PartState.ACTIVATE);
             NavigationManagement.pushStateView(ProteomicsView.ID);
         } else if (e.getSource() == btnGenomics) {

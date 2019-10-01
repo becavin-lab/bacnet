@@ -185,6 +185,7 @@ public class SaveFileUtils {
                 e.printStackTrace();
             }
         }
+        System.out.println(RWT.getApplicationContext().getResourceManager().getLocation(dataName));
         String fileNameResource = "../" + dataName;
         return fileNameResource;
 

@@ -1604,8 +1604,8 @@ public class GeneView implements SelectionListener, MouseListener {
             HashMap<String, String> genomeToGenes = new HashMap<>();
             for (int i : tableHomologViewer.getTable().getSelectionIndices()) {
                 TableItem item = tableHomologViewer.getTable().getItem(i);
-                String genomeName = item.getText(ArrayUtils.findColumn(bioCondsArray, "Name"));
-                String gene = item.getText(ArrayUtils.findColumn(bioCondsArray, "Homolog"));
+                String genomeName = item.getText(ArrayUtils.findColumn(bioCondsArray, "Name")+1);
+                String gene = item.getText(ArrayUtils.findColumn(bioCondsArray, "Homolog Protein")+1);
                 genomeToGenes.put(genomeName, gene);
             }
             try {

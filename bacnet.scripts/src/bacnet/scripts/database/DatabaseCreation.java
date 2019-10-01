@@ -9,38 +9,10 @@ import bacnet.scripts.listeriomics.MainListeriomics;
  * @author Christophe Bécavin
  *
  */
+@Deprecated
 public class DatabaseCreation {
 
-    /**
-     * Method for all pre-processing of the database UNCOMMENT in bacnet.e4.rap.setup.SetupPart
-     * 
-     * @throws IOException
-     */
-    public static void preProcessing() throws IOException {
-
-        /*
-         * Scripts for data pre-processing
-         */
-
-        // MainLeishomics.run();
-
-        /*
-         * Create CRISPRGo database
-         */
-        // MainCRISPRGo.run();
-
-        /*
-         * Create Leishomics database
-         */
-        // MainLeishomics.run();
-
-        /*
-         * Create Yersiniomics database
-         */
-        // MainYersiniomics.run();
-        System.out.println("Database Pre-processing done");
-    }
-
+    
     /**
      * This method in an example of all methods which should be run to create your multi-omics website
      * <br>

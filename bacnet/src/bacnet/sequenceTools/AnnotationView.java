@@ -505,7 +505,7 @@ public class AnnotationView implements SelectionListener {
             TreeSet<String> includeElements = new TreeSet<>();
             TreeSet<String> excludeElements = new TreeSet<>();
             SelectGenomeElementDialog dialog = new SelectGenomeElementDialog(shell, partService, includeElements,
-                    excludeElements, Genome.EGDE_NAME);
+                    excludeElements, genome);
             if (dialog.open() == 0) {
                 ArrayList<String> includeRows = new ArrayList<>();
                 for (String row : includeElements) {

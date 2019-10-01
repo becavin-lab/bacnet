@@ -109,9 +109,57 @@ public class CircularGenomeJPanel extends JPanel {
      * @param title
      */
     public CircularGenomeJPanel(int width, int height, Genome genome, String title) {
+    	int length = genome.getFirstChromosome().getLength();
+        cgview = new Cgview(length);
 
-        // sRNACircularGenome(width,height,genome,title);
-        RNABindingCircularGenome(width, height, genome, title);
+        // some optional settings
+        cgview.setWidth(height);
+        cgview.setHeight(width);
+        cgview.setBackboneRadius(200f);
+        // cgview.setBackgroundColor(Color.BLACK);
+        // cgview.setTitle(title);
+        cgview.setLabelPlacementQuality(100);
+        cgview.setShowWarning(true);
+        cgview.setLabelLineLength(8.0d);
+        cgview.setLabelLineThickness(0.5f);
+        cgview.setDrawTickMarks(false);
+        cgview.setDrawLegends(false);
+        // cgview.setIsLinear(true);
+        cgview.setTitleFont(new Font(getFont().getFontName(), Font.ITALIC, 30));
+        // cgview.setLabelFont(new Font(getFont().getFontName(), Font.PLAIN, 12));
+
+        // create a FeatureSlot to hold sequence features
+        // FeatureSlot featureSlotOperon = new FeatureSlot(cgview,
+        // Cgview.REVERSE_STRAND);
+        FeatureSlot featureSlotPlusGene = new FeatureSlot(cgview, CgviewConstants.REVERSE_STRAND);
+        FeatureSlot featureSlotMinusGene = new FeatureSlot(cgview, CgviewConstants.REVERSE_STRAND);
+
+        for (Gene gene : genome.getGenes().values()) {
+            if (!gene.isStrand()) {
+                Feature feature = new Feature(featureSlotMinusGene, gene.getName());
+                feature.setColor(Color.BLUE);
+                feature.setShowLabel(CgviewConstants.LABEL_NONE);
+                // a single FeatureRange to add the Feature
+                int begin = gene.getBegin();
+                int end = gene.getEnd();
+                if (begin > end) {
+                    int temp = end;
+                    end = begin;
+                    begin = temp;
+                }
+                FeatureRange featureRange = new FeatureRange(feature, begin, end);
+                featureRange.setDecoration(CgviewConstants.DECORATION_COUNTERCLOCKWISE_ARROW);
+            } else {
+                Feature feature = new Feature(featureSlotPlusGene, gene.getName());
+                feature.setColor(Color.RED);
+                feature.setShowLabel(CgviewConstants.LABEL_NONE);
+                // a single FeatureRange to add the Feature
+                int begin = gene.getBegin();
+                int end = gene.getEnd();
+                FeatureRange featureRange = new FeatureRange(feature, begin, end);
+                featureRange.setDecoration(CgviewConstants.DECORATION_CLOCKWISE_ARROW);
+            }
+        }
     }
 
     /**

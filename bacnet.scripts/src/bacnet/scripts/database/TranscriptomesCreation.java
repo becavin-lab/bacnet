@@ -14,6 +14,7 @@ import bacnet.datamodel.dataset.OmicsData.TypeData;
 import bacnet.datamodel.dataset.Tiling;
 import bacnet.datamodel.expdesign.BioCondition;
 import bacnet.datamodel.expdesign.Experiment;
+import bacnet.datamodel.sequence.Gene;
 import bacnet.datamodel.sequence.Genome;
 import bacnet.reader.TabDelimitedTableReader;
 import bacnet.scripts.arrayexpress.ArrayExpress;
@@ -22,6 +23,7 @@ import bacnet.scripts.core.normalization.MedianNormalization;
 import bacnet.scripts.core.normalization.VarianceNormalization;
 import bacnet.scripts.core.stat.StatTest;
 import bacnet.scripts.core.stat.StatTest.TypeStat;
+import bacnet.scripts.listeriomics.TilingGeneExprDataBase;
 import bacnet.utils.ExpressionMatrixStat;
 import bacnet.utils.FileUtils;
 import bacnet.utils.Filter;
@@ -65,27 +67,30 @@ public class TranscriptomesCreation {
         /*
          * Optional NGSCreation.normalizeCountFiles(exp);
          */
-
+        NGSCreation.normalizeCountFiles(exp);
+        
         /*
          * Tiling and GeneExpressionData
          */
-        logs += "Convert all GeneExpression and Tiling\n";
-        try {
-            // FileUtils.copy(GeneExpression.PROBES_PATH_2, GeneExpression.PROBES_PATH);
-            // FileUtils.copy(Tiling.PROBES_PATH_2, Tiling.PROBES_PATH);
-            // GeneExpression.convert(exp);
-            // Tiling.convert(exp);
-            // TilingGeneExprDataBase.calcGenExprTilingComparisons(exp);
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+        if(Genome.getDefautGenome().contains("Listeria")) {
+	        logs += "Convert all GeneExpression and Tiling\n";
+	        try {
+	             FileUtils.copy(GeneExpression.PROBES_PATH_2, GeneExpression.PROBES_PATH);
+	             FileUtils.copy(Tiling.PROBES_PATH_2, Tiling.PROBES_PATH);
+	             GeneExpression.convert(exp);
+	             Tiling.convert(exp);
+	             TilingGeneExprDataBase.calcGenExprTilingComparisons(exp);
+	        } catch (Exception e) {
+	            // TODO Auto-generated catch block
+	            e.printStackTrace();
+	        }
         }
 
         /*
          * ExpressionMatrix
          */
         logs += "Convert all ExpressionMatrix\n";
-        //convertExpressionMatrix(exp);
+        convertExpressionMatrix(exp);
 
         return logs;
 
@@ -165,7 +170,7 @@ public class TranscriptomesCreation {
          */
         logs += "Apply variance normalization to all datasets (Long calculation)\n";
         if (varianceNorm) {
-            // varianceNormalization(exp);
+            varianceNormalization(exp);
         }
 
         /*
@@ -174,6 +179,7 @@ public class TranscriptomesCreation {
         logs += "Create LogFC transcriptomes table\n";
         ArrayList<String> genomeList = BioCondition.getTranscriptomesGenomes();
         for (String genomeName : genomeList) {
+        	//if(genomeName.equals("Yersinia pestis CO92 2")) {
             Genome genome = Genome.loadGenome(genomeName);
             Experiment expTemp = new Experiment();
             for (BioCondition bioCond : exp.getBioConditions()) {
@@ -193,11 +199,14 @@ public class TranscriptomesCreation {
              * Summarize all expression in matrices
              */
             Expression.summarize(expTemp, genome);
-
+        	//}
         }
-        logs += Database.getLOGFC_MATRIX_TRANSCRIPTOMES_PATH() + " tables created";
+        String message = Database.getLOGFC_MATRIX_TRANSCRIPTOMES_PATH() + " tables created";
+        logs += message + "\n";
+        System.out.println(message);
         return logs;
     }
+    
 
     /**
      * Run some scripts to analyse the statistics of the transcriptomics data and performed
@@ -419,6 +428,12 @@ public class TranscriptomesCreation {
                     for (String gene : genome.getAllElementNames()) {
                         if (matrix.getRowNames().containsKey(gene)) {
                             logFCMatrix.setValue(matrix.getValue(gene, ColNames.LOGFC + ""), gene, comp);
+                        } else { // test if we can find the gene by its gene name
+                        	Gene geneTemp = genome.getGeneFromName(gene);
+                        	String geneName = geneTemp.getGeneName();
+                        	if (matrix.getRowNames().containsKey(geneName)) {
+                            	logFCMatrix.setValue(matrix.getValue(geneName, ColNames.LOGFC + ""), gene, comp);
+                        	}
                         }
                     }
                 } else if (bioCond.getTypeDataContained().contains(TypeData.RNASeq)) {
@@ -430,6 +445,12 @@ public class TranscriptomesCreation {
                         for (String gene : genome.getAllElementNames()) {
                             if (matrix.getRowNames().containsKey(gene)) {
                                 logFCMatrix.setValue(matrix.getValue(gene, ColNames.LOGFC + ""), gene, comp);
+                            } else { // test if we can find the gene by its gene name
+                            	Gene geneTemp = genome.getGeneFromName(gene);
+                            	String geneName = geneTemp.getGeneName();
+                            	if (matrix.getRowNames().containsKey(geneName)) {
+	                            	logFCMatrix.setValue(matrix.getValue(geneName, ColNames.LOGFC + ""), gene, comp);
+                            	}
                             }
                         }
                     }

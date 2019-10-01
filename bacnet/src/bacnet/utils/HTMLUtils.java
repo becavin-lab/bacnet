@@ -20,6 +20,8 @@ public class HTMLUtils {
     public static String SVG = "SVGDisplay.html";
     public static String NETWORK = "network.html";
     public static String CIRCOS = "circos.html";
+    public static String BLASTP = "BLASTP.html";
+    public static String BLASTN = "BlastN.html";
     public static String SCATTER = "scatterplot.html";
 
     /**
@@ -46,11 +48,7 @@ public class HTMLUtils {
      */
     private static String getPluginHTMLFromUrl(URL url) {
         try {
-            @SuppressWarnings("unused")
-            String key = url.toExternalForm();
-
-            InputStream stream;
-            stream = url.openStream();
+            InputStream stream = url.openStream();
 
             try {
                 InputStreamReader isr = new InputStreamReader(stream);

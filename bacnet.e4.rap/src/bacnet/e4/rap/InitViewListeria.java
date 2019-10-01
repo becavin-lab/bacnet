@@ -62,7 +62,6 @@ public class InitViewListeria implements SelectionListener {
     private Button btnIntracellular;
     private Button btnNTermTable;
     private Button btnLoadData;
-    private Button btnSubmitData;
     private Button btnGeneView;
     private Button btnAccessWiki;
     private Link linkUIBC;
@@ -551,31 +550,12 @@ public class InitViewListeria implements SelectionListener {
         composite_5.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false, false, 1, 1));
         composite_5.setLayout(new GridLayout(1, false));
         composite_5.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
-        btnSubmitData = new Button(composite_5, SWT.BORDER | SWT.CENTER);
-        btnSubmitData.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
-        btnSubmitData.setText("Submit to Listeriomics");
-        btnSubmitData.setFont(SWTResourceManager.getTitleFont(SWT.NORMAL));
-
-        Label lblContactUsIf = new Label(composite_5, SWT.WRAP);
-        GridData gd_lblContactUsIf = new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1);
-        gd_lblContactUsIf.widthHint = 200;
-        lblContactUsIf.setLayoutData(gd_lblContactUsIf);
-        lblContactUsIf.setAlignment(SWT.CENTER);
-        lblContactUsIf.setFont(SWTResourceManager.getBodyFont(SWT.NORMAL));
-        lblContactUsIf.setText(
-                "Contact us if you have a recently published \"omics\" dataset you want to be integrated to Listeriomics");
-        lblContactUsIf.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
-        btnSubmitData.addSelectionListener(this);
-        Composite composite_20 = new Composite(composite_16, SWT.NONE);
-        composite_20.setLayoutData(new GridData(SWT.CENTER, SWT.TOP, false, false, 1, 1));
-        composite_20.setLayout(new GridLayout(1, false));
-        composite_20.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
-        btnAccessWiki = new Button(composite_20, SWT.BORDER);
+        btnAccessWiki = new Button(composite_16, SWT.BORDER);
         btnAccessWiki.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
         btnAccessWiki.setText("Access Listeriomics wiki");
         btnAccessWiki.setFont(SWTResourceManager.getTitleFont(SWT.NORMAL));
         btnAccessWiki.addSelectionListener(this);
-        Label lblGoToThe = new Label(composite_20, SWT.WRAP);
+        Label lblGoToThe = new Label(composite_16, SWT.WRAP);
         lblGoToThe.setAlignment(SWT.CENTER);
         lblGoToThe.setFont(SWTResourceManager.getBodyFont(SWT.NORMAL));
         GridData gd_lblGoToThe = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
@@ -603,7 +583,7 @@ public class InitViewListeria implements SelectionListener {
 
         Link link = new Link(composite_19, SWT.NONE);
         link.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
-        link.setText("Contact us: <a>listeriomics AT pasteur DOT fr</a>");
+        link.setText("Contact us if you have a recently published \\\"omics\\\" dataset you want to be integrated to Listeriomics<br><a>becavin AT ipmc.cnrs DOT fr</a>");
 
         Label label_1 = new Label(composite_19, SWT.NONE);
 
@@ -692,9 +672,6 @@ public class InitViewListeria implements SelectionListener {
         } else if (e.getSource() == btnCoExpression) {
             partService.showPart(CoExprNetworkView.ID, PartState.ACTIVATE);
             NavigationManagement.pushStateView(CoExprNetworkView.ID);
-        } else if (e.getSource() == btnSubmitData) {
-            partService.showPart(SubmitDataView.ID, PartState.ACTIVATE);
-            NavigationManagement.pushStateView(SubmitDataView.ID);
         } else if (e.getSource() == btnNTerm) {
             GenomeTranscriptomeView.displayNTerminomics(partService, "");
         } else if (e.getSource() == btnNTermTable) {

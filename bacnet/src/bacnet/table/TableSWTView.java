@@ -12,7 +12,10 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Shell;
+
+import bacnet.Database;
 import bacnet.datamodel.dataset.ExpressionMatrix;
+import bacnet.datamodel.sequence.Genome;
 import bacnet.swt.ResourceManager;
 
 public class TableSWTView {
@@ -44,8 +47,8 @@ public class TableSWTView {
         tableComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
     }
 
-    public void setData(ExpressionMatrix matrix) {
-        tableComposite.initData(matrix);
+    public void setData(ExpressionMatrix matrix, Genome genome) {
+        tableComposite.initData(matrix, genome);
         tableComposite.update();
     }
 
@@ -68,11 +71,11 @@ public class TableSWTView {
      * @param viewName
      * @throws PartInitException
      */
-    public static void displayMatrix(ExpressionMatrix matrix, String viewName, EPartService partService) {
-        displayMatrix(matrix, viewName, false, "", partService);
+    public static void displayMatrix(ExpressionMatrix matrix, Genome genome, String viewName, EPartService partService) {
+        displayMatrix(matrix, genome, viewName, false, "", partService);
     }
 
-    public static void displayMatrix(ExpressionMatrix matrix, String viewName, boolean saveSVG, String fileName,
+    public static void displayMatrix(ExpressionMatrix matrix, Genome genome, String viewName, boolean saveSVG, String fileName,
             EPartService partService) {
         String id = TableSWTView.ID + Math.random();
         // initiate view
@@ -80,7 +83,7 @@ public class TableSWTView {
         // update data
         MPart part = partService.findPart(id);
         TableSWTView view = (TableSWTView) part.getObject();
-        view.setData(matrix);
+        view.setData(matrix, genome);
     }
 
     public TableSWTComposite getTableComposite() {

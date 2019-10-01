@@ -16,6 +16,7 @@ import bacnet.datamodel.dataset.OmicsData.TypeData;
 import bacnet.datamodel.dataset.Tiling;
 import bacnet.datamodel.expdesign.BioCondition;
 import bacnet.datamodel.expdesign.Experiment;
+import bacnet.datamodel.sequence.Gene;
 import bacnet.datamodel.sequence.Genome;
 import bacnet.datamodel.sequence.Sequence;
 import bacnet.genomeBrowser.core.DataTrack;
@@ -102,7 +103,7 @@ public class Expression {
          * Process matrix
          */
         for (String gElement : genomeElements) {
-            System.out.println(gElement);
+            //System.out.println(gElement);
             Sequence sequence = genome.getElement(gElement);
             if (sequence != null) {
                 for (BioCondition bioCondition : bioConditions) {
@@ -133,6 +134,14 @@ public class Expression {
                             double value = matrix.getValue(gElement, ColNames.VALUE + "");
                             expression.setValue(value, gElement,
                                     bioCondition.getName() + "[" + this.getTypeData() + "]");
+                        } else { // test if we can find the gene by its gene name
+                        	Gene geneTemp = genome.getGeneFromName(gElement);
+                        	String geneName = geneTemp.getGeneName();
+                        	if (matrix.getRowNames().containsKey(geneName)) {
+                        		 double value = matrix.getValue(geneName, ColNames.VALUE + "");
+                                 expression.setValue(value, gElement,
+                                         bioCondition.getName() + "[" + this.getTypeData() + "]");
+                        	}
                         }
                     } else if (typeData == TypeData.RNASeq) {
                         ExpressionMatrix matrix = matricesRNASeq.get(bioCondition.getName());
@@ -141,6 +150,14 @@ public class Expression {
                                 double value = matrix.getValue(gElement, ColNames.VALUE + "");
                                 expression.setValue(value, gElement,
                                         bioCondition.getName() + "[" + this.getTypeData() + "]");
+                            } else { // test if we can find the gene by its gene name
+                            	Gene geneTemp = genome.getGeneFromName(gElement);
+                            	String geneName = geneTemp.getGeneName();
+                            	if (matrix.getRowNames().containsKey(geneName)) {
+                            		 double value = matrix.getValue(geneName, ColNames.VALUE + "");
+                                     expression.setValue(value, gElement,
+                                             bioCondition.getName() + "[" + this.getTypeData() + "]");
+                            	}
                             }
                         }
                     }
