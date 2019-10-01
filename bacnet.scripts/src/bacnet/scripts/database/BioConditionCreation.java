@@ -93,10 +93,10 @@ public class BioConditionCreation {
         // /*
         // * Save bioCondition in XML to control
         // */
-        for (String name : generalExp.getBioConds().keySet()) {
-            BioCondition bio = generalExp.getBioConds().get(name);
-            XMLUtils.encodeToFile(bio, Database.getBIOCONDITION_PATH() + name + ".xml");
-        }
+//        for (String name : generalExp.getBioConds().keySet()) {
+//            BioCondition bio = generalExp.getBioConds().get(name);
+//            XMLUtils.encodeToFile(bio, Database.getBIOCONDITION_PATH() + name + ".xml");
+//        }
         return logs;
     }
 

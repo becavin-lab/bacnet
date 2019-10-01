@@ -131,8 +131,10 @@ public class SetupPart implements SelectionListener {
     private Label lblHomologpath;
     private Label lblHomopathfound;
     private Button btnAddHomologsInformation;
+    private Button btnCheckBlastResult;
+    private Button btnCreateHomologTables;
     private Button btnRunPhylogenomicTree;
-    private Button btnCreateBlast;
+    private Button btnCreateBlastDB;
     private Button btnCreatBlastpScript;
     private Button btnCreateGenomeSummary;
     private Button btnOrganizeGenomeTable;
@@ -262,14 +264,20 @@ public class SetupPart implements SelectionListener {
         
         lblHomopathfound = new Label(composite_9, SWT.NONE);
         
-        btnCreateBlast = new Button(composite_9, SWT.NONE);
-        btnCreateBlast.setToolTipText("WARNING : LONG RUN");
-        btnCreateBlast.setText("Create Blast database for Homolog search");
-        btnCreateBlast.addSelectionListener(this);
+        btnCreateBlastDB = new Button(composite_9, SWT.NONE);
+        btnCreateBlastDB.setToolTipText("WARNING : LONG RUN");
+        btnCreateBlastDB.setText("Create Blast database for Homolog search");
+        btnCreateBlastDB.addSelectionListener(this);
         
         btnCreatBlastpScript = new Button(composite_9, SWT.NONE);
-        btnCreatBlastpScript.setText("Creat BlastP script");
+        btnCreatBlastpScript.setText("Create BlastP script");
         btnCreatBlastpScript.addSelectionListener(this);
+        btnCheckBlastResult = new Button(composite_9, SWT.NONE);
+        btnCheckBlastResult.setText("Check BlastP script");
+        btnCheckBlastResult.addSelectionListener(this);
+        btnCreateHomologTables = new Button(composite_9, SWT.NONE);
+        btnCreateHomologTables.setText("Create Homolog tables");
+        btnCreateHomologTables.addSelectionListener(this);
         btnAddHomologsInformation = new Button(composite_9, SWT.NONE);
         btnAddHomologsInformation.setText("Add Homologs information to Genomes");
         btnAddHomologsInformation.addSelectionListener(this);
@@ -591,7 +599,7 @@ public class SetupPart implements SelectionListener {
         if (FileUtils.exists(Phylogenomic.PHYLO_GENOME_SVG)) {
             lblPhylofigfound.setText("Phylogenomic tree was found");
         } else {
-        	String message = "No phylogenomic tree was found. Create it by clicking below. (JolyTree and FigTree software will be used)";
+        	String message = "No phylogenomic tree was found. Click on \"Run Phylogenomic tree creation\" and follow every step.";
         	lblPhylofigfound.setText(message);
             logs += "No phylogenomic tree was found.\n";
             updateConsole();
@@ -603,9 +611,12 @@ public class SetupPart implements SelectionListener {
         if (FileUtils.exists(Phylogenomic.HOMOLOG_SUMMARY)) {
             lblHomopathfound.setText("Homologs final file was found");
         } else {
-        	String message = "No homologs final file found. Create first a Blast Database, then create the bash script, and run it on your computer. "
-        			+ "Finalize homolog search by creating HomoloStats.txt. (BlastP will be used)";
-        	lblHomopathfound.setText(message);
+        	String message = "No homologs final file found. Click on \"Create Blast database...\" "
+        			+ "-> \"Create BlastP script\" -> Run all BlastP scripts -> click on \"Check BlastP script\" "
+        			+ "-> \"Create Homolog tables\" -> \"Add Homologs information to Genomes\"\n"
+        			+ Phylogenomic.HOMOLOG_SUMMARY +" will be created.";
+        	lblHomopathfound.setText(Phylogenomic.HOMOLOG_SUMMARY + "not found");
+        	logs += message +"\n";
             updateConsole();
         }
     }
@@ -621,8 +632,7 @@ public class SetupPart implements SelectionListener {
     	if (FileUtils.exists(Phylogenomic.PHYLO_GENOME_SVG)) {
             lblPhylofigfound.setText("Phylogenomic tree was found");
         } else {
-        	String message = "No phylogenomic tree was found. Create first a Blast Database, then create the bash script, and run it on your computer. "
-        			+ "Finalize homolog search by creating HomoloStats.txt. (BlastP will be used)";
+        	String message = "No phylogenomic tree was found. Click on \"Run Phylogenomic tree creation\" and follow every step.";
         	lblPhylofigfound.setText(message);
             logs += "No phylogenomic tree was found.\n";
             updateConsole();
@@ -631,11 +641,14 @@ public class SetupPart implements SelectionListener {
          * Homologs search
          */
         if (FileUtils.exists(Phylogenomic.HOMOLOG_SUMMARY)) {
-            lblHomopathfound.setText("Homologs final file was found");
+            lblHomopathfound.setText("Homologs final file was found.");
         } else {
-        	String message = "No homologs final file found. Create first a Blast Database, then create the bash script, and run it on your computer. "
-        			+ "Finalize homolog search by creating HomoloStats.txt. (BlastP will be used)";
-        	lblHomopathfound.setText(message);
+        	String message = "No homologs final file found. Click on \"Create Blast database...\" "
+        			+ "-> \"Create BlastP script\" -> Run all BlastP scripts -> click on \"Check BlastP script\" "
+        			+ "-> \"Create Homolog tables\" -> \"Add Homologs information to Genomes\"\n"
+        			+ Phylogenomic.HOMOLOG_SUMMARY +" will be created.";
+        	lblHomopathfound.setText(Phylogenomic.HOMOLOG_SUMMARY + "not found");
+        	logs += message+"\n";
             updateConsole();
         }
     }
@@ -964,6 +977,8 @@ public class SetupPart implements SelectionListener {
                     } else {
                         logs += genome + " was added to the database" + "\n";
                         dataValidation.getGenomes().put(genome, true);
+                        logs += "Save Protein to Locus tag hashmap for faster computing of homolog search: " + genome;
+                        genomeTemp.saveProteinIdToLocusTag();
                     }
                 }
             }
@@ -972,25 +987,29 @@ public class SetupPart implements SelectionListener {
         } else if (e.getSource() == btnCreateGenomeSummary) {
         	logs = GenomesCreation.createGenomeTable(logs);
         	updateConsole();
-        } if (e.getSource() == btnRunPhylogenomicTree) {
+        } else if (e.getSource() == btnRunPhylogenomicTree) {
            	logs = PhylogenomicsCreation.createPhylogenomicFigure(logs);
         	updatePhylogeny();
         	updateConsole(); 
-        } if (e.getSource() == btnOrganizeGenomeTable) {
+        } else if (e.getSource() == btnOrganizeGenomeTable) {
            	logs = PhylogenomicsCreation.organizePhyloTable(logs);
         	updatePhylogeny();
         	updateConsole(); 
-        } if (e.getSource() == btnAddHomologsInformation) {
-        	logs = HomologCreation.extractBlastResults(logs);
-            updatePhylogeny();
-        	updateConsole();        	
-        } else if (e.getSource() == btnCreateBlast) {
+        } else if (e.getSource() == btnCreateBlastDB) {
         	logs = HomologCreation.createBlastDB(logs);
-        	updatePhylogeny();
         	updateConsole();        	
         } else if (e.getSource() == btnCreatBlastpScript) {
         	logs = HomologCreation.createBlastScript(logs);
-        	updatePhylogeny();
+        	updateConsole();        	
+        } else if (e.getSource() == btnCheckBlastResult) {
+        	logs = HomologCreation.verifyBlastResults(logs);
+            updateConsole();        	
+        } else if (e.getSource() == btnCreateHomologTables) {
+        	logs = HomologCreation.createHomologTable(logs);
+            updateConsole();        	
+        } else if (e.getSource() == btnAddHomologsInformation) {
+        	logs = HomologCreation.addHomologToGene(logs);
+            updatePhylogeny();
         	updateConsole();        	
         } else if (e.getSource() == btnValidateBioconditionsDatabase) {
             logs += "--- Validate bioconditions\n";

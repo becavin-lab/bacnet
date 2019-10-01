@@ -217,6 +217,7 @@ public class DataValidation {
                 }
                 if (validate) {
                     this.getProteomes().put(biocondName, true);
+                    System.out.println("Validated "+biocondName);
                 } else {
                     logs += "Missing proteomes datasets for " + biocondName
                             + " - Click: Add unvalidated Comparisons to the database" + "\n";

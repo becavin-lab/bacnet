@@ -18,6 +18,7 @@ import bacnet.datamodel.sequence.Genome;
 import bacnet.reader.TabDelimitedTableReader;
 import bacnet.utils.ArrayUtils;
 import bacnet.utils.FileUtils;
+import bacnet.utils.MathUtils;
 
 public class ProteomicsCreation {
 
@@ -91,20 +92,23 @@ public class ProteomicsCreation {
                         matrix = matrix.getSubMatrixColumn(includeColNames);
 
                         /*
+                         * Not used = log transformation
+                         */
+//                         int nbProteins = 0;
+//                         for (int i = 0; i < matrix.getValues().length; i++) {
+//	                         for (int j = 0; j < matrix.getValues()[0].length; j++) {
+//		                         if (!(matrix.getValues()[i][j] == OmicsData.MISSING_VALUE) && (matrix.getValues()[i][j] != 0)) {
+//			                         matrix.getValues()[i][j] = MathUtils.log2(matrix.getValues()[i][j]);
+//			                         matrix.getValues()[i][j] = 1;
+//		                         }
+//	                         }
+//                         }
+                        
+                        /*
                          * Save expressionMatrix
                          */
                         proteome.setHeaders(matrix.getHeaders());
                         proteome.setRowNames(matrix.getRowNames());
-                        // int nbProteins = 0;
-                        // for (int i = 0; i < matrix.getValues().length; i++) {
-                        // for (int j = 0; j < matrix.getValues()[0].length; j++) {
-                        // if (!(matrix.getValues()[i][j] == OmicsData.MISSING_VALUE)
-                        // && (matrix.getValues()[i][j] != 0)) {
-                        // matrix.getValues()[i][j] = MathUtils.log2(matrix.getValues()[i][j]);
-                        // matrix.getValues()[i][j] = 1;
-                        // }
-                        // }
-                        // }
                         proteome.setValues(matrix.getValues());
                         System.out.println(
                                 "Save " + OmicsData.PATH_STREAMING + proteome.getName() + ProteomicsData.EXTENSION);
@@ -160,7 +164,7 @@ public class ProteomicsCreation {
     }
 
     /**
-     * In order to represent proteomics data we need to add a 0 value in every missing row.<br>
+     * In order to represent proteomics data we need to add a -1 value in every missing row.<br>
      * 
      * @param exp
      * @param genome
@@ -183,16 +187,19 @@ public class ProteomicsCreation {
                  * Read data
                  */
                 for (ProteomicsData proteome : bioCondition.getProteomes()) {
-                    String fileName = OmicsData.PATH_PROTEOMICS_RAW + proteome.getName() + ".txt";
-                    System.out.println(fileName);
+                    String fileName = OmicsData.PATH_PROTEOMICS_RAW + proteome.getRawDatas().get(0);
                     ExpressionMatrix matrix = ExpressionMatrix.loadTab(fileName, false);
                     for (String geneName : genome.getAllElementNames()) {
                         if (!matrix.getRowNames().keySet().contains(geneName)) {
                             // System.out.println("gene:" + geneName);
-                            matrix.addRow(geneName, new double[matrix.getHeaders().size()]);
+                        	double[] newLine = new double[matrix.getHeaders().size()];
+                        	for(int i=0;i<newLine.length;i++) {
+                        		newLine[i] = -1;
+                        	}
+                        	matrix.addRow(geneName, newLine);
                         }
                     }
-                    String fileNameNew = OmicsData.PATH_PROTEOMICS_NORM + proteome.getName() + ".txt";
+                    String fileNameNew = OmicsData.PATH_PROTEOMICS_NORM + proteome.getRawDatas().get(0);
                     matrix.saveTab(fileNameNew, ColNames.GenomeElements + "");
                 }
 
@@ -261,8 +268,9 @@ public class ProteomicsCreation {
             summarizeProteomes(expTemp, genomeName);
             /*
              * Deal with fold change
+             * UNUSED
              */
-            createLogFCMatrix(expTemp, genomeName);
+            //createLogFCMatrix(expTemp, genomeName);
 
         }
         logs += Database.getLOGFC_MATRIX_TRANSCRIPTOMES_PATH() + " tables created";

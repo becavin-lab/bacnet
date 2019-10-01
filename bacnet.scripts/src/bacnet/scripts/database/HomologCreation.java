@@ -355,55 +355,80 @@ public class HomologCreation {
 	}
 
 	/**
-	 * Run blast script for each genome against the other
+	 * Check every if every blastP has been performed and extract first information by calcuating indentities metric of each blast
+	 * @param logs
+	 * @return
 	 */
-	public static String extractBlastResults(String logs) {
+	public static String verifyBlastResults(String logs) {
 		ArrayList<String> listGenomes = Genome.getAvailableGenomes();
 		// int size_list = 10;
 		int size_list = listGenomes.size();
 		/*
 		 * Check that every Blast was run and finished
 		 */
-		// checkBlastComplete(size_list, listGenomes, logs);
+		checkBlastComplete(size_list, listGenomes, logs);
 
 		/*
 		 * Add identity information in table results !!! VERY LONG RUN !!!
 		 */
-		//addColumnIdentities(size_list, listGenomes, logs);
+		addColumnIdentities(size_list, listGenomes, logs);
+		System.out.println("Finish verification of blast results and first parsing");
+		return logs;
+	}
+	
+	/**
+	 * Create all homolog tables for each genome<br>
+	 * 3 different log files are saved<br>
+	 * TabDelimitedTableReader.saveTreeSet(proteinNotFound, GenomeNCBI.PATH_HOMOLOGS + "ProteinNotfFound.homologs.txt");<br>
+	 * TabDelimitedTableReader.saveTreeSet(noHomologs, GenomeNCBI.PATH_HOMOLOGS + "NoHomologsFound.homologs.txt");<br>
+	 * TabDelimitedTableReader.saveTreeSet(lowHomologs, GenomeNCBI.PATH_HOMOLOGS + "LowHomologsFound.homologs.txt");<br><br>
+	 *	
+	 * @param logs
+	 * @return
+	 */
+	public static String createHomologTable(String logs) {
+		ArrayList<String> listGenomes = Genome.getAvailableGenomes();
+		int size_list = listGenomes.size();
 
-		/*
-		 * Load all genomes for next step
-		 */
-//		folderCreation(GenomeNCBI.PATH_PROTEINID);
-//		for(String genome_pivot : Genome.getAvailableGenomes()) {
-//			Genome genome = Genome.loadGenome(genome_pivot, false);
-//			String message = "Save Protein to Locus tag hashmap for faster computing: " + genome_pivot;
-//			logs += message + "\n";
-//			genome.saveProteinIdToLocusTag();
-//		}
-		
 		/*
 		 * Combine everything together per genomes and search every homologs
 		 */
-//		TreeSet<String> proteinNotFound = new TreeSet<String>();
-//		TreeSet<String> noHomologs = new TreeSet<String>();
-//		TreeSet<String> lowHomologs = new TreeSet<String>();
-//		for (int i = 0; i < size_list; i++) {
-//		//for (int i = 0; i < 4; i++) {
-//		//	int i = 8;
-//			/*
-//			 * Combine all homologs in on table
-//			 */
-//			String genome_pivot = listGenomes.get(i);
-//			genome_pivot = GenomeNCBI.processGenomeName(genome_pivot);
-//			String message = "Summary table creation for: " + genome_pivot;
-//			logs += message + "\n";
-//			ArrayList<String> list_genomes_toBlast = extractList(listGenomes, 0, size_list);
-//			createSummaryTable(genome_pivot, list_genomes_toBlast, proteinNotFound, noHomologs, lowHomologs);
-//		}
-//		TabDelimitedTableReader.saveTreeSet(proteinNotFound, GenomeNCBI.PATH_HOMOLOGS + "ProteinNotfFound.homologs.txt");
-//		TabDelimitedTableReader.saveTreeSet(noHomologs, GenomeNCBI.PATH_HOMOLOGS + "NoHomologsFound.homologs.txt");
-//		TabDelimitedTableReader.saveTreeSet(lowHomologs, GenomeNCBI.PATH_HOMOLOGS + "LowHomologsFound.homologs.txt");
+		TreeSet<String> proteinNotFound = new TreeSet<String>();
+		TreeSet<String> noHomologs = new TreeSet<String>();
+		TreeSet<String> lowHomologs = new TreeSet<String>();
+		for (int i = 0; i < size_list; i++) {
+		//for (int i = 0; i < 4; i++) {
+		//	int i = 8;
+			/*
+			 * Combine all homologs in on table
+			 */
+			String genome_pivot = listGenomes.get(i);
+			genome_pivot = GenomeNCBI.processGenomeName(genome_pivot);
+			String message = "Summary table creation for: " + genome_pivot;
+			logs += message + "\n";
+			ArrayList<String> list_genomes_toBlast = extractList(listGenomes, 0, size_list);
+			createSummaryTable(genome_pivot, list_genomes_toBlast, proteinNotFound, noHomologs, lowHomologs);
+		}
+		TabDelimitedTableReader.saveTreeSet(proteinNotFound, GenomeNCBI.PATH_HOMOLOGS + "ProteinNotfFound.homologs.txt");
+		TabDelimitedTableReader.saveTreeSet(noHomologs, GenomeNCBI.PATH_HOMOLOGS + "NoHomologsFound.homologs.txt");
+		TabDelimitedTableReader.saveTreeSet(lowHomologs, GenomeNCBI.PATH_HOMOLOGS + "LowHomologsFound.homologs.txt");
+		String message = "Save list of protein Id not found in query genome in: "+GenomeNCBI.PATH_HOMOLOGS + "ProteinNotfFound.homologs.txt"+"\n";
+		message += "Save list of protein Id with no homolog in target genome: "+GenomeNCBI.PATH_HOMOLOGS + "NoHomologsFound.homologs.txt"+"\n";
+		message += "Save list of protein Id with low similarity (<20%) in target genome: "+GenomeNCBI.PATH_HOMOLOGS + "LowHomologsFound.homologs.txt"+"\n";
+		System.out.println(message);
+		System.out.println("Finish homolog tables creation");
+		return logs+message;
+	}
+	
+	/**
+	 * Add homologs to every gene by parsing all homolog tables
+	 * @param logs
+	 * @return
+	 */
+	public static String addHomologToGene(String logs) {
+		ArrayList<String> listGenomes = Genome.getAvailableGenomes();
+		int size_list = listGenomes.size();
+		ArrayList<String> genomeModified = new ArrayList<String>();
 		
 		/*
 		 * Add the homologs to every gene object
@@ -418,10 +443,26 @@ public class HomologCreation {
 			addHomologsToGenes(genome_pivot);
 			String message = "Phylogeny added to gene of: " + genome_pivot;
 			logs += message + "\n";
-			System.out.println("Phylogeny added to gene of: " + genome_pivot);
-
+			System.out.println(message);
+			genomeModified.add(genome_pivot);
 		}
+		TabDelimitedTableReader.saveList(genomeModified, GenomeNCBI.PATH_HOMOLOGS + "AddedtoGenome.homologs.txt");
 		
+		/*
+		 * Create homolog search summary file to validate creation
+		 */
+		System.out.println("Load log files");
+		genomeModified = TabDelimitedTableReader.readList(GenomeNCBI.PATH_HOMOLOGS + "AddedtoGenome.homologs.txt");
+		ArrayList<String> proteinNotFound = TabDelimitedTableReader.readList(GenomeNCBI.PATH_HOMOLOGS + "ProteinNotfFound.homologs.txt");
+		ArrayList<String> noHomologs = TabDelimitedTableReader.readList(GenomeNCBI.PATH_HOMOLOGS + "NoHomologsFound.homologs.txt");
+		ArrayList<String> lowHomologs = TabDelimitedTableReader.readList(GenomeNCBI.PATH_HOMOLOGS + "LowHomologsFound.homologs.txt");
+		ArrayList<String> finalLog = new ArrayList<String>();
+		finalLog.add("Nb of protein Id not found in query genome in: "+proteinNotFound.size());
+		finalLog.add("Nb of protein Id with no homolog in target genome: "+noHomologs.size());
+		finalLog.add("Nb of protein Id with low similarity (<20%) in target genome: "+lowHomologs.size());
+		finalLog.add("Nb of genomes in which homolog search was added: "+ genomeModified.size()+"/"+Genome.getAvailableGenomes().size());
+		TabDelimitedTableReader.saveList(finalLog, Phylogenomic.HOMOLOG_SUMMARY);
+		logs+= Phylogenomic.HOMOLOG_SUMMARY + " created\n";
 		
 		System.out.println("Finish extraction of Blast results");
 		return logs;
