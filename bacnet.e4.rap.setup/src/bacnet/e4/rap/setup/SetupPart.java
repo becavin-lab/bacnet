@@ -151,6 +151,7 @@ public class SetupPart implements SelectionListener {
         System.out.println("Run Setup page");
 
         SessionControl.initBacnetApp(partService, modelService, shell);
+        Test.runPreTest();
 
         Composite composite = new Composite(parent, SWT.NONE);
         composite.setBounds(0, 0, 1030, 632);
@@ -496,7 +497,7 @@ public class SetupPart implements SelectionListener {
 
         initProjectInfo();
         
-        runTest();
+        Test.runPostTest();
     }
 
     /*
@@ -526,15 +527,6 @@ public class SetupPart implements SelectionListener {
         updateConsole();
     }
     
-    /**
-     * Run Test functions before running database creation
-     * Put every functions you want to test HERE
-     */
-    private void runTest() {
-    	//BioCondition bioCond1 = BioCondition.getBioCondition("22Enterocolitica_Y11_IHS2000_2015_cDNA");
-    	
-    	   	
-    }
 
     private void initBioconditions() {
         lblBioCondPath.setText(Database.getInstance().getBioConditionsArrayPath());
@@ -947,11 +939,13 @@ public class SetupPart implements SelectionListener {
             logs += "--- Download genomes from RefSeq\n";
             System.out.println("yo");
             String[][] newGenomes = TabDelimitedTableReader.read(Database.getInstance().getGenomeArrayPath());
-            int index = ArrayUtils.findColumn(newGenomes, "RefSeq FTP");
+            int index = ArrayUtils.findColumn(newGenomes, GenomesCreation.COLNAME_REFSEQ);
             System.out.println("yes"+ index);
             if (index == -1) {
-                logs += "No \"RefSeq FTP\" column available in " + Database.getInstance().getGenomeArrayPath() + "\n";
+            	String message = "No \""+GenomesCreation.COLNAME_REFSEQ+"\" column available in " + Database.getInstance().getGenomeArrayPath() + "\n";
+            	logs += message;
                 logs += "Impossible to download the genomes";
+                System.out.println(message);
             } else {
                 ArrayList<String> listGenomes = new ArrayList<>();
                 for (String genome : dataValidation.getGenomes().keySet()) {

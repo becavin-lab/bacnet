@@ -407,7 +407,7 @@ public class InitViewYersinia implements SelectionListener {
 
         Link link = new Link(composite_19, SWT.NONE);
         link.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
-        link.setText("Contact us if you have a recently published \"omics\" dataset you want to be integrated to Yersiniomics<br><a>becavin AT impc.cnrs.fr DOT fr</a>");
+        link.setText("Contact us if you have a recently published \"omics\" dataset you want to be integrated to Yersiniomics<br>  <a>becavin AT impc.cnrs.fr DOT fr</a>");
 
         new Label(composite_19, SWT.NONE);
 

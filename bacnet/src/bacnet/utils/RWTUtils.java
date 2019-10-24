@@ -69,7 +69,31 @@ public class RWTUtils {
             return expID;
         }
     }
+    
+    public static String setPrideLink(String expID) {
+        if (expID.startsWith("PRD")) {
+            return "<a href='" + getPrideLink(expID) + "' target='_blank'>" + expID + "</a>";
+        }else if (expID.startsWith("PXD")) {
+            return "<a href='" + getPrideLink(expID) + "' target='_blank'>" + expID + "</a>";
+        } else {
+            return expID;
+        }
+    }
 
+    /**
+     * Get pride database link to a specific project
+     * @param expID
+     * @return
+     */
+    public static String getPrideLink(String expID) {
+        return "https://www.ebi.ac.uk/pride/archive/projects/" + expID;
+    }
+    
+    /**
+     * Get ArrayExpress database link to a specific project
+     * @param expID
+     * @return
+     */
     public static String getArrayExpressExpLink(String expID) {
         return "https://www.ebi.ac.uk/arrayexpress/experiments/" + expID;
     }

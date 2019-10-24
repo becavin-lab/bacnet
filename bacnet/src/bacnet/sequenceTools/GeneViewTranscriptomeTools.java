@@ -1,14 +1,19 @@
 package bacnet.sequenceTools;
 
+import org.eclipse.jface.viewers.ColumnLabelProvider;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
+
+import bacnet.datamodel.dataset.OmicsData.TypeData;
 import bacnet.datamodel.sequence.Sequence;
 import bacnet.expressionAtlas.core.GenomeElementAtlas;
 import bacnet.utils.ArrayUtils;
 import bacnet.utils.Filter;
+import bacnet.utils.RWTUtils;
 
 public class GeneViewTranscriptomeTools {
     /**
@@ -49,6 +54,7 @@ public class GeneViewTranscriptomeTools {
             TableColumn column = new TableColumn(tableOver, SWT.NONE);
             column.setText(arrayDataList[0][i]);
             column.setAlignment(SWT.LEFT);
+            
         }
         for (int i = 1; i < arrayDataList.length; i++) {
             String dataName = arrayDataList[i][ArrayUtils.findColumn(arrayDataList, "Data Name")];

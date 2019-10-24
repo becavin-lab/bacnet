@@ -511,7 +511,7 @@ public class BioConditionCreation {
     public static void createSummaryTranscriptomesTable() {
         ArrayList<String> tableResult = new ArrayList<>();
         String[] titles =
-                {"Data Name", "Type", "Date", "Growth", "TimePoint", "�C", "Mutant", "Media", "MediaGrowthProperties",
+                {"Data Name", "Type", "Date", "Growth", "TimePoint", "Temp.", "Mutant", "Media", "MediaGrowthProperties", "Nb genes",
                         "Strain used", "Strain array", "Reference", "ArrayExpressId", "ArrayExpressTechnoID"};
         String header = "";
         for (String title : titles)
@@ -539,6 +539,7 @@ public class BioConditionCreation {
                 row += bioCondition.getMedia().toString().replace('[', ' ').replace(']', ' ').trim() + "\t";
                 row += bioCondition.getMediaGrowthProperties().toString().replace('[', ' ').replace(']', ' ').trim()
                         + "\t";
+                row += "\t";
                 row += bioCondition.getGenomeUsed() + "\t";
                 row += bioCondition.getGenomeName() + "\t";
                 row += bioCondition.getReference() + "\t";
@@ -557,8 +558,8 @@ public class BioConditionCreation {
      */
     public static void createSummaryTranscriptomesComparisonsTable() {
         ArrayList<String> tableResult = new ArrayList<>();
-        String[] titles = {"Data Name", "Growth", "�C", "Mutant", "Media", "MediaGrowthProperties", "VS", "Growth",
-                "�C", "Mutant", "MediaGrowthProperties", "Media", "Type", "Date", "Strain used", "Strain array",
+        String[] titles = {"Data Name", "Growth", "Temp.", "Mutant", "Media", "MediaGrowthProperties", "VS", "Growth",
+                "�C", "Mutant", "MediaGrowthProperties", "Media", "Type", "ArrayExpressId", "Date", "Strain used", "Strain array",
                 "Reference"};
         String header = "";
         for (String title : titles)
@@ -596,6 +597,7 @@ public class BioConditionCreation {
                     // typeDatacontained = typeDatacontained.replaceAll("GeneExpr",
                     // "GeneExpression");
                     row += typeDatacontained.trim() + "\t";
+                    row += bioCondition.getArrayExpressId() + "\t";
                     row += bioCondition.getDate() + "\t";
                     row += bioCondition.getGenomeUsed() + "\t";
                     row += bioCondition.getGenomeName() + "\t";
@@ -616,7 +618,7 @@ public class BioConditionCreation {
     public static void createSummaryProteomesTable() {
         ArrayList<String> tableResult = new ArrayList<>();
         String[] titles = {"Data Name", "Localization", "Type", "Date", "Nb proteins", "Comment", "Growth", "TimePoint",
-                "�C", "Mutant", "Media", "MediaGrowthProperties", "Reference", "Strain used", "Strain array",};
+                "Temp.", "Mutant", "Media", "MediaGrowthProperties", "Pride Id", "Reference", "Strain used", "Strain array",};
         String header = "";
         for (String title : titles)
             header += title + "\t";
@@ -644,6 +646,7 @@ public class BioConditionCreation {
                 row += bioCondition.getMedia().toString().replace('[', ' ').replace(']', ' ').trim() + "\t";
                 row += bioCondition.getMediaGrowthProperties().toString().replace('[', ' ').replace(']', ' ').trim()
                         + "\t";
+                row += bioCondition.getArrayExpressId() + "\t";
                 row += bioCondition.getReference() + "\t";
                 row += bioCondition.getGenomeUsed() + "\t";
                 row += bioCondition.getGenomeName() + "\t";

@@ -121,7 +121,7 @@ public class ProteomicsView implements SelectionListener {
         Label lblXxSrnas = new Label(container, SWT.BORDER | SWT.CENTER);
         lblXxSrnas.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
         lblXxSrnas.setFont(SWTResourceManager.getTitleFont(SWT.BOLD));
-        lblXxSrnas.setText("Listeria Proteomics Datasets");
+        lblXxSrnas.setText(Database.getInstance().getSpecies() + " Proteomics Datasets");
         lblXxSrnas.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
 
         btnHelp = new Button(container, SWT.NONE);
@@ -412,6 +412,8 @@ public class ProteomicsView implements SelectionListener {
                         return "";
                     } else if (colName.equals("Reference")) {
                         return RWTUtils.setPubMedLink(text);
+                    } else if (colName.equals("Pride Id")) {
+                        return RWTUtils.setPrideLink(text);
                     } else {
                         return text;
                     }
@@ -569,7 +571,7 @@ public class ProteomicsView implements SelectionListener {
             }
             String arrayRep = ArrayUtils.toString(arrayToSave);
             String arrayRepHTML = TabDelimitedTableReader.getHTMLVersion(arrayToSave);
-            SaveFileUtils.saveTextFile("Listeria_Proteomic_Table.txt", arrayRep, true, "", arrayRepHTML, partService,
+            SaveFileUtils.saveTextFile(Database.getInstance().getSpecies() + "_Proteomic_Table.txt", arrayRep, true, "", arrayRepHTML, partService,
                     shell);
         } else {
             compositeDataFilter.updateBioConditionList();

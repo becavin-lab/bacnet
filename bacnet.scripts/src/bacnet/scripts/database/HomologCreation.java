@@ -42,7 +42,8 @@ public class HomologCreation {
 	 * Path for data on the server when running homolog search blasts
 	 */
 	// public static String PATH_SCRIPT = "/home/becavin/Yersiniomics/";
-	public static String PATH_SCRIPT = "/pasteur/homes/cbecavin/Yersiniomics/";
+	//public static String PATH_SCRIPT = "/pasteur/homes/cbecavin/Listeriomics/";
+	public static String PATH_SCRIPT = "/pasteur/projets/policy01/BioIT/Chris_Listeriomics/";
 
 	/**
 	 * Path for Blastp on the server when running homolog search
@@ -248,12 +249,15 @@ public class HomologCreation {
 		ArrayList<String> blastFile = new ArrayList<>();
 
 		// blastFile.add("PATH="+PATH_SERVER_BLAST+":$PATH");
-		blastFile.add("blastp -query " + blastDBFolder + "_fileGenomePivot -db " + blastDBFolder
+		blastFile.add("blastp -task blastp-short -query " + blastDBFolder + "_fileGenomePivot -db " + blastDBFolder  // without max_target parameter
 				+ "_databaseTarget -out " + blastDBFolder
-				+ "_blastP_VS_T -evalue 0.01 -max_target_seqs 1 -outfmt \"6 qseqid sseqid qlen slen length nident positive evalue bitscore\"");
-		blastFile.add("blastp -query " + blastDBFolder + "_fileGenomeTarget -db " + blastDBFolder
-				+ "_databasePivot -out " + blastDBFolder
-				+ "_blastT_VS_P -evalue 0.01 -max_target_seqs 1 -outfmt \"6 qseqid sseqid qlen slen length nident positive evalue bitscore\"");
+				+ "_blastP_VS_T -evalue 10000 -outfmt \"6 qseqid sseqid qlen slen length nident positive evalue bitscore qseq sseq\"");
+//		blastFile.add("blastp -query " + blastDBFolder + "_fileGenomePivot -db " + blastDBFolder
+//				+ "_databaseTarget -out " + blastDBFolder
+//				+ "_blastP_VS_T -evalue 0.01 -max_target_seqs 1 -outfmt \"6 qseqid sseqid qlen slen length nident positive evalue bitscore\"");
+//		blastFile.add("blastp -query " + blastDBFolder + "_fileGenomeTarget -db " + blastDBFolder
+//				+ "_databasePivot -out " + blastDBFolder
+//				+ "_blastT_VS_P -evalue 0.01 -max_target_seqs 1 -outfmt \"6 qseqid sseqid qlen slen length nident positive evalue bitscore\"");
 		blastFile.add("echo _fileGenomePivot VS _fileGenomeTarget Blast search completed");
 		// ">" + scriptFolder + "_fileGenomePivotVS_fileGenomeTarget.control.txt");
 

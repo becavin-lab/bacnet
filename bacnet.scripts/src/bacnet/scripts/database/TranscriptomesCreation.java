@@ -24,6 +24,7 @@ import bacnet.scripts.core.normalization.VarianceNormalization;
 import bacnet.scripts.core.stat.StatTest;
 import bacnet.scripts.core.stat.StatTest.TypeStat;
 import bacnet.scripts.listeriomics.TilingGeneExprDataBase;
+import bacnet.utils.ArrayUtils;
 import bacnet.utils.ExpressionMatrixStat;
 import bacnet.utils.FileUtils;
 import bacnet.utils.Filter;
@@ -204,6 +205,33 @@ public class TranscriptomesCreation {
         String message = Database.getLOGFC_MATRIX_TRANSCRIPTOMES_PATH() + " tables created";
         logs += message + "\n";
         System.out.println(message);
+        
+        /*
+         * Update transcriptome table to count how much genes were measured
+         */
+        
+//        String[][] arrayTranscriptomics = TabDelimitedTableReader.read(Database.getInstance().getTranscriptomesArrayPath());
+//        for (String transcriptomes : exp.getBioConditions()) {
+//	        int nbProteins = 0;
+//	        for (int i = 0; i < proteome.getValues().length; i++) {
+//	            for (int j = 0; j < proteome.getValues()[0].length; j++) {
+//	                if ((proteome.getValues()[i][j] != -1)
+//	                        && (proteome.getValues()[i][j] != 0)) {
+//	                    nbProteins++;
+//	                }
+//	            }
+//	        }
+//	        for (int i = 1; i < arrayProteomics.length; i++) {
+//	            String dataName = arrayProteomics[i][ArrayUtils.findColumn(arrayProteomics, "Data Name")];
+//	            System.out.println("nb proteins"+dataName +" "+ bioCondition.getName()	);
+//	            if (dataName.equals(bioCondition.getName())) {
+//	                System.out.println(nbProteins + " "+i+" "+ArrayUtils.findColumn(arrayProteomics, "Nb genes"));
+//	                arrayProteomics[i][ArrayUtils.findColumn(arrayProteomics, "Nb proteins")] = nbProteins + "";
+//	            }
+//	        }
+//	        TabDelimitedTableReader.save(arrayProteomics, Database.getInstance().getProteomesArrayPath());
+//	        }
+        
         return logs;
     }
     

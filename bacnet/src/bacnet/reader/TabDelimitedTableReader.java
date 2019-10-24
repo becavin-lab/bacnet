@@ -33,7 +33,7 @@ public class TabDelimitedTableReader {
      * @param separator between the columns
      * @return String array representation of the file
      * @throws IOException
-     * @author Christophe B�cavin
+     * @author Christophe Becavin
      */
     public static String[][] read(File file, String separator) {
         ArrayList<String> rowList = readList(file.getAbsolutePath(), true);
@@ -46,24 +46,25 @@ public class TabDelimitedTableReader {
         		nbColumn = nbColumnTemp;
         	}
         }
-        String[][] ret = new String[nbRow][nbColumn];
-        for (int i = 0; i < rowList.size(); i++) {
-            int j = 0;
-            while (j < rowList.get(i).split(separator).length) {
-                ret[i][j] = rowList.get(i).split(separator)[j].trim();
-                j++;
-            }
-            while (j < nbColumn) {
-                ret[i][j] = "";
-                j++;
-            }
+        //System.out.println(nbColumn + " "+nbRow);
+        if(nbColumn == -1 || nbRow == 0) {
+        	String[][] ret = new String[0][0];
+        	return ret;
+        }else {
+        	String[][] ret = new String[nbRow][nbColumn];
+	        for (int i = 0; i < rowList.size(); i++) {
+	            int j = 0;
+	            while (j < rowList.get(i).split(separator).length) {
+	                ret[i][j] = rowList.get(i).split(separator)[j].trim();
+	                j++;
+	            }
+	            while (j < nbColumn) {
+	                ret[i][j] = "";
+	                j++;
+	            }
+	        }
+	        return ret;
         }
-        // System.out.println(Arrays.toString(ret));
-        // ArrayUtils.displayMatrix("yo", ret);
-        // System.out.println("Read table, found "+nbRow+" rows, "+nbColumn+"
-        // columns.");
-
-        return ret;
     }
 
     public static String[][] read(String fileName) {
