@@ -249,12 +249,12 @@ public class HomologCreation {
 		ArrayList<String> blastFile = new ArrayList<>();
 
 		// blastFile.add("PATH="+PATH_SERVER_BLAST+":$PATH");
-		blastFile.add("blastp -task blastp-short -query " + blastDBFolder + "_fileGenomePivot -db " + blastDBFolder  // without max_target parameter
-				+ "_databaseTarget -out " + blastDBFolder
-				+ "_blastP_VS_T -evalue 10000 -outfmt \"6 qseqid sseqid qlen slen length nident positive evalue bitscore qseq sseq\"");
-//		blastFile.add("blastp -query " + blastDBFolder + "_fileGenomePivot -db " + blastDBFolder
+//		blastFile.add("blastp -task blastp-short -query " + blastDBFolder + "_fileGenomePivot -db " + blastDBFolder  // without max_target parameter
 //				+ "_databaseTarget -out " + blastDBFolder
-//				+ "_blastP_VS_T -evalue 0.01 -max_target_seqs 1 -outfmt \"6 qseqid sseqid qlen slen length nident positive evalue bitscore\"");
+//				+ "_blastP_VS_T -evalue 10000 -outfmt \"6 qseqid sseqid qlen slen length nident positive evalue bitscore qseq sseq\"");
+		blastFile.add("blastp -query " + blastDBFolder + "_fileGenomePivot -db " + blastDBFolder
+				+ "_databaseTarget -out " + blastDBFolder
+				+ "_blastP_VS_T -evalue 0.01 -max_target_seqs 1 -outfmt \"6 qseqid sseqid qlen slen length nident positive evalue bitscore\"");
 //		blastFile.add("blastp -query " + blastDBFolder + "_fileGenomeTarget -db " + blastDBFolder
 //				+ "_databasePivot -out " + blastDBFolder
 //				+ "_blastT_VS_P -evalue 0.01 -max_target_seqs 1 -outfmt \"6 qseqid sseqid qlen slen length nident positive evalue bitscore\"");

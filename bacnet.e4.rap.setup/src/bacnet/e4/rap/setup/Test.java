@@ -19,7 +19,7 @@ public class Test {
 	public static void runPreTest() {
 		System.out.println("Run Pre-test");
 		
-		Peptidomics.run();
+//		Peptidomics.run();
 //		String genome = "Listeria monocytogenes 2015TE24968";
 //		GenomeNCBI genomeNCBI = GenomeNCBITools.loadGenome(genome, GenomeNCBI.PATH_GENOMES, false, true);
 //        GenomeConversion.run(genomeNCBI, GenomeNCBI.PATH_GENOMES + "/" + genome, genome);
