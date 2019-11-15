@@ -53,6 +53,7 @@ public class DataFolder {
         folders.add(GenomeNCBI.PATH_GENOMES);
         folders.add(GenomeNCBI.PATH_HOMOLOGS);
         folders.add(GenomeNCBI.PATH_ANNOTATION);
+        folders.add(GenomeNCBI.PATH_PROTEINID);
         folders.add(GenomeNCBI.PATH_TEMP);
         for (String path : folders) {
             if (!FileUtils.exists(path)) {

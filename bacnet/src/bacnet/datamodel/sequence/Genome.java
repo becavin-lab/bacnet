@@ -575,6 +575,7 @@ public class Genome {
         ArrayList<String> listGenomes =
                 TabDelimitedTableReader.readList(Database.getInstance().getGenomeArrayPath(), 1);
         listGenomes.remove(0);
+        //listGenomes.add(0, "peptidomics");
         return listGenomes;
     }
 

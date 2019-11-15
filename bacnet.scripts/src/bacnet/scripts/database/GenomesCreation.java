@@ -30,6 +30,11 @@ import ca.ualberta.stothard.cgview.CgviewIO;
  *
  */
 public class GenomesCreation {
+	
+	/**
+	 * Name fo the column in which RefSeq FTP url is found
+	 */
+	public static String COLNAME_REFSEQ = "RefSeq.FTP";
 
     /**
      * Download all genomes available in the database
@@ -86,16 +91,16 @@ public class GenomesCreation {
         for (int i = 1; i < newGenomes.length; i++) {
             String strain = newGenomes[i][ArrayUtils.findColumn(newGenomes, "Name")];
             if (listGenomes.contains(strain)) {
-                String refSeqFTP = newGenomes[i][ArrayUtils.findColumn(newGenomes, "RefSeq FTP")];
+                String refSeqFTP = newGenomes[i][ArrayUtils.findColumn(newGenomes, GenomesCreation.COLNAME_REFSEQ)];
                 String ftp = refSeqFTP;
                 System.out.println("Ref:" + refSeqFTP);
                 if (refSeqFTP.equals("")) {
-                	int index = ArrayUtils.findColumn(newGenomes, "GenBank FTP");
+                	int index = ArrayUtils.findColumn(newGenomes, GenomesCreation.COLNAME_REFSEQ);
                     if (index == -1) {
                         logs += "No \"RefSeq FTP\" and \"GenBank FTP\" columns available in " + Database.getInstance().getGenomeArrayPath() + "\n";
                         logs += "Impossible to download the genomes";
                     } else {
-                    	ftp = newGenomes[i][ArrayUtils.findColumn(newGenomes, "GenBank FTP")];
+                    	ftp = newGenomes[i][ArrayUtils.findColumn(newGenomes, GenomesCreation.COLNAME_REFSEQ)];
                     }
                 }
                 System.out.println(ftp);

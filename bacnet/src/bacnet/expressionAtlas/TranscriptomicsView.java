@@ -661,7 +661,7 @@ public class TranscriptomicsView implements SelectionListener {
             }
             String arrayRep = ArrayUtils.toString(arrayToSave);
             String arrayRepHTML = TabDelimitedTableReader.getHTMLVersion(arrayToSave);
-            SaveFileUtils.saveTextFile("Listeria_Transcriptomic_Table.txt", arrayRep, true, "", arrayRepHTML,
+            SaveFileUtils.saveTextFile(Database.getInstance().getSpecies() + "_Transcriptomic_Table.txt", arrayRep, true, "", arrayRepHTML,
                     partService, shell);
         } else if (e.getSource() == btnHelp) {
             HelpPage.helpTrancriptomicView(partService);

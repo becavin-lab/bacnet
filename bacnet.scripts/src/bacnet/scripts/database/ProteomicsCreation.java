@@ -296,35 +296,34 @@ public class ProteomicsCreation {
         String[][] arrayProteomics = TabDelimitedTableReader.read(Database.getInstance().getProteomesArrayPath());
         ArrayList<ExpressionMatrix> matrices = new ArrayList<>();
         for (BioCondition bioCondition : massSpecBioCond) {
-            System.out.println(bioCondition.getName());
-
             if (bioCondition.getTypeDataContained().contains(TypeData.Proteome)) {
                 /*
                  * Read data
                  */
                 for (ProteomicsData proteome : bioCondition.getProteomes()) {
                     proteome.load();
+                    
+                    /*
+                     * Update proteomics table by adding nb of poteins detected
+                     */
                     int nbProteins = 0;
                     for (int i = 0; i < proteome.getValues().length; i++) {
                         for (int j = 0; j < proteome.getValues()[0].length; j++) {
-                            if (!(proteome.getValues()[i][j] == OmicsData.MISSING_VALUE)
+                            if ((proteome.getValues()[i][j] != -1)
                                     && (proteome.getValues()[i][j] != 0)) {
                                 nbProteins++;
                             }
                         }
                     }
-
-                    /*
-                     * Update proteomics table
-                     */
                     for (int i = 1; i < arrayProteomics.length; i++) {
                         String dataName = arrayProteomics[i][ArrayUtils.findColumn(arrayProteomics, "Data Name")];
                         if (dataName.equals(bioCondition.getName())) {
-                            // System.out.println(matrix.getRowNames().size());
+                            //System.out.println(nbProteins + " "+i+" "+ArrayUtils.findColumn(arrayProteomics, "Nb proteins"));
                             arrayProteomics[i][ArrayUtils.findColumn(arrayProteomics, "Nb proteins")] = nbProteins + "";
                         }
                     }
                     TabDelimitedTableReader.save(arrayProteomics, Database.getInstance().getProteomesArrayPath());
+                    
                     /*
                      * Add to list for fusion matrix
                      */
