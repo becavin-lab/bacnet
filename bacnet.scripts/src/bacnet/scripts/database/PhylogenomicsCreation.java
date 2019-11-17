@@ -52,7 +52,7 @@ public class PhylogenomicsCreation {
 	public static String createPhylogenomicFigure(String logs) {
 		String output = "PhylogenyGenomes";
 		String fastaFolder = GenomeNCBI.PATH_RAW + "Fasta/";
-
+		
 		logs = copyFastafile(fastaFolder, logs);
 		logs = runJOLYTree(fastaFolder, output, logs);
 		logs = runFigTree(output, logs);
@@ -76,7 +76,6 @@ public class PhylogenomicsCreation {
 			File file = new File(fastaFolder);
 			file.mkdir();
 		}
-
 		for (int i = 0; i < genomeNames.size(); i++) {
 			String genomeName = genomeNames.get(i);
 			String folder = genomeFolder + genomeName;

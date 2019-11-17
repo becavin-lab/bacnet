@@ -1063,6 +1063,7 @@ public class ExpressionMatrix extends OmicsData implements Cloneable, Serializab
         ArrayList<String> headerAnnotation = new ArrayList<String>();
         boolean annotationReached = false;
         for (int j = 1; j < array[0].length; j++) {
+        	int nbVoid = 0;
             for (int i = 1; i < Math.min(10, array.length); i++) {
                 try {
                     /*
@@ -1074,7 +1075,7 @@ public class ExpressionMatrix extends OmicsData implements Cloneable, Serializab
                         double value = Double.parseDouble(array[i][j]);
 
                         // System.out.println("null value at position: "+i+" : "+j+" "+);
-                    }
+                    } else nbVoid += 1;
                     // System.out.println("First value of column: "+j+" at line "+i+" Value:
                     // "+array[0][j]);
                     // double value = Double.parseDouble(array[i][j]);
@@ -1087,7 +1088,9 @@ public class ExpressionMatrix extends OmicsData implements Cloneable, Serializab
                 }
             }
             if (!annotationReached) {
-                headers.add(array[0][j]);
+            	if (nbVoid == Math.min(10, array.length)-1) {
+            		headerAnnotation.add(array[0][j]);
+            	} else headers.add(array[0][j]);
             } else {
                 headerAnnotation.add(array[0][j]);
             }
@@ -1113,7 +1116,7 @@ public class ExpressionMatrix extends OmicsData implements Cloneable, Serializab
                             values[i][j] = 0;
                         else if (array[i + 1][j + 1].contains("NA"))
                             values[i][j] = 0;
-                        else
+                        else 
                             values[i][j] = Double.parseDouble(array[i + 1][j + 1]);
                     }
                 }
