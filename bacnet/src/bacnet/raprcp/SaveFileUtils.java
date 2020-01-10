@@ -21,52 +21,6 @@ import bacnet.views.InternalBrowser;
 public class SaveFileUtils {
 
     /**
-     * Same as saveTextFile but with no Preview
-     * 
-     * @param fileName
-     * @param textToSave
-     * @param title
-     * @param partService
-     * @param shell
-     */
-    public static void saveControltoPNG(String divID, String fileName, Shell shell) {
-        /*
-         * IF eclipse.rap
-         */
-        /*
-         * NOT WORKING - GET DIVID and print only the control String $el = "$el"; String id =
-         * WidgetUtil.getId(control); String divId = "test"; String[] scripts = {"rap.getObject( '", id,
-         * "' ).", $el, ".attr( 'div-id', '", divId + "' );"
-         * ,"console.log(document.getElementById(\""+divId+"\"));","console.log(\"yo\")" }; StringBuilder
-         * script = new StringBuilder(); script.append( "try{" ); for( String str : scripts ) {
-         * script.append( str ); } script.append( "}catch(e){console.log(\"Cannot find div\")}" );
-         */
-        String script = HTMLUtils.getPluginTextFile("bacnet", "html/printscreen.js");
-        script = script.replaceFirst("_FileName", fileName);
-        script = script.replaceFirst("_DivName", divID);
-        JavaScriptExecutor executor = RWT.getClient().getService(JavaScriptExecutor.class);
-        executor.execute("console.log(\"printscreen\")");
-        executor.execute(script);
-
-        /*
-         * If eclipse.rcp
-         */
-        // FileDialog fd = new FileDialog(shell, SWT.SAVE);
-        // fd.setText("Save "+fileName+" to: ");
-        // fd.setFileName(fileName);
-        // String extension = FileUtils.getExtension(fileName);
-        // String[] filterExt = {"*"+extension,"*.*" };
-        // fd.setFilterExtensions(filterExt);
-        // String fileNameSave = fd.open();
-        // try {
-        // FileUtils.copy(fileToSave.getAbsolutePath(), fileNameSave);
-        // } catch (Exception ex) {
-        // System.out.println("Cannot save the image");
-        // }
-
-    }
-
-    /**
      * Save a text file
      * 
      * @param fileName name of the file you want to give

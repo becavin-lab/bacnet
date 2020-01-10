@@ -22,9 +22,9 @@ import bacnet.Database;
 
 public class BasicApplication implements ApplicationConfiguration {
 
-    public static String projectName = Database.YERSINIOMICS_PROJECT;
+    //public static String projectName = Database.YERSINIOMICS_PROJECT;
     // public static String projectName = Database.LEISHOMICS_PROJECT;
-    // public static String projectName = Database.CRISPRGO_PROJECT;
+    public static String projectName = Database.CRISPRGO_PROJECT;
     //public static String projectName = Database.LISTERIOMICS_PROJECT;
     //public static String projectName = "ListeriomicsSample";
     // public static String projectName = "Encode";

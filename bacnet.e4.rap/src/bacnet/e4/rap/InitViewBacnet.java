@@ -211,7 +211,7 @@ public class InitViewBacnet implements SelectionListener {
 
         Link link = new Link(composite_19, SWT.NONE);
         link.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
-        link.setText("Contact us: <a>listeriomics AT pasteur DOT fr</a>");
+        link.setText("Contact us: <a>becavin AT ipmc DOT cnrs DOT fr</a>");
 
         new Label(composite_19, SWT.NONE);
 
@@ -291,7 +291,7 @@ public class InitViewBacnet implements SelectionListener {
     @Override
     public void widgetSelected(SelectionEvent e) {
         if (e.getSource() == btnCRISPR) {
-            String url = "https://crispr.pasteur.fr";
+            String url = "http://www.genomique.info:10080/CRISPRGo/";
             NavigationManagement.openURLInExternalBrowser(url, partService);
         } else if (e.getSource() == btnListeriomics) {
             String url = "https://listeriomics.pasteur.fr";
@@ -300,7 +300,7 @@ public class InitViewBacnet implements SelectionListener {
             String url = "https://leishomics.pasteur.fr";
             NavigationManagement.openURLInExternalBrowser(url, partService);
         } else if (e.getSource() == btnYersiniomics) {
-            String url = "https://yersiniomics.pasteur.fr";
+            String url = "http://www.genomique.info:10080/Yersiniomics/";
             NavigationManagement.openURLInExternalBrowser(url, partService);
         } else if (e.getSource() == linkPubli) {
             String url = "";

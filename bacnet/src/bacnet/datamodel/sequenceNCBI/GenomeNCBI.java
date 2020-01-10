@@ -97,6 +97,7 @@ public class GenomeNCBI {
         // read Genome sequence given in the .fna
         this.species = FileUtils.removeExtensionAndPath(genomePath);
         File file = new File(genomePath);
+        System.out.println(genomePath);
         System.out.println("Load " + this.species);
         /*
          ****** First we read Genome sequence information in the different fna files
@@ -109,6 +110,7 @@ public class GenomeNCBI {
         File[] files = file.listFiles(new FilenameFilter() {
             @Override
             public boolean accept(File dir, String name) {
+            	System.out.println(name);
                 if (name.endsWith(".fna"))
                     return true;
                 return false;
