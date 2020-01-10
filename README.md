@@ -7,7 +7,7 @@ Our platform integrates different type of tools, the three most important being:
 
 All these tools are already implemented in _Listeriomics_ website. See the [Listeriomics wiki](https://listeriomics.pasteur.fr/WikiListeriomics/index.php/Summary) to understand how they work.
 
-![Bacnet Ad](https://github.com/becavin-lab/bacnet/blob/tutorial/wiki/BACNET%20Ad.png)
+![Bacnet Ad](https://github.com/becavin-lab/bacnet/blob/master/wiki/BACNET%20Ad.png)
 
 BACNET allows also to develop local software and websites with the same code. To reach this goal we used two highly connected APis , <a rel="nofollow" class="external text" href="http://wiki.eclipse.org/index.php/Rich_Client_Platform">Eclipse RCP</a> and <a rel="nofollow" class="external text" href="http://eclipse.org/rap/">Eclipse RAP</a> (<a rel="nofollow" class="external text" href="http://fr.slideshare.net/caniszczyk/single-sourcing-rcp-and-rap">single sourcing</a>).
 
@@ -51,3 +51,8 @@ The following tutorials will show you how to build such a website using BACNET p
 [Add Co-Expression Networks](https://github.com/becavin-lab/bacnet/wiki/Add-Co-Expression-Networks) - Add Co Expression Networks to your website
 
 [Deploy your website](https://github.com/becavin-lab/bacnet/wiki/Deploy-multi-omics-website) - Deploy on server your website
+
+
+## Support
+
+![Bacnet Ad](https://github.com/becavin-lab/bacnet/blob/master/wiki/logos.png)
