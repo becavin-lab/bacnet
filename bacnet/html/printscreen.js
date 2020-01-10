@@ -3,13 +3,6 @@
  */
 function printscreen(fileName, divId) {
 	console.log("Printscreen "+divId+" in "+fileName)
-	//var div = document.getElementById(divId) // not working with Eclipse.RAP
-	//if(divId == "body"){
-	//	var div = document.body
-	//}else{
-	//	var div = document.getElementById(divId)
-	//}
-	//console.log(div)
 	html2canvas(document.body).then(
 		function(canvas) {
 			canvas.toBlob(function(blob) {
@@ -20,12 +13,18 @@ function printscreen(fileName, divId) {
 			};
 			var link = document.createElement("a");
 			link.setAttribute("href", url);
-			link.setAttribute("download", fileName+".png");
+			link.setAttribute("download", fileName +".jpeg");
 			link.click();
 		});
 	console.log("Screen printed")
 	});
+
 }
+
+html2canvas(document.querySelector("#capture")).then(canvas => {
+    document.body.appendChild(canvas)
+});
+
 
 var fileName = "_FileName"
 //var divId = "_DivName"

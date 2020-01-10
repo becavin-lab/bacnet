@@ -1,9 +1,12 @@
 package bacnet.e4.rap.setup;
 
+import bacnet.datamodel.annotation.Annotation;
 import bacnet.datamodel.sequence.Genome;
 import bacnet.datamodel.sequenceNCBI.GenomeConversion;
 import bacnet.datamodel.sequenceNCBI.GenomeNCBI;
 import bacnet.datamodel.sequenceNCBI.GenomeNCBITools;
+import bacnet.reader.TabDelimitedTableReader;
+import bacnet.scripts.genome.RASTEGDeGenome;
 import bacnet.scripts.listeriomics.Peptidomics;
 
 /**
@@ -17,7 +20,12 @@ public class Test {
 	 * Run pre-test methods before interface creation
 	 */
 	public static void runPreTest() {
-		System.out.println("Run Pre-test");
+//		System.out.println("Run Pre-test");
+//		 RASTEGDeGenome.run();
+//		Genome genome = Genome.loadEgdeGenome();
+//		System.out.println(genome.getSpecies());
+//		
+//		TabDelimitedTableReader.save(Annotation.getAnnotationGenes(genome,genome.getFirstChromosome().getGeneNameList()),"C:\\Users\\ipmc\\Desktop\\EGDe.txt");
 		
 //		Peptidomics.run();
 //		String genome = "Listeria monocytogenes 2015TE24968";

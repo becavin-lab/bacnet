@@ -61,7 +61,7 @@ public class BannerView implements SelectionListener {
     @Inject
     @Named(IServiceConstants.ACTIVE_SHELL)
     private Shell shell;
-    private ToolItem tltmPrintScreen;
+    
 
     @Inject
     public BannerView() {
@@ -141,10 +141,6 @@ public class BannerView implements SelectionListener {
         tltmAbout.setImage(ResourceManager.getPluginImage("bacnet", "icons/ToolBar/howto.png"));
         tltmAbout.addSelectionListener(this);
 
-        tltmPrintScreen = new ToolItem(toolBar, SWT.NONE);
-        tltmPrintScreen.setImage(ResourceManager.getPluginImage("bacnet", "icons/ToolBar/printscreen.png"));
-        tltmPrintScreen.addSelectionListener(this);
-
         if (appName.equals(Database.CRISPRGO_PROJECT) || appName.equals(Database.BACNET)) {
             tltmGenomics.dispose();
             tltmTranscriptomics.dispose();
@@ -166,14 +162,12 @@ public class BannerView implements SelectionListener {
         } else if (e.getSource() == tltmTranscriptomics) {
             partService.showPart(TranscriptomicsView.ID, PartState.ACTIVATE);
             NavigationManagement.pushStateView(TranscriptomicsView.ID);
-        } else if (e.getSource() == tltmPrintScreen) {
-            SaveFileUtils.saveControltoPNG("body", Database.getInstance().getProjectName(), shell);
         } else if (e.getSource() == tltmAbout) {
             UrlLauncher launcher = RWT.getClient().getService(UrlLauncher.class);
-            launcher.openURL("https://gitlab.pasteur.fr/bacnet/Bacnet-public/wikis/home");
+            launcher.openURL("https://listeriomics.pasteur.fr/WikiBacnet/index.php/Main_Page");
         } else if (e.getSource() == tltmGitlab) {
             UrlLauncher launcher = RWT.getClient().getService(UrlLauncher.class);
-            launcher.openURL("https://gitlab.pasteur.fr/bacnet/Bacnet-public");
+            launcher.openURL("https://github.com/becavin-lab/bacnet");
         }
     }
 

@@ -96,7 +96,7 @@ public class Database {
     /**
      * Path for website database on Pasteur Virtual Machine
      */
-//    public static String PATH_WEBSITE = "/srv/data/BacnetDatabases.ini";
+    //public static String PATH_WEBSITE = "/srv/data/BacnetDatabases.ini";
     public static String PATH_WEBSITE="/home/becavin/srv/data/BacnetDatabases.ini";
 
     /*******************************************************************

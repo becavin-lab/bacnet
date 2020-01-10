@@ -1,5 +1,7 @@
 package bacnet.scripts.listeriomics;
 
+import bacnet.datamodel.annotation.LocusTag;
+
 public class GenomesListeriomics {
 
     public static void run() {
@@ -25,7 +27,7 @@ public class GenomesListeriomics {
         /*
          * Due to change in the locus tag naming of NCBI we need to add old locus tag in the information
          */
-        // LocusTag.parseOldLocusTagChange();
+         //LocusTag.parseOldLocusTagChange();
         // LocusTag.parseNewLocusTagChange();
         // LocusTag.addLocusChange();
 
