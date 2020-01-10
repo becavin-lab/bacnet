@@ -44,6 +44,7 @@ public class GenomeNCBI {
 
     /**
      * Path for all raw data for Genomes : Database.getInstance().getPath() + "/GenomeNCBI/";
+     * 
      */
     public static String PATH_RAW = Database.getInstance().getPath() + File.separator + "GenomeNCBI" + File.separator;
     /**

@@ -42,13 +42,16 @@ public class HomologCreation {
 	 * Path for data on the server when running homolog search blasts
 	 */
 	// public static String PATH_SCRIPT = "/home/becavin/Yersiniomics/";
-	//public static String PATH_SCRIPT = "/pasteur/homes/cbecavin/Listeriomics/";
-	public static String PATH_SCRIPT = "/pasteur/projets/policy01/BioIT/Chris_Listeriomics/";
+
+//	public static String PATH_SCRIPT = "/pasteur/homes/cbecavin/Yersiniomics/";
+	public static String PATH_SCRIPT = "D:/Programming/GitRepository/ListeriomicsSample/GenomeNCBI/Temp/";
+
 
 	/**
 	 * Path for Blastp on the server when running homolog search
 	 */
-	public static String PATH_SERVER_BLAST = "/share/apps/local/rmblast-2-2-28/bin/";
+//	public static String PATH_SERVER_BLAST = "/share/apps/local/rmblast-2-2-28/bin/";
+	public static String PATH_SERVER_BLAST = "C:/Program Files/NCBI/blast-2.9.0+/bin/";
 
 	/**
 	 * Path for Blast+ on windows
@@ -108,7 +111,7 @@ public class HomologCreation {
 		ArrayList<String> listGenomes = Genome.getAvailableGenomes();
 		for (String genomeTemp : listGenomes) {
 			File pathGenome = new File(GenomeNCBI.PATH_GENOMES + genomeTemp + File.separator);
-			final String filterFinal = ".faa";
+			final String filterFinal = ".fna";
 			File[] files = pathGenome.listFiles(new FilenameFilter() {
 				@Override
 				public boolean accept(File dir, String name) {
@@ -248,16 +251,21 @@ public class HomologCreation {
 
 		ArrayList<String> blastFile = new ArrayList<>();
 
-		// blastFile.add("PATH="+PATH_SERVER_BLAST+":$PATH");
-//		blastFile.add("blastp -task blastp-short -query " + blastDBFolder + "_fileGenomePivot -db " + blastDBFolder  // without max_target parameter
+
+//		blastFile.add("PATH="+PATH_SERVER_BLAST+":$PATH");
+//		blastFile.add("blastp -query " + blastDBFolder + "_fileGenomePivot -db " + blastDBFolder
 //				+ "_databaseTarget -out " + blastDBFolder
-//				+ "_blastP_VS_T -evalue 10000 -outfmt \"6 qseqid sseqid qlen slen length nident positive evalue bitscore qseq sseq\"");
-		blastFile.add("blastp -query " + blastDBFolder + "_fileGenomePivot -db " + blastDBFolder
-				+ "_databaseTarget -out " + blastDBFolder
-				+ "_blastP_VS_T -evalue 0.01 -max_target_seqs 1 -outfmt \"6 qseqid sseqid qlen slen length nident positive evalue bitscore\"");
+//				+ "_blastP_VS_T -evalue 0.01 -max_target_seqs 1 -outfmt \"6 qseqid sseqid qlen slen length nident positive evalue bitscore\"");
 //		blastFile.add("blastp -query " + blastDBFolder + "_fileGenomeTarget -db " + blastDBFolder
 //				+ "_databasePivot -out " + blastDBFolder
 //				+ "_blastT_VS_P -evalue 0.01 -max_target_seqs 1 -outfmt \"6 qseqid sseqid qlen slen length nident positive evalue bitscore\"");
+		blastFile.add("\"" + HomologCreation.blastP + "\"" + " -query " + blastDBFolder + "_fileGenomePivot -db " + blastDBFolder
+				+ "_databaseTarget -out " + blastDBFolder
+				+ "_blastP_VS_T -evalue 0.01 -max_target_seqs 1 -outfmt \"6 qseqid sseqid qlen slen length nident positive evalue bitscore\"");
+		blastFile.add("\"" + HomologCreation.blastP + "\"" + " -query " + blastDBFolder + "_fileGenomeTarget -db " + blastDBFolder
+				+ "_databasePivot -out " + blastDBFolder
+				+ "_blastT_VS_P -evalue 0.01 -max_target_seqs 1 -outfmt \"6 qseqid sseqid qlen slen length nident positive evalue bitscore\"");
+
 		blastFile.add("echo _fileGenomePivot VS _fileGenomeTarget Blast search completed");
 		// ">" + scriptFolder + "_fileGenomePivotVS_fileGenomeTarget.control.txt");
 

@@ -181,7 +181,7 @@ public class Network extends OmicsData {
         // for(int k=0;k<50;k++){
         for (int k = 0; k < genomeElements.size(); k++) {
             String gene1Name = genomeElements.get(k);
-            System.out.println(gene1Name);
+//            System.out.println(gene1Name);
             // if(gene1Name.contains("lmo0200")){
             // for(int j=k+1;j<50;j++){
             for (int j = 0; j < genomeElements.size(); j++) {
