@@ -150,14 +150,14 @@ public class DataValidation {
                 }
                 for (Tiling transData : bioCond.getTilings()) {
                     String fileNameInfo = OmicsData.PATH_STREAMING + transData.getName() + OmicsData.EXTENSION;
-                    System.out.println(fileNameInfo);
+                    //System.out.println(fileNameInfo);
                     if (!FileUtils.exists(fileNameInfo)) {
                         validate = false;
                     }
                 }
                 for (GeneExpression transData : bioCond.getGeneExprs()) {
                     String fileNameInfo = OmicsData.PATH_STREAMING + transData.getName() + OmicsData.EXTENSION;
-                    System.out.println(fileNameInfo);
+                    //System.out.println(fileNameInfo);
                     if (!FileUtils.exists(fileNameInfo)) {
                         validate = false;
                     }

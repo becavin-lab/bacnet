@@ -27,6 +27,7 @@ import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Item;
@@ -40,6 +41,7 @@ import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 import bacnet.Database;
 import bacnet.datamodel.dataset.Network;
+import bacnet.datamodel.phylogeny.Phylogenomic;
 import bacnet.datamodel.sequence.Chromosome;
 import bacnet.datamodel.sequence.Gene;
 import bacnet.datamodel.sequence.Genome;
@@ -96,6 +98,7 @@ public class CoExprNetworkView implements SelectionListener {
     @Inject
     @Named(IServiceConstants.ACTIVE_SHELL)
     private Shell shell;
+    private Combo comboGenome;
 
     @Inject
     public CoExprNetworkView() {
@@ -106,7 +109,30 @@ public class CoExprNetworkView implements SelectionListener {
     public void createPartControl(Composite parent) {
         focused = true;
         parent.setLayout(new GridLayout(2, false));
+        
+        Composite compositeGenome = new Composite(parent, SWT.NONE);
+        compositeGenome.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, false, 2, 1));
+        compositeGenome.setLayout(new GridLayout(7, false));
 
+        Label lblSelectAGenome = new Label(compositeGenome, SWT.NONE);
+        lblSelectAGenome.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+        lblSelectAGenome.setText("Select genome");
+
+        comboGenome = new Combo(compositeGenome, SWT.NONE);
+        GridData gd_comboGenome = new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1);
+        gd_comboGenome.widthHint = 220;
+        comboGenome.setLayoutData(gd_comboGenome);
+        comboGenome.addSelectionListener(this);
+        
+        
+        new Label(compositeGenome, SWT.NONE);
+        new Label(compositeGenome, SWT.NONE);
+        new Label(compositeGenome, SWT.NONE);
+        new Label(compositeGenome, SWT.NONE);
+        new Label(compositeGenome, SWT.NONE);
+
+       
+        
         Composite compositeGeneselection = new Composite(parent, SWT.BORDER);
         compositeGeneselection.setLayoutData(new GridData(SWT.LEFT, SWT.FILL, false, true, 1, 2));
         compositeGeneselection.setLayout(new GridLayout(1, false));
@@ -139,7 +165,7 @@ public class CoExprNetworkView implements SelectionListener {
                         tableGenes.setItemCount(listGenomeElements.size());
                         tableGenes.update();
                         tableGenes.select(listGenomeElements.indexOf(searchResults.get(0)));
-                        updateCoExpression();
+                        updateCoExpressionFigure();
                     }
                 }
 
@@ -182,7 +208,7 @@ public class CoExprNetworkView implements SelectionListener {
         btnCorrMinus.setImage(ResourceManager.getPluginImage("bacnet", "icons/genome/zoomOUT.bmp"));
         btnCorrMinus.addSelectionListener(this);
         textCutOff = new Text(composite, SWT.BORDER);
-        textCutOff.setText("0.90");
+        textCutOff.setText("0.98");
         textCutOff.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 
         btnCorrPlus = new Button(composite, SWT.NONE);
@@ -215,7 +241,7 @@ public class CoExprNetworkView implements SelectionListener {
 
             @Override
             public void widgetSelected(org.eclipse.swt.events.SelectionEvent event) {
-                updateCoExpression();
+                updateCoExpressionFigure();
             }
         });
 
@@ -224,17 +250,48 @@ public class CoExprNetworkView implements SelectionListener {
          */
         //SaveFileUtils.registerTextFile(svgName, new File(Network.CIRCOS_BACK_PATH));
 
-        try {
+
+	    setData();
+	}
+	
+	/**
+	 * Set all starting variables
+	 */
+	private void setData() {
+		
+		/*
+		 * Load available genomes for co--expression network
+		 */
+		String[][] genomes = TabDelimitedTableReader.read(Database.getInstance().getCoExprNetworkArrayPath());
+		for (int i=1;i<genomes.length;i++) {
+            comboGenome.add(genomes[i][0]);
+        }		
+		comboGenome.select(0);
+		genomeName = comboGenome.getItem(0);
+		
+		/*
+		 * Load network
+		 */
+		updateNetwork();
+	}
+	
+	/**
+	 * Load co-expression network file
+	 */
+	private void updateNetwork() {
+		try {
             InitNetworkThread thread = new InitNetworkThread(this);
             new ProgressMonitorDialog(shell).run(true, false, thread);
             updateGenomeInfo();
-            updateCoExpression();
+            updateCoExpressionFigure();
         } catch (InvocationTargetException ex) {
             ex.printStackTrace();
         } catch (InterruptedException ex) {
             ex.printStackTrace();
         }
-    }
+		
+	}
+
 
     public static class InitNetworkThread implements IRunnableWithProgress {
 
@@ -259,12 +316,7 @@ public class CoExprNetworkView implements SelectionListener {
     }
 
     public void initComboGenome() {
-    	if(Database.getInstance().getProjectName() == Database.LISTERIOMICS_PROJECT) {
-    		genomeName = Genome.EGDE_NAME;
-    	}else if(Database.getInstance().getProjectName() == Database.YERSINIOMICS_PROJECT) {
-    		genomeName = "Yersinia enterocolitica subsp palearctica Y11";
-    	}
-        genome = Genome.loadGenome(genomeName);
+    	genome = Genome.loadGenome(genomeName);
     }
 
     /**
@@ -359,7 +411,7 @@ public class CoExprNetworkView implements SelectionListener {
         NavigationManagement.pushStateView(CoExprNetworkView.ID, stateParameters);
     }
 
-    private void updateCoExpression() {
+    private void updateCoExpressionFigure() {
         try {
             /*
              * Register the network data in corr.txt
@@ -496,6 +548,9 @@ public class CoExprNetworkView implements SelectionListener {
         return searchResult;
     }
 
+    
+    
+    
     /**
      * Display the view with saved parameters
      * 
@@ -531,12 +586,30 @@ public class CoExprNetworkView implements SelectionListener {
                 }
             }
         }
-        view.updateCoExpression();
+        view.updateCoExpressionFigure();
     }
+    
+    /**
+     * The comboGenome contains modified genome name so we need this method to get selected element<br>
+     * a '*' is add to genome name when a transcriptome data is available
+     */
+    public String getGenomeSelected() {
+        if (comboGenome.isDisposed()) {
+            return Genome.EGDE_NAME;
+        } else {
+            String genome = comboGenome.getItem(comboGenome.getSelectionIndex());
+            return genome;
+        }
+    }
+    
 
     @Override
     public void widgetSelected(SelectionEvent e) {
-        if (e.getSource() == btnCorrMinus) {
+    	if (e.getSource() == comboGenome) {
+            genomeName = getGenomeSelected();
+            initComboGenome();
+            updateNetwork();
+        } else if (e.getSource() == btnCorrMinus) {
             double cutoff = Double.parseDouble(textCutOff.getText());
             if (cutoff > Network.CORR_CUTOFF) {
                 cutoff = cutoff - 0.01;
@@ -544,7 +617,7 @@ public class CoExprNetworkView implements SelectionListener {
                 if (cutoffString.length() >= 4)
                     cutoffString = cutoffString.substring(0, 4);
                 textCutOff.setText(cutoffString);
-                updateCoExpression();
+                updateCoExpressionFigure();
             }
         } else if (e.getSource() == btnCorrPlus) {
             double cutoff = Double.parseDouble(textCutOff.getText());
@@ -553,9 +626,9 @@ public class CoExprNetworkView implements SelectionListener {
             if (cutoffString.length() >= 4)
                 cutoffString = cutoffString.substring(0, 4);
             textCutOff.setText(cutoffString);
-            updateCoExpression();
+            updateCoExpressionFigure();
         } else if (e.getSource() == tableGenes) {
-            updateCoExpression();
+            updateCoExpressionFigure();
         } else if (e.getSource() == btnSelectGenomeElements) {
             System.out.println("select genome elements");
             TreeSet<String> includeElements = new TreeSet<>();
@@ -573,7 +646,7 @@ public class CoExprNetworkView implements SelectionListener {
                 for (String row : includeElements) {
                     tableGenes.select(listGenomeElements.indexOf(row));
                 }
-                updateCoExpression();
+                updateCoExpressionFigure();
             }
         } else if (e.getSource() == btnHelp) {
             HelpPage.helpNetworkView(partService);

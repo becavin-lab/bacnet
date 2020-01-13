@@ -74,7 +74,6 @@ public class NetworkCreation {
      */
     public static String createCoExpressionNetwork(ArrayList<String> networks, String logs) {
         for(String genomeName : networks) {
-            System.out.println("yo");
             logs += "Load expression matrix for " + genomeName;
             ExpressionMatrix expression =
                     ExpressionMatrix.loadTab(Expression.PATH_ALLDataType + "_" + genomeName + ".excel", false);
@@ -90,6 +89,16 @@ public class NetworkCreation {
             System.out.println("Compute network");
             logs += "Compute network for " + genomeName;
             Network.getCoExpressionGlobalMatrix(Genome.loadGenome(genomeName));
+            
+            
+            /*
+             * Remove temporary file
+             */
+            File file = new File(Database.getCOEXPR_NETWORK_TRANSCRIPTOMES_PATH() + "_Temp_" + genomeName);
+            file.delete();
+            file = new File(Database.getCOEXPR_NETWORK_TRANSCRIPTOMES_PATH() + "_Temp_" + genomeName + ".excel");
+            file.delete();
+            
             
             /*
              * Create circular genome figure for CircosPlot 

@@ -533,7 +533,6 @@ public class SetupPart implements SelectionListener {
         tableBioCondition.removeAll();
         if (FileUtils.exists(Database.getInstance().getBioConditionsArrayPath())) {
             String[][] bioConds = TabDelimitedTableReader.read(Database.getInstance().getBioConditionsArrayPath());
-            lblBioconditions.setText("Found : " + bioConds.length + " Bioconditions in the database");
             tableBioCondition.setLinesVisible(true);
             tableBioCondition.setHeaderVisible(true);
             String[] titles = {"BioConditions", "Validated"};
@@ -551,6 +550,8 @@ public class SetupPart implements SelectionListener {
                 item.setText(0, biocond);
                 item.setImage(1, ResourceManager.getPluginImage("bacnet", "icons/unchecked.bmp"));
             }
+            lblBioconditions.setText("Found : " + (dataValidation.getBioconditions().size()) + " Bioconditions in the database");
+            
             for (int i = 0; i < titles.length; i++) {
                 tableBioCondition.getColumn(i).pack();
             }
@@ -651,7 +652,6 @@ public class SetupPart implements SelectionListener {
         if (FileUtils.exists(Database.getInstance().getExperimentComparisonTablePath())) {
             String[][] bioConds =
                     TabDelimitedTableReader.read(Database.getInstance().getExperimentComparisonTablePath());
-            lblBioconditions.setText("Found : " + bioConds.length + " Comparisons in the database");
             tableComparisons.setLinesVisible(true);
             tableComparisons.setHeaderVisible(true);
             String[] titles = {"Comparisons", "Validated"};
@@ -669,6 +669,8 @@ public class SetupPart implements SelectionListener {
                 item.setText(0, biocond);
                 item.setImage(1, ResourceManager.getPluginImage("bacnet", "icons/unchecked.bmp"));
             }
+            lblComparisons.setText("Found : " + dataValidation.getComparisons().size() + " Comparisons in the database");
+            
             for (int i = 0; i < titles.length; i++) {
                 tableComparisons.getColumn(i).pack();
             }
@@ -772,7 +774,7 @@ public class SetupPart implements SelectionListener {
                 item.setText(0, bioConds[i][0]);
                 item.setImage(1, ResourceManager.getPluginImage("bacnet", "icons/unchecked.bmp"));
             }
-            label_Transcriptomics.setText("Found : " + bioConds.length + " Transcriptomes in the database");
+            label_Transcriptomics.setText("Found : " + (bioConds.length-1) + " Transcriptomes in the database");
             lblTechno.setText("Type of data: " + VectorUtils.toString(listType));
             for (int i = 0; i < titles.length; i++) {
                 tableTranscriptomes.getColumn(i).pack();
@@ -809,7 +811,7 @@ public class SetupPart implements SelectionListener {
         tableProteomics.removeAll();
         if (FileUtils.exists(Database.getInstance().getProteomesArrayPath())) {
             String[][] bioConds = TabDelimitedTableReader.read(Database.getInstance().getProteomesArrayPath());
-            labelProteomics.setText("Found : " + bioConds.length + " Proteomes in the database");
+            labelProteomics.setText("Found : " + (bioConds.length-1) + " Proteomes in the database");
             tableProteomics.setLinesVisible(true);
             tableProteomics.setHeaderVisible(true);
             String[] titles = {"Proteomes", "Validated"};
@@ -860,7 +862,7 @@ public class SetupPart implements SelectionListener {
         tableNetwork.removeAll();
         if (FileUtils.exists(Database.getInstance().getCoExprNetworkArrayPath())) {
             String[][] bioConds = TabDelimitedTableReader.read(Database.getInstance().getCoExprNetworkArrayPath());
-            labelNetwork.setText("Found : " + bioConds.length + " CoExpression Networks in the database");
+            labelNetwork.setText("Found : " + (bioConds.length-1) + " CoExpression Networks in the database");
             tableNetwork.setLinesVisible(true);
             tableNetwork.setHeaderVisible(true);
             String[] titles = {"CoExpr network", "Validated"};
@@ -937,7 +939,6 @@ public class SetupPart implements SelectionListener {
             updateGenomics();
         } else if (e.getSource() == btnDownloadGenomesFrom) {
             logs += "--- Download genomes from RefSeq\n";
-            System.out.println("yo");
             String[][] newGenomes = TabDelimitedTableReader.read(Database.getInstance().getGenomeArrayPath());
             int index = ArrayUtils.findColumn(newGenomes, GenomesCreation.COLNAME_REFSEQ);
             System.out.println("yes"+ index);

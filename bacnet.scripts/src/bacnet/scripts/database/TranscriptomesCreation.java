@@ -171,7 +171,7 @@ public class TranscriptomesCreation {
          */
         logs += "Apply variance normalization to all datasets (Long calculation)\n";
         if (varianceNorm) {
-            varianceNormalization(exp);
+            //varianceNormalization(exp);
         }
 
         /*
@@ -432,7 +432,7 @@ public class TranscriptomesCreation {
         for (BioCondition bioCond : exp.getBioConditions()) {
             for (String comparison : bioCond.getComparisonNames()) {
                 if (bioCond.getTypeDataContained().contains(TypeData.GeneExpr)) {
-                    logFCMatrix.addHeader(comparison + "_GE");
+                    logFCMatrix.addHeader(comparison);
                 } else {
                     System.out.println(comparison);
                     logFCMatrix.addHeader(comparison);
@@ -448,6 +448,7 @@ public class TranscriptomesCreation {
         for (BioCondition bioCond : exp.getBioConditions()) {
             ArrayList<String> comparisonNames = bioCond.getComparisonNames();
             for (String comp : comparisonNames) {
+            	System.out.println(comp + " "+bioCond.getTypeDataContained());
                 if (bioCond.getTypeDataContained().size() == 0
                         || bioCond.getTypeDataContained().contains(TypeData.ExpressionMatrix)) {
                     String fileName = OmicsData.PATH_STREAMING + comp + OmicsData.EXTENSION;
@@ -482,29 +483,14 @@ public class TranscriptomesCreation {
                             }
                         }
                     }
-                } else if (bioCond.getTypeDataContained().contains(TypeData.GeneExpr)) {
-                    String fileName =
-                            OmicsData.PATH_COMPARISONS + "/" + comp + File.separator + comp + "_Gene_GEonly.txt";
-                    System.out.println("Load: " + fileName);
-                    File file = new File(fileName);
-                    if (file.exists()) {
-                        ExpressionMatrix matrix = ExpressionMatrix.loadTab(fileName, true);
-                        String headerGE = "LOGFC_" + comp + GeneExpression.EXTENSION;
-                        for (String gene : genome.getAllElementNames()) {
-                            // System.out.println(header+" "+gene+" "+comp);
-                            if (matrix.getRowNames().containsKey(gene)) {
-                                logFCMatrix.setValue(matrix.getValue(gene, headerGE), gene, comp + "_GE");
-                            }
-                        }
-                    }
                 } else if (bioCond.getTypeDataContained().contains(TypeData.Tiling)) {
                     /**
                      * Go through all comparisons files for Tiling and add them to LogFC table
                      */
-                    String[] typeFiles = {"_Gene", "_Srna", "_ASrna.txt", "_CisReg.txt"};
-                    for (String typeFile : typeFiles) {
+                    //String[] typeFiles = {"_Gene", "_Srna", "_ASrna", "_CisReg"};
+                    //for (String typeFile : typeFiles) {
                         String fileName =
-                                OmicsData.PATH_COMPARISONS + "/" + comp + File.separator + comp + typeFile + ".txt";
+                                OmicsData.PATH_COMPARISONS + "/" + comp + File.separator + comp + "_Gene.txt";
                         System.out.println("Load: " + fileName);
                         File file = new File(fileName);
                         if (file.exists()) {
@@ -518,6 +504,22 @@ public class TranscriptomesCreation {
                                         logFCMatrix.setValue(matrixTiling.getValue(gene, headerTiling), gene, comp);
                                     }
                                 }
+                            }
+                        }
+                    //}
+                } else if (bioCond.getTypeDataContained().contains(TypeData.GeneExpr)) {
+                	// For gene expression include in priority GeneExpression array before Tiling array
+                    String fileName =
+                            OmicsData.PATH_COMPARISONS + "/" + comp + File.separator + comp + "_Gene_GEonly.txt";
+                    System.out.println("Load: " + fileName);
+                    File file = new File(fileName);
+                    if (file.exists()) {
+                        ExpressionMatrix matrix = ExpressionMatrix.loadTab(fileName, true);
+                        String headerGE = "LOGFC_" + comp + GeneExpression.EXTENSION;
+                        for (String gene : genome.getAllElementNames()) {
+                            // System.out.println(header+" "+gene+" "+comp);
+                            if (matrix.getRowNames().containsKey(gene)) {
+                                logFCMatrix.setValue(matrix.getValue(gene, headerGE), gene, comp);
                             }
                         }
                     }

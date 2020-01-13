@@ -25,7 +25,7 @@ import bacnet.utils.VectorUtils;
  */
 public class Network extends OmicsData {
 
-    public static double CORR_CUTOFF = 0.50;
+    public static double CORR_CUTOFF = 0.75;
     public static String CIRCOS_BACK_PATH = Database.getANNOTATIONDATA_PATH() + "CircosBackground.svg";
     /**
      * 
@@ -235,8 +235,9 @@ public class Network extends OmicsData {
                         String row = gene1Name + "(" + type1 + ";" + seq1.getBegin() + "){" + product1 + "}" + "\t"
                                 + pearsonCorrelation + "\t" + gene2Name + "(" + type2 + ";" + seq2.getBegin() + "){"
                                 + product2 + "}";
-                        // String row = gene1Name+"("+type1+"\t"+pearsonCorrelation+"\t"+gene2Name;
-                        // System.out.println(row);
+                        if(count%1000==0) {
+                        	System.out.println("Edge: "+count+ " - "+row);
+                        }
                         networkList.add(row);
                         vertices.put(gene1Name, "(" + type1 + ";" + seq1.getBegin() + "){" + product1 + "}");
                         vertices.put(gene2Name, "(" + type2 + ";" + seq2.getBegin() + "){" + product2 + "}");
@@ -256,28 +257,28 @@ public class Network extends OmicsData {
         network.setEdges(edges);
         network.setVertices(vertices);
         System.out.println("Found: " + count + " edges");
-        TabDelimitedTableReader.saveList(networkList,
-                Database.getCOEXPR_NETWORK_TRANSCRIPTOMES_PATH() + "_" + genome.getSpecies() + ".txt");
+        //TabDelimitedTableReader.saveList(networkList,
+        //        Database.getCOEXPR_NETWORK_TRANSCRIPTOMES_PATH() + "_" + genome.getSpecies() + ".txt");
         network.save(Database.getCOEXPR_NETWORK_TRANSCRIPTOMES_PATH() + "_" + genome.getSpecies());
-        ArrayList<String> result = new ArrayList<>();
-        Network networkNew = new Network();
-        networkNew.load(Database.getCOEXPR_NETWORK_TRANSCRIPTOMES_PATH() + "_" + genome.getSpecies());
-        for (String vecteur : networkNew.getVertices().keySet()) {
-            result.add(vecteur + "\t" + networkNew.getVertices().get(vecteur));
-            System.out.println(vecteur + "\t" + networkNew.getVertices().get(vecteur));
-        }
-        TabDelimitedTableReader.saveList(result, Database.getInstance().getPath() + "nodesNew.txt");
-        result.clear();
-        for (String node : networkNew.getEdges().keySet()) {
-            for (String node2 : networkNew.getEdges().get(node).keySet()) {
-                result.add(node + "\t" + networkNew.getVertices().get(node) + "\t"
-                        + networkNew.getEdges().get(node).get(node2) + "\t" + node2 + "\t"
-                        + networkNew.getVertices().get(node2));
-                System.out
-                        .println("Node: " + node + " - " + networkNew.getEdges().get(node).get(node2) + " - " + node2);
-            }
-        }
-        TabDelimitedTableReader.saveList(result, Database.getInstance().getPath() + "aretesNew.txt");
+//        ArrayList<String> result = new ArrayList<>();
+//        Network networkNew = new Network();
+//        networkNew.load(Database.getCOEXPR_NETWORK_TRANSCRIPTOMES_PATH() + "_" + genome.getSpecies());
+//        for (String vecteur : networkNew.getVertices().keySet()) {
+//            result.add(vecteur + "\t" + networkNew.getVertices().get(vecteur));
+//            System.out.println(vecteur + "\t" + networkNew.getVertices().get(vecteur));
+//        }
+//        TabDelimitedTableReader.saveList(result, Database.getInstance().getPath() + "nodesNew.txt");
+//        result.clear();
+//        for (String node : networkNew.getEdges().keySet()) {
+//            for (String node2 : networkNew.getEdges().get(node).keySet()) {
+//                result.add(node + "\t" + networkNew.getVertices().get(node) + "\t"
+//                        + networkNew.getEdges().get(node).get(node2) + "\t" + node2 + "\t"
+//                        + networkNew.getVertices().get(node2));
+//                System.out
+//                        .println("Node: " + node + " - " + networkNew.getEdges().get(node).get(node2) + " - " + node2);
+//            }
+//        }
+//        TabDelimitedTableReader.saveList(result, Database.getInstance().getPath() + "aretesNew.txt");
 
     }
 

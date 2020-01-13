@@ -427,20 +427,21 @@ public class Annotation implements Serializable {
                 // if it is a Gene
                 Sequence seq = genome.getElement(locus);
                 if (seq != null) {
-                    // System.out.println(locus);
+                    //System.out.println(locus);
                     if (seq.getType() == SeqType.Gene) {
                         Gene gene = (Gene) seq;
                         String geneName = "";
-
                         // add phage information in the gene name if Listeria EGD-e
                         if (genome.getSpecies().equals(Genome.EGDE_NAME)) {
                             geneName = gene.getGeneName();
-                            int geneId = Integer.parseInt(gene.getName().replaceAll("lmo", ""));
-                            if (113 <= geneId && geneId <= 123) {
-                                geneName = "lma operon - " + geneName;
-                            }
-                            if (2270 <= geneId && geneId <= 2333) {
-                                geneName = "A118 phage - " + geneName;
+                            if(!geneName.equals("")) {
+	                            int geneId = Integer.parseInt(gene.getName().replaceAll("lmo", ""));
+	                            if (113 <= geneId && geneId <= 123) {
+	                                geneName = "lma operon - " + geneName;
+	                            }
+	                            if (2270 <= geneId && geneId <= 2333) {
+	                                geneName = "A118 phage - " + geneName;
+	                            }
                             }
                         }
                         // write line

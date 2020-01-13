@@ -89,6 +89,13 @@ public class Expression {
                     tilingTemp.read();
                 }
             }
+        } else if (typeData == TypeData.GeneExpr) {
+            for (BioCondition bioCondition : bioConditions) {
+                datas.addBioCondition(bioCondition.getName());
+                for (GeneExpression geneExprTemp : bioCondition.getGeneExprs()) {
+                	geneExprTemp.read();
+                }
+            }
         } else if (typeData == TypeData.RNASeq) {
             for (BioCondition bioCondition : bioConditions) {
                 if (bioCondition.getNGSSeqs().size() != 0) {
@@ -218,13 +225,14 @@ public class Expression {
         }
         ArrayList<BioCondition> bioCondRNASeqs = new ArrayList<BioCondition>();
         for (BioCondition bioCond : bioConds) {
-            if (bioCond.getNGSSeqs().size() != 0) {
+            if ((bioCond.getNGSSeqs().size() != 0) && bioCond.getTypeDataContained().contains(TypeData.RNASeq)) {
                 bioCondRNASeqs.add(bioCond);
             }
         }
         ArrayList<BioCondition> bioCondExprMatrices = new ArrayList<BioCondition>();
         for (BioCondition bioCond : bioConds) {
             if (bioCond.getMatrices().size() != 0) {
+            	
                 bioCondExprMatrices.add(bioCond);
             }
         }
@@ -232,7 +240,7 @@ public class Expression {
         /*
          * List of genomeElements
          */
-        ArrayList<String> genes = new ArrayList<String>();
+        ArrayList<String> genes = genome.getGeneNames();
         ArrayList<String> allGenomeElements = genome.getAllElementNames();
 
         ArrayList<ExpressionMatrix> matrices = new ArrayList<ExpressionMatrix>();
@@ -244,7 +252,12 @@ public class Expression {
             ExpressionMatrix matrix = showExpr.createExpressionMatrix(genome);
             Annotation.addAnnotation(matrix, genome);
             matrix.saveTab(PATH_ALLGENEXPR + "_" + genome.getSpecies() + ".excel", "Gene");
-            matrices.add(matrix);
+            
+            /*
+             * Do not add GeneExpr in matrices because Tiling array are already present. 
+             * No redundancy as Co-expression will be created using matrices
+             */
+            //matrices.add(matrix);
         }
         // /*
         // * All Tiling
@@ -278,6 +291,10 @@ public class Expression {
         }
 
         if (matrices.size() > 0) {
+        	/*
+             * Do not add GeneExpr in matrices because Tiling array are already present. 
+             * No redundancy as Co-expression will be created using matrices
+             */
             ExpressionMatrix matrix = ExpressionMatrix.merge(matrices, false);
             matrix.saveTab(PATH_ALLDataType + "_" + genome.getSpecies() + ".excel", "GenomeElements");
         }
