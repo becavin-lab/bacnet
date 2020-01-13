@@ -66,7 +66,7 @@ public class NGSCreation {
             if(bioCond.getTypeDataContained().contains(TypeData.RNASeq)) {
                 for (String bioCondName2 : bioCond.getComparisons()) {
                     BioCondition compBioCond = bioCond.compare(BioCondition.getBioCondition(bioCondName2), false);
-                    String fileName = OmicsData.PATH_NGS_NORM + bioCond.getName() + "_vs_" + bioCondName2 + ".rnaseq";
+                    String fileName = OmicsData.PATH_NGS_NORM + bioCond.getName() + "_vs_" + bioCondName2 + NGS.EXTENSION;
                     System.out.println("Search "+fileName);
                     File file = new File(fileName);
                     if (file.exists()) {
@@ -105,7 +105,7 @@ public class NGSCreation {
                 int nbDuplicate = bioCond.getNGSSeqs().get(0).getRawDatas().size();
                 System.out.println(bioCond.getName() + " dupl:" + nbDuplicate);
                 if (nbDuplicate == 1) {
-                    String fileName = OmicsData.PATH_NGS_NORM + bioCond.getName() + ".rnaseq";
+                    String fileName = OmicsData.PATH_NGS_NORM + bioCond.getName() + NGS.EXTENSION;
                     File file = new File(fileName);
                     if (file.exists()) {
                         String[][] array = TabDelimitedTableReader.read(new File(fileName), ",");
@@ -142,7 +142,7 @@ public class NGSCreation {
                 } else {
                     ArrayList<ExpressionMatrix> matrices = new ArrayList<ExpressionMatrix>();
                     for (int i = 1; i < (nbDuplicate + 1); i++) {
-                        String fileName = OmicsData.PATH_NGS_NORM + bioCond.getName() + "_" + i + ".rnaseq";
+                        String fileName = OmicsData.PATH_NGS_NORM + bioCond.getName() + "_" + i + NGS.EXTENSION;
                         File file = new File(fileName);
                         if (file.exists()) {
                             String[][] array = TabDelimitedTableReader.read(new File(fileName), ",");

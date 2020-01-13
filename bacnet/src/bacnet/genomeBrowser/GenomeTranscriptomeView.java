@@ -127,6 +127,7 @@ public class GenomeTranscriptomeView {
             /*
              * Add and load BioCondition
              */
+        	//System.out.println("biocondname: "+bioCondName);
             monitor.subTask("Loading datasets " + i + "/" + bioCondNames.size() + " : " + bioCondName);
             track.getDatas().addBioCondition(bioCondName);
             monitor.worked(1);
@@ -201,7 +202,7 @@ public class GenomeTranscriptomeView {
      * @param bioConditions
      */
     public static GenomeTranscriptomeView displayGenomeElementAndBioConditions(EPartService partService, String genome,
-            ArrayList<String> comparisons, String genomeElement) {
+            ArrayList<String> bioConditionsSelected, String genomeElement) {
         String id = GenomeTranscriptomeView.ID + "-" + String.valueOf(Math.random() * 1000).substring(0, 3);
         // initiate view
         ResourceManager.openView(partService, GenomeTranscriptomeView.ID, id);
@@ -210,17 +211,11 @@ public class GenomeTranscriptomeView {
         NavigationManagement.pushStateView(id, new HashMap<>());
         GenomeTranscriptomeView view = (GenomeTranscriptomeView) part.getObject();
         view.getTracksComposite().setParentViewId(id);
-        ArrayList<String> bioConds = new ArrayList<>();
-        for (String comparison : comparisons) {
-            if (comparison.contains(BioCondition.SEPARATOR)) {
-                bioConds.add(comparison.split(BioCondition.SEPARATOR)[0]);
-            } else
-                bioConds.add(comparison);
-        }
+        
         // Create your new ProgressMonitorDialog with a IRunnableWithProgress
         try {
             IRunnableWithProgress thread =
-                    new OpenBioConditionAndGenomeElementThread(view, genome, bioConds, genomeElement);
+                    new OpenBioConditionAndGenomeElementThread(view, genome, bioConditionsSelected, genomeElement);
             new ProgressMonitorDialog(view.shell).run(true, false, thread);
             /*
              * Init Composite

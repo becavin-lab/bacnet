@@ -469,15 +469,15 @@ public class GenomeNCBI {
     }
 
     /**
-     * Initi static variables after Database change
+     * Init static variables after Database change
      */
     public static void initStaticVariables() {
-        PATH_RAW = Database.getInstance().getPath() + "GenomeNCBI" + File.separator;
+        PATH_RAW = Database.getInstance().getPath() + File.separator + "GenomeNCBI" + File.separator;
         PATH_GENOMES = PATH_RAW + "Genomes"+ File.separator;
         PATH_GENOMES_NEW = PATH_RAW + "GenomesNew" + File.separator;
         PATH_HOMOLOGS = PATH_RAW + "Homologs"+ File.separator ;
         PATH_ANNOTATION = PATH_RAW + "Annotation"+ File.separator;
-        PATH_TEMP = PATH_RAW + "Temp" + File.separator;
+        PATH_TEMP = PATH_RAW + "Temp" + File.separator;        
     }
 
     /**
