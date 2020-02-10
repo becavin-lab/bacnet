@@ -858,20 +858,8 @@ public class GeneView implements SelectionListener, MouseListener {
         } catch (InterruptedException ex) {
             ex.printStackTrace();
         }
-        if (Database.getInstance().getProjectName().equals(Database.LEISHOMICS_PROJECT)) {
-            initLeishmania();
-        } else if (Database.getInstance().getProjectName().equals(Database.CRISPRGO_PROJECT)) {
-            initCrispromics();
-        } else if (Database.getInstance().getProjectName().equals("Yersiniomics")) {
-            initYersiniomics();
-        } else if (Database.getInstance().getProjectName().equals(Database.UIBCLISTERIOMICS_PROJECT)
-                || Database.getInstance().getProjectName().equals(Database.LISTERIOMICS_PROJECT)) {
-            initListeriomics();
-        } else if (Database.getInstance().getProjectName() == Database.YERSINIOMICS_PROJECT) {
-            initYersiniomics();
-        } else {
-            initDefault();
-        }
+        
+        initGenomeInfo();
 
         this.chromoID = genome.getFirstChromosome().getChromosomeID();
         updateComboChromosome(this.chromoID);
@@ -880,6 +868,29 @@ public class GeneView implements SelectionListener, MouseListener {
         updateGeneInfo();
     }
 
+    /**
+     * Init GeneView accrodingly to the project selected
+     * NEED TO BE MODIFIED TO BE LESS DEPENDENT OF PROJECT SELECTION
+     */
+    private void initGenomeInfo(){
+    	if (Database.getInstance().getProjectName().equals(Database.LEISHOMICS_PROJECT)) {
+            initLeishmania();
+        } else if (Database.getInstance().getProjectName().equals(Database.CRISPRGO_PROJECT)) {
+            initCrispromics();
+        } else if (Database.getInstance().getProjectName().equals("Yersiniomics")) {
+            initYersiniomics();
+        } else if (Database.getInstance().getProjectName().equals(Database.UIBCLISTERIOMICS_PROJECT)
+                || Database.getInstance().getProjectName().equals(Database.LISTERIOMICS_PROJECT)) {
+            initListeriomics();
+        } else if (Database.getInstance().getProjectName() == "ListeriomicsSample") {
+            initListeriomicsSample();
+        } else if (Database.getInstance().getProjectName() == Database.YERSINIOMICS_PROJECT) {
+            initYersiniomics();
+        } else {
+            initDefault();
+        }
+    }
+    
     /**
      * When a genome is selected this method will trigger every update possible of the widgets
      * 
@@ -898,18 +909,7 @@ public class GeneView implements SelectionListener, MouseListener {
         } catch (InterruptedException ex) {
             ex.printStackTrace();
         }
-        if (Database.getInstance().getProjectName() == Database.LEISHOMICS_PROJECT) {
-            initLeishmania();
-        } else if (Database.getInstance().getProjectName() == Database.CRISPRGO_PROJECT) {
-            initCrispromics();
-        } else if (Database.getInstance().getProjectName() == Database.UIBCLISTERIOMICS_PROJECT
-                || Database.getInstance().getProjectName() == Database.LISTERIOMICS_PROJECT) {
-            initListeriomics();
-        } else if (Database.getInstance().getProjectName() == Database.YERSINIOMICS_PROJECT) {
-            initYersiniomics();
-        } else {
-            initDefault();
-        }
+        initGenomeInfo();
 
         this.chromoID = chromoID;
         updateComboChromosome(this.chromoID);
@@ -945,7 +945,7 @@ public class GeneView implements SelectionListener, MouseListener {
      * Remove some Widgets for Leishmania view
      */
     private void initDefault() {
-        System.out.println("defaulttttt");
+        System.out.println("Default initialisation for GeneView");
         tbtmHomologs.dispose();
         tbtmSynteny.dispose();
         composite_localization.dispose();
@@ -1015,6 +1015,31 @@ public class GeneView implements SelectionListener, MouseListener {
         arrayGeneToLocalization = TabDelimitedTableReader.read(SubCellCompartment.LOCALIZATION_PATH);
     }
 
+    /**
+     * Initi Widgets for Listeriomics and UIBCListeriomics
+     */
+    private void initListeriomicsSample() {
+    	tbtmSynteny.dispose();
+        composite_localization.dispose();
+        arrayDataList = TabDelimitedTableReader.read(Database.getInstance().getTranscriptomesComparisonsArrayPath());
+        arrayProteomeList = TabDelimitedTableReader.read(Database.getInstance().getProteomesArrayPath());
+        ArrayList<String> dataTranscriptomes = BioCondition.getTranscriptomesGenomes();
+        for (String genomeTemp : Database.getInstance().getGenomeList()) {
+            if (dataTranscriptomes.contains(genomeTemp)) {
+                genomeTemp = genomeTemp + " *";
+            }
+            comboGenome.add(genomeTemp);
+        }
+        int index = -1;
+        for (int i = 0; i < comboGenome.getItems().length; i++) {
+            if (comboGenome.getItem(i).contains(genome.getSpecies())) {
+                index = i;
+            }
+        }
+        comboGenome.select(index);
+    }
+
+    
     /**
      * Initi Widgets for Yersiniomics
      */
@@ -1146,6 +1171,9 @@ public class GeneView implements SelectionListener, MouseListener {
                     || Database.getInstance().getProjectName() == Database.UIBCLISTERIOMICS_PROJECT
                     || Database.getInstance().getProjectName() == Database.YERSINIOMICS_PROJECT) {
                 updateAllGeneOmicsInfo();
+            } else if (Database.getInstance().getProjectName() == "ListeriomicsSample") {
+            	updateGeneOmicsInfo();
+            	updateHomolog();
             } else if (Database.getInstance().getProjectName() != Database.CRISPRGO_PROJECT) {
                 updateGeneOmicsInfo();
             }
@@ -1238,10 +1266,7 @@ public class GeneView implements SelectionListener, MouseListener {
         /*
          * Homolog update
          */
-        bioCondsArray = GeneViewHomologTools.loadArrayHomologs(sequence, bioCondsArray, bioConds, bioCondsToDisplay);
-        GeneViewHomologTools.loadFigureHomologs(sequence, browserHomolog, selectedGenomes);
-        GeneViewHomologTools.updateHomologTable(tableHomologViewer, bioCondsArray, bioCondsToDisplay, bioConds,
-                comparatorBioCondition, columnNames, selectedGenomes, txtSearchGenome);
+        updateHomolog();
 
         /*
          * Load localization
@@ -1281,6 +1306,13 @@ public class GeneView implements SelectionListener, MouseListener {
             tableProteomes.removeAll();
         }
 
+    }
+    
+    public void updateHomolog() {
+    	bioCondsArray = GeneViewHomologTools.loadArrayHomologs(sequence, bioCondsArray, bioConds, bioCondsToDisplay);
+        GeneViewHomologTools.loadFigureHomologs(sequence, browserHomolog, selectedGenomes);
+        GeneViewHomologTools.updateHomologTable(tableHomologViewer, bioCondsArray, bioCondsToDisplay, bioConds,
+                comparatorBioCondition, columnNames, selectedGenomes, txtSearchGenome);
     }
 
     /**
