@@ -40,6 +40,8 @@ The following tutorials will show you how to build such a website using BACNET p
 
 [Add Phylogenomics data](https://github.com/becavin-lab/bacnet/wiki/Add-Phylogenomics-data) - Add Phylogenomics information to your website
 
+[Add Homologs](https://github.com/becavin-lab/bacnet/wiki/Add-Homologs) - Add Homologs of each protein to your website
+
 [Add Biological conditions](https://github.com/becavin-lab/bacnet/wiki/Add-Biological-conditions) - Add Biological Conditions to your website
 
 [Add Comparisons](https://github.com/becavin-lab/bacnet/wiki/Add-Comparisons) - Add dataset comparisons to your website
