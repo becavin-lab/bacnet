@@ -157,6 +157,9 @@ public class GenomeConversion {
                 gene.setChromosomeID(chromosomeNCBI.getAccession().toString());
                 genome.getChromosomes().get(chromosomeNCBI.getAccession().toString()).getGenes().put(gene.getName(),
                         gene);
+                if(!gene.getProtein_id().equals("")) {
+                	genome.getChromosomes().get(chromosomeNCBI.getAccession().toString()).getProteinIDTolocusTag().put(gene.getProtein_id(), gene.getName());
+                }
                 gene.save(pathSequences + gene.getName());
                 // for(String note:dnaSeq.getNotesList()){
                 // System.out.println(note);

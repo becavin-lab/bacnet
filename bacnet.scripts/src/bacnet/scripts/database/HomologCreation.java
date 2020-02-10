@@ -39,28 +39,27 @@ import bacnet.utils.FileUtils;
 public class HomologCreation {
 
 	/**
+	 * We added manually this variable because when running .bat file on windows the file separator can get tricky.
+	 * that is why I fix it in the script.
+	 */
+	public static String FILE_SEPARATOR = "/";
+	
+	/**
 	 * Path for data on the server when running homolog search blasts
 	 */
-	// public static String PATH_SCRIPT = "/home/becavin/Yersiniomics/";
 
-//	public static String PATH_SCRIPT = "/pasteur/homes/cbecavin/Yersiniomics/";
-	public static String PATH_SCRIPT = "D:/Programming/GitRepository/ListeriomicsSample/GenomeNCBI/Temp/";
-
-
-	/**
-	 * Path for Blastp on the server when running homolog search
-	 */
-//	public static String PATH_SERVER_BLAST = "/share/apps/local/rmblast-2-2-28/bin/";
-	public static String PATH_SERVER_BLAST = "C:/Program Files/NCBI/blast-2.9.0+/bin/";
+//	public static String PATH_SCRIPT = "//home//becavin//ListeriomicsSample//";
+//	public static String PATH_SCRIPT = "/pasteur/homes/cbecavin/ListeriomicsSample/";
+//	public static String PATH_SCRIPT = "D:/Programming/GitRepository/ListeriomicsSample/GenomeNCBI/Temp/";
+	public static String PATH_SCRIPT = "C:"+ FILE_SEPARATOR +"Users"+ FILE_SEPARATOR +"ipmc"+ FILE_SEPARATOR +
+			"Documents"+ FILE_SEPARATOR +"BACNET"+ FILE_SEPARATOR +"ListeriomicsSample" + FILE_SEPARATOR + "GenomeNCBI" + FILE_SEPARATOR;
 
 	/**
-	 * Path for Blast+ on windows
+	 * Path for Blast+ 
 	 */
-	public static String PATH_BLAST_WIN = "C:/Program Files/NCBI/blast-2.9.0+/bin/";
-	/**
-	 * Path for Blast+ on MacOSX
-	 */
-	public static String PATH_BLAST_MAC = "/opt/ncbi-blast-2.7.1+/bin/";
+	public static String PATH_BLAST = "";
+//	public static String PATH_BLAST = "/share/apps/local/rmblast-2-2-28/bin/";
+//	public static String PATH_BLAST = "C:/Program Files/NCBI/blast-2.9.0+/bin/";
 
 	/**
 	 * Shortcut for running blastP
@@ -73,7 +72,20 @@ public class HomologCreation {
 	/**
 	 * Path for BlastDB folder
 	 */
-	public static String PATH_BLASTDB = GenomeNCBI.PATH_TEMP + File.separator + "BLASTDB" + File.separator;
+	public static String PATH_THREADS = PATH_SCRIPT + "Threads" + FILE_SEPARATOR;
+	/**
+	 * Path for BlastDB folder
+	 */
+	public static String PATH_BLASTDB = PATH_SCRIPT + "BLASTDB" + FILE_SEPARATOR;
+	/**
+	 * Path for BlastDB folder
+	 */
+	public static String PATH_RESULTS = PATH_SCRIPT + "Results" + FILE_SEPARATOR;
+	
+	public static String PATH_ADD_IDENTITY = PATH_SCRIPT + "AddedColumnIdentity" + FILE_SEPARATOR;
+	
+	public static String BLAST_SCRIPT_TEMP = GenomeNCBI.PATH_THREADS + "BlastTemp.txt";
+			
 	/**
 	 * Cutoff for indeityt value
 	 */
@@ -91,13 +103,13 @@ public class HomologCreation {
 		 */
 		logs = createFAA(logs);
 		// Test if Blast is installed
-		if (FileUtils.exists(PATH_BLAST_WIN)) {
+		if (FileUtils.exists(PATH_BLAST)) {
 			logs = createBlastDatabases(logs, PATH_BLASTDB, Genome.getAvailableGenomes());
 			logs += verifyDatabase(logs);
 		} else {
 			logs += "Cannot find an installation of Blast+.\n"
 					+ "Install Blast+ from : ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/\n"
-					+ "Update variables bacnet.scripts.database.PATH_BLAST_WIN or bacnet.scripts.database.PATH_BLAST_MAC\n";
+					+ "Update variables bacnet.scripts.database.HomologCreation.PATH_BLAST\n";
 		}
 
 		return logs;
@@ -110,7 +122,7 @@ public class HomologCreation {
 	public static String createFAA(String logs) {
 		ArrayList<String> listGenomes = Genome.getAvailableGenomes();
 		for (String genomeTemp : listGenomes) {
-			File pathGenome = new File(GenomeNCBI.PATH_GENOMES + genomeTemp + File.separator);
+			File pathGenome = new File(GenomeNCBI.PATH_GENOMES + genomeTemp + FILE_SEPARATOR);
 			final String filterFinal = ".fna";
 			File[] files = pathGenome.listFiles(new FilenameFilter() {
 				@Override
@@ -124,8 +136,8 @@ public class HomologCreation {
 			if (files.length == 1) {
 				// Output file
 				String input = files[0].getAbsolutePath();
-				String output = PATH_BLASTDB + genome + "/" + genome + ".ORF.faa";
-				folderCreation(PATH_BLASTDB + genome + "/");
+				String output = PATH_BLASTDB + genome + FILE_SEPARATOR + genome + ".ORF.faa";
+				folderCreation(PATH_BLASTDB + genome + FILE_SEPARATOR);
 				try {
 					FileUtils.copy(input, output);
 				} catch (IOException e) {
@@ -152,7 +164,7 @@ public class HomologCreation {
 	public static String createBlastDatabases(String logs, String pathInput, ArrayList<String> genomesInput) {
 		// build the fusion of this databases
 		final ArrayList<String> genomes = genomesInput;
-		final String pathFolder = pathInput;
+		final String pathFolder = PATH_BLASTDB;
 		String dbType = "prot";
 		final String dbtypeFinal = dbType;
 
@@ -164,10 +176,10 @@ public class HomologCreation {
 				@Override
 				public void run() {
 					try {
-						String path_faa = pathFolder + genome + File.separator + genome + ".ORF.faa";
+						String path_faa = pathFolder + genome + FILE_SEPARATOR + genome + ".ORF.faa";
 						String suffix = ".ORF";
-						final String out = PATH_BLASTDB + genome + File.separator + genome + suffix;
-						folderCreation(PATH_BLASTDB + genome + File.separator);
+						final String out = PATH_BLASTDB + genome + FILE_SEPARATOR + genome + suffix;
+						folderCreation(PATH_BLASTDB + genome + FILE_SEPARATOR);
 						String execProcess = HomologCreation.makeblastdb + " -in \"" + path_faa
 								+ "\" -parse_seqids -out \"" + out + "\" -dbtype " + dbtypeFinal + " -title " + genome;
 						System.out.println(execProcess);
@@ -204,7 +216,7 @@ public class HomologCreation {
 		for (String genomeTemp : listGenomes) {
 			System.out.println(genomeTemp);
 			String genomeName = GenomeNCBI.processGenomeName(genomeTemp);
-			File genomeFolder = new File(PATH_BLASTDB + genomeName + File.separator);
+			File genomeFolder = new File(PATH_BLASTDB + genomeName + FILE_SEPARATOR);
 			int lengthFNA = 0;
 			for (File file : genomeFolder.listFiles()) {
 				if (file.getAbsolutePath().endsWith(".faa")) {
@@ -241,44 +253,39 @@ public class HomologCreation {
 	 * each blast
 	 */
 	public static String createBlastScript(String logs) {
-		folderCreation(GenomeNCBI.PATH_TEMP + "Threads/");
-		// String blastDBFolder = PATH_BLASTDB;
-		// String scriptFolder = GenomeNCBI.PATH_TEMP + "Threads";
 		/*
 		 * Change DB directory if you want to run it on a cluster
 		 */
-		String blastDBFolder = PATH_SCRIPT + "BLASTDB/";
+		String blastDBFolder = PATH_BLASTDB;
+		String blastOutFolder = PATH_RESULTS;
 
+		/*
+		 * Run bidirectionnal BlastP 
+		 */
 		ArrayList<String> blastFile = new ArrayList<>();
-
-
-//		blastFile.add("PATH="+PATH_SERVER_BLAST+":$PATH");
-//		blastFile.add("blastp -query " + blastDBFolder + "_fileGenomePivot -db " + blastDBFolder
-//				+ "_databaseTarget -out " + blastDBFolder
-//				+ "_blastP_VS_T -evalue 0.01 -max_target_seqs 1 -outfmt \"6 qseqid sseqid qlen slen length nident positive evalue bitscore\"");
-//		blastFile.add("blastp -query " + blastDBFolder + "_fileGenomeTarget -db " + blastDBFolder
-//				+ "_databasePivot -out " + blastDBFolder
-//				+ "_blastT_VS_P -evalue 0.01 -max_target_seqs 1 -outfmt \"6 qseqid sseqid qlen slen length nident positive evalue bitscore\"");
 		blastFile.add("\"" + HomologCreation.blastP + "\"" + " -query " + blastDBFolder + "_fileGenomePivot -db " + blastDBFolder
-				+ "_databaseTarget -out " + blastDBFolder
+				+ "_databaseTarget -out " + blastOutFolder
+				+ "_blastP_VS_T -evalue 0.01 -max_target_seqs 1 -outfmt \"6 qseqid sseqid qlen slen length nident positive evalue bitscore\"");
+		System.out.println("\"" + HomologCreation.blastP + "\"" + " -query " + blastDBFolder + "_fileGenomePivot -db " + blastDBFolder
+				+ "_databaseTarget -out " + blastOutFolder
 				+ "_blastP_VS_T -evalue 0.01 -max_target_seqs 1 -outfmt \"6 qseqid sseqid qlen slen length nident positive evalue bitscore\"");
 		blastFile.add("\"" + HomologCreation.blastP + "\"" + " -query " + blastDBFolder + "_fileGenomeTarget -db " + blastDBFolder
-				+ "_databasePivot -out " + blastDBFolder
+				+ "_databasePivot -out " + blastOutFolder
 				+ "_blastT_VS_P -evalue 0.01 -max_target_seqs 1 -outfmt \"6 qseqid sseqid qlen slen length nident positive evalue bitscore\"");
 
 		blastFile.add("echo _fileGenomePivot VS _fileGenomeTarget Blast search completed");
 		// ">" + scriptFolder + "_fileGenomePivotVS_fileGenomeTarget.control.txt");
 
-		TabDelimitedTableReader.saveList(blastFile, GenomeNCBI.PATH_TEMP + "Threads/BlastTemp.txt");
+		TabDelimitedTableReader.saveList(blastFile, BLAST_SCRIPT_TEMP);
 		/*
 		 * Create the blast commands
 		 */
 		createBlastCommands(".ORF", 0.01);
-		logs += "All blast script created in : " + GenomeNCBI.PATH_TEMP
-				+ "Threads/Commands/\nRun them with bash or using calculus cluster (see bacnet.e4.rap.setup.RunBlastSGE.sh or"
+		logs += "All blast script created in : " + GenomeNCBI.PATH_THREADS
+				+ "Threads/Commands/\nRun them with bash or using a cluster (see bacnet.e4.rap.setup.RunBlastSGE.sh or"
 				+ " RunBlastSlurm.sh)\nBut fix first value of: HomologCreation.PATH_SCRIPT -> " + PATH_SCRIPT
 				+ " which is the path for data on your server.\n"
-				+ "You need also to fix the value of: HomologCreation.PATH_SERVER_BLAST -> " + PATH_SERVER_BLAST
+				+ "You need also to fix the value of: HomologCreation.PATH_BLAST -> " + PATH_BLAST
 				+ " which is the path for blastp on your server.\n"
 				+ "Run again script creation after fixing these path\n";
 
@@ -292,7 +299,6 @@ public class HomologCreation {
 	 * @param evalueCutoff
 	 */
 	public static void createBlastCommands(String suffix, double evalueCutoff) {
-		folderCreation(GenomeNCBI.PATH_TEMP + "Threads/Commands/");
 		ArrayList<String> listGenomes = Genome.getAvailableGenomes();
 		for (int i = 0; i < listGenomes.size(); i++) {
 			String genome_pivot = listGenomes.get(i);
@@ -333,25 +339,25 @@ public class HomologCreation {
 				Runnable runnable = new Runnable() {
 					@Override
 					public void run() {
-						String separator = "/";
-						String databaseTarget = genomeName + separator + genomeName + suffixFinal;
-						String databasePivot = genomePivot + separator + genomePivot + suffixFinal;
-						String fileGenomePivot = genomePivot + separator + genomePivot + suffix + ".faa";
-						String fileGenomeTarget = genomeName + separator + genomeName + suffix + ".faa";
-						String blastP_VS_T = "Results" + separator + "resultBlast_" + genomePivot + "_vs_" + genomeName
-								+ ".blast.txt";
-						String blastT_VS_P = "Results" + separator + "resultBlast_" + genomeName + "_vs_" + genomePivot
-								+ ".blast.txt";
+						String databaseTarget = genomeName + FILE_SEPARATOR + genomeName + suffixFinal;
+						String databasePivot = genomePivot + FILE_SEPARATOR + genomePivot + suffixFinal;
+						String fileGenomePivot = genomePivot + FILE_SEPARATOR + genomePivot + suffix + ".faa";
+						String fileGenomeTarget = genomeName + FILE_SEPARATOR + genomeName + suffix + ".faa";
+						String blastP_VS_T = "resultBlast_" + genomePivot + "_vs_" + genomeName + ".blast.txt";
+						String blastT_VS_P = "resultBlast_" + genomeName + "_vs_" + genomePivot	+ ".blast.txt";
 						String args = FileUtils
-								.readText(GenomeNCBI.PATH_TEMP + "Threads" + File.separator + "BlastTemp.txt");
+								.readText(BLAST_SCRIPT_TEMP);
 						args = args.replaceAll("_fileGenomePivot", fileGenomePivot);
 						args = args.replaceAll("_fileGenomeTarget", fileGenomeTarget);
 						args = args.replaceAll("_blastP_VS_T", blastP_VS_T);
 						args = args.replaceAll("_blastT_VS_P", blastT_VS_P);
 						args = args.replaceAll("_databasePivot", databasePivot);
 						args = args.replaceAll("_databaseTarget", databaseTarget);
-						FileUtils.saveText(args, GenomeNCBI.PATH_TEMP + "Threads" + File.separator + "Commands"
-								+ File.separator + genomePivot + "_vs_" + genomeName + ".sh");
+						String extension = ".sh";
+//						String os = System.getProperty("os.name");
+//				        if (os.contains("Windows"))
+//				        	extension = ".bat";
+						FileUtils.saveText(args, GenomeNCBI.PATH_THREADS + genomePivot + "_vs_" + genomeName + extension);
 					}
 				};
 				executor.execute(runnable);
@@ -499,9 +505,9 @@ public class HomologCreation {
 				/*
 				 * Calculate identity value
 				 */
-				String results_folder = PATH_BLASTDB + File.separator + "Results" + File.separator;
+				String results_folder = PATH_RESULTS;
 				for (String genome_target : list_genomes_toBlast) {
-					// System.out.println("Add column for: "+genome_pivot + " vs " + genome_target);
+					System.out.println("Add column for: "+genome_pivot + " vs " + genome_target+" in "+results_folder);
 					String path_fileblast = results_folder + "resultBlast_" + genome_pivot + "_vs_" + genome_target
 							+ ".blast.txt";
 					String path_fileblast2 = results_folder + "resultBlast_" + genome_target + "_vs_" + genome_pivot
@@ -558,9 +564,9 @@ public class HomologCreation {
 	 * @param listGenomes
 	 */
 	private static void addColumnIdentity(String genome_pivot, ArrayList<String> listGenomes) {
-		String addedcolumn_folder = PATH_BLASTDB + File.separator + "AddedColumnIdentity" + File.separator;
+		String addedcolumn_folder = PATH_ADD_IDENTITY;
 		folderCreation(addedcolumn_folder);
-		String results_folder = PATH_BLASTDB + File.separator + "Results" + File.separator;
+		String results_folder = PATH_RESULTS;
 		folderCreation(results_folder);
 		for (String genome_target : listGenomes) {
 			System.out.println("Add column for: " + genome_pivot + " vs " + genome_target);
@@ -639,23 +645,23 @@ public class HomologCreation {
 	 * @param genome_pivot
 	 */
 	private static void createSummaryTable(String genome_pivot, ArrayList<String> listGenomes, TreeSet<String> proteinNotFound, TreeSet<String> noHomologs, TreeSet<String> lowHomologs) {
-		ArrayList<String> proteinList = getProteinList(genome_pivot);
-		String[][] newTable = new String[proteinList.size() + 1][2];
+		HashMap<String,String> proteinIdtoLocusTagPivot = Genome.loadGeneFromProteinId(GenomeNCBI.unprocessGenomeName(genome_pivot));
+		String[][] newTable = new String[proteinIdtoLocusTagPivot.keySet().size() + 1][2];
 		newTable[0][0] = "Gene_Id";
 		newTable[0][1] = "Homologs";
-		HashMap<String,String> proteinIdtoLocusTagPivot = Genome.loadGeneFromProteinId(GenomeNCBI.unprocessGenomeName(genome_pivot));
 		for (String genome_target : listGenomes) {
 		//for(int w=0; w < 4 ;w++) {
 			//String genome_target = listGenomes.get(w);
 			if (!genome_target.equals(genome_pivot)) {
 				HashMap<String,String> proteinIdtoLocusTagTarget = Genome.loadGeneFromProteinId(GenomeNCBI.unprocessGenomeName(genome_target));
-				String pathBlast = PATH_BLASTDB + File.separator + "AddedColumnIdentity" + File.separator + genome_pivot
+				String pathBlast = PATH_ADD_IDENTITY + genome_pivot
 						+ "_vs_" + genome_target + ".blast.txt";
 				String[][] homologyTable = TabDelimitedTableReader.read(pathBlast);
 				HashMap<String, Integer> indexRowHashmap = indexRows(homologyTable);
 				int i = 1;
-				for (String proteinName : proteinList) {
+				for (String proteinName : proteinIdtoLocusTagPivot.keySet()) {
 					// add gene_name to protein id
+					System.out.println(proteinName);
 					String gene = proteinIdtoLocusTagPivot.get(proteinName);
 					if (gene == null) {
 						String rowNotFound = genome_pivot + "\t" + proteinName;
@@ -724,34 +730,7 @@ public class HomologCreation {
 		return hashMap;
 	}
 
-	/**
-	 * Return the list of all protein id present in the genome given
-	 * 
-	 * @param genome
-	 * @return
-	 */
-	private static ArrayList<String> getProteinList(String genome) {
-		ArrayList<String> protein_list = new ArrayList<String>();
-		try {
-			FileInputStream inStream = new FileInputStream(getFAAPath(genome));
-			FastaReader<ProteinSequence, AminoAcidCompound> fastaReader = new FastaReader<ProteinSequence, AminoAcidCompound>(
-					inStream, new NCBIFastaHeaderParser<ProteinSequence, AminoAcidCompound>(),
-					new ProteinSequenceCreator(AminoAcidCompoundSet.getAminoAcidCompoundSet()));
-			LinkedHashMap<String, ProteinSequence> genomeSequences = fastaReader.process();
-			for (String key : genomeSequences.keySet()) {
-				String seq_name = key.split(" ")[0];
-				protein_list.add(seq_name);
-			}
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return protein_list;
-	}
-
+	
 	/**
 	 * Go through all result files and create Conservation HadhMap for each Gene
 	 */
@@ -779,8 +758,8 @@ public class HomologCreation {
 				// System.out.println("Found "+conservationHashMap.size()+ " homologs for
 				// "+gene.getName());
 				gene.setConservation(conservationHashMap.size());
-				String genepath = Database.getGENOMES_PATH() + GenomeNCBI.unprocessGenomeName(genome) + File.separator
-						+ "Sequences" + File.separator + gene.getName();
+				String genepath = Database.getGENOMES_PATH() + GenomeNCBI.unprocessGenomeName(genome) + FILE_SEPARATOR
+						+ "Sequences" + FILE_SEPARATOR + gene.getName();
 				// System.out.println(genepath);
 				gene.save(genepath);
 			}
@@ -808,7 +787,7 @@ public class HomologCreation {
 
 	public static String getFAAPath(String genome) {
 		String path = new String();
-		File folder = new File(PATH_BLASTDB + genome + "/");
+		File folder = new File(GenomeNCBI.PATH_BLASTDB + genome + FILE_SEPARATOR);
 		File[] list_file = folder.listFiles();
 		for (File file : list_file) {
 			if (file.getAbsolutePath().endsWith(".faa")) {
@@ -820,18 +799,14 @@ public class HomologCreation {
 	}
 
 	public static String getBlastFolder() {
-		String os = System.getProperty("os.arch");
-		if (os.equals("amd64"))
-			return PATH_BLAST_WIN;
-		else
-			return PATH_BLAST_MAC;
+		return PATH_BLAST;
 	}
 
 	public static String getBlastExtension() {
 		String os = System.getProperty("os.arch");
-		if (os.equals("amd64"))
-			return ".exe";
-		else
+//		if (os.equals("amd64"))
+//			return ".exe";
+//		else
 			return "";
 	}
 

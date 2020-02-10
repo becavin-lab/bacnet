@@ -54,7 +54,7 @@ public class DataFolder {
         folders.add(GenomeNCBI.PATH_HOMOLOGS);
         folders.add(GenomeNCBI.PATH_ANNOTATION);
         folders.add(GenomeNCBI.PATH_PROTEINID);
-        folders.add(GenomeNCBI.PATH_TEMP);
+        folders.add(GenomeNCBI.PATH_THREADS);
         for (String path : folders) {
             if (!FileUtils.exists(path)) {
                 System.out.println("Create folder: " + path);

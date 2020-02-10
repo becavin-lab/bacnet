@@ -231,9 +231,9 @@ public class GenomicsView implements SelectionListener {
 							tableGenomeViewer.replace(tableGenomeViewer.getTable().getItem(i).getData(), i);
 						}
 					}
-					if (Database.getInstance().getProjectName() == Database.LISTERIOMICS_PROJECT
-							|| Database.getInstance().getProjectName() == Database.UIBCLISTERIOMICS_PROJECT
-							|| Database.getInstance().getProjectName() == Database.YERSINIOMICS_PROJECT) {
+					url = Phylogenomic.PHYLO_GENOME_SVG;
+					File file = new File(url);
+					if (file.exists()) {
 						loadPhylogenomicFigure(selectedGenomes);
 					}
 				}

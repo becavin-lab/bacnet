@@ -964,6 +964,7 @@ public class SetupPart implements SelectionListener {
                     logs += "Convert genome: " + genome + "\n";
                     GenomeNCBI genomeNCBI = GenomeNCBITools.loadGenome(genome, GenomeNCBI.PATH_GENOMES, false, true);
                     GenomeConversion.run(genomeNCBI, GenomeNCBI.PATH_GENOMES + "/" + genome, genome);
+                    //System.out.println("Conversion complete");
                     Genome genomeTemp = Genome.loadGenome(genome);
                     if (genomeTemp == null) {
                         logs += genome + " does not exists. Click: Add unvalidated Genome to the database" + "\n";
@@ -972,7 +973,7 @@ public class SetupPart implements SelectionListener {
                     } else {
                         logs += genome + " was added to the database" + "\n";
                         dataValidation.getGenomes().put(genome, true);
-                        logs += "Save Protein to Locus tag hashmap for faster computing of homolog search: " + genome;
+                        logs += "Save Protein to Locus tag hashmap for faster computing of homolog search: " + genome + "\n";
                         genomeTemp.saveProteinIdToLocusTag();
                     }
                 }

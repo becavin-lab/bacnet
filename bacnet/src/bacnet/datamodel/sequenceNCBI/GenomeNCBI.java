@@ -59,16 +59,22 @@ public class GenomeNCBI {
      */
     @Deprecated
     public static String PATH_GENOMES_NEW = PATH_RAW + "GenomesNew" + File.separator;
-    /**
-     * Path for all Temp fils, mainly created during Genome related operations. Database.getInstance().getPath() + "/Temp/";
-     */
-    public static String PATH_TEMP = PATH_RAW + "Temp" + File.separator;
-    
+     
     /**
      * Path for all homologs calculation file : Database.getInstance().getPath() +
      * "/GenomeNCBI/Homologs/";
      */
     public static String PATH_HOMOLOGS = PATH_RAW + "Homologs"+ File.separator ;
+    /**
+     * Path for all homologs calculation file : Database.getInstance().getPath() +
+     * "/GenomeNCBI/Homologs/";
+     */
+    public static String PATH_THREADS = PATH_RAW + "Threads"+ File.separator ;
+    /**
+	 * Path for BlastDB folder
+	 */
+	public static String PATH_BLASTDB = PATH_RAW + "BLASTDB" + File.separator;
+	
     /**
      * Path for all homologs calculation file : Database.getInstance().getPath() +
      * "/GenomeNCBI/Homologs/";
@@ -476,8 +482,9 @@ public class GenomeNCBI {
         PATH_GENOMES = PATH_RAW + "Genomes"+ File.separator;
         PATH_GENOMES_NEW = PATH_RAW + "GenomesNew" + File.separator;
         PATH_HOMOLOGS = PATH_RAW + "Homologs"+ File.separator ;
-        PATH_ANNOTATION = PATH_RAW + "Annotation"+ File.separator;
-        PATH_TEMP = PATH_RAW + "Temp" + File.separator;        
+        PATH_ANNOTATION = PATH_RAW + "Annotation"+ File.separator;   
+        PATH_THREADS = PATH_RAW + "Threads"+ File.separator;
+        PATH_BLASTDB = PATH_RAW + "BLASTDB"+ File.separator;
     }
 
     /**
