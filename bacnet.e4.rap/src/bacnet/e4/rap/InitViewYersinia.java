@@ -1,13 +1,12 @@
 package bacnet.e4.rap;
 
-import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
+
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.inject.Named;
+
 import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.e4.ui.workbench.modeling.EModelService;
@@ -28,6 +27,7 @@ import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Link;
 import org.eclipse.swt.widgets.Shell;
+
 import bacnet.datamodel.sequence.Genome;
 import bacnet.datamodel.sequence.Genome.OpenGenomesThread;
 import bacnet.expressionAtlas.ProteomicsView;
@@ -84,7 +84,7 @@ public class InitViewYersinia implements SelectionListener {
     @PostConstruct
     public void createPartControl(Composite parent) {
 
-        System.out.println("Load InitView");
+        //System.out.println("Load InitView");
 
         focused = true;
         parent.setLayout(new GridLayout(1, false));
@@ -391,6 +391,7 @@ public class InitViewYersinia implements SelectionListener {
         lblGoToThe.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
         new Label(composite_16, SWT.NONE);
         new Label(composite_16, SWT.NONE);
+        new Label(composite_16, SWT.NONE);
 
         Composite composite_19 = new Composite(composite, SWT.NONE);
         composite_19.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, true, false, 1, 1));
@@ -465,7 +466,7 @@ public class InitViewYersinia implements SelectionListener {
 
         pushState();
 
-        System.out.println("InitView loaded");
+        //System.out.println("InitView loaded");
  
     }
 
