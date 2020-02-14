@@ -37,7 +37,7 @@ public class InitViewBacnet implements SelectionListener {
      */
     private boolean focused = false;
     private Button btnListeriomics;
-    private Button btnLeishomics;
+    private Button btnLightlisteriomics;
     private Link linkPubli;
     private Link linkHUB;
     private Button btnCRISPR;
@@ -53,6 +53,7 @@ public class InitViewBacnet implements SelectionListener {
     @Inject
     @Named(IServiceConstants.ACTIVE_SHELL)
     private Shell shell;
+    private Button btnLeishmania;
 
     @Inject
     public InitViewBacnet() {}
@@ -114,14 +115,15 @@ public class InitViewBacnet implements SelectionListener {
         composite_15.setLayoutData(gd_composite_15);
         composite_15.setLayout(new GridLayout(1, false));
         composite_15.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
-        btnLeishomics = new Button(composite_15, SWT.BORDER);
-        GridData gd_btnLeishomics = new GridData(SWT.CENTER, SWT.CENTER, true, false, 1, 1);
-        gd_btnLeishomics.heightHint = 100;
-        btnLeishomics.setLayoutData(gd_btnLeishomics);
+        btnLightlisteriomics = new Button(composite_15, SWT.BORDER);
+        GridData gd_btnLightlisteriomics = new GridData(SWT.CENTER, SWT.CENTER, true, false, 1, 1);
+        gd_btnLightlisteriomics.heightHint = 100;
+        btnLightlisteriomics.setLayoutData(gd_btnLightlisteriomics);
         // btnGeneView.setImage(ResourceManager.getPluginImage("bacnet",
         // "icons/InitPage/SystemsBio.png"));
-        btnLeishomics.addSelectionListener(this);
-        btnLeishomics.setImage(ResourceManager.getPluginImage("bacnet", "icons/ToolBar/LogoLeishomics.png"));
+        btnLightlisteriomics.addSelectionListener(this);
+        btnLightlisteriomics.setImage(ResourceManager.getPluginImage("bacnet", "icons/ToolBar/LogoListeriomics.png"));
+        
 
         Label lblinfo = new Label(composite_15, SWT.WRAP);
         lblinfo.setAlignment(SWT.CENTER);
@@ -132,14 +134,38 @@ public class InitViewBacnet implements SelectionListener {
         lblinfo.setData(RWT.MARKUP_ENABLED, Boolean.TRUE);
         lblinfo.setLayoutData(gd_lblinfo);
         lblinfo.setText(
-                "Acces to the Omics viewer : Amastigote vs Promastigote. MultiOmics Viewer : DNA vs RNA vs Protein");
+        		"Light version of Listeriomics. This version can be developed through the BACNET github wiki.\r");
 
         Composite composite_6 = new Composite(composite, SWT.BORDER);
         GridData gd_composite_6 = new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1);
-        gd_composite_6.widthHint = 850;
+        gd_composite_6.widthHint = 1300;
         composite_6.setLayoutData(gd_composite_6);
-        composite_6.setLayout(new GridLayout(2, false));
+        composite_6.setLayout(new GridLayout(3, false));
         composite_6.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
+        
+        Composite composite_1 = new Composite(composite_6, SWT.NONE);
+        GridData gd_composite_1 = new GridData(SWT.CENTER, SWT.TOP, false, false, 1, 1);
+        gd_composite_1.widthHint = 425;
+        gd_composite_1.heightHint = 200;
+        composite_1.setLayoutData(gd_composite_1);
+        composite_1.setLayout(new GridLayout(1, false));
+        composite_1.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
+        GridData gd_btnLeishmania = new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1);
+        gd_btnLeishmania.heightHint = 100;
+        btnLeishmania = new Button(composite_1, SWT.BORDER);
+        btnLeishmania.setLayoutData(gd_btnLeishmania);
+        btnLeishmania.setImage(ResourceManager.getPluginImage("bacnet", "icons/ToolBar/LogoLeishomics.png"));
+        btnLeishmania.addSelectionListener(this);
+        Label lblNewLabel = new Label(composite_1, SWT.WRAP);
+        lblNewLabel.setAlignment(SWT.CENTER);
+        lblNewLabel.setFont(SWTResourceManager.getBodyFont(SWT.NORMAL));
+        lblNewLabel.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
+        GridData gd_lblNewLabel = new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1);
+        gd_lblNewLabel.widthHint = 400;
+        lblNewLabel.setData(RWT.MARKUP_ENABLED, Boolean.TRUE);
+        lblNewLabel.setLayoutData(gd_lblNewLabel);
+        lblNewLabel.setText("Acces to the Omics viewer : Amastigote vs Promastigote. MultiOmics Viewer : DNA vs RNA vs Protein");
+        
         Composite composite_10 = new Composite(composite_6, SWT.NONE);
         GridData gd_composite_10 = new GridData(SWT.CENTER, SWT.TOP, false, false, 1, 1);
         gd_composite_10.widthHint = 425;
@@ -202,7 +228,7 @@ public class InitViewBacnet implements SelectionListener {
 
         Label lblLastUpdate = new Label(composite_19, SWT.NONE);
         lblLastUpdate.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, true, 1, 1));
-        lblLastUpdate.setText("Last update: December 2018");
+        lblLastUpdate.setText("Last update: February 2020");
 
         linkPubli = new Link(composite_19, SWT.NONE);
         linkPubli.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
@@ -296,8 +322,11 @@ public class InitViewBacnet implements SelectionListener {
         } else if (e.getSource() == btnListeriomics) {
             String url = "https://listeriomics.pasteur.fr";
             NavigationManagement.openURLInExternalBrowser(url, partService);
-        } else if (e.getSource() == btnLeishomics) {
+        } else if (e.getSource() == btnLeishmania) {
             String url = "https://leishomics.pasteur.fr";
+            NavigationManagement.openURLInExternalBrowser(url, partService);
+        } else if (e.getSource() == btnLightlisteriomics) {
+            String url = "http://www.genomique.info:10080/ListeriomicsSample/";
             NavigationManagement.openURLInExternalBrowser(url, partService);
         } else if (e.getSource() == btnYersiniomics) {
             String url = "http://www.genomique.info:10080/Yersiniomics/";
