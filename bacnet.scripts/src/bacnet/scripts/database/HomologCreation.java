@@ -51,15 +51,15 @@ public class HomologCreation {
 //	public static String PATH_SCRIPT = "//home//becavin//ListeriomicsSample//";
 //	public static String PATH_SCRIPT = "/pasteur/homes/cbecavin/ListeriomicsSample/";
 //	public static String PATH_SCRIPT = "D:/Programming/GitRepository/ListeriomicsSample/GenomeNCBI/Temp/";
-	public static String PATH_SCRIPT = "C:"+ FILE_SEPARATOR +"Users"+ FILE_SEPARATOR +"ipmc"+ FILE_SEPARATOR +
-			"Documents"+ FILE_SEPARATOR +"BACNET"+ FILE_SEPARATOR +"ListeriomicsSample" + FILE_SEPARATOR + "GenomeNCBI" + FILE_SEPARATOR;
-
+//	public static String PATH_SCRIPT = "C:"+ FILE_SEPARATOR +"Users"+ FILE_SEPARATOR +"ipmc"+ FILE_SEPARATOR +
+//			"Documents"+ FILE_SEPARATOR +"BACNET"+ FILE_SEPARATOR +"ListeriomicsSample" + FILE_SEPARATOR + "GenomeNCBI" + FILE_SEPARATOR;
+	public static String PATH_SCRIPT = "C:\\Users\\ipmc\\OneDrive\\Listeriomics\\GenomeNCBI\\";
 	/**
 	 * Path for Blast+ 
 	 */
-	public static String PATH_BLAST = "";
+//	public static String PATH_BLAST = "";
 //	public static String PATH_BLAST = "/share/apps/local/rmblast-2-2-28/bin/";
-//	public static String PATH_BLAST = "C:/Program Files/NCBI/blast-2.9.0+/bin/";
+	public static String PATH_BLAST = "C:/Program Files/NCBI/blast-2.9.0+/bin/";
 
 	/**
 	 * Shortcut for running blastP
@@ -123,7 +123,7 @@ public class HomologCreation {
 		ArrayList<String> listGenomes = Genome.getAvailableGenomes();
 		for (String genomeTemp : listGenomes) {
 			File pathGenome = new File(GenomeNCBI.PATH_GENOMES + genomeTemp + FILE_SEPARATOR);
-			final String filterFinal = ".fna";
+			final String filterFinal = ".faa";
 			File[] files = pathGenome.listFiles(new FilenameFilter() {
 				@Override
 				public boolean accept(File dir, String name) {
@@ -150,7 +150,7 @@ public class HomologCreation {
 						+ ". Concatenate all .faa in one file to be able to run homolog search");
 			}
 		}
-		logs += "All .faa files were copied to " + PATH_BLASTDB;
+		logs += "All .faa files were copied to " + PATH_BLASTDB+"\n";
 		return logs;
 	}
 
