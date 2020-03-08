@@ -22,7 +22,8 @@ public class Peptidomics {
 		
 		/*
 		 * Exec blastDB creation
-		 * "C:/Program Files/NCBI/blast-2.9.0+/bin/makeblastdb".exe -in "C:\\Users\\ipmc\\OneDrive\\Listeriomics\GenomeNCBI\Temp\\BLASTDB\peptidomics\peptidomics.ORF.faa" -parse_seqids -out "C:\\Users\\ipmc\\OneDrive\\Listeriomics\GenomeNCBI\Temp\\BLASTDB\peptidomics\peptidomics.ORF" -dbtype prot -title peptidomics
+		 * "C:/Program Files/NCBI/blast-2.9.0+/bin/makeblastdb".exe -in "C:\\Users\\ipmc\\OneDrive\\Listeriomics\GenomeNCBI\\BLASTDB\peptidomics\peptidomics.ORF.faa" -parse_seqids -out "C:\\Users\\ipmc\\OneDrive\\Listeriomics\\GenomeNCBI\\BLASTDB\peptidomics\peptidomics.ORF" -dbtype prot -title peptidomics
+ 		*
  		*
 		 */
 		
@@ -35,7 +36,8 @@ public class Peptidomics {
 		/*
 		 * Run every Blast on the server
 		 */
-		
+		// Done there : /pasteur/projets/policy01/BioIT/Chris_Listeriomics/
+		//  sbatch --array=1-236 RunBlast.sh ListScriptPeptidomics.txt
 		/*
 		 * Combine results
 		 */
