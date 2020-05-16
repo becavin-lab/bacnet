@@ -1,5 +1,7 @@
 # eclipse values
 .settings/
+.classpath
+.project
 
 # Remove folder
 BBH_script/
