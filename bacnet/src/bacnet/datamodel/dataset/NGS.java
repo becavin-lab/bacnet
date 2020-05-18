@@ -59,29 +59,6 @@ public class NGS extends OmicsData implements Serializable {
     }
 
     /**
-     * Return the value at the right position in the double[] values argument<br>
-     * Read the data if necessary
-     * 
-     * @param position
-     * @return
-     */
-    public double getValue(int position, String chromoID) {
-        ExpressionData dataset = datasets.get(chromoID);
-        if (dataset != null) {
-            // if(dataset.getRead()[position]){
-            // return dataset.getValues()[position];
-            // }else{
-            // dataset.read(position);
-            double value = dataset.read(position, true);
-            // return dataset.getValues()[position];
-            return value;
-            // }
-        } else {
-            return 0;
-        }
-    }
-
-    /**
      * Load information on the datasets: name, date, note, stat, etc ... The path for data loading will
      * be: PATH_STREAMING+this.getName()+"_"chromoID+"Info"+this.EXTENSION;
      */
@@ -89,7 +66,7 @@ public class NGS extends OmicsData implements Serializable {
         Genome genome = Genome.loadGenome(genomeName);
         for (String chromoID : genome.getChromosomes().keySet()) {
             String name = this.getName() + "_" + chromoID;
-            String fileName = PATH_STREAMING + name + "Info" + EXTENSION;
+            String fileName = PATH_STREAMING + name + "Info" + ExpressionData.EXTENSION;
             System.out.println(fileName);
             ExpressionData dataset = this.getDatasets().get(chromoID);
             dataset.load(fileName, false);
@@ -109,7 +86,7 @@ public class NGS extends OmicsData implements Serializable {
             if (!dataset.isInfoRead()) {
                 load();
             }
-            String fileName = PATH_STREAMING + getName() + "_" + chromoID + EXTENSION;
+            String fileName = PATH_STREAMING + getName() + "_" + chromoID + ExpressionData.EXTENSION;
             try {
                 DataInputStream in = new DataInputStream(new BufferedInputStream(new FileInputStream(fileName)));
                 dataset.setValues(new double[dataset.getLength()]);
@@ -137,7 +114,7 @@ public class NGS extends OmicsData implements Serializable {
         for (String chromoID : genome.getChromosomes().keySet()) {
             // save stat data
             String fileName = PATH_STREAMING + getName() + "_" + chromoID;
-            String statfileName = fileName + "Info" + EXTENSION;
+            String statfileName = fileName + "Info" + ExpressionData.EXTENSION;
             ExpressionData dataset = datasets.get(chromoID);
             try {
                 // Create the necessary output streams to save the scribble.
@@ -158,7 +135,7 @@ public class NGS extends OmicsData implements Serializable {
 
             if (saveValues) {
                 // save double[] values
-                fileName = fileName + EXTENSION;
+                fileName = fileName + ExpressionData.EXTENSION;
                 System.out.println("save: " + fileName);
                 try {
                     DataOutputStream out =
@@ -316,7 +293,7 @@ public class NGS extends OmicsData implements Serializable {
 
             // save double[] values and remove it to release memory
             String fileName = PATH_STREAMING + getName() + "_" + chromoID;
-            fileName = fileName + EXTENSION;
+            fileName = fileName + ExpressionData.EXTENSION;
             System.out.println("save: " + fileName);
             try {
                 DataOutputStream out = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(fileName)));

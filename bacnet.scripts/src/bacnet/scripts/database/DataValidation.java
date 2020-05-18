@@ -2,6 +2,7 @@ package bacnet.scripts.database;
 
 import java.util.HashMap;
 import bacnet.Database;
+import bacnet.datamodel.dataset.ExpressionData;
 import bacnet.datamodel.dataset.ExpressionMatrix;
 import bacnet.datamodel.dataset.GeneExpression;
 import bacnet.datamodel.dataset.NGS;
@@ -166,7 +167,7 @@ public class DataValidation {
                     String chromosome =
                             Genome.loadGenome(transData.getGenomeName()).getFirstChromosome().getChromosomeID();
                     String fileNameInfo =
-                            OmicsData.PATH_STREAMING + transData.getName() + "_" + chromosome + NGS.EXTENSION;
+                            OmicsData.PATH_STREAMING + transData.getName() + "_" + chromosome + OmicsData.EXTENSION;
                     if (!FileUtils.exists(fileNameInfo)) {
                         validate = false;
                     }

@@ -465,7 +465,12 @@ public class InitViewListeriaSample implements SelectionListener {
         scrolledComposite.setMinSize(composite.computeSize(SWT.DEFAULT, SWT.DEFAULT));
 
         pushState();
-
+        
+        /*
+         * Run test after loading
+         */
+        TestPart.runPostTests(partService);
+        
     }
 
     public boolean openPasswordDialog() {

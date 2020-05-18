@@ -137,6 +137,9 @@ public class ExpressionData extends OmicsData implements Serializable {
      */
     public void load() {
         String fileName = PATH_STREAMING + getName() + "Info" + EXTENSION;
+        if (isNGS()) {
+            fileName = PATH_STREAMING + getName() + "_" + this.getChromosomeID() + "Info" + EXTENSION;
+        }
         load(fileName);
     }
 
@@ -146,6 +149,9 @@ public class ExpressionData extends OmicsData implements Serializable {
      */
     public void load(boolean createValues) {
         String fileName = PATH_STREAMING + getName() + "Info" + EXTENSION;
+        if (isNGS()) {
+            fileName = PATH_STREAMING + getName() + "_" + this.getChromosomeID() + "Info" + EXTENSION;
+        }
         load(fileName, createValues);
     }
 
@@ -237,6 +243,10 @@ public class ExpressionData extends OmicsData implements Serializable {
             load();
         }
         String fileName = PATH_STREAMING + getName() + EXTENSION;
+        if (isNGS()) {
+            fileName = PATH_STREAMING + getName() + "_" + this.getChromosomeID() + "Info" + EXTENSION;
+        }
+        
         // System.out.println(fileName);
         try {
             DataInputStream in = new DataInputStream(new BufferedInputStream(new FileInputStream(fileName)));
@@ -267,7 +277,7 @@ public class ExpressionData extends OmicsData implements Serializable {
         if (!isInfoRead()) {
             load();
         }
-        String fileName = PATH_STREAMING + getName() + "_" + chromosomeID + ".rnaseq";
+        String fileName = PATH_STREAMING + getName() + "_" + chromosomeID + EXTENSION;
         // System.out.println(fileName);
         try {
             DataInputStream in = new DataInputStream(new BufferedInputStream(new FileInputStream(fileName)));
@@ -304,7 +314,7 @@ public class ExpressionData extends OmicsData implements Serializable {
         }
         String fileName = PATH_STREAMING + getName() + EXTENSION;
         if (isNGS()) {
-            fileName = PATH_STREAMING + getName() + "_" + this.getChromosomeID() + NGS.EXTENSION;
+            fileName = PATH_STREAMING + getName() + "_" + this.getChromosomeID() + EXTENSION;
         }
         DataInputStream in;
         try {

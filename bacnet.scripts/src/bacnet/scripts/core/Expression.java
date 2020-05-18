@@ -159,12 +159,14 @@ public class Expression {
                                         bioCondition.getName() + "[" + this.getTypeData() + "]");
                             } else { // test if we can find the gene by its gene name
                             	Gene geneTemp = genome.getGeneFromName(gElement);
-                            	String geneName = geneTemp.getGeneName();
-                            	if (matrix.getRowNames().containsKey(geneName)) {
-                            		 double value = matrix.getValue(geneName, ColNames.VALUE + "");
-                                     expression.setValue(value, gElement,
-                                             bioCondition.getName() + "[" + this.getTypeData() + "]");
-                            	}
+                            	if(geneTemp != null) {
+                                    String geneName = geneTemp.getGeneName();
+                                	if (matrix.getRowNames().containsKey(geneName)) {
+                                		 double value = matrix.getValue(geneName, ColNames.VALUE + "");
+                                         expression.setValue(value, gElement,
+                                                 bioCondition.getName() + "[" + this.getTypeData() + "]");
+                                	}
+                                }
                             }
                         }
                     }

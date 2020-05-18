@@ -459,9 +459,11 @@ public class TranscriptomesCreation {
                             logFCMatrix.setValue(matrix.getValue(gene, ColNames.LOGFC + ""), gene, comp);
                         } else { // test if we can find the gene by its gene name
                         	Gene geneTemp = genome.getGeneFromName(gene);
-                        	String geneName = geneTemp.getGeneName();
-                        	if (matrix.getRowNames().containsKey(geneName)) {
-                            	logFCMatrix.setValue(matrix.getValue(geneName, ColNames.LOGFC + ""), gene, comp);
+                        	if(geneTemp != null) {
+                            	String geneName = geneTemp.getGeneName();
+                            	if (matrix.getRowNames().containsKey(geneName)) {
+                                	logFCMatrix.setValue(matrix.getValue(geneName, ColNames.LOGFC + ""), gene, comp);
+                            	}
                         	}
                         }
                     }
@@ -476,9 +478,11 @@ public class TranscriptomesCreation {
                                 logFCMatrix.setValue(matrix.getValue(gene, ColNames.LOGFC + ""), gene, comp);
                             } else { // test if we can find the gene by its gene name
                             	Gene geneTemp = genome.getGeneFromName(gene);
-                            	String geneName = geneTemp.getGeneName();
-                            	if (matrix.getRowNames().containsKey(geneName)) {
-	                            	logFCMatrix.setValue(matrix.getValue(geneName, ColNames.LOGFC + ""), gene, comp);
+                            	if(geneTemp != null) {
+                                    String geneName = geneTemp.getGeneName();
+                                	if (matrix.getRowNames().containsKey(geneName)) {
+    	                            	logFCMatrix.setValue(matrix.getValue(geneName, ColNames.LOGFC + ""), gene, comp);
+                                	}
                             	}
                             }
                         }
@@ -497,10 +501,11 @@ public class TranscriptomesCreation {
                             ExpressionMatrix matrixTiling = ExpressionMatrix.loadTab(fileName, true);
                             String headerTiling = "LOGFC_" + comp + Tiling.EXTENSION;
                             for (String gene : genome.getAllElementNames()) {
-                                // System.out.println(header+" "+gene+" "+comp);
+                                //System.out.println(headerTiling+" "+gene+" "+comp);
                                 if (matrixTiling.getRowNames().containsKey(gene)) {
                                     if (matrixTiling.getHeaders().contains(headerTiling)) {
-                                        // double value = matrixTiling.getValue(gene, headerTiling);
+                                        //double value = matrixTiling.getValue(gene, headerTiling);
+                                        //System.out.println(value + " "+gene+ " "+comp);
                                         logFCMatrix.setValue(matrixTiling.getValue(gene, headerTiling), gene, comp);
                                     }
                                 }
@@ -590,8 +595,8 @@ public class TranscriptomesCreation {
                 ExpressionMatrix matrix = ExpressionMatrix.loadTab(fileName, true);
                 ExpressionMatrix matrixTiling = ExpressionMatrix.loadTab(fileNameTiling, true);
                 if (matrix != null) {
-                    String headerGE = "STAT_" + comp + "_" + StatTest.TypeStat.FDRBY + GeneExpression.EXTENSION;
-                    String headerTiling = "STAT_" + comp + "_" + StatTest.TypeStat.TSTUDENTTILING + Tiling.EXTENSION;
+                    String headerGE = "STAT_" + comp + "_" + StatTest.TypeStat.FDRBY + OmicsData.EXTENSION;
+                    String headerTiling = "STAT_" + comp + "_" + StatTest.TypeStat.TSTUDENTTILING + OmicsData.EXTENSION;
                     for (String gene : genome.getFirstChromosome().getGenes().keySet()) {
                         // System.out.println(header+" "+gene+" "+comp);
                         if (matrix.getRowNames().containsKey(gene)) {
@@ -610,7 +615,7 @@ public class TranscriptomesCreation {
                 System.out.println("load: " + fileName);
                 matrix = ExpressionMatrix.loadTab(fileName, true);
                 if (matrix != null) {
-                    String header = "STAT_" + comp + "_" + StatTest.TypeStat.TSTUDENTTILING + Tiling.EXTENSION;
+                    String header = "STAT_" + comp + "_" + StatTest.TypeStat.TSTUDENTTILING + OmicsData.EXTENSION;
                     for (String sRNA : genome.getFirstChromosome().getsRNAs().keySet()) {
                         logStatTable.setValue(matrix.getValue(sRNA, header), sRNA, comp);
                     }
@@ -622,7 +627,7 @@ public class TranscriptomesCreation {
                 System.out.println("load: " + fileName);
                 matrix = ExpressionMatrix.loadTab(fileName, true);
                 if (matrix != null) {
-                    String header = "STAT_" + comp + "_" + StatTest.TypeStat.TSTUDENTTILING + Tiling.EXTENSION;
+                    String header = "STAT_" + comp + "_" + StatTest.TypeStat.TSTUDENTTILING + OmicsData.EXTENSION;
                     for (String asRNA : genome.getFirstChromosome().getAsRNAs().keySet()) {
                         logStatTable.setValue(matrix.getValue(asRNA, header), asRNA, comp);
                     }
@@ -634,7 +639,7 @@ public class TranscriptomesCreation {
                 System.out.println("load: " + fileName);
                 matrix = ExpressionMatrix.loadTab(fileName, true);
                 if (matrix != null) {
-                    String header = "STAT_" + comp + "_" + StatTest.TypeStat.TSTUDENTTILING + Tiling.EXTENSION;
+                    String header = "STAT_" + comp + "_" + StatTest.TypeStat.TSTUDENTTILING + OmicsData.EXTENSION;
                     for (String cisReg : genome.getFirstChromosome().getCisRegs().keySet()) {
                         logStatTable.setValue(matrix.getValue(cisReg, header), cisReg, comp);
                     }

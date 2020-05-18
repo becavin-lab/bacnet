@@ -86,7 +86,7 @@ public class Database {
     /**
      * Path when using MAC OX X
      */
-    public static String PATH_MAC = "/Users/christophebecavin/Documents/BACNET/Bacnet-private/BacnetDatabases.ini";
+    public static String PATH_MAC = "/Users/christophebecavin/Documents/BACNET/bacnet/BacnetDatabases.ini";
     /**
      * Path for website database on Windows
      */

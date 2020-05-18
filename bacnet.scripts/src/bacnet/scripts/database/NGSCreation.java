@@ -2,6 +2,7 @@ package bacnet.scripts.database;
 
 import java.io.File;
 import java.util.ArrayList;
+import bacnet.datamodel.dataset.ExpressionData;
 import bacnet.datamodel.dataset.ExpressionMatrix;
 import bacnet.datamodel.dataset.NGS;
 import bacnet.datamodel.dataset.OmicsData;

@@ -16,6 +16,8 @@ public class OmicsData implements Serializable {
      * 
      */
     private static final long serialVersionUID = -3093089920089151952L;
+    
+    
 
     /**
      * Path for all streaming datasets = serialized data for BACNET platform

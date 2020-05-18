@@ -17,8 +17,6 @@ public class ProteomicsData extends ExpressionMatrix implements Serializable {
      */
     private static final long serialVersionUID = -7625087278597156645L;
 
-    public static String EXTENSION = ".prot";
-
     public ProteomicsData() {
         super();
         this.setType(TypeData.Proteome);
