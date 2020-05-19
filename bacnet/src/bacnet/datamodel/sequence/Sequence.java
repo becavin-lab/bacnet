@@ -697,6 +697,10 @@ public class Sequence implements Serializable {
         this.synonym = synonym;
     }
 
+    /**
+     * Get HashMap linking genomeName to conserved gene<br>
+     * Give information about the genome in which this gene is conserved
+     */
     public LinkedHashMap<String, String> getConservationHashMap() {
         return conservationHashMap;
     }

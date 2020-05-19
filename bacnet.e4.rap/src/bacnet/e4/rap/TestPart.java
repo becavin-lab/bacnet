@@ -80,7 +80,7 @@ public class TestPart {
         /*
          * PUT YOUR SCRIPT HERE!
          */
-        
+        //System.out.println("test run");
         
         /*
          * PUT YOUR SCRIPT HERE!
@@ -168,6 +168,29 @@ public class TestPart {
 //        // print gene amino acid sequence
 //        System.out.println(gene.getSequenceAA());
 
+        
+        /*
+         * Search gene and print its homologous sequences as a fasta format
+         */
+//        String geneName = "lmo0200";
+//        String genomeName = Genome.EGDE_NAME;
+//        Genome genome = Genome.loadGenome(genomeName);
+//        // search gene
+//        Gene gene = genome.getGeneFromName(geneName);
+//        ArrayList<String> listResults = new ArrayList<String>();
+//        // go trough all homologs
+//        for(String genomeNameHomolog : gene.getConservationHashMap().keySet()) {
+//            Genome genomeHomolog = Genome.loadGenome(genomeNameHomolog);
+//            String homologInfo = gene.getConservationHashMap().get(genomeNameHomolog);
+//            String genehomologName = homologInfo.split(";")[0];
+//            String similarity = homologInfo.split(";")[2];
+//            Gene genehomolog = genomeHomolog.getGeneFromName(genehomologName);
+//            listResults.add("> "+ genehomologName + " - "+genomeNameHomolog + " - similarity="+similarity);
+//            listResults.add(genehomolog.getSequenceAA());
+//        }
+//        for(String result : listResults) {
+//            System.out.println(result);
+//        }
         
         /*
          * Get in which transcriptome and proteome a gene is differently expressed
