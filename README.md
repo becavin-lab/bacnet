@@ -54,6 +54,12 @@ The following tutorials will show you how to build such a website using BACNET p
 
 [Deploy your website](https://github.com/becavin-lab/bacnet/wiki/Deploy-multi-omics-website) - Deploy on server your website
 
+[Run query-based multi-omics analysis](https://github.com/becavin-lab/bacnet/wiki/Query-based-tools-in-BACNET) - Create a script to query multi-omics datasets
+
+
+## Support
+
+![Bacnet Ad](https://github.com/becavin-lab/bacnet/blob/master/wiki/logos.png)
 
 ## Support
 
