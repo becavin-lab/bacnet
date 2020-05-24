@@ -19,7 +19,10 @@ Bacnet includes four packages which should be imported from the github repositor
 * _**bacnet.e4.rap**_ for creating the mult-iomics website_
 * _**bacnet.e4.rcp**_ the desktop version of the website_
 
+
 The choice of Eclipse RAP and RCP architecture was made because of its easy to use interface named [WindowBuilder](https://www.eclipse.org/windowbuilder/). It allows the user to quickly design its own view by adding panels, buttons, canvas in a “one click” fashion. One can also add existing graphical API based on Javascript. This capability is of particular interest when creating multi-omics website for specific organism, paving the way for ‘personalized omics’ platforms.
+
+See the Bacnet Javadoc for more information: [Bacnet Javadoc](https://becavin-lab.github.io/bacnet/index.html)
 
 The following tutorials will show you how to build such a website using BACNET platform.
 
