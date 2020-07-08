@@ -1647,7 +1647,7 @@ public class TrackCanvasData extends Canvas implements MouseMoveListener {
         int[] position = new int[2];
         for (Sequence sequence : sequences) {
             String accession = sequence.getName();
-
+            String accessionOld = sequence.getFeature("old_locus_tag"); //most of the ArrayExpress data are with old_locs_tag
             int begin = sequence.getBegin();
             int end = sequence.getEnd();
             int length = sequence.getLength();
@@ -1671,6 +1671,9 @@ public class TrackCanvasData extends Canvas implements MouseMoveListener {
                     String dataName = matrix.getName();
                     if (track.getDisplayType() == DisplayType.BIOCOND)
                         dataName = matrix.getBioCondName();
+                    if (!matrix.getRowNames().containsKey(accession)) {
+                    	accession = accessionOld;	
+                    }
                     if (matrix.getRowNames().containsKey(accession)) {
                         double value = matrix.getValue(matrix.getRowNames().get(accession),
                                 matrix.getGenomeViewerColumnIndex());

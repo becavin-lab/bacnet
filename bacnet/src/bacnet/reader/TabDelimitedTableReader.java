@@ -40,17 +40,22 @@ public class TabDelimitedTableReader {
         int nbRow = rowList.size();
         int nbColumn = -1;
         // Get nbColumn on first 10 lines
-        for(int i=0; i < Math.min(50, rowList.size()); i++) {
-        	int nbColumnTemp = rowList.get(0).split(separator).length;
-        	if(nbColumn < nbColumnTemp) {
-        		nbColumn = nbColumnTemp;
-        	}
-        }
+       // if (nbRow != 0) {
+        	for(int i=0; i < Math.min(50, rowList.size()); i++) {
+            	int nbColumnTemp = rowList.get(0).split(separator).length;
+            	if(nbColumn < nbColumnTemp) {
+            		nbColumn = nbColumnTemp;
+            	}
+            }
+    //    }
+        
         //System.out.println(nbColumn + " "+nbRow);
         if(nbColumn == -1 || nbRow == 0) {
         	String[][] ret = new String[0][0];
+
         	return ret;
         }else {
+
         	String[][] ret = new String[nbRow][nbColumn];
 	        for (int i = 0; i < rowList.size(); i++) {
 	            int j = 0;
@@ -63,12 +68,13 @@ public class TabDelimitedTableReader {
 	                j++;
 	            }
 	        }
+
 	        return ret;
         }
     }
 
     public static String[][] read(String fileName) {
-        return read(new File(fileName));
+        return  read(new File(fileName)) ;
     }
 
     /**
@@ -143,7 +149,7 @@ public class TabDelimitedTableReader {
             }
 
         } catch (Exception e) {
-            System.err.println("Cannot read:" + fileName);
+            System.err.println("Cannot read readList:" + fileName);
         }
         return list;
     }

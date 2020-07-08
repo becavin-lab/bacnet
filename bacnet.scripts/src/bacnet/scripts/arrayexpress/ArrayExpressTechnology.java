@@ -35,8 +35,8 @@ public class ArrayExpressTechnology {
      */
     public static void run() {
         downloadAllTechno();
-        createTechnoTable();
-        createHTMLPageSummary();
+        downloadAllFilesTechno();
+        adfCleaning();
     }
 
     /**
@@ -252,19 +252,19 @@ public class ArrayExpressTechnology {
      * From array probe sequence try to retrieve the gene name
      */
     public static void findProbes() {
-        Genome genome = Genome.loadEgdeGenome();
-        String[][] array = TabDelimitedTableReader.read(ArrayExpressTechnology.PATH + "A-GEOD-17774.adfTable.txt");
+        Genome genome = Genome.loadGenome("Yersinia pseudotuberculosis IP32953");
+        String[][] array = TabDelimitedTableReader.read(ArrayExpressTechnology.PATH + "A-GEOD-15095.adfTable.txt");
         for (int i = 1; i < array.length; i++) {
-            String sequence = array[i][2];
+            String sequence = array[i][5];
             for (Gene gene : genome.getFirstChromosome().getGenes().values()) {
                 String geneSeq = gene.getSequence();
                 if (geneSeq.contains(sequence)) {
-                    array[i][1] = gene.getName();
+                    array[i][2] = gene.getName();
                 }
             }
 
         }
-        TabDelimitedTableReader.save(array, ArrayExpressTechnology.PATH + "A-GEOD-17774.adfTableModif.txt");
+        TabDelimitedTableReader.save(array, ArrayExpressTechnology.PATH + "A-GEOD-15095.adfTableModif.txt");
     }
 
     public static void downloadAllFilesTechno() {
@@ -272,7 +272,7 @@ public class ArrayExpressTechnology {
                 TabDelimitedTableReader.read(Database.getInstance().getPath() + "/ArrayExpress/Technologies.txt");
         ArrayList<String> list_techno = new ArrayList<>();
         for (int i = 1; i < technologies.length; i++) {
-            if (!list_techno.contains(technologies[i][2]) && !technologies[i][2].equals("N/A")) {
+            if (!list_techno.contains(technologies[i][2]) && !technologies[i][2].equals("N/A") && !technologies[i][0].equals("Proteome")&& !technologies[i][0].equals("RNA-seq")) {
                 list_techno.add(technologies[i][2]);
             }
         }

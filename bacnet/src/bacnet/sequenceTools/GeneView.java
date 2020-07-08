@@ -315,6 +315,10 @@ public class GeneView implements SelectionListener, MouseListener {
                         listGenes.clear();
                         for (String gene : searchResults) {
                             String text = gene;
+                            String oldLocusTag = genome.getChromosomes().get(chromoID).getGenes().get(gene).getFeature("old_locus_tag");
+                            if (!oldLocusTag.equals("")) {
+                                text += " - " + oldLocusTag;
+                            }
                             String geneName = genome.getChromosomes().get(chromoID).getGenes().get(gene).getGeneName();
                             if (!geneName.equals("")) {
                                 text += " (" + geneName + ")";
@@ -342,7 +346,7 @@ public class GeneView implements SelectionListener, MouseListener {
 
         tableGenes = new Table(composite_7, SWT.BORDER | SWT.V_SCROLL | SWT.VIRTUAL);
         GridData gd_list = new GridData(SWT.CENTER, SWT.FILL, false, true, 1, 1);
-        gd_list.widthHint = 160;
+        gd_list.widthHint = 200;
         tableGenes.setLayoutData(gd_list);
         tableGenes.addListener(SWT.SetData, new Listener() {
             /**
@@ -409,14 +413,14 @@ public class GeneView implements SelectionListener, MouseListener {
 
         Composite compGeneralInfo = new Composite(composite_1, SWT.BORDER);
         GridData gd_compGeneralInfo = new GridData(SWT.FILL, SWT.FILL, false, false, 1, 2);
-        gd_compGeneralInfo.widthHint = 300;
+        gd_compGeneralInfo.widthHint = 350;
         compGeneralInfo.setLayoutData(gd_compGeneralInfo);
         compGeneralInfo.setLayout(new GridLayout(2, false));
 
         lblLocus = new Text(compGeneralInfo, SWT.READ_ONLY);
         lblLocus.setTouchEnabled(true);
         GridData gd_lblLocus = new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1);
-        gd_lblLocus.widthHint = 143;
+        gd_lblLocus.widthHint = 160;
         lblLocus.setLayoutData(gd_lblLocus);
         lblLocus.setText("Locus");
 
@@ -1112,6 +1116,10 @@ public class GeneView implements SelectionListener, MouseListener {
         listGenes = new ArrayList<>();
         for (String gene : genome.getChromosomes().get(chromoID).getGenes().keySet()) {
             String text = gene;
+            String oldLocusTag = genome.getChromosomes().get(chromoID).getGenes().get(gene).getFeature("old_locus_tag");
+            if (!oldLocusTag.equals("")) {
+                text += " - " + oldLocusTag;
+            }
             String geneName = genome.getChromosomes().get(chromoID).getGenes().get(gene).getGeneName();
             if (!geneName.equals("")) {
                 text += " (" + geneName + ")";
@@ -1129,6 +1137,7 @@ public class GeneView implements SelectionListener, MouseListener {
         tableGenes.setItemCount(listGenes.size());
         tableGenes.select(0);
         sequence = genome.getGeneFromName(tableGenes.getSelection()[0].getText(), chromoID);
+        //sequence = genome.getGeneFromName("YPO_RS01055", chromoID);
         tableGenes.update();
 
     }
@@ -1191,7 +1200,7 @@ public class GeneView implements SelectionListener, MouseListener {
         if (!sequence.getGeneName().equals("") && !sequence.getGeneName().equals("-"))
             title += " - " + sequence.getGeneName();
         lblGene.setText(title);
-        lblLocus.setText("Locus: " + sequence.getName());
+        lblLocus.setText("Locus: " + sequence.getName() +  " - "+ sequence.getFeature("old_locus_tag") );
         lblBegin.setText("Begin: " + sequence.getBegin() + "");
         lblSizeBP.setText("Size bp: " + sequence.getLength());
         lblStrand.setText("Strand: " + sequence.getStrand());
@@ -1204,7 +1213,7 @@ public class GeneView implements SelectionListener, MouseListener {
         canvasGenome.getTrack().moveHorizontally(sequence.getBegin());
         canvasGenome.redraw();
     }
-
+    
     /**
      * Update all the information for the gene selected: <br>
      * <li>Transcriptome update
@@ -1389,8 +1398,7 @@ public class GeneView implements SelectionListener, MouseListener {
         MPart part = partService.findPart(id);
         GeneView view = (GeneView) part.getObject();
         view.setViewID(id);
-        // System.out.println("Select current genome:
-        // "+FileUtils.removeExtension(gene.getGenomeName()));
+         System.out.println("Select current genome:  "+FileUtils.removeExtension(gene.getGenomeName()));
         view.initGenomeInfo(gene.getGenomeName());
         view.setGenomeSelected(gene.getGenomeName());
         view.setSequence(gene);

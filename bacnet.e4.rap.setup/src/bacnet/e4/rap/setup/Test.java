@@ -6,8 +6,13 @@ import bacnet.datamodel.sequenceNCBI.GenomeConversion;
 import bacnet.datamodel.sequenceNCBI.GenomeNCBI;
 import bacnet.datamodel.sequenceNCBI.GenomeNCBITools;
 import bacnet.reader.TabDelimitedTableReader;
+import bacnet.scripts.arrayexpress.ArrayExpress;
+import bacnet.scripts.arrayexpress.ArrayExpressDataImport;
+import bacnet.scripts.arrayexpress.ArrayExpressTechnology;
 import bacnet.scripts.genome.RASTEGDeGenome;
 import bacnet.scripts.listeriomics.Peptidomics;
+import bacnet.scripts.listeriomics.technology.Agilent;
+
 
 /**
  * All methods which will be executed before or after interface run
@@ -20,6 +25,22 @@ public class Test {
 	 * Run pre-test methods before interface creation
 	 */
 	public static void runPreTest() {
+		System.out.println("Run Pre-test");
+		
+		/*
+		String[][] array = TabDelimitedTableReader.read("D:\\Yersiniomics\\Yersiniomics\\ArrayExpress\\probes.txt");
+        for (int i = 0; i < array.length; i++) {
+            for (int j = 0; j < array[0].length; j++) {
+            	Agilent.extractProbesComparison(array[i][1], array[i][0]);
+            }
+        }
+        */
+    	//ArrayExpressTechnology.findProbes();
+		//ArrayExpress.run();
+		//ArrayExpressTechnology.downloadAllTechno();
+    	//Agilent.extractProbesComparison("A-GEOD-9009", "E-GEOD-30634");
+
+
 //		System.out.println("Run Pre-test");
 //		 RASTEGDeGenome.run();
 //		Genome genome = Genome.loadEgdeGenome();

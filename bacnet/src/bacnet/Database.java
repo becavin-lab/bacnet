@@ -90,7 +90,8 @@ public class Database {
     /**
      * Path for website database on Windows
      */
-    public static String PATH_WIN = "C:\\Users\\ipmc\\Documents\\BACNET\\bacnet-private\\BacnetDatabases.ini";
+    public static String PATH_WIN = "D:\\Yersiniomics\\bacnet\\BacnetDatabases.ini";
+    //public static String PATH_WIN = "C:\\Users\\ipmc\\Documents\\BACNET\\bacnet-private\\BacnetDatabases.ini";
 //    public static String PATH_WIN = "D:\\Programming\\GitRepository\\bacnet\\BacnetDatabases.ini";
 
     /**

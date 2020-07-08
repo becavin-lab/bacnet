@@ -39,7 +39,7 @@ public class GElement {
     public static void displayGene(GC gc, Sequence sequence, Rectangle rectangle, Track track, Color lightColor,
             Color darkColor, Color lineColor, Color textColor, boolean nTerm) {
         /*
-         * Draw gene box (draw a rectangle and fill it
+         * Draw gene box (draw a rectangle and fill it)
          */
         if (sequence instanceof TIS)
             ARROW_SIZE = 5;
@@ -161,20 +161,24 @@ public class GElement {
                 Gene gene = (Gene) sequence;
                 if (!gene.getGeneName().equals("")) {
                     gc.drawString(gene.getName() + " - " + gene.getGeneName(), rectangle.x + decayString,
-                            rectangle.y + rectangle.height / 2 - 7);
+                            rectangle.y + rectangle.height / 2 - 17);
                 } else {
-                    gc.drawString(gene.getName(), rectangle.x + decayString, rectangle.y + rectangle.height / 2 - 7);
+                    gc.drawString(gene.getName(), rectangle.x + decayString, rectangle.y + rectangle.height / 2 - 17);
                 }
+                gc.drawString(((Gene) sequence).getFeature("old_locus_tag"), rectangle.x + decayString,
+                        rectangle.y + rectangle.height / 2 - 5 );
                 gc.drawString(((Gene) sequence).getProduct(), rectangle.x + decayString,
-                        rectangle.y + rectangle.height / 2 + 5);
+                        rectangle.y + rectangle.height / 2 + 6);
             } else if (sequence instanceof TIS) {
                 TIS tis = (TIS) sequence;
                 gc.drawString(tis.getName() + " - " + tis.getLength() + " " + tis.getRefSequence(),
                         rectangle.x + decayString, rectangle.y + rectangle.height / 2 + 5);
             } else {
                 gc.drawString(sequence.getName(), rectangle.x + decayString, rectangle.y + rectangle.height / 2 - 7);
+                gc.drawString(((Gene) sequence).getFeature("old_locus_tag"), rectangle.x + decayString,
+                        rectangle.y + rectangle.height / 2 - 5 );
             }
-        } else if (rectangle.width > 100) {
+        } else if (rectangle.width > 150) {
             if (sequence instanceof TIS) {
                 TIS tis = (TIS) sequence;
                 gc.drawString(tis.getName() + " - " + tis.getRefSequence(), rectangle.x + decayString,
@@ -187,7 +191,9 @@ public class GElement {
                         name = gene.getName() + " - " + gene.getGeneName();
                     }
                 }
-                gc.drawString(name, rectangle.x + decayString, rectangle.y + rectangle.height / 2 - 7);
+                gc.drawString(name, rectangle.x + decayString, rectangle.y + rectangle.height / 2 - 9);
+                gc.drawString(((Gene) sequence).getFeature("old_locus_tag"), rectangle.x + decayString,
+                        rectangle.y + rectangle.height / 2 + 3 );
             }
         } else if (rectangle.width > 60) {
             String name = sequence.getName();
@@ -197,9 +203,8 @@ public class GElement {
                     name = gene.getGeneName();
                 }
             }
-            gc.drawString(name, rectangle.x + decayString, rectangle.y + rectangle.height / 2 - 7);
+            gc.drawString(name, rectangle.x + decayString, rectangle.y + rectangle.height / 2 - 5);
         }
-
     }
 
     /**

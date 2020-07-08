@@ -134,6 +134,7 @@ public class Track implements Serializable, Cloneable {
              */
             if (getChromosome().getAllElements().get(text) != null) {
                 Sequence sequence = getChromosome().getAllElements().get(text);
+            	System.out.println("sequence: "+ sequence);
                 if (sequence.isStrand())
                     moveHorizontally(sequence.getBegin());
                 else
@@ -165,6 +166,7 @@ public class Track implements Serializable, Cloneable {
              */
             for (Gene gene : getChromosome().getGenes().values()) {
                 String geneName = gene.getName();
+            	System.out.println("geneName: "+ geneName);
                 String geneNameTemp = geneName.toUpperCase();
                 if (geneNameTemp.contains(text)) {
                     Sequence seq = getChromosome().getAllElements().get(geneName);
@@ -175,6 +177,7 @@ public class Track implements Serializable, Cloneable {
                     return true;
                 }
                 geneName = gene.getGeneName();
+            	System.out.println("geneName 2: "+ geneName);
                 geneNameTemp = geneName.toUpperCase();
                 if (geneNameTemp.contains(text)) {
                     Sequence seq = getChromosome().getAllElements().get(gene.getName());
@@ -186,9 +189,28 @@ public class Track implements Serializable, Cloneable {
                 }
             }
             /*
+             * Search old locus
+             */
+            for (Gene gene : getChromosome().getGenes().values()) {
+                String oldLocus = gene.getFeature("old_locus_tag");
+            	System.out.println("old locus: "+ oldLocus);
+                String oldLocusTemp = oldLocus.toUpperCase();
+                if (oldLocusTemp.contains(text)) {
+                    String geneName = gene.getName();
+                	System.out.println("geneName: "+ geneName);
+                    Sequence seq = getChromosome().getAllElements().get(geneName);
+                    if (seq.isStrand())
+                        moveHorizontally(seq.getBegin());
+                    else
+                        moveHorizontally(seq.getEnd());
+                    return true;
+                }
+            }
+            /*
              * Search the rest
              */
             for (String name : getChromosome().getAllElements().keySet()) {
+            	System.out.println("the rest: "+ name);
                 String nameTemp = name.toUpperCase();
                 if (nameTemp.equals(text)) {
                     Sequence seq = getChromosome().getAllElements().get(name);

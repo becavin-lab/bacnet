@@ -42,7 +42,9 @@ public class HomologCreation {
 	 * We added manually this variable because when running .bat file on windows the file separator can get tricky.
 	 * that is why I fix it in the script.
 	 */
-	public static String FILE_SEPARATOR = "/";
+	//public static String FILE_SEPARATOR = "/";
+	public static String FILE_SEPARATOR = "\\";
+
 	
 	/**
 	 * Path for data on the server when running homolog search blasts
@@ -53,7 +55,7 @@ public class HomologCreation {
 //	public static String PATH_SCRIPT = "D:/Programming/GitRepository/ListeriomicsSample/GenomeNCBI/Temp/";
 //	public static String PATH_SCRIPT = "C:"+ FILE_SEPARATOR +"Users"+ FILE_SEPARATOR +"ipmc"+ FILE_SEPARATOR +
 //			"Documents"+ FILE_SEPARATOR +"BACNET"+ FILE_SEPARATOR +"ListeriomicsSample" + FILE_SEPARATOR + "GenomeNCBI" + FILE_SEPARATOR;
-	public static String PATH_SCRIPT = "C:\\Users\\ipmc\\OneDrive\\Listeriomics\\GenomeNCBI\\";
+	public static String PATH_SCRIPT = "D:\\Yersiniomics\\Yersiniomics\\GenomeNCBI\\";
 	/**
 	 * Path for Blast+ 
 	 */
@@ -379,7 +381,7 @@ public class HomologCreation {
 	 */
 	public static String verifyBlastResults(String logs) {
 		ArrayList<String> listGenomes = Genome.getAvailableGenomes();
-		// int size_list = 10;
+		//int size_list = 3;
 		int size_list = listGenomes.size();
 		/*
 		 * Check that every Blast was run and finished
@@ -423,6 +425,8 @@ public class HomologCreation {
 			String genome_pivot = listGenomes.get(i);
 			genome_pivot = GenomeNCBI.processGenomeName(genome_pivot);
 			String message = "Summary table creation for: " + genome_pivot;
+			System.out.println(message);
+
 			logs += message + "\n";
 			ArrayList<String> list_genomes_toBlast = extractList(listGenomes, 0, size_list);
 			createSummaryTable(genome_pivot, list_genomes_toBlast, proteinNotFound, noHomologs, lowHomologs);
@@ -433,7 +437,6 @@ public class HomologCreation {
 		String message = "Save list of protein Id not found in query genome in: "+GenomeNCBI.PATH_HOMOLOGS + "ProteinNotfFound.homologs.txt"+"\n";
 		message += "Save list of protein Id with no homolog in target genome: "+GenomeNCBI.PATH_HOMOLOGS + "NoHomologsFound.homologs.txt"+"\n";
 		message += "Save list of protein Id with low similarity (<20%) in target genome: "+GenomeNCBI.PATH_HOMOLOGS + "LowHomologsFound.homologs.txt"+"\n";
-		System.out.println(message);
 		System.out.println("Finish homolog tables creation");
 		return logs+message;
 	}
@@ -446,6 +449,8 @@ public class HomologCreation {
 	public static String addHomologToGene(String logs) {
 		ArrayList<String> listGenomes = Genome.getAvailableGenomes();
 		int size_list = listGenomes.size();
+		//int size_list = 4;
+
 		ArrayList<String> genomeModified = new ArrayList<String>();
 		
 		/*
@@ -514,11 +519,11 @@ public class HomologCreation {
 							+ ".blast.txt";
 					File file = new File(path_fileblast);
 					if (!file.exists()) {
-						System.err.println("cannot find: " + path_fileblast);
+						System.err.println("cannot find 1: " + path_fileblast);
 					}
 					file = new File(path_fileblast2);
 					if (!file.exists()) {
-						System.err.println("cannot find: " + path_fileblast);
+						System.err.println("cannot find 2: " + path_fileblast);
 					}
 
 				}
@@ -533,24 +538,37 @@ public class HomologCreation {
 	 * @param listGenomes
 	 * @param logs
 	 */
+	
 	private static void addColumnIdentities(int size_list, ArrayList<String> listGenomes, String logs) {
 		for (int i = 0; i < size_list; i++) {
-//		int i = 8;
 			String genome_pivot = listGenomes.get(i);
 			genome_pivot = GenomeNCBI.processGenomeName(genome_pivot);
-			String message = "Extract blast results for " + genome_pivot + " vs all other genomes " + i + "/"
+			int j = i+1;
+			String message = "Extract blast results for " + genome_pivot + " vs all other genomes " + j + "/"
 					+ size_list;
 			logs += message + "\n";
 			System.out.println(message);
 			System.out.println(genome_pivot+" "+i);
-			if ((i + 1) < size_list) {
+			if(i==0) {
 				ArrayList<String> list_genomes_toBlast = extractList(listGenomes, i + 1, size_list);
-//			ArrayList<String> list_genomes_toBlast = extractList(listGenomes, 12, 13);
-//				/*
-//				 * Calculate identity value
-//				 */
+				addColumnIdentity(genome_pivot, list_genomes_toBlast);
+
+			} else if ((i + 1) < size_list) {
+				ArrayList<String> list_genomes_toBlast_1 = extractList(listGenomes, 0, i);
+				ArrayList<String> list_genomes_toBlast_2 = extractList(listGenomes, i + 1, size_list);
+				ArrayList<String> list_genomes_toBlast = new ArrayList<String>();
+				list_genomes_toBlast.addAll(list_genomes_toBlast_1);
+				list_genomes_toBlast.addAll(list_genomes_toBlast_2);
+				addColumnIdentity(genome_pivot, list_genomes_toBlast);
+
+			} else if (i+1 == size_list) {
+				ArrayList<String> list_genomes_toBlast = extractList(listGenomes, 0, size_list-1);
 				addColumnIdentity(genome_pivot, list_genomes_toBlast);
 			}
+				/*
+				 * Calculate identity value
+				 */
+
 		}
 	}
 
@@ -568,74 +586,124 @@ public class HomologCreation {
 		folderCreation(addedcolumn_folder);
 		String results_folder = PATH_RESULTS;
 		folderCreation(results_folder);
+		
 		for (String genome_target : listGenomes) {
 			System.out.println("Add column for: " + genome_pivot + " vs " + genome_target);
-			String[][] genomeP_vs_genomeT = TabDelimitedTableReader
-					.read(results_folder + "resultBlast_" + genome_pivot + "_vs_" + genome_target + ".blast.txt");
-//			String[][] genomeT_vs_genomeP = TabDelimitedTableReader
-//					.read(results_folder + "resultBlast_" + genome_target + "_vs_" + genome_pivot + ".blast.txt");
-			String[] columToAdd_P_VS_T = new String[genomeP_vs_genomeT.length];
-			//String[] columToAdd_T_VS_P = new String[genomeT_vs_genomeP.length];
-
-			for (int i = 0; i < genomeP_vs_genomeT.length; i++) {
-				//String id_genomeT = genomeP_vs_genomeT[i][1].split("\\|")[1];
-				//HashMap<String, Integer> indexRow_T_vs_P = indexRows(genomeT_vs_genomeP);
-				float identitiesP_vs_T = (Float.valueOf(genomeP_vs_genomeT[i][5]))
-						/ (Float.valueOf(genomeP_vs_genomeT[i][2]));
-				columToAdd_P_VS_T[i] = String.valueOf(identitiesP_vs_T);
-//				float identitiesP_vs_T = (Float.valueOf(genomeP_vs_genomeT[i][5]))
-//						/ (Float.valueOf(genomeP_vs_genomeT[i][3]));
-//				if (indexRow_T_vs_P.containsKey(id_genomeT)) {
-//					int row = indexRow_T_vs_P.get(id_genomeT);
-//					float identitiesT_vs_P = (Float.valueOf(genomeT_vs_genomeP[row][5]))
-//							/ (Float.valueOf(genomeT_vs_genomeP[row][3]));
-//					if (identitiesP_vs_T > identitiesT_vs_P) {
-//						columToAdd_P_VS_T[i] = String.valueOf(identitiesP_vs_T);
-//						columToAdd_T_VS_P[row] = String.valueOf(identitiesP_vs_T);
-//					} else {
-//						columToAdd_P_VS_T[i] = String.valueOf(identitiesT_vs_P);
-//						columToAdd_T_VS_P[row] = String.valueOf(identitiesT_vs_P);
-//					}
-//				} else {
-//					columToAdd_P_VS_T[i] = String.valueOf(identitiesP_vs_T);
-//				}
-			}
-//			for (int i = 0; i < genomeT_vs_genomeP.length; i++) {
-//				try {
-//					if (columToAdd_T_VS_P[i].equals(""))
-//						;
-//				} catch (NullPointerException e) {
-//					float identitiesT_vs_P = (Float.valueOf(genomeT_vs_genomeP[i][5]))
-//							/ (Float.valueOf(genomeT_vs_genomeP[i][3]));
-//					columToAdd_T_VS_P[i] = String.valueOf(identitiesT_vs_P);
-//				}
-//			}
-			genomeP_vs_genomeT = ArrayUtils.addColumn(genomeP_vs_genomeT, columToAdd_P_VS_T);
-			//genomeT_vs_genomeP = ArrayUtils.addColumn(genomeT_vs_genomeP, columToAdd_T_VS_P);
-			TabDelimitedTableReader.save(genomeP_vs_genomeT,
-					addedcolumn_folder + genome_pivot + "_vs_" + genome_target + ".blast.txt");
-			//TabDelimitedTableReader.save(genomeT_vs_genomeP,
-			//		addedcolumn_folder + genome_target + "_vs_" + genome_pivot + ".blast.txt");
-			//System.out.println("Column added: " + genome_pivot + " vs " + genome_target);
-			
 			/*
-			 * Add column the other way
-			 */
-			System.out.println("Add column for: " + genome_target + " vs " + genome_pivot);			
-			String[][] genomeT_vs_genomeP = TabDelimitedTableReader
-			.read(results_folder + "resultBlast_" + genome_target + "_vs_" + genome_pivot + ".blast.txt");
-			String[] columToAdd_T_VS_P = new String[genomeT_vs_genomeP.length];
-			for (int i = 0; i < genomeT_vs_genomeP.length; i++) {
-				float identitiesT_vs_P = (Float.valueOf(genomeT_vs_genomeP[i][5]))
-						/ (Float.valueOf(genomeT_vs_genomeP[i][2]));
-				columToAdd_T_VS_P[i] = String.valueOf(identitiesT_vs_P);
-			}
-			genomeT_vs_genomeP = ArrayUtils.addColumn(genomeT_vs_genomeP, columToAdd_T_VS_P);
-			TabDelimitedTableReader.save(genomeT_vs_genomeP,
-					addedcolumn_folder + genome_target + "_vs_" + genome_pivot + ".blast.txt");
-			//System.out.println("Column added: " + genome_target + " vs " + genome_pivot);
+			File file = new File(results_folder + "resultBlast_" + genome_pivot + "_vs_" + genome_target + ".blast.txt");
+			if (file.exists()) {
+				String[][] genomeP_vs_genomeT = TabDelimitedTableReader
+						.read(results_folder + "resultBlast_" + genome_pivot + "_vs_" + genome_target + ".blast.txt");
+				String[] columToAdd_P_VS_T = new String[genomeP_vs_genomeT.length];
 
-		}
+
+//				String[][] genomeT_vs_genomeP = TabDelimitedTableReader
+//						.read(results_folder + "resultBlast_" + genome_target + "_vs_" + genome_pivot + ".blast.txt");
+				//String[] columToAdd_T_VS_P = new String[genomeT_vs_genomeP.length];
+
+				for (int i = 0; i < genomeP_vs_genomeT.length; i++) {
+					//String id_genomeT = genomeP_vs_genomeT[i][1].split("\\|")[1];
+					//HashMap<String, Integer> indexRow_T_vs_P = indexRows(genomeT_vs_genomeP);
+					float identitiesP_vs_T = (Float.valueOf(genomeP_vs_genomeT[i][5]))
+							/ (Float.valueOf(genomeP_vs_genomeT[i][2]));
+					columToAdd_P_VS_T[i] = String.valueOf(identitiesP_vs_T);
+//					float identitiesP_vs_T = (Float.valueOf(genomeP_vs_genomeT[i][5]))
+//							/ (Float.valueOf(genomeP_vs_genomeT[i][3]));
+//					if (indexRow_T_vs_P.containsKey(id_genomeT)) {
+//						int row = indexRow_T_vs_P.get(id_genomeT);
+//						float identitiesT_vs_P = (Float.valueOf(genomeT_vs_genomeP[row][5]))
+//								/ (Float.valueOf(genomeT_vs_genomeP[row][3]));
+//						if (identitiesP_vs_T > identitiesT_vs_P) {
+//							columToAdd_P_VS_T[i] = String.valueOf(identitiesP_vs_T);
+//							columToAdd_T_VS_P[row] = String.valueOf(identitiesP_vs_T);
+//						} else {
+//							columToAdd_P_VS_T[i] = String.valueOf(identitiesT_vs_P);
+//							columToAdd_T_VS_P[row] = String.valueOf(identitiesT_vs_P);
+//						}
+//					} else {
+//						columToAdd_P_VS_T[i] = String.valueOf(identitiesP_vs_T);
+//					}
+				}
+//				for (int i = 0; i < genomeT_vs_genomeP.length; i++) {
+//					try {
+//						if (columToAdd_T_VS_P[i].equals(""))
+//							;
+//					} catch (NullPointerException e) {
+//						float identitiesT_vs_P = (Float.valueOf(genomeT_vs_genomeP[i][5]))
+//								/ (Float.valueOf(genomeT_vs_genomeP[i][3]));
+//						columToAdd_T_VS_P[i] = String.valueOf(identitiesT_vs_P);
+//					}
+//				}
+				genomeP_vs_genomeT = ArrayUtils.addColumn(genomeP_vs_genomeT, columToAdd_P_VS_T);
+				//genomeT_vs_genomeP = ArrayUtils.addColumn(genomeT_vs_genomeP, columToAdd_T_VS_P);
+				TabDelimitedTableReader.save(genomeP_vs_genomeT,
+						addedcolumn_folder + genome_pivot + "_vs_" + genome_target + ".blast.txt");
+				//TabDelimitedTableReader.save(genomeT_vs_genomeP,
+				//		addedcolumn_folder + genome_target + "_vs_" + genome_pivot + ".blast.txt");
+				//System.out.println("Column added: " + genome_pivot + " vs " + genome_target);
+				
+				/*
+				 * Add column the other way
+				 */
+				/*
+				file = new File(results_folder + "resultBlast_" + genome_target + "_vs_" + genome_pivot + ".blast.txt");
+				if (file.exists()) {
+					System.out.println("Add column for: " + genome_target + " vs " + genome_pivot);			
+					String[][] genomeT_vs_genomeP = TabDelimitedTableReader
+					.read(results_folder + "resultBlast_" + genome_target + "_vs_" + genome_pivot + ".blast.txt");
+					String[] columToAdd_T_VS_P = new String[genomeT_vs_genomeP.length];
+					for (int i = 0; i < genomeT_vs_genomeP.length; i++) {
+						float identitiesT_vs_P = (Float.valueOf(genomeT_vs_genomeP[i][5]))
+								/ (Float.valueOf(genomeT_vs_genomeP[i][2]));
+						columToAdd_T_VS_P[i] = String.valueOf(identitiesT_vs_P);
+					}
+					genomeT_vs_genomeP = ArrayUtils.addColumn(genomeT_vs_genomeP, columToAdd_T_VS_P);
+					TabDelimitedTableReader.save(genomeT_vs_genomeP,
+							addedcolumn_folder + genome_target + "_vs_" + genome_pivot + ".blast.txt");
+					//System.out.println("Column added: " + genome_target + " vs " + genome_pivot);
+				
+				}
+				
+			}
+			*/
+			
+			File file = new File(results_folder + "resultBlast_" + genome_pivot + "_vs_" + genome_target + ".blast.txt");
+			if (file.exists()) {
+				String[][] genomeP_vs_genomeT = TabDelimitedTableReader
+						.read(results_folder + "resultBlast_" + genome_pivot + "_vs_" + genome_target + ".blast.txt");
+				String[] columToAdd_P_VS_T = new String[genomeP_vs_genomeT.length];
+
+				for (int i = 0; i < genomeP_vs_genomeT.length; i++) {
+					float identitiesP_vs_T = (Float.valueOf(genomeP_vs_genomeT[i][5]))
+							/ (Float.valueOf(genomeP_vs_genomeT[i][2]));
+					columToAdd_P_VS_T[i] = String.valueOf(identitiesP_vs_T);
+				}
+				genomeP_vs_genomeT = ArrayUtils.addColumn(genomeP_vs_genomeT, columToAdd_P_VS_T);
+				TabDelimitedTableReader.save(genomeP_vs_genomeT,
+						addedcolumn_folder + genome_pivot + "_vs_" + genome_target + ".blast.txt");
+
+				/*
+				 * Add column the other way and intervert column 0 identifiers with column 1 identifiers
+				 */
+				
+			} else {
+				String[][] genomeT_vs_genomeP = TabDelimitedTableReader
+				.read(results_folder + "resultBlast_" + genome_target + "_vs_" + genome_pivot + ".blast.txt");
+				String[] columToAdd_T_VS_P = new String[genomeT_vs_genomeP.length];
+				for (int j = 0; j < genomeT_vs_genomeP.length; j++) {
+					float identitiesT_vs_P = (Float.valueOf(genomeT_vs_genomeP[j][5]))
+							/ (Float.valueOf(genomeT_vs_genomeP[j][2]));
+					String targetProtein_temp = genomeT_vs_genomeP[j][0];
+					genomeT_vs_genomeP[j][0] = genomeT_vs_genomeP[j][1];
+					genomeT_vs_genomeP[j][1] = targetProtein_temp;
+					columToAdd_T_VS_P[j] = String.valueOf(identitiesT_vs_P);
+				}
+				genomeT_vs_genomeP = ArrayUtils.addColumn(genomeT_vs_genomeP, columToAdd_T_VS_P);
+				TabDelimitedTableReader.save(genomeT_vs_genomeP,
+						addedcolumn_folder + genome_pivot + "_vs_" + genome_target + ".blast.txt");
+				//System.out.println("Column added: " + genome_target + " vs " + genome_pivot);
+			}		
+		}	
 	}
 
 	/**

@@ -508,12 +508,12 @@ public class Annotation implements Serializable {
     public static ExpressionMatrix addAnnotationLite(ExpressionMatrix exprMatrix, Genome genome) {
         try {
             int previousSize = exprMatrix.getHeaderAnnotation().size();
-            String[] headers = {"Begin", "End", "Length", "Strand", "Description", "Note", "Operon"};
+            String[] headers = {"Old Locus", "Begin", "End", "Length", "Strand", "Description", "Note", "Operon"};
             for (String header : headers) {
                 exprMatrix.getHeaderAnnotation().add(header);
             }
 
-            // we will add a table of annotation cvontaining info on the gene, sRNA, asRNA
+            // we will add a table of annotation containing info on the gene, sRNA, asRNA
             String[][] annotation = new String[exprMatrix.getNumberRow()][exprMatrix.getHeaderAnnotation().size()];
             for (int i = 0; i < annotation.length; i++) {
                 for (int j = 0; j < previousSize; j++) {
@@ -535,22 +535,24 @@ public class Annotation implements Serializable {
                     // System.out.println(locus);
                     if (seq.getType() == SeqType.Gene) {
                         Gene gene = (Gene) seq;
-                        annotation[index][previousSize + 0] = gene.getBegin() + "";
-                        annotation[index][previousSize + 1] = gene.getEnd() + "";
-                        annotation[index][previousSize + 2] = gene.getLength() + "";
-                        annotation[index][previousSize + 3] = gene.getStrand() + "";
-                        annotation[index][previousSize + 4] = gene.getGeneName();
-                        annotation[index][previousSize + 5] = gene.getProduct();
-                        annotation[index][previousSize + 6] = gene.getOperon();
+                        annotation[index][previousSize + 0] = gene.getFeature("old_locus_tag") + "";
+                        annotation[index][previousSize + 1] = gene.getBegin() + "";
+                        annotation[index][previousSize + 2] = gene.getEnd() + "";
+                        annotation[index][previousSize + 3] = gene.getLength() + "";
+                        annotation[index][previousSize + 4] = gene.getStrand() + "";
+                        annotation[index][previousSize + 5] = gene.getGeneName();
+                        annotation[index][previousSize + 6] = gene.getProduct();
+                        annotation[index][previousSize + 7] = gene.getOperon();
                     } else if (seq.getType() == SeqType.Srna) {
                         Srna sRNA = (Srna) seq;
-                        annotation[index][previousSize + 0] = sRNA.getBegin() + "";
-                        annotation[index][previousSize + 1] = sRNA.getEnd() + "";
-                        annotation[index][previousSize + 2] = sRNA.getLength() + "";
-                        annotation[index][previousSize + 3] = sRNA.getStrand() + "";
-                        annotation[index][previousSize + 4] = sRNA.getRef();
-                        annotation[index][previousSize + 5] = sRNA.getSynonymsText();
-                        annotation[index][previousSize + 6] = "";
+                        annotation[index][previousSize + 0] = sRNA.getFeature("old_locus_tag") + "";
+                        annotation[index][previousSize + 1] = sRNA.getBegin() + "";
+                        annotation[index][previousSize + 2] = sRNA.getEnd() + "";
+                        annotation[index][previousSize + 3] = sRNA.getLength() + "";
+                        annotation[index][previousSize + 4] = sRNA.getStrand() + "";
+                        annotation[index][previousSize + 5] = sRNA.getRef();
+                        annotation[index][previousSize + 6] = sRNA.getSynonymsText();
+                        annotation[index][previousSize + 7] = "";
                     }
                 }
             }
@@ -560,6 +562,7 @@ public class Annotation implements Serializable {
         }
         return exprMatrix;
     }
+
 
     /**
      * Add annotation information to an ExpressionMatrix

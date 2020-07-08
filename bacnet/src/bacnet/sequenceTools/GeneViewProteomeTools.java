@@ -20,7 +20,7 @@ public class GeneViewProteomeTools {
          * Update overexpressed list
          */
         ArrayList<String> bioConditions = new ArrayList<>();
-        System.out.println(viewer.getGenomeSelected());
+        //System.out.println(viewer.getGenomeSelected());
         ExpressionMatrix exprProteomesMatrix = Database.getInstance().getExprProteomesTable(viewer.getGenomeSelected());
         System.out.println(sequence.getName());
         if (exprProteomesMatrix.getRowNames().containsKey(sequence.getName())) {

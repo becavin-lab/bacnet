@@ -198,6 +198,9 @@ public class Genome {
     public Gene getGeneFromName(String name, String accessionChromo) {
         if (name.equals("No gene"))
             return null;
+        if (name.contains("-")) {
+            name = name.substring(0, name.indexOf("-")).trim();
+        }
         if (name.contains("(") && name.contains(")")) {
             name = name.substring(0, name.indexOf("(")).trim();
         }
@@ -219,6 +222,7 @@ public class Genome {
         }
         return null;
     }
+
 
     
     /**
@@ -585,7 +589,7 @@ public class Genome {
      * @return
      */
     public static String getDefautGenome() {
-        return getAvailableGenomes().get(0);
+        return getAvailableGenomes().get(7);
     }
 
     /**

@@ -297,13 +297,18 @@ public class DataTrack {
             initDisplayBoolean();
         }
         BioCondition bioCond = BioCondition.getBioCondition(bioCondName, true);
+        System.out.println("biocond: "+bioCond);
+
         if (bioCond.getOmicsData().size() != 0 || bioCond.getComparisons().size() != 0) {
+            System.out.println("addBioCondition if 1");
+
             /*
              * If the biological condition we add has no Absolute value expression data, we force the view to
              * switch to relative expression mode
              */
             if (bioCond.getOmicsData().size() == 0 && bioCond.getComparisons().size() != 0) {
-                System.out.println("Add :" + bioCondName + " with no omics data");
+                System.out.println("addBioCondition if 2");
+                System.out.println("Add: " + bioCondName + " with no omics data");
                 if (isDisplayAbsoluteValue()) {
                     setDisplayAbsoluteValue(false);
                     absoluteTOrelativeValue();
@@ -311,18 +316,25 @@ public class DataTrack {
             }
 
             if (displayAbsoluteValue) {
+                System.out.println("addBioCondition if 3");
+
                 bioConditionHashMaps.put(bioCond.getName(), bioCond);
             } else {
+                System.out.println("addBioCondition if 4");
+
                 /*
                  * Create and add Comparison BioCondition if available
                  */
                 if (bioCond.getComparisons().size() != 0) {
+                    System.out.println("addBioCondition if 5");
+
                     for (String bioCond2Name : bioCond.getComparisons()) {
                         BioCondition comparisonBioCond =
                                 bioCond.compare(BioCondition.getBioCondition(bioCond2Name), false);
                         bioConditionHashMaps.put(comparisonBioCond.getName(), comparisonBioCond);
                     }
-                } else {
+                } else {                System.out.println("addBioCondition if 6");
+
                     bioConditionHashMaps.put(bioCond.getName(), bioCond);
                 }
             }
@@ -403,7 +415,7 @@ public class DataTrack {
      */
     private void loadData() {
         for (BioCondition bioCond : bioConditionHashMaps.values()) {
-            for (Tiling tiling : bioCond.getTilings()) {
+        	for (Tiling tiling : bioCond.getTilings()) {
                 if (!tiling.isInfoRead()) {
                     tiling.load();
                 }
@@ -426,9 +438,13 @@ public class DataTrack {
                     proteome.load();
                 }
             }
+            System.out.println("bioCond.getMatrices: "+bioCond.getMatrices());
             for (ExpressionMatrix matrix : bioCond.getMatrices()) {
+
                 if (!matrix.isLoaded()) {
                     matrix.load();
+                    System.out.println("matrix row names: " + matrix.getRowNamesToList());
+                    System.out.println("matrix loaded ");
                 }
             }
         }
