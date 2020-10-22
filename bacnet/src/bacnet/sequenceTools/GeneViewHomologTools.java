@@ -76,7 +76,7 @@ public class GeneViewHomologTools {
             if (sequence.getConservationHashMap().containsKey(genome)) {
                 bioCondsArray[i][1] = sequence.getConservationHashMap().get(genome).split(";")[0];
                 bioCondsArray[i][2] = sequence.getConservationHashMap().get(genome).split(";")[1];
-                bioCondsArray[i][3] = String.format("%.2f", Float.parseFloat(sequence.getConservationHashMap().get(genome).split(";")[2]));
+                bioCondsArray[i][3] = String.format("%.5f", Float.parseFloat(sequence.getConservationHashMap().get(genome).split(";")[2]));
             }
         }
 

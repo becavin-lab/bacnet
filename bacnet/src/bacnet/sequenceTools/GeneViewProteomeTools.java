@@ -16,12 +16,14 @@ public class GeneViewProteomeTools {
      * Update proteomics table
      */
     public static void updateProteomesTable(Sequence sequence, GeneView viewer, String[][] arrayProteomeList) {
+    	System.out.println("updateProteomesTable");
         /*
          * Update overexpressed list
          */
         ArrayList<String> bioConditions = new ArrayList<>();
-        //System.out.println(viewer.getGenomeSelected());
+        System.out.println("getGenomeSelected: "+ viewer.getGenomeSelected());
         ExpressionMatrix exprProteomesMatrix = Database.getInstance().getExprProteomesTable(viewer.getGenomeSelected());
+
         System.out.println(sequence.getName());
         if (exprProteomesMatrix.getRowNames().containsKey(sequence.getName())) {
             for (String header : exprProteomesMatrix.getHeaders()) {

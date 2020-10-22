@@ -862,14 +862,22 @@ public class GeneView implements SelectionListener, MouseListener {
         } catch (InterruptedException ex) {
             ex.printStackTrace();
         }
-        
+        System.out.println("before initGenome Info genomeItem: ");
+        for (String genomeItem : comboGenome.getItems()) {
+            System.out.println("before initGenome Info genomeItem: "+genomeItem);
+        }
         initGenomeInfo();
+        for (String genomeItem2 : comboGenome.getItems()) {
+            System.out.println("after initGenome Info genomeItem: "+genomeItem2);
 
+
+        }
+        this.setGenomeSelected(genomeName);
         this.chromoID = genome.getFirstChromosome().getChromosomeID();
         updateComboChromosome(this.chromoID);
         updateListGenomeElements();
         updateGenomeViewer();
-        updateGeneInfo();
+        updateGeneInfo();    
     }
 
     /**
@@ -1045,20 +1053,28 @@ public class GeneView implements SelectionListener, MouseListener {
 
     
     /**
-     * Initi Widgets for Yersiniomics
+     * Init Widgets for Yersiniomics
      */
     private void initYersiniomics() {
+        System.out.println("initYersiniomics");
         arrayDataList = TabDelimitedTableReader.read(Database.getInstance().getTranscriptomesComparisonsArrayPath());
         arrayProteomeList = TabDelimitedTableReader.read(Database.getInstance().getProteomesArrayPath());
+
         ArrayList<String> dataTranscriptomes = BioCondition.getTranscriptomesGenomes();
+        System.out.println("dataTranscriptomes: "+dataTranscriptomes);
+        System.out.println("Database.getInstance().getGenomeList(: "+Database.getInstance().getGenomeList());
+
         for (String genomeTemp : Database.getInstance().getGenomeList()) {
             if (dataTranscriptomes.contains(genomeTemp)) {
+                System.out.println("genomeTemp: "+genomeTemp);
+
                 genomeTemp = genomeTemp + " *";
             }
             comboGenome.add(genomeTemp);
+
         }
-        tbtmSynteny.dispose();
-        composite_localization.dispose();
+         tbtmSynteny.dispose();
+         composite_localization.dispose();
         // arrayGeneToLocalization =
         // TabDelimitedTableReader.read(SubCellCompartment.LOCALIZATION_PATH);
     }
@@ -1068,14 +1084,21 @@ public class GeneView implements SelectionListener, MouseListener {
      * a '*' is add to genome name when a transcriptome data is available
      */
     public String getGenomeSelected() {
+        System.out.println("getGenomeSelected");
+
         if (comboGenome.isDisposed()) {
             return Genome.EGDE_NAME;
         } else {
+            System.out.println("getSelectionIndex: " + comboGenome.getSelectionIndex());
+
             String genome = comboGenome.getItem(comboGenome.getSelectionIndex());
+
             int extensionIndex = genome.lastIndexOf("*");
+
             if (extensionIndex == -1)
                 return genome;
             else {
+
                 genome = genome.substring(0, extensionIndex);
                 genome = genome.trim();
                 return genome;
@@ -1090,10 +1113,13 @@ public class GeneView implements SelectionListener, MouseListener {
      * @param genome
      */
     public void setGenomeSelected(String genome) {
+        System.out.println("setGenomeSelected");
         if (!comboGenome.isDisposed()) {
+            System.out.println("true ue ");
+
             // select genome
             for (String genomeItem : comboGenome.getItems()) {
-                if (genomeItem.contains(genome)) {
+                if (genomeItem.equals(genome) || genomeItem.equals(genome.concat(" *"))) {
                     // System.out.println("item: "+genomeItem);
                     comboGenome.select(comboGenome.indexOf(genomeItem));
                 }
@@ -1180,6 +1206,7 @@ public class GeneView implements SelectionListener, MouseListener {
                     || Database.getInstance().getProjectName() == Database.UIBCLISTERIOMICS_PROJECT
                     || Database.getInstance().getProjectName() == Database.YERSINIOMICS_PROJECT) {
                 updateAllGeneOmicsInfo();
+
             } else if (Database.getInstance().getProjectName() == "ListeriomicsSample") {
             	updateGeneOmicsInfo();
             	updateHomolog();
@@ -1196,7 +1223,6 @@ public class GeneView implements SelectionListener, MouseListener {
 
     public void updateGeneBasicInfo() {
         String title = sequence.getName();
-        // System.out.println(seq.getName());
         if (!sequence.getGeneName().equals("") && !sequence.getGeneName().equals("-"))
             title += " - " + sequence.getGeneName();
         lblGene.setText(title);
@@ -1209,9 +1235,11 @@ public class GeneView implements SelectionListener, MouseListener {
         lblSizeaa.setText("Size aa: " + sequence.getLengthAA());
         lblProduct.setText("Product: " + sequence.getProduct());
         textFeature.setText("Note: " + sequence.getComment() + "\nFeatures: " + sequence.getFeaturesText());
+        System.out.println(" updateGeneBasicInfo all done");
 
         canvasGenome.getTrack().moveHorizontally(sequence.getBegin());
         canvasGenome.redraw();
+
     }
     
     /**
@@ -1255,7 +1283,6 @@ public class GeneView implements SelectionListener, MouseListener {
      * <li>Proteome update
      */
     public void updateAllGeneOmicsInfo() {
-
         if (!sequence.getOperon().equals("")) {
             Operon operon = genome.getChromosomes().get(chromoID).getOperons().get(sequence.getOperon());
             lblOperon.setText("In " + sequence.getOperon() + " containing " + operon.getGenes().size() + " genes");
@@ -1272,10 +1299,12 @@ public class GeneView implements SelectionListener, MouseListener {
 
         ArrayList<String> genomeTranscriptomes = BioCondition.getTranscriptomesGenomes();
         ArrayList<String> genomeProteomes = BioCondition.getProteomeGenomes();
+
         /*
          * Homolog update
          */
         updateHomolog();
+
 
         /*
          * Load localization
@@ -1286,12 +1315,14 @@ public class GeneView implements SelectionListener, MouseListener {
         /*
          * Update synteny view
          */
+        
+        /*
         try {
             browserSynteny.evaluate("search('" + sequence.getName() + "')");
         } catch (Exception e) {
             System.out.println("Cannot evaluate: " + "search('" + sequence.getName() + "')");
         }
-
+*/
         /*
          * Transcriptome update
          */
@@ -1309,8 +1340,13 @@ public class GeneView implements SelectionListener, MouseListener {
         /*
          * Proteome update
          */
+        
+        
         if (genomeProteomes.contains(genome.getSpecies())) {
+        	System.out.println("yes: " +genome.getSpecies());
             GeneViewProteomeTools.updateProteomesTable(sequence, this, arrayProteomeList);
+        	System.out.println("updateProteomesTable done");
+
         } else {
             tableProteomes.removeAll();
         }
@@ -1391,6 +1427,8 @@ public class GeneView implements SelectionListener, MouseListener {
      * @param partService
      */
     public static void displayGene(Gene gene, EPartService partService) {
+        System.out.println("displayGene");
+
         String id = GeneView.ID + "-" + String.valueOf(Math.random() * 1000).substring(0, 3);
         // initiate view
         ResourceManager.openView(partService, GeneView.ID, id);
@@ -1398,11 +1436,17 @@ public class GeneView implements SelectionListener, MouseListener {
         MPart part = partService.findPart(id);
         GeneView view = (GeneView) part.getObject();
         view.setViewID(id);
-         System.out.println("Select current genome:  "+FileUtils.removeExtension(gene.getGenomeName()));
+        System.out.println("gene.getGenomeName(): "+gene.getGenomeName());
+
+        
         view.initGenomeInfo(gene.getGenomeName());
+        System.out.println("after initGenomeInfo");
         view.setGenomeSelected(gene.getGenomeName());
+        System.out.println("after setGenomeSelected");
+      
+
         view.setSequence(gene);
-        for (int i = 0; i < view.getListGenes().size(); i++) {
+        for (int i = 0; i < view.getListGenes().size(); i++) {        	
             if (view.getListGenes().get(i).equals(gene.getName())) {
                 view.getTableGenes().select(i);
                 view.getTableGenes().showItem(view.getTableGenes().getItem(i));
@@ -1680,9 +1724,10 @@ public class GeneView implements SelectionListener, MouseListener {
         if (e.getSource() == canvasGenome) {
             Object obj = canvasGenome.clickedElement(e);
             if (obj != null) {
-                // System.out.println("select "+obj.getClass());
                 if (obj instanceof Gene) {
                     Gene gene = (Gene) obj;
+                    System.out.println("select obj "+gene.getName());
+
                     GeneView.displayGene(gene, partService);
                 } else if (obj instanceof Srna) {
                     Srna sRNA = (Srna) obj;
