@@ -127,7 +127,7 @@ public class InitViewYersinia implements SelectionListener {
 
         Composite composite_11 = new Composite(composite, SWT.BORDER);
         GridData gd_composite_11 = new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1);
-        gd_composite_11.widthHint = 850;
+        gd_composite_11.widthHint = 1500;
         composite_11.setLayoutData(gd_composite_11);
         composite_11.setLayout(new GridLayout(4, false));
         composite_11.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
@@ -168,7 +168,7 @@ public class InitViewYersinia implements SelectionListener {
         lblExpressionAtlas.setFont(SWTResourceManager.getBodyFont(SWT.NORMAL));
         lblExpressionAtlas.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
         lblExpressionAtlas.setData(RWT.MARKUP_ENABLED, Boolean.TRUE);
-        lblExpressionAtlas.setText("Browse RNA-seq of <i>Yersinia enterocolitica subsp palearctica Y11</i>");
+        lblExpressionAtlas.setText("Browse RNA-seq of <i>Yersinia enterocolitica Y11</i>");
 
         Composite composite_9 = new Composite(composite_11, SWT.NONE);
         GridData gd_composite_9 = new GridData(SWT.LEFT, SWT.CENTER, false, true, 1, 1);
@@ -192,7 +192,7 @@ public class InitViewYersinia implements SelectionListener {
         lblIntracellularMouse.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
         lblIntracellularMouse.setData(RWT.MARKUP_ENABLED, Boolean.TRUE);
         lblIntracellularMouse.setText("Browse gene expression array of <i>Yersinia pseudotuberculosis YPIII</i>");
-        gd_composite_11.widthHint = 850;
+        gd_composite_11.widthHint = 1500;
         gd_lblExpressionAtlas.widthHint = 200;
         gd_composite_9.heightHint = 180;
         gd_lblIntracellularMouse.widthHint = 200;
@@ -223,7 +223,7 @@ public class InitViewYersinia implements SelectionListener {
 
         Composite composite_6 = new Composite(composite, SWT.BORDER);
         GridData gd_composite_6 = new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1);
-        gd_composite_6.widthHint = 850;
+        gd_composite_6.widthHint = 1500;
         composite_6.setLayoutData(gd_composite_6);
         composite_6.setLayout(new GridLayout(4, false));
         composite_6.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
@@ -234,17 +234,17 @@ public class InitViewYersinia implements SelectionListener {
         Label lblBrowseOmicsDatasets = new Label(composite_8, SWT.WRAP);
         lblBrowseOmicsDatasets.setAlignment(SWT.CENTER);
         GridData gd_lblBrowseOmicsDatasets = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
-        gd_lblBrowseOmicsDatasets.widthHint = 140;
+        gd_lblBrowseOmicsDatasets.widthHint = 200;
         lblBrowseOmicsDatasets.setLayoutData(gd_lblBrowseOmicsDatasets);
         lblBrowseOmicsDatasets.setText("Browse omics datasets");
         lblBrowseOmicsDatasets.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
         lblBrowseOmicsDatasets.setFont(SWTResourceManager.getTitleFont());
 
         Label lblImage_3 = new Label(composite_8, SWT.BORDER);
-        lblImage_3.setImage(ResourceManager.getPluginImage("bacnet", "icons/InitPage/heatmap.png"));
+        //lblImage_3.setImage(ResourceManager.getPluginImage("bacnet", "icons/InitPage/heatmap.png"));
         Composite composite_10 = new Composite(composite_6, SWT.NONE);
         GridData gd_composite_10 = new GridData(SWT.LEFT, SWT.TOP, false, false, 1, 1);
-        gd_composite_10.heightHint = 180;
+        gd_composite_10.heightHint = 100;
         composite_10.setLayoutData(gd_composite_10);
         composite_10.setLayout(new GridLayout(1, false));
         composite_10.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
@@ -256,17 +256,17 @@ public class InitViewYersinia implements SelectionListener {
         Label lblGoThroughAll = new Label(composite_10, SWT.WRAP);
         lblGoThroughAll.setAlignment(SWT.CENTER);
         GridData gd_lblGoThroughAll = new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1);
-        gd_lblGoThroughAll.widthHint = 200;
+        gd_lblGoThroughAll.widthHint = 400;
         lblGoThroughAll.setLayoutData(gd_lblGoThroughAll);
         lblGoThroughAll.setData(RWT.MARKUP_ENABLED, Boolean.TRUE);
-        lblGoThroughAll.setText("Browse all 83 <i>Yersinia</i> complete genomes available on Yersiniomics."
+        lblGoThroughAll.setText("Browse all 121 <i>Yersinia</i> complete genomes available on Yersiniomics."
                 + " Visualize strain relationship in a phylogenomic tree. Access to all their annotated genome elements.");
         lblGoThroughAll.setFont(SWTResourceManager.getBodyFont(SWT.NORMAL));
         lblGoThroughAll.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
 
         Composite composite_21 = new Composite(composite_6, SWT.NONE);
         GridData gd_composite_21 = new GridData(SWT.LEFT, SWT.TOP, false, false, 1, 1);
-        gd_composite_21.heightHint = 180;
+        gd_composite_21.heightHint = 100;
         composite_21.setLayoutData(gd_composite_21);
         composite_21.setLayout(new GridLayout(1, false));
         composite_21.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
@@ -278,18 +278,18 @@ public class InitViewYersinia implements SelectionListener {
         Label lblGoThroughAll_1 = new Label(composite_21, SWT.WRAP);
         lblGoThroughAll_1.setAlignment(SWT.CENTER);
         GridData gd_lblGoThroughAll_1 = new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1);
-        gd_lblGoThroughAll_1.widthHint = 200;
+        gd_lblGoThroughAll_1.widthHint = 400;
         lblGoThroughAll_1.setLayoutData(gd_lblGoThroughAll_1);
         lblGoThroughAll_1.setData(RWT.MARKUP_ENABLED, Boolean.TRUE);
         lblGoThroughAll_1
-                .setText("Browse all 426 <i>Yersinia</i> species transcriptomics datasets available on Yersiniomics. "
+                .setText("Browse all 104 <i>Yersinia</i> species transcriptomics datasets available on Yersiniomics. "
                         + "Visualize them on the genome browser. Extract differently expressed genome elements and display their fold changes in a heatmap viewer.");
         lblGoThroughAll_1.setFont(SWTResourceManager.getBodyFont(SWT.NORMAL));
         lblGoThroughAll_1.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
 
         Composite composite_22 = new Composite(composite_6, SWT.NONE);
         GridData gd_composite_22 = new GridData(SWT.LEFT, SWT.TOP, false, false, 1, 1);
-        gd_composite_22.heightHint = 180;
+        gd_composite_22.heightHint = 100;
         composite_22.setLayoutData(gd_composite_22);
         composite_22.setLayout(new GridLayout(1, false));
         composite_22.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
@@ -301,18 +301,18 @@ public class InitViewYersinia implements SelectionListener {
         Label lblGoThroughAll_2 = new Label(composite_22, SWT.WRAP);
         lblGoThroughAll_2.setAlignment(SWT.CENTER);
         GridData gd_lblGoThroughAll_2 = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
-        gd_lblGoThroughAll_2.widthHint = 200;
+        gd_lblGoThroughAll_2.widthHint = 400;
         lblGoThroughAll_2.setLayoutData(gd_lblGoThroughAll_2);
         lblGoThroughAll_2.setData(RWT.MARKUP_ENABLED, Boolean.TRUE);
         lblGoThroughAll_2
-                .setText("Browse all 76 <i>Yersinia</i> species proteomics datasets available on Yersiniomics. "
+                .setText("Browse all 8 <i>Yersinia</i> species proteomics datasets available on Yersiniomics. "
                         + "Visualize them on the genome browser. Display protein detection patterns for each datasets in a heatmap viewer.");
         lblGoThroughAll_2.setFont(SWTResourceManager.getBodyFont(SWT.NORMAL));
         lblGoThroughAll_2.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
 
         Composite composite_16 = new Composite(composite, SWT.BORDER);
         GridData gd_composite_16 = new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1);
-        gd_composite_16.widthHint = 850;
+        gd_composite_16.widthHint = 1500;
         composite_16.setLayoutData(gd_composite_16);
         composite_16.setLayout(new GridLayout(4, false));
         composite_16.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));

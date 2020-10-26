@@ -657,7 +657,6 @@ public class GeneView implements SelectionListener, MouseListener {
             }
         });
         tableHomologViewer.addDoubleClickListener(new IDoubleClickListener() {
-
             @Override
             public void doubleClick(DoubleClickEvent event) {
                 String selectedGenome =
@@ -820,8 +819,8 @@ public class GeneView implements SelectionListener, MouseListener {
         scrolledComposite.setMinSize(composite_11.computeSize(SWT.DEFAULT, SWT.DEFAULT));
 
         if (Database.getInstance().getProjectName() == Database.LISTERIOMICS_PROJECT
-                || Database.getInstance().getProjectName() == Database.UIBCLISTERIOMICS_PROJECT) {
-            initSyntenyBrowser();
+                || Database.getInstance().getProjectName() == Database.UIBCLISTERIOMICS_PROJECT || Database.getInstance().getProjectName() == Database.YERSINIOMICS_PROJECT) {
+//            initSyntenyBrowser();
         }
 
     }
@@ -829,18 +828,72 @@ public class GeneView implements SelectionListener, MouseListener {
     private void initSyntenyBrowser() {
         try {
             String realUrl = FileUtils.getPath(NavigationManagement.getURL());
-            if (realUrl.contains("/Listeriomics/")) {
-                realUrl = realUrl.replaceAll("Listeriomics/", "");
-            } else if (realUrl.contains("/UIBCListeriomics/")) {
-                realUrl = realUrl.replaceAll("UIBCListeriomics/", "");
-            }
+            String pathGraphHTML = new String();
+            if (realUrl.contains("Listeriomics")) {
+            	if (realUrl.contains("/Listeriomics/")) {
+            		realUrl = realUrl.replaceAll("Listeriomics/", "");
+            	} else if (realUrl.contains("/UIBCListeriomics/")) {
+            		realUrl = realUrl.replaceAll("UIBCListeriomics/", "");
+            	}
             realUrl = "https://listeriomics.pasteur.fr/";
-            String pathGraphHTML = realUrl + "SynTView/flash/indexFinal.html";
+            pathGraphHTML = realUrl + "SynTView/flash/indexFinal.html";
+            } else {
+                pathGraphHTML = "http://hub18.hosting.pasteur.fr/SynTView/flash/Yersinia/SynWebPestis.html";
+            }
             System.out.println("SyntView: " + pathGraphHTML);
             browserSynteny.setUrl(pathGraphHTML);
             browserSynteny.redraw();
         } catch (Exception e) {
-            System.out.println("Cannot create brower");
+            System.out.println("Cannot create browser");
+        }
+    }
+    
+    private void updateSyntenyBrowser() {
+    	tbtmSynteny.dispose();
+    	tbtmSynteny = new TabItem(tabFolder, SWT.NONE);
+        tbtmSynteny.setText("Synteny");
+
+        composite_12 = new Composite(tabFolder, SWT.NONE);
+        tbtmSynteny.setControl(composite_12);
+        composite_12.setLayout(new GridLayout(1, false));
+        browserSynteny = new Browser(composite_12, SWT.NONE);
+        browserSynteny.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+        
+        try {
+            String realUrl = FileUtils.getPath(NavigationManagement.getURL());
+            String pathGraphHTML = new String();
+            if (realUrl.contains("Listeriomics")) {
+            	if (realUrl.contains("/Listeriomics/")) {
+            		realUrl = realUrl.replaceAll("Listeriomics/", "");
+            	} else if (realUrl.contains("/UIBCListeriomics/")) {
+            		realUrl = realUrl.replaceAll("UIBCListeriomics/", "");
+            	}
+            realUrl = "https://listeriomics.pasteur.fr/";
+            pathGraphHTML = realUrl + "SynTView/flash/indexFinal.html";
+            } else if (genome.getSpecies().equals("Yersinia pestis CO92")){
+                pathGraphHTML = "http://hub18.hosting.pasteur.fr/SynTView/flash/Yersinia/SynWebPestis.html";
+                System.out.println("SyntView: " + pathGraphHTML);
+                browserSynteny.setUrl(pathGraphHTML);
+                browserSynteny.redraw();
+                
+            } else if (genome.getSpecies().equals("Yersinia pseudotuberculosis YPIII")){
+                pathGraphHTML = "http://hub18.hosting.pasteur.fr/SynTView/flash/Yersinia/SynWebPseudo.html";
+                System.out.println("SyntView: " + pathGraphHTML);
+                browserSynteny.setUrl(pathGraphHTML);
+                browserSynteny.redraw();
+                
+            } else if (genome.getSpecies().equals("Yersinia enterocolitica 8081")){
+            pathGraphHTML = "http://hub18.hosting.pasteur.fr/SynTView/flash/Yersinia/SynWebEntero.html";
+            System.out.println("SyntView: " + pathGraphHTML);
+            browserSynteny.setUrl(pathGraphHTML);
+            browserSynteny.redraw();
+            
+            } else {
+            	tbtmSynteny.dispose();
+            }
+
+        } catch (Exception e) {
+            System.out.println("Cannot create browser");
         }
     }
 
@@ -862,16 +915,25 @@ public class GeneView implements SelectionListener, MouseListener {
         } catch (InterruptedException ex) {
             ex.printStackTrace();
         }
-        System.out.println("before initGenome Info genomeItem: ");
-        for (String genomeItem : comboGenome.getItems()) {
-            System.out.println("before initGenome Info genomeItem: "+genomeItem);
-        }
+        System.out.println("before initGenome Info");
+        //for (String genomeItem : comboGenome.getItems()) {System.out.println("before initGenome Info genomeItem: "+genomeItem)}
         initGenomeInfo();
-        for (String genomeItem2 : comboGenome.getItems()) {
-            System.out.println("after initGenome Info genomeItem: "+genomeItem2);
-
-
+        updateSyntenyBrowser();
+       /*
+        if (genomeName.contains("pestis CO92")) {
+            System.out.println("SynTView update 1: pestis CO92");
+        } else if (genomeName.contains("pseudotuberculosis YPIII")) {
+            System.out.println("SynTView update 1: pseudotuberculosis YPIII");
+            updateSyntenyBrowser();
+        } else if (genomeName.contains("enterocolitica 8081")) {
+            System.out.println("SynTView update 1: enterocolitica 8081");
+            updateSyntenyBrowser();
+        } else {
+            System.out.println("SynTView update 1: no");
+        	tbtmSynteny.dispose();
         }
+        */
+        //for (String genomeItem2 : comboGenome.getItems()) {System.out.println("after initGenome Info genomeItem: "+genomeItem2)}
         this.setGenomeSelected(genomeName);
         this.chromoID = genome.getFirstChromosome().getChromosomeID();
         updateComboChromosome(this.chromoID);
@@ -909,6 +971,7 @@ public class GeneView implements SelectionListener, MouseListener {
      * @param genomeName
      */
     private void initGenomeInfo(String genomeName, String chromoID) {
+    	System.out.println("initGenomeInfo 2");
         try {
             ArrayList<String> genomeNames = new ArrayList<>();
             genomeNames.add(genomeName);
@@ -924,6 +987,16 @@ public class GeneView implements SelectionListener, MouseListener {
         initGenomeInfo();
 
         this.chromoID = chromoID;
+        if (genomeName.contains("pestis")) {
+            System.out.println("SynTView update 2: pestis");
+        } else if (genomeName.contains("pseudotuberculosis")) {
+            System.out.println("SynTView update 2: pseudotub");
+        } else if (genomeName.contains("enterocolitica")) {
+            System.out.println("SynTView update 2: entero");
+        } else {
+            System.out.println("SynTView update 2: no");
+        	tbtmSynteny.dispose();
+        }
         updateComboChromosome(this.chromoID);
         updateListGenomeElements();
         updateGenomeViewer();
@@ -1056,24 +1129,24 @@ public class GeneView implements SelectionListener, MouseListener {
      * Init Widgets for Yersiniomics
      */
     private void initYersiniomics() {
-        System.out.println("initYersiniomics");
+        //System.out.println("initYersiniomics");
         arrayDataList = TabDelimitedTableReader.read(Database.getInstance().getTranscriptomesComparisonsArrayPath());
         arrayProteomeList = TabDelimitedTableReader.read(Database.getInstance().getProteomesArrayPath());
 
         ArrayList<String> dataTranscriptomes = BioCondition.getTranscriptomesGenomes();
-        System.out.println("dataTranscriptomes: "+dataTranscriptomes);
-        System.out.println("Database.getInstance().getGenomeList(: "+Database.getInstance().getGenomeList());
+        //System.out.println("dataTranscriptomes: "+dataTranscriptomes);
+        //System.out.println("Database.getInstance().getGenomeList(: "+Database.getInstance().getGenomeList());
 
         for (String genomeTemp : Database.getInstance().getGenomeList()) {
             if (dataTranscriptomes.contains(genomeTemp)) {
-                System.out.println("genomeTemp: "+genomeTemp);
+                //System.out.println("genomeTemp: "+genomeTemp);
 
                 genomeTemp = genomeTemp + " *";
             }
             comboGenome.add(genomeTemp);
 
         }
-         tbtmSynteny.dispose();
+         //tbtmSynteny.dispose();
          composite_localization.dispose();
         // arrayGeneToLocalization =
         // TabDelimitedTableReader.read(SubCellCompartment.LOCALIZATION_PATH);
@@ -1084,12 +1157,12 @@ public class GeneView implements SelectionListener, MouseListener {
      * a '*' is add to genome name when a transcriptome data is available
      */
     public String getGenomeSelected() {
-        System.out.println("getGenomeSelected");
+        //System.out.println("getGenomeSelected");
 
         if (comboGenome.isDisposed()) {
             return Genome.EGDE_NAME;
         } else {
-            System.out.println("getSelectionIndex: " + comboGenome.getSelectionIndex());
+            //System.out.println("getSelectionIndex: " + comboGenome.getSelectionIndex());
 
             String genome = comboGenome.getItem(comboGenome.getSelectionIndex());
 
@@ -1108,14 +1181,13 @@ public class GeneView implements SelectionListener, MouseListener {
 
     /**
      * The comboGenome contains modified genome name so we need this method to select an element<br>
-     * a '*' is add to genome name when a transcriptome data is available
+     * a '*' is add to genome name when a transcriptome or proteome data is available
      * 
      * @param genome
      */
     public void setGenomeSelected(String genome) {
-        System.out.println("setGenomeSelected");
+        //System.out.println("setGenomeSelected");
         if (!comboGenome.isDisposed()) {
-            System.out.println("true ue ");
 
             // select genome
             for (String genomeItem : comboGenome.getItems()) {
@@ -1235,7 +1307,6 @@ public class GeneView implements SelectionListener, MouseListener {
         lblSizeaa.setText("Size aa: " + sequence.getLengthAA());
         lblProduct.setText("Product: " + sequence.getProduct());
         textFeature.setText("Note: " + sequence.getComment() + "\nFeatures: " + sequence.getFeaturesText());
-        System.out.println(" updateGeneBasicInfo all done");
 
         canvasGenome.getTrack().moveHorizontally(sequence.getBegin());
         canvasGenome.redraw();
@@ -1322,7 +1393,7 @@ public class GeneView implements SelectionListener, MouseListener {
         } catch (Exception e) {
             System.out.println("Cannot evaluate: " + "search('" + sequence.getName() + "')");
         }
-*/
+
         /*
          * Transcriptome update
          */
@@ -1343,9 +1414,9 @@ public class GeneView implements SelectionListener, MouseListener {
         
         
         if (genomeProteomes.contains(genome.getSpecies())) {
-        	System.out.println("yes: " +genome.getSpecies());
+        	//System.out.println("yes: " +genome.getSpecies());
             GeneViewProteomeTools.updateProteomesTable(sequence, this, arrayProteomeList);
-        	System.out.println("updateProteomesTable done");
+        	//System.out.println("updateProteomesTable done");
 
         } else {
             tableProteomes.removeAll();
@@ -1436,13 +1507,13 @@ public class GeneView implements SelectionListener, MouseListener {
         MPart part = partService.findPart(id);
         GeneView view = (GeneView) part.getObject();
         view.setViewID(id);
-        System.out.println("gene.getGenomeName(): "+gene.getGenomeName());
+        //System.out.println("gene.getGenomeName(): "+gene.getGenomeName());
 
         
         view.initGenomeInfo(gene.getGenomeName());
-        System.out.println("after initGenomeInfo");
+        //System.out.println("after initGenomeInfo");
         view.setGenomeSelected(gene.getGenomeName());
-        System.out.println("after setGenomeSelected");
+        //System.out.println("after setGenomeSelected");
       
 
         view.setSequence(gene);
@@ -1583,6 +1654,7 @@ public class GeneView implements SelectionListener, MouseListener {
             updateListGenomeElements();
             updateGenomeViewer();
             updateGeneInfo();
+            updateSyntenyBrowser();
         } else if (e.getSource() == comboChromosome) {
             chromoID = comboChromosome.getItem(comboChromosome.getSelectionIndex()).split(" - ")[1];
             updateListGenomeElements();
@@ -1599,7 +1671,7 @@ public class GeneView implements SelectionListener, MouseListener {
                 File tempSVGFile = File.createTempFile("Highlightstrain", "Phylogeny.svg");
                 FileUtils.saveText(textSVG, tempSVGFile.getAbsolutePath());
                 File tempPNGFile = File.createTempFile("Highlightstrain", "Phylogeny.png");
-                System.out.println("Convert Phylogeny.svg to Phylogeny.png\nHave you set ImageMagick PATH in ImageMagick.getConvertPATH()\nYours is set to: "+ImageMagick.getConvertPATH());
+                //System.out.println("Convert Phylogeny.svg to Phylogeny.png\nHave you set ImageMagick PATH in ImageMagick.getConvertPATH()\nYours is set to: "+ImageMagick.getConvertPATH());
                 CMD.runProcess(ImageMagick.getConvertPATH() + " " + tempSVGFile.getAbsolutePath() + " " + tempPNGFile);
                 SaveFileUtils.saveFile("Listeria_Phylogenomic_Tree_" + sequence.getName() + ".png", tempPNGFile,
                         "PNG image file", partService, shell);

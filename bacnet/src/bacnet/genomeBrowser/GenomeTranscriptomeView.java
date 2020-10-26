@@ -484,10 +484,19 @@ public class GenomeTranscriptomeView {
      */
     public static void displayYersiYPIII(EPartService partService) {
         ArrayList<String> bioConditions = new ArrayList<>();
-        bioConditions.add("37PseudotuberculosisStat_Agilent_IP32953");
-        bioConditions.add("26PseudotuberculosisStat_Agilent_IP32953");
-        bioConditions.add("25PseudotuberculosisExponentialAerobic_YPIII_Agilent_2014_YPIII");
-        bioConditions.add("26PseudotuberculosisExp_Agilent_IP32953");
+        bioConditions.add("Pseudotuberculosis_YPIII_WT_17h_Agilent_2012");
+        bioConditions.add("Pseudotuberculosis_YPIII_WT_25C_Log_Agilent_2014");
+        bioConditions.add("Pseudotuberculosis_YPIII_WT_25C_Stat_Agilent_2014");
+        bioConditions.add("Pseudotuberculosis_YPIII_Mutant_crp_25C_Log_Agilent_2014");
+        bioConditions.add("Pseudotuberculosis_YPIII_Mutant_crp_25C_Stat_Agilent_2014");
+        bioConditions.add("Pseudotuberculosis_YPIII_Mutant_csrA_25C_Log_Agilent_2014");
+        bioConditions.add("Pseudotuberculosis_YPIII_Mutant_rovA_25C_Log_Agilent_2014");
+        bioConditions.add("Pseudotuberculosis_YPIII_Mutant_ymoA_17h_Agilent_2012");
+        bioConditions.add("Pseudotuberculosis_YPIII_25_Log_Aerobic_Agilent_2014");
+        bioConditions.add("Pseudotuberculosis_YPIII_25_Log_Anaerobic_Agilent_2014");
+        bioConditions.add("Pseudotuberculosis_YPIII_25_Stat_Aerobic_Agilent_2014");
+        bioConditions.add("Pseudotuberculosis_YPIII_25_Stat_Anaerobic_Agilent_2014");
+
         displayGenomeElementAndBioConditions(partService, "Yersinia pseudotuberculosis YPIII", bioConditions, "");
     }
     
@@ -497,11 +506,9 @@ public class GenomeTranscriptomeView {
      */
     public static void displayYersiY11(EPartService partService) {
         ArrayList<String> bioConditions = new ArrayList<>();
-        bioConditions.add("22Enterocolitica_Y11_IHS2000_2015_cDNA");
-        bioConditions.add("37Enterocolitica_Y11_IHS2000_2015_cDNA");
-        bioConditions.add("22Enterocolitica_Y11_IHS2000_2014_cDNA");
-        bioConditions.add("37Enterocolitica_Y11_IHS2000_2014_cDNA");
-        displayGenomeElementAndBioConditions(partService, "Yersinia enterocolitica subsp palearctica Y11", bioConditions, "");
+        bioConditions.add("Enterocolitica_Y11_Mutant_hfq_37C_Log_IHS2000_2015");
+        bioConditions.add("Enterocolitica_Y11_WT_37C_Log_IHS2000_2015");
+        displayGenomeElementAndBioConditions(partService, "Yersinia enterocolitica Y11", bioConditions, "");
     }
     
     /**
