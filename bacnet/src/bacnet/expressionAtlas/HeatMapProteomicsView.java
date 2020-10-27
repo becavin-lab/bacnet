@@ -15,37 +15,47 @@ import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.Text;
 import bacnet.Database;
 import bacnet.datamodel.dataset.ExpressionMatrix;
+import bacnet.datamodel.expdesign.BioCondition;
 import bacnet.datamodel.sequence.Genome;
+import bacnet.expressionAtlas.core.ComparisonAtlas;
+import bacnet.expressionAtlas.core.GenomeElementAtlas;
 import bacnet.raprcp.NavigationManagement;
 import bacnet.swt.ResourceManager;
+import bacnet.utils.Filter;
 
 public class HeatMapProteomicsView implements SelectionListener {
 
     /**
      * 
      */
-    private static final long serialVersionUID = 7806377909856153015L;
+    private static final long serialVersionUID = -2640442866422682301L;
+
+    public static final String ID = "bacnet.HeatMapProteomicsView"; //$NON-NLS-1$
 
     /**
      * Indicates if we focus the view, so we can pushState navigation
      */
     private boolean focused = false;
 
-    public static final String ID = "bacnet.HeatMapProteomicsView"; //$NON-NLS-1$
-
+    private String sequence = "";
     private String viewId = "";
     private String genomeName = Genome.EGDE_NAME;
     private Composite compositeSummary;
     private TableCompositeHeatMap tableComposite;
-
-    private ArrayList<String> bioConditions = new ArrayList<>();
+    private Combo cmbDataUsed;
+    private Text txtCutoffLogFC;
+    private Button btnUpdateCutoff;
 
     @Inject
-    private EPartService partService;
+    EPartService partService;
 
     @Inject
     @Named(IServiceConstants.ACTIVE_SHELL)
@@ -75,10 +85,42 @@ public class HeatMapProteomicsView implements SelectionListener {
             {
                 compositeSummary = new Composite(scrolledComposite, SWT.BORDER);
                 compositeSummary.setLayout(new GridLayout(1, false));
+
+                Composite composite_8 = new Composite(compositeSummary, SWT.BORDER);
+                composite_8.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
+                composite_8.setLayout(new GridLayout(3, false));
+
                 {
-                    tableComposite =
-                            new TableCompositeHeatMap(compositeSummary, SWT.NONE, genomeName, true, partService, shell);
+                    Composite composite = new Composite(composite_8, SWT.NONE);
+                    composite.setLayout(new GridLayout(4, false));
+                    {
+                        Label lblApplyCutoffFor = new Label(composite, SWT.NONE);
+                        lblApplyCutoffFor.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+                        lblApplyCutoffFor.setText("Apply cut-off |Log(Fold-Change| >");
+                    }
+
+                    txtCutoffLogFC = new Text(composite, SWT.BORDER);
+                    txtCutoffLogFC.setText("1.5");
+
+                    Label lbllogfoldchange = new Label(composite, SWT.NONE);
+                    lbllogfoldchange.setText("for");
+                    {
+                        cmbDataUsed = new Combo(composite, SWT.NONE);
+                        GridData gd_cmbDataUsed = new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1);
+                        gd_cmbDataUsed.widthHint = 306;
+                        cmbDataUsed.setLayoutData(gd_cmbDataUsed);
+                    }
+                }
+
+                btnUpdateCutoff = new Button(composite_8, SWT.NONE);
+                btnUpdateCutoff.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
+                btnUpdateCutoff.setText("Update HeatMap");
+                btnUpdateCutoff.addSelectionListener(this);
+                {
+                    tableComposite = new TableCompositeHeatMap(compositeSummary, SWT.NONE, genomeName, false,
+                            partService, shell);
                     tableComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+
                 }
 
             }
@@ -88,9 +130,20 @@ public class HeatMapProteomicsView implements SelectionListener {
 
     }
 
-    private void initData() {
-        ExpressionMatrix exprMatrix = Database.getInstance().getExprProteomesTable(genomeName);
-        tableComposite.initData(exprMatrix);
+    private void initData(String genomeName) {
+        this.setGenomeName(genomeName);
+        ExpressionMatrix logFCMatrix = Database.getInstance().getLogFCProteomesTable(genomeName);
+        tableComposite.initData(logFCMatrix);
+        tableComposite.setGenomeName(genomeName);
+    }
+
+    private void updateComboData(ArrayList<String> comparisons) {
+        cmbDataUsed.removeAll();
+        cmbDataUsed.add("All Columns");
+        cmbDataUsed.select(0);
+        for (String comp : comparisons) {
+            cmbDataUsed.add(comp);
+        }
     }
 
     /**
@@ -98,37 +151,50 @@ public class HeatMapProteomicsView implements SelectionListener {
      * 
      * @param includeComparisons list of comparisons to include
      */
-    public void updateExcludeColumns(ArrayList<String> bioConditions) {
-        ExpressionMatrix matrixExprProteomes = Database.getInstance().getExprProteomesTable(genomeName);
-        /*
-         * Find biocondition to exclude
-         */
-        ArrayList<String> excludeBioConditions = new ArrayList<>();
-        for (String bioCondName : matrixExprProteomes.getHeaders()) {
-            excludeBioConditions.add(bioCondName);
-        }
-        for (String includeColumn : bioConditions) {
-            excludeBioConditions.remove(includeColumn);
-        }
-        tableComposite.setExcludeColumn(excludeBioConditions);
-        /*
-         * Find rowName to exclude
-         */
-        ArrayList<String> excludeRowNames = new ArrayList<>();
-        for (String rowName : matrixExprProteomes.getRowNames().keySet()) {
-            boolean noValue = true;
-            for (String header : bioConditions) {
-                double value = matrixExprProteomes.getValue(rowName, header);
-                if (value > 0) {
-                    noValue = false;
-                }
-            }
-            if (noValue) {
-                excludeRowNames.add(rowName);
+    public void updateExcludeColumns(ArrayList<String> includeComparisons) {
+        ArrayList<String> excludeComparisons = new ArrayList<>();
+        ArrayList<String> removedBioConds = BioCondition.getAllBioConditionNames();
+        for (String bioCondName : removedBioConds) {
+            BioCondition bioCond = BioCondition.getBioCondition(bioCondName);
+            for (String comp : bioCond.getComparisonNames()) {
+                excludeComparisons.add(comp);
             }
         }
-        tableComposite.setExcludeRow(excludeRowNames);
 
+        for (String includeColumn : includeComparisons) {
+            excludeComparisons.remove(includeColumn);
+        }
+        tableComposite.setExcludeColumn(excludeComparisons);
+    }
+
+    /**
+     * Update the list of rows to exclude from the display
+     */
+    public void updateExcludeRows() {
+        /*
+         * Get cut-off
+         */
+        double cutoffLogFC = GenomeElementAtlas.DEFAULT_LOGFC_PROTEOMIC_CUTOFF;
+        try {
+            cutoffLogFC = Double.parseDouble(txtCutoffLogFC.getText());
+        } catch (Exception e) {
+            txtCutoffLogFC.setText(GenomeElementAtlas.DEFAULT_LOGFC_PROTEOMIC_CUTOFF + "");
+        }
+        Filter filter = new Filter();
+        filter.setCutOff1(cutoffLogFC);
+
+        /*
+         * Create list of genome elements to exclude for each analysis
+         */
+
+        ArrayList<String> excludedGenomesElements = new ArrayList<>();
+        ComparisonAtlas atlas = new ComparisonAtlas(Database.getInstance().getLogFCProteomesTable(genomeName),
+                tableComposite.getExcludeColumn(), cmbDataUsed.getItem(cmbDataUsed.getSelectionIndex()), filter);
+        for (String genomeElement : atlas.getExcludeRows()) {
+            excludedGenomesElements.add(genomeElement);
+        }
+
+        tableComposite.setExcludeRow(excludedGenomesElements);
     }
 
     @Focus
@@ -147,8 +213,12 @@ public class HeatMapProteomicsView implements SelectionListener {
     private void pushState() {
         HashMap<String, String> parameters = new HashMap<>();
         parameters.put(NavigationManagement.GENOME, genomeName);
+        if (!sequence.equals("")) {
+            parameters.put(NavigationManagement.GENE, sequence);
+        }
+
         String stateValue = "";
-        for (String comparison : bioConditions) {
+        for (String comparison : cmbDataUsed.getItems()) {
             stateValue += comparison + ":";
         }
         parameters.put(NavigationManagement.LIST, stateValue);
@@ -156,7 +226,13 @@ public class HeatMapProteomicsView implements SelectionListener {
     }
 
     @Override
-    public void widgetSelected(SelectionEvent e) {}
+    public void widgetSelected(SelectionEvent e) {
+        if (e.getSource() == btnUpdateCutoff) {
+            System.out.println("Update HeatMap");
+            updateExcludeRows();
+            tableComposite.updateInfo();
+        }
+    }
 
     @Override
     public void widgetDefaultSelected(SelectionEvent e) {
@@ -164,27 +240,52 @@ public class HeatMapProteomicsView implements SelectionListener {
 
     }
 
+    public static void displayComparisonsAndElement(String genomeName, ArrayList<String> comparisons, String sequence,
+            EPartService partService) {
+        ArrayList<String> genomeArrays = BioCondition.getTranscriptomesGenomes();
+        if (genomeArrays.contains(genomeName)) {
+            String id = HeatMapProteomicsView.ID + "-" + String.valueOf(Math.random() * 1000).substring(0, 3);
+            // initiate view
+            ResourceManager.openView(partService, HeatMapProteomicsView.ID, id);
+            // update data
+            MPart part = partService.findPart(id);
+            HeatMapProteomicsView view = (HeatMapProteomicsView) part.getObject();
+            view.setViewId(id);
+            view.initData(genomeName);
+            view.updateExcludeColumns(comparisons);
+            view.getTableComposite().updateInfo();
+            view.updateComboData(comparisons);
+            view.setSequence(sequence);
+            view.pushState();
+        }
+    }
+
     /**
-     * Run a <code>HeatMapView</code> displaying a specific bioCond
+     * Run a <code>HeatMapProteomicsView</code> displaying a specific comparison of bioCond
      * 
      * @param bioConds
      */
-    public static void displayBioConditions(String genomeName, ArrayList<String> bioConditions,
-            EPartService partService) {
-        String id = HeatMapProteomicsView.ID + "-" + String.valueOf(Math.random() * 1000).substring(0, 3);
-        // initiate view
-        ResourceManager.openView(partService, HeatMapProteomicsView.ID, id);
-        // update data
-        MPart part = partService.findPart(id);
-        HeatMapProteomicsView view = (HeatMapProteomicsView) part.getObject();
-        view.setViewId(id);
-        view.setGenomeName(genomeName);
-        view.initData();
-        view.updateExcludeColumns(bioConditions);
-        view.getTableComposite().updateInfo();
-        view.getTableComposite().setTranscriptomics(false);
-        view.setBioConditions(bioConditions);
-        view.pushState();
+    public static void displayBioConditionsExpressionAtlas(HashMap<String, ArrayList<String>> genomeToComparisons, EPartService partService) {
+        // Create a heatmap for each genome
+        for (String genomeName : genomeToComparisons.keySet()) {
+            ArrayList<String> genomeArrays = BioCondition.getTranscriptomesGenomes();
+            if (genomeArrays.contains(genomeName)) {
+                ArrayList<String> comparisons = genomeToComparisons.get(genomeName);
+                String id = HeatMapProteomicsView.ID + "-" + String.valueOf(Math.random() * 1000).substring(0, 3);
+                // initiate view
+                ResourceManager.openView(partService, HeatMapProteomicsView.ID, id);
+                // update data
+                MPart part = partService.findPart(id);
+                HeatMapProteomicsView view = (HeatMapProteomicsView) part.getObject();
+                view.setViewId(id);
+                view.initData(genomeName);
+                view.updateExcludeColumns(comparisons);
+                view.updateComboData(comparisons);
+                view.updateExcludeRows();
+                view.pushState();
+                view.getTableComposite().updateInfo();
+            }
+        }
     }
 
     /**
@@ -196,12 +297,19 @@ public class HeatMapProteomicsView implements SelectionListener {
     public static void displayHeatMapProteomicsView(EPartService partService, HashMap<String, String> parameters) {
         String genomeName = parameters.get(NavigationManagement.GENOME);
         String[] genes = parameters.get(NavigationManagement.LIST).split(":");
-        ArrayList<String> bioConditions = new ArrayList<>();
+        ArrayList<String> comparisons = new ArrayList<>();
         for (String gene : genes) {
-            System.out.println(gene);
-            bioConditions.add(gene);
+            comparisons.add(gene);
         }
-        displayBioConditions(genomeName, bioConditions, partService);
+        if (parameters.containsKey(NavigationManagement.GENE)) {
+            displayComparisonsAndElement(genomeName, comparisons, parameters.get(NavigationManagement.GENE),
+                    partService);
+        } else {
+            HashMap<String, ArrayList<String>> genomeToComparisons = new HashMap<>();
+            genomeToComparisons.put(genomeName, comparisons);
+            displayBioConditionsExpressionAtlas(genomeToComparisons, partService);
+        }
+
     }
 
     public TableCompositeHeatMap getTableComposite() {
@@ -236,12 +344,12 @@ public class HeatMapProteomicsView implements SelectionListener {
         this.focused = focused;
     }
 
-    public ArrayList<String> getBioConditions() {
-        return bioConditions;
+    public String getSequence() {
+        return sequence;
     }
 
-    public void setBioConditions(ArrayList<String> bioConditions) {
-        this.bioConditions = bioConditions;
+    public void setSequence(String sequence) {
+        this.sequence = sequence;
     }
 
 }

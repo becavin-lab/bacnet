@@ -273,7 +273,7 @@ public class ProteomicsCreation {
             //createLogFCMatrix(expTemp, genomeName);
 
         }
-        logs += Database.getLOGFC_MATRIX_TRANSCRIPTOMES_PATH() + " tables created";
+        logs += Database.getLOGFC_MATRIX_PROTEOMES_PATH() + " tables created";
         return logs;
     }
 
@@ -399,7 +399,7 @@ public class ProteomicsCreation {
         logFCMatrix.setValues(values);
 
         /*
-         * Fill the matrix with GeneExpression values
+         * Fill the matrix with LogFC values
          */
         for (BioCondition bioCond : exp.getBioConditions()) {
             ArrayList<String> comparisonNames = bioCond.getComparisonNames();

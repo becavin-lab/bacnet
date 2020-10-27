@@ -192,6 +192,156 @@ public class ProteomicsDataFilterComposite extends org.eclipse.swt.widgets.Compo
         initComboGenome();
 
     }
+    
+    public ProteomicsDataFilterComposite(org.eclipse.swt.widgets.Composite parent, int style, ProteomicsExpressionView view) {
+        super(parent, style);
+        this.setLayout(new GridLayout(1, false));
+        //this.view = view;
+
+        Label lblSearch = new Label(this, SWT.NONE);
+        lblSearch.setFont(SWTResourceManager.getBodyFont(SWT.BOLD));
+        lblSearch.setText("Search");
+
+        textSearch = new Text(this, SWT.BORDER);
+        GridData gd_textSearch = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
+        gd_textSearch.widthHint = 250;
+        textSearch.setLayoutData(gd_textSearch);
+        textSearch.addKeyListener(new org.eclipse.swt.events.KeyListener() {
+
+            /**
+             * 
+             */
+            private static final long serialVersionUID = 1L;
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                if (e.keyCode == 16777296 || e.keyCode == 13) {
+                    // System.out.println("Search for "+textSearch.getText());
+                    updateView();
+                }
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                // TODO Auto-generated method stub
+
+            }
+        });
+
+        new Label(this, SWT.NONE);
+        {
+            Label lblGenome = new Label(this, SWT.NONE);
+            lblGenome.setFont(SWTResourceManager.getBodyFont(SWT.BOLD));
+            lblGenome.setText("Genome");
+        }
+        {
+            comboGenome = new Combo(this, SWT.NONE);
+            GridData gd_comboGenome = new GridData(SWT.LEFT, SWT.CENTER, true, false, 1, 1);
+            gd_comboGenome.widthHint = 270;
+            comboGenome.setLayoutData(gd_comboGenome);
+            comboGenome.addSelectionListener(this);
+        }
+        {
+            new Label(this, SWT.NONE);
+        }
+        {
+            Label lblNewLabel_2 = new Label(this, SWT.NONE);
+            lblNewLabel_2.setFont(SWTResourceManager.getBodyFont(SWT.BOLD));
+            lblNewLabel_2.setText("Localization");
+        }
+        {
+            Composite composite = new Composite(this, SWT.NONE);
+            composite.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
+            composite.setLayout(new GridLayout(1, false));
+
+            btnCytoplasm = new Button(composite, SWT.CHECK);
+            btnCytoplasm.setText("Cytoplasm");
+
+            btnCellWall = new Button(composite, SWT.CHECK);
+            btnCellWall.setText("Cell Wall");
+
+            btnMembrane = new Button(composite, SWT.CHECK);
+            btnMembrane.setText("Membrane");
+
+            btnSecretome = new Button(composite, SWT.CHECK);
+            btnSecretome.setText("Secretome");
+
+            btnUnpublished = new Button(composite, SWT.CHECK);
+            btnUnpublished.setText("Unpublished");
+
+            btnCytoplasm.addSelectionListener(this);
+            btnCellWall.addSelectionListener(this);
+            btnMembrane.addSelectionListener(this);
+            btnSecretome.addSelectionListener(this);
+
+        }
+
+        new Label(this, SWT.NONE);
+
+        Label lblGrowth = new Label(this, SWT.NONE);
+        lblGrowth.setFont(SWTResourceManager.getBodyFont(SWT.BOLD));
+        lblGrowth.setText("Growth Medium");
+
+        Composite composite_1_1 = new Composite(this, SWT.NONE);
+        composite_1_1.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
+        composite_1_1.setLayout(new GridLayout(1, false));
+
+        btnBhiBroth = new Button(composite_1_1, SWT.CHECK);
+        btnBhiBroth.setText("BHI Broth");
+
+        btnBhiBroth.addSelectionListener(this);
+
+        btnLbBroth = new Button(composite_1_1, SWT.CHECK);
+        btnLbBroth.setText("LB Broth");
+        btnLbBroth.addSelectionListener(this);
+
+        btnMinimalMediaBroth = new Button(composite_1_1, SWT.CHECK);
+        btnMinimalMediaBroth.setText("Minimal Media Broth");
+        btnMinimalMediaBroth.addSelectionListener(this);
+
+        btnHumanBloodCells = new Button(composite_1_1, SWT.CHECK);
+        btnHumanBloodCells.setText("Human blood cells");
+
+        btnMouseMacrophagesCells = new Button(composite_1_1, SWT.CHECK);
+        btnMouseMacrophagesCells.setText("Mouse macrophages cells");
+        btnHumanBloodCells.addSelectionListener(this);
+        btnMouseMacrophagesCells.addSelectionListener(this);
+
+        new Label(this, SWT.NONE);
+
+        Label lblGrowthPhases = new Label(this, SWT.NONE);
+        lblGrowthPhases.setFont(SWTResourceManager.getBodyFont(SWT.BOLD));
+        lblGrowthPhases.setText("Growth phases");
+
+        Composite composite_2 = new Composite(this, SWT.NONE);
+        composite_2.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
+        composite_2.setLayout(new GridLayout(1, false));
+
+        btnExponential = new Button(composite_2, SWT.CHECK);
+        btnExponential.setText("Exponential");
+
+        btnStationnary = new Button(composite_2, SWT.CHECK);
+        btnStationnary.setText("Stationnary");
+        btnExponential.addSelectionListener(this);
+        btnStationnary.addSelectionListener(this);
+
+        new Label(this, SWT.NONE);
+
+        allButtons.add(btnCytoplasm);
+        allButtons.add(btnCellWall);
+        allButtons.add(btnMembrane);
+        allButtons.add(btnSecretome);
+        allButtons.add(btnHumanBloodCells);
+        allButtons.add(btnMouseMacrophagesCells);
+        allButtons.add(btnBhiBroth);
+        allButtons.add(btnLbBroth);
+        allButtons.add(btnMinimalMediaBroth);
+        allButtons.add(btnExponential);
+        allButtons.add(btnStationnary);
+
+        initComboGenome();
+
+    }
 
     private void initComboGenome() {
         /**

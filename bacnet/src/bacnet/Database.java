@@ -90,9 +90,9 @@ public class Database {
     /**
      * Path for website database on Windows
      */
-    public static String PATH_WIN = "D:\\Yersiniomics\\bacnet\\BacnetDatabases.ini";
+    //public static String PATH_WIN = "D:\\Yersiniomics\\bacnet\\BacnetDatabases.ini";
     //public static String PATH_WIN = "C:\\Users\\ipmc\\Documents\\BACNET\\bacnet-private\\BacnetDatabases.ini";
-//    public static String PATH_WIN = "D:\\Programming\\GitRepository\\bacnet\\BacnetDatabases.ini";
+    public static String PATH_WIN = "D:\\BACNET\\bacnet\\BacnetDatabases.ini";
 
     /**
      * Path for website database on Pasteur Virtual Machine
@@ -236,6 +236,11 @@ public class Database {
      * Matrices containing all logFC values in a matrix GenomeElement vs BioCondition
      */
     private HashMap<String, ExpressionMatrix> logFCTable = new HashMap<>();
+    /**
+     * HashMap linking genome name to LofFC proteomic matrices<br>
+     * Matrices containing all logFC values of proteomic in a matrix GenomeElement vs BioCondition
+     */
+    private HashMap<String, ExpressionMatrix> logFCProteomeTable = new HashMap<>();
     /**
      * HashMap linking genome name to Expr proteomes matrices<br>
      * Matrices containing all logFC values in a matrix GenomeElement vs BioCondition
@@ -450,6 +455,11 @@ public class Database {
         }
     }
 
+    /**
+     * Load logFC transcriptome table for a specific genome
+     * @param genomeName
+     * @return
+     */
     public ExpressionMatrix getLogFCTranscriptomesTable(String genomeName) {
         if (logFCTable.containsKey(genomeName)) {
             return logFCTable.get(genomeName);
@@ -466,6 +476,32 @@ public class Database {
                 ExpressionMatrix matrix =
                         ExpressionMatrix.load(getLOGFC_MATRIX_TRANSCRIPTOMES_PATH() + "_" + genomeName);
                 logFCTable.put(genomeName, matrix);
+                return matrix;
+            }
+        }
+    }
+    
+    /**
+     * Load Logfc proteome tables for a specific genome
+     * @param genomeName
+     * @return
+     */
+    public ExpressionMatrix getLogFCProteomesTable(String genomeName) {
+        if (logFCProteomeTable.containsKey(genomeName)) {
+            return logFCProteomeTable.get(genomeName);
+        } else {
+            if (Database.getInstance().getProjectName() == Database.UIBCLISTERIOMICS_PROJECT
+                    && genomeName.equals(Genome.EGDE_NAME)) {
+                System.out.println(getLOGFC_MATRIX_PROTEOMES_PATH() + "_" + genomeName + "_PRIVATE");
+                ExpressionMatrix matrix =
+                        ExpressionMatrix.load(getLOGFC_MATRIX_PROTEOMES_PATH() + "_" + genomeName + "_PRIVATE");
+                logFCProteomeTable.put(genomeName, matrix);
+                return matrix;
+            } else {
+                System.out.println(getLOGFC_MATRIX_PROTEOMES_PATH() + "_" + genomeName);
+                ExpressionMatrix matrix =
+                        ExpressionMatrix.load(getLOGFC_MATRIX_PROTEOMES_PATH() + "_" + genomeName);
+                logFCProteomeTable.put(genomeName, matrix);
                 return matrix;
             }
         }
@@ -670,6 +706,7 @@ public class Database {
         return Database.getTRANSCRIPTOMES_PATH() + "Table_STAT";
     }
 
+    
     /**
      * Path for loading Proteomes matrix data showing absolute expression values
      */
@@ -867,6 +904,14 @@ public class Database {
         this.logFCTable = logFCTable;
     }
 
+    public HashMap<String, ExpressionMatrix> getLogFCProteomeTable() {
+        return logFCProteomeTable;
+    }
+    
+    public void setLogFCProteomeTable(HashMap<String, ExpressionMatrix> logFCProteomeTable) {
+        this.logFCProteomeTable = logFCProteomeTable;
+    }
+    
     public HashMap<String, ExpressionMatrix> getExprProteomesTable() {
         return exprProteomesTable;
     }

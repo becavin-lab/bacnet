@@ -144,7 +144,6 @@ public class HeatMapTranscriptomicsView implements SelectionListener {
         for (String comp : comparisons) {
             cmbDataUsed.add(comp);
         }
-
     }
 
     /**
@@ -280,7 +279,7 @@ public class HeatMapTranscriptomicsView implements SelectionListener {
     }
 
     /**
-     * Run a <code>HeatMapView</code> displaying a specific bioCond
+     * Run a <code>HeatMapTranscriptomicsView</code> displaying a specific comparison of bioCond
      * 
      * @param bioConds
      */

@@ -59,6 +59,7 @@ import bacnet.datamodel.sequence.Sequence;
 import bacnet.datamodel.sequence.Srna;
 import bacnet.datamodel.sequenceNCBI.GenomeNCBI;
 import bacnet.expressionAtlas.HeatMapTranscriptomicsView;
+import bacnet.expressionAtlas.core.GenomeElementAtlas;
 import bacnet.genomeBrowser.GenomeTranscriptomeView;
 import bacnet.genomeBrowser.core.Track;
 import bacnet.genomeBrowser.tracksGUI.TrackCanvasGenome;
@@ -481,9 +482,9 @@ public class GeneView implements SelectionListener, MouseListener {
         lblOperon = new Text(compSuppInfo, SWT.READ_ONLY);
         lblOperon.setText("Operon");
         lblProtID = new Label(compSuppInfo, SWT.READ_ONLY);
-        lblProtID.setText("protid");
         RWTUtils.setMarkup(lblProtID);
-
+        lblProtID.setText("protid");
+        
         lblCog = new Text(compSuppInfo, SWT.READ_ONLY | SWT.WRAP);
         lblCog.setText("COG");
 
@@ -495,11 +496,11 @@ public class GeneView implements SelectionListener, MouseListener {
         composite_localization.setLayout(new GridLayout(1, false));
 
         lblPredictedSubcellularLocalization = new Label(composite_localization, SWT.WRAP);
+        RWTUtils.setMarkup(lblPredictedSubcellularLocalization);
         GridData gd_lblPredictedSubcellularLocalization = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
         gd_lblPredictedSubcellularLocalization.widthHint = 200;
         gd_lblPredictedSubcellularLocalization.heightHint = 55;
         lblPredictedSubcellularLocalization.setLayoutData(gd_lblPredictedSubcellularLocalization);
-        RWTUtils.setMarkup(lblPredictedSubcellularLocalization);
         lblPredictedSubcellularLocalization
                 .setText("Predicted subcellular localization of L. mono. EGD-e proteins (<a href='"
                         + RWTUtils.getPubMedLink("22912771") + "' target='_blank'>Renier et al., Plos One 2012</a>)");
@@ -631,8 +632,8 @@ public class GeneView implements SelectionListener, MouseListener {
 
         tableHomologViewer = new TableViewer(composite_16, SWT.BORDER | SWT.FULL_SELECTION | SWT.MULTI);
         tableHomolog = tableHomologViewer.getTable();
-        tableHomolog.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
         RWTUtils.setMarkup(tableHomolog);
+        tableHomolog.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
         tableHomologViewer.getTable().setHeaderVisible(true);
         tableHomologViewer.getTable().setLinesVisible(true);
         tableHomologViewer.setLabelProvider(new TableLabelProvider());
@@ -703,7 +704,7 @@ public class GeneView implements SelectionListener, MouseListener {
             lbllogfoldchange.setText("|Log(Fold-Change)| >");
 
             txtCutoffLogFC = new Text(composite_2, SWT.BORDER);
-            txtCutoffLogFC.setText("1.5");
+            txtCutoffLogFC.setText(GenomeElementAtlas.DEFAULT_LOGFC_CUTOFF+"");
         }
         {
             composite_pvalue = new Composite(composite_8, SWT.NONE);

@@ -43,6 +43,7 @@ import bacnet.datamodel.expdesign.BioCondition;
 import bacnet.datamodel.sequence.Gene;
 import bacnet.datamodel.sequence.Genome;
 import bacnet.datamodel.sequence.Sequence;
+import bacnet.expressionAtlas.core.OpenExpressionMatrixAndComparisons;
 import bacnet.genomeBrowser.GenomeTranscriptomeView;
 import bacnet.raprcp.NavigationManagement;
 import bacnet.raprcp.SaveFileUtils;
@@ -623,8 +624,7 @@ public class TranscriptomicsView implements SelectionListener {
         } else if (e.getSource() == btnExpressionAtlas) {
             HashMap<String, ArrayList<String>> genomeToComparisons = new HashMap<>();
             try {
-                IRunnableWithProgress thread =
-                        new OpenExpressionMatrixAndComparisons(selectedTranscriptomes, genomeToComparisons);
+                IRunnableWithProgress thread = new OpenExpressionMatrixAndComparisons(selectedTranscriptomes, genomeToComparisons, true);
                 new ProgressMonitorDialog(shell).run(true, false, thread);
                 HeatMapTranscriptomicsView.displayBioConditionsExpressionAtlas(genomeToComparisons, partService);
             } catch (InvocationTargetException ex) {
@@ -677,63 +677,6 @@ public class TranscriptomicsView implements SelectionListener {
     public void widgetDefaultSelected(SelectionEvent e) {
         // TODO Auto-generated method stub
 
-    }
-
-    /**
-     * Run thread for opening BioCondition, Comparisons, detect Genome and open corresponding LogFC
-     * ExpressionMatrix
-     * 
-     * @author christophebecavin
-     *
-     */
-    public static class OpenExpressionMatrixAndComparisons implements IRunnableWithProgress {
-        private ArrayList<String> bioConditions = new ArrayList<>();
-        private HashMap<String, ArrayList<String>> genomeToComparisons;
-
-        /**
-         * Open BioCondition, Comparisons, detect Genome and open corresponding LogFC ExpressionMatrix
-         * 
-         * @param bioConditions
-         * @param genomeToComparisons
-         */
-        public OpenExpressionMatrixAndComparisons(ArrayList<String> bioConditions,
-                HashMap<String, ArrayList<String>> genomeToComparisons) {
-            this.bioConditions = bioConditions;
-            this.genomeToComparisons = genomeToComparisons;
-        }
-
-        @Override
-        public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
-            int sizeProcess = bioConditions.size();
-            // Tell the user what you are doing
-            monitor.beginTask("Displaying HeatMap", sizeProcess);
-            for (String bioCondName : bioConditions) {
-                monitor.subTask("Loading : " + bioCondName);
-                monitor.worked(1);
-                BioCondition bioCondition = BioCondition.getBioCondition(bioCondName);
-                String genome = bioCondition.getGenomeName();
-                for (String compName : bioCondition.getComparisonNames()) {
-                    System.out.println(compName);
-                    if (genomeToComparisons.containsKey(genome)) {
-                        genomeToComparisons.get(genome).add(compName);
-                    } else {
-                        ArrayList<String> compNames = new ArrayList<>();
-                        compNames.add(compName);
-                        genomeToComparisons.put(genome, compNames);
-                    }
-                }
-            }
-            monitor.beginTask("Displaying HeatMap", genomeToComparisons.size());
-            for (String genomeName : genomeToComparisons.keySet()) {
-                monitor.subTask("Loading ExpressionAtlas for : " + genomeName);
-                monitor.worked(1);
-                @SuppressWarnings("unused")
-                ExpressionMatrix logFCMatrix = Database.getInstance().getLogFCTranscriptomesTable(genomeName);
-            }
-
-            // You are done
-            monitor.done();
-        }
     }
 
     public String[][] getBioCondsArray() {

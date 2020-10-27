@@ -1,6 +1,5 @@
 package bacnet.expressionAtlas;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.TreeSet;
@@ -12,8 +11,6 @@ import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.e4.ui.workbench.modeling.EPartService.PartState;
-import org.eclipse.jface.dialogs.ProgressMonitorDialog;
-import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
@@ -41,7 +38,6 @@ import bacnet.datamodel.expdesign.BioCondition;
 import bacnet.datamodel.sequence.Gene;
 import bacnet.datamodel.sequence.Genome;
 import bacnet.datamodel.sequence.Sequence;
-import bacnet.expressionAtlas.core.OpenExpressionMatrixAndComparisons;
 import bacnet.genomeBrowser.GenomeTranscriptomeView;
 import bacnet.raprcp.NavigationManagement;
 import bacnet.raprcp.SaveFileUtils;
@@ -53,7 +49,7 @@ import bacnet.utils.ArrayUtils;
 import bacnet.utils.RWTUtils;
 import bacnet.views.HelpPage;
 
-public class ProteomicsView implements SelectionListener {
+public class ProteomicsExpressionView implements SelectionListener {
 
     /**
      * 
@@ -62,6 +58,7 @@ public class ProteomicsView implements SelectionListener {
 
     public static final String ID = "bacnet.ProteomicsView"; //$NON-NLS-1$
 
+    public static final int DATA_LIMIT = 25;
     private TableViewer tableProteomeViewer;
     private BioConditionComparator comparatorBioCondition;
 
@@ -105,7 +102,7 @@ public class ProteomicsView implements SelectionListener {
     private Shell shell;
 
     @Inject
-    public ProteomicsView() {
+    public ProteomicsExpressionView() {
         imageTSS = ResourceManager.getPluginImage("bacnet", "icons/tss.bmp");
         imageGeneExpr = ResourceManager.getPluginImage("bacnet", "icons/GeneExpr.bmp");
     }
@@ -245,7 +242,6 @@ public class ProteomicsView implements SelectionListener {
                                 tableProteomeViewer.replace(tableProteomeViewer.getTable().getItem(i).getData(), i);
                             }
                         } else {
-                        	System.out.println("add: " + selectedGenome);
                             selectedProteomes.add(selectedGenome);
                             tableProteomeViewer.replace(tableProteomeViewer.getTable().getItem(i).getData(), i);
                         }
@@ -500,7 +496,7 @@ public class ProteomicsView implements SelectionListener {
         partService.showPart(ID, PartState.ACTIVATE);
         // update data
         MPart part = partService.findPart(ID);
-        ProteomicsView view = (ProteomicsView) part.getObject();
+        ProteomicsExpressionView view = (ProteomicsExpressionView) part.getObject();
         ProteomicsDataFilterComposite compositeDataFilter = view.getCompositeDataFilter();
         for (String stateId : parameters.keySet()) {
             String stateValue = parameters.get(stateId);
@@ -539,20 +535,11 @@ public class ProteomicsView implements SelectionListener {
                         genomeToBioConds.get(genomeName), "");
             }
         } else if (e.getSource() == btnHeatmap) {
-            HashMap<String, ArrayList<String>> genomeToComparisons = new HashMap<>();
-            try {
-                IRunnableWithProgress thread = new OpenExpressionMatrixAndComparisons(selectedProteomes, genomeToComparisons, false);
-                new ProgressMonitorDialog(shell).run(true, false, thread);
-                HeatMapProteomicsView.displayBioConditionsExpressionAtlas(genomeToComparisons, partService);
-            } catch (InvocationTargetException ex) {
-                ex.printStackTrace();
-            } catch (InterruptedException ex) {
-                ex.printStackTrace();
+            HashMap<String, ArrayList<String>> genomeToBioConds = getSelectedBioConditions();
+            for (String genomeName : genomeToBioConds.keySet()) {
+                //HeatMapProteomicsView.displayBioConditions(genomeName, genomeToBioConds.get(genomeName), partService);
             }
-        } 
-        
-        
-        else if (e.getSource() == tableProteomeViewer.getTable()) {
+        } else if (e.getSource() == tableProteomeViewer.getTable()) {
         } else if (e.getSource() == btnHelp) {
             HelpPage.helpProteomicView(partService);
         } else if (e.getSource() == btnSelectall) {

@@ -39,6 +39,7 @@ import bacnet.sequenceTools.GenomicsView;
 import bacnet.swt.ResourceManager;
 import bacnet.swt.SWTResourceManager;
 import bacnet.utils.FileUtils;
+import bacnet.utils.RWTUtils;
 import bacnet.views.CoExprNetworkView;
 
 public class InitViewYersinia implements SelectionListener {
@@ -113,6 +114,7 @@ public class InitViewYersinia implements SelectionListener {
         lblListeriomicsIsSo.setImage(ResourceManager.getPluginImage("bacnet", "icons/ToolBar/logoYersiniomics.png"));
         new Label(composite_Intro, SWT.NONE);
         Label lblNewLabel_1 = new Label(composite_Intro, SWT.WRAP);
+        RWTUtils.setMarkup(lblNewLabel_1);
         lblNewLabel_1.setAlignment(SWT.CENTER);
         GridData gd_lblNewLabel_1 = new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1);
         gd_lblNewLabel_1.widthHint = 700;
@@ -123,8 +125,7 @@ public class InitViewYersinia implements SelectionListener {
                         + "Use Yersiniomics for deciphering regulatory mechanisms of your genome element of interest.\r");
         // lblNewLabel_1.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
         lblNewLabel_1.setFont(SWTResourceManager.getBodyFont(SWT.NORMAL));
-        lblNewLabel_1.setData(RWT.MARKUP_ENABLED, Boolean.TRUE);
-
+        
         Composite composite_11 = new Composite(composite, SWT.BORDER);
         GridData gd_composite_11 = new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1);
         gd_composite_11.widthHint = 1500;
@@ -161,13 +162,13 @@ public class InitViewYersinia implements SelectionListener {
         btnBHI37.addSelectionListener(this);
 
         Label lblExpressionAtlas = new Label(composite_1, SWT.WRAP);
+        RWTUtils.setMarkup(lblExpressionAtlas);
         lblExpressionAtlas.setAlignment(SWT.CENTER);
         GridData gd_lblExpressionAtlas = new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1);
         gd_lblExpressionAtlas.widthHint = 200;
         lblExpressionAtlas.setLayoutData(gd_lblExpressionAtlas);
         lblExpressionAtlas.setFont(SWTResourceManager.getBodyFont(SWT.NORMAL));
         lblExpressionAtlas.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
-        lblExpressionAtlas.setData(RWT.MARKUP_ENABLED, Boolean.TRUE);
         lblExpressionAtlas.setText("Browse RNA-seq of <i>Yersinia enterocolitica Y11</i>");
 
         Composite composite_9 = new Composite(composite_11, SWT.NONE);
@@ -184,13 +185,13 @@ public class InitViewYersinia implements SelectionListener {
         btnIntracellular.setFont(SWTResourceManager.getTitleFont(SWT.NORMAL));
 
         Label lblIntracellularMouse = new Label(composite_9, SWT.WRAP);
+        RWTUtils.setMarkup(lblIntracellularMouse);
         lblIntracellularMouse.setAlignment(SWT.CENTER);
         GridData gd_lblIntracellularMouse = new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1);
         gd_lblIntracellularMouse.widthHint = 200;
         lblIntracellularMouse.setLayoutData(gd_lblIntracellularMouse);
         lblIntracellularMouse.setFont(SWTResourceManager.getBodyFont(SWT.NORMAL));
         lblIntracellularMouse.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
-        lblIntracellularMouse.setData(RWT.MARKUP_ENABLED, Boolean.TRUE);
         lblIntracellularMouse.setText("Browse gene expression array of <i>Yersinia pseudotuberculosis YPIII</i>");
         gd_composite_11.widthHint = 1500;
         gd_lblExpressionAtlas.widthHint = 200;
@@ -209,12 +210,12 @@ public class InitViewYersinia implements SelectionListener {
         btnGeneView.setFont(SWTResourceManager.getTitleFont(SWT.NORMAL));
 
         Label lblinfo = new Label(composite_15, SWT.WRAP);
+        RWTUtils.setMarkup(lblinfo);
         lblinfo.setAlignment(SWT.CENTER);
         lblinfo.setFont(SWTResourceManager.getBodyFont(SWT.NORMAL));
         lblinfo.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
         GridData gd_lblinfo = new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1);
         gd_lblinfo.widthHint = 200;
-        lblinfo.setData(RWT.MARKUP_ENABLED, Boolean.TRUE);
         lblinfo.setLayoutData(gd_lblinfo);
         lblinfo.setText("Access to all information about <i>Yersinia</i> species genes: "
                 + "functional annotation, gene conservation, synteny, expression atlas and protein atlas. "
@@ -254,11 +255,11 @@ public class InitViewYersinia implements SelectionListener {
         btnGenomics.setFont(SWTResourceManager.getTitleFont(SWT.NORMAL));
         btnGenomics.addSelectionListener(this);
         Label lblGoThroughAll = new Label(composite_10, SWT.WRAP);
+        RWTUtils.setMarkup(lblGoThroughAll);
         lblGoThroughAll.setAlignment(SWT.CENTER);
         GridData gd_lblGoThroughAll = new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1);
         gd_lblGoThroughAll.widthHint = 400;
         lblGoThroughAll.setLayoutData(gd_lblGoThroughAll);
-        lblGoThroughAll.setData(RWT.MARKUP_ENABLED, Boolean.TRUE);
         lblGoThroughAll.setText("Browse all 121 <i>Yersinia</i> complete genomes available on Yersiniomics."
                 + " Visualize strain relationship in a phylogenomic tree. Access to all their annotated genome elements.");
         lblGoThroughAll.setFont(SWTResourceManager.getBodyFont(SWT.NORMAL));
@@ -276,11 +277,11 @@ public class InitViewYersinia implements SelectionListener {
         btnTranscriptomics.setFont(SWTResourceManager.getTitleFont(SWT.NORMAL));
         btnTranscriptomics.addSelectionListener(this);
         Label lblGoThroughAll_1 = new Label(composite_21, SWT.WRAP);
+        RWTUtils.setMarkup(lblGoThroughAll_1);
         lblGoThroughAll_1.setAlignment(SWT.CENTER);
         GridData gd_lblGoThroughAll_1 = new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1);
         gd_lblGoThroughAll_1.widthHint = 400;
         lblGoThroughAll_1.setLayoutData(gd_lblGoThroughAll_1);
-        lblGoThroughAll_1.setData(RWT.MARKUP_ENABLED, Boolean.TRUE);
         lblGoThroughAll_1
                 .setText("Browse all 104 <i>Yersinia</i> species transcriptomics datasets available on Yersiniomics. "
                         + "Visualize them on the genome browser. Extract differently expressed genome elements and display their fold changes in a heatmap viewer.");
@@ -299,11 +300,11 @@ public class InitViewYersinia implements SelectionListener {
         btnProteomics.setFont(SWTResourceManager.getTitleFont(SWT.NORMAL));
         btnProteomics.addSelectionListener(this);
         Label lblGoThroughAll_2 = new Label(composite_22, SWT.WRAP);
+        RWTUtils.setMarkup(lblGoThroughAll_2);
         lblGoThroughAll_2.setAlignment(SWT.CENTER);
         GridData gd_lblGoThroughAll_2 = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
         gd_lblGoThroughAll_2.widthHint = 400;
         lblGoThroughAll_2.setLayoutData(gd_lblGoThroughAll_2);
-        lblGoThroughAll_2.setData(RWT.MARKUP_ENABLED, Boolean.TRUE);
         lblGoThroughAll_2
                 .setText("Browse all 8 <i>Yersinia</i> species proteomics datasets available on Yersiniomics. "
                         + "Visualize them on the genome browser. Display protein detection patterns for each datasets in a heatmap viewer.");
