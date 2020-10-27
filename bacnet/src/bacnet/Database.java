@@ -167,6 +167,10 @@ public class Database {
      */
     private String proteomesArrayPath = "";
     /**
+     * Path for the transcriptome comparisons table
+     */
+    private String proteomesComparisonsArrayPath = "";
+    /**
      * Path for coexpression table
      */
     private String coExprNetworkArrayPath = "";
@@ -816,7 +820,15 @@ public class Database {
         this.proteomesArrayPath = proteomesArrayPath;
     }
 
-    public String getCoExprNetworkArrayPath() {
+    public String getProteomesComparisonsArrayPath() {
+		return proteomesComparisonsArrayPath;
+	}
+
+	public void setProteomesComparisonsArrayPath(String proteomesComparisonsArrayPath) {
+		this.proteomesComparisonsArrayPath = proteomesComparisonsArrayPath;
+	}
+
+	public String getCoExprNetworkArrayPath() {
         return coExprNetworkArrayPath;
     }
 

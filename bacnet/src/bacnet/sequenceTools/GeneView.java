@@ -117,20 +117,25 @@ public class GeneView implements SelectionListener, MouseListener {
     private Label lblProtID;
     private Combo comboGenome;
     private Text textFeature;
-    private Composite composite_pvalue;
     private Text lblOperon;
-    private Composite composite_7;
     private Table tableGenes;
-    private ScrolledComposite scrolledComposite;
     private Label lblGene;
     private TrackCanvasGenome canvasGenome;
     private Text txtSearch;
     @SuppressWarnings("unused")
     private boolean browserIsFocus = false;
 
-    private String[][] arrayDataList = new String[0][0];
+    /*
+     * General buttons
+     */
+    private TabFolder tabFolder;
+    private TabItem tbtmGeneralInformation;
+    private Label lblTranscriptomesData;
+    
+    
+    
     private TabItem tbtmSynteny;
-    private Composite composite_12;
+    private Composite compositeSynteny;
     private Browser browserSynteny;
     private Composite composite_15;
     private Button btnNucleotideSequence;
@@ -138,33 +143,59 @@ public class GeneView implements SelectionListener, MouseListener {
     private Button btnLocalization;
 
     /*
+     * GenomeViewer
+     */
+    private Button btnZoomplus;
+    private Button btnZoomminus;
+    private Combo comboChromosome;
+    
+    /*
      * Expression atlas variables
      */
-    private String[][] arrayProteomeList = new String[0][0];
-    private Composite composite;
+    private Composite compositeTranscriptome;
+    private String[][] arrayDataList = new String[0][0];
     private Table tableOver;
     private Table tableUnder;
     private Table tableNodiff;
     private Label lblOver;
     private Label lblUnder;
     private Label lblNodiff;
-
-    private Button btnGenomeViewer;
-    private TabFolder tabFolder;
-    private TabItem tbtmGeneralInformation;
+    
     private TabItem tbtmExpressionData;
     private Button btnUpdateCutoff;
     private Text txtCutoffLogFC;
     private Text txtCutoffPvalue;
     private Button btnHeatmapview;
-    private Button btnZoomplus;
-    private Button btnZoomminus;
-    private Combo comboChromosome;
-    private Label lblTranscriptomesData;
+    private Button btnGenomeViewer;
+    
+    /*
+     * Protein atlas variables
+     */
+    private String[][] arrayProteinAtlasList = new String[0][0];
+    private Composite compositeProteome;
+    private Table tableOverProteome;
+    private Table tableUnderProteome;
+    private Table tableNodiffProteome;
+    private Label lblOverProteome;
+    private Label lblUnderProteome;
+    private Label lblNodiffProteome;
+    
+    private TabItem tbtmProteomeData;
+    private Button btnUpdateCutoffProteome;
+    private Text txtCutoffLogFCProteome;
+    private Text txtCutoffPvalueProteome;
+    private Button btnHeatmapviewProteome;
+    private Button btnGenomeViewerProteome;
+    
+
+    /*
+     * Other tabs
+     */
     private TabItem tbtmProteomes;
+    private String[][] arrayProteomeList = new String[0][0];
     private Composite composite_9;
     private Table tableProteomes;
-    private Label lblOverProteomes;
+    private Label lblExprProteomes;
     private Text lblConservation;
     private TabItem tbtmHomologs;
     private Composite composite_13;
@@ -207,16 +238,12 @@ public class GeneView implements SelectionListener, MouseListener {
     private Shell shell;
     private Button btnGetAnnotationInformation;
     private Button btnNcbiChromosome;
-    private Composite composite_6;
     private Button btnSaveAsPng;
     private Button btnSaveAsSvg;
-    private Composite composite_16;
-    private Composite composite_17;
     private Text txtSearchGenome;
     private Button btnSelectall;
     private Button btnUnselectall;
     private Button btnDonwloadtxt;
-    private Composite composite_18;
     private Composite compSuppInfo;
 
     @Inject
@@ -287,7 +314,7 @@ public class GeneView implements SelectionListener, MouseListener {
         btnHelp.setImage(ResourceManager.getPluginImage("bacnet", "icons/help.png"));
         btnHelp.addSelectionListener(this);
 
-        composite_7 = new Composite(container, SWT.BORDER);
+        Composite composite_7 = new Composite(container, SWT.BORDER);
         composite_7.setLayout(new GridLayout(1, false));
         composite_7.setLayoutData(new GridData(SWT.LEFT, SWT.FILL, false, true, 1, 1));
 
@@ -364,7 +391,7 @@ public class GeneView implements SelectionListener, MouseListener {
         });
         tableGenes.addSelectionListener(this);
 
-        scrolledComposite = new ScrolledComposite(container, SWT.H_SCROLL | SWT.V_SCROLL);
+        ScrolledComposite scrolledComposite = new ScrolledComposite(container, SWT.H_SCROLL | SWT.V_SCROLL);
         scrolledComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 3, 1));
         scrolledComposite.setExpandHorizontal(true);
         scrolledComposite.setExpandVertical(true);
@@ -541,11 +568,11 @@ public class GeneView implements SelectionListener, MouseListener {
         lblConservation2.setText("Homologs in 00/50 Listeria genomes");
         new Label(composite_14, SWT.NONE);
 
-        composite_18 = new Composite(composite_13, SWT.NONE);
+        Composite composite_18 = new Composite(composite_13, SWT.NONE);
         composite_18.setLayoutData(new GridData(SWT.LEFT, SWT.FILL, false, false, 1, 1));
         composite_18.setLayout(new GridLayout(1, false));
 
-        composite_6 = new Composite(composite_18, SWT.NONE);
+        Composite composite_6 = new Composite(composite_18, SWT.NONE);
         composite_6.setLayout(new GridLayout(3, false));
 
         Label lblDownloadPhylogenomicConservation = new Label(composite_6, SWT.NONE);
@@ -567,11 +594,11 @@ public class GeneView implements SelectionListener, MouseListener {
         gd_browserHomolog.widthHint = 400;
         browserHomolog.setLayoutData(gd_browserHomolog);
 
-        composite_16 = new Composite(composite_13, SWT.BORDER);
+        Composite composite_16 = new Composite(composite_13, SWT.BORDER);
         composite_16.setLayoutData(new GridData(SWT.LEFT, SWT.FILL, true, true, 1, 1));
         composite_16.setLayout(new GridLayout(1, false));
 
-        composite_17 = new Composite(composite_16, SWT.NONE);
+        Composite composite_17 = new Composite(composite_16, SWT.NONE);
         composite_17.setLayout(new GridLayout(8, false));
 
         txtSearchGenome = new Text(composite_17, SWT.BORDER);
@@ -678,127 +705,277 @@ public class GeneView implements SelectionListener, MouseListener {
         tbtmSynteny = new TabItem(tabFolder, SWT.NONE);
         tbtmSynteny.setText("Synteny");
 
-        composite_12 = new Composite(tabFolder, SWT.NONE);
-        tbtmSynteny.setControl(composite_12);
-        composite_12.setLayout(new GridLayout(1, false));
-        browserSynteny = new Browser(composite_12, SWT.NONE);
+        compositeSynteny = new Composite(tabFolder, SWT.NONE);
+        tbtmSynteny.setControl(compositeSynteny);
+        compositeSynteny.setLayout(new GridLayout(1, false));
+        browserSynteny = new Browser(compositeSynteny, SWT.NONE);
         browserSynteny.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
-
-        tbtmExpressionData = new TabItem(tabFolder, SWT.NONE);
-        tbtmExpressionData.setText("Expression Atlas");
-
-        composite = new Composite(tabFolder, SWT.BORDER);
-        tbtmExpressionData.setControl(composite);
-        composite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
-        composite.setLayout(new GridLayout(2, false));
-
-        Composite composite_8 = new Composite(composite, SWT.BORDER);
-        composite_8.setLayout(new GridLayout(1, false));
-
+        
+        
+        /*
+         * Expression atlas section
+         */
         {
-            Composite composite_2 = new Composite(composite_8, SWT.NONE);
-            composite_2.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
-            composite_2.setLayout(new GridLayout(2, false));
-
-            Label lbllogfoldchange = new Label(composite_2, SWT.NONE);
-            lbllogfoldchange.setText("|Log(Fold-Change)| >");
-
-            txtCutoffLogFC = new Text(composite_2, SWT.BORDER);
-            txtCutoffLogFC.setText(GenomeElementAtlas.DEFAULT_LOGFC_CUTOFF+"");
-        }
+	        tbtmExpressionData = new TabItem(tabFolder, SWT.NONE);
+	        tbtmExpressionData.setText("Expression Atlas");
+	
+	        compositeTranscriptome = new Composite(tabFolder, SWT.BORDER);
+	        tbtmExpressionData.setControl(compositeTranscriptome);
+	        compositeTranscriptome.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+	        compositeTranscriptome.setLayout(new GridLayout(2, false));
+	
+	        Composite composite_8 = new Composite(compositeTranscriptome, SWT.BORDER);
+	        composite_8.setLayout(new GridLayout(1, false));
+	
+	        {
+	            Composite composite_logfc = new Composite(composite_8, SWT.NONE);
+	            composite_logfc.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
+	            composite_logfc.setLayout(new GridLayout(2, false));
+	
+	            Label lbllogfoldchange = new Label(composite_logfc, SWT.NONE);
+	            lbllogfoldchange.setText("|Log(Fold-Change)| >");
+	
+	            txtCutoffLogFC = new Text(composite_logfc, SWT.BORDER);
+	            txtCutoffLogFC.setText(GenomeElementAtlas.DEFAULT_LOGFC_CUTOFF+"");
+	        }
+	        {
+	        	Composite  composite_pvalue = new Composite(composite_8, SWT.NONE);
+	            composite_pvalue.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
+	            composite_pvalue.setLayout(new GridLayout(3, false));
+	
+	            Label lblAnd = new Label(composite_pvalue, SWT.NONE);
+	            lblAnd.setText("and");
+	
+	            Label lblPvalueFdrby = new Label(composite_pvalue, SWT.NONE);
+	            lblPvalueFdrby.setText("p-value FDRBY <");
+	
+	            txtCutoffPvalue = new Text(composite_pvalue, SWT.BORDER);
+	            txtCutoffPvalue.setText(GenomeElementAtlas.DEFAULT_LOGFC_CUTOFF+"");
+	            if (Database.getInstance().getProjectName() != Database.UIBCLISTERIOMICS_PROJECT) {
+	                composite_pvalue.dispose();
+	            }
+	        }
+	        btnUpdateCutoff = new Button(composite_8, SWT.NONE);
+	        btnUpdateCutoff.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 5, 1));
+	        btnUpdateCutoff.setText("Choose cut-off and update Expression Atlas");
+	        btnUpdateCutoff.addSelectionListener(this);
+	
+	        Composite composite_3 = new Composite(compositeTranscriptome, SWT.NONE);
+	        composite_3.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
+	        composite_3.setLayout(new GridLayout(4, false));
+	
+	        Label lblClickOnOne = new Label(composite_3, SWT.WRAP);
+	        lblClickOnOne.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 2));
+	        lblClickOnOne.setText("Select data and click here to display on:");
+	        lblClickOnOne.setForeground(BasicColor.GREY);
+	
+	        Label lblGenomeViewer = new Label(composite_3, SWT.NONE);
+	        lblGenomeViewer.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
+	        lblGenomeViewer.setText("Genome Viewer");
+	
+	        Label lblOr = new Label(composite_3, SWT.NONE);
+	        lblOr.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 2));
+	        lblOr.setText("   or   ");
+	        lblOr.setForeground(BasicColor.GREY);
+	
+	        Label lblHeatmapViewer = new Label(composite_3, SWT.NONE);
+	        lblHeatmapViewer.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
+	        lblHeatmapViewer.setText("HeatMap Viewer");
+	
+	        btnGenomeViewer = new Button(composite_3, SWT.NONE);
+	        btnGenomeViewer.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
+	        btnGenomeViewer.setImage(ResourceManager.getPluginImage("bacnet", "icons/genomeViewer.bmp"));
+	        btnGenomeViewer.addSelectionListener(this);
+	
+	        btnHeatmapview = new Button(composite_3, SWT.NONE);
+	        btnHeatmapview.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
+	        btnHeatmapview.setImage(ResourceManager.getPluginImage("bacnet", "icons/compareexpression.bmp"));
+	        btnHeatmapview.addSelectionListener(this);
+	
+	        Label lblOverExpressedIn = new Label(compositeTranscriptome, SWT.NONE);
+	        lblOverExpressedIn.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+	        lblOverExpressedIn.setText("Over expressed in");
+	
+	        lblOver = new Label(compositeTranscriptome, SWT.NONE);
+	        lblOver.setText("over");
+	
+	        tableOver = new Table(compositeTranscriptome, SWT.BORDER | SWT.FULL_SELECTION | SWT.MULTI);
+	        GridData gd_listOver = new GridData(SWT.FILL, SWT.TOP, true, false, 2, 1);
+	        gd_listOver.heightHint = 150;
+	        tableOver.setLayoutData(gd_listOver);
+	        tableOver.addSelectionListener(this);
+	
+	        Label lblUnderExpressedIn = new Label(compositeTranscriptome, SWT.NONE);
+	        lblUnderExpressedIn.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+	        lblUnderExpressedIn.setText("Under expressed in");
+	
+	        lblUnder = new Label(compositeTranscriptome, SWT.NONE);
+	        lblUnder.setText("under");
+	
+	        tableUnder = new Table(compositeTranscriptome, SWT.BORDER | SWT.FULL_SELECTION | SWT.MULTI);
+	        GridData gd_listUnder = new GridData(SWT.FILL, SWT.TOP, true, false, 2, 1);
+	        gd_listUnder.heightHint = 150;
+	        tableUnder.setLayoutData(gd_listUnder);
+	        tableUnder.addSelectionListener(this);
+	
+	        Label lblNoDiffExpression = new Label(compositeTranscriptome, SWT.NONE);
+	        lblNoDiffExpression.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+	        lblNoDiffExpression.setText("No diff. expression in");
+	
+	        lblNodiff = new Label(compositeTranscriptome, SWT.NONE);
+	        lblNodiff.setText("nodiff");
+	
+	        tableNodiff = new Table(compositeTranscriptome, SWT.BORDER | SWT.FULL_SELECTION | SWT.MULTI);
+	        GridData gd_listNodiff = new GridData(SWT.FILL, SWT.TOP, true, false, 2, 1);
+	        gd_listNodiff.heightHint = 150;
+	        tableNodiff.setLayoutData(gd_listNodiff);
+	        tableNodiff.addSelectionListener(this);
+    	}
+        
+        
+        /*
+         * Protein atlas section
+         */
+        /*
+         * Protein atlas variables
+         */
+//        private String[][] arrayProteinAtlasList = new String[0][0];
+//        private Composite compositeProteome;
+//        private Table tableOverProteome;
+//        private Table tableUnderProteome;
+//        private Table tableNodiffProteome;
+//        private Label lblOverProteome;
+//        private Label lblUnderProteome;
+//        private Label lblNodiffProteome;
+//        
+//        private TabItem tbtmProteomeData;
+//        private Button btnUpdateCutoffProteome;
+//        private Text txtCutoffLogFCProteome;
+//        private Text txtCutoffPvalueProteome;
+//        private Button btnHeatmapviewProteome;
+//        private Button btnGenomeViewerProteome;
+//        
         {
-            composite_pvalue = new Composite(composite_8, SWT.NONE);
-            composite_pvalue.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
-            composite_pvalue.setLayout(new GridLayout(3, false));
-
-            Label lblAnd = new Label(composite_pvalue, SWT.NONE);
-            lblAnd.setText("and");
-
-            Label lblPvalueFdrby = new Label(composite_pvalue, SWT.NONE);
-            lblPvalueFdrby.setText("p-value FDRBY <");
-
-            txtCutoffPvalue = new Text(composite_pvalue, SWT.BORDER);
-            txtCutoffPvalue.setText("0.05");
-            if (Database.getInstance().getProjectName() != Database.UIBCLISTERIOMICS_PROJECT) {
-                composite_pvalue.dispose();
-            }
-        }
-        btnUpdateCutoff = new Button(composite_8, SWT.NONE);
-        btnUpdateCutoff.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 5, 1));
-        btnUpdateCutoff.setText("Choose cut-off and update Expression Atlas");
-        btnUpdateCutoff.addSelectionListener(this);
-
-        Composite composite_3 = new Composite(composite, SWT.NONE);
-        composite_3.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
-        composite_3.setLayout(new GridLayout(4, false));
-
-        Label lblClickOnOne = new Label(composite_3, SWT.WRAP);
-        lblClickOnOne.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 2));
-        lblClickOnOne.setText("Select data and click here to display on:");
-        lblClickOnOne.setForeground(BasicColor.GREY);
-
-        Label lblGenomeViewer = new Label(composite_3, SWT.NONE);
-        lblGenomeViewer.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
-        lblGenomeViewer.setText("Genome Viewer");
-
-        Label lblOr = new Label(composite_3, SWT.NONE);
-        lblOr.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 2));
-        lblOr.setText("   or   ");
-        lblOr.setForeground(BasicColor.GREY);
-
-        Label lblHeatmapViewer = new Label(composite_3, SWT.NONE);
-        lblHeatmapViewer.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
-        lblHeatmapViewer.setText("HeatMap Viewer");
-
-        btnGenomeViewer = new Button(composite_3, SWT.NONE);
-        btnGenomeViewer.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
-        btnGenomeViewer.setImage(ResourceManager.getPluginImage("bacnet", "icons/genomeViewer.bmp"));
-        btnGenomeViewer.addSelectionListener(this);
-
-        btnHeatmapview = new Button(composite_3, SWT.NONE);
-        btnHeatmapview.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
-        btnHeatmapview.setImage(ResourceManager.getPluginImage("bacnet", "icons/compareexpression.bmp"));
-        btnHeatmapview.addSelectionListener(this);
-
-        Label lblOverExpressedIn = new Label(composite, SWT.NONE);
-        lblOverExpressedIn.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-        lblOverExpressedIn.setText("Over expressed in");
-
-        lblOver = new Label(composite, SWT.NONE);
-        lblOver.setText("over");
-
-        tableOver = new Table(composite, SWT.BORDER | SWT.FULL_SELECTION | SWT.MULTI);
-        GridData gd_listOver = new GridData(SWT.FILL, SWT.TOP, true, false, 2, 1);
-        gd_listOver.heightHint = 150;
-        tableOver.setLayoutData(gd_listOver);
-        tableOver.addSelectionListener(this);
-
-        Label lblUnderExpressedIn = new Label(composite, SWT.NONE);
-        lblUnderExpressedIn.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-        lblUnderExpressedIn.setText("Under expressed in");
-
-        lblUnder = new Label(composite, SWT.NONE);
-        lblUnder.setText("under");
-
-        tableUnder = new Table(composite, SWT.BORDER | SWT.FULL_SELECTION | SWT.MULTI);
-        GridData gd_listUnder = new GridData(SWT.FILL, SWT.TOP, true, false, 2, 1);
-        gd_listUnder.heightHint = 150;
-        tableUnder.setLayoutData(gd_listUnder);
-        tableUnder.addSelectionListener(this);
-
-        Label lblNoDiffExpression = new Label(composite, SWT.NONE);
-        lblNoDiffExpression.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-        lblNoDiffExpression.setText("No diff. expression in");
-
-        lblNodiff = new Label(composite, SWT.NONE);
-        lblNodiff.setText("nodiff");
-
-        tableNodiff = new Table(composite, SWT.BORDER | SWT.FULL_SELECTION | SWT.MULTI);
-        GridData gd_listNodiff = new GridData(SWT.FILL, SWT.TOP, true, false, 2, 1);
-        gd_listNodiff.heightHint = 150;
-        tableNodiff.setLayoutData(gd_listNodiff);
-        tableNodiff.addSelectionListener(this);
-
+	        tbtmProteomeData = new TabItem(tabFolder, SWT.NONE);
+	        tbtmProteomeData.setText("Protein Atlas");
+	
+	        compositeProteome = new Composite(tabFolder, SWT.BORDER);
+	        tbtmProteomeData.setControl(compositeProteome);
+	        compositeProteome.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+	        compositeProteome.setLayout(new GridLayout(2, false));
+	
+	        Composite composite_8 = new Composite(compositeProteome, SWT.BORDER);
+	        composite_8.setLayout(new GridLayout(1, false));
+	
+	        {
+	            Composite composite_logfc = new Composite(composite_8, SWT.NONE);
+	            composite_logfc.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
+	            composite_logfc.setLayout(new GridLayout(2, false));
+	
+	            Label lbllogfoldchange = new Label(composite_logfc, SWT.NONE);
+	            lbllogfoldchange.setText("|Log(Fold-Change)| >");
+	
+	            txtCutoffLogFCProteome = new Text(composite_logfc, SWT.BORDER);
+	            txtCutoffLogFCProteome.setText(GenomeElementAtlas.DEFAULT_LOGFC_PROTEOMIC_CUTOFF+"");
+	        }
+	        {
+	        	Composite  composite_pvalue = new Composite(composite_8, SWT.NONE);
+	            composite_pvalue.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
+	            composite_pvalue.setLayout(new GridLayout(3, false));
+	
+	            Label lblAnd = new Label(composite_pvalue, SWT.NONE);
+	            lblAnd.setText("and");
+	
+	            Label lblPvalueFdrby = new Label(composite_pvalue, SWT.NONE);
+	            lblPvalueFdrby.setText("p-value FDRBY <");
+	
+	            txtCutoffPvalue = new Text(composite_pvalue, SWT.BORDER);
+	            txtCutoffPvalue.setText(GenomeElementAtlas.DEFAULT_LOGFC_PROTEOMIC_CUTOFF+"");
+	            if (Database.getInstance().getProjectName() != Database.UIBCLISTERIOMICS_PROJECT) {
+	                composite_pvalue.dispose();
+	            }
+	        }
+	        btnUpdateCutoffProteome = new Button(composite_8, SWT.NONE);
+	        btnUpdateCutoffProteome.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 5, 1));
+	        btnUpdateCutoffProteome.setText("Choose cut-off and update Protein Atlas");
+	        btnUpdateCutoffProteome.addSelectionListener(this);
+	
+	        Composite composite_3 = new Composite(compositeProteome, SWT.NONE);
+	        composite_3.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
+	        composite_3.setLayout(new GridLayout(4, false));
+	
+	        Label lblClickOnOne = new Label(composite_3, SWT.WRAP);
+	        lblClickOnOne.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 2));
+	        lblClickOnOne.setText("Select data and click here to display on:");
+	        lblClickOnOne.setForeground(BasicColor.GREY);
+	
+	        Label lblGenomeViewer = new Label(composite_3, SWT.NONE);
+	        lblGenomeViewer.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
+	        lblGenomeViewer.setText("Genome Viewer");
+	
+	        Label lblOr = new Label(composite_3, SWT.NONE);
+	        lblOr.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 2));
+	        lblOr.setText("   or   ");
+	        lblOr.setForeground(BasicColor.GREY);
+	
+	        Label lblHeatmapViewer = new Label(composite_3, SWT.NONE);
+	        lblHeatmapViewer.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
+	        lblHeatmapViewer.setText("HeatMap Viewer");
+	
+	        btnGenomeViewerProteome = new Button(composite_3, SWT.NONE);
+	        btnGenomeViewerProteome.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
+	        btnGenomeViewerProteome.setImage(ResourceManager.getPluginImage("bacnet", "icons/genomeViewer.bmp"));
+	        btnGenomeViewerProteome.addSelectionListener(this);
+	
+	        btnHeatmapviewProteome = new Button(composite_3, SWT.NONE);
+	        btnHeatmapviewProteome.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
+	        btnHeatmapviewProteome.setImage(ResourceManager.getPluginImage("bacnet", "icons/compareexpression.bmp"));
+	        btnHeatmapviewProteome.addSelectionListener(this);
+	
+	        Label lblOverExpressedIn = new Label(compositeProteome, SWT.NONE);
+	        lblOverExpressedIn.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+	        lblOverExpressedIn.setText("Over expressed in");
+	
+	        lblOverProteome = new Label(compositeProteome, SWT.NONE);
+	        lblOverProteome.setText("over");
+	
+	        tableOverProteome = new Table(compositeProteome, SWT.BORDER | SWT.FULL_SELECTION | SWT.MULTI);
+	        GridData gd_listOver = new GridData(SWT.FILL, SWT.TOP, true, false, 2, 1);
+	        gd_listOver.heightHint = 150;
+	        tableOverProteome.setLayoutData(gd_listOver);
+	        tableOverProteome.addSelectionListener(this);
+	
+	        Label lblUnderExpressedIn = new Label(compositeProteome, SWT.NONE);
+	        lblUnderExpressedIn.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+	        lblUnderExpressedIn.setText("Under expressed in");
+	
+	        lblUnderProteome = new Label(compositeProteome, SWT.NONE);
+	        lblUnderProteome.setText("under");
+	
+	        tableUnderProteome = new Table(compositeProteome, SWT.BORDER | SWT.FULL_SELECTION | SWT.MULTI);
+	        GridData gd_listUnder = new GridData(SWT.FILL, SWT.TOP, true, false, 2, 1);
+	        gd_listUnder.heightHint = 150;
+	        tableUnderProteome.setLayoutData(gd_listUnder);
+	        tableUnderProteome.addSelectionListener(this);
+	
+	        Label lblNoDiffExpression = new Label(compositeProteome, SWT.NONE);
+	        lblNoDiffExpression.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+	        lblNoDiffExpression.setText("No diff. expression in");
+	
+	        lblNodiffProteome = new Label(compositeProteome, SWT.NONE);
+	        lblNodiffProteome.setText("nodiff");
+	
+	        tableNodiffProteome = new Table(compositeProteome, SWT.BORDER | SWT.FULL_SELECTION | SWT.MULTI);
+	        GridData gd_listNodiff = new GridData(SWT.FILL, SWT.TOP, true, false, 2, 1);
+	        gd_listNodiff.heightHint = 150;
+	        tableNodiffProteome.setLayoutData(gd_listNodiff);
+	        tableNodiffProteome.addSelectionListener(this);
+    	}
+        
+        
+        
+        
+        
         tbtmProteomes = new TabItem(tabFolder, SWT.NONE);
         tbtmProteomes.setText("Proteomes");
 
@@ -810,8 +987,8 @@ public class GeneView implements SelectionListener, MouseListener {
         lblOverExpressedInProteomes.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
         lblOverExpressedInProteomes.setText("Found in ");
 
-        lblOverProteomes = new Label(composite_9, SWT.NONE);
-        lblOverProteomes.setText("over");
+        lblExprProteomes = new Label(composite_9, SWT.NONE);
+        lblExprProteomes.setText("over");
 
         tableProteomes = new Table(composite_9, SWT.BORDER | SWT.FULL_SELECTION | SWT.MULTI);
         tableProteomes.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1));
@@ -854,10 +1031,10 @@ public class GeneView implements SelectionListener, MouseListener {
     	tbtmSynteny = new TabItem(tabFolder, SWT.NONE);
         tbtmSynteny.setText("Synteny");
 
-        composite_12 = new Composite(tabFolder, SWT.NONE);
-        tbtmSynteny.setControl(composite_12);
-        composite_12.setLayout(new GridLayout(1, false));
-        browserSynteny = new Browser(composite_12, SWT.NONE);
+        compositeSynteny = new Composite(tabFolder, SWT.NONE);
+        tbtmSynteny.setControl(compositeSynteny);
+        compositeSynteny.setLayout(new GridLayout(1, false));
+        browserSynteny = new Browser(compositeSynteny, SWT.NONE);
         browserSynteny.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
         
         try {
@@ -1323,7 +1500,7 @@ public class GeneView implements SelectionListener, MouseListener {
         ArrayList<String> genomeTranscriptomes = BioCondition.getTranscriptomesGenomes();
         ArrayList<String> genomeProteomes = BioCondition.getProteomeGenomes();
         /*
-         * Transcriptome update
+         * Expression atlas update
          */
         if (genomeTranscriptomes.contains(genome.getSpecies())) {
             GeneViewTranscriptomeTools.updateExpressionAtlas(sequence, txtCutoffLogFC, this, arrayDataList);
@@ -1335,6 +1512,9 @@ public class GeneView implements SelectionListener, MouseListener {
             tableUnder.removeAll();
             tableNodiff.removeAll();
         }
+        
+               
+        
         /*
          * Proteome update
          */
@@ -1867,14 +2047,6 @@ public class GeneView implements SelectionListener, MouseListener {
         this.listGenes = listGenes;
     }
 
-    public Composite getComposite_7() {
-        return composite_7;
-    }
-
-    public void setComposite_7(Composite composite_7) {
-        this.composite_7 = composite_7;
-    }
-
     public Table getTableGenes() {
         return tableGenes;
     }
@@ -1955,7 +2127,31 @@ public class GeneView implements SelectionListener, MouseListener {
         this.lblTranscriptomesData = lblTranscriptomesData;
     }
 
-    public Table getTableProteomes() {
+    public Table getTableOverProteome() {
+		return tableOverProteome;
+	}
+
+	public void setTableOverProteome(Table tableOverProteome) {
+		this.tableOverProteome = tableOverProteome;
+	}
+
+	public Table getTableUnderProteome() {
+		return tableUnderProteome;
+	}
+
+	public void setTableUnderProteome(Table tableUnderProteome) {
+		this.tableUnderProteome = tableUnderProteome;
+	}
+
+	public Table getTableNodiffProteome() {
+		return tableNodiffProteome;
+	}
+
+	public void setTableNodiffProteome(Table tableNodiffProteome) {
+		this.tableNodiffProteome = tableNodiffProteome;
+	}
+
+	public Table getTableProteomes() {
         return tableProteomes;
     }
 
@@ -1964,11 +2160,11 @@ public class GeneView implements SelectionListener, MouseListener {
     }
 
     public Label getLblOverProteomes() {
-        return lblOverProteomes;
+        return lblExprProteomes;
     }
 
     public void setLblOverProteomes(Label lblOverProteomes) {
-        this.lblOverProteomes = lblOverProteomes;
+        this.lblExprProteomes = lblOverProteomes;
     }
 
     public Label getLblNodiff() {

@@ -115,6 +115,7 @@ public class SetupPart implements SelectionListener {
     private Button btnValidateComparisonsDatabase;
     private Button btnAddComparisonsFrom;
     private Button btnCreateTranscriptomicsComparisons;
+    private Button btnCreateProteomicsComparisons;
     private Button btnCreateLogfcTranscriptome;
     private Button btnCreateExprPrteome;
     private Button btnDownloadGenomesFrom;
@@ -154,7 +155,7 @@ public class SetupPart implements SelectionListener {
         Test.runPreTest();
 
         Composite composite = new Composite(parent, SWT.NONE);
-        composite.setBounds(0, 0, 1030, 632);
+        composite.setBounds(0, -11, 889, 309);
         composite.setLayout(new GridLayout(1, false));
 
         Label lblNewLabel = new Label(composite, SWT.NONE);
@@ -355,7 +356,10 @@ public class SetupPart implements SelectionListener {
         btnAddComparisonsFrom.addSelectionListener(this);
         btnCreateTranscriptomicsComparisons = new Button(composite_8, SWT.NONE);
         btnCreateTranscriptomicsComparisons.setText("Create Transcriptomics Comparisons table");
-        new Label(composite_8, SWT.NONE);
+        btnCreateProteomicsComparisons = new Button(composite_8, SWT.NONE);
+        btnCreateProteomicsComparisons.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false, false, 1, 1));
+        btnCreateProteomicsComparisons.setText("Create Proteomics Comparisons table");
+        btnCreateProteomicsComparisons.addSelectionListener(this);
         btnCreateTranscriptomicsComparisons.addSelectionListener(this);
 
         TabItem tbtmTranscriptomics = new TabItem(tabFolder, SWT.NONE);
@@ -1058,6 +1062,12 @@ public class SetupPart implements SelectionListener {
             logs = "--- Create Transcriptomics Comparisons table\n";
             BioConditionCreation.createSummaryTranscriptomesComparisonsTable();
             logs += "Transcriptomics table saved : " + Database.getInstance().getTranscriptomesComparisonsArrayPath()
+                    + "\n";
+            updateConsole();
+        } else if (e.getSource() == btnCreateProteomicsComparisons) {
+            logs = "--- Create Proteomics Comparisons table\n";
+            BioConditionCreation.createSummaryProteomesComparisonsTable();
+            logs += "Proteomics table saved : " + Database.getInstance().getProteomesComparisonsArrayPath()
                     + "\n";
             updateConsole();
         } else if (e.getSource() == buttonValidateTrancriptomics) {

@@ -610,6 +610,63 @@ public class BioConditionCreation {
         }
         TabDelimitedTableReader.saveList(tableResult, Database.getInstance().getTranscriptomesComparisonsArrayPath());
     }
+    
+    /**
+     * Create a table will all main information on the different Comparison of proteomic available<br>
+     * This table will be loaded by BioConditionView
+     */
+    public static void createSummaryProteomesComparisonsTable() {
+        ArrayList<String> tableResult = new ArrayList<>();
+        String[] titles = {"Data Name", "Growth", "Temp.", "Mutant", "Media", "MediaGrowthProperties", "VS", "Growth",
+                "�C", "Mutant", "MediaGrowthProperties", "Media", "Type", "ArrayExpressId", "Date", "Strain used", "Strain array",
+                "Reference"};
+        String header = "";
+        for (String title : titles)
+            header += title + "\t";
+        tableResult.add(header.trim());
+
+        for (BioCondition bioCondition : BioCondition.getAllBioConditions()) {
+            if (bioCondition.getTypeDataContained().contains(TypeData.Proteome)){
+                for (String comparison : bioCondition.getComparisonNames()) {
+                    String row = "";
+                    row += comparison + "\t";
+                    row += bioCondition.getGrowth().toString().replace('[', ' ').replace(']', ' ').trim() + "\t";
+                    row += bioCondition.getTemperature().toString().replace('[', ' ').replace(']', ' ')
+                            .replace('C', ' ').trim() + "\t";
+                    row += bioCondition.getMutant().toString().replace('[', ' ').replace(']', ' ').trim() + "\t";
+                    row += bioCondition.getMedia().toString().replace('[', ' ').replace(']', ' ').trim() + "\t";
+                    row += bioCondition.getMediaGrowthProperties().toString().replace('[', ' ').replace(']', ' ').trim()
+                            + "\t";
+                    row += "VS" + "\t";
+                    bioCondition = BioCondition.getBioCondition(BioCondition.parseName(comparison)[1]);
+                    row += bioCondition.getGrowth().toString().replace('[', ' ').replace(']', ' ').trim() + "\t";
+                    row += bioCondition.getTemperature().toString().replace('[', ' ').replace(']', ' ')
+                            .replace('C', ' ').trim() + "\t";
+                    row += bioCondition.getMutant().toString().replace('[', ' ').replace(']', ' ').trim() + "\t";
+                    row += bioCondition.getMedia().toString().replace('[', ' ').replace(']', ' ').trim() + "\t";
+                    row += bioCondition.getMediaGrowthProperties().toString().replace('[', ' ').replace(']', ' ').trim()
+                            + "\t";
+                    String typeDatacontained =
+                            bioCondition.getTypeDataContained().toString().replace('[', ' ').replace(']', ' ');
+                    if (bioCondition.getTypeDataContained().size() == 0)
+                        typeDatacontained = "GeneExpr";
+                    if (typeDatacontained.contains("ExpressionMatrix"))
+                        typeDatacontained = typeDatacontained.replaceAll("ExpressionMatrix", "GeneExpr");
+                    // typeDatacontained = typeDatacontained.replaceAll("GeneExpr",
+                    // "GeneExpression");
+                    row += typeDatacontained.trim() + "\t";
+                    row += bioCondition.getArrayExpressId() + "\t";
+                    row += bioCondition.getDate() + "\t";
+                    row += bioCondition.getGenomeUsed() + "\t";
+                    row += bioCondition.getGenomeName() + "\t";
+
+                    row += bioCondition.getReference() + "\t";
+                    tableResult.add(row.trim());
+                }
+            }
+        }
+        TabDelimitedTableReader.saveList(tableResult, Database.getInstance().getProteomesComparisonsArrayPath());
+    }
 
     /**
      * Create a table will all main information on the different BioCondition available<br>

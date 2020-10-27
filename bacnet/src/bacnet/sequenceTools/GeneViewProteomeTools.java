@@ -5,20 +5,134 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
+import org.eclipse.swt.widgets.Text;
+
 import bacnet.Database;
 import bacnet.datamodel.dataset.ExpressionMatrix;
 import bacnet.datamodel.sequence.Sequence;
+import bacnet.expressionAtlas.core.GenomeElementAtlas;
 import bacnet.utils.ArrayUtils;
+import bacnet.utils.Filter;
 
 public class GeneViewProteomeTools {
 
+	/**
+     * Update display of expression data results
+     */
+    public static void updateProteinAtlas(Sequence sequence, Text txtCutoffLogFC, GeneView viewer, String[][] arrayProteinAtlasList) {
+        if (sequence != null) {
+            double cutoffLogFC = GenomeElementAtlas.DEFAULT_LOGFC_PROTEOMIC_CUTOFF;
+            try {
+                cutoffLogFC = Double.parseDouble(viewer.getTxtCutoffLogFC().getText());
+            } catch (Exception e) {
+                viewer.getTxtCutoffLogFC().setText(GenomeElementAtlas.DEFAULT_LOGFC_PROTEOMIC_CUTOFF + "");
+            }
+            Filter filter = new Filter();
+            filter.setCutOff1(cutoffLogFC);
+            GenomeElementAtlas atlas = new GenomeElementAtlas(sequence, filter, false);
+            viewer.getLblOver().setText(atlas.getOverBioConds().size() + " data");
+            viewer.getLblUnder().setText(atlas.getUnderBioConds().size() + " data");
+            viewer.getLblNodiff().setText(atlas.getNotDiffExpresseds().size() + " data");
+
+            updateProteinAtlasTable(atlas, viewer, arrayProteinAtlasList);
+        }
+    }
+
     /**
-     * Update proteomics table
+     * Update table showing proteomics information
+     */
+    private static void updateProteinAtlasTable(GenomeElementAtlas atlas, GeneView viewer, String[][] arrayProteinAtlasList) {
+        /*
+         * Update overexpressed list
+         */
+        Table tableOver = viewer.getTableOverProteome();
+        tableOver.removeAll();
+        tableOver.setHeaderVisible(true);
+        tableOver.setLinesVisible(true);
+        for (int i = 0; i < arrayProteinAtlasList[0].length; i++) {
+            TableColumn column = new TableColumn(tableOver, SWT.NONE);
+            column.setText(arrayProteinAtlasList[0][i]);
+            column.setAlignment(SWT.LEFT);
+            
+        }
+        for (int i = 1; i < arrayProteinAtlasList.length; i++) {
+            String dataName = arrayProteinAtlasList[i][ArrayUtils.findColumn(arrayProteinAtlasList, "Data Name")];
+            if (atlas.getOverBioConds().contains(dataName)) {
+                TableItem item = new TableItem(tableOver, SWT.NONE);
+                for (int j = 0; j < arrayProteinAtlasList[0].length; j++) {
+                    item.setText(j, arrayProteinAtlasList[i][j]);
+                }
+            }
+        }
+        for (int i = 0; i < arrayProteinAtlasList[0].length; i++) {
+            tableOver.getColumn(i).pack();
+        }
+        tableOver.update();
+        tableOver.redraw();
+
+        /*
+         * Update under-expressed list
+         */
+        Table tableUnder = viewer.getTableUnderProteome();
+        tableUnder.removeAll();
+        tableUnder.setHeaderVisible(true);
+        tableUnder.setLinesVisible(true);
+        for (int i = 0; i < arrayProteinAtlasList[0].length; i++) {
+            TableColumn column = new TableColumn(tableUnder, SWT.NONE);
+            column.setText(arrayProteinAtlasList[0][i]);
+            column.setAlignment(SWT.LEFT);
+        }
+        for (int i = 1; i < arrayProteinAtlasList.length; i++) {
+            String dataName = arrayProteinAtlasList[i][ArrayUtils.findColumn(arrayProteinAtlasList, "Data Name")];
+            if (atlas.getUnderBioConds().contains(dataName)) {
+                TableItem item = new TableItem(tableUnder, SWT.NONE);
+                for (int j = 0; j < arrayProteinAtlasList[0].length; j++) {
+                    item.setText(j, arrayProteinAtlasList[i][j]);
+                }
+            }
+        }
+        for (int i = 0; i < arrayProteinAtlasList[0].length; i++) {
+            tableUnder.getColumn(i).pack();
+        }
+        tableUnder.update();
+        tableUnder.redraw();
+
+        /*
+         * Update no dfiff expressed genes list
+         */
+        Table tableNodiff = viewer.getTableNodiffProteome();
+        tableNodiff.removeAll();
+        tableNodiff.setHeaderVisible(true);
+        tableNodiff.setLinesVisible(true);
+        for (int i = 0; i < arrayProteinAtlasList[0].length; i++) {
+            TableColumn column = new TableColumn(tableNodiff, SWT.NONE);
+            column.setText(arrayProteinAtlasList[0][i]);
+            column.setAlignment(SWT.LEFT);
+        }
+        for (int i = 1; i < arrayProteinAtlasList.length; i++) {
+            String dataName = arrayProteinAtlasList[i][ArrayUtils.findColumn(arrayProteinAtlasList, "Data Name")];
+            if (atlas.getNotDiffExpresseds().contains(dataName)) {
+                TableItem item = new TableItem(tableNodiff, SWT.NONE);
+                for (int j = 0; j < arrayProteinAtlasList[0].length; j++) {
+                    item.setText(j, arrayProteinAtlasList[i][j]);
+                }
+            }
+        }
+        for (int i = 0; i < arrayProteinAtlasList[0].length; i++) {
+            tableNodiff.getColumn(i).pack();
+        }
+        tableNodiff.update();
+        tableNodiff.redraw();
+    }
+    
+    
+    /**
+     * Update proteomics table = Protein expression with a value over 0
      */
     public static void updateProteomesTable(Sequence sequence, GeneView viewer, String[][] arrayProteomeList) {
     	System.out.println("updateProteomesTable");
         /*
-         * Update overexpressed list
+         * Update expressed list
          */
         ArrayList<String> bioConditions = new ArrayList<>();
         System.out.println("getGenomeSelected: "+ viewer.getGenomeSelected());

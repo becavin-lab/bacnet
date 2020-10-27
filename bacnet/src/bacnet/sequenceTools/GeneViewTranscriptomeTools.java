@@ -30,7 +30,7 @@ public class GeneViewTranscriptomeTools {
             }
             Filter filter = new Filter();
             filter.setCutOff1(cutoffLogFC);
-            GenomeElementAtlas atlas = new GenomeElementAtlas(sequence, filter);
+            GenomeElementAtlas atlas = new GenomeElementAtlas(sequence, filter, true);
             viewer.getLblOver().setText(atlas.getOverBioConds().size() + " data");
             viewer.getLblUnder().setText(atlas.getUnderBioConds().size() + " data");
             viewer.getLblNodiff().setText(atlas.getNotDiffExpresseds().size() + " data");

@@ -573,7 +573,7 @@ public class SrnaView implements SelectionListener, MouseListener {
             }
             Filter filter = new Filter();
             filter.setCutOff1(cutoffLogFC);
-            GenomeElementAtlas atlas = new GenomeElementAtlas(seq, filter);
+            GenomeElementAtlas atlas = new GenomeElementAtlas(seq, filter, true);
             lblOver.setText(atlas.getOverBioConds().size() + " data");
             lblUnder.setText(atlas.getUnderBioConds().size() + " data");
             lblNodiff.setText(atlas.getNotDiffExpresseds().size() + " data");
