@@ -333,6 +333,7 @@ public class Database {
                 setTranscriptomesArrayPath(getTRANSCRIPTOMES_PATH() + "Transcriptomes.txt");
                 setTranscriptomesComparisonsArrayPath(getTRANSCRIPTOMES_PATH() + "ComparisonsTranscriptomes.txt");
                 setProteomesArrayPath(getPROTEOMES_PATH() + "Proteomes.txt");
+                setProteomesComparisonsArrayPath(getPROTEOMES_PATH() + "ComparisonsProteomes.txt");
                 setCoExprNetworkArrayPath(getNETWORK_PATH() + "CoExpressionNetworks.txt");
                 setBioConditionsArrayPath(getDATA_PATH() + "BioConditions.txt");
                 setExperimentComparisonTablePath(getDATA_PATH() + "Comparisons.txt");

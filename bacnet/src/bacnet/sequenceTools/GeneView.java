@@ -1310,7 +1310,8 @@ public class GeneView implements SelectionListener, MouseListener {
         //System.out.println("initYersiniomics");
         arrayDataList = TabDelimitedTableReader.read(Database.getInstance().getTranscriptomesComparisonsArrayPath());
         arrayProteomeList = TabDelimitedTableReader.read(Database.getInstance().getProteomesArrayPath());
-
+        arrayProteinAtlasList = TabDelimitedTableReader.read(Database.getInstance().getProteomesComparisonsArrayPath());
+        
         ArrayList<String> dataTranscriptomes = BioCondition.getTranscriptomesGenomes();
         //System.out.println("dataTranscriptomes: "+dataTranscriptomes);
         //System.out.println("Database.getInstance().getGenomeList(: "+Database.getInstance().getGenomeList());
@@ -1590,10 +1591,23 @@ public class GeneView implements SelectionListener, MouseListener {
             tableNodiff.removeAll();
         }
         /*
+         * Protein atlas update
+         */
+        if (genomeProteomes.contains(genome.getSpecies())) {
+            // System.out.println(genome.getSpecies());
+            GeneViewProteomeTools.updateProteinAtlas(sequence, txtCutoffLogFCProteome, this, arrayProteinAtlasList);
+        } else {
+            lblOverProteome.setText("No data");
+            lblUnderProteome.setText("No data");
+            lblNodiffProteome.setText("No data");
+            tableOverProteome.removeAll();
+            tableUnderProteome.removeAll();
+            tableNodiffProteome.removeAll();
+        }
+        
+        /*
          * Proteome update
          */
-        
-        
         if (genomeProteomes.contains(genome.getSpecies())) {
         	//System.out.println("yes: " +genome.getSpecies());
             GeneViewProteomeTools.updateProteomesTable(sequence, this, arrayProteomeList);
