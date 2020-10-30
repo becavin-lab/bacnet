@@ -166,7 +166,7 @@ public class ProteomicsView implements SelectionListener {
                         gd_lblDisplayTheseBiocondition.widthHint = 200;
                         lblDisplayTheseBiocondition.setLayoutData(gd_lblDisplayTheseBiocondition);
                         lblDisplayTheseBiocondition
-                                .setText("Visualize their transcriptomics datasets with the Genome Viewer");
+                                .setText("Visualize their proteomics datasets with the Genome Viewer");
                         // lblDisplayTheseBiocondition.setForeground(BasicColor.GREY);
                     }
                     btnGenomeViewer.addSelectionListener(this);
@@ -185,7 +185,7 @@ public class ProteomicsView implements SelectionListener {
                     GridData gd_lblDisplayFoldchangeOf = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
                     gd_lblDisplayFoldchangeOf.widthHint = 200;
                     lblDisplayFoldchangeOf.setLayoutData(gd_lblDisplayFoldchangeOf);
-                    lblDisplayFoldchangeOf.setText("Visualize protein detection with the HeatMap Viewer");
+                    lblDisplayFoldchangeOf.setText("Visualize differently expressed proteins with the HeatMap Viewer");
                 }
             }
             new Label(composite_2, SWT.NONE);
@@ -476,7 +476,7 @@ public class ProteomicsView implements SelectionListener {
     private HashMap<String, ArrayList<String>> getSelectedBioConditions() {
         HashMap<String, ArrayList<String>> genomeToBioConds = new HashMap<>();
         for (String bioCondName : selectedProteomes) {
-            // System.out.println("select: "+index);
+            System.out.println("select: "+ bioCondName);
             BioCondition bioCondition = BioCondition.getBioCondition(bioCondName);
             String genome = bioCondition.getGenomeName();
             if (genomeToBioConds.containsKey(genome)) {

@@ -283,6 +283,8 @@ public class BioConditionCreation {
                 bioCond.getTypeDataContained().add(dataType);
                 if (!rawDataName.equals("")) {
                     if (dataType == TypeData.ExpressionMatrix) {
+                        System.out.println("ExpressionMatrix");
+
                         boolean found = false;
                         for (ExpressionMatrix matrix : bioCond.getMatrices()) {
                             if (matrix.getName().equals(name)) {
@@ -290,6 +292,8 @@ public class BioConditionCreation {
                                 found = true;
                             }
                         }
+                        System.out.println("found: "+ found);
+
                         if (!found) {
                             ExpressionMatrix matrix = new ExpressionMatrix();
                             matrix.setName(name);
@@ -421,15 +425,25 @@ public class BioConditionCreation {
                         massSpec.setDate(date);
                         massSpec.setType(dataType);
                         bioCond.getnTerms().add(massSpec);
-                    } else if (dataType == TypeData.Proteome) {
+                        
+                    }  else if (dataType == TypeData.Proteome) {
+                    	System.out.println("TypeData.Proteome");
                         ProteomicsData matrix = new ProteomicsData();
                         matrix.setName(name);
                         matrix.setDate(date);
                         matrix.setType(dataType);
                         matrix.getRawDatas().add(rawDataName);
                         bioCond.getProteomes().add(matrix);
-                    }
-                }
+                        }
+                } /*else if (dataType == TypeData.Proteome) {
+                	System.out.println("TypeData.Proteome");
+                    ProteomicsData matrix = new ProteomicsData();
+                    matrix.setName(name);
+                    matrix.setDate(date);
+                    matrix.setType(dataType);
+                    matrix.getRawDatas().add(rawDataName);
+                    bioCond.getProteomes().add(matrix);
+                    }*/
             }
         }
 
@@ -559,7 +573,7 @@ public class BioConditionCreation {
     public static void createSummaryTranscriptomesComparisonsTable() {
         ArrayList<String> tableResult = new ArrayList<>();
         String[] titles = {"Data Name", "Growth", "Temp.", "Mutant", "Media", "MediaGrowthProperties", "VS", "Growth",
-                "�C", "Mutant", "MediaGrowthProperties", "Media", "Type", "ArrayExpressId", "Date", "Strain used", "Strain array",
+                "Temp.", "Mutant", "MediaGrowthProperties", "Media", "Type", "ArrayExpressId", "Date", "Strain used", "Strain array",
                 "Reference"};
         String header = "";
         for (String title : titles)
@@ -618,7 +632,7 @@ public class BioConditionCreation {
     public static void createSummaryProteomesComparisonsTable() {
         ArrayList<String> tableResult = new ArrayList<>();
         String[] titles = {"Data Name", "Growth", "Temp.", "Mutant", "Media", "MediaGrowthProperties", "VS", "Growth",
-                "�C", "Mutant", "MediaGrowthProperties", "Media", "Type", "ArrayExpressId", "Date", "Strain used", "Strain array",
+                "Temp.", "Mutant", "MediaGrowthProperties", "Media", "Type", "ArrayExpressId", "Date", "Strain used", "Strain array",
                 "Reference"};
         String header = "";
         for (String title : titles)

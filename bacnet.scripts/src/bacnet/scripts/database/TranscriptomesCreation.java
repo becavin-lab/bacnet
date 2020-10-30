@@ -57,6 +57,7 @@ public class TranscriptomesCreation {
         boolean logTransformed = true;
         Experiment exp = new Experiment();
         for (String bioCond : bioConds) {
+        	System.out.println("for 1 " + bioConds);
             exp.addBioCond(BioCondition.getBioCondition(bioCond));
         }
 

@@ -194,6 +194,15 @@ public class BioCondition implements Serializable {
         }
         return found;
     }
+    
+    public boolean containProteomes() {
+        boolean found = false;
+        for (TypeData dataType : this.getTypeDataContained()) {
+            if (dataType == TypeData.Proteome)
+                found = true;
+        }
+        return found;
+    }
 
     /**
      * Put all ExpressionData in a list
@@ -302,10 +311,11 @@ public class BioCondition implements Serializable {
      * 
      * @return
      */
+    
     public static ArrayList<String> getProteomeGenomes() {
         TreeSet<String> setGenomes = new TreeSet<String>();
         for (BioCondition bioCond : getAllBioConditions()) {
-            if (bioCond.getProteomicsData().size() > 0) {
+            if (bioCond.containProteomes()) {
                 setGenomes.add(bioCond.getGenomeName());
             }
         }

@@ -211,17 +211,23 @@ public class GenomeTranscriptomeView {
         NavigationManagement.pushStateView(id, new HashMap<>());
         GenomeTranscriptomeView view = (GenomeTranscriptomeView) part.getObject();
         view.getTracksComposite().setParentViewId(id);
-        
+    	System.out.println("displayGenomeElementAndBioConditions"+ bioConditionsSelected);
+
         // Create your new ProgressMonitorDialog with a IRunnableWithProgress
         try {
             IRunnableWithProgress thread =
                     new OpenBioConditionAndGenomeElementThread(view, genome, bioConditionsSelected, genomeElement);
+        	System.out.println("try: "+ thread);
+
             new ProgressMonitorDialog(view.shell).run(true, false, thread);
             /*
              * Init Composite
              */
+        	System.out.println("before getTrcksComposite ");
+
             view.getTracksComposite().setTrack(view.getTrack());
             if (!genomeElement.equals("")) {
+            	System.out.println("genomeElement: "+ genomeElement);
                 view.getTracksComposite().search(genomeElement);
                 try {
                     @SuppressWarnings("unused")
@@ -417,18 +423,33 @@ public class GenomeTranscriptomeView {
 
         @Override
         public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
-            int sizeProcess = 1 + bioConditions.size();
+            System.out.println("run");
+
+        	int sizeProcess = 1 + bioConditions.size();
             // Tell the user what you are doing
             monitor.beginTask("Loading datasets for Genome Viewer", sizeProcess);
+            System.out.println("run2");
 
             // Optionally add subtasks
             monitor.subTask("Loading genome: " + genome);
+            System.out.println("run3");
+
             monitor.worked(1);
+            System.out.println("run4");
+
             view.setData(genome, bioConditions);
+            System.out.println("run5");
+
             monitor.worked(1);
+            System.out.println("run6");
+
             view.updateView(monitor);
+            System.out.println("run7");
+
             // You are done
             monitor.done();
+            System.out.println("monitor.done()");
+
         }
 
     }

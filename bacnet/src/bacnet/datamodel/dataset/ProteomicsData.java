@@ -28,7 +28,7 @@ public class ProteomicsData extends ExpressionMatrix implements Serializable {
      * with new data, and redraw everything.
      */
     public void load() {
-        System.out.println(OmicsData.PATH_STREAMING + this.getName() + EXTENSION);
+        System.out.println(" load proteomics data : " +OmicsData.PATH_STREAMING + this.getName() + EXTENSION);
         ExpressionMatrix matrixLoaded = ExpressionMatrix.load(OmicsData.PATH_STREAMING + this.getName() + EXTENSION);
         this.setAnnotations(matrixLoaded.getAnnotations());
         this.setBioCondName(matrixLoaded.getBioCondName());

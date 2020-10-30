@@ -176,7 +176,7 @@ public class TrackCanvasData extends Canvas implements MouseMoveListener {
         this.genomeName = track.getGenomeName();
         // System.out.println("size canvas start: "+this.getSize().x+" -
         // "+this.getSize().y);
-
+        
         /*
          * Set the size of the Canvas when resize is performed
          */
@@ -234,8 +234,13 @@ public class TrackCanvasData extends Canvas implements MouseMoveListener {
                  */
                 if (track.isDisplaySequence())
                     displaySequence(e.gc);
+            	System.out.println("setTrack 1");
+
                 displayData(e.gc);
+            	System.out.println("setTrack 2");
+
                 displayLegendAfter(e.gc);
+            	System.out.println("setTrack 3");
 
                 /*
                  * For testing the display need to save data displayed
@@ -371,21 +376,32 @@ public class TrackCanvasData extends Canvas implements MouseMoveListener {
          * Calculate y position depending on the data size
          */
         int y = 0;
+    	System.out.println("getDataPosition");
+
         if (track.getDisplayType() == DisplayType.BIOCOND) {
+        	System.out.println("getDataPosition 2"+ dataName +":"+ bpIndex +":"+ dataIndex +":"+ value +":"+ min +":"+ max +":"+ minPosition);
+        	System.out.println("getDataPosition 21: " + track.getDatas().getDataSize().get(dataName));
+
             y = minPosition;
             y += (int) ((max - value)
                     * (dataSizeReference * zoomVertical * track.getDatas().getBioCondSize(dataName) / (max - min)));
         } else if (track.getDisplayType() == DisplayType.DATA) {
+        	System.out.println("getDataPosition 3");
+
             y = minPosition;
             y += (int) ((max - value)
                     * (dataSizeReference * zoomVertical * track.getDatas().getDataSize().get(dataName) / (max - min)));
         } else {
+        	System.out.println("getDataPosition 4");
+
             y = (int) ((max - value) * (dataSizeReference * zoomVertical / (max - min)));
         }
 
         /*
          * If the slider has been used we decay the display
          */
+    	System.out.println("getDataPosition 5");
+
         y += decaySliderVBar;
         /*
          * Return a vector [x,y]
@@ -440,11 +456,20 @@ public class TrackCanvasData extends Canvas implements MouseMoveListener {
         /*
          * Depending of DisplayType we have different way of representation
          */
+
         if (track.getDisplayType() == DisplayType.OVERLAY) {
+        	System.out.println("displayData 2");
+
             displayDataOVERLAY(gc);
         } else if (track.getDisplayType() == DisplayType.BIOCOND) {
+        	System.out.println("displayData 3");
+        	
             displayDataBIOCOND(gc);
+        	System.out.println("displayData 3bis");
+
         } else if (track.getDisplayType() == DisplayType.DATA) {
+        	System.out.println("displayData 4");
+
             displayDataDATASEPARATED(gc);
         }
 
@@ -567,6 +592,7 @@ public class TrackCanvasData extends Canvas implements MouseMoveListener {
             /*
              * If only RNASeq data are in displayed we need to change the legend of the data (log transformed)
              */
+        	System.out.println("displayDataBIOCOND 1");
 
             TypeData typeData = TypeData.unknown;
             if (track.getDatas().getTilings(bcName).size() == 0 && track.getDatas().getGeneExprs(bcName).size() == 0
@@ -592,18 +618,26 @@ public class TrackCanvasData extends Canvas implements MouseMoveListener {
                         typeData = TypeData.RNASeq;
                 }
             }
+
             displayDataLegend(gc, bcName, position, min, max, k, dataMinimumPosition, typeData);
+
             GElement.setExpressionAlpha(gc);
             if (track.getDatas().getTilings(bcName).size() != 0)
                 displayTiling(gc, track.getDatas().getTilings(bcName), min, max, k, dataMinimumPosition);
             GElement.setExpressionAlpha(gc);
+
             if (track.getDatas().getGeneExprs(bcName).size() != 0)
                 displayGeneExpression(gc, track.getDatas().getGeneExprs(bcName), min, max, k, dataMinimumPosition);
             GElement.setExpressionAlpha(gc);
+
             if (track.getDatas().getMatrices(bcName).size() != 0)
+            	System.out.println("displayDataBIOCOND: "+track.getDatas().getMatrices(bcName));
+
                 displayExpressionMatrix(gc, track.getDatas().getMatrices(bcName), min, max, k, dataMinimumPosition);
             GElement.setExpressionAlpha(gc);
+
             if (track.getDatas().getRNASeqDatas(bcName).size() != 0) {
+
                 ArrayList<ExpressionData> seqDatasTemp = new ArrayList<ExpressionData>();
                 for (ExpressionData rnaSeq : track.getDatas().getRNASeqDatas(bcName)) {
                     if (rnaSeq.getChromosomeID().equals(chromoID)) {
@@ -612,6 +646,7 @@ public class TrackCanvasData extends Canvas implements MouseMoveListener {
                 }
                 displayRNASeq(gc, seqDatasTemp, min, max, k, dataMinimumPosition);
             }
+
             GElement.setExpressionAlpha(gc);
             if (track.getDatas().getDNASeqDatas(bcName).size() != 0) {
                 ArrayList<ExpressionData> seqDatasTemp = new ArrayList<ExpressionData>();
@@ -622,6 +657,7 @@ public class TrackCanvasData extends Canvas implements MouseMoveListener {
                 }
                 displayRNASeq(gc, seqDatasTemp, min, max, k, dataMinimumPosition);
             }
+
             GElement.setExpressionAlpha(gc);
             if (track.getDatas().getRiboSeqDatas(bcName).size() != 0) {
                 ArrayList<ExpressionData> seqDatasTemp = new ArrayList<ExpressionData>();
@@ -632,6 +668,7 @@ public class TrackCanvasData extends Canvas implements MouseMoveListener {
                 }
                 displayRNASeq(gc, seqDatasTemp, min, max, k, dataMinimumPosition);
             }
+
             GElement.setExpressionAlpha(gc);
             if (track.getDatas().getTSSDatas(bcName).size() != 0) {
                 ArrayList<ExpressionData> seqDatasTemp = new ArrayList<ExpressionData>();
@@ -642,6 +679,7 @@ public class TrackCanvasData extends Canvas implements MouseMoveListener {
                 }
                 displayTSS(gc, seqDatasTemp, min, max, k, dataMinimumPosition);
             }
+
             GElement.setExpressionAlpha(gc);
             if (track.getDatas().getTermSeqDatas(bcName).size() != 0) {
                 ArrayList<ExpressionData> seqDatasTemp = new ArrayList<ExpressionData>();
@@ -652,6 +690,7 @@ public class TrackCanvasData extends Canvas implements MouseMoveListener {
                 }
                 displayTermSeq(gc, seqDatasTemp, min, max, k, dataMinimumPosition);
             }
+
             GElement.setExpressionAlpha(gc);
             if (track.getDatas().getProteomes(bcName).size() != 0)
                 displayProteomicsData(gc, track.getDatas().getProteomes(bcName), min, max, k, dataMinimumPosition);
@@ -663,6 +702,7 @@ public class TrackCanvasData extends Canvas implements MouseMoveListener {
             GElement.setDefaultFont(gc);
             k++;
         }
+
         for (String bcName : track.getDatas().getBioConditionHashMaps().keySet()) {
 
             GElement.setDataNameFont(gc);
@@ -1645,6 +1685,7 @@ public class TrackCanvasData extends Canvas implements MouseMoveListener {
         int endDraw = track.getDisplayRegion().getX2();
         ArrayList<Sequence> sequences = annot.getElements(chromo, beginDraw, endDraw);
         int[] position = new int[2];
+
         for (Sequence sequence : sequences) {
             String accession = sequence.getName();
             String accessionOld = sequence.getFeature("old_locus_tag"); //most of the ArrayExpress data are with old_locs_tag
@@ -1666,20 +1707,40 @@ public class TrackCanvasData extends Canvas implements MouseMoveListener {
 
             // display element
             for (ExpressionMatrix matrix : matrices) {
+            	System.out.println("displayExpressionMatrix1");
+
                 if (!track.getDatas().getDataNOTDisplayed().contains(matrix.getName())) {
+                	System.out.println("displayExpressionMatrix2");
+
                     // System.out.println(accession);
                     String dataName = matrix.getName();
+                	System.out.println("dataName 1: " + dataName);
+
                     if (track.getDisplayType() == DisplayType.BIOCOND)
                         dataName = matrix.getBioCondName();
+                    	System.out.println("dataName 2: " + dataName);
+
                     if (!matrix.getRowNames().containsKey(accession)) {
+                    	System.out.println("displayExpressionMatrix4");
+
                     	accession = accessionOld;	
                     }
                     if (matrix.getRowNames().containsKey(accession)) {
+                    	System.out.println("displayExpressionMatrix5");
+
                         double value = matrix.getValue(matrix.getRowNames().get(accession),
                                 matrix.getGenomeViewerColumnIndex());
+                    	System.out.println("displayExpressionMatrix51: "+ dataName + ": "+ dataIndex);
+
                         position = getDataPosition(dataName, begin, dataIndex, value, min, max, minPosition);
+                    	System.out.println("displayExpressionMatrix52");
+
                         int[] positionZero = getDataPosition(dataName, begin, dataIndex, 0, min, max, minPosition);
+                    	System.out.println("displayExpressionMatrix53");
+                        
                         double geneSize = bpSizeH * length;
+                    	System.out.println("displayExpressionMatrix54");
+                        
                         if (track.getDatas().getDisplay()[begin])
                             gc.setBackground(track.getDatas().getDataColors().get(matrix.getName()));
                         else
@@ -1688,11 +1749,15 @@ public class TrackCanvasData extends Canvas implements MouseMoveListener {
                             geneSize = 1;
 
                         if (value > 0) {
+                        	System.out.println("displayExpressionMatrix6");
+
                             gc.fillRectangle(position[0], position[1], (int) geneSize,
                                     Math.abs(position[1] - positionZero[1]));
                             gc.drawRectangle(position[0], position[1], (int) geneSize,
                                     Math.abs(position[1] - positionZero[1]));
                         } else {
+                        	System.out.println("displayExpressionMatrix7");
+
                             gc.fillRectangle(position[0], positionZero[1], (int) geneSize,
                                     Math.abs(position[1] - positionZero[1]));
                             gc.drawRectangle(position[0], positionZero[1], (int) geneSize,
@@ -1703,6 +1768,8 @@ public class TrackCanvasData extends Canvas implements MouseMoveListener {
                         // gc.drawLine(position[0]+(int)geneSize,position[1],position[0]+(int)geneSize,minPos);
 
                         if (testData) {
+                        	System.out.println("displayExpressionMatrix8");
+
                             String[][] saveDataArray = saveData.get(matrix.getName());
                             for (int index = 0; index < length; index++) {
                                 saveDataArray[0][begin + index - track.getDisplayRegion().getX1()] = begin + index + "";
@@ -1728,14 +1795,19 @@ public class TrackCanvasData extends Canvas implements MouseMoveListener {
      */
     private void displayProteomicsData(GC gc, ArrayList<ProteomicsData> matrices, double min, double max, int dataIndex,
             int minPosition) {
+    	System.out.println("displayProteomicsData");
+
         Chromosome chromo = track.getChromosome();
         Annotation annot = chromo.getAnnotation();
         int beginDraw = track.getDisplayRegion().getX1();
         int endDraw = track.getDisplayRegion().getX2();
         ArrayList<Sequence> sequences = annot.getElements(chromo, beginDraw, endDraw);
         int[] position = new int[2];
+    	System.out.println("displayProteomicsData 2");
+
         for (Sequence sequence : sequences) {
             String accession = sequence.getName();
+            String accessionOld = sequence.getFeature("old_locus_tag"); //most of the ArrayExpress data are with old_locs_tag
 
             int begin = sequence.getBegin();
             int end = sequence.getEnd();
@@ -1752,6 +1824,7 @@ public class TrackCanvasData extends Canvas implements MouseMoveListener {
                     length = track.getDisplayRegion().getX2() - begin;
                 }
             }
+        	System.out.println("displayProteomicsData 3");
 
             // display element
             for (ExpressionMatrix matrix : matrices) {

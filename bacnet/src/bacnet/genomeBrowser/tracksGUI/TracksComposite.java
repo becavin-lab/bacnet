@@ -458,6 +458,7 @@ public class TracksComposite extends Composite implements SelectionListener, Mou
     }
 
     public void setTrack(Track track) {
+    	System.out.println("setTrack: " + track);
         boolean nterm = false;
         if (track.getDatas().getDataNames().contains(NTerm.NTERM_PROJECT_BHI))
             nterm = true;
@@ -468,6 +469,8 @@ public class TracksComposite extends Composite implements SelectionListener, Mou
 
         this.track = track;
         if (transcriptome) {
+        	System.out.println("transcriptome true");
+
             if (track.getDisplayType() == DisplayType.OVERLAY)
                 comboTypeDisplay.select(2);
             if (track.getDisplayType() == DisplayType.BIOCOND)
@@ -475,8 +478,13 @@ public class TracksComposite extends Composite implements SelectionListener, Mou
             if (track.getDisplayType() == DisplayType.DATA)
                 comboTypeDisplay.select(1);
         }
+    	System.out.println("canvasData.setTrack");
+
         canvasData.setTrack(this.track);
+    	System.out.println("canvasGenome.setTrack");
+
         canvasGenome.setTrack(this.track);
+    	System.out.println("after canvasGenome.setTrack");
 
         if (!track.getDatas().isDisplayAbsoluteValue()) {
             this.getComboAbsoluteRelative().select(1);

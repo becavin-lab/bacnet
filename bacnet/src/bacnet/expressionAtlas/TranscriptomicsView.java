@@ -616,6 +616,7 @@ public class TranscriptomicsView implements SelectionListener {
     @Override
     public void widgetSelected(SelectionEvent e) {
         if (e.getSource() == btnGenomeViewer) {
+        	System.out.println("bouton genome viewer");
             HashMap<String, ArrayList<String>> genomeToBioConds = getSelectedBioConditions();
             for (String genomeName : genomeToBioConds.keySet()) {
                 GenomeTranscriptomeView.displayGenomeElementAndBioConditions(partService, genomeName,

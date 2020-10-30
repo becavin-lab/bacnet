@@ -301,6 +301,8 @@ public class DataTrack {
 
         if (bioCond.getOmicsData().size() != 0 || bioCond.getComparisons().size() != 0) {
             System.out.println("addBioCondition if 1");
+            System.out.println("bioCond.getOmicsData(): " + bioCond.getOmicsData());
+            System.out.println("bioCond.getComparisons(): "+bioCond.getComparisons());
 
             /*
              * If the biological condition we add has no Absolute value expression data, we force the view to

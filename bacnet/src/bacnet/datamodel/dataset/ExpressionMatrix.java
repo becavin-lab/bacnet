@@ -1350,7 +1350,7 @@ public class ExpressionMatrix extends OmicsData implements Cloneable, Serializab
      * with new data, and redraw everything.
      */
     public void load() {
-        System.out.println(OmicsData.PATH_STREAMING + this.getName() + EXTENSION);
+        System.out.println("load transcriptomics data : " +OmicsData.PATH_STREAMING + this.getName() + EXTENSION);
         ExpressionMatrix matrixLoaded = ExpressionMatrix.load(OmicsData.PATH_STREAMING + this.getName() + EXTENSION);
         this.setAnnotations(matrixLoaded.getAnnotations());
         this.setBioCondName(matrixLoaded.getBioCondName());
