@@ -581,9 +581,14 @@ public class BioConditionCreation {
         tableResult.add(header.trim());
 
         for (BioCondition bioCondition : BioCondition.getAllBioConditions()) {
+
             if (!bioCondition.getTypeDataContained().contains(TypeData.Proteome)
                     && !bioCondition.getTypeDataContained().contains(TypeData.NTerm)) {
+            	//System.out.println("getAllBioConditions: " + bioCondition.getName());
+
                 for (String comparison : bioCondition.getComparisonNames()) {
+                	//System.out.println("comparison: " + comparison);
+
                     String row = "";
                     row += comparison + "\t";
                     row += bioCondition.getGrowth().toString().replace('[', ' ').replace(']', ' ').trim() + "\t";
@@ -594,13 +599,14 @@ public class BioConditionCreation {
                     row += bioCondition.getMediaGrowthProperties().toString().replace('[', ' ').replace(']', ' ').trim()
                             + "\t";
                     row += "VS" + "\t";
-                    bioCondition = BioCondition.getBioCondition(BioCondition.parseName(comparison)[1]);
-                    row += bioCondition.getGrowth().toString().replace('[', ' ').replace(']', ' ').trim() + "\t";
-                    row += bioCondition.getTemperature().toString().replace('[', ' ').replace(']', ' ')
+                    BioCondition bioCondition2 = new BioCondition();
+                    bioCondition2 = BioCondition.getBioCondition(BioCondition.parseName(comparison)[1]);
+                    row += bioCondition2.getGrowth().toString().replace('[', ' ').replace(']', ' ').trim() + "\t";
+                    row += bioCondition2.getTemperature().toString().replace('[', ' ').replace(']', ' ')
                             .replace('C', ' ').trim() + "\t";
-                    row += bioCondition.getMutant().toString().replace('[', ' ').replace(']', ' ').trim() + "\t";
-                    row += bioCondition.getMedia().toString().replace('[', ' ').replace(']', ' ').trim() + "\t";
-                    row += bioCondition.getMediaGrowthProperties().toString().replace('[', ' ').replace(']', ' ').trim()
+                    row += bioCondition2.getMutant().toString().replace('[', ' ').replace(']', ' ').trim() + "\t";
+                    row += bioCondition2.getMedia().toString().replace('[', ' ').replace(']', ' ').trim() + "\t";
+                    row += bioCondition2.getMediaGrowthProperties().toString().replace('[', ' ').replace(']', ' ').trim()
                             + "\t";
                     String typeDatacontained =
                             bioCondition.getTypeDataContained().toString().replace('[', ' ').replace(']', ' ');
@@ -641,7 +647,13 @@ public class BioConditionCreation {
 
         for (BioCondition bioCondition : BioCondition.getAllBioConditions()) {
             if (bioCondition.getTypeDataContained().contains(TypeData.Proteome)){
+            	//System.out.println("getAllBioConditions: " + bioCondition.getName());
+
                 for (String comparison : bioCondition.getComparisonNames()) {
+                	//System.out.println("getBioConditions 1: " + bioCondition.getName());
+
+                	//System.out.println("comparison: " + comparison);
+
                     String row = "";
                     row += comparison + "\t";
                     row += bioCondition.getGrowth().toString().replace('[', ' ').replace(']', ' ').trim() + "\t";
@@ -652,13 +664,16 @@ public class BioConditionCreation {
                     row += bioCondition.getMediaGrowthProperties().toString().replace('[', ' ').replace(']', ' ').trim()
                             + "\t";
                     row += "VS" + "\t";
-                    bioCondition = BioCondition.getBioCondition(BioCondition.parseName(comparison)[1]);
-                    row += bioCondition.getGrowth().toString().replace('[', ' ').replace(']', ' ').trim() + "\t";
-                    row += bioCondition.getTemperature().toString().replace('[', ' ').replace(']', ' ')
+                    BioCondition bioCondition2 = new BioCondition();
+                    bioCondition2 = BioCondition.getBioCondition(BioCondition.parseName(comparison)[1]);
+                	//System.out.println("getBioConditions 2: " + bioCondition2.getName());
+
+                    row += bioCondition2.getGrowth().toString().replace('[', ' ').replace(']', ' ').trim() + "\t";
+                    row += bioCondition2.getTemperature().toString().replace('[', ' ').replace(']', ' ')
                             .replace('C', ' ').trim() + "\t";
-                    row += bioCondition.getMutant().toString().replace('[', ' ').replace(']', ' ').trim() + "\t";
-                    row += bioCondition.getMedia().toString().replace('[', ' ').replace(']', ' ').trim() + "\t";
-                    row += bioCondition.getMediaGrowthProperties().toString().replace('[', ' ').replace(']', ' ').trim()
+                    row += bioCondition2.getMutant().toString().replace('[', ' ').replace(']', ' ').trim() + "\t";
+                    row += bioCondition2.getMedia().toString().replace('[', ' ').replace(']', ' ').trim() + "\t";
+                    row += bioCondition2.getMediaGrowthProperties().toString().replace('[', ' ').replace(']', ' ').trim()
                             + "\t";
                     String typeDatacontained =
                             bioCondition.getTypeDataContained().toString().replace('[', ' ').replace(']', ' ');

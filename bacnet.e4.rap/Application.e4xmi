@@ -27,7 +27,7 @@
   <descriptors xmi:id="_C9nzYL91EeWgHPGw7Po5aA" elementId="bacnet.CoExprNetworkView" label="Co-Expression network view" closeable="true" contributionURI="bundleclass://bacnet/bacnet.views.CoExprNetworkView">
     <tags>REMOVE_ON_HIDE_TAG</tags>
   </descriptors>
-  <descriptors xmi:id="_Q68C0L91EeWgHPGw7Po5aA" elementId="bacnet.e4.rap.InitViewListeria" label="Home" contributionURI="bundleclass://bacnet.e4.rap/bacnet.e4.rap.InitViewCRISPRListeria"/>
+  <descriptors xmi:id="_Q68C0L91EeWgHPGw7Po5aA" elementId="bacnet.e4.rap.InitViewYersinia" label="Home" contributionURI="bundleclass://bacnet.e4.rap/bacnet.e4.rap.InitViewYersinia"/>
   <descriptors xmi:id="_ZCDT4L91EeWgHPGw7Po5aA" elementId="bacnet.e4.rap.InitViewNTerm" label="Home NTerminomics" contributionURI="bundleclass://bacnet.e4.rap/bacnet.e4.rap.InitViewCRISPRNTerm"/>
   <descriptors xmi:id="_erg2wL91EeWgHPGw7Po5aA" elementId="bacnet.e4.rap.SubmitDataView" label="Submit data to Listeriomics" allowMultiple="true" closeable="true" contributionURI="bundleclass://bacnet.e4.rap/bacnet.e4.rap.SubmitDataView">
     <tags>REMOVE_ON_HIDE_TAG</tags>

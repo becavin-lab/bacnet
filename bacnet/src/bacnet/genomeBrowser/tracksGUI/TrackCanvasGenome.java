@@ -273,7 +273,7 @@ public class TrackCanvasGenome extends Canvas implements MouseMoveListener {
             Color lightColor = null;
             Color darkColor = null;
             Color lineColor = null;
-            Color textColor = BasicColor.WHITE;
+            Color textColor = BasicColor.BLACK;
             switch (sequence.getType()) {
                 case Gene:
                     Gene gene = (Gene) sequence;

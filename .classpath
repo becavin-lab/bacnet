@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="bacnet.e4.rap.setup/src"/>
+	<classpathentry kind="src" path="bacnet.e4.rap/src"/>
+	<classpathentry kind="src" path="bacnet.e4.rcp/src"/>
+	<classpathentry kind="src" path="bacnet.scripts/src"/>
+	<classpathentry excluding="bacnet/datamodel/dataset/" kind="src" path="bacnet/src"/>
+	<classpathentry kind="src" path="bacnet/src/bacnet/datamodel/dataset"/>
+	<classpathentry kind="lib" path="bacnet.e4.rap/WEB-INF/plugins/javax.mail_1.0.0.jar"/>
+	<classpathentry kind="lib" path="Jar-source/apache.batik/batik-anim.jar"/>
+	<classpathentry kind="lib" path="Jar-source/apache.batik/batik-awt-util.jar"/>
+	<classpathentry kind="lib" path="Jar-source/apache.batik/batik-bridge.jar"/>
+	<classpathentry kind="lib" path="Jar-source/apache.batik/batik-codec.jar"/>
+	<classpathentry kind="lib" path="Jar-source/apache.batik/batik-css.jar"/>
+	<classpathentry kind="lib" path="Jar-source/apache.batik/batik-dom.jar"/>
+	<classpathentry kind="lib" path="Jar-source/apache.batik/batik-ext.jar"/>
+	<classpathentry kind="lib" path="Jar-source/apache.batik/batik-extension.jar"/>
+	<classpathentry kind="lib" path="Jar-source/apache.batik/batik-gui-util.jar"/>
+	<classpathentry kind="lib" path="Jar-source/apache.batik/batik-gvt.jar"/>
+	<classpathentry kind="lib" path="Jar-source/apache.batik/batik-parser.jar"/>
+	<classpathentry kind="lib" path="Jar-source/apache.batik/batik-script.jar"/>
+	<classpathentry kind="lib" path="Jar-source/apache.batik/batik-svg-dom.jar"/>
+	<classpathentry kind="lib" path="Jar-source/apache.batik/batik-svggen.jar"/>
+	<classpathentry kind="lib" path="Jar-source/apache.batik/batik-swing.jar"/>
+	<classpathentry kind="lib" path="Jar-source/apache.batik/batik-transcoder.jar"/>
+	<classpathentry kind="lib" path="Jar-source/apache.batik/batik-util.jar"/>
+	<classpathentry kind="lib" path="Jar-source/apache.batik/batik-xml.jar"/>
+	<classpathentry kind="lib" path="Jar-source/bacnet.lib/biojava3-alignment-3.0.4-sources.jar"/>
+	<classpathentry kind="lib" path="Jar-source/bacnet.lib/cgview.jar"/>
+	<classpathentry kind="lib" path="Jar-source/bacnet.lib/commons-lang-2.0.jar"/>
+	<classpathentry kind="lib" path="Jar-source/bacnet.lib/commons-math-2.2.jar"/>
+	<classpathentry kind="lib" path="Jar-source/bacnet.lib/forester_1038.jar"/>
+	<classpathentry kind="lib" path="Jar-source/bacnet.lib/Jama-1.0.2.jar"/>
+	<classpathentry kind="lib" path="Jar-source/bacnet.lib/jcommon-1.0.18.jar"/>
+	<classpathentry kind="lib" path="Jar-source/bacnet.lib/jdom-1.1.3.jar"/>
+	<classpathentry kind="lib" path="Jar-source/bacnet.lib/jfreechart-1.0.14-experimental.jar"/>
+	<classpathentry kind="lib" path="Jar-source/bacnet.lib/jfreechart-1.0.14-swt.jar"/>
+	<classpathentry kind="lib" path="Jar-source/bacnet.lib/jfreechart-1.0.14.jar"/>
+	<classpathentry kind="lib" path="Jar-source/bacnet.lib/jsc.jar"/>
+	<classpathentry kind="lib" path="Jar-source/javax.mail/javax.mail.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="bacnet/bin"/>
+</classpath>

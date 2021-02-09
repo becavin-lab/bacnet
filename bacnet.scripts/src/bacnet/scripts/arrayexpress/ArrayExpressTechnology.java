@@ -252,19 +252,27 @@ public class ArrayExpressTechnology {
      * From array probe sequence try to retrieve the gene name
      */
     public static void findProbes() {
-        Genome genome = Genome.loadGenome("Yersinia pseudotuberculosis IP32953");
-        String[][] array = TabDelimitedTableReader.read(ArrayExpressTechnology.PATH + "A-GEOD-15095.adfTable.txt");
+        Genome genome = Genome.loadGenome("Yersinia pestis KIM10+");
+        //Genome genome2 = Genome.loadGenome("Yersinia pestis KIM5");
+
+        String[][] array = TabDelimitedTableReader.read(ArrayExpressTechnology.PATH + "A-GEOD-4199.adfTable.txt");
         for (int i = 1; i < array.length; i++) {
-            String sequence = array[i][5];
+            String sequence = array[i][3];
             for (Gene gene : genome.getFirstChromosome().getGenes().values()) {
+                String geneSeq = gene.getSequence();
+                if (geneSeq.contains(sequence)) {
+                    array[i][1] = gene.getName();
+                }
+            }
+            /*
+            for (Gene gene : genome2.getFirstChromosome().getGenes().values()) {
                 String geneSeq = gene.getSequence();
                 if (geneSeq.contains(sequence)) {
                     array[i][2] = gene.getName();
                 }
-            }
-
+            }*/
         }
-        TabDelimitedTableReader.save(array, ArrayExpressTechnology.PATH + "A-GEOD-15095.adfTableModif.txt");
+        TabDelimitedTableReader.save(array, ArrayExpressTechnology.PATH + "A-GEOD-4199.adfTableModif.txt");
     }
 
     public static void downloadAllFilesTechno() {

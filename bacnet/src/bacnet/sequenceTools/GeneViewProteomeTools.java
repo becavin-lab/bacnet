@@ -21,18 +21,23 @@ public class GeneViewProteomeTools {
      */
     public static void updateProteinAtlas(Sequence sequence, Text txtCutoffLogFC, GeneView viewer, String[][] arrayProteinAtlasList) {
         if (sequence != null) {
+        	//System.out.println("true");
             double cutoffLogFC = GenomeElementAtlas.DEFAULT_LOGFC_PROTEOMIC_CUTOFF;
+
             try {
-                cutoffLogFC = Double.parseDouble(viewer.getTxtCutoffLogFC().getText());
+                cutoffLogFC = Double.parseDouble(viewer.getTxtCutoffLogFCProteome().getText());
+                
             } catch (Exception e) {
                 viewer.getTxtCutoffLogFC().setText(GenomeElementAtlas.DEFAULT_LOGFC_PROTEOMIC_CUTOFF + "");
             }
+        	//System.out.println("cutoff: "+ cutoffLogFC);
+
             Filter filter = new Filter();
             filter.setCutOff1(cutoffLogFC);
             GenomeElementAtlas atlas = new GenomeElementAtlas(sequence, filter, false);
-            viewer.getLblOver().setText(atlas.getOverBioConds().size() + " data");
-            viewer.getLblUnder().setText(atlas.getUnderBioConds().size() + " data");
-            viewer.getLblNodiff().setText(atlas.getNotDiffExpresseds().size() + " data");
+            viewer.getLblOverProteome().setText(atlas.getOverBioConds().size() + " data");
+            viewer.getLblUnderProteome().setText(atlas.getUnderBioConds().size() + " data");
+            viewer.getLblNodiffProteome().setText(atlas.getNotDiffExpresseds().size() + " data");
 
             updateProteinAtlasTable(atlas, viewer, arrayProteinAtlasList);
         }
@@ -127,7 +132,7 @@ public class GeneViewProteomeTools {
     
     
     /**
-     * Update proteomics table = Protein expression with a value over 0
+     * Update proteomics table = (Protein expression with a value over 0 --> old one), now, differential expression
      */
     public static void updateProteomesTable(Sequence sequence, GeneView viewer, String[][] arrayProteomeList) {
     	System.out.println("updateProteomesTable");
@@ -136,10 +141,14 @@ public class GeneViewProteomeTools {
          */
         ArrayList<String> bioConditions = new ArrayList<>();
         System.out.println("getGenomeSelected: "+ viewer.getGenomeSelected());
-        ExpressionMatrix exprProteomesMatrix = Database.getInstance().getExprProteomesTable(viewer.getGenomeSelected());
+        ExpressionMatrix exprProteomesMatrix = Database.getInstance().getLogFCProteomesTable(viewer.getGenomeSelected());
 
-        System.out.println(sequence.getName());
+        System.out.println("sequence: " + sequence.getName());
+        System.out.println("exprProteomesMatrixRowNames: " + exprProteomesMatrix);
+
         if (exprProteomesMatrix.getRowNames().containsKey(sequence.getName())) {
+            System.out.println("in if");
+
             for (String header : exprProteomesMatrix.getHeaders()) {
                 double value = exprProteomesMatrix.getValue(sequence.getName(), header);
                 if (value > 0) {
@@ -147,6 +156,8 @@ public class GeneViewProteomeTools {
                 }
             }
         }
+        System.out.println("after if");
+
         viewer.getLblOverProteomes().setText(bioConditions.size() + "");
 
         /*

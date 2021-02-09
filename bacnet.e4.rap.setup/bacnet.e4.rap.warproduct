@@ -6,10 +6,12 @@
       <plugin id="bacnet"/>
       <plugin id="bacnet.e4.rap"/>
       <plugin id="com.ibm.icu"/>
+      <plugin id="com.ibm.icu.txt"/>
       <plugin id="javax.annotation"/>
       <plugin id="javax.inject"/>
       <plugin id="javax.mail"/>
       <plugin id="javax.xml"/>
+      <plugin id="javax.servlet.http"/>
       <plugin id="org.apache.commons.fileupload"/>
       <plugin id="org.apache.commons.io"/>
       <plugin id="org.apache.commons.jxpath"/>
@@ -75,10 +77,12 @@
       <plugin id="bacnet" autoStart="true" startLevel="0" />
       <plugin id="bacnet.e4.rap" autoStart="true" startLevel="0" />
       <plugin id="com.ibm.icu" autoStart="true" startLevel="0" />
+      <plugin id="com.ibm.icu.txt" autoStart="true" startLevel="0" />
       <plugin id="javax.annotation" autoStart="true" startLevel="0" />
       <plugin id="javax.inject" autoStart="true" startLevel="0" />
       <plugin id="javax.mail" autoStart="true" startLevel="0" />
       <plugin id="javax.xml" autoStart="true" startLevel="0" />
+      <plugin id="javax.servlet.http" autoStart="true" startLevel="0" />
       <plugin id="org.apache.commons.fileupload" autoStart="true" startLevel="0" />
       <plugin id="org.apache.commons.io" autoStart="true" startLevel="0" />
       <plugin id="org.apache.commons.jxpath" autoStart="true" startLevel="0" />
@@ -142,7 +146,7 @@
 
    <warConfiguration webXml="/bacnet.e4.rap/WEB-INF/web.xml" launchIni="/bacnet.e4.rap/WEB-INF/launch.ini">
    <libraries>
-      <library path="org.eclipse.equinox.servletbridge_1.4.200.v20181008-1820.jar" fromTarget="true"/>
+      <library path="org.eclipse.equinox.servletbridge_1.3.200.v20160128-1435.jar" fromTarget="true"/>
    </libraries>
    </warConfiguration>
 </product>

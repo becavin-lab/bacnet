@@ -121,17 +121,32 @@ public class GenomeTranscriptomeView {
          * Load Experiment and init Track
          */
         String firstChromoID = genome.getFirstChromosome().getChromosomeID();
+        //System.out.println("updateView: "+ firstChromoID);
+
         track = new Track(genome, firstChromoID);
         int i = 1;
         for (String bioCondName : bioCondNames) {
+        	
             /*
              * Add and load BioCondition
              */
-        	//System.out.println("biocondname: "+bioCondName);
-            monitor.subTask("Loading datasets " + i + "/" + bioCondNames.size() + " : " + bioCondName);
-            track.getDatas().addBioCondition(bioCondName);
-            monitor.worked(1);
-            i++;
+        	//System.out.println("biocondname: " + bioCondName);
+        	if (bioCondName.contains(" vs ")) {
+                String bioCond1 = BioCondition.parseName(bioCondName)[0];
+                String bioCond2 = BioCondition.parseName(bioCondName)[1];
+
+                monitor.subTask("Loading datasets " + i + "/" + bioCondNames.size() + " : " + bioCondName);
+                track.getDatas().addBioCondition(bioCond1);
+                track.getDatas().addBioCondition(bioCond2);
+                monitor.worked(1);
+                i++;
+        	} else {
+        		monitor.subTask("Loading datasets " + i + "/" + bioCondNames.size() + " : " + bioCondName);
+                track.getDatas().addBioCondition(bioCondName);
+                monitor.worked(1);
+                i++;
+        	}
+            
         }
         track.setDisplayType(DisplayType.BIOCOND);
         // filterData(bioCondNames);
@@ -217,17 +232,17 @@ public class GenomeTranscriptomeView {
         try {
             IRunnableWithProgress thread =
                     new OpenBioConditionAndGenomeElementThread(view, genome, bioConditionsSelected, genomeElement);
-        	System.out.println("try: "+ thread);
+        	//System.out.println("try: "+ thread);
 
             new ProgressMonitorDialog(view.shell).run(true, false, thread);
             /*
              * Init Composite
              */
-        	System.out.println("before getTrcksComposite ");
+        	//System.out.println("before getTrcksComposite ");
 
             view.getTracksComposite().setTrack(view.getTrack());
             if (!genomeElement.equals("")) {
-            	System.out.println("genomeElement: "+ genomeElement);
+            	//System.out.println("genomeElement: "+ genomeElement);
                 view.getTracksComposite().search(genomeElement);
                 try {
                     @SuppressWarnings("unused")
@@ -423,32 +438,32 @@ public class GenomeTranscriptomeView {
 
         @Override
         public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
-            System.out.println("run");
+            //System.out.println("run");
 
         	int sizeProcess = 1 + bioConditions.size();
             // Tell the user what you are doing
             monitor.beginTask("Loading datasets for Genome Viewer", sizeProcess);
-            System.out.println("run2");
+            //System.out.println("run2");
 
             // Optionally add subtasks
             monitor.subTask("Loading genome: " + genome);
-            System.out.println("run3");
+            //System.out.println("run3");
 
             monitor.worked(1);
-            System.out.println("run4");
+            //System.out.println("run4");
 
             view.setData(genome, bioConditions);
-            System.out.println("run5");
+            //System.out.println("run5: " +bioConditions);
 
             monitor.worked(1);
-            System.out.println("run6");
+            //System.out.println("run6");
 
             view.updateView(monitor);
-            System.out.println("run7");
+            //System.out.println("run7");
 
             // You are done
             monitor.done();
-            System.out.println("monitor.done()");
+            //System.out.println("monitor.done()");
 
         }
 

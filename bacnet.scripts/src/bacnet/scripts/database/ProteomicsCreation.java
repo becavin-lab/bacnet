@@ -448,6 +448,11 @@ public class ProteomicsCreation {
                     if (proteome.getRowNames().containsKey(gene)) {
                         logFCMatrix.setValue(proteome.getValue(gene, ColNames.LOGFC + ""), gene, comparisonName);
                     } 
+                    // test if we can find the gene by its gene name
+                    else if (!geneName.equals("") & proteome.getRowNames().containsKey(geneName)) {
+                    	System.out.println("gene Name does contain Key");
+                    	logFCMatrix.setValue(proteome.getValue(geneName, ColNames.LOGFC + ""), gene, comparisonName);
+                    }
                     // test if we can find the gene by its old locus tag
                     else if (genome.getGenes().get(gene) != null) { //.getGenes() returns null if gene is a NcRNA 
                     	String oldLocusTag = genome.getGenes().get(gene).getFeature("old_locus_tag");
@@ -455,11 +460,7 @@ public class ProteomicsCreation {
                     		logFCMatrix.setValue(proteome.getValue(oldLocusTag, ColNames.LOGFC + ""), gene, comparisonName);
                     		}
                     }
-                 // test if we can find the gene by its gene name
-                    else if (!geneName.equals("") & proteome.getRowNames().containsKey(geneName)) {
-                    	System.out.println("gene Name does contain Key");
-                    	logFCMatrix.setValue(proteome.getValue(geneName, ColNames.LOGFC + ""), gene, comparisonName);
-                    }
+                 
                 }
             }
         }

@@ -440,13 +440,13 @@ public class DataTrack {
                     proteome.load();
                 }
             }
-            System.out.println("bioCond.getMatrices: "+bioCond.getMatrices());
+            //System.out.println("bioCond.getMatrices: "+bioCond.getMatrices());
             for (ExpressionMatrix matrix : bioCond.getMatrices()) {
 
                 if (!matrix.isLoaded()) {
                     matrix.load();
-                    System.out.println("matrix row names: " + matrix.getRowNamesToList());
-                    System.out.println("matrix loaded ");
+                    //System.out.println("matrix row names: " + matrix.getRowNamesToList());
+                    //System.out.println("matrix loaded ");
                 }
             }
         }

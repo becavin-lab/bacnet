@@ -81,10 +81,11 @@ public class BannerView implements SelectionListener {
         
         Composite container = new Composite(parent, SWT.BORDER);
         container.setLayout(new GridLayout(3, false));
-
+        container.setBackground(BasicColor.BANNER_COLOR);
         canvas = new Canvas(container, SWT.NONE);
         canvas.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
         canvas.setLayout(new GridLayout(1, false));
+        
         /*
          * Paint the Banner of the software/website
          */
@@ -96,9 +97,10 @@ public class BannerView implements SelectionListener {
 
             @Override
             public void paintControl(PaintEvent event) {
-                event.gc.setBackground(BasicColor.WHITE);
-                event.gc.setForeground(BasicColor.LIGHTGREY);
+                event.gc.setBackground(BasicColor.BANNER_COLOR);
+                event.gc.setForeground(BasicColor.BANNER_COLOR);
                 event.gc.fillGradientRectangle(0, 0, event.width, event.height, false);
+                               
                 // event.gc.setBackground(BasicColor.WHITE);
                 // event.gc.setForeground(BasicColor.BANNER_BACKGROUND);
                 // event.gc.fillGradientRectangle(0, event.height/2, event.width,
@@ -116,7 +118,7 @@ public class BannerView implements SelectionListener {
         });
 
         toolBar = new ToolBar(container, SWT.FLAT | SWT.RIGHT);
-
+        toolBar.setBackground(BasicColor.BANNER_COLOR);
         tltmGenomics = new ToolItem(toolBar, SWT.NONE);
         tltmGenomics.setImage(ResourceManager.getPluginImage("bacnet", "icons/ToolBar/genomics.png"));
         tltmGenomics.addSelectionListener(this);

@@ -60,6 +60,7 @@ import bacnet.datamodel.sequence.Srna;
 import bacnet.datamodel.sequenceNCBI.GenomeNCBI;
 import bacnet.expressionAtlas.HeatMapTranscriptomicsView;
 import bacnet.expressionAtlas.core.GenomeElementAtlas;
+import bacnet.expressionAtlas.HeatMapProteomicsView;
 import bacnet.genomeBrowser.GenomeTranscriptomeView;
 import bacnet.genomeBrowser.core.Track;
 import bacnet.genomeBrowser.tracksGUI.TrackCanvasGenome;
@@ -298,7 +299,7 @@ public class GeneView implements SelectionListener, MouseListener {
         new Label(compositeGenome, SWT.NONE);
 
         lblTranscriptomesData = new Label(compositeGenome, SWT.NONE);
-        lblTranscriptomesData.setText(" * Transcriptomes data available");
+        lblTranscriptomesData.setText(" * Transcriptomics or proteomics data available");
         lblTranscriptomesData.setFont(SWTResourceManager.getBodyFont(10, SWT.NORMAL));
         new Label(compositeGenome, SWT.NONE);
         new Label(compositeGenome, SWT.NONE);
@@ -1016,7 +1017,8 @@ public class GeneView implements SelectionListener, MouseListener {
             realUrl = "https://listeriomics.pasteur.fr/";
             pathGraphHTML = realUrl + "SynTView/flash/indexFinal.html";
             } else {
-                pathGraphHTML = "http://hub18.hosting.pasteur.fr/SynTView/flash/Yersinia/SynWebPestis.html";
+                pathGraphHTML = "http://hub18.hosting.pasteur.fr/SynTView/JS/Yersiniomics/pestis/";
+                pathGraphHTML = "";
             }
             System.out.println("SyntView: " + pathGraphHTML);
             browserSynteny.setUrl(pathGraphHTML);
@@ -1049,19 +1051,19 @@ public class GeneView implements SelectionListener, MouseListener {
             realUrl = "https://listeriomics.pasteur.fr/";
             pathGraphHTML = realUrl + "SynTView/flash/indexFinal.html";
             } else if (genome.getSpecies().equals("Yersinia pestis CO92")){
-                pathGraphHTML = "http://hub18.hosting.pasteur.fr/SynTView/flash/Yersinia/SynWebPestis.html";
+                //pathGraphHTML = "http://hub18.hosting.pasteur.fr/SynTView/JS/Yersiniomics/pestis/";
                 System.out.println("SyntView: " + pathGraphHTML);
                 browserSynteny.setUrl(pathGraphHTML);
                 browserSynteny.redraw();
                 
             } else if (genome.getSpecies().equals("Yersinia pseudotuberculosis YPIII")){
-                pathGraphHTML = "http://hub18.hosting.pasteur.fr/SynTView/flash/Yersinia/SynWebPseudo.html";
+                //pathGraphHTML = "http://hub18.hosting.pasteur.fr/SynTView/JS/Yersiniomics/pseudo/";
                 System.out.println("SyntView: " + pathGraphHTML);
                 browserSynteny.setUrl(pathGraphHTML);
                 browserSynteny.redraw();
                 
             } else if (genome.getSpecies().equals("Yersinia enterocolitica 8081")){
-            pathGraphHTML = "http://hub18.hosting.pasteur.fr/SynTView/flash/Yersinia/SynWebEntero.html";
+            //pathGraphHTML = "http://hub18.hosting.pasteur.fr/SynTView/JS/Yersiniomics/entero/";
             System.out.println("SyntView: " + pathGraphHTML);
             browserSynteny.setUrl(pathGraphHTML);
             browserSynteny.redraw();
@@ -1569,7 +1571,7 @@ public class GeneView implements SelectionListener, MouseListener {
          * Update synteny view
          */
         
-        /*
+        
         try {
             browserSynteny.evaluate("search('" + sequence.getName() + "')");
         } catch (Exception e) {
@@ -1580,7 +1582,7 @@ public class GeneView implements SelectionListener, MouseListener {
          * Transcriptome update
          */
         if (genomeTranscriptomes.contains(genome.getSpecies())) {
-            // System.out.println(genome.getSpecies());
+            //System.out.println(genome.getSpecies());
             GeneViewTranscriptomeTools.updateExpressionAtlas(sequence, txtCutoffLogFC, this, arrayDataList);
         } else {
             lblOver.setText("No data");
@@ -1683,9 +1685,30 @@ public class GeneView implements SelectionListener, MouseListener {
             // System.out.println(comparison);
             comparisons.add(comparison);
         }
+        System.out.println("comparisons: "+ comparisons);
         return comparisons;
     }
 
+    public ArrayList<String> getSelectedComparisonsProteome() {
+        ArrayList<String> comparisons = new ArrayList<>();
+        for (int index : tableOverProteome.getSelectionIndices()) {
+            String comparison = tableOverProteome.getItem(index).getText(ArrayUtils.findColumn(arrayProteomeList, "Data Name"));
+            // System.out.println(comparison);
+            comparisons.add(comparison);
+        }
+        for (int index : tableUnderProteome.getSelectionIndices()) {
+            String comparison = tableUnderProteome.getItem(index).getText(ArrayUtils.findColumn(arrayProteomeList, "Data Name"));
+            // System.out.println(comparison);
+            comparisons.add(comparison);
+        }
+        for (int index : tableNodiffProteome.getSelectionIndices()) {
+            String comparison = tableNodiffProteome.getItem(index).getText(ArrayUtils.findColumn(arrayProteomeList, "Data Name"));
+            // System.out.println(comparison);
+            comparisons.add(comparison);
+        }
+        System.out.println("comparisons: "+ comparisons);
+        return comparisons;
+    }
     /**
      * Display a given gene
      * 
@@ -1943,11 +1966,20 @@ public class GeneView implements SelectionListener, MouseListener {
         } else if (e.getSource() == btnGenomeViewer) {
             GenomeTranscriptomeView.displayGenomeElementAndBioConditions(partService, genome.getSpecies(),
                     getSelectedComparisons(), sequence.getName());
+        } else if (e.getSource() == btnGenomeViewerProteome) {
+            GenomeTranscriptomeView.displayGenomeElementAndBioConditions(partService, genome.getSpecies(),
+                    getSelectedComparisonsProteome(), sequence.getName());
         } else if (e.getSource() == btnUpdateCutoff) {
             GeneViewTranscriptomeTools.updateExpressionAtlas(sequence, txtCutoffLogFC, this, arrayDataList);
+        } else if (e.getSource() == btnUpdateCutoffProteome) {
+            GeneViewProteomeTools.updateProteinAtlas(sequence, txtCutoffLogFCProteome, this, arrayProteinAtlasList);
         } else if (e.getSource() == btnHeatmapview) {
             String sequenceName = sequence.getName();
             HeatMapTranscriptomicsView.displayComparisonsAndElement(genome.getSpecies(), getSelectedComparisons(),
+                    sequenceName, partService);
+        } else if (e.getSource() == btnHeatmapviewProteome) {
+            String sequenceName = sequence.getName();
+            HeatMapProteomicsView.displayComparisonsAndElement(genome.getSpecies(), getSelectedComparisonsProteome(),
                     sequenceName, partService);
         } else if (e.getSource() == btnExportToFasta) {
             ArrayList<String> fastaFile = new ArrayList<String>();
@@ -2116,15 +2148,55 @@ public class GeneView implements SelectionListener, MouseListener {
     public void setLblUnder(Label lblUnder) {
         this.lblUnder = lblUnder;
     }
+    
+    public Label getLblNodiff() {
+        return lblNodiff;
+    }
+
+    public void setLblNodiff(Label lblNodiff) {
+        this.lblNodiff = lblNodiff;
+    }
+
+    public Label getLblOverProteome() {
+        return lblOverProteome;
+    }
+
+    public void setLblOveProteome(Label lblOver) {
+        this.lblOverProteome = lblOver;
+    }
+
+    public Label getLblUnderProteome() {
+        return lblUnderProteome;
+    }
+
+    public void setLblUnderProteome(Label lblUnder) {
+        this.lblUnderProteome = lblUnder;
+    }
+    
+    public Label getLblNodiffProteome() {
+        return lblNodiffProteome;
+    }
+
+    public void setLblNodiffProteome(Label lblNodiff) {
+        this.lblNodiffProteome = lblNodiff;
+    }
 
     public Text getTxtCutoffLogFC() {
         return txtCutoffLogFC;
     }
-
+    
+    public Text getTxtCutoffLogFCProteome() {
+        return txtCutoffLogFCProteome;
+    }
+    
     public void setTxtCutoffLogFC(Text txtCutoffLogFC) {
         this.txtCutoffLogFC = txtCutoffLogFC;
     }
 
+    public void setTxtCutoffLogFCProteome(Text txtCutoffLogFCProteome) {
+        this.txtCutoffLogFCProteome = txtCutoffLogFCProteome;
+    }
+    
     public Text getTxtCutoffPvalue() {
         return txtCutoffPvalue;
     }
@@ -2179,14 +2251,6 @@ public class GeneView implements SelectionListener, MouseListener {
 
     public void setLblOverProteomes(Label lblOverProteomes) {
         this.lblExprProteomes = lblOverProteomes;
-    }
-
-    public Label getLblNodiff() {
-        return lblNodiff;
-    }
-
-    public void setLblNodiff(Label lblNodiff) {
-        this.lblNodiff = lblNodiff;
     }
 
     public Track getTrackGenome() {

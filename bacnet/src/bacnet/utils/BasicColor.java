@@ -30,9 +30,23 @@ public class BasicColor {
     // Purple
     public static Color PURPLE = new Color(display, 128, 0, 128);
     // LIGHTBLUE
-    public static Color LIGHTBLUE = new Color(display, 140, 142, 242);
+    public static Color LIGHTBLUE = new Color(display, 149, 224, 245);
     // CYAN
     public static Color CYAN = new Color(display, 0, 217, 217);
+
+
+    public static Color BANNER_COLOR = new Color(display, 199, 255, 247);
+    
+    public static Color LIGHT_ONE = new Color(display, 202, 240, 248);
+    public static Color DARK_ONE = new Color(display, 255, 255, 255);
+    
+    public static Color LIGHT_TWO = new Color(display, 173, 232, 244);
+    public static Color DARK_TWO = new Color(display, 230, 250, 255);
+    
+    public static Color LIGHT_THREE = new Color(display, 144, 224, 239);
+    public static Color DARK_THREE = new Color(display, 202, 240, 248);
+
+    public static Color BROWN = new Color(display, 158, 107, 17);
 
     public static Color gradientColor(int gradient) {
         return new Color(display, 255, 127, gradient % 255);
@@ -53,11 +67,11 @@ public class BasicColor {
     /**
      * Light red color used for plus strand genes
      */
-    public static Color REDLIGHT_GENE = new Color(display, 230, 50, 52);
+    public static Color REDLIGHT_GENE = new Color(display, 255, 229, 189);
     /**
      * Dark red color used for plus strand genes
      */
-    public static Color REDDARK_GENE = new Color(display, 169, 42, 43);
+    public static Color REDDARK_GENE = new Color(display, 255, 229, 189);
     /**
      * Very dark red color used for plus strand genes surrounding
      */
@@ -66,7 +80,7 @@ public class BasicColor {
     /**
      * Light blue color used for plus strand genes
      */
-    public static Color BLUELIGHT_GENE = new Color(display, 69, 130, 247);
+    public static Color BLUELIGHT_GENE = new Color(display, 184, 232, 255);
     /**
      * Dark blue color used for plus strand genes
      */

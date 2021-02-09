@@ -458,9 +458,11 @@ public class TranscriptomesCreation {
                     	Gene geneTemp = genome.getGeneFromName(gene);
                     	String geneName = geneTemp.getGeneName();
                         if (matrix.getRowNames().containsKey(gene)) {
-                            System.out.println("contains Key");
                             logFCMatrix.setValue(matrix.getValue(gene, ColNames.LOGFC + ""), gene, comp);
-                        } 
+                        } else if (!geneName.equals("") & matrix.getRowNames().containsKey(geneName)) {
+                            //System.out.println("gene Name does contain Key");
+                        	logFCMatrix.setValue(matrix.getValue(geneName, ColNames.LOGFC + ""), gene, comp);
+                        }
                         // test if we can find the gene by its old locus tag
                         else if (genome.getGenes().get(gene) != null) { //.getGenes() returns null if gene is a NcRNA 
                             String oldLocusTag = genome.getGenes().get(gene).getFeature("old_locus_tag");
@@ -468,9 +470,6 @@ public class TranscriptomesCreation {
                         		logFCMatrix.setValue(matrix.getValue(oldLocusTag, ColNames.LOGFC + ""), gene, comp);
                         		}
                         // test if we can find the gene by its gene name
-                        } else if (!geneName.equals("") & matrix.getRowNames().containsKey(geneName)) {
-                                System.out.println("gene Name does contain Key");
-                            	logFCMatrix.setValue(matrix.getValue(geneName, ColNames.LOGFC + ""), gene, comp);
                         }
                 }
                     
@@ -481,13 +480,18 @@ public class TranscriptomesCreation {
                     if (file.exists()) {
                         ExpressionMatrix matrix = ExpressionMatrix.loadTab(fileNameRNASeq, false);
                         for (String gene : genome.getAllElementNames()) {
+                        	Gene geneTemp = genome.getGeneFromName(gene);
+                        	String geneName = geneTemp.getGeneName();
                             if (matrix.getRowNames().containsKey(gene)) {
                                 logFCMatrix.setValue(matrix.getValue(gene, ColNames.LOGFC + ""), gene, comp);
-                            } else { // test if we can find the gene by its gene name
-                            	Gene geneTemp = genome.getGeneFromName(gene);
-                            	String geneName = geneTemp.getGeneName();
-                            	if (matrix.getRowNames().containsKey(geneName)) {
-	                            	logFCMatrix.setValue(matrix.getValue(geneName, ColNames.LOGFC + ""), gene, comp);
+                            }  else if (!geneName.equals("") & matrix.getRowNames().containsKey(geneName)) { // test if we can find the gene by its gene name         
+                            	logFCMatrix.setValue(matrix.getValue(geneName, ColNames.LOGFC + ""), gene, comp);
+                            }
+                         // test if we can find the gene by its old locus tag
+                            else if (genome.getGenes().get(gene) != null) { //.getGenes() returns null if gene is a NcRNA 
+                                String oldLocusTag = genome.getGenes().get(gene).getFeature("old_locus_tag");
+                            	if (!oldLocusTag.equals("") & matrix.getRowNames().containsKey(oldLocusTag)) {
+                            		logFCMatrix.setValue(matrix.getValue(oldLocusTag, ColNames.LOGFC + ""), gene, comp);
                             	}
                             }
                         }

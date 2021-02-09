@@ -76,26 +76,32 @@ public class GElement {
                 int[] pointArray = {rectangle.x, rectangle.y, newX, rectangle.y, newX + sizeArrow,
                         rectangle.y + rectangle.height / 2, newX, rectangle.y + rectangle.height, rectangle.x,
                         rectangle.y + rectangle.height};
+                
                 // Fill the entire shape
                 gc.setBackground(lightColor);
                 gc.fillPolygon(pointArray);
+                
                 // fill the figure with a gradient color
-                gc.setForeground(darkColor);
-                gc.fillGradientRectangle(rectangle.x, rectangle.y, rectangle.width - sizeArrow, rectangle.height,
-                        false);
+                //gc.setForeground(darkColor);
+                //gc.fillGradientRectangle(rectangle.x, rectangle.y, rectangle.width - sizeArrow, rectangle.height,
+                 //       false);
+                
                 // draw the line surrounding the shape
-                gc.setForeground(lineColor);
-                gc.drawPolygon(pointArray);
+                //gc.setForeground(lineColor);
+                //gc.drawPolygon(pointArray);
+                
             } else { // draw only a rectangle
                 int[] pointArray = {rectangle.x + rectangle.width, rectangle.y, rectangle.x, rectangle.y, rectangle.x,
                         rectangle.y + rectangle.height, rectangle.x + rectangle.width, rectangle.y + rectangle.height,};
                 // fill the figure with a gradient color
                 gc.setBackground(lightColor);
-                gc.setForeground(darkColor);
-                gc.fillGradientRectangle(rectangle.x, rectangle.y, rectangle.width, rectangle.height, false);
+                gc.fillPolygon(pointArray);
+
+                //gc.setForeground(darkColor);
+                //gc.fillGradientRectangle(rectangle.x, rectangle.y, rectangle.width, rectangle.height, false);
                 // draw the line surrounding the shape
-                gc.setForeground(lineColor);
-                gc.drawPolygon(pointArray);
+                //gc.setForeground(lineColor);
+                //gc.drawPolygon(pointArray);
             }
         } else {
             boolean displayEnd = true;
@@ -117,6 +123,7 @@ public class GElement {
                 // Fill the entire shape
                 gc.setBackground(lightColor);
                 gc.fillPolygon(pointArray);
+                /*
                 // fill the figure with a gradient color
                 gc.setForeground(lightColor);
                 gc.setBackground(darkColor);
@@ -125,17 +132,20 @@ public class GElement {
                 // draw the arrow
                 gc.setForeground(lineColor);
                 gc.drawPolygon(pointArray);
+                */
             } else { // draw only a rectangle
                 int[] pointArray = {rectangle.x, rectangle.y, rectangle.x + rectangle.width, rectangle.y,
                         rectangle.x + rectangle.width, rectangle.y + rectangle.height, rectangle.x,
                         rectangle.y + rectangle.height};
                 // fill the figure with a gradient color
-                gc.setForeground(lightColor);
-                gc.setBackground(darkColor);
-                gc.fillGradientRectangle(rectangle.x, rectangle.y, rectangle.width, rectangle.height, false);
+                //gc.setForeground(lightColor);
+                gc.setBackground(lightColor);
+                gc.fillPolygon(pointArray);
+
+                //gc.fillGradientRectangle(rectangle.x, rectangle.y, rectangle.width, rectangle.height, false);
                 // draw the arrow
-                gc.setForeground(lineColor);
-                gc.drawPolygon(pointArray);
+                //gc.setForeground(lineColor);
+                //gc.drawPolygon(pointArray);
             }
 
         }
@@ -147,11 +157,11 @@ public class GElement {
         if (sequence.isStrand()) {
             // set text box color
             gc.setForeground(textColor);
-            gc.setBackground(darkColor);
+            //gc.setBackground(darkColor);
         } else {
             // set text box color
             gc.setForeground(textColor);
-            gc.setBackground(lightColor);
+            //gc.setBackground(lightColor);
             if (!(sequence instanceof TIS)) {
                 decayString = 30;
             }

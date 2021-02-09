@@ -56,7 +56,7 @@ public class Genome {
     /**
      * Default genome for Yersinia
      */
-    public static String YERSINIA_NAME = "Yersinia enterocolitica subsp enterocolitica 8081";
+    public static String YERSINIA_NAME = "";
     /**
      * Name of EGD genome
      */

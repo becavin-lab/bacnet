@@ -78,5 +78,6 @@ Export-Package: bacnet,
  org.biojava3.genome.uniprot,
  org.biojava3.genome.util
 Import-Package: javax.inject;version="1.0.0",
- javax.servlet;version="3.1.0";resolution:=optional,
- javax.servlet.http;version="3.1.0";resolution:=optional
+ javax.servlet;version="3.1.0",
+ javax.servlet.http;version="3.1.0"
+
