@@ -573,7 +573,7 @@ public class BioConditionCreation {
     public static void createSummaryTranscriptomesComparisonsTable() {
         ArrayList<String> tableResult = new ArrayList<>();
         String[] titles = {"Data Name", "Growth", "Temp.", "Mutant", "Media", "MediaGrowthProperties", "VS", "Growth",
-                "Temp.", "Mutant", "MediaGrowthProperties", "Media", "Type", "ArrayExpressId", "Date", "Strain used", "Strain array",
+                "Temp.", "Mutant", "Media", "MediaGrowthProperties", "Type", "ArrayExpressId", "Date", "Strain used", "Strain array",
                 "Reference"};
         String header = "";
         for (String title : titles)
@@ -638,7 +638,7 @@ public class BioConditionCreation {
     public static void createSummaryProteomesComparisonsTable() {
         ArrayList<String> tableResult = new ArrayList<>();
         String[] titles = {"Data Name", "Growth", "Temp.", "Mutant", "Media", "MediaGrowthProperties", "VS", "Growth",
-                "Temp.", "Mutant", "MediaGrowthProperties", "Media", "Type", "ArrayExpressId", "Date", "Strain used", "Strain array",
+                "Temp.", "Mutant", "Media", "MediaGrowthProperties", "Type", "ArrayExpressId", "Date", "Strain used", "Strain array",
                 "Reference"};
         String header = "";
         for (String title : titles)
