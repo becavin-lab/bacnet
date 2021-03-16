@@ -22,7 +22,6 @@ Require-Bundle: org.eclipse.e4.ui.services,
  org.eclipse.e4.ui.di,
  org.eclipse.equinox.app,
  org.eclipse.equinox.registry,
- apache.batik;bundle-version="1.0.0",
  bacnet.lib;bundle-version="1.0.0",
  bacnet.scripts;bundle-version="1.0.0"
 Import-Package: javax.annotation;version="1.2.0",

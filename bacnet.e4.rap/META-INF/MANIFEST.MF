@@ -15,7 +15,7 @@ Require-Bundle: org.eclipse.e4.ui.services,
  org.eclipse.rap.e4,
  org.eclipse.rap.jface,
  org.eclipse.e4.ui.di
-Import-Package: javax.annotation,
+Import-Package: javax.annotation;version="1.3.5",
  javax.inject,
  org.osgi.framework
 Service-Component: OSGI-INF/contribution.xml
