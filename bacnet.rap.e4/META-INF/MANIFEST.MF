@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: E4
+Bundle-SymbolicName: bacnet.rap.e4;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Automatic-Module-Name: bacnet.rap.e4
+Bundle-RequiredExecutionEnvironment: JavaSE-15
+Require-Bundle: org.eclipse.rap.ui;bundle-version="[3.0.0,4.0.0)"
