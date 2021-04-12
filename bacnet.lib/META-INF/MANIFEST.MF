@@ -4,8 +4,7 @@ Bundle-Name: Lib
 Bundle-SymbolicName: bacnet.lib
 Bundle-Version: 1.0.0
 Bundle-ClassPath: .
-Require-Bundle: apache.batik,
- javax.servlet,
+Require-Bundle: javax.servlet,
  javax.xml,
  org.eclipse.core.runtime,
  org.eclipse.rap.filedialog,
