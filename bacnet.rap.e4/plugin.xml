@@ -3,85 +3,12 @@
 <plugin>
 
    <extension
-         id="mailapp.entrypoints"
-         point="org.eclipse.rap.ui.entrypoint">
-      <entrypoint
-            id="mailapp.entrypoint"
-            path="/mail"
-            applicationId="bacnet.rap.e4.mailapp"
-            brandingId="bacnet.rap.e4.branding">
-      </entrypoint>
-   </extension>
-   <extension
-         id="bacnet.rap.e4.mailapp"
-         point="org.eclipse.core.runtime.applications">
-      <application
-            visible="true"
-            cardinality="singleton-global"
-            thread="main">
-         <run
-               class="bacnet.rap.e4.Application">
-         </run>
-      </application>
-   </extension>
-   <extension
-         point="org.eclipse.ui.perspectives">
-      <perspective
-            class="bacnet.rap.e4.Perspective"
-            name="RAP Perspective"
-            id="bacnet.rap.e4.perspective">
-      </perspective>
-   </extension>
-   <extension
-         point="org.eclipse.ui.views">
-      <view
-            class="bacnet.rap.e4.View"
-            name="Message"
-            id="bacnet.rap.e4.view"
-            allowMultiple="true"
-            icon="icons/sample2.gif">
-      </view>
-      <view
-            class="bacnet.rap.e4.NavigationView"
-            name="Mailboxes"
-            id="bacnet.rap.e4.navigationView"
-            icon="icons/sample3.gif">
-      </view>
-   </extension>
-   <extension
-         point="org.eclipse.ui.commands">
-      <category
-            name="Mail"
-            id="bacnet.rap.e4.category">
-      </category>
-      <command
-            name="Open Mailbox"
-            description="Opens a mailbox"
-            categoryId="bacnet.rap.e4.category"
-            id="bacnet.rap.e4.open">
-      </command>
-      <command
-            name="Open Message Dialog"
-            description="Opens a message dialog"
-            categoryId="bacnet.rap.e4.category"
-            id="bacnet.rap.e4.openMessage">
-      </command>
-   </extension>
-   <extension
-         point="org.eclipse.rap.ui.branding">
-      <branding
-            id="bacnet.rap.e4.branding"
-            themeId="org.eclipse.rap.design.example.business.theme"
-            title="RAP Maildemo">
-         <presentationFactory
-               id="org.eclipse.rap.design.example.business.factory"
-               defaultLayoutId="org.eclipse.rap.design.example.business.layout"
-               name="Business PresentationFactory">
-            <defaultStackPresentation
-                  id="org.eclipse.rap.design.example.stack.view">
-            </defaultStackPresentation>
-         </presentationFactory>
-      </branding>
+         id="bacnet.rap.e4.e4app"
+         point="org.eclipse.core.runtime.products">
+      <product
+            application="org.eclipse.e4.ui.workbench.swt.E4Application"
+            name="RAP E4 Application">
+      </product>
    </extension>
 
 </plugin>
