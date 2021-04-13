@@ -91,7 +91,7 @@ public class InitViewBacnet implements SelectionListener {
         gd_btnListeriomics.heightHint = 100;
         btnListeriomics.setLayoutData(gd_btnListeriomics);
         btnListeriomics.addSelectionListener(this);
-        btnListeriomics.setImage(ResourceManager.getPluginImage("bacnet", "icons/ToolBar/LogoListeriomics.png"));
+        btnListeriomics.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/ToolBar/LogoListeriomics.png"));
 
         Label lblIntracellularMouse = new Label(composite_9, SWT.WRAP);
         lblIntracellularMouse.setAlignment(SWT.CENTER);
@@ -119,10 +119,10 @@ public class InitViewBacnet implements SelectionListener {
         GridData gd_btnLightlisteriomics = new GridData(SWT.CENTER, SWT.CENTER, true, false, 1, 1);
         gd_btnLightlisteriomics.heightHint = 100;
         btnLightlisteriomics.setLayoutData(gd_btnLightlisteriomics);
-        // btnGeneView.setImage(ResourceManager.getPluginImage("bacnet",
+        // btnGeneView.setImage(ResourceManager.getPluginImage("bacnet.core",
         // "icons/InitPage/SystemsBio.png"));
         btnLightlisteriomics.addSelectionListener(this);
-        btnLightlisteriomics.setImage(ResourceManager.getPluginImage("bacnet", "icons/ToolBar/LogoListeriomics.png"));
+        btnLightlisteriomics.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/ToolBar/LogoListeriomics.png"));
         
 
         Label lblinfo = new Label(composite_15, SWT.WRAP);
@@ -154,7 +154,7 @@ public class InitViewBacnet implements SelectionListener {
         gd_btnLeishmania.heightHint = 100;
         btnLeishmania = new Button(composite_1, SWT.BORDER);
         btnLeishmania.setLayoutData(gd_btnLeishmania);
-        btnLeishmania.setImage(ResourceManager.getPluginImage("bacnet", "icons/ToolBar/LogoLeishomics.png"));
+        btnLeishmania.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/ToolBar/LogoLeishomics.png"));
         btnLeishmania.addSelectionListener(this);
         Label lblNewLabel = new Label(composite_1, SWT.WRAP);
         lblNewLabel.setAlignment(SWT.CENTER);
@@ -178,7 +178,7 @@ public class InitViewBacnet implements SelectionListener {
         gd_btnYersiniomics.heightHint = 100;
         btnYersiniomics.setLayoutData(gd_btnYersiniomics);
         btnYersiniomics.addSelectionListener(this);
-        btnYersiniomics.setImage(ResourceManager.getPluginImage("bacnet", "icons/ToolBar/LogoYersiniomics.png"));
+        btnYersiniomics.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/ToolBar/LogoYersiniomics.png"));
 
         Label lblGoThroughAll = new Label(composite_10, SWT.WRAP);
         lblGoThroughAll.setAlignment(SWT.CENTER);
@@ -206,7 +206,7 @@ public class InitViewBacnet implements SelectionListener {
         btnCRISPR.setLayoutData(gd_btnCRISPR);
         btnCRISPR.setFont(SWTResourceManager.getTitleFont(SWT.NORMAL));
         btnCRISPR.addSelectionListener(this);
-        btnCRISPR.setImage(ResourceManager.getPluginImage("bacnet", "icons/ToolBar/LogoCRISPRbrowserMini.png"));
+        btnCRISPR.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/ToolBar/LogoCRISPRbrowserMini.png"));
 
         Label lblGoThroughAll_1 = new Label(composite_21, SWT.WRAP);
         lblGoThroughAll_1.setAlignment(SWT.CENTER);
@@ -243,7 +243,7 @@ public class InitViewBacnet implements SelectionListener {
 
         Label lblImagelicence = new Label(composite_19, SWT.CENTER);
         lblImagelicence.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
-        lblImagelicence.setImage(ResourceManager.getPluginImage("bacnet", "icons/logos/cccommons.png"));
+        lblImagelicence.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/logos/cccommons.png"));
 
         Label lblThisWorkIs = new Label(composite_19, SWT.NONE);
         lblThisWorkIs.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
@@ -276,19 +276,19 @@ public class InitViewBacnet implements SelectionListener {
         Label lblPasteur = new Label(composite_3, SWT.NONE);
         lblPasteur.setSize(0, 15);
         lblPasteur.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-        lblPasteur.setImage(ResourceManager.getPluginImage("bacnet", "icons/logos/Pasteur.png"));
+        lblPasteur.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/logos/Pasteur.png"));
 
         Label lblInra = new Label(composite_3, SWT.NONE);
         lblInra.setSize(0, 15);
         lblInra.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-        lblInra.setImage(ResourceManager.getPluginImage("bacnet", "icons/logos/INRA.png"));
+        lblInra.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/logos/INRA.png"));
         Label lblAnr = new Label(composite_3, SWT.NONE);
         lblAnr.setSize(0, 15);
-        lblAnr.setImage(ResourceManager.getPluginImage("bacnet", "icons/logos/Logo ANR.png"));
+        lblAnr.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/logos/Logo ANR.png"));
 
         Label lblBacnet = new Label(composite_3, SWT.NONE);
         lblBacnet.setSize(0, 15);
-        lblBacnet.setImage(ResourceManager.getPluginImage("bacnet", "icons/logos/investissement-davenir.png"));
+        lblBacnet.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/logos/investissement-davenir.png"));
 
         scrolledComposite.setContent(composite);
         scrolledComposite.setMinSize(composite.computeSize(SWT.DEFAULT, SWT.DEFAULT));

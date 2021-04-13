@@ -552,7 +552,7 @@ public class SetupPart implements SelectionListener {
                 dataValidation.getBioconditions().put(biocond, false);
                 TableItem item = new TableItem(tableBioCondition, SWT.NONE);
                 item.setText(0, biocond);
-                item.setImage(1, ResourceManager.getPluginImage("bacnet", "icons/unchecked.bmp"));
+                item.setImage(1, ResourceManager.getPluginImage("bacnet.core", "icons/unchecked.bmp"));
             }
             lblBioconditions.setText("Found : " + (dataValidation.getBioconditions().size()) + " Bioconditions in the database");
             
@@ -576,9 +576,9 @@ public class SetupPart implements SelectionListener {
             item.setText(0, bioCondName);
             boolean validated = dataValidation.getBioconditions().get(bioCondName);
             if (validated) {
-                item.setImage(1, ResourceManager.getPluginImage("bacnet", "icons/checked.bmp"));
+                item.setImage(1, ResourceManager.getPluginImage("bacnet.core", "icons/checked.bmp"));
             } else {
-                item.setImage(1, ResourceManager.getPluginImage("bacnet", "icons/unchecked.bmp"));
+                item.setImage(1, ResourceManager.getPluginImage("bacnet.core", "icons/unchecked.bmp"));
             }
             i++;
         }
@@ -671,7 +671,7 @@ public class SetupPart implements SelectionListener {
                 dataValidation.getComparisons().put(biocond, false);
                 TableItem item = new TableItem(tableComparisons, SWT.NONE);
                 item.setText(0, biocond);
-                item.setImage(1, ResourceManager.getPluginImage("bacnet", "icons/unchecked.bmp"));
+                item.setImage(1, ResourceManager.getPluginImage("bacnet.core", "icons/unchecked.bmp"));
             }
             lblComparisons.setText("Found : " + dataValidation.getComparisons().size() + " Comparisons in the database");
             
@@ -699,9 +699,9 @@ public class SetupPart implements SelectionListener {
             item.setText(0, compName);
             boolean validated = dataValidation.getComparisons().get(compName);
             if (validated) {
-                item.setImage(1, ResourceManager.getPluginImage("bacnet", "icons/checked.bmp"));
+                item.setImage(1, ResourceManager.getPluginImage("bacnet.core", "icons/checked.bmp"));
             } else {
-                item.setImage(1, ResourceManager.getPluginImage("bacnet", "icons/unchecked.bmp"));
+                item.setImage(1, ResourceManager.getPluginImage("bacnet.core", "icons/unchecked.bmp"));
             }
             i++;
         }
@@ -724,7 +724,7 @@ public class SetupPart implements SelectionListener {
                 dataValidation.getGenomes().put(genome, false);
                 TableItem item = new TableItem(tableGenome, SWT.NONE);
                 item.setText(0, genome);
-                item.setImage(1, ResourceManager.getPluginImage("bacnet", "icons/unchecked.bmp"));
+                item.setImage(1, ResourceManager.getPluginImage("bacnet.core", "icons/unchecked.bmp"));
             }
             for (int i = 0; i < titles.length; i++) {
                 tableGenome.getColumn(i).pack();
@@ -742,9 +742,9 @@ public class SetupPart implements SelectionListener {
             item.setText(0, genome);
             boolean validated = dataValidation.getGenomes().get(genome);
             if (validated) {
-                item.setImage(1, ResourceManager.getPluginImage("bacnet", "icons/checked.bmp"));
+                item.setImage(1, ResourceManager.getPluginImage("bacnet.core", "icons/checked.bmp"));
             } else {
-                item.setImage(1, ResourceManager.getPluginImage("bacnet", "icons/unchecked.bmp"));
+                item.setImage(1, ResourceManager.getPluginImage("bacnet.core", "icons/unchecked.bmp"));
             }
             i++;
         }
@@ -776,7 +776,7 @@ public class SetupPart implements SelectionListener {
                 }
                 TableItem item = new TableItem(tableTranscriptomes, SWT.NONE);
                 item.setText(0, bioConds[i][0]);
-                item.setImage(1, ResourceManager.getPluginImage("bacnet", "icons/unchecked.bmp"));
+                item.setImage(1, ResourceManager.getPluginImage("bacnet.core", "icons/unchecked.bmp"));
             }
             label_Transcriptomics.setText("Found : " + (bioConds.length-1) + " Transcriptomes in the database");
             lblTechno.setText("Type of data: " + VectorUtils.toString(listType));
@@ -800,9 +800,9 @@ public class SetupPart implements SelectionListener {
             item.setText(0, bioCondName);
             boolean validated = dataValidation.getTranscriptomes().get(bioCondName);
             if (validated) {
-                item.setImage(1, ResourceManager.getPluginImage("bacnet", "icons/checked.bmp"));
+                item.setImage(1, ResourceManager.getPluginImage("bacnet.core", "icons/checked.bmp"));
             } else {
-                item.setImage(1, ResourceManager.getPluginImage("bacnet", "icons/unchecked.bmp"));
+                item.setImage(1, ResourceManager.getPluginImage("bacnet.core", "icons/unchecked.bmp"));
             }
             i++;
         }
@@ -827,7 +827,7 @@ public class SetupPart implements SelectionListener {
                 dataValidation.getProteomes().put(bioConds[i][0], false);
                 TableItem item = new TableItem(tableProteomics, SWT.NONE);
                 item.setText(0, bioConds[i][0]);
-                item.setImage(1, ResourceManager.getPluginImage("bacnet", "icons/unchecked.bmp"));
+                item.setImage(1, ResourceManager.getPluginImage("bacnet.core", "icons/unchecked.bmp"));
             }
             for (int i = 0; i < titles.length; i++) {
                 tableProteomics.getColumn(i).pack();
@@ -848,9 +848,9 @@ public class SetupPart implements SelectionListener {
             item.setText(0, bioCondName);
             boolean validated = dataValidation.getProteomes().get(bioCondName);
             if (validated) {
-                item.setImage(1, ResourceManager.getPluginImage("bacnet", "icons/checked.bmp"));
+                item.setImage(1, ResourceManager.getPluginImage("bacnet.core", "icons/checked.bmp"));
             } else {
-                item.setImage(1, ResourceManager.getPluginImage("bacnet", "icons/unchecked.bmp"));
+                item.setImage(1, ResourceManager.getPluginImage("bacnet.core", "icons/unchecked.bmp"));
             }
             i++;
         }
@@ -878,7 +878,7 @@ public class SetupPart implements SelectionListener {
                 dataValidation.getCoExprNetworks().put(bioConds[i][0], false);
                 TableItem item = new TableItem(tableNetwork, SWT.NONE);
                 item.setText(0, bioConds[i][0]);
-                item.setImage(1, ResourceManager.getPluginImage("bacnet", "icons/unchecked.bmp"));
+                item.setImage(1, ResourceManager.getPluginImage("bacnet.core", "icons/unchecked.bmp"));
             }
             for (int i = 0; i < titles.length; i++) {
                 tableNetwork.getColumn(i).pack();
@@ -902,9 +902,9 @@ public class SetupPart implements SelectionListener {
             item.setText(0, genomeName);
             boolean validated = dataValidation.getCoExprNetworks().get(genomeName);
             if (validated) {
-                item.setImage(1, ResourceManager.getPluginImage("bacnet", "icons/checked.bmp"));
+                item.setImage(1, ResourceManager.getPluginImage("bacnet.core", "icons/checked.bmp"));
             } else {
-                item.setImage(1, ResourceManager.getPluginImage("bacnet", "icons/unchecked.bmp"));
+                item.setImage(1, ResourceManager.getPluginImage("bacnet.core", "icons/unchecked.bmp"));
             }
             i++;
         }

@@ -113,7 +113,7 @@ public class InitViewYersinia implements SelectionListener {
         // lblListeriomicsIsSo.setText("Systems biology of the model pathogen
         // <i>yersinia</i>");
         // lblListeriomicsIsSo.setFont(SWTResourceManager.getTitleFont(SWT.BOLD));
-        lblListeriomicsIsSo.setImage(ResourceManager.getPluginImage("bacnet", "icons/ToolBar/logoYersiniomics.png"));
+        lblListeriomicsIsSo.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/ToolBar/logoYersiniomics.png"));
         new Label(composite_Intro, SWT.NONE);
         Label lblNewLabel_1 = new Label(composite_Intro, SWT.WRAP);
         RWTUtils.setMarkup(lblNewLabel_1);
@@ -149,7 +149,7 @@ public class InitViewYersinia implements SelectionListener {
         lblFastAccessTo.setForeground(BasicColor.BLACK);
         lblFastAccessTo.setText("Multi-omics views");
         //Label lblImage = new Label(composite_12, SWT.BORDER);
-        //lblImage.setImage(ResourceManager.getPluginImage("bacnet", "icons/InitPage/genomeView.png"));
+        //lblImage.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/InitPage/genomeView.png"));
         Composite composite_1 = new Composite(composite_11, SWT.NONE);
         GridData gd_composite_1 = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
         //gd_composite_1.heightHint = 115;
@@ -216,7 +216,7 @@ public class InitViewYersinia implements SelectionListener {
         composite_15.setBackground(BasicColor.LIGHT_ONE);
         btnGeneView = new Button(composite_15, SWT.BORDER);
         btnGeneView.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
-        // btnGeneView.setImage(ResourceManager.getPluginImage("bacnet",
+        // btnGeneView.setImage(ResourceManager.getPluginImage("bacnet.core",
         // "icons/InitPage/SystemsBio.png"));
         btnGeneView.addSelectionListener(this);
         btnGeneView.setText("Genes information");
@@ -261,7 +261,7 @@ public class InitViewYersinia implements SelectionListener {
 
 
         //Label lblImage_3 = new Label(composite_8, SWT.BORDER);
-        //lblImage_3.setImage(ResourceManager.getPluginImage("bacnet", "icons/InitPage/heatmap.png"));
+        //lblImage_3.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/InitPage/heatmap.png"));
         Composite composite_10 = new Composite(composite_6, SWT.NONE);
         GridData gd_composite_10 = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
         //gd_composite_10.heightHint = 100;
@@ -359,7 +359,7 @@ public class InitViewYersinia implements SelectionListener {
         lblListeriomicsSpecificTools.setText("Yersiniomics specific tools");
         lblListeriomicsSpecificTools.setFont(SWTResourceManager.getTitleFont(SWT.BOLD));
         //Label lblImage_2 = new Label(composite_17, SWT.BORDER);
-        //lblImage_2.setImage(ResourceManager.getPluginImage("bacnet", "icons/InitPage/SysBio.png"));
+        //lblImage_2.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/InitPage/SysBio.png"));
 
         Composite composite_2 = new Composite(composite_16, SWT.NONE);
         composite_2.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
@@ -390,7 +390,7 @@ public class InitViewYersinia implements SelectionListener {
         btnLoadData = new Button(composite_18, SWT.BORDER | SWT.CENTER);
         btnLoadData.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
         btnLoadData.setText(" Load data selection");
-        btnLoadData.setImage(ResourceManager.getPluginImage("bacnet", "icons/fileIO/txtload.bmp"));
+        btnLoadData.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/fileIO/txtload.bmp"));
         btnLoadData.setFont(SWTResourceManager.getTitleFont(SWT.NORMAL));
         btnLoadData.setBackground(BasicColor.DARK_THREE);
 
@@ -453,7 +453,7 @@ public class InitViewYersinia implements SelectionListener {
 
         Label lblImagelicence = new Label(composite_19, SWT.CENTER);
         lblImagelicence.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
-        lblImagelicence.setImage(ResourceManager.getPluginImage("bacnet", "icons/logos/cccommons.png"));
+        lblImagelicence.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/logos/cccommons.png"));
 
         Label lblThisWorkIs = new Label(composite_19, SWT.NONE);
         lblThisWorkIs.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
@@ -486,19 +486,19 @@ public class InitViewYersinia implements SelectionListener {
         Label lblPasteur = new Label(composite_3, SWT.NONE);
         lblPasteur.setSize(0, 15);
         lblPasteur.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-        lblPasteur.setImage(ResourceManager.getPluginImage("bacnet", "icons/logos/Pasteur.png"));
+        lblPasteur.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/logos/Pasteur.png"));
 
         Label lblInra = new Label(composite_3, SWT.NONE);
         lblInra.setSize(0, 15);
         lblInra.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-        lblInra.setImage(ResourceManager.getPluginImage("bacnet", "icons/logos/INRA.png"));
+        lblInra.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/logos/INRA.png"));
         Label lblAnr = new Label(composite_3, SWT.NONE);
         lblAnr.setSize(0, 15);
-        lblAnr.setImage(ResourceManager.getPluginImage("bacnet", "icons/logos/Logo ANR.png"));
+        lblAnr.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/logos/Logo ANR.png"));
 
         Label lblBacnet = new Label(composite_3, SWT.NONE);
         lblBacnet.setSize(0, 15);
-        lblBacnet.setImage(ResourceManager.getPluginImage("bacnet", "icons/logos/investissement-davenir.png"));
+        lblBacnet.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/logos/investissement-davenir.png"));
 
         scrolledComposite.setContent(composite);
         scrolledComposite.setMinSize(composite.computeSize(SWT.DEFAULT, SWT.DEFAULT));

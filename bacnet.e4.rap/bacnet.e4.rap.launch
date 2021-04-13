@@ -135,12 +135,10 @@
         <setEntry value="org.junit@default:default"/>
     </setAttribute>
     <setAttribute key="selected_workspace_bundles">
-        <setEntry value="apache.batik@default:default"/>
+        <setEntry value="bacnet.core@default:default"/>
         <setEntry value="bacnet.e4.rap@default:default"/>
-        <setEntry value="bacnet@default:default"/>
-        <setEntry value="javax.mail@default:default"/>
     </setAttribute>
-    <booleanAttribute key="show_selected_only" value="false"/>
+    <booleanAttribute key="show_selected_only" value="true"/>
     <booleanAttribute key="tracing" value="false"/>
     <booleanAttribute key="useCustomFeatures" value="false"/>
     <booleanAttribute key="useDefaultConfigArea" value="true"/>
