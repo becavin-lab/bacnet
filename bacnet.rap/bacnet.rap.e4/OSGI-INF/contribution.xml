@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="E4Application">
-   <implementation class="bacnet.rap.e4.E4Application"/>
-   <service>
-      <provide interface="org.eclipse.rap.rwt.application.ApplicationConfiguration"/>
-   </service>
-</scr:component>
