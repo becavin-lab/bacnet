@@ -97,6 +97,9 @@
 		<module>bacnet.scripts</module>
 		<module>bacnet.e4.rap</module>
 		<module>bacnet.e4.rap.setup</module>
+		<module>bacnet.webapp.feature</module>
+		<module>bacnet.setup.feature</module>
+	
 	</modules>
 
 </project>
