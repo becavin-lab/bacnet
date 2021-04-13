@@ -8,7 +8,6 @@ Bundle-RequiredExecutionEnvironment: JavaSE-15
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.e4.ui.services,
  bacnet;bundle-version="1.0.0",
- javax.mail;bundle-version="1.0.0",
  org.eclipse.rap.filedialog,
  org.eclipse.e4.ui.model.workbench,
  org.eclipse.e4.ui.workbench,
