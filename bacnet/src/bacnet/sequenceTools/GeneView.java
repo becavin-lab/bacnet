@@ -5,9 +5,11 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
+
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.inject.Named;
+
 import org.biojava3.core.sequence.Strand;
 import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
@@ -46,6 +48,7 @@ import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
+
 import bacnet.Database;
 import bacnet.datamodel.annotation.SubCellCompartment;
 import bacnet.datamodel.expdesign.BioCondition;
@@ -58,9 +61,9 @@ import bacnet.datamodel.sequence.Operon;
 import bacnet.datamodel.sequence.Sequence;
 import bacnet.datamodel.sequence.Srna;
 import bacnet.datamodel.sequenceNCBI.GenomeNCBI;
+import bacnet.expressionAtlas.HeatMapProteomicsView;
 import bacnet.expressionAtlas.HeatMapTranscriptomicsView;
 import bacnet.expressionAtlas.core.GenomeElementAtlas;
-import bacnet.expressionAtlas.HeatMapProteomicsView;
 import bacnet.genomeBrowser.GenomeTranscriptomeView;
 import bacnet.genomeBrowser.core.Track;
 import bacnet.genomeBrowser.tracksGUI.TrackCanvasGenome;

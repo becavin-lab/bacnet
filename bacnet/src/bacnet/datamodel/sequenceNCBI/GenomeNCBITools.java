@@ -18,7 +18,6 @@ import bacnet.Database;
 import bacnet.datamodel.annotation.Annotation;
 import bacnet.datamodel.annotation.COGannotation;
 import bacnet.datamodel.annotation.CodonUsage;
-import bacnet.datamodel.annotation.RfamElement;
 import bacnet.datamodel.dataset.ExpressionMatrix;
 import bacnet.datamodel.sequence.Genome;
 import bacnet.reader.NCBIFastaHeaderParser;
@@ -452,31 +451,7 @@ public class GenomeNCBITools {
 
     }
 
-    /**
-     * Read RFAM_GENOME table, and extract a list of all genomes which has both Rfam_ID and NCBI_Id
-     * 
-     * @return
-     */
-    public static String[][] getRfamAvailableGenome() {
-        String[] genomes = GenomeNCBITools.getAvailableGenome();
-        ArrayList<String[]> genomesRfam = new ArrayList<String[]>();
-        String[][] array = TabDelimitedTableReader.read(RfamElement.RFAM_GENOME);
-        for (String genome : genomes) {
-            for (int i = 0; i < array.length; i++) {
-                if (genome.equals(array[i][0])) {
-                    String[] gffFiles = {array[i][4], array[i][1], array[i][0], array[i][5]};
-                    if (!array[i][4].equals(""))
-                        genomesRfam.add(gffFiles);
-                }
-            }
-        }
-
-        String[][] genomesRfamArray = new String[genomesRfam.size()][3];
-        for (int i = 0; i < genomesRfam.size(); i++) {
-            genomesRfamArray[i] = genomesRfam.get(i);
-        }
-        return genomesRfamArray;
-    }
+   
 
     /**
      * Detect if the genome is a Complete genome or a WGS using DATABASES_LIST_PATH table

@@ -2,9 +2,11 @@ package bacnet.e4.rap;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.inject.Named;
+
 import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.e4.ui.workbench.modeling.EModelService;
@@ -25,6 +27,7 @@ import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Link;
 import org.eclipse.swt.widgets.Shell;
+
 import bacnet.datamodel.sequence.Genome;
 import bacnet.datamodel.sequence.Genome.OpenGenomesThread;
 import bacnet.expressionAtlas.ProteomicsView;
