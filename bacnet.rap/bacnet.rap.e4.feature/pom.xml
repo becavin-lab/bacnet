@@ -24,7 +24,7 @@
 		<webapp.name>bacnet-rap</webapp.name>
 		<!--                                -->
 	</properties>
-	
+
 	<!--  Run the build of the feature -->
 	<build>
 		<plugins>
@@ -64,7 +64,28 @@
 						</configuration>
 					</execution>
 					
-					<!--  Copy every jar files from target/site to eclipse folder -->
+					<!--  Copy org.eclipse.equinox.servletbridge in lib folder -->
+					<execution>
+						<id>copy-servlet</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${output-directory}/lib</outputDirectory>
+							<resources>
+								<resource>
+									<directory>${basedir}/target/site/plugins</directory>
+									<includes>
+										<include>org.eclipse.equinox.servletbridge*.jar</include>
+									</includes>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+					
+					
+						<!--  Copy every jar files from target/site to eclipse folder -->
 					<execution>
 						<id>copy-plugins</id>
 						<phase>package</phase>
@@ -81,6 +102,7 @@
 									</includes>
 									<excludes>
 										<exclude>*.jar</exclude>
+										<exclude>*/org.eclipse.equinox.servletbridge*.jar</exclude>
 									</excludes>
 								</resource>
 							</resources>
@@ -88,6 +110,8 @@
 					</execution>
 				</executions>
 			</plugin>
+			
+			
 
 			<!--  Assembly of the project in one single war file -->
 			<plugin>

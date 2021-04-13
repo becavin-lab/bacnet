@@ -20,7 +20,7 @@ public class E4Application implements ApplicationConfiguration {
         properties.put(WebClient.PAGE_TITLE, "Hello e4 RAP");
         E4ApplicationConfig config = E4ApplicationConfig.create(E4XMI);
         E4EntryPointFactory entryPointFactory = new E4EntryPointFactory(config);
-        application.addEntryPoint("/e4", entryPointFactory, properties);
+        application.addEntryPoint("/", entryPointFactory, properties);
         application.setOperationMode( OperationMode.SWT_COMPATIBILITY );
     }
 
