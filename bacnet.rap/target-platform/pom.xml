@@ -12,9 +12,7 @@
 	</parent>
 	
 	<!--  Setting up properties of this target platform -->
-	<groupId>bacnet</groupId>
 	<artifactId>target-platform</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
 	<packaging>eclipse-target-definition</packaging>
 
 </project>
