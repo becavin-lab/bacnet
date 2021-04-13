@@ -687,37 +687,5 @@ public class TranscriptomesCreation {
         return geneExprs;
     }
 
-    /**
-     * Look at the Expression of HouseKeeping genes<br>
-     * 
-     * @param exp
-     */
-    @SuppressWarnings("unused")
-    private static void qualityControl(Experiment exp) {
-        Database.initDatabase(Database.LISTERIOMICS_PROJECT);
-        Signature hkGenes = Signature.getSignatureFromName("House-Keeping genes");
-
-        ExpressionMatrix allGeneExpr = ExpressionMatrix.load(Expression.PATH_ALLGENEXPR);
-        allGeneExpr = allGeneExpr.getSubMatrixRow(hkGenes.getElements());
-        allGeneExpr.saveTab(Database.getTEMP_PATH() + "GeneExprHouseKeeping_QC.txt", "r");
-        allGeneExpr = ExpressionMatrix.loadTab(Expression.PATH_ALLGENEXPR + "_WT.txt", true);
-        allGeneExpr = allGeneExpr.getSubMatrixRow(hkGenes.getElements());
-        allGeneExpr.saveTab(Database.getTEMP_PATH() + "GeneExprHouseKeeping_WT_QC.txt", "r");
-
-        ExpressionMatrix allTiling = ExpressionMatrix.load(Expression.PATH_ALLTILING);
-        allTiling = allTiling.getSubMatrixRow(hkGenes.getElements());
-        allTiling.saveTab(Database.getTEMP_PATH() + "TilingHouseKeeping_QC.txt", "r");
-        allTiling = ExpressionMatrix.loadTab(Expression.PATH_ALLTILING + "_WT.txt", true);
-        allTiling = allTiling.getSubMatrixRow(hkGenes.getElements());
-        allTiling.saveTab(Database.getTEMP_PATH() + "TilingHouseKeeping_WT_QC.txt", "r");
-
-        /*
-         * Then execute in bacnet.rcp.test.test.runPostInit():
-         * HeatMapView.displayMatrix(ExpressionMatrix.loadTab(Project.getTEMP_PATH()+
-         * "GeneExprHouseKeeping_QC.txt", true), "GeneExprHouseKeeping_QC");
-         * HeatMapView.displayMatrix(ExpressionMatrix.loadTab(Project.getTEMP_PATH()+
-         * "TilingHouseKeeping_QC.txt", true), "TilingHouseKeeping_QC");
-         */
-
-    }
+    
 }

@@ -62,8 +62,8 @@
 					<executionEnvironment>JavaSE-15</executionEnvironment>
 					<target>
 						<artifact>
-							<groupId>rap.e4.export</groupId>
-							<artifactId>target-platform-rap-e4</artifactId>
+							<groupId>bacnet</groupId>
+							<artifactId>bacnet-target-platform</artifactId>
 							<version>1.0.0-SNAPSHOT</version>
 						</artifact>
 					</target>
@@ -92,9 +92,11 @@
 
 	<!-- Add the target-plateform, plugins and features of the project -->
 	<modules>
-		<module>target-platform-rap-e4</module>
-		<module>rap.e4.export.demo</module>
-		<module>rap.e4.export.feature</module>
+		<module>bacnet-target-platform</module>
+		<module>bacnet.core</module>
+		<module>bacnet.scripts</module>
+		<module>bacnet.e4.rap</module>
+		<module>bacnet.e4.rap.setup</module>
 	</modules>
 
 </project>
