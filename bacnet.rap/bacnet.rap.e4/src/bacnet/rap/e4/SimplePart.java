@@ -15,6 +15,7 @@ public class SimplePart {
        parent.setLayout(new GridLayout());
        Label label = new Label(parent, SWT.NONE);
        label.setText("Hello e4 World");
+
     }
 
 }
