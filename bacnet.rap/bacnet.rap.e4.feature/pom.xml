@@ -1,27 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <artifactId>rap-e4</artifactId>
-    <groupId>bacnet</groupId>
-    <version>1.0.0-SNAPSHOT</version>
-  </parent>
-  
- 
-  <groupId>bacnet</groupId>
-  <artifactId>bacnet.rap.e4.feature</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
-  <packaging>eclipse-feature</packaging>
-  
-  <properties>
-  		<tycho.version>2.2.0</tycho.version>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	
+	<!--  Setting up parent project -->
+	<parent>
+		<artifactId>rap-e4</artifactId>
+		<groupId>bacnet</groupId>
+		<version>1.0.0-SNAPSHOT</version>
+	</parent>
+
+	<!--  Setting up properties of this feature -->
+	<groupId>bacnet</groupId>
+	<artifactId>bacnet.rap.e4.feature</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<packaging>eclipse-feature</packaging>
+	<properties>
 		<output-directory>${basedir}/target/WEB-INF</output-directory>
+		<!--  Setting up webapp name        -->
+		<!--  Need to be changed by user     -->
+		<webapp.name>bacnet-rap</webapp.name>
+		<!--                                -->
 	</properties>
 	
+	<!--  Run the build of the feature -->
 	<build>
 		<plugins>
+			
+			<!-- Create the war file with Tycho maven = deployable feature -->
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>tycho-packaging-plugin</artifactId>
@@ -31,10 +39,12 @@
 				</configuration>
 			</plugin>
 
+			<!-- Copying of project resources to the output directory -->
 			<plugin>
 				<artifactId>maven-resources-plugin</artifactId>
 				<version>3.2.0</version>
 				<executions>
+					<!--  Copy everything in the WEB-INF -->
 					<execution>
 						<id>copy-web-inf</id>
 						<phase>package</phase>
@@ -53,6 +63,8 @@
 							</resources>
 						</configuration>
 					</execution>
+					
+					<!--  Copy every jar files from target/site to eclipse folder -->
 					<execution>
 						<id>copy-plugins</id>
 						<phase>package</phase>
@@ -60,7 +72,7 @@
 							<goal>copy-resources</goal>
 						</goals>
 						<configuration>
-							<outputDirectory>${output-directory}/eclipse</outputDirectory>
+							<outputDirectory>${output-directory}</outputDirectory>
 							<resources>
 								<resource>
 									<directory>${basedir}/target/site</directory>
@@ -77,7 +89,7 @@
 				</executions>
 			</plugin>
 
-					
+			<!--  Assembly of the project in one single war file -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-assembly-plugin</artifactId>
@@ -87,10 +99,9 @@
 					<descriptors>
 						<descriptor>assembly.xml</descriptor>
 					</descriptors>
-					<finalName>bacnet-rap</finalName>
+					<finalName>${webapp.name}</finalName>
 				</configuration>
 				<executions>
-				
 					<execution>
 						<id>make-assembly</id>
 						<phase>verify</phase>

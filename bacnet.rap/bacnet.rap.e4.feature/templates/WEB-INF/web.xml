@@ -18,9 +18,9 @@
 		
     <!-- Enable multi-language support for the extension registry -->
 		<init-param>
-			<param-name>commandline</param-name>
-			<param-value>-registryMultiLanguage</param-value>			
-		</init-param>		
+      		<param-name>commandline</param-name>
+      		<param-value>-registryMultiLanguage -console -clearPersistedState</param-value>     
+    	</init-param>	
     
     <!-- Framework Controls could be useful for testing purpose, but
          we disable it in RAP environment per default -->
@@ -78,6 +78,6 @@
 	</servlet-mapping>
 	
 	<session-config>
-      <session-timeout>5</session-timeout> 
+      <session-timeout>180</session-timeout> 
     </session-config>
 </web-app>
