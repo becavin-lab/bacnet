@@ -4,8 +4,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
+
 import javax.inject.Inject;
 import javax.inject.Named;
+
 import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.rap.e4.E4ApplicationConfig;
@@ -15,9 +17,9 @@ import org.eclipse.rap.rwt.application.Application.OperationMode;
 import org.eclipse.rap.rwt.application.ApplicationConfiguration;
 import org.eclipse.rap.rwt.application.ExceptionHandler;
 import org.eclipse.rap.rwt.client.WebClient;
-import org.eclipse.rap.rwt.internal.service.ServletLog;
 import org.eclipse.rap.rwt.service.ResourceLoader;
 import org.eclipse.swt.widgets.Shell;
+
 import bacnet.Database;
 
 public class BasicApplication implements ApplicationConfiguration {

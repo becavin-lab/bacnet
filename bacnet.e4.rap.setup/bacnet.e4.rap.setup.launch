@@ -46,22 +46,11 @@
     <booleanAttribute key="org.eclipse.rap.launch.useManualPort" value="true"/>
     <booleanAttribute key="org.eclipse.rap.launch.useSessionTimeout" value="false"/>
     <stringAttribute key="pde.version" value="3.3"/>
-    <setAttribute key="selected_features">
-        <setEntry value="org.eclipse.rap.e4.equinox.target.feature:default"/>
-        <setEntry value="org.eclipse.rap.e4.examples.feature:default"/>
-        <setEntry value="org.eclipse.rap.e4.feature:default"/>
-        <setEntry value="org.eclipse.rap.e4.sdk.feature:default"/>
-        <setEntry value="org.eclipse.rap.equinox.target.feature:default"/>
-        <setEntry value="org.eclipse.rap.examples.feature:default"/>
-        <setEntry value="org.eclipse.rap.feature:default"/>
-        <setEntry value="org.eclipse.rap.sdk.feature:default"/>
-    </setAttribute>
     <setAttribute key="selected_target_bundles">
         <setEntry value="com.ibm.icu@default:default"/>
         <setEntry value="javax.annotation@default:default"/>
         <setEntry value="javax.inject@default:default"/>
         <setEntry value="javax.servlet@default:default"/>
-        <setEntry value="javax.xml@default:default"/>
         <setEntry value="org.apache.commons.fileupload@default:default"/>
         <setEntry value="org.apache.commons.io@default:default"/>
         <setEntry value="org.apache.commons.jxpath@default:default"/>
@@ -71,6 +60,7 @@
         <setEntry value="org.apache.felix.scr@1:true"/>
         <setEntry value="org.eclipse.core.commands@default:default"/>
         <setEntry value="org.eclipse.core.contenttype@default:default"/>
+        <setEntry value="org.eclipse.core.databinding.beans@default:default"/>
         <setEntry value="org.eclipse.core.databinding.observable@default:default"/>
         <setEntry value="org.eclipse.core.databinding.property@default:default"/>
         <setEntry value="org.eclipse.core.databinding@default:default"/>
@@ -89,6 +79,7 @@
         <setEntry value="org.eclipse.e4.ui.di@default:default"/>
         <setEntry value="org.eclipse.e4.ui.model.workbench@default:default"/>
         <setEntry value="org.eclipse.e4.ui.services@default:default"/>
+        <setEntry value="org.eclipse.e4.ui.workbench.addons.swt@default:default"/>
         <setEntry value="org.eclipse.e4.ui.workbench.renderers.swt@default:default"/>
         <setEntry value="org.eclipse.e4.ui.workbench.swt@default:default"/>
         <setEntry value="org.eclipse.e4.ui.workbench@default:default"/>
@@ -103,11 +94,9 @@
         <setEntry value="org.eclipse.equinox.http.jetty@default:default"/>
         <setEntry value="org.eclipse.equinox.http.registry@default:default"/>
         <setEntry value="org.eclipse.equinox.http.servlet@default:default"/>
-        <setEntry value="org.eclipse.equinox.http.servletbridge@default:default"/>
         <setEntry value="org.eclipse.equinox.preferences@default:default"/>
         <setEntry value="org.eclipse.equinox.registry@default:default"/>
-        <setEntry value="org.eclipse.equinox.servletbridge@default:default"/>
-        <setEntry value="org.eclipse.help@default:default"/>
+        <setEntry value="org.eclipse.jetty.continuation@default:default"/>
         <setEntry value="org.eclipse.jetty.http@default:default"/>
         <setEntry value="org.eclipse.jetty.io@default:default"/>
         <setEntry value="org.eclipse.jetty.security@default:default"/>
@@ -124,10 +113,7 @@
         <setEntry value="org.eclipse.rap.jface.databinding@default:default"/>
         <setEntry value="org.eclipse.rap.jface@default:default"/>
         <setEntry value="org.eclipse.rap.rwt.osgi@default:default"/>
-        <setEntry value="org.eclipse.rap.rwt.testfixture@default:default"/>
         <setEntry value="org.eclipse.rap.rwt@default:default"/>
-        <setEntry value="org.hamcrest.core@default:default"/>
-        <setEntry value="org.junit@default:default"/>
     </setAttribute>
     <setAttribute key="selected_workspace_bundles">
         <setEntry value="bacnet.core@default:default"/>
