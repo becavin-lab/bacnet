@@ -29,7 +29,8 @@
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-  <plugin
+  
+   <plugin
          id="com.ibm.icu"
          download-size="0"
          install-size="0"
@@ -52,13 +53,6 @@
 
 <plugin
          id="javax.servlet"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-<plugin
-         id="javax.xml"
          download-size="0"
          install-size="0"
          version="0.0.0"
@@ -122,6 +116,13 @@
 
 <plugin
          id="org.eclipse.core.contenttype"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+<plugin
+         id="org.eclipse.core.databinding.beans"
          download-size="0"
          install-size="0"
          version="0.0.0"
@@ -317,13 +318,6 @@
          unpack="false"/>
 
 <plugin
-         id="org.eclipse.equinox.cm"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-<plugin
          id="org.eclipse.equinox.common"
          download-size="0"
          install-size="0"
@@ -366,13 +360,6 @@
          unpack="false"/>
 
 <plugin
-         id="org.eclipse.equinox.http.servletbridge"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-<plugin
          id="org.eclipse.equinox.preferences"
          download-size="0"
          install-size="0"
@@ -381,27 +368,6 @@
 
 <plugin
          id="org.eclipse.equinox.registry"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-<plugin
-         id="org.eclipse.equinox.servletbridge"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-<plugin
-         id="org.eclipse.help"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-<plugin
-         id="org.eclipse.jdt.junit.runtime"
          download-size="0"
          install-size="0"
          version="0.0.0"
@@ -527,32 +493,9 @@
          unpack="false"/>
 
 <plugin
-         id="org.eclipse.rap.rwt.testfixture"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-<plugin
          id="org.eclipse.rap.rwt"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-
-<plugin
-         id="org.hamcrest.core"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-<plugin
-         id="org.junit"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-  
-
 </feature>

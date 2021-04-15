@@ -3,7 +3,6 @@
 
 <product name="RAP E4 Application" uid="bacnet.setup" id="bacnet.e4.rap.setup.e4app" application="org.eclipse.e4.ui.workbench.swt.E4Application" version="1.0.0.qualifier" useFeatures="true" includeLaunchers="true">
 
-
    <configIni use="default">
    </configIni>
 
@@ -14,6 +13,14 @@
 
    <windowImages/>
 
+   <launcher>
+      <win useIco="false">
+         <bmp/>
+      </win>
+   </launcher>
+
+   <vm>
+   </vm>
 
    <plugins>
       <plugin id="bacnet.core"/>
