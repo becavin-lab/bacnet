@@ -44,8 +44,8 @@ public class BasicApplication implements ApplicationConfiguration {
     private Shell shell;
 
     public void configure(Application application) {
-
-        //System.out.println("prop: " + System.getProperty("enableFrameworkControls")+" - "+System.getProperty(CONFIGURATION_PARAM));
+    	System.out.println("Start Application");
+        System.out.println("prop: " + System.getProperty("enableFrameworkControls")+" - "+System.getProperty(CONFIGURATION_PARAM));
     	
         Map<String, String> properties = new HashMap<String, String>();
         String title = "";

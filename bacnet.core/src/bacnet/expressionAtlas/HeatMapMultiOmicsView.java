@@ -620,7 +620,7 @@ public class HeatMapMultiOmicsView implements SelectionListener {
                 updateDisplayedElements();
             }
         } else if (e.getSource() == btnSavePNG) {
-            String jsScript = HTMLUtils.getPluginTextFile("bacnet", "html/printscreen.js");
+            String jsScript = HTMLUtils.getPluginTextFile("bacnet.core", "html/printscreen.js");
             jsScript = jsScript.replaceFirst("_FileName", "ScatterPlot_" + Database.getInstance().getProjectName());
             browserGraph.execute(jsScript);
         } else {

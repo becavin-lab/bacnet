@@ -113,7 +113,7 @@ public class SaveFileUtils {
         String dataName = FileUtils.removePath(fileName);
         String fileNameResource = registerTextFile(dataName, new File(fileName));
         System.out.println("Add: " + fileNameResource + " to " + htmlFile);
-        String htmlText = HTMLUtils.getPluginTextFile("bacnet", "html/" + htmlFile);
+        String htmlText = HTMLUtils.getPluginTextFile("bacnet.core", "html/" + htmlFile);
         
         htmlText = htmlText.replaceFirst("_FileName", fileNameResource);
         return htmlText;

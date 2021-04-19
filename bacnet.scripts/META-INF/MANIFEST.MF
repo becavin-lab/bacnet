@@ -2,6 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Scripts
 Bundle-SymbolicName: bacnet.scripts; singleton:=true
+Automatic-Module-Name: bacnet.scripts
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: bacnet.scripts.Activator
 Require-Bundle: org.eclipse.e4.ui.workbench;bundle-version="0.0.0",
@@ -23,7 +24,6 @@ Export-Package:
  bacnet.scripts.listeriomics,
  bacnet.scripts.listeriomics.technology,
  org.forester.phylogeny.iterators
-Automatic-Module-Name: bacnet.scripts
 Bundle-ClassPath: .,
  lib/cgview.jar,
  lib/commons-lang-2.0.jar,
