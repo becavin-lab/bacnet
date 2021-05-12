@@ -111,8 +111,6 @@
 				</executions>
 			</plugin>
 			
-			
-
 			<!--  Assembly of the project in one single war file -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

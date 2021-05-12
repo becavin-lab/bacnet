@@ -144,7 +144,7 @@ public class TranscriptomicsView implements SelectionListener {
     public void createPartControl(Composite parent) {
         focused = true;
         Composite container = new Composite(parent, SWT.NONE);
-        container.setBounds(0, 0, 947, 489);
+        container.setBounds(0, 0, 1031, 903);
         container.setLayout(new GridLayout(3, false));
         Label lblXxSrnas = new Label(container, SWT.BORDER | SWT.CENTER);
         lblXxSrnas.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
@@ -235,6 +235,9 @@ public class TranscriptomicsView implements SelectionListener {
         Label lblSaveSelectionAs = new Label(composite_2, SWT.NONE);
         lblSaveSelectionAs.setText("Download transcriptome selection as a table");
         lblSaveSelectionAs.setFont(SWTResourceManager.getBodyFont(10, SWT.NORMAL));
+        new Label(composite_2, SWT.NONE);
+        new Label(composite_2, SWT.NONE);
+        new Label(composite_2, SWT.NONE);
         btnSaveTxt.addSelectionListener(this);
 
         tableBioConditionViewer = new TableViewer(compositeTable, SWT.BORDER | SWT.MULTI);
