@@ -86,11 +86,12 @@ public class Database {
     /**
      * Path when using MAC OX X
      */
-    public static String PATH_MAC = "/Users/christophebecavin/Documents/BACNET/bacnet/BacnetDatabases.ini";
+    public static String PATH_MAC = "/mnt/c/bacnet/BacnetDatabases.ini";
     /**
      * Path for website database on Windows
      */
-    public static String PATH_WIN = "D:\\BACNET\\BacnetDatabases.ini";
+    public static String PATH_WIN = "C:\\bacnet\\BacnetDatabases.ini";
+    //public static String PATH_WIN = "/mnt/c/bacnet/BacnetDatabases.ini";
     //public static String PATH_WIN = "C:\\Users\\ipmc\\Documents\\BACNET\\bacnet-private\\BacnetDatabases.ini";
     //public static String PATH_WIN = "C:\\Users\\Pierre\\Documents\\Yersiniomics\\bacnet\\BacnetDatabases.ini";
 
@@ -98,8 +99,9 @@ public class Database {
      * Path for website database on Pasteur Virtual Machine
      */
     public static String PATH_WEBSITE = "/srv/data/BacnetDatabases.ini";
-    //public static String PATH_WEBSITE="D:\\Yersiniomics\\bacnet\\BacnetDatabases.ini";
-
+    //public static String PATH_WEBSITE="C:\\bacnet\\BacnetDatabases.ini";
+    //public static String PATH_WEBSITE="/mnt/c/bacnet/BacnetDatabases.ini";
+    
     /*******************************************************************
      * Database information
      ********************************************************************/

@@ -80,6 +80,19 @@ public class GenomeNCBI {
      * "/GenomeNCBI/Homologs/";
      */
     public static String PATH_PROTEINID = PATH_RAW + "ProteinId"+ File.separator ;
+    
+    /**
+     * Path for all homologs calculation file : Database.getInstance().getPath() +
+     * "/GenomeNCBI/Homologs/";
+     */
+    public static String PATH_OLDLOCUSTAG = PATH_RAW + "OldLocusTag"+ File.separator ;
+    
+    /**
+     * Path for all homologs calculation file : Database.getInstance().getPath() +
+     * "/GenomeNCBI/Homologs/";
+     */
+    public static String PATH_PROTEINIDTOOLDLOCUSTAG = PATH_RAW + "ProtToOldLocusTag"+ File.separator ;
+    
     /**
      * Path for all supplementary information for genome annotation : Database.getInstance().getPath() +
      * "/GenomeNCBI/Annotation/";

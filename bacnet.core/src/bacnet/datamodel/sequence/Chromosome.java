@@ -58,9 +58,17 @@ public class Chromosome extends ChromosomeSequence {
      */
     private LinkedHashMap<String, String> geneNameToLocusTagMap = new LinkedHashMap<String, String>();
     /**
+     * Map of the locus tag to the old locus tag
+     */
+    private LinkedHashMap<String, String> locusTagToOldLocusTagMap = new LinkedHashMap<String, String>();
+    /**
      * Map proteinId to locustag
      */
     private LinkedHashMap<String, String> proteinIDTolocusTag = new LinkedHashMap<String, String>();
+    /**
+     * Map proteinId to oldlocustag
+     */
+    private LinkedHashMap<String, String> proteinIDToOldLocusTagMap = new LinkedHashMap<String, String>();
 
     public Chromosome() {}
 
@@ -97,6 +105,7 @@ public class Chromosome extends ChromosomeSequence {
         this.getElements().clear();
         this.getLocusTagToGeneNameMap().clear();
         this.getGeneNameToLocusTagMap().clear();
+        this.getLocusTagToOldLocusTagMap().clear();
         DNASequence dnaSequence = new DNASequence("A");
         Chromosome chromoNew = new Chromosome(dnaSequence.getProxySequenceReader());
         this.setProxySequenceReader(chromoNew.getProxySequenceReader());
@@ -163,6 +172,8 @@ public class Chromosome extends ChromosomeSequence {
             // System.out.println(type);
             switch (type) {
                 case Gene:
+                    //System.out.println(" sysout 1" );
+
                     Gene gene = Gene.load(path + name);
                     if (gene.getComment().contains("RAST")) {
                         getGenesAlternative().put(name, gene);
@@ -174,7 +185,12 @@ public class Chromosome extends ChromosomeSequence {
                             getLocusTagToGeneNameMap().put(name, gene.getGeneName());
                             getGeneNameToLocusTagMap().put(gene.getGeneName(), name);
                         }
-                        
+                        String oldLocusTag = gene.getOldLocusTag();
+                        //System.out.println(" sysout " +oldLocusTag);
+
+                        if(!oldLocusTag.equals("")) {
+                            getLocusTagToOldLocusTagMap().put(name, gene.getOldLocusTag());
+                        }
                         String proteinId = gene.getProtein_id();
                         if(!proteinId.equals("")) {
                         	getProteinIDTolocusTag().put(proteinId, name);
@@ -398,6 +414,22 @@ public class Chromosome extends ChromosomeSequence {
         this.geneNameToLocusTagMap = geneNameToLocusTagMap;
     }
 
+    public LinkedHashMap<String, String> getLocusTagToOldLocusTagMap() {
+        return locusTagToOldLocusTagMap;
+    }
+    
+    public void setLocusTagToOldLocusTagMap(LinkedHashMap<String, String> locusTagToOldLocusTagMap) {
+        this.locusTagToOldLocusTagMap = locusTagToOldLocusTagMap;
+    } 
+    
+    public LinkedHashMap<String, String> getProteinIDToOldLocusTagMap() {
+        return proteinIDToOldLocusTagMap;
+    }
+    
+    public void setProteinIDToOldLocusTagMap(LinkedHashMap<String, String> ProteinIDToOldLocusTagMap) {
+        this.proteinIDToOldLocusTagMap = proteinIDToOldLocusTagMap;
+    } 
+    
     public LinkedHashMap<String, String> getProteinIDTolocusTag() {
 		return proteinIDTolocusTag;
 	}

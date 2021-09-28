@@ -327,7 +327,7 @@ public class DataTrack {
                 /*
                  * Create and add Comparison BioCondition if available
                  */
-                if (bioCond.getComparisons().size() != 0) {
+                if (bioCond.getComparisons().size() != 0 ) {
                     System.out.println("addBioCondition if 5");
 
                     for (String bioCond2Name : bioCond.getComparisons()) {

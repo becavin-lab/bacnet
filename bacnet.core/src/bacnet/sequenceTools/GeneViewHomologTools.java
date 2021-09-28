@@ -53,19 +53,21 @@ public class GeneViewHomologTools {
         /*
          * Add two columnsd for homologs information
          */
-        bioCondsArray = new String[bioCondsTemp.length][bioCondsTemp[0].length + 3];
+        bioCondsArray = new String[bioCondsTemp.length][bioCondsTemp[0].length + 4];
         for (int i = 0; i < bioCondsArray.length; i++) {
             bioCondsArray[i][0] = bioCondsTemp[i][0];
             bioCondsArray[i][1] = "";
             bioCondsArray[i][2] = "";
             bioCondsArray[i][3] = "";
+            bioCondsArray[i][4] = "";
             for (int j = 1; j < bioCondsTemp[0].length; j++) {
-                bioCondsArray[i][j + 3] = bioCondsTemp[i][j];
+                bioCondsArray[i][j + 4] = bioCondsTemp[i][j];
             }
         }
-        bioCondsArray[0][1] = "Homolog Gene";
-        bioCondsArray[0][2] = "Homolog Protein";
-        bioCondsArray[0][3] = "Similarity";
+        bioCondsArray[0][1] = "Homolog Locus";
+        bioCondsArray[0][2] = "Homolog Old Locus";
+        bioCondsArray[0][3] = "Homolog Protein";
+        bioCondsArray[0][4] = "Similarity";
 
         /*
          * Add homologs information
@@ -74,9 +76,11 @@ public class GeneViewHomologTools {
         for (int i = 1; i < bioCondsArray.length; i++) {
             String genome = bioCondsArray[i][genomeIndex];
             if (sequence.getConservationHashMap().containsKey(genome)) {
+
                 bioCondsArray[i][1] = sequence.getConservationHashMap().get(genome).split(";")[0];
                 bioCondsArray[i][2] = sequence.getConservationHashMap().get(genome).split(";")[1];
-                bioCondsArray[i][3] = String.format("%.5f", Float.parseFloat(sequence.getConservationHashMap().get(genome).split(";")[2]));
+                bioCondsArray[i][3] = sequence.getConservationHashMap().get(genome).split(";")[2];
+                bioCondsArray[i][4] = String.format("%.5f", Float.parseFloat(sequence.getConservationHashMap().get(genome).split(";")[3]));
             }
         }
 
@@ -132,9 +136,10 @@ public class GeneViewHomologTools {
         	if (sequence.getConservationHashMap().containsKey(GenomeNCBI.unprocessGenomeName(genome))) {
         		String accession = sequence.getConservationHashMap().get(GenomeNCBI.unprocessGenomeName(genome));
         		String gene = accession.split(";")[0];
-                String similarity = String.format("%.2f", Float.parseFloat(accession.split(";")[2]));
+        		String oldLocus = accession.split(";")[1];
+                String similarity = String.format("%.2f", Float.parseFloat(accession.split(";")[3]));
         		int indexOfGenome = textSVG.indexOf(">"+genome+"<");
-        		String textToADD = similarity + "  --  " + gene;
+        		String textToADD = similarity + "  --  " + gene + " - " + oldLocus ;
                 textSVG = textSVG.substring(0, indexOfGenome+1) + textToADD + textSVG.substring(indexOfGenome + genome.length() + 1, textSVG.length());
             }else {
             	int indexOfGenome = textSVG.indexOf(">"+genome+"<");
@@ -245,7 +250,7 @@ public class GeneViewHomologTools {
             public void update(ViewerCell cell) {
                 String[] bioCond = (String[]) cell.getElement();
                 Image image = null;
-                if (selectedGenomes.contains(GenomeNCBI.processGenomeName(bioCond[4]))) {
+                if (selectedGenomes.contains(GenomeNCBI.processGenomeName(bioCond[5]))) {
                     image = ResourceManager.getPluginImage("bacnet.core", "icons/checked.bmp");
                 } else {
                     image = ResourceManager.getPluginImage("bacnet.core", "icons/unchecked.bmp");

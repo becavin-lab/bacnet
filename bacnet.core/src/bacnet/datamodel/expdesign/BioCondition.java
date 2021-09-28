@@ -426,13 +426,15 @@ public class BioCondition implements Serializable {
             bioConditionCompare.getTilings().add(compData);
             bioConditionCompare.getTypeDataContained().add(TypeData.Tiling);
         }
+        
+        /*
         for (int i = 0; i < this.getNGSSeqs().size(); i++) {
             NGS data1 = this.getNGSSeqs().get(i);
             NGS data2 = bioCond2.getNGSSeqs().get(i);
             NGS compData = data1.compare(data2, calcData);
             bioConditionCompare.getNGSSeqs().add(compData);
             bioConditionCompare.getTypeDataContained().add(TypeData.RNASeq);
-        }
+        } */
         
         /*
          * Proteomics data comparison if they exists

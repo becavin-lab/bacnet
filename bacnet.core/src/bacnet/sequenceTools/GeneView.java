@@ -347,7 +347,7 @@ public class GeneView implements SelectionListener, MouseListener {
                         listGenes.clear();
                         for (String gene : searchResults) {
                             String text = gene;
-                            String oldLocusTag = genome.getChromosomes().get(chromoID).getGenes().get(gene).getFeature("old_locus_tag");
+                            String oldLocusTag = genome.getChromosomes().get(chromoID).getGenes().get(gene).getOldLocusTag();
                             if (!oldLocusTag.equals("")) {
                                 text += " - " + oldLocusTag;
                             }
@@ -696,9 +696,8 @@ public class GeneView implements SelectionListener, MouseListener {
                                 .getText(columnNames.indexOf("Name") + 1);
                 String selectedGene =
                         tableHomologViewer.getTable().getItem(tableHomologViewer.getTable().getSelectionIndex())
-                                .getText(columnNames.indexOf("Homolog") + 1);
-                // System.out.println(tableHomologViewer.getTable().getSelectionIndex()+"
-                // "+columnNames.indexOf("Name")+ "yahou "+selectedGene+" "+selectedGenome);
+                                .getText(columnNames.indexOf("Homolog Locus") + 1);
+                 //System.out.println(tableHomologViewer.getTable().getSelectionIndex()+ " " + columnNames.indexOf("Name")+ "yahou "+selectedGene+" "+selectedGenome);
                 Genome genome = Genome.loadGenome(selectedGenome);
                 Gene gene = genome.getGeneFromName(selectedGene);
                 GeneView.displayGene(gene, partService);
@@ -1002,7 +1001,7 @@ public class GeneView implements SelectionListener, MouseListener {
 
         if (Database.getInstance().getProjectName() == Database.LISTERIOMICS_PROJECT
                 || Database.getInstance().getProjectName() == Database.UIBCLISTERIOMICS_PROJECT || Database.getInstance().getProjectName() == Database.YERSINIOMICS_PROJECT) {
-//            initSyntenyBrowser();
+            initSyntenyBrowser();
         }
 
     }
@@ -1054,7 +1053,7 @@ public class GeneView implements SelectionListener, MouseListener {
             realUrl = "https://listeriomics.pasteur.fr/";
             pathGraphHTML = realUrl + "SynTView/flash/indexFinal.html";
             } else if (genome.getSpecies().equals("Yersinia pestis CO92")){
-                //pathGraphHTML = "http://hub18.hosting.pasteur.fr/SynTView/JS/Yersiniomics/pestis/";
+                //pathGraphHTML = "http://hub15.hosting.pasteur.fr:8080/SynTView/CO92/?datadir=Data";
                 System.out.println("SyntView: " + pathGraphHTML);
                 browserSynteny.setUrl(pathGraphHTML);
                 browserSynteny.redraw();
@@ -1066,10 +1065,10 @@ public class GeneView implements SelectionListener, MouseListener {
                 browserSynteny.redraw();
                 
             } else if (genome.getSpecies().equals("Yersinia enterocolitica 8081")){
-            //pathGraphHTML = "http://hub18.hosting.pasteur.fr/SynTView/JS/Yersiniomics/entero/";
-            System.out.println("SyntView: " + pathGraphHTML);
-            browserSynteny.setUrl(pathGraphHTML);
-            browserSynteny.redraw();
+            	//pathGraphHTML = "http://hub18.hosting.pasteur.fr/SynTView/JS/Yersiniomics/entero/";
+            	System.out.println("SyntView: " + pathGraphHTML);
+            	browserSynteny.setUrl(pathGraphHTML);
+            	browserSynteny.redraw();
             
             } else {
             	tbtmSynteny.dispose();
@@ -1576,9 +1575,11 @@ public class GeneView implements SelectionListener, MouseListener {
         
         
         try {
-            browserSynteny.evaluate("search('" + sequence.getName() + "')");
+        	System.out.println("before evaluate " + sequence.getName());
+            browserSynteny.evaluate("goToGene('" + sequence.getName() + "')");
+        	System.out.println("evaluate OK");
         } catch (Exception e) {
-            System.out.println("Cannot evaluate: " + "search('" + sequence.getName() + "')");
+            System.out.println("Cannot evaluate: " + "goToGene('" + sequence.getName() + "')");
         }
 
         /*
@@ -1749,7 +1750,7 @@ public class GeneView implements SelectionListener, MouseListener {
 
     /**
      * Display GeneView <br>
-     * It will display Genome.getDefautGenome();
+     * It will display Genome.getDefautGenome(); CO92
      * 
      * @param gene
      * @param partService
@@ -1767,7 +1768,160 @@ public class GeneView implements SelectionListener, MouseListener {
         view.initGenomeInfo(genomeName);
         view.setGenomeSelected(genomeName);
     }
-
+    
+    /**
+     * Display GeneView <br>
+     * It will display KIM
+     * 
+     * @param gene
+     * @param partService
+     */
+    
+    public static void openKIMGeneView(EPartService partService) {
+        String id = GeneView.ID + "-" + String.valueOf(Math.random() * 1000).substring(0, 3);
+        // initiate view
+        ResourceManager.openView(partService, GeneView.ID, id);
+        // update data
+        MPart part = partService.findPart(id);
+        NavigationManagement.pushStateView(id, new HashMap<>());
+        GeneView view = (GeneView) part.getObject();
+        view.setViewID(id);
+        String genomeName = "Yersinia pestis KIM10+";
+        view.initGenomeInfo(genomeName);
+        view.setGenomeSelected(genomeName);
+    }
+    
+    /**
+     * Display GeneView <br>
+     * It will display IP32953
+     * 
+     * @param gene
+     * @param partService
+     */
+    
+    public static void openIP32953GeneView(EPartService partService) {
+        String id = GeneView.ID + "-" + String.valueOf(Math.random() * 1000).substring(0, 3);
+        // initiate view
+        ResourceManager.openView(partService, GeneView.ID, id);
+        // update data
+        MPart part = partService.findPart(id);
+        NavigationManagement.pushStateView(id, new HashMap<>());
+        GeneView view = (GeneView) part.getObject();
+        view.setViewID(id);
+        String genomeName = "Yersinia pseudotuberculosis IP32953";
+        view.initGenomeInfo(genomeName);
+        view.setGenomeSelected(genomeName);
+    }
+    
+    /**
+     * Display GeneView <br>
+     * It will display YPIII
+     * 
+     * @param gene
+     * @param partService
+     */
+    
+    public static void openYPIIIGeneView(EPartService partService) {
+        String id = GeneView.ID + "-" + String.valueOf(Math.random() * 1000).substring(0, 3);
+        // initiate view
+        ResourceManager.openView(partService, GeneView.ID, id);
+        // update data
+        MPart part = partService.findPart(id);
+        NavigationManagement.pushStateView(id, new HashMap<>());
+        GeneView view = (GeneView) part.getObject();
+        view.setViewID(id);
+        String genomeName = "Yersinia pseudotuberculosis YPIII";
+        view.initGenomeInfo(genomeName);
+        view.setGenomeSelected(genomeName);
+    }
+    
+    
+    /**
+     * Display GeneView <br>
+     * It will display Y11
+     * 
+     * @param gene
+     * @param partService
+     */
+   
+    public static void openY11GeneView(EPartService partService) {
+        String id = GeneView.ID + "-" + String.valueOf(Math.random() * 1000).substring(0, 3);
+        // initiate view
+        ResourceManager.openView(partService, GeneView.ID, id);
+        // update data
+        MPart part = partService.findPart(id);
+        NavigationManagement.pushStateView(id, new HashMap<>());
+        GeneView view = (GeneView) part.getObject();
+        view.setViewID(id);
+        String genomeName = "Yersinia enterocolitica Y11";
+        view.initGenomeInfo(genomeName);
+        view.setGenomeSelected(genomeName);
+    }
+    
+    /**
+     * Display GeneView <br>
+     * It will display 8081
+     * 
+     * @param gene
+     * @param partService
+     */
+    
+    public static void open8081GeneView(EPartService partService) {
+        String id = GeneView.ID + "-" + String.valueOf(Math.random() * 1000).substring(0, 3);
+        // initiate view
+        ResourceManager.openView(partService, GeneView.ID, id);
+        // update data
+        MPart part = partService.findPart(id);
+        NavigationManagement.pushStateView(id, new HashMap<>());
+        GeneView view = (GeneView) part.getObject();
+        view.setViewID(id);
+        String genomeName = "Yersinia enterocolitica 8081";
+        view.initGenomeInfo(genomeName);
+        view.setGenomeSelected(genomeName);
+    }
+    /**
+     * Display GeneView <br>
+     * It will display QMA0440
+     * 
+     * @param gene
+     * @param partService
+     */
+    
+    public static void openQMA0440GeneView(EPartService partService) {
+        String id = GeneView.ID + "-" + String.valueOf(Math.random() * 1000).substring(0, 3);
+        // initiate view
+        ResourceManager.openView(partService, GeneView.ID, id);
+        // update data
+        MPart part = partService.findPart(id);
+        NavigationManagement.pushStateView(id, new HashMap<>());
+        GeneView view = (GeneView) part.getObject();
+        view.setViewID(id);
+        String genomeName = "Yersinia ruckeri QMA0440";
+        view.initGenomeInfo(genomeName);
+        view.setGenomeSelected(genomeName);
+    }
+    
+    /**
+     * Display GeneView <br>
+     * It will display 91001
+     * 
+     * @param gene
+     * @param partService
+     */
+    
+    public static void open91001GeneView(EPartService partService) {
+        String id = GeneView.ID + "-" + String.valueOf(Math.random() * 1000).substring(0, 3);
+        // initiate view
+        ResourceManager.openView(partService, GeneView.ID, id);
+        // update data
+        MPart part = partService.findPart(id);
+        NavigationManagement.pushStateView(id, new HashMap<>());
+        GeneView view = (GeneView) part.getObject();
+        view.setViewID(id);
+        String genomeName = "Yersinia pestis 91001";
+        view.initGenomeInfo(genomeName);
+        view.setGenomeSelected(genomeName);
+    }
     /**
      * Display the view with saved parameters
      * 

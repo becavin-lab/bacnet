@@ -455,7 +455,7 @@ public class ProteomicsCreation {
                     }
                     // test if we can find the gene by its old locus tag
                     else if (genome.getGenes().get(gene) != null) { //.getGenes() returns null if gene is a NcRNA 
-                    	String oldLocusTag = genome.getGenes().get(gene).getFeature("old_locus_tag");
+                    	String oldLocusTag = genome.getGenes().get(gene).getOldLocusTag();
                     	if (!oldLocusTag.equals("") & proteome.getRowNames().containsKey(oldLocusTag)) {
                     		logFCMatrix.setValue(proteome.getValue(oldLocusTag, ColNames.LOGFC + ""), gene, comparisonName);
                     		}

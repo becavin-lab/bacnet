@@ -979,6 +979,8 @@ public class SetupPart implements SelectionListener {
                         dataValidation.getGenomes().put(genome, true);
                         logs += "Save Protein to Locus tag hashmap for faster computing of homolog search: " + genome + "\n";
                         genomeTemp.saveProteinIdToLocusTag();
+                        genomeTemp.saveProteinIdToOldLocusTag();
+                        genomeTemp.saveLocusTagToOldLocusTag();
                     }
                 }
             }

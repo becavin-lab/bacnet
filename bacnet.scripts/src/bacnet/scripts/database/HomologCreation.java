@@ -55,7 +55,7 @@ public class HomologCreation {
 //	public static String PATH_SCRIPT = "D:/Programming/GitRepository/ListeriomicsSample/GenomeNCBI/Temp/";
 //	public static String PATH_SCRIPT = "C:"+ FILE_SEPARATOR +"Users"+ FILE_SEPARATOR +"ipmc"+ FILE_SEPARATOR +
 //			"Documents"+ FILE_SEPARATOR +"BACNET"+ FILE_SEPARATOR +"ListeriomicsSample" + FILE_SEPARATOR + "GenomeNCBI" + FILE_SEPARATOR;
-	public static String PATH_SCRIPT = "D:\\Yersiniomics\\Yersiniomics\\GenomeNCBI\\";
+	public static String PATH_SCRIPT = "C:\\Users\\Pierre\\Documents\\Yersiniomics\\Yersiniomics\\GenomeNCBI\\";
 	/**
 	 * Path for Blast+ 
 	 */
@@ -722,6 +722,8 @@ public class HomologCreation {
 			//String genome_target = listGenomes.get(w);
 			if (!genome_target.equals(genome_pivot)) {
 				HashMap<String,String> proteinIdtoLocusTagTarget = Genome.loadGeneFromProteinId(GenomeNCBI.unprocessGenomeName(genome_target));
+				HashMap<String,String> proteinIdtoOldLocusTagTarget = Genome.loadOldLocusTagFromProteinId(GenomeNCBI.unprocessGenomeName(genome_target));
+// TODO: add proteinIdtoOldLocusTagTarget in summary table
 				String pathBlast = PATH_ADD_IDENTITY + genome_pivot
 						+ "_vs_" + genome_target + ".blast.txt";
 				String[][] homologyTable = TabDelimitedTableReader.read(pathBlast);
@@ -729,7 +731,7 @@ public class HomologCreation {
 				int i = 1;
 				for (String proteinName : proteinIdtoLocusTagPivot.keySet()) {
 					// add gene_name to protein id
-					System.out.println(proteinName);
+					//System.out.println(proteinName);
 					String gene = proteinIdtoLocusTagPivot.get(proteinName);
 					if (gene == null) {
 						String rowNotFound = genome_pivot + "\t" + proteinName;
@@ -745,13 +747,15 @@ public class HomologCreation {
 						if (identity > IDENTITY_CUTOFF) {
 							// Replace proteinId by locustag
 							String geneTarget = proteinIdtoLocusTagTarget.get(proteinTargetName);
+							String oldLocusTarget = proteinIdtoOldLocusTagTarget.get(proteinTargetName);
+
 							if (geneTarget == null) {
 								System.err.println("Cannot find gene for : " + proteinTargetName);
 								String rowNotFound = genome_target + "\t" + proteinTargetName;
 								proteinNotFound.add(rowNotFound);
 							}
 
-							newTable[i][1] += GenomeNCBI.unprocessGenomeName(genome_target) + ";" + geneTarget
+							newTable[i][1] += GenomeNCBI.unprocessGenomeName(genome_target) + ";" + geneTarget + ";" + oldLocusTarget
 									+ ";"+proteinTargetName+ ";" + homologyTable[indexRow][homologyTable[indexRow].length - 1] + ";;";
 						}else {
 							String rowNotFound = genome_pivot + "\t" + proteinName + "\t" + genome_target + "\t" + proteinTargetName +"\t"+ identity;
@@ -800,7 +804,7 @@ public class HomologCreation {
 
 	
 	/**
-	 * Go through all result files and create Conservation HadhMap for each Gene
+	 * Go through all result files and create Conservation HashMap for each Gene
 	 */
 	private static void addHomologsToGenes(String genome) {
 		Genome genomeLoaded = Genome.loadGenome(GenomeNCBI.unprocessGenomeName(genome), false);
@@ -812,23 +816,22 @@ public class HomologCreation {
 			Gene gene = genomeLoaded.getGeneFromName(locus);
 			if (gene != null) {
 				LinkedHashMap<String, String> conservationHashMap = new LinkedHashMap<>();
-				conservationHashMap.put(GenomeNCBI.unprocessGenomeName(genome), locus + ";"+gene.getProtein_id()+";1.0");
+				conservationHashMap.put(GenomeNCBI.unprocessGenomeName(genome), locus + ";" + gene.getOldLocusTag() +";"+gene.getProtein_id()+";1.0");
 				if (!allInfo.equals("")) {
 					String[] conservations = allInfo.split(";;");
 					for (String conservation : conservations) {
 						String genomeTarget = conservation.split(";")[0];
-						String geneTarget = conservation.split(";")[1] + ";" + conservation.split(";")[2] + ";" + conservation.split(";")[3];
-						// System.out.println(genomeTarget + " -----" + geneTarget);
+						String geneTarget = conservation.split(";")[1] + ";" + conservation.split(";")[2] + ";" + conservation.split(";")[3] + ";" + conservation.split(";")[4];
+						//System.out.println(genomeTarget + " -----" + geneTarget);
 						conservationHashMap.put(genomeTarget, geneTarget);
 					}
 				}
 				gene.setConservationHashMap(conservationHashMap);
-				// System.out.println("Found "+conservationHashMap.size()+ " homologs for
-				// "+gene.getName());
+				//System.out.println("Found "+conservationHashMap.size()+ " homologs for "+gene.getName());
 				gene.setConservation(conservationHashMap.size());
 				String genepath = Database.getGENOMES_PATH() + GenomeNCBI.unprocessGenomeName(genome) + FILE_SEPARATOR
 						+ "Sequences" + FILE_SEPARATOR + gene.getName();
-				// System.out.println(genepath);
+				//System.out.println(genepath);
 				gene.save(genepath);
 			}
 		}

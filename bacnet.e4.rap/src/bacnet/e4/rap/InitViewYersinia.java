@@ -57,10 +57,16 @@ public class InitViewYersinia implements SelectionListener {
      * Indicates if we focus the view, so we can pushState navigation
      */
     private boolean focused = false;
-
-    private Button btnBHI37;
+    
+    private Button btnCO92;
+    private Button btnKIM;
     private Button btnCoExpression;
-    private Button btnIntracellular;
+    private Button btnY11;
+    private Button btn8081;
+    private Button btnYPIII;
+    private Button btnIP32953;
+    private Button btnCSF007;
+    private Button btn91001;
     private Button btnLoadData;
     private Button btnGeneView;
     private Button btnAccessWiki;
@@ -86,6 +92,8 @@ public class InitViewYersinia implements SelectionListener {
 
     @PostConstruct
     public void createPartControl(Composite parent) {
+    	//AppSpecificMethods AppSpecificMethods = new AppSpecificMethods();
+    	//AppSpecificMethods.openPasswordDialog(shell);
 
         //System.out.println("Load InitView");
 
@@ -132,13 +140,14 @@ public class InitViewYersinia implements SelectionListener {
         GridData gd_composite_11 = new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1);
         gd_composite_11.widthHint = 1500;
         composite_11.setLayoutData(gd_composite_11);
-        composite_11.setLayout(new GridLayout(4, false));
+        composite_11.setLayout(new GridLayout(5, false));
         composite_11.setBackground(BasicColor.LIGHT_ONE);
 
         Composite composite_12 = new Composite(composite_11, SWT.NONE);
         composite_12.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
         composite_12.setLayout(new GridLayout(1, false));
         composite_12.setBackground(BasicColor.LIGHT_ONE);
+        
         Label lblFastAccessTo = new Label(composite_12, SWT.WRAP);
         GridData gd_lblFastAccessTo = new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1);
         gd_lblFastAccessTo.widthHint = 200;
@@ -147,11 +156,12 @@ public class InitViewYersinia implements SelectionListener {
         lblFastAccessTo.setFont(SWTResourceManager.getTitleFont(SWT.BOLD));
         lblFastAccessTo.setBackground(BasicColor.LIGHT_ONE);
         lblFastAccessTo.setForeground(BasicColor.BLACK);
-        lblFastAccessTo.setText("Multi-omics views");
+        lblFastAccessTo.setText("Reference genomes quick access");
         //Label lblImage = new Label(composite_12, SWT.BORDER);
         //lblImage.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/InitPage/genomeView.png"));
+        
         Composite composite_1 = new Composite(composite_11, SWT.NONE);
-        GridData gd_composite_1 = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
+        GridData gd_composite_1 = new GridData(SWT.LEFT, SWT.TOP, false, false, 1, 1);
         //gd_composite_1.heightHint = 115;
         composite_1.setLayoutData(gd_composite_1);
         composite_1.setSize(480, 109);
@@ -159,91 +169,194 @@ public class InitViewYersinia implements SelectionListener {
         composite_1.setBackground(BasicColor.LIGHT_ONE);
 
         //ToolBar toolBar = new ToolBar(composite_1, SWT.FLAT | SWT.RIGHT);
-        btnBHI37 = new Button(composite_1, SWT.PUSH);
-        btnBHI37.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
-        btnBHI37.setText("Test");
-        btnBHI37.setFont(SWTResourceManager.getTitleFont(SWT.NORMAL));
-        btnBHI37.setBackground(BasicColor.DARK_ONE);
-        //sbtnBHI37.setForeground(BasicColor.BLACK);
+        Label lblPestis = new Label(composite_1, SWT.WRAP);
+        RWTUtils.setMarkup(lblPestis);
+        lblPestis.setAlignment(SWT.CENTER);
+        GridData gd_lblPestis = new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1);
+        gd_lblPestis.widthHint = 300;
+        lblPestis.setLayoutData(gd_lblPestis);
+        lblPestis.setFont(SWTResourceManager.getTitleFont(SWT.NORMAL));
+        lblPestis.setBackground(BasicColor.LIGHT_ONE);
+        lblPestis.setForeground(BasicColor.BLACK);
+        lblPestis.setText("<i>Yersinia pestis</i>");
+        
+        btnCO92 = new Button(composite_1, SWT.BORDER);
+        btnCO92.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
+        btnCO92.setText("CO92");
+        btnCO92.setFont(SWTResourceManager.getTitleFont(SWT.NORMAL));
+        btnCO92.setBackground(BasicColor.DARK_ONE);
+        //sbtnCO92.setForeground(BasicColor.BLACK);
+        btnCO92.addSelectionListener(this);
+        
+        btnKIM = new Button(composite_1, SWT.BORDER);
+        btnKIM.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
+        btnKIM.setText("KIM");
+        btnKIM.setFont(SWTResourceManager.getTitleFont(SWT.NORMAL));
+        btnKIM.setBackground(BasicColor.DARK_ONE);
+        //btnKIM.setForeground(BasicColor.BLACK);
+        btnKIM.addSelectionListener(this);
+/*
+        Label lblCO92 = new Label(composite_1, SWT.WRAP);
+        RWTUtils.setMarkup(lblCO92);
+        lblCO92.setAlignment(SWT.CENTER);
+        GridData gd_lblCO92 = new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1);
+        gd_lblCO92.widthHint = 300;
+        lblCO92.setLayoutData(gd_lblCO92);
+        lblCO92.setFont(SWTResourceManager.getBodyFont(SWT.NORMAL));
+        lblCO92.setBackground(BasicColor.LIGHT_ONE);
+        lblCO92.setForeground(BasicColor.BLACK);
+        lblCO92.setText("View of <i>Yersinia pestis</i> CO92 RNASeq and LC-MS/MS datas or KIM microarray datas");
+*/
+        Composite composite_23 = new Composite(composite_11, SWT.NONE);
+        GridData gd_composite_23 = new GridData(SWT.LEFT, SWT.TOP, false, false, 1, 1);
+        //gd_composite_23.heightHint = 115;
+        composite_23.setLayoutData(gd_composite_23);
+        composite_23.setLayout(new GridLayout(1, false));
+        composite_23.setBackground(BasicColor.LIGHT_ONE);
+        composite_23.setForeground(BasicColor.BLACK);
+        
+        Label lblPseudo = new Label(composite_23, SWT.WRAP);
+        RWTUtils.setMarkup(lblPseudo);
+        lblPseudo.setAlignment(SWT.CENTER);
+        GridData gd_lblPseudo = new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1);
+        gd_lblPseudo.widthHint = 300;
+        lblPseudo.setLayoutData(gd_lblPseudo);
+        lblPseudo.setFont(SWTResourceManager.getTitleFont(SWT.NORMAL));
+        lblPseudo.setBackground(BasicColor.LIGHT_ONE);
+        lblPseudo.setForeground(BasicColor.BLACK);
+        lblPseudo.setText("<i>Yersinia pseudotuberculosis</i>");
 
+        btnIP32953 = new Button(composite_23, SWT.BORDER);
+        btnIP32953.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
+        btnIP32953.addSelectionListener(this);
+        btnIP32953.setText("IP32953");
+        btnIP32953.setFont(SWTResourceManager.getTitleFont(SWT.NORMAL));
+        btnIP32953.setBackground(BasicColor.DARK_ONE);
 
-        btnBHI37.addSelectionListener(this);
+        
+        btnYPIII = new Button(composite_23, SWT.BORDER);
+        btnYPIII.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
+        btnYPIII.addSelectionListener(this);
+        btnYPIII.setText("YPIII");
+        btnYPIII.setFont(SWTResourceManager.getTitleFont(SWT.NORMAL));
+        btnYPIII.setBackground(BasicColor.DARK_ONE);
 
-        Label lblExpressionAtlas = new Label(composite_1, SWT.WRAP);
-        RWTUtils.setMarkup(lblExpressionAtlas);
-        lblExpressionAtlas.setAlignment(SWT.CENTER);
-        GridData gd_lblExpressionAtlas = new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1);
-        gd_lblExpressionAtlas.widthHint = 400;
-        lblExpressionAtlas.setLayoutData(gd_lblExpressionAtlas);
-        lblExpressionAtlas.setFont(SWTResourceManager.getBodyFont(SWT.NORMAL));
-        lblExpressionAtlas.setBackground(BasicColor.LIGHT_ONE);
-        lblExpressionAtlas.setForeground(BasicColor.BLACK);
-        lblExpressionAtlas.setText("Do not click");
-
+/*
+        Label lblYPIII = new Label(composite_23, SWT.WRAP);
+        RWTUtils.setMarkup(lblYPIII);
+        lblYPIII.setAlignment(SWT.CENTER);
+        GridData gd_lblYPIII = new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1);
+        gd_lblYPIII.widthHint = 300;
+        lblYPIII.setLayoutData(gd_lblYPIII);
+        lblYPIII.setFont(SWTResourceManager.getBodyFont(SWT.NORMAL));
+        lblYPIII.setBackground(BasicColor.LIGHT_ONE);
+        lblYPIII.setForeground(BasicColor.BLACK);
+        lblYPIII.setText("View of <i>Yersinia pseudotuberculosis</i> IP32953 RNASeq datas or YPIII microarray datas");
+    */    
         Composite composite_9 = new Composite(composite_11, SWT.NONE);
-        GridData gd_composite_9 = new GridData(SWT.LEFT, SWT.CENTER, false, true, 1, 1);
+        GridData gd_composite_9 = new GridData(SWT.LEFT, SWT.TOP, false, false, 1, 1);
         //gd_composite_9.heightHint = 115;
         composite_9.setLayoutData(gd_composite_9);
         composite_9.setLayout(new GridLayout(1, false));
         composite_9.setBackground(BasicColor.LIGHT_ONE);
         composite_9.setForeground(BasicColor.BLACK);
+        
+        Label lblEntero = new Label(composite_9, SWT.WRAP);
+        RWTUtils.setMarkup(lblEntero);
+        lblEntero.setAlignment(SWT.CENTER);
+        GridData gd_lblEntero = new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1);
+        gd_lblEntero.widthHint = 300;
+        lblEntero.setLayoutData(gd_lblEntero);
+        lblEntero.setFont(SWTResourceManager.getTitleFont(SWT.NORMAL));
+        lblEntero.setBackground(BasicColor.LIGHT_ONE);
+        lblEntero.setForeground(BasicColor.BLACK);
+        lblEntero.setText("<i>Yersinia enterocolitica</i>");
 
-        btnIntracellular = new Button(composite_9, SWT.BORDER);
-        btnIntracellular.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
-        btnIntracellular.addSelectionListener(this);
-        btnIntracellular.setText("Test");
-        btnIntracellular.setFont(SWTResourceManager.getTitleFont(SWT.NORMAL));
-        btnIntracellular.setBackground(BasicColor.DARK_ONE);
-
-
-        Label lblIntracellularMouse = new Label(composite_9, SWT.WRAP);
-        RWTUtils.setMarkup(lblIntracellularMouse);
-        lblIntracellularMouse.setAlignment(SWT.CENTER);
-        GridData gd_lblIntracellularMouse = new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1);
-        gd_lblIntracellularMouse.widthHint = 400;
-        lblIntracellularMouse.setLayoutData(gd_lblIntracellularMouse);
-        lblIntracellularMouse.setFont(SWTResourceManager.getBodyFont(SWT.NORMAL));
-        lblIntracellularMouse.setBackground(BasicColor.LIGHT_ONE);
-        lblIntracellularMouse.setForeground(BasicColor.BLACK);
-        lblIntracellularMouse.setText("Do not click");
-        gd_composite_11.widthHint = 1500;
-
-        Composite composite_15 = new Composite(composite_11, SWT.NONE);
-        GridData gd_composite_15 = new GridData(SWT.LEFT, SWT.CENTER, false, true, 1, 1);
-        //gd_composite_15.heightHint = 115;
-        composite_15.setLayoutData(gd_composite_15);
-        composite_15.setLayout(new GridLayout(1, false));
-        composite_15.setBackground(BasicColor.LIGHT_ONE);
-        btnGeneView = new Button(composite_15, SWT.BORDER);
-        btnGeneView.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
-        // btnGeneView.setImage(ResourceManager.getPluginImage("bacnet.core",
-        // "icons/InitPage/SystemsBio.png"));
-        btnGeneView.addSelectionListener(this);
-        btnGeneView.setText("Genes information");
-        btnGeneView.setFont(SWTResourceManager.getTitleFont(SWT.NORMAL));
-        btnGeneView.setBackground(BasicColor.DARK_ONE);
-
-
-        Label lblinfo = new Label(composite_15, SWT.WRAP);
-        RWTUtils.setMarkup(lblinfo);
-        lblinfo.setAlignment(SWT.CENTER);
-        lblinfo.setFont(SWTResourceManager.getBodyFont(SWT.NORMAL));
-        lblinfo.setBackground(BasicColor.LIGHT_ONE);
-        lblinfo.setForeground(BasicColor.BLACK);
-
-        GridData gd_lblinfo = new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1);
-        gd_lblinfo.widthHint = 400;
-        lblinfo.setLayoutData(gd_lblinfo);
-        lblinfo.setText("Access to all information about <i>Yersinia</i> species genes: "
-                + "functional annotation, gene conservation, synteny, expression atlas and protein atlas. "
-                + "The expression atlas extracts the transcriptomics datasets in which a gene is differently expressed."
-                + " The protein atlas shows in which proteomics datasets a protein has been observed.");
-
+        btnY11 = new Button(composite_9, SWT.BORDER);
+        btnY11.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
+        btnY11.addSelectionListener(this);
+        btnY11.setText("Y11");
+        btnY11.setFont(SWTResourceManager.getTitleFont(SWT.NORMAL));
+        btnY11.setBackground(BasicColor.DARK_ONE);
+        
+        btn8081 = new Button(composite_9, SWT.BORDER);
+        btn8081.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
+        btn8081.addSelectionListener(this);
+        btn8081.setText("8081");
+        btn8081.setFont(SWTResourceManager.getTitleFont(SWT.NORMAL));
+        btn8081.setBackground(BasicColor.DARK_ONE);
+/*
+        Label lblY11 = new Label(composite_9, SWT.WRAP);
+        RWTUtils.setMarkup(lblY11);
+        lblY11.setAlignment(SWT.CENTER);
+        GridData gd_lblY11 = new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1);
+        gd_lblY11.widthHint = 300;
+        lblY11.setLayoutData(gd_lblY11);
+        lblY11.setFont(SWTResourceManager.getBodyFont(SWT.NORMAL));
+        lblY11.setBackground(BasicColor.LIGHT_ONE);
+        lblY11.setForeground(BasicColor.BLACK);
+        lblY11.setText("View of <i>Yersinia enterocolitica</i> Y11 RNASeq datas or 8081 datas");
+    */    
+        Composite composite_20 = new Composite(composite_11, SWT.NONE);
+        GridData gd_composite_20 = new GridData(SWT.LEFT, SWT.TOP, false, false, 1, 1);
+        //gd_composite_9.heightHint = 115;
+        composite_20.setLayoutData(gd_composite_20);
+        composite_20.setLayout(new GridLayout(1, false));
+        composite_20.setBackground(BasicColor.LIGHT_ONE);
+        composite_20.setForeground(BasicColor.BLACK);
+        
+        Label lblRuck = new Label(composite_20, SWT.WRAP);
+        RWTUtils.setMarkup(lblRuck);
+        lblRuck.setAlignment(SWT.CENTER);
+        GridData gd_lblRuck = new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1);
+        gd_lblRuck.widthHint = 300;
+        lblRuck.setLayoutData(gd_lblRuck);
+        lblRuck.setFont(SWTResourceManager.getTitleFont(SWT.NORMAL));
+        lblRuck.setBackground(BasicColor.LIGHT_ONE);
+        lblRuck.setForeground(BasicColor.BLACK);
+        lblRuck.setText("<i>Yersinia ruckeri</i>");
+        
+        btnCSF007 = new Button(composite_20, SWT.BORDER);
+        btnCSF007.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
+        btnCSF007.addSelectionListener(this);
+        btnCSF007.setText("QMA0440");
+        btnCSF007.setFont(SWTResourceManager.getTitleFont(SWT.NORMAL));
+        btnCSF007.setBackground(BasicColor.DARK_ONE);
+        
+        Label lblMicr = new Label(composite_20, SWT.WRAP);
+        RWTUtils.setMarkup(lblMicr);
+        lblMicr.setAlignment(SWT.CENTER);
+        GridData gd_lblMicr = new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1);
+        gd_lblMicr.widthHint = 300;
+        lblMicr.setLayoutData(gd_lblRuck);
+        lblMicr.setFont(SWTResourceManager.getTitleFont(SWT.NORMAL));
+        lblMicr.setBackground(BasicColor.LIGHT_ONE);
+        lblMicr.setForeground(BasicColor.BLACK);
+        lblMicr.setText("<i>Yersinia pestis</i> biovar <i>Microtus</i>");
+        
+        btn91001 = new Button(composite_20, SWT.BORDER);
+        btn91001.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
+        btn91001.addSelectionListener(this);
+        btn91001.setText("91001");
+        btn91001.setFont(SWTResourceManager.getTitleFont(SWT.NORMAL));
+        btn91001.setBackground(BasicColor.DARK_ONE);
+        /*
+        Label lblCSF007 = new Label(composite_20, SWT.WRAP);
+        RWTUtils.setMarkup(lblCSF007);
+        lblCSF007.setAlignment(SWT.CENTER);
+        GridData gd_lblCSF007 = new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1);
+        gd_lblCSF007.widthHint = 300;
+        lblCSF007.setLayoutData(gd_lblCSF007);
+        lblCSF007.setFont(SWTResourceManager.getBodyFont(SWT.NORMAL));
+        lblCSF007.setBackground(BasicColor.LIGHT_ONE);
+        lblCSF007.setForeground(BasicColor.BLACK);
+        lblCSF007.setText("View of <i>Yersinia ruckeri</i> CSF007-82 RNASeq datas");
+*/
         Composite composite_6 = new Composite(composite, SWT.BORDER);
         GridData gd_composite_6 = new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1);
         gd_composite_6.widthHint = 1500;
         composite_6.setLayoutData(gd_composite_6);
-        composite_6.setLayout(new GridLayout(4, false));
+        composite_6.setLayout(new GridLayout(5, false));
         composite_6.setBackground(BasicColor.LIGHT_TWO);
         Composite composite_8 = new Composite(composite_6, SWT.NONE);
         composite_8.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1));
@@ -262,8 +375,37 @@ public class InitViewYersinia implements SelectionListener {
 
         //Label lblImage_3 = new Label(composite_8, SWT.BORDER);
         //lblImage_3.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/InitPage/heatmap.png"));
+        Composite composite_15 = new Composite(composite_6, SWT.NONE);
+        GridData gd_composite_15 = new GridData(SWT.LEFT, SWT.TOP, false, false, 1, 1);
+        //gd_composite_15.heightHint = 115;
+        composite_15.setLayoutData(gd_composite_15);
+        composite_15.setLayout(new GridLayout(1, false));
+        composite_15.setBackground(BasicColor.LIGHT_TWO);
+        btnGeneView = new Button(composite_15, SWT.BORDER);
+        btnGeneView.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
+        // btnGeneView.setImage(ResourceManager.getPluginImage("bacnet.core",
+        // "icons/InitPage/SystemsBio.png"));
+        btnGeneView.addSelectionListener(this);
+        btnGeneView.setText("Genes information");
+        btnGeneView.setFont(SWTResourceManager.getTitleFont(SWT.NORMAL));
+        btnGeneView.setBackground(BasicColor.DARK_TWO);
+
+
+        Label lblinfo = new Label(composite_15, SWT.WRAP);
+        RWTUtils.setMarkup(lblinfo);
+        lblinfo.setAlignment(SWT.CENTER);
+        lblinfo.setFont(SWTResourceManager.getBodyFont(SWT.NORMAL));
+        lblinfo.setBackground(BasicColor.LIGHT_TWO);
+        lblinfo.setForeground(BasicColor.BLACK);
+
+        GridData gd_lblinfo = new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1);
+        gd_lblinfo.widthHint = 300;
+        lblinfo.setLayoutData(gd_lblinfo);
+        lblinfo.setText("Access to all information about <i>Yersinia</i> species genes: "
+                + "functional annotation, gene conservation, synteny, expression atlas and protein atlas. ");
+        
         Composite composite_10 = new Composite(composite_6, SWT.NONE);
-        GridData gd_composite_10 = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
+        GridData gd_composite_10 = new GridData(SWT.LEFT, SWT.TOP, false, false, 1, 1);
         //gd_composite_10.heightHint = 100;
         composite_10.setLayoutData(gd_composite_10);
         composite_10.setLayout(new GridLayout(1, false));
@@ -279,7 +421,7 @@ public class InitViewYersinia implements SelectionListener {
         RWTUtils.setMarkup(lblGoThroughAll);
         lblGoThroughAll.setAlignment(SWT.CENTER);
         GridData gd_lblGoThroughAll = new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1);
-        gd_lblGoThroughAll.widthHint = 400;
+        gd_lblGoThroughAll.widthHint = 300;
         lblGoThroughAll.setLayoutData(gd_lblGoThroughAll);
         lblGoThroughAll.setText("Browse all 121 <i>Yersinia</i> complete genomes available on Yersiniomics."
                 + " Visualize strain relationship in a phylogenomic tree. Access to all their annotated genome elements.");
@@ -304,7 +446,7 @@ public class InitViewYersinia implements SelectionListener {
         RWTUtils.setMarkup(lblGoThroughAll_1);
         lblGoThroughAll_1.setAlignment(SWT.CENTER);
         GridData gd_lblGoThroughAll_1 = new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1);
-        gd_lblGoThroughAll_1.widthHint = 400;
+        gd_lblGoThroughAll_1.widthHint = 300;
         lblGoThroughAll_1.setLayoutData(gd_lblGoThroughAll_1);
         lblGoThroughAll_1
                 .setText("Browse all 104 <i>Yersinia</i> species transcriptomics datasets available on Yersiniomics. "
@@ -330,7 +472,7 @@ public class InitViewYersinia implements SelectionListener {
         RWTUtils.setMarkup(lblGoThroughAll_2);
         lblGoThroughAll_2.setAlignment(SWT.CENTER);
         GridData gd_lblGoThroughAll_2 = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
-        gd_lblGoThroughAll_2.widthHint = 400;
+        gd_lblGoThroughAll_2.widthHint = 300;
         lblGoThroughAll_2.setLayoutData(gd_lblGoThroughAll_2);
         lblGoThroughAll_2
                 .setText("Browse all 9 <i>Yersinia</i> species proteomics datasets available on Yersiniomics. "
@@ -438,7 +580,7 @@ public class InitViewYersinia implements SelectionListener {
 
         Label lblLastUpdate = new Label(composite_19, SWT.NONE);
         lblLastUpdate.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, true, 1, 1));
-        lblLastUpdate.setText("Last update: October 2019");
+        lblLastUpdate.setText("Last update: September 2021");
 
         linkPubli = new Link(composite_19, SWT.NONE);
         linkPubli.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
@@ -447,7 +589,7 @@ public class InitViewYersinia implements SelectionListener {
 
         Link link = new Link(composite_19, SWT.NONE);
         link.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
-        link.setText("Contact us if you have a recently published \"omics\" dataset you want to be integrated to Yersiniomics<br>  <a>becavin AT impc.cnrs.fr DOT fr</a>");
+        link.setText("Contact us if you have a recently published \"omics\" dataset you want to be integrated to Yersiniomics:  <a href=\"mailto:yersiniomics@pasteur.fr\">yersiniomics@pasteur.fr</a>");
 
         new Label(composite_19, SWT.NONE);
 
@@ -532,10 +674,30 @@ public class InitViewYersinia implements SelectionListener {
         if (e.getSource() == btnCoExpression) {
             partService.showPart(CoExprNetworkView.ID, PartState.ACTIVATE);
             NavigationManagement.pushStateView(CoExprNetworkView.ID);
-        }else if (e.getSource() == btnBHI37) {
-        	GenomeTranscriptomeView.displayYersiY11(partService);
-        } else if (e.getSource() == btnIntracellular) {
-        	GenomeTranscriptomeView.displayYersiYPIII(partService);
+        }else if (e.getSource() == btnCO92) {
+            GeneView.openGeneView(partService);
+        	//GenomeTranscriptomeView.displayYersiCO92(partService);
+        }else if (e.getSource() == btnKIM) {
+            GeneView.openKIMGeneView(partService);
+        	//GenomeTranscriptomeView.displayYersiKIM(partService);
+        } else if (e.getSource() == btnIP32953) {
+            GeneView.openIP32953GeneView(partService);
+        	//GenomeTranscriptomeView.displayYersiIP32953(partService);
+        } else if (e.getSource() == btnYPIII) {
+            GeneView.openYPIIIGeneView(partService);
+        	//GenomeTranscriptomeView.displayYersiYPIII(partService);
+        } else if (e.getSource() == btnY11) {
+            GeneView.openY11GeneView(partService);
+        	//GenomeTranscriptomeView.displayYersiY11(partService);
+        } else if (e.getSource() == btn8081) {
+            GeneView.open8081GeneView(partService);
+        	//GenomeTranscriptomeView.displayYersi8081(partService);
+        } else if (e.getSource() == btnCSF007) {
+            GeneView.openQMA0440GeneView(partService);
+        	//GenomeTranscriptomeView.displayYersiCSF007(partService);
+        } else if (e.getSource() == btn91001) {
+            GeneView.open91001GeneView(partService);
+        	//GenomeTranscriptomeView.displayYersiCSF007(partService);
         }else if (e.getSource() == btnProteomics) {
             partService.showPart(ProteomicsView.ID, PartState.ACTIVATE);
             NavigationManagement.pushStateView(ProteomicsView.ID);

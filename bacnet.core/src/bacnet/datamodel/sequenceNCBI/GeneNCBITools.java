@@ -112,7 +112,11 @@ public class GeneNCBITools {
     	}
     	return resultSearch;
     }
-
+    
+    public static String getOldLocusTag(DNASequence seq) {
+        return searchElement(seq, "old_locus_tag : ");
+    }
+    
     public static String getProduct(DNASequence seq) {
         return searchElement(seq, "product : ");
     }

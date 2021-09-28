@@ -246,14 +246,55 @@ public class Genome {
      * @return
      */
     public void saveProteinIdToLocusTag() {
+    	//System.out.println("save 1");
     	ArrayList<String> hashMapProteinId = new ArrayList<String>();
         for (String accessionChromo : this.getChromosomes().keySet()) {
         	Chromosome chromo = this.getChromosomes().get(accessionChromo);
+        	//System.out.println("save 1 chrom: "+ accessionChromo);
         	for(String proteinId : chromo.getProteinIDTolocusTag().keySet()) {
+        		//System.out.println("save function 1 "+ proteinId+" "+chromo.getProteinIDTolocusTag().get(proteinId));
+
         		hashMapProteinId.add(proteinId+"\t"+chromo.getProteinIDTolocusTag().get(proteinId));
         	}
         }
         TabDelimitedTableReader.saveList(hashMapProteinId, GenomeNCBI.PATH_PROTEINID + this.getSpecies() + "_protein.txt");
+    }
+    
+    /**
+     * Save locusTagToOldLocusTag in a file for HomologCreation
+     * @return
+     */
+    public void saveLocusTagToOldLocusTag() {
+    	//System.out.println("save 2");
+
+    	ArrayList<String> hashMapOldLocusTag = new ArrayList<String>();
+        for (String accessionChromo : this.getChromosomes().keySet()) {
+        	Chromosome chromo = this.getChromosomes().get(accessionChromo);
+        	//System.out.println("save 2 chrom: "+ accessionChromo);
+        	for(String name : chromo.getLocusTagToOldLocusTagMap().keySet()) {
+        		//System.out.println("save function 2"+ name+" "+chromo.getLocusTagToOldLocusTagMap().get(name));
+        		hashMapOldLocusTag.add(name+"\t"+chromo.getLocusTagToOldLocusTagMap().get(name));
+        	}
+        }
+        TabDelimitedTableReader.saveList(hashMapOldLocusTag, GenomeNCBI.PATH_OLDLOCUSTAG + this.getSpecies() + "_oldLocusTag.txt");
+    }
+    /**
+     * Save locusTagToOldLocusTag in a file for HomologCreation
+     * @return
+     */
+    public void saveProteinIdToOldLocusTag() {
+    	//System.out.println("save 2");
+
+    	ArrayList<String> hashMapOldLocusTag = new ArrayList<String>();
+        for (String accessionChromo : this.getChromosomes().keySet()) {
+        	Chromosome chromo = this.getChromosomes().get(accessionChromo);
+        	//System.out.println("save 2 chrom: "+ accessionChromo);
+        	for(String name : chromo.getProteinIDToOldLocusTagMap().keySet()) {
+        		//System.out.println("save function 2"+ name+" "+chromo.getLocusTagToOldLocusTagMap().get(name));
+        		hashMapOldLocusTag.add(name+"\t"+chromo.getProteinIDToOldLocusTagMap().get(name));
+        	}
+        }
+        TabDelimitedTableReader.saveList(hashMapOldLocusTag, GenomeNCBI.PATH_PROTEINIDTOOLDLOCUSTAG + this.getSpecies() + "_protIDToOldLocusTag.txt");
     }
     
     /**
@@ -266,6 +307,25 @@ public class Genome {
     	return proteinIDTolocusTag;
     }
     
+    /**
+     * Load locusTagToOldLocusTag hashmap for HomologCreation
+     * @param genomeName
+     * @return
+     */
+    public static HashMap<String,String> loadOldLocusTagFromLocusTag(String genomeName) {
+    	HashMap<String,String> locusTagToOldLocusTag = TabDelimitedTableReader.readHashMap(GenomeNCBI.PATH_OLDLOCUSTAG + genomeName + "_oldLocusTag.txt");
+    	return locusTagToOldLocusTag;
+    }
+    
+    /**
+     * Load proteinIDToOldLocusTag hashmap for HomologCreation
+     * @param genomeName
+     * @return
+     */
+    public static HashMap<String,String> loadOldLocusTagFromProteinId(String genomeName) {
+    	HashMap<String,String> proteinIDToOldLocusTag = TabDelimitedTableReader.readHashMap(GenomeNCBI.PATH_PROTEINIDTOOLDLOCUSTAG + genomeName + "_protIDToOldLocusTag.txt");
+    	return proteinIDToOldLocusTag;
+    }
     
     /**
      * Return all element names contained in all chromosomes

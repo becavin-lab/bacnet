@@ -514,37 +514,117 @@ public class GenomeTranscriptomeView {
         displayGenomeElementAndBioConditions(partService, Genome.EGDE_NAME, bioConditions, "");
     }
 
+    
+    /**
+     * Display omics data for Yersinia pestis CO92
+     * @param partService
+     */
+    public static void displayYersiCO92(EPartService partService) {
+        ArrayList<String> bioConditions = new ArrayList<>();
+        bioConditions.add("Pestis_CO92_WT_37C_Planktonic_TMH_Glucose_NextSeq500_2019");
+        bioConditions.add("Pestis_CO92_WT_37C_Planktonic_TMH_Glycerol_NextSeq500_2019");
+        bioConditions.add("Pestis_CO92_WT_37C_Biofilm_TMH_Glucose_NextSeq500_2019");
+        bioConditions.add("Pestis_CO92_WT_37C_Biofilm_TMH_Glycerol_NextSeq500_2019");
+        bioConditions.add("Pestis_CO92_Mutant_crp_37C_Planktonic_TMH_Glucose_NextSeq500_2019");
+        bioConditions.add("Pestis_CO92_Mutant_crp_37C_Biofilm_TMH_Glucose_NextSeq500_2019");
+        bioConditions.add("Pestis_CO92_WT_37C_BHI_HiSeq2000_2016");
+        bioConditions.add("Pestis_CO92_WT_37C_Intracellular_HiSeq2000_2016");
+        bioConditions.add("Pestis_CO92_WT_37C_Extracellular_HiSeq2000_2016");
+        bioConditions.add("Pestis_CO92_25C_solidLBH_QExactiveHF_2020");
+        bioConditions.add("Pestis_CO92_37C_M9_preculture25C_QExactiveHF_2020");
+        bioConditions.add("Pestis_CO92_37C_M9_preculture37C_QExactiveHF_2020");
+        bioConditions.add("Pestis_CO92_37C_Plasma_preculture25C_QExactiveHF_2020");
+        bioConditions.add("Pestis_CO92_37C_Plasma_preculture37C_QExactiveHF_2020");
+        bioConditions.add("Pestis_CO92_37C_solidLBH_QExactiveHF_2020");
+        displayGenomeElementAndBioConditions(partService, "Yersinia pestis CO92", bioConditions, "");
+    }
+    
+    /**
+     * Display omics data for Yersinia pestis KIM
+     * @param partService
+     */
+    public static void displayYersiKIM(EPartService partService) {
+        ArrayList<String> bioConditions = new ArrayList<>();
+        bioConditions.add("Pestis_KIM5_28C_1h30_Log_J774A1_JCVI_2010");
+        bioConditions.add("Pestis_KIM5_28C_4h_Log_Control_JCVI_2010");
+        bioConditions.add("Pestis_KIM5_28C_4h_Log_J774A1_JCVI_2010");
+        bioConditions.add("Pestis_KIM5_28C_8h_Log_J774A1_JCVI_2010");
+
+        displayGenomeElementAndBioConditions(partService, "Yersinia pestis KIM10+", bioConditions, "");
+    }
+    
+    /**
+     * Display omics data for Yersinia  pseudotuberculosis IP32953
+     * @param partService
+     */
+    public static void displayYersiIP32953(EPartService partService) {
+        ArrayList<String> bioConditions = new ArrayList<>();
+        bioConditions.add("Pseudotuberculosis_IP32953_WT_25C_Log_LB_HiSeq2500_2016");
+        bioConditions.add("Pseudotuberculosis_IP32953_WT_25C_Stat_LB_HiSeq2500_2016");
+        bioConditions.add("Pseudotuberculosis_IP32953_WT_37C_Log_LB_HiSeq2500_2016");
+        bioConditions.add("Pseudotuberculosis_IP32953_WT_37C_Stat_LB_HiSeq2500_2016");
+        bioConditions.add("Pseudotuberculosis_IP32953_WT_37C_PeyerPatches_HiSeq2500_2016");
+
+        displayGenomeElementAndBioConditions(partService, "Yersinia pseudotuberculosis IP32953", bioConditions, "");
+    }
+    
     /**
      * Display omics data for Yersinia pseudotuberculosis YPIII
      * @param partService
      */
     public static void displayYersiYPIII(EPartService partService) {
         ArrayList<String> bioConditions = new ArrayList<>();
-        bioConditions.add("Pseudotuberculosis_YPIII_WT_17h_Agilent_2012");
-        bioConditions.add("Pseudotuberculosis_YPIII_WT_25C_Log_Agilent_2014");
-        bioConditions.add("Pseudotuberculosis_YPIII_WT_25C_Stat_Agilent_2014");
-        bioConditions.add("Pseudotuberculosis_YPIII_Mutant_crp_25C_Log_Agilent_2014");
         bioConditions.add("Pseudotuberculosis_YPIII_Mutant_crp_25C_Stat_Agilent_2014");
+        bioConditions.add("Pseudotuberculosis_YPIII_Mutant_crp_25C_Log_Agilent_2014");
         bioConditions.add("Pseudotuberculosis_YPIII_Mutant_csrA_25C_Log_Agilent_2014");
         bioConditions.add("Pseudotuberculosis_YPIII_Mutant_rovA_25C_Log_Agilent_2014");
-        bioConditions.add("Pseudotuberculosis_YPIII_Mutant_ymoA_17h_Agilent_2012");
-        bioConditions.add("Pseudotuberculosis_YPIII_25_Log_Aerobic_Agilent_2014");
         bioConditions.add("Pseudotuberculosis_YPIII_25_Log_Anaerobic_Agilent_2014");
-        bioConditions.add("Pseudotuberculosis_YPIII_25_Stat_Aerobic_Agilent_2014");
         bioConditions.add("Pseudotuberculosis_YPIII_25_Stat_Anaerobic_Agilent_2014");
 
         displayGenomeElementAndBioConditions(partService, "Yersinia pseudotuberculosis YPIII", bioConditions, "");
     }
     
     /**
-     * Display omics data for Yersinia enterocolitica subsp palearctica Y11
+     * Display omics data for Yersinia enterocolitica Y11
      * @param partService
      */
     public static void displayYersiY11(EPartService partService) {
         ArrayList<String> bioConditions = new ArrayList<>();
-        bioConditions.add("Enterocolitica_Y11_Mutant_hfq_37C_Log_IHS2000_2015");
-        bioConditions.add("Enterocolitica_Y11_WT_37C_Log_IHS2000_2015");
+        bioConditions.add("Enterocolitica_647176_Mutant_ybeY_22C_Log_IHS2000_2014");
+        bioConditions.add("Enterocolitica_647176_Mutant_ybeY_37C_Log_IHS2000_2014");
+        bioConditions.add("Enterocolitica_647176_WT_22C_Log_IHS2000_2014");
+        bioConditions.add("Enterocolitica_647176_WT_37C_Log_IHS2000_2014");
+        bioConditions.add("Enterocolitica_647176_Mutant_hfq_22C_Log_IHS2000_2015");
+        bioConditions.add("Enterocolitica_647176_Mutant_hfq_37C_Log_IHS2000_2015");
+        bioConditions.add("Enterocolitica_647176_Mutant_OAntigen_22C_Log_IHS2000_2015");
+        bioConditions.add("Enterocolitica_647176_Mutant_rfaH_22C_Log_IHS2000_2015");
+        bioConditions.add("Enterocolitica_647176_Mutant_rfaH_37C_Log_IHS2000_2015");
+        bioConditions.add("Enterocolitica_647176_WT_22C_Log_IHS2000_2015");
+        bioConditions.add("Enterocolitica_647176_WT_37C_Log_IHS2000_2015");
         displayGenomeElementAndBioConditions(partService, "Yersinia enterocolitica Y11", bioConditions, "");
+    }
+    
+    /**
+     * Display omics data for Yersinia enterocolitica 8081
+     * @param partService
+     */
+    public static void displayYersi8081(EPartService partService) {
+        ArrayList<String> bioConditions = new ArrayList<>();
+        bioConditions.add("Enterocolitica_8081_Mutant_yenR_26-37C_5h_SGUL_2008");
+        bioConditions.add("Enterocolitica_8081_Mutant_yenR_OverExpr_ytxR_26-37C_5h_SGUL_2008");
+        bioConditions.add("Enterocolitica_8081_Mutant_yenR_ytxR_26C_SGUL_2008");
+        bioConditions.add("Enterocolitica_8081_Mutant_yenR_ytxR_OverExpr_ytxR_26C_SGUL_2008");
+        displayGenomeElementAndBioConditions(partService, "Yersinia enterocolitica 8081", bioConditions, "");
+    }
+    /**
+     * Display omics data for Yersinia ruckeri CSF007
+     * @param partService
+     */
+    public static void displayYersiCSF007(EPartService partService) {
+        ArrayList<String> bioConditions = new ArrayList<>();
+        bioConditions.add("Ruckeri_CSF007-82_WT_NextSeq500_2019");
+        bioConditions.add("Ruckeri_CSF007-82_Mutant_rcsB_NextSeq500_2019");
+        displayGenomeElementAndBioConditions(partService, "Yersinia ruckeri QMA0440", bioConditions, "");
     }
     
     /**

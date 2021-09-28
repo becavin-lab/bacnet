@@ -52,6 +52,7 @@ public class GenomeConversionElement {
         gene.setProduct(FileUtils.cleanStringFromHex(GeneNCBITools.getProduct(dnaSeq)));
         gene.setProtein_id(GeneNCBITools.getProteinID(dnaSeq));
         gene.setCog(GeneNCBITools.getCOG(dnaSeq));
+        gene.setOldLocusTag(GeneNCBITools.getOldLocusTag(dnaSeq));
 
         // gene.setLengthAA(gene.getSequenceAA().length());
 
