@@ -113,38 +113,39 @@ public class TranscriptomicsDataFilterComposite extends org.eclipse.swt.widgets.
             btnGeneExpression = new Button(composite, SWT.CHECK);
             btnGeneExpression.setText("Gene Expression");
 
-            btnTiling = new Button(composite, SWT.CHECK);
-            btnTiling.setText("Tiling");
+            //btnTiling = new Button(composite, SWT.CHECK);
+            //btnTiling.setText("Tiling");
 
             btnTss = new Button(composite, SWT.CHECK);
             btnTss.setText("TSS");
 
-            btnTermSeq = new Button(composite, SWT.CHECK);
-            btnTermSeq.setText("TermSeq");
+            //btnTermSeq = new Button(composite, SWT.CHECK);
+            //btnTermSeq.setText("TermSeq");
 
             btnRnaseq = new Button(composite, SWT.CHECK);
             btnRnaseq.setText("RNA-Seq");
 
-            btnRiboSeq = new Button(composite, SWT.CHECK);
-            btnRiboSeq.setText("RiboSeq");
+            //btnRiboSeq = new Button(composite, SWT.CHECK);
+            //btnRiboSeq.setText("RiboSeq");
 
             btnGeneExpression.addSelectionListener(this);
-            btnTiling.addSelectionListener(this);
+            //btnTiling.addSelectionListener(this);
             btnTss.addSelectionListener(this);
             btnRnaseq.addSelectionListener(this);
-            btnRiboSeq.addSelectionListener(this);
-            btnTermSeq.addSelectionListener(this);
+            //btnRiboSeq.addSelectionListener(this);
+            //btnTermSeq.addSelectionListener(this);
         }
 
         Composite composite_1 = new Composite(this, SWT.NONE);
         composite_1.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
         composite_1.setLayout(new GridLayout(1, false));
 
+        /*
         btnUnpublished = new Button(composite_1, SWT.CHECK);
         btnUnpublished.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
         btnUnpublished.setText("Unpublished (0)");
         btnUnpublished.addSelectionListener(this);
-
+*/
         
         new Label(this, SWT.NONE);
 
@@ -186,8 +187,8 @@ public class TranscriptomicsDataFilterComposite extends org.eclipse.swt.widgets.
         composite_2.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
         composite_2.setLayout(new GridLayout(1, false));
 
-        btnLagPhase = new Button(composite_2, SWT.CHECK);
-        btnLagPhase.setText("Lag");
+        //btnLagPhase = new Button(composite_2, SWT.CHECK);
+        //btnLagPhase.setText("Lag");
 
         btnExponential = new Button(composite_2, SWT.CHECK);
         btnExponential.setText("Exponential");
@@ -195,21 +196,21 @@ public class TranscriptomicsDataFilterComposite extends org.eclipse.swt.widgets.
         btnStationnary = new Button(composite_2, SWT.CHECK);
         btnStationnary.setText("Stationary");
 
-        btnSurvival = new Button(composite_2, SWT.CHECK);
-        btnSurvival.setText("Survival");
+        //btnSurvival = new Button(composite_2, SWT.CHECK);
+        //btnSurvival.setText("Survival");
 
-        btnDeath = new Button(composite_2, SWT.CHECK);
-        btnDeath.setText("Death");
+        //btnDeath = new Button(composite_2, SWT.CHECK);
+        //btnDeath.setText("Death");
 
-        btnRegrowth = new Button(composite_2, SWT.CHECK);
-        btnRegrowth.setText("Regrowth");
+        //btnRegrowth = new Button(composite_2, SWT.CHECK);
+        //btnRegrowth.setText("Regrowth");
 
-        btnLagPhase.addSelectionListener(this);
+        //btnLagPhase.addSelectionListener(this);
         btnExponential.addSelectionListener(this);
         btnStationnary.addSelectionListener(this);
-        btnSurvival.addSelectionListener(this);
-        btnDeath.addSelectionListener(this);
-        btnRegrowth.addSelectionListener(this);
+        //btnSurvival.addSelectionListener(this);
+        //btnDeath.addSelectionListener(this);
+        //btnRegrowth.addSelectionListener(this);
 
         getComboGenome().add("All");
         ArrayList<String> genomes = BioCondition.getTranscriptomesGenomes();
@@ -221,18 +222,18 @@ public class TranscriptomicsDataFilterComposite extends org.eclipse.swt.widgets.
             getComboGenome().add(genome);
         }
         getComboGenome().select(0);
-        allButtons.add(btnLagPhase);
+        //allButtons.add(btnLagPhase);
         allButtons.add(btnExponential);
         allButtons.add(btnStationnary);
-        allButtons.add(btnSurvival);
-        allButtons.add(btnDeath);
-        allButtons.add(btnRegrowth);
+        //allButtons.add(btnSurvival);
+        //allButtons.add(btnDeath);
+        //allButtons.add(btnRegrowth);
         allButtons.add(btnGeneExpression);
-        allButtons.add(btnTiling);
+        //allButtons.add(btnTiling);
         allButtons.add(btnTss);
-        allButtons.add(btnTermSeq);
+        //allButtons.add(btnTermSeq);
         allButtons.add(btnRnaseq);
-        allButtons.add(btnRiboSeq);
+        //allButtons.add(btnRiboSeq);
 
     }
 
@@ -301,22 +302,24 @@ public class TranscriptomicsDataFilterComposite extends org.eclipse.swt.widgets.
          * Update checkbox text with the number of data available for each category
          */
         btnGeneExpression.setText("Gene Expression (" + geneExpr + ")");
-        btnTiling.setText("Tiling (" + tiling + ")");
+        //btnTiling.setText("Tiling (" + tiling + ")");
         btnTss.setText("TSS (" + tss + ")");
-        btnTermSeq.setText("TermSeq (" + termseq + ")");
+        //btnTermSeq.setText("TermSeq (" + termseq + ")");
         btnRnaseq.setText("RNASeq (" + rnaSeq + ")");
-        btnRiboSeq.setText("RiboSeq (" + riboseq + ")");
+        //btnRiboSeq.setText("RiboSeq (" + riboseq + ")");
+        /*
         if (Database.getInstance().getProjectName() == Database.UIBCLISTERIOMICS_PROJECT) {
             btnUnpublished.dispose();
         } else {
             btnUnpublished.setText("Unpublished (" + unpublished + ")");
         }
-        btnLagPhase.setText("Lag (" + lag + ")");
+        */
+        //btnLagPhase.setText("Lag (" + lag + ")");
         btnExponential.setText("Exponential (" + expo + ")");
         btnStationnary.setText("Stationnary (" + stat + ")");
-        btnSurvival.setText("Survival (" + surival + ")");
-        btnDeath.setText("Death (" + death + ")");
-        btnRegrowth.setText("Regrowth (" + regrowth + ")");
+        //btnSurvival.setText("Survival (" + surival + ")");
+        //btnDeath.setText("Death (" + death + ")");
+        //btnRegrowth.setText("Regrowth (" + regrowth + ")");
 
     }
 
@@ -380,6 +383,7 @@ public class TranscriptomicsDataFilterComposite extends org.eclipse.swt.widgets.
                 }
             }
         }
+        /*
         if (btnTiling.getSelection()) {
             selected = true;
             for (String[] row : view.getBioCondsToDisplay()) {
@@ -390,6 +394,7 @@ public class TranscriptomicsDataFilterComposite extends org.eclipse.swt.widgets.
                 }
             }
         }
+        */
         if (btnTss.getSelection()) {
             selected = true;
             for (String[] row : view.getBioCondsToDisplay()) {
@@ -400,6 +405,7 @@ public class TranscriptomicsDataFilterComposite extends org.eclipse.swt.widgets.
                 }
             }
         }
+        /*
         if (btnTermSeq.getSelection()) {
             selected = true;
             for (String[] row : view.getBioCondsToDisplay()) {
@@ -410,6 +416,7 @@ public class TranscriptomicsDataFilterComposite extends org.eclipse.swt.widgets.
                 }
             }
         }
+        */
         if (btnRnaseq.getSelection()) {
             selected = true;
             for (String[] row : view.getBioCondsToDisplay()) {
@@ -420,6 +427,7 @@ public class TranscriptomicsDataFilterComposite extends org.eclipse.swt.widgets.
                 }
             }
         }
+        /*
         if (btnRiboSeq.getSelection()) {
             selected = true;
             for (String[] row : view.getBioCondsToDisplay()) {
@@ -430,7 +438,7 @@ public class TranscriptomicsDataFilterComposite extends org.eclipse.swt.widgets.
                 }
             }
         }
-
+         */
         if (selected) {
             view.getBioCondsToDisplay().clear();
             for (String[] row : bioCondsToDisplayTemp)
@@ -440,6 +448,7 @@ public class TranscriptomicsDataFilterComposite extends org.eclipse.swt.widgets.
         /*
          * Reference section
          */
+        /*
         if (Database.getInstance().getProjectName() == Database.UIBCLISTERIOMICS_PROJECT) {
             selected = false;
             if (btnUnpublished.getSelection()) {
@@ -459,6 +468,7 @@ public class TranscriptomicsDataFilterComposite extends org.eclipse.swt.widgets.
                     view.getBioCondsToDisplay().add(row);
             }
         }
+        */
         /*
          * Update with intracellular Media type
          */
@@ -520,6 +530,7 @@ public class TranscriptomicsDataFilterComposite extends org.eclipse.swt.widgets.
          */
         bioCondsToDisplayTemp = new ArrayList<>();
         selected = false;
+        /*
         if (btnLagPhase.getSelection()) {
             selected = true;
             for (String[] row : view.getBioCondsToDisplay()) {
@@ -530,6 +541,7 @@ public class TranscriptomicsDataFilterComposite extends org.eclipse.swt.widgets.
                 }
             }
         }
+        */
         if (btnExponential.getSelection()) {
             selected = true;
             for (String[] row : view.getBioCondsToDisplay()) {
@@ -550,6 +562,7 @@ public class TranscriptomicsDataFilterComposite extends org.eclipse.swt.widgets.
                 }
             }
         }
+        /*
         if (btnSurvival.getSelection()) {
             selected = true;
             for (String[] row : view.getBioCondsToDisplay()) {
@@ -580,12 +593,13 @@ public class TranscriptomicsDataFilterComposite extends org.eclipse.swt.widgets.
                 }
             }
         }
+        */
         if (selected) {
             view.getBioCondsToDisplay().clear();
             for (String[] row : bioCondsToDisplayTemp)
                 view.getBioCondsToDisplay().add(row);
         }
-
+/*
         if (Database.getInstance().getProjectName() == Database.UIBCLISTERIOMICS_PROJECT) {
             bioCondsToDisplayTemp = new ArrayList<String[]>();
             for (String[] row : view.getBioCondsToDisplay()) {
@@ -598,6 +612,7 @@ public class TranscriptomicsDataFilterComposite extends org.eclipse.swt.widgets.
             }
             view.setBioCondsToDisplay(bioCondsToDisplayTemp);
         }
+        */
     }
 
     public void pushState() {
@@ -621,8 +636,8 @@ public class TranscriptomicsDataFilterComposite extends org.eclipse.swt.widgets.
 
         if (btnChooseOneMutant.getSelection()) {
             String mutantSelected = comboMutant.getItem(comboMutant.getSelectionIndex());
-            if (mutantSelected.indexOf('(') != -1)
-                mutantSelected = mutantSelected.substring(0, mutantSelected.indexOf('(')).trim();
+            if (mutantSelected.indexOf('(') != -1) {
+                mutantSelected = mutantSelected.substring(0, mutantSelected.indexOf('(')).trim();}
             statesParameters.put(NavigationManagement.COMBO + "2", mutantSelected);
         }
         int buttonPressed = 1;

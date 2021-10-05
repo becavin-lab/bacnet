@@ -73,6 +73,11 @@ public class Database {
     /**
      * Static variable to discriminate Listeriomics project from the others
      */
+    public static String URY_YERSINIOMICS_PROJECT = "URY_Yersiniomics";
+
+    /**
+     * Static variable to discriminate Listeriomics project from the others
+     */
     public static String UIBCLISTERIOMICS_PROJECT = "UIBCListeriomics";
     /**
      * Static variable to discriminate Listeriomics project from the others
@@ -98,7 +103,7 @@ public class Database {
     /**
      * Path for website database on Pasteur Virtual Machine
      */
-    public static String PATH_WEBSITE = "/srv/data/BacnetDatabases.ini";
+    public static String PATH_WEBSITE = "/srv/yersiniomics/BacnetDatabases.ini";
     //public static String PATH_WEBSITE="C:\\bacnet\\BacnetDatabases.ini";
     //public static String PATH_WEBSITE="/mnt/c/bacnet/BacnetDatabases.ini";
     

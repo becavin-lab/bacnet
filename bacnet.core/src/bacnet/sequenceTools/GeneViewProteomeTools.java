@@ -1,6 +1,8 @@
 package bacnet.sequenceTools;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
@@ -140,25 +142,29 @@ public class GeneViewProteomeTools {
          * Update expressed list
          */
         ArrayList<String> bioConditions = new ArrayList<>();
+        HashMap<String, Double> LFQValues = new HashMap<>();
+
         System.out.println("getGenomeSelected: "+ viewer.getGenomeSelected());
-        ExpressionMatrix exprProteomesMatrix = Database.getInstance().getLogFCProteomesTable(viewer.getGenomeSelected());
+        ExpressionMatrix exprProteomesMatrix = Database.getInstance().getExprProteomesTable(viewer.getGenomeSelected());
 
         System.out.println("sequence: " + sequence.getName());
-        System.out.println("exprProteomesMatrixRowNames: " + exprProteomesMatrix);
+        System.out.println("exprProteomesMatrixRowNames: " + exprProteomesMatrix.getName());
 
         if (exprProteomesMatrix.getRowNames().containsKey(sequence.getName())) {
             System.out.println("in if");
 
             for (String header : exprProteomesMatrix.getHeaders()) {
+                System.out.println("headers: "+ header);
                 double value = exprProteomesMatrix.getValue(sequence.getName(), header);
                 if (value > 0) {
                     bioConditions.add(header);
+                    LFQValues.put(header, value);
                 }
             }
         }
         System.out.println("after if");
 
-        viewer.getLblOverProteomes().setText(bioConditions.size() + "");
+        viewer.getLblOverProteomes().setText(bioConditions.size() + " datasets out of " + exprProteomesMatrix.getHeaders().size());
 
         /*
          * Update table
@@ -167,21 +173,38 @@ public class GeneViewProteomeTools {
         tableProteomes.removeAll();
         tableProteomes.setHeaderVisible(true);
         tableProteomes.setLinesVisible(true);
+        TableColumn column1 = new TableColumn(tableProteomes, SWT.NONE);
+        column1.setText("Log10(LFQ)");
+        column1.setAlignment(SWT.LEFT);
+        System.out.println("column 1");
+        System.out.println("length "+arrayProteomeList[0].length);
+
         for (int i = 0; i < arrayProteomeList[0].length; i++) {
+        	
+            System.out.println("head column "+i);
             TableColumn column = new TableColumn(tableProteomes, SWT.NONE);
             column.setText(arrayProteomeList[0][i]);
             column.setAlignment(SWT.LEFT);
         }
         for (int i = 1; i < arrayProteomeList.length; i++) {
+            System.out.println("head column "+i);
             String dataName = arrayProteomeList[i][ArrayUtils.findColumn(arrayProteomeList, "Data Name")];
             if (bioConditions.contains(dataName)) {
+                System.out.println("dataName "+dataName);
+
                 TableItem item = new TableItem(tableProteomes, SWT.NONE);
+                item.setText(0, LFQValues.get(dataName).toString());
                 for (int j = 0; j < arrayProteomeList[0].length; j++) {
-                    item.setText(j, arrayProteomeList[i][j]);
+                    System.out.println("j "+ j);
+
+                    item.setText(j+1, arrayProteomeList[i][j]);
+                    
                 }
             }
         }
-        for (int i = 0; i < arrayProteomeList[0].length; i++) {
+        for (int i = 0; i < arrayProteomeList[0].length+1; i++) {
+            System.out.println("pack "+ i);
+
             tableProteomes.getColumn(i).pack();
         }
         tableProteomes.update();

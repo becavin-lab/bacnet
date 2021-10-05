@@ -274,13 +274,19 @@ public class BioConditionCreation {
         /*
          * go through the table and create data
          */
-        if (!bioCond.isNoData()) {
+
+        if (!bioCond.isNoData()) {        	
             for (int i = 1; i < bioCondTable.length; i++) {
                 TypeData dataType =
                         TypeData.valueOf(bioCondTable[i][ArrayUtils.findColumn(bioCondTable, "Technology")]);
+                System.out.println("datatype "+ dataType);
+
                 String rawDataName = bioCondTable[i][ArrayUtils.findColumn(bioCondTable, "FileName")];
+                
                 date = bioCondTable[i][ArrayUtils.findColumn(bioCondTable, "Date")];
+                
                 bioCond.getTypeDataContained().add(dataType);
+                
                 if (!rawDataName.equals("")) {
                     if (dataType == TypeData.ExpressionMatrix) {
                         System.out.println("ExpressionMatrix");
@@ -427,7 +433,6 @@ public class BioConditionCreation {
                         bioCond.getnTerms().add(massSpec);
                         
                     }  else if (dataType == TypeData.Proteome) {
-                    	System.out.println("TypeData.Proteome");
                         ProteomicsData matrix = new ProteomicsData();
                         matrix.setName(name);
                         matrix.setDate(date);
@@ -435,6 +440,7 @@ public class BioConditionCreation {
                         matrix.getRawDatas().add(rawDataName);
                         bioCond.getProteomes().add(matrix);
                         }
+                    
                 } /*else if (dataType == TypeData.Proteome) {
                 	System.out.println("TypeData.Proteome");
                     ProteomicsData matrix = new ProteomicsData();

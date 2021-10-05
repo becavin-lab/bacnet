@@ -85,48 +85,51 @@ public class ProteomicsCreation {
             	/*
                  * Read data
                  */
-//                for (ProteomicsData proteome : bioCondition.getProteomes()) {
-//                    String fileName = OmicsData.PATH_PROTEOMICS_NORM + proteome.getRawDatas().get(0);
-//                    // String fileName = OmicsData.PATH_PROTEOMICS_NORM + proteome.getName() +
-//                    // ".txt";
-//                    File file = new File(fileName);
-//                    if (file.exists()) {
-//                        ExpressionMatrix matrix = ExpressionMatrix.loadTab(fileName, false);
-//                        System.out.println("Convert: " + fileName);
+                for (ProteomicsData proteome : bioCondition.getProteomes()) {
+                    System.out.println("proteome: " + proteome.getName());
+
+                    //String fileName = OmicsData.PATH_PROTEOMICS_NORM + proteome.getRawDatas().get(0);
+                    String fileName = OmicsData.PATH_PROTEOMICS_NORM + proteome.getName() + ".txt";
+                    File file = new File(fileName);
+                    if (file.exists()) {
+                        ExpressionMatrix matrix = ExpressionMatrix.loadTab(fileName, false);
+                        System.out.println("Convert: " + fileName);
                         /*
                          * Select only the VALUE column
                          */
-//                        ArrayList<String> includeColNames = new ArrayList<>();
-//                        includeColNames.add(ColNames.VALUE + "");
-//                        if (!matrix.getHeaders().contains(ColNames.VALUE + "")) {
-//                            System.out.println("No " + ColNames.VALUE + " column found for " + fileName);
-//                        }
-//                        matrix = matrix.getSubMatrixColumn(includeColNames);
+                        ArrayList<String> includeColNames = new ArrayList<>();
+                        includeColNames.add(ColNames.VALUE + "");
+                        if (!matrix.getHeaders().contains(ColNames.VALUE + "")) {
+                            System.out.println("No " + ColNames.VALUE + " column found for " + fileName);
+                        }
+                        matrix = matrix.getSubMatrixColumn(includeColNames);
 
                         /*
                          * Not used = log transformation
                          */
-//                         int nbProteins = 0;
-//                         for (int i = 0; i < matrix.getValues().length; i++) {
-//	                         for (int j = 0; j < matrix.getValues()[0].length; j++) {
-//		                         if (!(matrix.getValues()[i][j] == OmicsData.MISSING_VALUE) && (matrix.getValues()[i][j] != 0)) {
-//			                         matrix.getValues()[i][j] = MathUtils.log2(matrix.getValues()[i][j]);
-//			                         matrix.getValues()[i][j] = 1;
-//		                         }
-//	                         }
-//                         }
-                        
+                        /*
+                         int nbProteins = 0;
+                         for (int i = 0; i < matrix.getValues().length; i++) {
+	                         for (int j = 0; j < matrix.getValues()[0].length; j++) {
+		                         if (!(matrix.getValues()[i][j] == OmicsData.MISSING_VALUE) && (matrix.getValues()[i][j] != 0)) {
+			                         matrix.getValues()[i][j] = MathUtils.log2(matrix.getValues()[i][j]);
+			                         matrix.getValues()[i][j] = 1;
+		                         }
+	                         }
+                         }
+                        */
                         /*
                          * Save expressionMatrix
                          */
-//                        proteome.setHeaders(matrix.getHeaders());
-//                        proteome.setRowNames(matrix.getRowNames());
-//                        proteome.setValues(matrix.getValues());
-//                        System.out.println(
-//                               "Save " + OmicsData.PATH_STREAMING + proteome.getName() + ProteomicsData.EXTENSION);
-//                        proteome.save(OmicsData.PATH_STREAMING + proteome.getName() + ProteomicsData.EXTENSION);
-//                    }
-//                }
+                        proteome.setHeaders(matrix.getHeaders());
+                        proteome.setRowNames(matrix.getRowNames());
+                        proteome.setValues(matrix.getValues());
+                        System.out.println(
+                               "Save " + OmicsData.PATH_STREAMING + proteome.getName() + ProteomicsData.EXTENSION);
+                        proteome.save(OmicsData.PATH_STREAMING + proteome.getName() + ProteomicsData.EXTENSION);
+                    }
+                }
+                
                 System.out.println("comparison name: " + bioCondition.getComparisonNames());
 
                 for (String comparisonName : bioCondition.getComparisonNames()) {
@@ -284,14 +287,8 @@ public class ProteomicsCreation {
         for (String genomeName : genomeList) {
             Experiment expTemp = new Experiment();
             for (BioCondition bioCond : exp.getBioConditions()) {
-                System.out.println("bioCond:" + bioCond);
-
                 if (bioCond.getGenomeName().equals(genomeName)) {
-                    System.out.println("true 1" );
-
                     if (bioCond.containProteomes()) {
-                        System.out.println("tre 2");
-
                     	expTemp.addBioCond(bioCond);
                     }
                 }
@@ -300,10 +297,9 @@ public class ProteomicsCreation {
             /*
              * Deal with Expr values
              */
-            //summarizeProteomes(expTemp, genomeName);
+            summarizeProteomes(expTemp, genomeName);
             /*
              * Deal with fold change
-             * UNUSED
              */
             createLogFCMatrix(expTemp, genomeName);
 
@@ -321,13 +317,30 @@ public class ProteomicsCreation {
     public static void summarizeProteomes(Experiment exp, String genomeName) {
         Genome genome = Genome.loadGenome(genomeName);
         ArrayList<BioCondition> massSpecBioCond = new ArrayList<>();
+        
         for (BioCondition bioCond : exp.getBioConditions()) {
             if (bioCond.getTypeDataContained().contains(TypeData.NTerm)
                     || bioCond.getTypeDataContained().contains(TypeData.Proteome)) {
                 massSpecBioCond.add(bioCond);
             }
         }
-
+        
+        /*
+         * Init comparison matrix: in headers we put all proteomes, in rownames all genes, srna and ASrna
+         */
+        ExpressionMatrix ExpMatrix = new ExpressionMatrix();
+        int r = 0;
+        for (String genomeElement : genome.getAllElementNames()) {
+        	ExpMatrix.getRowNames().put(genomeElement, r);
+            r++;
+        }
+        for (BioCondition bioCond : massSpecBioCond) {
+                ExpMatrix.addHeader(bioCond.getName());
+        }
+        double[][] values = new double[ExpMatrix.getRowNames().size()][ExpMatrix.getHeaders().size()];
+        ExpMatrix.setValues(values); 
+        
+        
         String[][] arrayProteomics = TabDelimitedTableReader.read(Database.getInstance().getProteomesArrayPath());
         ArrayList<ExpressionMatrix> matrices = new ArrayList<>();
         for (BioCondition bioCondition : massSpecBioCond) {
@@ -338,8 +351,29 @@ public class ProteomicsCreation {
                 for (ProteomicsData proteome : bioCondition.getProteomes()) {
                     proteome.load();
                     
+                    for (String gene : genome.getAllElementNames()) {
+                    	Gene geneTemp = genome.getGeneFromName(gene);
+                    	String geneName = geneTemp.getGeneName();
+                        if (proteome.getRowNames().containsKey(gene)) {
+                        	ExpMatrix.setValue(proteome.getValue(gene, ColNames.VALUE + ""), gene, proteome.getName());
+                        } 
+                        // test if we can find the gene by its gene name
+                        else if (!geneName.equals("") & proteome.getRowNames().containsKey(geneName)) {
+                        	System.out.println("gene Name does contain Key");
+                        	ExpMatrix.setValue(proteome.getValue(geneName, ColNames.VALUE + ""), gene,  proteome.getName());
+                        }
+                        // test if we can find the gene by its old locus tag
+                        else if (genome.getGenes().get(gene) != null) { //.getGenes() returns null if gene is a NcRNA 
+                        	String oldLocusTag = genome.getGenes().get(gene).getOldLocusTag();
+                        	if (!oldLocusTag.equals("") & proteome.getRowNames().containsKey(oldLocusTag)) {
+                        		ExpMatrix.setValue(proteome.getValue(oldLocusTag, ColNames.VALUE + ""), gene,  proteome.getName());
+                        		}
+                        }
+                     
+                    }
+                    
                     /*
-                     * Update proteomics table by adding nb of poteins detected
+                     * Update proteomics table by adding nb of proteins detected
                      */
                     int nbProteins = 0;
                     for (int i = 0; i < proteome.getValues().length; i++) {
@@ -353,11 +387,13 @@ public class ProteomicsCreation {
                     for (int i = 1; i < arrayProteomics.length; i++) {
                         String dataName = arrayProteomics[i][ArrayUtils.findColumn(arrayProteomics, "Data Name")];
                         if (dataName.equals(bioCondition.getName())) {
-                            //System.out.println(nbProteins + " "+i+" "+ArrayUtils.findColumn(arrayProteomics, "Nb proteins"));
+                            System.out.println(nbProteins + " "+i+" "+ArrayUtils.findColumn(arrayProteomics, "Nb proteins"));
                             arrayProteomics[i][ArrayUtils.findColumn(arrayProteomics, "Nb proteins")] = nbProteins + "";
                         }
                     }
                     TabDelimitedTableReader.save(arrayProteomics, Database.getInstance().getProteomesArrayPath());
+                    
+                    
                     
                     /*
                      * Add to list for fusion matrix
@@ -387,14 +423,17 @@ public class ProteomicsCreation {
                 /*
                  * Add to list for fusion matrix
                  */
+                
                 matrix.getHeaders().clear();
                 matrix.getHeaders().add(bioCondition.getName());
+                
                 matrices.add(matrix);
 
             }
 
         }
-        ExpressionMatrix absoluteValue = ExpressionMatrix.merge(matrices, false);
+        //ExpressionMatrix absoluteValue = ExpressionMatrix.merge(matrices, false);
+        ExpressionMatrix absoluteValue = ExpMatrix;
         absoluteValue.setAnnotations(new String[0][0]);
         absoluteValue.getHeaderAnnotation().clear();
         absoluteValue = Annotation.addAnnotationLite(absoluteValue, genome);

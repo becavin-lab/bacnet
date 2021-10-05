@@ -14,6 +14,8 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
+
+import bacnet.datamodel.dataset.OmicsData.ColNames;
 import bacnet.reader.TabDelimitedTableReader;
 import bacnet.utils.ArrayUtils;
 import bacnet.utils.FileUtils;
@@ -1038,7 +1040,7 @@ public class ExpressionMatrix extends OmicsData implements Cloneable, Serializab
                 for (ExpressionMatrix matrix : matrices) {
                     if (matrix.getRowNames().containsKey(rowName) && matrix.getHeaderAnnotation().contains(header)) {
                         finalMatrix.setValueAnnotation(matrix.getValueAnnotation(rowName, header), rowName, header);
-                    }
+                    }   
                 }
 
             }

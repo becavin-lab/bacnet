@@ -27,6 +27,7 @@ public class BasicApplication implements ApplicationConfiguration {
     //public static String projectName = Database.BACNET;
     //public static String projectName = "ListeriomicsSample";
     public static String projectName = Database.YERSINIOMICS_PROJECT;
+    //public static String projectName = Database.URY_YERSINIOMICS_PROJECT;
     //public static String projectName = "CRISPRGo";
     //public static String projectName = Database.BACNET;
     //public static String projectName = "ListeriomicsSample";
@@ -69,6 +70,9 @@ public class BasicApplication implements ApplicationConfiguration {
         } else if (projectName == Database.YERSINIOMICS_PROJECT) {
             title = "Yersiniomics website";
             googleId = "UA-80335618-5";
+        } else if (projectName == Database.URY_YERSINIOMICS_PROJECT) {
+            title = "Yersiniomics website";
+            googleId = "UA-80335618-7";
         }
         application.addResource("theme/favicon.ico", createResourceLoader("theme/favicon.ico"));
         properties.put(WebClient.FAVICON, "theme/favicon.ico");

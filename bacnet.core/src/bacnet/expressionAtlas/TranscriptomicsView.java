@@ -299,7 +299,7 @@ public class TranscriptomicsView implements SelectionListener {
         new Label(container, SWT.NONE);
         setData();
         if (Database.getInstance().getProjectName() == Database.LISTERIOMICS_PROJECT
-                || Database.getInstance().getProjectName() == Database.UIBCLISTERIOMICS_PROJECT) {
+                || Database.getInstance().getProjectName() == Database.UIBCLISTERIOMICS_PROJECT|| Database.getInstance().getProjectName() == Database.YERSINIOMICS_PROJECT|| Database.getInstance().getProjectName() == Database.URY_YERSINIOMICS_PROJECT) {
             compositeDataFilter.updateInfo();
         }
 
@@ -337,13 +337,14 @@ public class TranscriptomicsView implements SelectionListener {
         /*
          * Fill combos
          */
-        if (Database.getInstance().getSpecies().equals("Listeria")) {
+        if (Database.getInstance().getSpecies().equals("Yersinia")) {
             TreeSet<String> mutantSet = new TreeSet<>();
             for (String[] rows : bioConds) {
                 String mutants = rows[ArrayUtils.findColumn(bioCondsArray, "Mutant")];
-                for (String mutant : mutants.split(",")) {
+                                for (String mutant : mutants.split(",")) {
                     if (!mutant.equals("")) {
                         mutant = mutant.trim();
+                        /*
                         Genome genome = Genome.loadEgdeGenome();
                         Sequence seq = genome.getElement(mutant);
                         if (seq != null && seq instanceof Gene) {
@@ -353,8 +354,9 @@ public class TranscriptomicsView implements SelectionListener {
                                 text += " (" + gene.getGeneName() + ")";
                             mutantSet.add(text);
                         } else {
+                        */
                             mutantSet.add(mutant.trim());
-                        }
+                        //}
                     }
                 }
             }

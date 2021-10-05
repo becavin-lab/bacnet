@@ -106,6 +106,7 @@ public class BannerView implements SelectionListener {
                 // event.gc.fillGradientRectangle(0, event.height/2, event.width,
                 // event.height/2, true);
                 //System.out.println("Logo:"+Database.getInstance().getLogo());
+                
                 Image image = ResourceManager.getPluginImage("bacnet.core", Database.getInstance().getLogo());
                 if(image!=null) {
 	                int xPosition = event.x + 20;

@@ -163,10 +163,10 @@ public class ColorMapper implements Serializable, Cloneable {
 
     public void setDefaultColor() {
         centerColor = new Color(display, 255, 255, 255);
-        maxColor = new Color(display, 255, 0, 0);
-        minColor = new Color(display, 0, 0, 255);
-        midRightColor = new Color(display, 230, 0, 0);
-        midLeftColor = new Color(display, 0, 0, 230);
+        maxColor = new Color(display, 27,120,55);
+        minColor = new Color(display, 118,42,131);
+        midRightColor = new Color(display, 90,174,97);
+        midLeftColor = new Color(display, 153,112,171);
         rowNameCellColor = new Color(display, 240, 240, 240);
         rowNameTextColor = new Color(display, 0, 0, 0);
         textColor = new Color(display, 0, 0, 0);

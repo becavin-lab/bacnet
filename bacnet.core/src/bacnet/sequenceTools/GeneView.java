@@ -705,14 +705,6 @@ public class GeneView implements SelectionListener, MouseListener {
         });
         new Label(composite_13, SWT.NONE);
 
-        tbtmSynteny = new TabItem(tabFolder, SWT.NONE);
-        tbtmSynteny.setText("Synteny");
-
-        compositeSynteny = new Composite(tabFolder, SWT.NONE);
-        tbtmSynteny.setControl(compositeSynteny);
-        compositeSynteny.setLayout(new GridLayout(1, false));
-        browserSynteny = new Browser(compositeSynteny, SWT.NONE);
-        browserSynteny.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
         
         
         /*
@@ -988,7 +980,7 @@ public class GeneView implements SelectionListener, MouseListener {
 
         Label lblOverExpressedInProteomes = new Label(composite_9, SWT.NONE);
         lblOverExpressedInProteomes.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-        lblOverExpressedInProteomes.setText("Found in ");
+        lblOverExpressedInProteomes.setText("Found in");
 
         lblExprProteomes = new Label(composite_9, SWT.NONE);
         lblExprProteomes.setText("over");
@@ -999,8 +991,17 @@ public class GeneView implements SelectionListener, MouseListener {
         scrolledComposite.setContent(composite_11);
         scrolledComposite.setMinSize(composite_11.computeSize(SWT.DEFAULT, SWT.DEFAULT));
 
+        tbtmSynteny = new TabItem(tabFolder, SWT.NONE);
+        tbtmSynteny.setText("Synteny");
+
+        compositeSynteny = new Composite(tabFolder, SWT.NONE);
+        tbtmSynteny.setControl(compositeSynteny);
+        compositeSynteny.setLayout(new GridLayout(1, false));
+        browserSynteny = new Browser(compositeSynteny, SWT.NONE);
+        browserSynteny.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+        
         if (Database.getInstance().getProjectName() == Database.LISTERIOMICS_PROJECT
-                || Database.getInstance().getProjectName() == Database.UIBCLISTERIOMICS_PROJECT || Database.getInstance().getProjectName() == Database.YERSINIOMICS_PROJECT) {
+                || Database.getInstance().getProjectName() == Database.UIBCLISTERIOMICS_PROJECT || Database.getInstance().getProjectName() == Database.YERSINIOMICS_PROJECT || Database.getInstance().getProjectName() == Database.URY_YERSINIOMICS_PROJECT) {
             initSyntenyBrowser();
         }
 
@@ -1019,7 +1020,6 @@ public class GeneView implements SelectionListener, MouseListener {
             realUrl = "https://listeriomics.pasteur.fr/";
             pathGraphHTML = realUrl + "SynTView/flash/indexFinal.html";
             } else {
-                pathGraphHTML = "http://hub18.hosting.pasteur.fr/SynTView/JS/Yersiniomics/pestis/";
                 pathGraphHTML = "";
             }
             System.out.println("SyntView: " + pathGraphHTML);
@@ -1140,7 +1140,7 @@ public class GeneView implements SelectionListener, MouseListener {
             initListeriomics();
         } else if (Database.getInstance().getProjectName() == "ListeriomicsSample") {
             initListeriomicsSample();
-        } else if (Database.getInstance().getProjectName() == Database.YERSINIOMICS_PROJECT) {
+        } else if (Database.getInstance().getProjectName() == Database.YERSINIOMICS_PROJECT || Database.getInstance().getProjectName() == Database.URY_YERSINIOMICS_PROJECT) {
             initYersiniomics();
         } else {
             initDefault();
@@ -1459,7 +1459,7 @@ public class GeneView implements SelectionListener, MouseListener {
             updateGeneBasicInfo();
             if (Database.getInstance().getProjectName() == Database.LISTERIOMICS_PROJECT
                     || Database.getInstance().getProjectName() == Database.UIBCLISTERIOMICS_PROJECT
-                    || Database.getInstance().getProjectName() == Database.YERSINIOMICS_PROJECT) {
+                    || Database.getInstance().getProjectName() == Database.YERSINIOMICS_PROJECT || Database.getInstance().getProjectName() == Database.URY_YERSINIOMICS_PROJECT) {
                 updateAllGeneOmicsInfo();
 
             } else if (Database.getInstance().getProjectName() == "ListeriomicsSample") {
@@ -1575,9 +1575,9 @@ public class GeneView implements SelectionListener, MouseListener {
         
         
         try {
-        	System.out.println("before evaluate " + sequence.getName());
+        	//System.out.println("before evaluate " + sequence.getName());
             browserSynteny.evaluate("goToGene('" + sequence.getName() + "')");
-        	System.out.println("evaluate OK");
+        	//System.out.println("evaluate OK");
         } catch (Exception e) {
             System.out.println("Cannot evaluate: " + "goToGene('" + sequence.getName() + "')");
         }
@@ -1612,7 +1612,7 @@ public class GeneView implements SelectionListener, MouseListener {
         }
         
         /*
-         * Proteome update
+         * Absence/presence Proteome update
          */
         if (genomeProteomes.contains(genome.getSpecies())) {
         	//System.out.println("yes: " +genome.getSpecies());
@@ -1791,6 +1791,20 @@ public class GeneView implements SelectionListener, MouseListener {
         view.setGenomeSelected(genomeName);
     }
     
+    public static void openPestoidesGeneView(EPartService partService) {
+        String id = GeneView.ID + "-" + String.valueOf(Math.random() * 1000).substring(0, 3);
+        // initiate view
+        ResourceManager.openView(partService, GeneView.ID, id);
+        // update data
+        MPart part = partService.findPart(id);
+        NavigationManagement.pushStateView(id, new HashMap<>());
+        GeneView view = (GeneView) part.getObject();
+        view.setViewID(id);
+        String genomeName = "Yersinia pestis Pestoides F";
+        view.initGenomeInfo(genomeName);
+        view.setGenomeSelected(genomeName);
+    }
+    
     /**
      * Display GeneView <br>
      * It will display IP32953
@@ -1812,6 +1826,21 @@ public class GeneView implements SelectionListener, MouseListener {
         view.initGenomeInfo(genomeName);
         view.setGenomeSelected(genomeName);
     }
+    
+    public static void openPB1GeneView(EPartService partService) {
+        String id = GeneView.ID + "-" + String.valueOf(Math.random() * 1000).substring(0, 3);
+        // initiate view
+        ResourceManager.openView(partService, GeneView.ID, id);
+        // update data
+        MPart part = partService.findPart(id);
+        NavigationManagement.pushStateView(id, new HashMap<>());
+        GeneView view = (GeneView) part.getObject();
+        view.setViewID(id);
+        String genomeName = "Yersinia pseudotuberculosis PB1+";
+        view.initGenomeInfo(genomeName);
+        view.setGenomeSelected(genomeName);
+    }
+    
     
     /**
      * Display GeneView <br>
@@ -1879,6 +1908,21 @@ public class GeneView implements SelectionListener, MouseListener {
         view.initGenomeInfo(genomeName);
         view.setGenomeSelected(genomeName);
     }
+    
+    public static void openWAGeneView(EPartService partService) {
+        String id = GeneView.ID + "-" + String.valueOf(Math.random() * 1000).substring(0, 3);
+        // initiate view
+        ResourceManager.openView(partService, GeneView.ID, id);
+        // update data
+        MPart part = partService.findPart(id);
+        NavigationManagement.pushStateView(id, new HashMap<>());
+        GeneView view = (GeneView) part.getObject();
+        view.setViewID(id);
+        String genomeName = "Yersinia enterocolitica WA";
+        view.initGenomeInfo(genomeName);
+        view.setGenomeSelected(genomeName);
+    }
+    
     /**
      * Display GeneView <br>
      * It will display QMA0440
