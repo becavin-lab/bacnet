@@ -158,6 +158,7 @@ public class GeneView implements SelectionListener, MouseListener {
      */
     private Composite compositeTranscriptome;
     private String[][] arrayDataList = new String[0][0];
+    private ArrayList<String[]> arrayDataToDisplay;
     private Table tableOver;
     private Table tableUnder;
     private Table tableNodiff;
@@ -172,10 +173,18 @@ public class GeneView implements SelectionListener, MouseListener {
     private Button btnHeatmapview;
     private Button btnGenomeViewer;
     
+    private TabItem tbtmTranscriptomes;
+    private String[][] arrayTranscriptomesList = new String[0][0];
+    //private ArrayList<String[]> arrayProteomeToDisplay;
+    private Composite composite_10;
+    private Table tableTranscriptomes;
+    private Label lblExprTranscriptomes;
+    
     /*
      * Protein atlas variables
      */
     private String[][] arrayProteinAtlasList = new String[0][0];
+    private ArrayList<String[]> arrayProteinAtlasToDisplay;
     private Composite compositeProteome;
     private Table tableOverProteome;
     private Table tableUnderProteome;
@@ -197,9 +206,11 @@ public class GeneView implements SelectionListener, MouseListener {
      */
     private TabItem tbtmProteomes;
     private String[][] arrayProteomeList = new String[0][0];
+    private ArrayList<String[]> arrayProteomeToDisplay;
     private Composite composite_9;
     private Table tableProteomes;
     private Label lblExprProteomes;
+    
     private Text lblConservation;
     private TabItem tbtmHomologs;
     private Composite composite_13;
@@ -712,7 +723,7 @@ public class GeneView implements SelectionListener, MouseListener {
          */
         {
 	        tbtmExpressionData = new TabItem(tabFolder, SWT.NONE);
-	        tbtmExpressionData.setText("Expression Atlas");
+	        tbtmExpressionData.setText("Transcript differential expressions");
 	
 	        compositeTranscriptome = new Composite(tabFolder, SWT.BORDER);
 	        tbtmExpressionData.setControl(compositeTranscriptome);
@@ -827,6 +838,26 @@ public class GeneView implements SelectionListener, MouseListener {
 	        tableNodiff.addSelectionListener(this);
     	}
         
+
+        tbtmTranscriptomes = new TabItem(tabFolder, SWT.NONE);
+        tbtmTranscriptomes.setText("Transcriptomes");
+
+        composite_10 = new Composite(tabFolder, SWT.NONE);
+        tbtmTranscriptomes.setControl(composite_10);
+        composite_10.setLayout(new GridLayout(2, false));
+
+        Label lblOverExpressedInTranscriptomes = new Label(composite_10, SWT.NONE);
+        lblOverExpressedInTranscriptomes.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+        lblOverExpressedInTranscriptomes.setText("Found in");
+
+        lblExprTranscriptomes = new Label(composite_10, SWT.NONE);
+        lblExprTranscriptomes.setText("over");
+
+        tableTranscriptomes = new Table(composite_10, SWT.BORDER | SWT.FULL_SELECTION | SWT.MULTI);
+        tableTranscriptomes.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1));
+
+        scrolledComposite.setContent(composite_11);
+        scrolledComposite.setMinSize(composite_11.computeSize(SWT.DEFAULT, SWT.DEFAULT));
         
         /*
          * Protein atlas section
@@ -852,7 +883,7 @@ public class GeneView implements SelectionListener, MouseListener {
 //        
         {
 	        tbtmProteomeData = new TabItem(tabFolder, SWT.NONE);
-	        tbtmProteomeData.setText("Protein Atlas");
+	        tbtmProteomeData.setText("Protein differential expressions");
 	
 	        compositeProteome = new Composite(tabFolder, SWT.BORDER);
 	        tbtmProteomeData.setControl(compositeProteome);
@@ -1053,7 +1084,7 @@ public class GeneView implements SelectionListener, MouseListener {
             realUrl = "https://listeriomics.pasteur.fr/";
             pathGraphHTML = realUrl + "SynTView/flash/indexFinal.html";
             } else if (genome.getSpecies().equals("Yersinia pestis CO92")){
-                //pathGraphHTML = "http://hub15.hosting.pasteur.fr:8080/SynTView/CO92/?datadir=Data";
+                pathGraphHTML = "http://hub15.hosting.pasteur.fr:8080/SynTView/CO92/?datadir=Data";
                 System.out.println("SyntView: " + pathGraphHTML);
                 browserSynteny.setUrl(pathGraphHTML);
                 browserSynteny.redraw();
@@ -1312,10 +1343,70 @@ public class GeneView implements SelectionListener, MouseListener {
      */
     private void initYersiniomics() {
         //System.out.println("initYersiniomics");
+
         arrayDataList = TabDelimitedTableReader.read(Database.getInstance().getTranscriptomesComparisonsArrayPath());
-        arrayProteomeList = TabDelimitedTableReader.read(Database.getInstance().getProteomesArrayPath());
-        arrayProteinAtlasList = TabDelimitedTableReader.read(Database.getInstance().getProteomesComparisonsArrayPath());
+        arrayDataToDisplay = TabDelimitedTableReader.readList(Database.getInstance().getTranscriptomesComparisonsArrayPath(), true, true);
         
+        arrayProteomeList = TabDelimitedTableReader.read(Database.getInstance().getProteomesArrayPath());
+        arrayProteomeToDisplay = TabDelimitedTableReader.readList(Database.getInstance().getProteomesArrayPath(), true, true);
+        arrayTranscriptomesList = TabDelimitedTableReader.read(Database.getInstance().getTranscriptomesArrayPath());
+        arrayProteinAtlasList = TabDelimitedTableReader.read(Database.getInstance().getProteomesComparisonsArrayPath());
+        arrayProteinAtlasToDisplay = TabDelimitedTableReader.readList(Database.getInstance().getProteomesComparisonsArrayPath(), true, true);
+        System.out.println("rownames ");
+        /*
+  	  if (Database.getInstance().getProjectName() != Database.URY_YERSINIOMICS_PROJECT) {
+  		  List<Integer> rowNum = new ArrayList<>(); 
+          int i=0;
+          for (String[] row : arrayDataToDisplay) {
+              String info = row[ArrayUtils.findColumn(arrayDataList, "Reference")];              
+              if (!info.contains("Unpublished (URY)")) {
+                	i++;
+              } 
+          }
+          String[][] arrayDataToDisplayTemp = new String[i][arrayDataList[0].length];
+          String[][] arrayProteomeToDisplayTemp = new String[0][0];
+          String[][] arrayProteinAtlasToDisplayTemp = new String[0][0];
+          
+          i=0;
+          for (String[] row : arrayDataToDisplay) {
+        	  System.out.println("transcriptome");
+              String info = row[ArrayUtils.findColumn(arrayDataList, "Reference")];              
+              if (info.contains("Unpublished (URY)")) {
+                	//
+              } else {
+            	  System.out.println("TRUE");
+            	  ArrayUtils.addRow(arrayDataToDisplayTemp, row, i);
+            	  i++;
+              }
+          }
+          arrayDataList = arrayDataToDisplayTemp;
+          /*
+          for (String[] row : arrayProteomeToDisplay) {
+        	  System.out.println("proteome");
+
+              String info = row[ArrayUtils.findColumn(arrayProteomeList, "Reference")];              
+              if (info.contains("Unpublished (URY)")) {
+                	//
+              } else {
+            	  ArrayUtils.addRow(arrayProteomeToDisplayTemp,row,arrayProteomeToDisplayTemp.length+1);
+              }
+          }
+          arrayProteomeList = arrayProteomeToDisplayTemp;
+          
+          for (String[] row : arrayProteinAtlasToDisplay) {
+        	  System.out.println("proteome atlas");
+
+              String info = row[ArrayUtils.findColumn(arrayProteinAtlasList, "Reference")];              
+              if (info.contains("Unpublished (URY)")) {
+                	//
+              } else {
+            	  ArrayUtils.addRow(arrayProteinAtlasToDisplayTemp,row,arrayProteinAtlasToDisplayTemp.length+1);
+              }
+          }
+          arrayProteinAtlasList = arrayProteinAtlasToDisplayTemp;
+      
+      }
+  	  */
         ArrayList<String> dataTranscriptomes = BioCondition.getTranscriptomesGenomes();
         //System.out.println("dataTranscriptomes: "+dataTranscriptomes);
         //System.out.println("Database.getInstance().getGenomeList(: "+Database.getInstance().getGenomeList());
@@ -1556,6 +1647,7 @@ public class GeneView implements SelectionListener, MouseListener {
 
         ArrayList<String> genomeTranscriptomes = BioCondition.getTranscriptomesGenomes();
         ArrayList<String> genomeProteomes = BioCondition.getProteomeGenomes();
+        ArrayList<String> genomeRNASeq = BioCondition.getRNASeqGenomes();
 
         /*
          * Homolog update
@@ -1596,6 +1688,21 @@ public class GeneView implements SelectionListener, MouseListener {
             tableUnder.removeAll();
             tableNodiff.removeAll();
         }
+        
+        
+        /*
+         * Absence/presence Transcriptome update
+         */
+        if (genomeRNASeq.contains(genome.getSpecies())) {
+        	//System.out.println("yes: " +genome.getSpecies());
+            GeneViewTranscriptomeTools.updateTranscriptomesTable(sequence, this, arrayTranscriptomesList);
+        	//System.out.println("updateProteomesTable done");
+
+        } else {
+            tableTranscriptomes.removeAll();
+        }
+
+        
         /*
          * Protein atlas update
          */
@@ -2309,6 +2416,13 @@ public class GeneView implements SelectionListener, MouseListener {
     public void setGenome(Genome genome) {
         this.genome = genome;
     }
+	public Table getTableTranscriptomes() {
+        return tableTranscriptomes;
+    }
+
+    public void setTableTranscriptomes(Table tableTranscriptomes) {
+        this.tableTranscriptomes = tableTranscriptomes;
+    }
 
     public Table getTableOver() {
         return tableOver;
@@ -2357,6 +2471,15 @@ public class GeneView implements SelectionListener, MouseListener {
     public void setLblNodiff(Label lblNodiff) {
         this.lblNodiff = lblNodiff;
     }
+    
+    public Label getLblOverTranscriptomes() {
+        return lblExprTranscriptomes;
+    }
+
+    public void setLblOverTranscriptomes(Label lblExprTranscriptomes) {
+        this.lblExprTranscriptomes = lblExprTranscriptomes;
+    }
+
 
     public Label getLblOverProteome() {
         return lblOverProteome;
@@ -2468,6 +2591,14 @@ public class GeneView implements SelectionListener, MouseListener {
 
     public void setArrayProteomeList(String[][] arrayProteomeList) {
         this.arrayProteomeList = arrayProteomeList;
+    }
+    
+    public String[][] getArrayTranscriptomesList() {
+        return arrayTranscriptomesList;
+    }
+
+    public void setArrayTranscriptomesList(String[][] arrayProteomeList) {
+        this.arrayTranscriptomesList = arrayProteomeList;
     }
 
     public String[][] getBioCondsArray() {

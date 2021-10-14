@@ -279,6 +279,7 @@ public class Expression {
             ExpressionMatrix matrix = showExpr.createExpressionMatrix(genome);
             Annotation.addAnnotation(matrix, genome);
             matrix.saveTab(PATH_ALLRNASEQ + "_" + genome.getSpecies() + ".excel", "GenomeElements");
+            matrix.save(PATH_ALLRNASEQ + "_" + genome.getSpecies());
             matrices.add(matrix);
         }
         /*

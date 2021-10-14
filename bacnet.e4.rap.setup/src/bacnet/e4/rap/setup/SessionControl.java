@@ -146,6 +146,7 @@ public class SessionControl {
                             view.setArrayDataList(new String[0][0]);
                             view.setArrayGeneToLocalization(new String[0][0]);
                             view.setArrayProteomeList(new String[0][0]);
+                            view.setArrayTranscriptomesList(new String[0][0]);
                             view.setBioConds(new ArrayList<>());
                             view.setBioCondsArray(new String[0][0]);
                             view.setBioCondsToDisplay(new ArrayList<>());

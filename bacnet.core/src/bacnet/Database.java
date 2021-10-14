@@ -257,6 +257,12 @@ public class Database {
      * Matrices containing all logFC values in a matrix GenomeElement vs BioCondition
      */
     private HashMap<String, ExpressionMatrix> exprProteomesTable = new HashMap<>();
+    
+    /**
+     * HashMap linking genome name to Expr transcriptome matrices<br>
+     * Matrices containing all logFC values in a matrix GenomeElement vs BioCondition
+     */
+    private HashMap<String, ExpressionMatrix> exprTranscriptomesTable = new HashMap<>();
     /**
      * Matrix containing all stat values in a matrix GenomeElement vs BioCondition
      */
@@ -539,6 +545,27 @@ public class Database {
             }
         }
     }
+    
+    public ExpressionMatrix getExprTranscriptomesTable(String genomeName) {
+        if (exprTranscriptomesTable.containsKey(genomeName)) {
+            return exprTranscriptomesTable.get(genomeName);
+        } else {
+            if (Database.getInstance().getProjectName() == Database.UIBCLISTERIOMICS_PROJECT
+                    && genomeName.equals(Genome.EGDE_NAME)) {
+                System.out.println(getEXPRESSION_MATRIX_TRANSCRIPTOMES_PATH() + "_" + genomeName + "_PRIVATE");
+                ExpressionMatrix matrix =
+                        ExpressionMatrix.load(getEXPRESSION_MATRIX_TRANSCRIPTOMES_PATH() + "_" + genomeName + "_PRIVATE");
+                exprTranscriptomesTable.put(genomeName, matrix);
+                return matrix;
+            } else {
+                System.out.println(getEXPRESSION_MATRIX_TRANSCRIPTOMES_PATH() + "_" + genomeName);
+                ExpressionMatrix matrix =
+                        ExpressionMatrix.load(getEXPRESSION_MATRIX_TRANSCRIPTOMES_PATH() + "_" + genomeName);
+                exprTranscriptomesTable.put(genomeName, matrix);
+                return matrix;
+            }
+        }
+    }
 
     public ExpressionMatrix getStatTable() {
         if (statTable == null) {
@@ -626,6 +653,8 @@ public class Database {
         cisRegRNAListEGDe = new ArrayList<String>();
         logFCTable = new HashMap<>();
         exprProteomesTable = new HashMap<>();
+        exprTranscriptomesTable = new HashMap<>();
+
         statTable = new ExpressionMatrix();
         signaturesNametoID = new TreeMap<String, String>();
         for (Genome genome : genomes.values()) {
@@ -710,7 +739,12 @@ public class Database {
     public static String getLOGFC_MATRIX_TRANSCRIPTOMES_PATH() {
         return Database.getTRANSCRIPTOMES_PATH() + "Table_LOGFC";
     }
-
+    /**
+     * Path for loading Transcriptomes matrix data showing expression values
+     */
+    public static String getEXPRESSION_MATRIX_TRANSCRIPTOMES_PATH() {
+        return Database.getTRANSCRIPTOMES_PATH() + "AllRNASeq";
+    }
     /**
      * Path for loading Transcriptomes matrix data showing statistical p-values
      */
@@ -923,7 +957,14 @@ public class Database {
     public void setLogFCTable(HashMap<String, ExpressionMatrix> logFCTable) {
         this.logFCTable = logFCTable;
     }
+    public HashMap<String, ExpressionMatrix> getExprTranscriptomesTable() {
+        return exprTranscriptomesTable;
+    }
 
+    public void setExprTranscriptomesTable(HashMap<String, ExpressionMatrix> exprTranscriptomesTable) {
+        this.exprTranscriptomesTable = exprTranscriptomesTable;
+    }
+    
     public HashMap<String, ExpressionMatrix> getLogFCProteomeTable() {
         return logFCProteomeTable;
     }

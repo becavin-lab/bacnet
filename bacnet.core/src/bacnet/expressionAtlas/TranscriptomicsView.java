@@ -329,6 +329,18 @@ public class TranscriptomicsView implements SelectionListener {
             }
             bioCondsToDisplay = bioCondsToDisplayTemp;
         }
+        if (Database.getInstance().getProjectName() != Database.URY_YERSINIOMICS_PROJECT) {
+            ArrayList<String[]> bioCondsToDisplayTemp = new ArrayList<String[]>();
+            for (String[] row : bioCondsToDisplay) {
+                String info = row[ArrayUtils.findColumn(bioCondsArray, "Reference")];
+                if (info.contains("Unpublished (URY)")) {
+                  	//
+                } else {
+                    bioCondsToDisplayTemp.add(row);
+                }
+            }
+            bioCondsToDisplay = bioCondsToDisplayTemp;
+        }
         bioConds.remove(0);
         bioCondsToDisplay.remove(0);
 

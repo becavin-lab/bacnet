@@ -181,7 +181,7 @@ public class TranscriptomicsDataFilterComposite extends org.eclipse.swt.widgets.
 
         Label lblGrowthPhases = new Label(this, SWT.NONE);
         lblGrowthPhases.setFont(SWTResourceManager.getBodyFont(SWT.BOLD));
-        lblGrowthPhases.setText("Growth phases");
+        lblGrowthPhases.setText("Growth Phases");
 
         Composite composite_2 = new Composite(this, SWT.NONE);
         composite_2.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
@@ -191,10 +191,10 @@ public class TranscriptomicsDataFilterComposite extends org.eclipse.swt.widgets.
         //btnLagPhase.setText("Lag");
 
         btnExponential = new Button(composite_2, SWT.CHECK);
-        btnExponential.setText("Exponential");
+        btnExponential.setText("Logarithmic Phase");
 
         btnStationnary = new Button(composite_2, SWT.CHECK);
-        btnStationnary.setText("Stationary");
+        btnStationnary.setText("Stationary Phase");
 
         //btnSurvival = new Button(composite_2, SWT.CHECK);
         //btnSurvival.setText("Survival");
@@ -285,7 +285,7 @@ public class TranscriptomicsDataFilterComposite extends org.eclipse.swt.widgets.
             String growth = row[ArrayUtils.findColumn(view.getBioCondsArray(), "Growth")];
             if (growth.contains("Lag"))
                 lag++;
-            if (growth.contains("Exp phase"))
+            if (growth.contains("Logarithmic"))
                 expo++;
             if (growth.contains("Stationary"))
                 stat++;
@@ -315,8 +315,8 @@ public class TranscriptomicsDataFilterComposite extends org.eclipse.swt.widgets.
         }
         */
         //btnLagPhase.setText("Lag (" + lag + ")");
-        btnExponential.setText("Exponential (" + expo + ")");
-        btnStationnary.setText("Stationnary (" + stat + ")");
+        btnExponential.setText("Logarithmic Phase (" + expo + ")");
+        btnStationnary.setText("Stationnary Phase (" + stat + ")");
         //btnSurvival.setText("Survival (" + surival + ")");
         //btnDeath.setText("Death (" + death + ")");
         //btnRegrowth.setText("Regrowth (" + regrowth + ")");
@@ -546,7 +546,7 @@ public class TranscriptomicsDataFilterComposite extends org.eclipse.swt.widgets.
             selected = true;
             for (String[] row : view.getBioCondsToDisplay()) {
                 String info = row[ArrayUtils.findColumn(view.getBioCondsArray(), "Growth")];
-                if (info.contains("Exp phase")) {
+                if (info.contains("Logarithmic")) {
                     if (!bioCondsToDisplayTemp.contains(row))
                         bioCondsToDisplayTemp.add(row);
                 }

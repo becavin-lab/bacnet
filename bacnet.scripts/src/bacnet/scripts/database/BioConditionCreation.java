@@ -209,9 +209,9 @@ public class BioConditionCreation {
             for (String growth : growths) {
                 bioCond.getGrowth().add(growth);
             }
-        } else {
-            bioCond.getGrowth().add("Exp phase");
-        }
+        } //else {
+            //bioCond.getGrowth().add("Exp phase");
+        //}
         /*
          * Temperature
          */
@@ -235,9 +235,9 @@ public class BioConditionCreation {
             for (String media : medium) {
                 bioCond.getMedia().add(media);
             }
-        } else {
-            bioCond.getMedia().add("BHI Broth");
-        }
+        } //else {
+            //bioCond.getMedia().add("BHI Broth");
+        //}
         /*
          * Properties or quantity of the media and growth
          */

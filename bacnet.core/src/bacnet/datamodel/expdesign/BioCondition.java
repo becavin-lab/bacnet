@@ -195,6 +195,14 @@ public class BioCondition implements Serializable {
         return found;
     }
     
+    public boolean containRNASeq() {
+        boolean found = false;
+        for (TypeData dataType : this.getTypeDataContained()) {
+            if (dataType == TypeData.RNASeq)
+                found = true;
+        }
+        return found;
+    }
     public boolean containProteomes() {
         boolean found = false;
         for (TypeData dataType : this.getTypeDataContained()) {
@@ -257,6 +265,25 @@ public class BioCondition implements Serializable {
         TreeSet<String> setGenomes = new TreeSet<String>();
         for (BioCondition bioCond : getAllBioConditions()) {
             if (bioCond.containTranscriptomes()) {
+                setGenomes.add(bioCond.getGenomeName());
+            }
+        }
+        ArrayList<String> listGenomes = new ArrayList<>();
+        for (String genome : setGenomes) {
+            listGenomes.add(genome);
+        }
+
+        return listGenomes;
+    }
+    /**
+     * Get all genomes associated to a transcriptomes dataset
+     * 
+     * @return
+     */
+    public static ArrayList<String> getRNASeqGenomes() {
+        TreeSet<String> setGenomes = new TreeSet<String>();
+        for (BioCondition bioCond : getAllBioConditions()) {
+            if (bioCond.containRNASeq()) {
                 setGenomes.add(bioCond.getGenomeName());
             }
         }

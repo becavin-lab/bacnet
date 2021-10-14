@@ -256,7 +256,7 @@ public class ProteomicsView implements SelectionListener {
 
         setData();
         if (Database.getInstance().getProjectName() == Database.LISTERIOMICS_PROJECT
-                || Database.getInstance().getProjectName() == Database.UIBCLISTERIOMICS_PROJECT) {
+                || Database.getInstance().getProjectName() == Database.UIBCLISTERIOMICS_PROJECT || Database.getInstance().getProjectName() == Database.YERSINIOMICS_PROJECT|| Database.getInstance().getProjectName() == Database.URY_YERSINIOMICS_PROJECT) {
             compositeDataFilter.updateInfo();
         }
     }
@@ -284,7 +284,18 @@ public class ProteomicsView implements SelectionListener {
             }
             bioCondsToDisplay = bioCondsToDisplayTemp;
         }
-
+        if (Database.getInstance().getProjectName() != Database.URY_YERSINIOMICS_PROJECT) {
+            ArrayList<String[]> bioCondsToDisplayTemp = new ArrayList<String[]>();
+            for (String[] row : bioCondsToDisplay) {
+                String info = row[ArrayUtils.findColumn(bioCondsArray, "Reference")];
+                if (info.contains("Unpublished (URY)")) {
+                  	//
+                } else {
+                    bioCondsToDisplayTemp.add(row);
+                }
+            }
+            bioCondsToDisplay = bioCondsToDisplayTemp;
+        }
         bioConds.remove(0);
         bioCondsToDisplay.remove(0);
         updateBioConditionTable();
@@ -297,6 +308,7 @@ public class ProteomicsView implements SelectionListener {
             for (String mutant : mutants.split(",")) {
                 if (!mutant.equals("")) {
                     mutant = mutant.trim();
+                    /*
                     Genome genome = Genome.loadEgdeGenome();
                     Sequence seq = genome.getElement(mutant);
                     if (seq != null && seq instanceof Gene) {
@@ -306,11 +318,16 @@ public class ProteomicsView implements SelectionListener {
                             text += " (" + gene.getGeneName() + ")";
                         mutantSet.add(text);
                     } else {
+                    */
                         mutantSet.add(mutant.trim());
-                    }
+                    //}
                 }
             }
         }
+        for (String mutant : mutantSet) {
+            compositeDataFilter.getComboMutant().add(mutant);
+        }
+        compositeDataFilter.getComboMutant().select(0);
 
     }
 
@@ -513,6 +530,15 @@ public class ProteomicsView implements SelectionListener {
                     String item = combo.getItem(i);
                     if (item.equals(stateValue)) {
                         combo.select(i);
+                    }
+                }
+                Combo combo2 = compositeDataFilter.getComboMutant();
+                for (int i = 0; i < combo2.getItemCount(); i++) {
+                    String item = combo2.getItem(i);
+                    if (item.equals(stateValue)) {
+                        combo2.select(i);
+                        compositeDataFilter.getBtnChooseOneMutant().setSelection(true);
+                        compositeDataFilter.getBtnAllMutant().setSelection(false);
                     }
                 }
             }

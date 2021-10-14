@@ -99,8 +99,8 @@ public class InitViewYersinia implements SelectionListener {
 
     @PostConstruct
     public void createPartControl(Composite parent) {
-    	//AppSpecificMethods AppSpecificMethods = new AppSpecificMethods();
-    	//AppSpecificMethods.openPasswordDialog(shell);
+    	AppSpecificMethods AppSpecificMethods = new AppSpecificMethods();
+    	AppSpecificMethods.openPasswordDialog(shell);
 
         //System.out.println("Load InitView");
 
@@ -634,7 +634,7 @@ public class InitViewYersinia implements SelectionListener {
         gd_lblGoThroughAll_1.widthHint = 400;
         lblGoThroughAll_1.setLayoutData(gd_lblGoThroughAll_1);
         lblGoThroughAll_1
-                .setText("Browse all 104 <i>Yersinia</i> species transcriptomics datasets available on Yersiniomics. "
+                .setText("Browse all 185 <i>Yersinia</i> species transcriptomics datasets available on Yersiniomics. "
                         + "Visualize them on the genome browser. Extract differently expressed genome elements and display their fold changes in a heatmap viewer.");
         lblGoThroughAll_1.setFont(SWTResourceManager.getBodyFont(SWT.NORMAL));
         lblGoThroughAll_1.setBackground(BasicColor.LIGHT_TWO);
@@ -660,7 +660,7 @@ public class InitViewYersinia implements SelectionListener {
         gd_lblGoThroughAll_2.widthHint = 400;
         lblGoThroughAll_2.setLayoutData(gd_lblGoThroughAll_2);
         lblGoThroughAll_2
-                .setText("Browse all 9 <i>Yersinia</i> species proteomics datasets available on Yersiniomics. "
+                .setText("Browse all 31 <i>Yersinia</i> species proteomics datasets available on Yersiniomics. "
                         + "Visualize them on the genome browser. Display protein detection patterns for each datasets in a heatmap viewer.");
         lblGoThroughAll_2.setFont(SWTResourceManager.getBodyFont(SWT.NORMAL));
         lblGoThroughAll_2.setBackground(BasicColor.LIGHT_TWO);
