@@ -357,7 +357,7 @@ public class FastaFileReader<S extends Sequence<?>, C extends Compound> {
         for (Gene gene : sequences) {
             try {
                 String seqAA = gene.getSequenceAA();
-                pttTable[i][0] = ">" + gene.getName() + "|" + gene.getOldLocusTag() + "|" + gene.getNewLocusTag();
+                pttTable[i][0] = ">" + gene.getName() + "|" + gene.getFeature("old_locus_tag") + "|" + gene.getNewLocusTag();
                 i++;
                 pttTable[i][0] = seqAA;
                 i++;

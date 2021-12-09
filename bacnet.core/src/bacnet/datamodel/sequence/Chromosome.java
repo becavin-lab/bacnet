@@ -185,7 +185,7 @@ public class Chromosome extends ChromosomeSequence {
                             getLocusTagToGeneNameMap().put(name, gene.getGeneName());
                             getGeneNameToLocusTagMap().put(gene.getGeneName(), name);
                         }
-                        String oldLocusTag = gene.getOldLocusTag();
+                        String oldLocusTag = gene.getFeature("old_locus_tag");
                         //System.out.println(" sysout " +oldLocusTag);
 
                         if(!oldLocusTag.equals("")) {

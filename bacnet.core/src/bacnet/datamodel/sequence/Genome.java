@@ -499,7 +499,7 @@ public class Genome {
                 return chromo.getAllElements().get(name);
             }
             for (Gene gene : chromo.getGenes().values()) {
-                if (gene.getOldLocusTag().equals(name)) {
+                if (gene.getFeature("old_locus_tag").equals(name)) {
                     return gene;
                 }
                 if (gene.getNewLocusTag().equals(name)) {

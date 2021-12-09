@@ -55,6 +55,9 @@ public class GeneViewTranscriptomeTools {
 		tableOver.removeAll();
 		tableOver.setHeaderVisible(true);
 		tableOver.setLinesVisible(true);
+		TableColumn column01 = new TableColumn(tableOver, SWT.NONE);
+		column01.setText("Log2(FC)");
+		column01.setAlignment(SWT.LEFT);
 		for (int i = 0; i < arrayDataList[0].length; i++) {
 			TableColumn column = new TableColumn(tableOver, SWT.NONE);
 			column.setText(arrayDataList[0][i]);
@@ -65,8 +68,9 @@ public class GeneViewTranscriptomeTools {
 			String dataName = arrayDataList[i][ArrayUtils.findColumn(arrayDataList, "Data Name")];
 			if (atlas.getOverBioConds().contains(dataName)) {
 				TableItem item = new TableItem(tableOver, SWT.NONE);
+				item.setText(0, atlas.getValues().get(dataName).toString());
 				for (int j = 0; j < arrayDataList[0].length; j++) {
-					item.setText(j, arrayDataList[i][j]);
+					item.setText(j+1, arrayDataList[i][j]);
 				}
 			}
 		}
@@ -83,6 +87,9 @@ public class GeneViewTranscriptomeTools {
 		tableUnder.removeAll();
 		tableUnder.setHeaderVisible(true);
 		tableUnder.setLinesVisible(true);
+		TableColumn column02 = new TableColumn(tableUnder, SWT.NONE);
+		column02.setText("Log2(FC)");
+		column02.setAlignment(SWT.LEFT);
 		for (int i = 0; i < arrayDataList[0].length; i++) {
 			TableColumn column = new TableColumn(tableUnder, SWT.NONE);
 			column.setText(arrayDataList[0][i]);
@@ -92,8 +99,10 @@ public class GeneViewTranscriptomeTools {
 			String dataName = arrayDataList[i][ArrayUtils.findColumn(arrayDataList, "Data Name")];
 			if (atlas.getUnderBioConds().contains(dataName)) {
 				TableItem item = new TableItem(tableUnder, SWT.NONE);
+				item.setText(0, atlas.getValues().get(dataName).toString());
+
 				for (int j = 0; j < arrayDataList[0].length; j++) {
-					item.setText(j, arrayDataList[i][j]);
+					item.setText(j+1, arrayDataList[i][j]);
 				}
 			}
 		}
@@ -110,6 +119,9 @@ public class GeneViewTranscriptomeTools {
 		tableNodiff.removeAll();
 		tableNodiff.setHeaderVisible(true);
 		tableNodiff.setLinesVisible(true);
+		TableColumn column03 = new TableColumn(tableNodiff, SWT.NONE);
+		column03.setText("Log2(FC)");
+		column03.setAlignment(SWT.LEFT);
 		for (int i = 0; i < arrayDataList[0].length; i++) {
 			TableColumn column = new TableColumn(tableNodiff, SWT.NONE);
 			column.setText(arrayDataList[0][i]);
@@ -119,8 +131,10 @@ public class GeneViewTranscriptomeTools {
 			String dataName = arrayDataList[i][ArrayUtils.findColumn(arrayDataList, "Data Name")];
 			if (atlas.getNotDiffExpresseds().contains(dataName)) {
 				TableItem item = new TableItem(tableNodiff, SWT.NONE);
+				item.setText(0, atlas.getValues().get(dataName).toString());
+
 				for (int j = 0; j < arrayDataList[0].length; j++) {
-					item.setText(j, arrayDataList[i][j]);
+					item.setText(j+1, arrayDataList[i][j]);
 				}
 			}
 		}
@@ -136,31 +150,32 @@ public class GeneViewTranscriptomeTools {
 	 * Update  transcriptomes table = transcript expression with a value over 0
 	 */
 	public static void updateTranscriptomesTable(Sequence sequence, GeneView viewer, String[][] arrayTranscriptomesList) {
-		System.out.println("updateTranscriptomeTable");
+		//System.out.println("updateTranscriptomeTable");
 		/*
 		 * Update expressed list
 		 */
 		ArrayList<String> bioConditions = new ArrayList<>();
 		HashMap<String, Double> normValues = new HashMap<>();
 
-		System.out.println("getGenomeSelected: "+ viewer.getGenomeSelected());
+		//System.out.println("getGenomeSelected: "+ viewer.getGenomeSelected());
 		ExpressionMatrix exprTranscriptomesMatrix = Database.getInstance().getExprTranscriptomesTable(viewer.getGenomeSelected());
 
-		System.out.println("sequence: " + sequence.getName());
+		//System.out.println("sequence: " + sequence.getName());
 
 		if (exprTranscriptomesMatrix.getRowNames().containsKey(sequence.getName())) {
-			System.out.println("in if");
+			//System.out.println("in if");
 
 			for (String header : exprTranscriptomesMatrix.getHeaders()) {
-				System.out.println("headers: "+ header.substring(0, header.length()-8));
+				//System.out.println("headers: "+ header.substring(0, header.length()-8));
 				double value = exprTranscriptomesMatrix.getValue(sequence.getName(), header);
-				if (value > 0) {
-					bioConditions.add(header.substring(0, header.length()-8));
+				if (value != 0) {
+					//System.out.println("true");
+                    bioConditions.add(header.substring(0, header.length()-8));
 					normValues.put(header.substring(0, header.length()-8), value);
 				}
 			}
 		}
-		System.out.println("after if");
+		//System.out.println("after if");
 
 		viewer.getLblOverTranscriptomes().setText(bioConditions.size() + " datasets out of " + exprTranscriptomesMatrix.getHeaders().size());
 
@@ -172,31 +187,33 @@ public class GeneViewTranscriptomeTools {
 		tableTranscriptomes.setHeaderVisible(true);
 		tableTranscriptomes.setLinesVisible(true);
 		TableColumn column1 = new TableColumn(tableTranscriptomes, SWT.NONE);
-		column1.setText("DESeq2 norm");
+		column1.setText("Value");
 		column1.setAlignment(SWT.LEFT);
-		System.out.println("column 1");
-		System.out.println("length "+arrayTranscriptomesList[0].length);
+		//System.out.println("column 1");
+		//System.out.println("length "+arrayTranscriptomesList[0].length);
 
 		for (int i = 0; i < arrayTranscriptomesList[0].length; i++) {
 
-			//System.out.println("head column "+i);
+			//System.out.println("head column 1 "+i);
 			TableColumn column = new TableColumn(tableTranscriptomes, SWT.NONE);
 			column.setText(arrayTranscriptomesList[0][i]);
 			column.setAlignment(SWT.LEFT);
 		}
 		for (int i = 1; i < arrayTranscriptomesList.length; i++) {
-			//System.out.println("head column "+i);
+			//System.out.println("head column 2 "+i);
 			String dataName = arrayTranscriptomesList[i][ArrayUtils.findColumn(arrayTranscriptomesList, "Data Name")];
+			//System.out.println("dataname "+dataName);
+
 			if (bioConditions.contains(dataName)) {
-				System.out.println("dataName "+dataName);
+				//System.out.println("dataName "+dataName);
 				TableItem item = new TableItem(tableTranscriptomes, SWT.NONE);
-				System.out.println("TableItem ");
+				//System.out.println("TableItem ");
 
 				item.setText(0, normValues.get(dataName).toString());
-				System.out.println("TableItem ");
+				//System.out.println("TableItem 2");
 
 				for (int j = 0; j < arrayTranscriptomesList[0].length; j++) {
-					System.out.println("j "+ j);
+					//System.out.println("j "+ j);
 
 					item.setText(j+1, arrayTranscriptomesList[i][j]);
 
@@ -204,7 +221,7 @@ public class GeneViewTranscriptomeTools {
 			}
 		}
 		for (int i = 0; i < arrayTranscriptomesList[0].length+1; i++) {
-			System.out.println("pack "+ i);
+			//System.out.println("pack "+ i);
 
 			tableTranscriptomes.getColumn(i).pack();
 		}

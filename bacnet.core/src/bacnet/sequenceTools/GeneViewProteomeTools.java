@@ -56,6 +56,9 @@ public class GeneViewProteomeTools {
         tableOver.removeAll();
         tableOver.setHeaderVisible(true);
         tableOver.setLinesVisible(true);
+		TableColumn column01 = new TableColumn(tableOver, SWT.NONE);
+		column01.setText("Log2(FC)");
+		column01.setAlignment(SWT.LEFT);
         for (int i = 0; i < arrayProteinAtlasList[0].length; i++) {
             TableColumn column = new TableColumn(tableOver, SWT.NONE);
             column.setText(arrayProteinAtlasList[0][i]);
@@ -66,8 +69,9 @@ public class GeneViewProteomeTools {
             String dataName = arrayProteinAtlasList[i][ArrayUtils.findColumn(arrayProteinAtlasList, "Data Name")];
             if (atlas.getOverBioConds().contains(dataName)) {
                 TableItem item = new TableItem(tableOver, SWT.NONE);
+				item.setText(0, atlas.getValues().get(dataName).toString());
                 for (int j = 0; j < arrayProteinAtlasList[0].length; j++) {
-                    item.setText(j, arrayProteinAtlasList[i][j]);
+                    item.setText(j+1, arrayProteinAtlasList[i][j]);
                 }
             }
         }
@@ -84,6 +88,9 @@ public class GeneViewProteomeTools {
         tableUnder.removeAll();
         tableUnder.setHeaderVisible(true);
         tableUnder.setLinesVisible(true);
+		TableColumn column02 = new TableColumn(tableUnder, SWT.NONE);
+		column02.setText("Log2(FC)");
+		column02.setAlignment(SWT.LEFT);
         for (int i = 0; i < arrayProteinAtlasList[0].length; i++) {
             TableColumn column = new TableColumn(tableUnder, SWT.NONE);
             column.setText(arrayProteinAtlasList[0][i]);
@@ -93,8 +100,9 @@ public class GeneViewProteomeTools {
             String dataName = arrayProteinAtlasList[i][ArrayUtils.findColumn(arrayProteinAtlasList, "Data Name")];
             if (atlas.getUnderBioConds().contains(dataName)) {
                 TableItem item = new TableItem(tableUnder, SWT.NONE);
+				item.setText(0, atlas.getValues().get(dataName).toString());
                 for (int j = 0; j < arrayProteinAtlasList[0].length; j++) {
-                    item.setText(j, arrayProteinAtlasList[i][j]);
+                    item.setText(j+1, arrayProteinAtlasList[i][j]);
                 }
             }
         }
@@ -111,6 +119,9 @@ public class GeneViewProteomeTools {
         tableNodiff.removeAll();
         tableNodiff.setHeaderVisible(true);
         tableNodiff.setLinesVisible(true);
+		TableColumn column03 = new TableColumn(tableNodiff, SWT.NONE);
+		column03.setText("Log2(FC)");
+		column03.setAlignment(SWT.LEFT);
         for (int i = 0; i < arrayProteinAtlasList[0].length; i++) {
             TableColumn column = new TableColumn(tableNodiff, SWT.NONE);
             column.setText(arrayProteinAtlasList[0][i]);
@@ -120,8 +131,10 @@ public class GeneViewProteomeTools {
             String dataName = arrayProteinAtlasList[i][ArrayUtils.findColumn(arrayProteinAtlasList, "Data Name")];
             if (atlas.getNotDiffExpresseds().contains(dataName)) {
                 TableItem item = new TableItem(tableNodiff, SWT.NONE);
+				item.setText(0, atlas.getValues().get(dataName).toString());
+
                 for (int j = 0; j < arrayProteinAtlasList[0].length; j++) {
-                    item.setText(j, arrayProteinAtlasList[i][j]);
+                    item.setText(j+1, arrayProteinAtlasList[i][j]);
                 }
             }
         }
@@ -156,7 +169,7 @@ public class GeneViewProteomeTools {
             for (String header : exprProteomesMatrix.getHeaders()) {
                 //System.out.println("headers: "+ header);
                 double value = exprProteomesMatrix.getValue(sequence.getName(), header);
-                if (value > 0) {
+                if (value != 0) {
                     bioConditions.add(header);
                     LFQValues.put(header, value);
                 }
@@ -174,7 +187,7 @@ public class GeneViewProteomeTools {
         tableProteomes.setHeaderVisible(true);
         tableProteomes.setLinesVisible(true);
         TableColumn column1 = new TableColumn(tableProteomes, SWT.NONE);
-        column1.setText("Log10(LFQ)");
+        column1.setText("Value");
         column1.setAlignment(SWT.LEFT);
         //System.out.println("column 1");
         //System.out.println("length "+arrayProteomeList[0].length);

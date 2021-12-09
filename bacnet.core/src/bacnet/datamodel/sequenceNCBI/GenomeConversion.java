@@ -160,7 +160,7 @@ public class GenomeConversion {
                 if(!gene.getProtein_id().equals("")) {
                 	genome.getChromosomes().get(chromosomeNCBI.getAccession().toString()).getProteinIDTolocusTag().put(gene.getProtein_id(), gene.getName());
                 }
-                if(!gene.getOldLocusTag().equals("")) {
+                if(!gene.getFeature("old_locus_tag").equals("")) {
                 	genome.getChromosomes().get(chromosomeNCBI.getAccession().toString()).getLocusTagToOldLocusTagMap().put(gene.getName(), gene.getOldLocusTag());
                 	genome.getChromosomes().get(chromosomeNCBI.getAccession().toString()).getProteinIDToOldLocusTagMap().put(gene.getProtein_id(), gene.getOldLocusTag());
                 }

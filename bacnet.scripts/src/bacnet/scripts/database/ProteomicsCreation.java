@@ -149,12 +149,12 @@ public class ProteomicsCreation {
                             System.out.println("No " + ColNames.LOGFC + " column found for " + fileName);
                         }
                         matrix = matrix.getSubMatrixColumn(includeColNames);
-                        System.out.println("mtrix: " + matrix.getBioCondName());
-                        System.out.println("mtrix: " + matrix.getHeaders());
-                        System.out.println("mtrix: " + matrix.getName());
-                        System.out.println("mtrix: " + matrix.getNumberRow());
-                        System.out.println("mtrix: " + matrix.getValue(2, 0));
-                        System.out.println("mtrix: " + matrix.getRowName(2));
+                        //System.out.println("mtrix: " + matrix.getBioCondName());
+                        //System.out.println("mtrix: " + matrix.getHeaders());
+                        //System.out.println("mtrix: " + matrix.getName());
+                        //System.out.println("mtrix: " + matrix.getNumberRow());
+                        //System.out.println("mtrix: " + matrix.getValue(2, 0));
+                        //System.out.println("mtrix: " + matrix.getRowName(2));
 
                         /*
                          * Save expressionMatrix
@@ -191,10 +191,11 @@ public class ProteomicsCreation {
 
     /**
      * In order to represent proteomics data we need to add a -1 value in every missing row.<br>
-     * 
+     * ATTENTION: -1 is now a value when there is no value but it is detected
      * @param exp
      * @param genome
      */
+    
     public static void addMissingValuesToMatrices(Experiment exp, Genome genome) {
         ArrayList<BioCondition> massSpecBioCond = new ArrayList<>();
         for (BioCondition bioCond : exp.getBioConditions()) {
@@ -364,10 +365,20 @@ public class ProteomicsCreation {
                         }
                         // test if we can find the gene by its old locus tag
                         else if (genome.getGenes().get(gene) != null) { //.getGenes() returns null if gene is a NcRNA 
-                        	String oldLocusTag = genome.getGenes().get(gene).getOldLocusTag();
+                        	String oldLocusTag = genome.getGenes().get(gene).getFeature("old_locus_tag");
                         	if (!oldLocusTag.equals("") & proteome.getRowNames().containsKey(oldLocusTag)) {
                         		ExpMatrix.setValue(proteome.getValue(oldLocusTag, ColNames.VALUE + ""), gene,  proteome.getName());
+                        	}
+                        	else if (oldLocusTag.contains(",")) {
+                            	//System.out.println("oldLocusTag contains ,");
+                        		for (String oldLocusTemp : oldLocusTag.split(",")) {
+                        			//System.out.println("oldLocusTemp: " +oldLocusTemp);
+                        			if (!oldLocusTemp.equals("") & proteome.getRowNames().containsKey(oldLocusTemp)) {
+                            			//System.out.println("in if");
+                        				ExpMatrix.setValue(proteome.getValue(oldLocusTemp, ColNames.VALUE + ""), gene, proteome.getName());
+                        			}
                         		}
+                        	}
                         }
                      
                     }
@@ -378,8 +389,8 @@ public class ProteomicsCreation {
                     int nbProteins = 0;
                     for (int i = 0; i < proteome.getValues().length; i++) {
                         for (int j = 0; j < proteome.getValues()[0].length; j++) {
-                            if ((proteome.getValues()[i][j] != -1)
-                                    && (proteome.getValues()[i][j] != 0)) {
+                            //if ((proteome.getValues()[i][j] != -1) && (proteome.getValues()[i][j] != 0)) {
+                            if (proteome.getValues()[i][j] != 0) {
                                 nbProteins++;
                             }
                         }
@@ -493,13 +504,27 @@ public class ProteomicsCreation {
                     	logFCMatrix.setValue(proteome.getValue(geneName, ColNames.LOGFC + ""), gene, comparisonName);
                     }
                     // test if we can find the gene by its old locus tag
-                    else if (genome.getGenes().get(gene) != null) { //.getGenes() returns null if gene is a NcRNA 
-                    	String oldLocusTag = genome.getGenes().get(gene).getOldLocusTag();
+                    else if (genome.getGenes().get(gene) != null) {
+                    	//System.out.println("test oldLocusTag");
+                    	//.getGenes() returns null if gene is a NcRNA 
+                    	String oldLocusTag = genome.getGenes().get(gene).getFeature("old_locus_tag");
+                    	//System.out.println("oldLocusTag: "+oldLocusTag);
+
                     	if (!oldLocusTag.equals("") & proteome.getRowNames().containsKey(oldLocusTag)) {
                     		logFCMatrix.setValue(proteome.getValue(oldLocusTag, ColNames.LOGFC + ""), gene, comparisonName);
+
+                    	}
+                    	else if (oldLocusTag.contains(",")) {
+                        	//System.out.println("oldLocusTag contains ,");
+                    		for (String oldLocusTemp : oldLocusTag.split(",")) {
+                    			//System.out.println("oldLocusTemp: " +oldLocusTemp);
+                    			if (!oldLocusTemp.equals("") & proteome.getRowNames().containsKey(oldLocusTemp)) {
+                    				
+                            		logFCMatrix.setValue(proteome.getValue(oldLocusTemp, ColNames.LOGFC + ""), gene, comparisonName);
+                    			}
                     		}
+                    	}
                     }
-                 
                 }
             }
         }

@@ -176,7 +176,9 @@ public class GeneView implements SelectionListener, MouseListener {
     private TabItem tbtmTranscriptomes;
     private String[][] arrayTranscriptomesList = new String[0][0];
     //private ArrayList<String[]> arrayProteomeToDisplay;
-    private Composite composite_10;
+    private Composite composite_101;
+    private Composite composite_102;
+    private Composite composite_103;
     private Table tableTranscriptomes;
     private Label lblExprTranscriptomes;
     
@@ -202,14 +204,27 @@ public class GeneView implements SelectionListener, MouseListener {
     
 
     /*
-     * Other tabs
+     * Proteomes
      */
     private TabItem tbtmProteomes;
     private String[][] arrayProteomeList = new String[0][0];
     private ArrayList<String[]> arrayProteomeToDisplay;
-    private Composite composite_9;
+    private Composite composite_09;
+    private Composite composite_091;
+    private Composite composite_092;
     private Table tableProteomes;
     private Label lblExprProteomes;
+    
+    
+    /*
+     * Interactomes
+     */
+    private TabItem tbtmInteractome;
+    private Composite compositeInteractome;
+
+    /*
+     * Other
+     */
     
     private Text lblConservation;
     private TabItem tbtmHomologs;
@@ -358,7 +373,7 @@ public class GeneView implements SelectionListener, MouseListener {
                         listGenes.clear();
                         for (String gene : searchResults) {
                             String text = gene;
-                            String oldLocusTag = genome.getChromosomes().get(chromoID).getGenes().get(gene).getOldLocusTag();
+                            String oldLocusTag = genome.getChromosomes().get(chromoID).getGenes().get(gene).getFeature("old_locus_tag");
                             if (!oldLocusTag.equals("")) {
                                 text += " - " + oldLocusTag;
                             }
@@ -841,46 +856,40 @@ public class GeneView implements SelectionListener, MouseListener {
 
         tbtmTranscriptomes = new TabItem(tabFolder, SWT.NONE);
         tbtmTranscriptomes.setText("Transcriptomes");
+        
 
-        composite_10 = new Composite(tabFolder, SWT.NONE);
-        tbtmTranscriptomes.setControl(composite_10);
-        composite_10.setLayout(new GridLayout(2, false));
+        composite_101 = new Composite(tabFolder, SWT.NONE);
+        tbtmTranscriptomes.setControl(composite_101);
+        composite_101.setLayout(new GridLayout(1, false));
+        composite_101.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 
-        Label lblOverExpressedInTranscriptomes = new Label(composite_10, SWT.NONE);
-        lblOverExpressedInTranscriptomes.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+        composite_102 = new Composite(composite_101, SWT.NONE);
+        composite_102.setLayout(new GridLayout(1, false));
+        
+        Label transcriptomesExpl = new Label(composite_102, SWT.NONE);
+        transcriptomesExpl.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 0, 0));
+        transcriptomesExpl.setText("For RNASeq experiments, displayed value is Log10(DESeq2 normalized feature counts).");
+
+        composite_103 = new Composite(composite_101, SWT.NONE);
+        composite_103.setLayout(new GridLayout(2, false));
+        
+        Label lblOverExpressedInTranscriptomes = new Label(composite_103, SWT.NONE);
+        lblOverExpressedInTranscriptomes.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 0, 0));
         lblOverExpressedInTranscriptomes.setText("Found in");
 
-        lblExprTranscriptomes = new Label(composite_10, SWT.NONE);
-        lblExprTranscriptomes.setText("over");
+        lblExprTranscriptomes = new Label(composite_103, SWT.NONE);
+        lblExprTranscriptomes.setText("");
 
-        tableTranscriptomes = new Table(composite_10, SWT.BORDER | SWT.FULL_SELECTION | SWT.MULTI);
+        tableTranscriptomes = new Table(composite_101, SWT.BORDER | SWT.FULL_SELECTION | SWT.MULTI);
         tableTranscriptomes.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1));
 
-        scrolledComposite.setContent(composite_11);
-        scrolledComposite.setMinSize(composite_11.computeSize(SWT.DEFAULT, SWT.DEFAULT));
+        //scrolledComposite.setContent(composite_11);
+        //scrolledComposite.setMinSize(composite_11.computeSize(SWT.DEFAULT, SWT.DEFAULT));
         
         /*
          * Protein atlas section
          */
-        /*
-         * Protein atlas variables
-         */
-//        private String[][] arrayProteinAtlasList = new String[0][0];
-//        private Composite compositeProteome;
-//        private Table tableOverProteome;
-//        private Table tableUnderProteome;
-//        private Table tableNodiffProteome;
-//        private Label lblOverProteome;
-//        private Label lblUnderProteome;
-//        private Label lblNodiffProteome;
-//        
-//        private TabItem tbtmProteomeData;
-//        private Button btnUpdateCutoffProteome;
-//        private Text txtCutoffLogFCProteome;
-//        private Text txtCutoffPvalueProteome;
-//        private Button btnHeatmapviewProteome;
-//        private Button btnGenomeViewerProteome;
-//        
+
         {
 	        tbtmProteomeData = new TabItem(tabFolder, SWT.NONE);
 	        tbtmProteomeData.setText("Protein differential expressions");
@@ -1005,23 +1014,58 @@ public class GeneView implements SelectionListener, MouseListener {
         tbtmProteomes = new TabItem(tabFolder, SWT.NONE);
         tbtmProteomes.setText("Proteomes");
 
-        composite_9 = new Composite(tabFolder, SWT.NONE);
-        tbtmProteomes.setControl(composite_9);
-        composite_9.setLayout(new GridLayout(2, false));
+        composite_09 = new Composite(tabFolder, SWT.NONE);
+        tbtmProteomes.setControl(composite_09);
+        composite_09.setLayout(new GridLayout(1, false));
+        
+        composite_091 = new Composite(composite_09, SWT.NONE);
+        composite_091.setLayout(new GridLayout(1, false));
 
-        Label lblOverExpressedInProteomes = new Label(composite_9, SWT.NONE);
+        Label proteomesExpl1 = new Label(composite_091, SWT.NONE);
+        proteomesExpl1.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1));
+        proteomesExpl1.setText("For Orbitrap experiments, displayed value is log10(raw LFQ).");
+
+        Label proteomesExpl2 = new Label(composite_091, SWT.NONE);
+        proteomesExpl2.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1));
+        proteomesExpl2.setText("For FTICR experiments, displayed value is raw FTICR intensity.");
+
+        Label proteomesExpl3 = new Label(composite_091, SWT.NONE);
+        proteomesExpl3.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1));
+        proteomesExpl3.setText("For 2D gel experiments, if proteins are detected in several spots, displayed value is the most intense measured spot intensity value.");
+        
+        Label proteomesExpl4 = new Label(composite_091, SWT.NONE);
+        proteomesExpl4.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1));
+        proteomesExpl4.setText("'-1' means that the protein is detected but no value is available.");
+
+        
+        composite_092 = new Composite(composite_09, SWT.NONE);
+        composite_092.setLayout(new GridLayout(2, false));
+
+        Label lblOverExpressedInProteomes = new Label(composite_092, SWT.NONE);
         lblOverExpressedInProteomes.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
         lblOverExpressedInProteomes.setText("Found in");
 
-        lblExprProteomes = new Label(composite_9, SWT.NONE);
-        lblExprProteomes.setText("over");
+        lblExprProteomes = new Label(composite_092, SWT.NONE);
+        lblExprProteomes.setText("");
 
-        tableProteomes = new Table(composite_9, SWT.BORDER | SWT.FULL_SELECTION | SWT.MULTI);
+        tableProteomes = new Table(composite_09, SWT.BORDER | SWT.FULL_SELECTION | SWT.MULTI);
         tableProteomes.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1));
 
         scrolledComposite.setContent(composite_11);
         scrolledComposite.setMinSize(composite_11.computeSize(SWT.DEFAULT, SWT.DEFAULT));
+        
+        tbtmInteractome = new TabItem(tabFolder, SWT.NONE);
+        tbtmInteractome.setText("Interactome");
 
+        compositeInteractome = new Composite(tabFolder, SWT.BORDER);
+        tbtmInteractome.setControl(compositeInteractome);
+        compositeInteractome.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+        compositeInteractome.setLayout(new GridLayout(2, false));
+
+        Composite composite_8 = new Composite(compositeInteractome, SWT.BORDER);
+        composite_8.setLayout(new GridLayout(1, false));
+
+        
         tbtmSynteny = new TabItem(tabFolder, SWT.NONE);
         tbtmSynteny.setText("Synteny");
 
@@ -1084,19 +1128,19 @@ public class GeneView implements SelectionListener, MouseListener {
             realUrl = "https://listeriomics.pasteur.fr/";
             pathGraphHTML = realUrl + "SynTView/flash/indexFinal.html";
             } else if (genome.getSpecies().equals("Yersinia pestis CO92")){
-                pathGraphHTML = "http://hub15.hosting.pasteur.fr:8080/SynTView/CO92/?datadir=Data";
+                pathGraphHTML = "http://hub15.hosting.pasteur.fr:8080/SynTView/site/?dataDir=\"data/CO92\"";
                 System.out.println("SyntView: " + pathGraphHTML);
                 browserSynteny.setUrl(pathGraphHTML);
                 browserSynteny.redraw();
                 
             } else if (genome.getSpecies().equals("Yersinia pseudotuberculosis YPIII")){
-                //pathGraphHTML = "http://hub18.hosting.pasteur.fr/SynTView/JS/Yersiniomics/pseudo/";
+                pathGraphHTML = "http://hub15.hosting.pasteur.fr:8080/SynTView/site/?dataDir=\"data/pseudo\"";
                 System.out.println("SyntView: " + pathGraphHTML);
                 browserSynteny.setUrl(pathGraphHTML);
                 browserSynteny.redraw();
                 
             } else if (genome.getSpecies().equals("Yersinia enterocolitica 8081")){
-            	//pathGraphHTML = "http://hub18.hosting.pasteur.fr/SynTView/JS/Yersiniomics/entero/";
+            	pathGraphHTML = "http://hub15.hosting.pasteur.fr:8080/SynTView/site/?dataDir=\"data/entero\"";
             	System.out.println("SyntView: " + pathGraphHTML);
             	browserSynteny.setUrl(pathGraphHTML);
             	browserSynteny.redraw();
@@ -1689,7 +1733,6 @@ public class GeneView implements SelectionListener, MouseListener {
             tableNodiff.removeAll();
         }
         
-        
         /*
          * Absence/presence Transcriptome update
          */
@@ -1700,9 +1743,9 @@ public class GeneView implements SelectionListener, MouseListener {
 
         } else {
             tableTranscriptomes.removeAll();
+            lblExprTranscriptomes.setText("No data");
         }
 
-        
         /*
          * Protein atlas update
          */
@@ -1728,6 +1771,8 @@ public class GeneView implements SelectionListener, MouseListener {
 
         } else {
             tableProteomes.removeAll();
+            lblExprProteomes.setText("No data");
+
         }
 
     }
@@ -1782,17 +1827,17 @@ public class GeneView implements SelectionListener, MouseListener {
     public ArrayList<String> getSelectedComparisons() {
         ArrayList<String> comparisons = new ArrayList<>();
         for (int index : tableOver.getSelectionIndices()) {
-            String comparison = tableOver.getItem(index).getText(ArrayUtils.findColumn(arrayDataList, "Data Name"));
-            // System.out.println(comparison);
+            String comparison = tableOver.getItem(index).getText(ArrayUtils.findColumn(arrayDataList, "Data Name")+1);
+            System.out.println("over comp: " +comparison);
             comparisons.add(comparison);
         }
         for (int index : tableUnder.getSelectionIndices()) {
-            String comparison = tableUnder.getItem(index).getText(ArrayUtils.findColumn(arrayDataList, "Data Name"));
-            // System.out.println(comparison);
+            String comparison = tableUnder.getItem(index).getText(ArrayUtils.findColumn(arrayDataList, "Data Name")+1);
+            System.out.println("under comp: " +comparison);
             comparisons.add(comparison);
         }
         for (int index : tableNodiff.getSelectionIndices()) {
-            String comparison = tableNodiff.getItem(index).getText(ArrayUtils.findColumn(arrayDataList, "Data Name"));
+            String comparison = tableNodiff.getItem(index).getText(ArrayUtils.findColumn(arrayDataList, "Data Name")+1);
             // System.out.println(comparison);
             comparisons.add(comparison);
         }
@@ -1803,17 +1848,17 @@ public class GeneView implements SelectionListener, MouseListener {
     public ArrayList<String> getSelectedComparisonsProteome() {
         ArrayList<String> comparisons = new ArrayList<>();
         for (int index : tableOverProteome.getSelectionIndices()) {
-            String comparison = tableOverProteome.getItem(index).getText(ArrayUtils.findColumn(arrayProteomeList, "Data Name"));
+            String comparison = tableOverProteome.getItem(index).getText(ArrayUtils.findColumn(arrayProteomeList, "Data Name")+1);
             // System.out.println(comparison);
             comparisons.add(comparison);
         }
         for (int index : tableUnderProteome.getSelectionIndices()) {
-            String comparison = tableUnderProteome.getItem(index).getText(ArrayUtils.findColumn(arrayProteomeList, "Data Name"));
+            String comparison = tableUnderProteome.getItem(index).getText(ArrayUtils.findColumn(arrayProteomeList, "Data Name")+1);
             // System.out.println(comparison);
             comparisons.add(comparison);
         }
         for (int index : tableNodiffProteome.getSelectionIndices()) {
-            String comparison = tableNodiffProteome.getItem(index).getText(ArrayUtils.findColumn(arrayProteomeList, "Data Name"));
+            String comparison = tableNodiffProteome.getItem(index).getText(ArrayUtils.findColumn(arrayProteomeList, "Data Name")+1);
             // System.out.println(comparison);
             comparisons.add(comparison);
         }
@@ -1893,7 +1938,7 @@ public class GeneView implements SelectionListener, MouseListener {
         NavigationManagement.pushStateView(id, new HashMap<>());
         GeneView view = (GeneView) part.getObject();
         view.setViewID(id);
-        String genomeName = "Yersinia pestis KIM10+";
+        String genomeName = "Yersinia pestis KIM5";
         view.initGenomeInfo(genomeName);
         view.setGenomeSelected(genomeName);
     }
@@ -2573,8 +2618,8 @@ public class GeneView implements SelectionListener, MouseListener {
         return lblExprProteomes;
     }
 
-    public void setLblOverProteomes(Label lblOverProteomes) {
-        this.lblExprProteomes = lblOverProteomes;
+    public void setLblOverProteomes(Label lblExprProteomes) {
+        this.lblExprProteomes = lblExprProteomes;
     }
 
     public Track getTrackGenome() {

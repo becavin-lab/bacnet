@@ -816,7 +816,7 @@ public class HomologCreation {
 			Gene gene = genomeLoaded.getGeneFromName(locus);
 			if (gene != null) {
 				LinkedHashMap<String, String> conservationHashMap = new LinkedHashMap<>();
-				conservationHashMap.put(GenomeNCBI.unprocessGenomeName(genome), locus + ";" + gene.getOldLocusTag() +";"+gene.getProtein_id()+";1.0");
+				conservationHashMap.put(GenomeNCBI.unprocessGenomeName(genome), locus + ";" + gene.getFeature("old_locus_tag") +";"+gene.getProtein_id()+";1.0");
 				if (!allInfo.equals("")) {
 					String[] conservations = allInfo.split(";;");
 					for (String conservation : conservations) {

@@ -8,6 +8,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.TreeSet;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -47,6 +48,8 @@ public class GenomeElementAtlas implements Serializable {
     private TreeSet<String> overBioConds = new TreeSet<>();
     private TreeSet<String> underBioConds = new TreeSet<>();
     private TreeSet<String> notDiffExpresseds = new TreeSet<>();
+    private HashMap<String, Double> values = new HashMap<>();
+    //add hashmap for each with values
 
     public GenomeElementAtlas() {}
 
@@ -72,6 +75,7 @@ public class GenomeElementAtlas implements Serializable {
         if (logFCMatrix.getRowNames().containsKey(genomeElement)) {
             for (String bioCondName : logFCMatrix.getHeaders()) {
                 double logFC = logFCMatrix.getValue(genomeElement, bioCondName);
+                this.values.put(bioCondName, logFC);
                 if (logFC <= -filter.getCutOff1()) {
                     // under-expressed
                     this.underBioConds.add(bioCondName);
@@ -120,5 +124,10 @@ public class GenomeElementAtlas implements Serializable {
     public void setNotDiffExpresseds(TreeSet<String> notDiffExpresseds) {
         this.notDiffExpresseds = notDiffExpresseds;
     }
+    
+    public HashMap<String, Double> getValues() {
+        return values;
+    }
+
 
 }
