@@ -81,10 +81,11 @@ public class BannerView implements SelectionListener {
         
         Composite container = new Composite(parent, SWT.BORDER);
         container.setLayout(new GridLayout(3, false));
-
+        container.setBackground(BasicColor.BANNER_COLOR);
         canvas = new Canvas(container, SWT.NONE);
         canvas.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
         canvas.setLayout(new GridLayout(1, false));
+        
         /*
          * Paint the Banner of the software/website
          */
@@ -96,15 +97,17 @@ public class BannerView implements SelectionListener {
 
             @Override
             public void paintControl(PaintEvent event) {
-                event.gc.setBackground(BasicColor.WHITE);
-                event.gc.setForeground(BasicColor.LIGHTGREY);
+                event.gc.setBackground(BasicColor.BANNER_COLOR);
+                event.gc.setForeground(BasicColor.BANNER_COLOR);
                 event.gc.fillGradientRectangle(0, 0, event.width, event.height, false);
+                               
                 // event.gc.setBackground(BasicColor.WHITE);
                 // event.gc.setForeground(BasicColor.BANNER_BACKGROUND);
                 // event.gc.fillGradientRectangle(0, event.height/2, event.width,
                 // event.height/2, true);
                 //System.out.println("Logo:"+Database.getInstance().getLogo());
-                Image image = ResourceManager.getPluginImage("bacnet", Database.getInstance().getLogo());
+                
+                Image image = ResourceManager.getPluginImage("bacnet.core", Database.getInstance().getLogo());
                 if(image!=null) {
 	                int xPosition = event.x + 20;
 	                int yPosition = event.y + event.height / 2 - image.getBounds().height / 2;
@@ -116,20 +119,20 @@ public class BannerView implements SelectionListener {
         });
 
         toolBar = new ToolBar(container, SWT.FLAT | SWT.RIGHT);
-
+        toolBar.setBackground(BasicColor.BANNER_COLOR);
         tltmGenomics = new ToolItem(toolBar, SWT.NONE);
-        tltmGenomics.setImage(ResourceManager.getPluginImage("bacnet", "icons/ToolBar/genomics.png"));
+        tltmGenomics.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/ToolBar/genomics.png"));
         tltmGenomics.addSelectionListener(this);
         tltmTranscriptomics = new ToolItem(toolBar, SWT.NONE);
-        tltmTranscriptomics.setImage(ResourceManager.getPluginImage("bacnet", "icons/ToolBar/Transcriptomics.png"));
+        tltmTranscriptomics.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/ToolBar/Transcriptomics.png"));
         tltmTranscriptomics.addSelectionListener(this);
         tltmProteomics = new ToolItem(toolBar, SWT.NONE);
-        tltmProteomics.setImage(ResourceManager.getPluginImage("bacnet", "icons/ToolBar/Proteomics.png"));
+        tltmProteomics.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/ToolBar/Proteomics.png"));
         tltmProteomics.addSelectionListener(this);
 
         if (appName.equals(Database.BACNET)) {
             tltmGitlab = new ToolItem(toolBar, SWT.NONE);
-            tltmGitlab.setImage(ResourceManager.getPluginImage("bacnet", "icons/ToolBar/gitlab.png"));
+            tltmGitlab.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/ToolBar/gitlab.png"));
             tltmGitlab.addSelectionListener(this);
             tltmGitlab.setToolTipText("Access source code on GitLab.pasteur.fr");
 
@@ -138,7 +141,7 @@ public class BannerView implements SelectionListener {
         new ToolItem(toolBar, SWT.SEPARATOR);
 
         tltmAbout = new ToolItem(toolBar, SWT.NONE);
-        tltmAbout.setImage(ResourceManager.getPluginImage("bacnet", "icons/ToolBar/howto.png"));
+        tltmAbout.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/ToolBar/howto.png"));
         tltmAbout.addSelectionListener(this);
 
         if (appName.equals(Database.CRISPRGO_PROJECT) || appName.equals(Database.BACNET)) {

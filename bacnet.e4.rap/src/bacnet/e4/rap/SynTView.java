@@ -92,7 +92,7 @@ public class SynTView implements SelectionListener {
 
         btnHelp = new Button(compositeTitle, SWT.NONE);
         btnHelp.setToolTipText("How to use Co-expression network panel ?");
-        btnHelp.setImage(ResourceManager.getPluginImage("bacnet", "icons/help.png"));
+        btnHelp.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/help.png"));
         btnHelp.addSelectionListener(this);
 
         Composite compositeGeneselection = new Composite(parent, SWT.BORDER);

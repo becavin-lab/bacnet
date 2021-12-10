@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.TreeMap;
 import java.util.TreeSet;
+import java.util.regex.Pattern;
+
 import bacnet.Database;
 import bacnet.datamodel.dataset.ExpressionMatrix;
 import bacnet.datamodel.dataset.OmicsData;
@@ -40,9 +42,13 @@ public class ArrayExpress {
         /*
          * Download data
          */
+    	ArrayExpress.createArrayExpressTable();
         ArrayExpressDataImport.run();
+    	ArrayExpress.createTechnologiesTable();
         ArrayExpressTechnology.run();
-
+    	ArrayExpress.createArrayTable();
+        ArrayExpressTechnology.createTechnoTable();
+        ArrayExpressTechnology.createHTMLPageSummary();
         searchStudyMissing();
         /*
          * createMatrices();
@@ -56,7 +62,10 @@ public class ArrayExpress {
     public static void createArrayExpressTable() {
         System.out.println("Create ArrayExpress Table");
         ArrayList<String> arrayExpressTable = new ArrayList<>();
+        System.out.println("biocond path" +  Database.getInstance().getBioConditionsArrayPath());
         String[][] bioConds = TabDelimitedTableReader.read(Database.getInstance().getBioConditionsArrayPath());
+        System.out.println("biocond: "+ bioConds[1][0]);
+
         ArrayList<String> accession = new ArrayList<>();
 
         System.out.println(ARRAYEXPRESS_PATH);
@@ -71,9 +80,12 @@ public class ArrayExpress {
                 .add("ID" + "\t" + "Accession" + "\t" + "Title" + "\t" + "Type" + "\t" + "Organism" + "\t" + "Date");
 
         int j = 1;
-        for (int i = 12; i < bioConds.length; i++) {
-            if (!accession.contains(bioConds[i][4])) {
-                arrayExpressTable.add(String.valueOf(j) + "\t" + bioConds[i][4] + "\t" + bioConds[i][18] + "\t"
+        for (int i = 1; i < bioConds.length; i++) {
+            if (!accession.contains(bioConds[i][4]) & bioConds[i][1].equals("ExpressionMatrix")) {
+            	
+            	//& bioConds[i][1]=="ExpressionMatrix"
+
+                arrayExpressTable.add(String.valueOf(j) + "\t" + bioConds[i][4] + "\t" + bioConds[i][17] + "\t"
                         + bioConds[i][1] + "\t" + bioConds[i][15] + "\t" + bioConds[i][3]);
                 accession.add(bioConds[i][4]);
                 j++;
@@ -94,7 +106,7 @@ public class ArrayExpress {
 
         technologiesTable.add("Type" + "\t" + "Dataset" + "\t" + "Techno");
 
-        for (int i = 12; i < bioConds.length; i++) {
+        for (int i = 1; i < bioConds.length; i++) {
             technologiesTable.add(bioConds[i][1] + "\t" + bioConds[i][4] + "\t" + bioConds[i][6]);
         }
         TabDelimitedTableReader.saveList(technologiesTable, ARRAYEXPRESS_PATH + "Technologies.txt");
@@ -110,7 +122,11 @@ public class ArrayExpress {
         arrayTable.add("Techno\tName");
         for (int i = 0; i < array_list.length; i++) {
             String array_name = array_list[i].getName();
-            if (!array_name.equals("Table_resume.txt") && !array_name.startsWith(".DS")) {
+            System.out.println("arrayname: "+ array_name);
+            System.out.println("pattern: "+ Pattern.compile(".adf.txt$").matcher(array_name).find());
+
+            if (!array_name.equals("Table_resume.txt") && !array_name.startsWith(".DS") && !Pattern.compile(".adf.txt$").matcher(array_name).find()
+            		&& !Pattern.compile(".adfTable.txt$").matcher(array_name).find()) {
                 String path = array_list[i].getAbsolutePath() + File.separator + array_name + ".name.txt";
                 System.out.println(path);
 

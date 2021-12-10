@@ -209,9 +209,9 @@ public class BioConditionCreation {
             for (String growth : growths) {
                 bioCond.getGrowth().add(growth);
             }
-        } else {
-            bioCond.getGrowth().add("Exp phase");
-        }
+        } //else {
+            //bioCond.getGrowth().add("Exp phase");
+        //}
         /*
          * Temperature
          */
@@ -235,9 +235,9 @@ public class BioConditionCreation {
             for (String media : medium) {
                 bioCond.getMedia().add(media);
             }
-        } else {
-            bioCond.getMedia().add("BHI Broth");
-        }
+        } //else {
+            //bioCond.getMedia().add("BHI Broth");
+        //}
         /*
          * Properties or quantity of the media and growth
          */
@@ -274,15 +274,23 @@ public class BioConditionCreation {
         /*
          * go through the table and create data
          */
-        if (!bioCond.isNoData()) {
+
+        if (!bioCond.isNoData()) {        	
             for (int i = 1; i < bioCondTable.length; i++) {
                 TypeData dataType =
                         TypeData.valueOf(bioCondTable[i][ArrayUtils.findColumn(bioCondTable, "Technology")]);
+                System.out.println("datatype "+ dataType);
+
                 String rawDataName = bioCondTable[i][ArrayUtils.findColumn(bioCondTable, "FileName")];
+                
                 date = bioCondTable[i][ArrayUtils.findColumn(bioCondTable, "Date")];
+                
                 bioCond.getTypeDataContained().add(dataType);
+                
                 if (!rawDataName.equals("")) {
                     if (dataType == TypeData.ExpressionMatrix) {
+                        System.out.println("ExpressionMatrix");
+
                         boolean found = false;
                         for (ExpressionMatrix matrix : bioCond.getMatrices()) {
                             if (matrix.getName().equals(name)) {
@@ -290,6 +298,8 @@ public class BioConditionCreation {
                                 found = true;
                             }
                         }
+                        System.out.println("found: "+ found);
+
                         if (!found) {
                             ExpressionMatrix matrix = new ExpressionMatrix();
                             matrix.setName(name);
@@ -421,15 +431,25 @@ public class BioConditionCreation {
                         massSpec.setDate(date);
                         massSpec.setType(dataType);
                         bioCond.getnTerms().add(massSpec);
-                    } else if (dataType == TypeData.Proteome) {
+                        
+                    }  else if (dataType == TypeData.Proteome) {
                         ProteomicsData matrix = new ProteomicsData();
                         matrix.setName(name);
                         matrix.setDate(date);
                         matrix.setType(dataType);
                         matrix.getRawDatas().add(rawDataName);
                         bioCond.getProteomes().add(matrix);
-                    }
-                }
+                        }
+                    
+                } /*else if (dataType == TypeData.Proteome) {
+                	System.out.println("TypeData.Proteome");
+                    ProteomicsData matrix = new ProteomicsData();
+                    matrix.setName(name);
+                    matrix.setDate(date);
+                    matrix.setType(dataType);
+                    matrix.getRawDatas().add(rawDataName);
+                    bioCond.getProteomes().add(matrix);
+                    }*/
             }
         }
 
@@ -559,7 +579,7 @@ public class BioConditionCreation {
     public static void createSummaryTranscriptomesComparisonsTable() {
         ArrayList<String> tableResult = new ArrayList<>();
         String[] titles = {"Data Name", "Growth", "Temp.", "Mutant", "Media", "MediaGrowthProperties", "VS", "Growth",
-                "�C", "Mutant", "MediaGrowthProperties", "Media", "Type", "ArrayExpressId", "Date", "Strain used", "Strain array",
+                "Temp.", "Mutant", "Media", "MediaGrowthProperties", "Type", "ArrayExpressId", "Date", "Strain used", "Strain array",
                 "Reference"};
         String header = "";
         for (String title : titles)
@@ -567,9 +587,14 @@ public class BioConditionCreation {
         tableResult.add(header.trim());
 
         for (BioCondition bioCondition : BioCondition.getAllBioConditions()) {
+
             if (!bioCondition.getTypeDataContained().contains(TypeData.Proteome)
                     && !bioCondition.getTypeDataContained().contains(TypeData.NTerm)) {
+            	//System.out.println("getAllBioConditions: " + bioCondition.getName());
+
                 for (String comparison : bioCondition.getComparisonNames()) {
+                	//System.out.println("comparison: " + comparison);
+
                     String row = "";
                     row += comparison + "\t";
                     row += bioCondition.getGrowth().toString().replace('[', ' ').replace(']', ' ').trim() + "\t";
@@ -580,13 +605,14 @@ public class BioConditionCreation {
                     row += bioCondition.getMediaGrowthProperties().toString().replace('[', ' ').replace(']', ' ').trim()
                             + "\t";
                     row += "VS" + "\t";
-                    bioCondition = BioCondition.getBioCondition(BioCondition.parseName(comparison)[1]);
-                    row += bioCondition.getGrowth().toString().replace('[', ' ').replace(']', ' ').trim() + "\t";
-                    row += bioCondition.getTemperature().toString().replace('[', ' ').replace(']', ' ')
+                    BioCondition bioCondition2 = new BioCondition();
+                    bioCondition2 = BioCondition.getBioCondition(BioCondition.parseName(comparison)[1]);
+                    row += bioCondition2.getGrowth().toString().replace('[', ' ').replace(']', ' ').trim() + "\t";
+                    row += bioCondition2.getTemperature().toString().replace('[', ' ').replace(']', ' ')
                             .replace('C', ' ').trim() + "\t";
-                    row += bioCondition.getMutant().toString().replace('[', ' ').replace(']', ' ').trim() + "\t";
-                    row += bioCondition.getMedia().toString().replace('[', ' ').replace(']', ' ').trim() + "\t";
-                    row += bioCondition.getMediaGrowthProperties().toString().replace('[', ' ').replace(']', ' ').trim()
+                    row += bioCondition2.getMutant().toString().replace('[', ' ').replace(']', ' ').trim() + "\t";
+                    row += bioCondition2.getMedia().toString().replace('[', ' ').replace(']', ' ').trim() + "\t";
+                    row += bioCondition2.getMediaGrowthProperties().toString().replace('[', ' ').replace(']', ' ').trim()
                             + "\t";
                     String typeDatacontained =
                             bioCondition.getTypeDataContained().toString().replace('[', ' ').replace(']', ' ');
@@ -609,6 +635,72 @@ public class BioConditionCreation {
             }
         }
         TabDelimitedTableReader.saveList(tableResult, Database.getInstance().getTranscriptomesComparisonsArrayPath());
+    }
+    
+    /**
+     * Create a table will all main information on the different Comparison of proteomic available<br>
+     * This table will be loaded by BioConditionView
+     */
+    public static void createSummaryProteomesComparisonsTable() {
+        ArrayList<String> tableResult = new ArrayList<>();
+        String[] titles = {"Data Name", "Growth", "Temp.", "Mutant", "Media", "MediaGrowthProperties", "VS", "Growth",
+                "Temp.", "Mutant", "Media", "MediaGrowthProperties", "Type", "ArrayExpressId", "Date", "Strain used", "Strain array",
+                "Reference"};
+        String header = "";
+        for (String title : titles)
+            header += title + "\t";
+        tableResult.add(header.trim());
+
+        for (BioCondition bioCondition : BioCondition.getAllBioConditions()) {
+            if (bioCondition.getTypeDataContained().contains(TypeData.Proteome)){
+            	//System.out.println("getAllBioConditions: " + bioCondition.getName());
+
+                for (String comparison : bioCondition.getComparisonNames()) {
+                	//System.out.println("getBioConditions 1: " + bioCondition.getName());
+
+                	//System.out.println("comparison: " + comparison);
+
+                    String row = "";
+                    row += comparison + "\t";
+                    row += bioCondition.getGrowth().toString().replace('[', ' ').replace(']', ' ').trim() + "\t";
+                    row += bioCondition.getTemperature().toString().replace('[', ' ').replace(']', ' ')
+                            .replace('C', ' ').trim() + "\t";
+                    row += bioCondition.getMutant().toString().replace('[', ' ').replace(']', ' ').trim() + "\t";
+                    row += bioCondition.getMedia().toString().replace('[', ' ').replace(']', ' ').trim() + "\t";
+                    row += bioCondition.getMediaGrowthProperties().toString().replace('[', ' ').replace(']', ' ').trim()
+                            + "\t";
+                    row += "VS" + "\t";
+                    BioCondition bioCondition2 = new BioCondition();
+                    bioCondition2 = BioCondition.getBioCondition(BioCondition.parseName(comparison)[1]);
+                	//System.out.println("getBioConditions 2: " + bioCondition2.getName());
+
+                    row += bioCondition2.getGrowth().toString().replace('[', ' ').replace(']', ' ').trim() + "\t";
+                    row += bioCondition2.getTemperature().toString().replace('[', ' ').replace(']', ' ')
+                            .replace('C', ' ').trim() + "\t";
+                    row += bioCondition2.getMutant().toString().replace('[', ' ').replace(']', ' ').trim() + "\t";
+                    row += bioCondition2.getMedia().toString().replace('[', ' ').replace(']', ' ').trim() + "\t";
+                    row += bioCondition2.getMediaGrowthProperties().toString().replace('[', ' ').replace(']', ' ').trim()
+                            + "\t";
+                    String typeDatacontained =
+                            bioCondition.getTypeDataContained().toString().replace('[', ' ').replace(']', ' ');
+                    if (bioCondition.getTypeDataContained().size() == 0)
+                        typeDatacontained = "GeneExpr";
+                    if (typeDatacontained.contains("ExpressionMatrix"))
+                        typeDatacontained = typeDatacontained.replaceAll("ExpressionMatrix", "GeneExpr");
+                    // typeDatacontained = typeDatacontained.replaceAll("GeneExpr",
+                    // "GeneExpression");
+                    row += typeDatacontained.trim() + "\t";
+                    row += bioCondition.getArrayExpressId() + "\t";
+                    row += bioCondition.getDate() + "\t";
+                    row += bioCondition.getGenomeUsed() + "\t";
+                    row += bioCondition.getGenomeName() + "\t";
+
+                    row += bioCondition.getReference() + "\t";
+                    tableResult.add(row.trim());
+                }
+            }
+        }
+        TabDelimitedTableReader.saveList(tableResult, Database.getInstance().getProteomesComparisonsArrayPath());
     }
 
     /**

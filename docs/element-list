@@ -20,7 +20,6 @@ bacnet.reader
 bacnet.scripts
 bacnet.scripts.arrayexpress
 bacnet.scripts.blast
-bacnet.scripts.blast.gui
 bacnet.scripts.core
 bacnet.scripts.core.normalization
 bacnet.scripts.core.stat

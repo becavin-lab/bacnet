@@ -9,6 +9,7 @@ Fichier Yersiniomics/
 
 # Compiled class file
 bin/
+target/
 
 # MACOSX files
 .DS_Store

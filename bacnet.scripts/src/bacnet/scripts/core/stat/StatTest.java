@@ -8,7 +8,6 @@ import bacnet.datamodel.dataset.OmicsData;
 import jsc.independentsamples.MannWhitneyTest;
 import jsc.independentsamples.PitmanTwoSampleTest;
 import jsc.independentsamples.SmirnovTest;
-import jsc.independentsamples.TwoSampleBootstrapMeansTest;
 
 public class StatTest {
 
@@ -42,10 +41,6 @@ public class StatTest {
                 case SMIRNOV:
                     SmirnovTest test3 = new SmirnovTest(vector1, vector2);
                     return test3.getSP();
-                case BOOTSTRAP:
-                    TwoSampleBootstrapMeansTest test4 =
-                            new TwoSampleBootstrapMeansTest(vector1, vector2, vector1.length / 2);
-                    return test4.getSP();
                 case CORR:
                     return new PearsonsCorrelation().correlation(vector1, vector2);
                 case SPEARCORR:

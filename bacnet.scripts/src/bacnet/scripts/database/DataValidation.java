@@ -201,7 +201,7 @@ public class DataValidation {
         for (String biocondName : this.getProteomes().keySet()) {
             if (!this.getProteomes().get(biocondName)) {
                 BioCondition bioCond = BioCondition.getBioCondition(biocondName);
-                // logs+= "Validate proteomes in: "+biocondName+"\n";
+                logs+= "Validate proteomes in: "+biocondName+"\n";
                 boolean validate = true;
                 for (OmicsData transData : bioCond.getnTerms()) {
                     String fileNameInfo = OmicsData.PATH_STREAMING + transData.getName() + OmicsData.EXTENSION;
@@ -214,6 +214,15 @@ public class DataValidation {
                     System.out.println(fileNameInfo);
                     if (!FileUtils.exists(fileNameInfo)) {
                         validate = false;
+                    }
+                }
+                for (String transData : bioCond.getComparisonDataNames()) {
+                    if (bioCond.getTypeDataContained().contains(TypeData.Proteome)) {
+                        String fileNameInfo = OmicsData.PATH_STREAMING + transData + OmicsData.EXTENSION;
+                        System.out.println(fileNameInfo);
+                        if (!FileUtils.exists(fileNameInfo)) {
+                            validate = false;
+                        }
                     }
                 }
                 if (validate) {

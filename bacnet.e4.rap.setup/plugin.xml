@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         id="bacnet.rap.e4.setup.e4app"
+         point="org.eclipse.core.runtime.products">
+      <product
+            application="org.eclipse.e4.ui.workbench.swt.E4Application"
+            name="RAP E4 Application">
+      </product>
+   </extension>
+   <extension
+         id="e4app"
+         point="org.eclipse.core.runtime.products">
+      <product
+            application="org.eclipse.e4.ui.workbench.swt.E4Application"
+            name="RAP E4 Application">
+         <property
+               name="appName"
+               value="RAP E4 Application">
+         </property>
+      </product>
+   </extension>
+
+</plugin>

@@ -14,7 +14,7 @@
             <children xsi:type="basic:Part" xmi:id="_R7sQYMmVEeWiwYu3hjSA_g" elementId="bacnet.e4.rap.part.testpart" toBeRendered="false" visible="false" contributionURI="bundleclass://bacnet.e4.rap/bacnet.e4.rap.TestPart" label="Test Part" closeable="true">
               <toolbar xmi:id="_qZBxYCXuEeiaMcRqu-B8ug" elementId="bacnet.e4.rap.toolbar.0"/>
             </children>
-            <children xsi:type="basic:Part" xmi:id="_zPNcsESfEeiLePEIL6_FOQ" elementId="bacnet.CRISPRPredictView" toBeRendered="false" containerData="85" contributionURI="bundleclass://bacnet/bacnet.views.CRISPRPredictView" label="Home" iconURI=""/>
+            <children xsi:type="basic:Part" xmi:id="_zPNcsESfEeiLePEIL6_FOQ" elementId="bacnet.CRISPRPredictView" toBeRendered="false" containerData="85" contributionURI="bundleclass://bacnet.core/bacnet.views.CRISPRPredictView" label="Home" iconURI=""/>
             <children xsi:type="basic:Part" xmi:id="_z40pgH97Eei9efSRkyT6iw" elementId="bacnet.ListeriaSample" toBeRendered="false" containerData="" contributionURI="bundleclass://bacnet.e4.rap/bacnet.e4.rap.InitViewListeriaSample" label="Home"/>
             <children xsi:type="basic:Part" xmi:id="_bqy_wIpyEeidp67ETMmp8g" elementId="bacnet.Yersinia" toBeRendered="false" contributionURI="bundleclass://bacnet.e4.rap/bacnet.e4.rap.InitViewYersinia" label="Home"/>
             <children xsi:type="basic:Part" xmi:id="_nb8rUKJoEeiM-rZDy39xPg" elementId="bacnet.InitViewBacnet" toBeRendered="false" containerData="" contributionURI="bundleclass://bacnet.e4.rap/bacnet.e4.rap.InitViewBacnet" label="Home"/>
@@ -24,108 +24,108 @@
     </children>
   </children>
   <descriptors xmi:id="__IkNYL90EeWgHPGw7Po5aA" elementId="bacnet.e4.rap.BannerView" label="BannerView" category="" contributionURI="bundleclass://bacnet.e4.rap/bacnet.e4.rap.BannerView"/>
-  <descriptors xmi:id="_C9nzYL91EeWgHPGw7Po5aA" elementId="bacnet.CoExprNetworkView" label="Co-Expression network view" closeable="true" contributionURI="bundleclass://bacnet/bacnet.views.CoExprNetworkView">
+  <descriptors xmi:id="_C9nzYL91EeWgHPGw7Po5aA" elementId="bacnet.CoExprNetworkView" label="Co-Expression network view" closeable="true" contributionURI="bundleclass://bacnet.core/bacnet.views.CoExprNetworkView">
     <tags>REMOVE_ON_HIDE_TAG</tags>
   </descriptors>
-  <descriptors xmi:id="_Q68C0L91EeWgHPGw7Po5aA" elementId="bacnet.e4.rap.InitViewListeria" label="Home" contributionURI="bundleclass://bacnet.e4.rap/bacnet.e4.rap.InitViewCRISPRListeria"/>
+  <descriptors xmi:id="_Q68C0L91EeWgHPGw7Po5aA" elementId="bacnet.e4.rap.InitViewYersinia" label="Home" contributionURI="bundleclass://bacnet.e4.rap/bacnet.e4.rap.InitViewYersinia"/>
   <descriptors xmi:id="_ZCDT4L91EeWgHPGw7Po5aA" elementId="bacnet.e4.rap.InitViewNTerm" label="Home NTerminomics" contributionURI="bundleclass://bacnet.e4.rap/bacnet.e4.rap.InitViewCRISPRNTerm"/>
   <descriptors xmi:id="_erg2wL91EeWgHPGw7Po5aA" elementId="bacnet.e4.rap.SubmitDataView" label="Submit data to Listeriomics" allowMultiple="true" closeable="true" contributionURI="bundleclass://bacnet.e4.rap/bacnet.e4.rap.SubmitDataView">
     <tags>REMOVE_ON_HIDE_TAG</tags>
   </descriptors>
-  <descriptors xmi:id="_XYY1kLoeEeWP17x1TBZCrg" elementId="bacnet.InternalBrowser" label="Internal Browser" iconURI="platform:/plugin/bacnet/icons/iconBacnet.bmp" allowMultiple="true" closeable="true" contributionURI="bundleclass://bacnet/bacnet.views.InternalBrowser">
+  <descriptors xmi:id="_XYY1kLoeEeWP17x1TBZCrg" elementId="bacnet.InternalBrowser" label="Internal Browser" iconURI="platform:/plugin/bacnet.core/icons/iconBacnet.bmp" allowMultiple="true" closeable="true" contributionURI="bundleclass://bacnet.core/bacnet.views.InternalBrowser">
     <tags>REMOVE_ON_HIDE_TAG</tags>
     <menus xmi:id="_XYY1kboeEeWP17x1TBZCrg" elementId="bacnet.InternalBrowser">
       <tags>ViewMenu</tags>
     </menus>
   </descriptors>
-  <descriptors xmi:id="_XYhYcLoeEeWP17x1TBZCrg" elementId="bacnet.GenomicsView" label="Genomics" iconURI="platform:/plugin/bacnet/icons/ExpDesignView.bmp" closeable="true" contributionURI="bundleclass://bacnet/bacnet.sequenceTools.GenomicsView">
+  <descriptors xmi:id="_XYhYcLoeEeWP17x1TBZCrg" elementId="bacnet.GenomicsView" label="Genomics" iconURI="platform:/plugin/bacnet.core/icons/ExpDesignView.bmp" closeable="true" contributionURI="bundleclass://bacnet.core/bacnet.sequenceTools.GenomicsView">
     <tags>REMOVE_ON_HIDE_TAG</tags>
     <menus xmi:id="_XYhYcboeEeWP17x1TBZCrg" elementId="bacnet.GenomicsView">
       <tags>ViewMenu</tags>
     </menus>
   </descriptors>
-  <descriptors xmi:id="_XYrwgLoeEeWP17x1TBZCrg" elementId="bacnet.TranscriptomicsView" label="Transcriptomics" iconURI="platform:/plugin/bacnet/icons/ExpDesignView.bmp" closeable="true" contributionURI="bundleclass://bacnet/bacnet.expressionAtlas.TranscriptomicsView">
+  <descriptors xmi:id="_XYrwgLoeEeWP17x1TBZCrg" elementId="bacnet.TranscriptomicsView" label="Transcriptomics" iconURI="platform:/plugin/bacnet.core/icons/ExpDesignView.bmp" closeable="true" contributionURI="bundleclass://bacnet.core/bacnet.expressionAtlas.TranscriptomicsView">
     <tags>REMOVE_ON_HIDE_TAG</tags>
     <menus xmi:id="_XYrwgboeEeWP17x1TBZCrg" elementId="bacnet.TranscriptomicsView">
       <tags>ViewMenu</tags>
     </menus>
   </descriptors>
-  <descriptors xmi:id="_XY0TYLoeEeWP17x1TBZCrg" elementId="bacnet.ProteomicsView" label="Proteomics" iconURI="platform:/plugin/bacnet/icons/ExpDesignView.bmp" closeable="true" contributionURI="bundleclass://bacnet/bacnet.expressionAtlas.ProteomicsView">
+  <descriptors xmi:id="_XY0TYLoeEeWP17x1TBZCrg" elementId="bacnet.ProteomicsView" label="Proteomics" iconURI="platform:/plugin/bacnet.core/icons/ExpDesignView.bmp" closeable="true" contributionURI="bundleclass://bacnet.core/bacnet.expressionAtlas.ProteomicsView">
     <tags>REMOVE_ON_HIDE_TAG</tags>
     <menus xmi:id="_XY0TYboeEeWP17x1TBZCrg" elementId="bacnet.ProteomicsView">
       <tags>ViewMenu</tags>
     </menus>
   </descriptors>
-  <descriptors xmi:id="_XY-EYLoeEeWP17x1TBZCrg" elementId="bacnet.GeneView" label="Genes" iconURI="platform:/plugin/bacnet/icons/mutantGene.bmp" allowMultiple="true" closeable="true" contributionURI="bundleclass://bacnet/bacnet.sequenceTools.GeneView">
+  <descriptors xmi:id="_XY-EYLoeEeWP17x1TBZCrg" elementId="bacnet.GeneView" label="Genes" iconURI="platform:/plugin/bacnet.core/icons/mutantGene.bmp" allowMultiple="true" closeable="true" contributionURI="bundleclass://bacnet.core/bacnet.sequenceTools.GeneView">
     <tags>REMOVE_ON_HIDE_TAG</tags>
     <menus xmi:id="_XY-EYboeEeWP17x1TBZCrg" elementId="bacnet.GeneView">
       <tags>ViewMenu</tags>
     </menus>
   </descriptors>
-  <descriptors xmi:id="_INGPENP9EeaENLmj-e0rhg" elementId="bacnet.AnnotationView" label="Annotation" iconURI="platform:/plugin/bacnet/icons/ExpDesignView.bmp" allowMultiple="true" closeable="true" contributionURI="bundleclass://bacnet/bacnet.sequenceTools.AnnotationView">
+  <descriptors xmi:id="_INGPENP9EeaENLmj-e0rhg" elementId="bacnet.AnnotationView" label="Annotation" iconURI="platform:/plugin/bacnet.core/icons/ExpDesignView.bmp" allowMultiple="true" closeable="true" contributionURI="bundleclass://bacnet.core/bacnet.sequenceTools.AnnotationView">
     <tags>REMOVE_ON_HIDE_TAG</tags>
     <menus xmi:id="_INGPEdP9EeaENLmj-e0rhg" elementId="bacnet.GenomicsView">
       <tags>ViewMenu</tags>
     </menus>
   </descriptors>
-  <descriptors xmi:id="_XZH1YLoeEeWP17x1TBZCrg" elementId="bacnet.SrnaSummaryView" label="Small RNAs Summary" iconURI="platform:/plugin/bacnet/icons/mutantSrna.bmp" closeable="true" contributionURI="bundleclass://bacnet/bacnet.sequenceTools.SrnaSummaryView">
+  <descriptors xmi:id="_XZH1YLoeEeWP17x1TBZCrg" elementId="bacnet.SrnaSummaryView" label="Small RNAs Summary" iconURI="platform:/plugin/bacnet.core/icons/mutantSrna.bmp" closeable="true" contributionURI="bundleclass://bacnet.core/bacnet.sequenceTools.SrnaSummaryView">
     <tags>REMOVE_ON_HIDE_TAG</tags>
     <menus xmi:id="_XZH1YboeEeWP17x1TBZCrg" elementId="bacnet.SrnaSummaryView">
       <tags>ViewMenu</tags>
     </menus>
     <toolbar xmi:id="_XZH1YroeEeWP17x1TBZCrg" elementId="bacnet.SrnaSummaryView"/>
   </descriptors>
-  <descriptors xmi:id="_XZSNcLoeEeWP17x1TBZCrg" elementId="bacnet.SrnaView" label="Small RNAs" iconURI="platform:/plugin/bacnet/icons/mutantSrna.bmp" allowMultiple="true" closeable="true" contributionURI="bundleclass://bacnet/bacnet.sequenceTools.SrnaView">
+  <descriptors xmi:id="_XZSNcLoeEeWP17x1TBZCrg" elementId="bacnet.SrnaView" label="Small RNAs" iconURI="platform:/plugin/bacnet.core/icons/mutantSrna.bmp" allowMultiple="true" closeable="true" contributionURI="bundleclass://bacnet.core/bacnet.sequenceTools.SrnaView">
     <tags>REMOVE_ON_HIDE_TAG</tags>
     <menus xmi:id="_XZSNcboeEeWP17x1TBZCrg" elementId="bacnet.SrnaView">
       <tags>ViewMenu</tags>
     </menus>
     <toolbar xmi:id="_XZSNcroeEeWP17x1TBZCrg" elementId="bacnet.SrnaView"/>
   </descriptors>
-  <descriptors xmi:id="_XZbXYLoeEeWP17x1TBZCrg" elementId="bacnet.TableSWTView" label="Table tools" iconURI="platform:/plugin/bacnet/icons/heatmap.bmp" allowMultiple="true" closeable="true" contributionURI="bundleclass://bacnet/bacnet.table.TableSWTView">
+  <descriptors xmi:id="_XZbXYLoeEeWP17x1TBZCrg" elementId="bacnet.TableSWTView" label="Table tools" iconURI="platform:/plugin/bacnet.core/icons/heatmap.bmp" allowMultiple="true" closeable="true" contributionURI="bundleclass://bacnet.core/bacnet.table.TableSWTView">
     <tags>REMOVE_ON_HIDE_TAG</tags>
     <menus xmi:id="_XZbXYboeEeWP17x1TBZCrg" elementId="bacnet.TableSWTView">
       <tags>ViewMenu</tags>
     </menus>
     <toolbar xmi:id="_XZbXYroeEeWP17x1TBZCrg" elementId="bacnet.TableSWTView"/>
   </descriptors>
-  <descriptors xmi:id="_XZmWgLoeEeWP17x1TBZCrg" elementId="bacnet.HeatMapMultiOmicsView" label="HeatMapMultiOmicsView" iconURI="platform:/plugin/bacnet/icons/heatmap.bmp" allowMultiple="true" closeable="true" contributionURI="bundleclass://bacnet/bacnet.expressionAtlas.HeatMapMultiOmicsView">
+  <descriptors xmi:id="_XZmWgLoeEeWP17x1TBZCrg" elementId="bacnet.HeatMapMultiOmicsView" label="HeatMapMultiOmicsView" iconURI="platform:/plugin/bacnet.core/icons/heatmap.bmp" allowMultiple="true" closeable="true" contributionURI="bundleclass://bacnet.core/bacnet.expressionAtlas.HeatMapMultiOmicsView">
     <tags>REMOVE_ON_HIDE_TAG</tags>
     <menus xmi:id="_XZmWgboeEeWP17x1TBZCrg" elementId="bacnet.HeatMapMultiOmicsView">
       <tags>ViewMenu</tags>
     </menus>
   </descriptors>
-  <descriptors xmi:id="_Pkz2cJaIEeipN6twBsTYaA" elementId="bacnet.HeatMapTranscriptomicsView" label="HeatMapTranscriptomics" iconURI="platform:/plugin/bacnet/icons/heatmap.bmp" allowMultiple="true" closeable="true" contributionURI="bundleclass://bacnet/bacnet.expressionAtlas.HeatMapTranscriptomicsView">
+  <descriptors xmi:id="_Pkz2cJaIEeipN6twBsTYaA" elementId="bacnet.HeatMapTranscriptomicsView" label="HeatMapTranscriptomics" iconURI="platform:/plugin/bacnet.core/icons/heatmap.bmp" allowMultiple="true" closeable="true" contributionURI="bundleclass://bacnet.core/bacnet.expressionAtlas.HeatMapTranscriptomicsView">
     <tags>REMOVE_ON_HIDE_TAG</tags>
     <menus xmi:id="_Pkz2cZaIEeipN6twBsTYaA" elementId="bacnet.HeatMapTranscriptomicsView">
       <tags>ViewMenu</tags>
     </menus>
   </descriptors>
-  <descriptors xmi:id="_XZvgcLoeEeWP17x1TBZCrg" elementId="bacnet.HeatMapProteomicsView" label="HeatMapProteomics" iconURI="platform:/plugin/bacnet/icons/heatmap.bmp" allowMultiple="true" closeable="true" contributionURI="bundleclass://bacnet/bacnet.expressionAtlas.HeatMapProteomicsView">
+  <descriptors xmi:id="_XZvgcLoeEeWP17x1TBZCrg" elementId="bacnet.HeatMapProteomicsView" label="HeatMapProteomics" iconURI="platform:/plugin/bacnet.core/icons/heatmap.bmp" allowMultiple="true" closeable="true" contributionURI="bundleclass://bacnet.core/bacnet.expressionAtlas.HeatMapProteomicsView">
     <tags>REMOVE_ON_HIDE_TAG</tags>
     <menus xmi:id="_XZvgcboeEeWP17x1TBZCrg" elementId="bacnet.HeatMapProteomicsView">
       <tags>ViewMenu</tags>
     </menus>
   </descriptors>
-  <descriptors xmi:id="_XZ4qYLoeEeWP17x1TBZCrg" elementId="bacnet.GenomeTranscriptomeView" label="Genome Viewer" iconURI="platform:/plugin/bacnet/icons/genome/genomeView2.bmp" allowMultiple="true" closeable="true" contributionURI="bundleclass://bacnet/bacnet.genomeBrowser.GenomeTranscriptomeView">
+  <descriptors xmi:id="_XZ4qYLoeEeWP17x1TBZCrg" elementId="bacnet.GenomeTranscriptomeView" label="Genome Viewer" iconURI="platform:/plugin/bacnet.core/icons/genome/genomeView2.bmp" allowMultiple="true" closeable="true" contributionURI="bundleclass://bacnet.core/bacnet.genomeBrowser.GenomeTranscriptomeView">
     <tags>REMOVE_ON_HIDE_TAG</tags>
     <menus xmi:id="_XZ4qYboeEeWP17x1TBZCrg" elementId="bacnet.GenomeTranscriptomeView">
       <tags>ViewMenu</tags>
     </menus>
   </descriptors>
-  <descriptors xmi:id="_ojTHAL7YEea_OJw02AlA2g" elementId="bacnet.NTerminomicsView" label="Nterm Table" iconURI="platform:/plugin/bacnet/icons/ExpDesignView.bmp" closeable="true" contributionURI="bundleclass://bacnet/bacnet.genomeBrowser.NTerminomicsView">
+  <descriptors xmi:id="_ojTHAL7YEea_OJw02AlA2g" elementId="bacnet.NTerminomicsView" label="Nterm Table" iconURI="platform:/plugin/bacnet.core/icons/ExpDesignView.bmp" closeable="true" contributionURI="bundleclass://bacnet.core/bacnet.genomeBrowser.NTerminomicsView">
     <tags>REMOVE_ON_HIDE_TAG</tags>
     <menus xmi:id="_ojTHAb7YEea_OJw02AlA2g" elementId="bacnet.NTerminomicsView">
       <tags>ViewMenu</tags>
     </menus>
   </descriptors>
-  <descriptors xmi:id="_ayGAUCYQEeiaMcRqu-B8ug" elementId="bacnet.CRISPRPredictView" label="CRISPR Guide Prediction" iconURI="" closeable="true" contributionURI="bundleclass://bacnet/bacnet.views.CRISPRPredictView">
+  <descriptors xmi:id="_ayGAUCYQEeiaMcRqu-B8ug" elementId="bacnet.CRISPRPredictView" label="CRISPR Guide Prediction" iconURI="" closeable="true" contributionURI="bundleclass://bacnet.core/bacnet.views.CRISPRPredictView">
     <tags>REMOVE_ON_HIDE_TAG</tags>
     <menus xmi:id="_ayGAUSYQEeiaMcRqu-B8ug" elementId="bacnet.GenomicsView">
       <tags>ViewMenu</tags>
     </menus>
   </descriptors>
-  <descriptors xmi:id="_768wMKxaEei5wPqK_Lambw" elementId="bacnet.CRISPRGuideView" label="CRISPR Guide Table" iconURI="platform:/plugin/bacnet/icons/genome/genomeView2.bmp" allowMultiple="true" closeable="true" contributionURI="bundleclass://bacnet/bacnet.genomeBrowser.CRISPRGuideView">
+  <descriptors xmi:id="_768wMKxaEei5wPqK_Lambw" elementId="bacnet.CRISPRGuideView" label="CRISPR Guide Table" iconURI="platform:/plugin/bacnet.core/icons/genome/genomeView2.bmp" allowMultiple="true" closeable="true" contributionURI="bundleclass://bacnet.core/bacnet.genomeBrowser.CRISPRGuideView">
     <tags>REMOVE_ON_HIDE_TAG</tags>
     <menus xmi:id="_768wMaxaEei5wPqK_Lambw" elementId="bacnet.GenomeTranscriptomeView">
       <tags>ViewMenu</tags>

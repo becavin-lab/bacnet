@@ -2,27 +2,16 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Scripts
 Bundle-SymbolicName: bacnet.scripts; singleton:=true
+Automatic-Module-Name: bacnet.scripts
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: bacnet.scripts.Activator
-Require-Bundle: javax.inject;bundle-version="0.0.0",
- org.eclipse.swt;bundle-version="0.0.0";resolution:=optional,
- org.eclipse.e4.ui.model.workbench;bundle-version="0.0.0",
- org.eclipse.jface;bundle-version="0.0.0";resolution:=optional,
- org.eclipse.e4.ui.services;bundle-version="0.0.0",
- org.eclipse.e4.ui.workbench;bundle-version="0.0.0",
- org.eclipse.e4.core.di;bundle-version="0.0.0",
- org.eclipse.e4.ui.di;bundle-version="0.0.0",
- org.eclipse.e4.core.contexts;bundle-version="0.0.0",
+Require-Bundle: org.eclipse.e4.ui.workbench;bundle-version="0.0.0",
  org.eclipse.core.runtime;bundle-version="0.0.0",
- bacnet,
- org.junit;bundle-version="4.12.0",
- bacnet.lib;bundle-version="1.0.0",
+ bacnet.core,
  org.apache.commons.io;bundle-version="2.2.0",
- org.eclipse.rap.rwt;bundle-version="3.2.0";resolution:=optional,
- org.eclipse.rap.jface,
- javax.annotation;bundle-version="1.2.0"
+ org.eclipse.rap.rwt
 Bundle-ActivationPolicy: lazy
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Export-Package: 
  bacnet.scripts,
  bacnet.scripts.arrayexpress,
@@ -33,5 +22,12 @@ Export-Package:
  bacnet.scripts.database,
  bacnet.scripts.genome,
  bacnet.scripts.listeriomics,
- bacnet.scripts.listeriomics.technology
-Automatic-Module-Name: bacnet.scripts
+ bacnet.scripts.listeriomics.technology,
+ org.forester.phylogeny.iterators
+Bundle-ClassPath: .,
+ lib/cgview.jar,
+ lib/commons-lang-2.0.jar,
+ lib/commons-math-2.2.jar,
+ lib/forester_1038.jar,
+ lib/jdom-1.1.3.jar,
+ lib/jsc.jar

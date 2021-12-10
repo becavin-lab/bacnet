@@ -57,6 +57,7 @@ public class TranscriptomesCreation {
         boolean logTransformed = true;
         Experiment exp = new Experiment();
         for (String bioCond : bioConds) {
+        	System.out.println("for 1 " + bioConds);
             exp.addBioCond(BioCondition.getBioCondition(bioCond));
         }
 
@@ -448,25 +449,30 @@ public class TranscriptomesCreation {
         for (BioCondition bioCond : exp.getBioConditions()) {
             ArrayList<String> comparisonNames = bioCond.getComparisonNames();
             for (String comp : comparisonNames) {
-            	System.out.println(comp + " "+bioCond.getTypeDataContained());
                 if (bioCond.getTypeDataContained().size() == 0
                         || bioCond.getTypeDataContained().contains(TypeData.ExpressionMatrix)) {
                     String fileName = OmicsData.PATH_STREAMING + comp + OmicsData.EXTENSION;
                     System.out.println("Load: " + fileName);
                     ExpressionMatrix matrix = ExpressionMatrix.load(fileName);
                     for (String gene : genome.getAllElementNames()) {
+                    	Gene geneTemp = genome.getGeneFromName(gene);
+                    	String geneName = geneTemp.getGeneName();
                         if (matrix.getRowNames().containsKey(gene)) {
                             logFCMatrix.setValue(matrix.getValue(gene, ColNames.LOGFC + ""), gene, comp);
-                        } else { // test if we can find the gene by its gene name
-                        	Gene geneTemp = genome.getGeneFromName(gene);
-                        	if(geneTemp != null) {
-                            	String geneName = geneTemp.getGeneName();
-                            	if (matrix.getRowNames().containsKey(geneName)) {
-                                	logFCMatrix.setValue(matrix.getValue(geneName, ColNames.LOGFC + ""), gene, comp);
-                            	}
-                        	}
+                        } else if (!geneName.equals("") & matrix.getRowNames().containsKey(geneName)) {
+                            //System.out.println("gene Name does contain Key");
+                        	logFCMatrix.setValue(matrix.getValue(geneName, ColNames.LOGFC + ""), gene, comp);
                         }
-                    }
+                        // test if we can find the gene by its old locus tag
+                        else if (genome.getGenes().get(gene) != null) { //.getGenes() returns null if gene is a NcRNA 
+                            String oldLocusTag = genome.getGenes().get(gene).getFeature("old_locus_tag");
+                        	if (!oldLocusTag.equals("") & matrix.getRowNames().containsKey(oldLocusTag)) {
+                        		logFCMatrix.setValue(matrix.getValue(oldLocusTag, ColNames.LOGFC + ""), gene, comp);
+                        		}
+                        // test if we can find the gene by its gene name
+                        }
+                }
+                    
                 } else if (bioCond.getTypeDataContained().contains(TypeData.RNASeq)) {
                     String fileNameRNASeq = OmicsData.PATH_NGS_NORM + comp + NGS.EXTENSION;
                     System.out.println("Load: " + fileNameRNASeq);
@@ -474,46 +480,23 @@ public class TranscriptomesCreation {
                     if (file.exists()) {
                         ExpressionMatrix matrix = ExpressionMatrix.loadTab(fileNameRNASeq, false);
                         for (String gene : genome.getAllElementNames()) {
+                        	Gene geneTemp = genome.getGeneFromName(gene);
+                        	String geneName = geneTemp.getGeneName();
                             if (matrix.getRowNames().containsKey(gene)) {
                                 logFCMatrix.setValue(matrix.getValue(gene, ColNames.LOGFC + ""), gene, comp);
-                            } else { // test if we can find the gene by its gene name
-                            	Gene geneTemp = genome.getGeneFromName(gene);
-                            	if(geneTemp != null) {
-                                    String geneName = geneTemp.getGeneName();
-                                	if (matrix.getRowNames().containsKey(geneName)) {
-    	                            	logFCMatrix.setValue(matrix.getValue(geneName, ColNames.LOGFC + ""), gene, comp);
-                                	}
+                            }  else if (!geneName.equals("") & matrix.getRowNames().containsKey(geneName)) { // test if we can find the gene by its gene name         
+                            	logFCMatrix.setValue(matrix.getValue(geneName, ColNames.LOGFC + ""), gene, comp);
+                            }
+                         // test if we can find the gene by its old locus tag
+                            else if (genome.getGenes().get(gene) != null) { //.getGenes() returns null if gene is a NcRNA 
+                                String oldLocusTag = genome.getGenes().get(gene).getFeature("old_locus_tag");
+                            	if (!oldLocusTag.equals("") & matrix.getRowNames().containsKey(oldLocusTag)) {
+                            		logFCMatrix.setValue(matrix.getValue(oldLocusTag, ColNames.LOGFC + ""), gene, comp);
                             	}
                             }
                         }
                     }
-                } else if (bioCond.getTypeDataContained().contains(TypeData.Tiling)) {
-                    /**
-                     * Go through all comparisons files for Tiling and add them to LogFC table
-                     */
-                    //String[] typeFiles = {"_Gene", "_Srna", "_ASrna", "_CisReg"};
-                    //for (String typeFile : typeFiles) {
-                        String fileName =
-                                OmicsData.PATH_COMPARISONS + "/" + comp + File.separator + comp + "_Gene.txt";
-                        System.out.println("Load: " + fileName);
-                        File file = new File(fileName);
-                        if (file.exists()) {
-                            ExpressionMatrix matrixTiling = ExpressionMatrix.loadTab(fileName, true);
-                            String headerTiling = "LOGFC_" + comp + Tiling.EXTENSION;
-                            for (String gene : genome.getAllElementNames()) {
-                                //System.out.println(headerTiling+" "+gene+" "+comp);
-                                if (matrixTiling.getRowNames().containsKey(gene)) {
-                                    if (matrixTiling.getHeaders().contains(headerTiling)) {
-                                        //double value = matrixTiling.getValue(gene, headerTiling);
-                                        //System.out.println(value + " "+gene+ " "+comp);
-                                        logFCMatrix.setValue(matrixTiling.getValue(gene, headerTiling), gene, comp);
-                                    }
-                                }
-                            }
-                        }
-                    //}
                 } else if (bioCond.getTypeDataContained().contains(TypeData.GeneExpr)) {
-                	// For gene expression include in priority GeneExpression array before Tiling array
                     String fileName =
                             OmicsData.PATH_COMPARISONS + "/" + comp + File.separator + comp + "_Gene_GEonly.txt";
                     System.out.println("Load: " + fileName);
@@ -524,7 +507,31 @@ public class TranscriptomesCreation {
                         for (String gene : genome.getAllElementNames()) {
                             // System.out.println(header+" "+gene+" "+comp);
                             if (matrix.getRowNames().containsKey(gene)) {
-                                logFCMatrix.setValue(matrix.getValue(gene, headerGE), gene, comp);
+                                logFCMatrix.setValue(matrix.getValue(gene, headerGE), gene, comp + "_GE");
+                            }
+                        }
+                    }
+                } else if (bioCond.getTypeDataContained().contains(TypeData.Tiling)) {
+                    /**
+                     * Go through all comparisons files for Tiling and add them to LogFC table
+                     */
+                    String[] typeFiles = {"_Gene", "_Srna", "_ASrna.txt", "_CisReg.txt"};
+                    for (String typeFile : typeFiles) {
+                        String fileName =
+                                OmicsData.PATH_COMPARISONS + "/" + comp + File.separator + comp + typeFile + ".txt";
+                        System.out.println("Load: " + fileName);
+                        File file = new File(fileName);
+                        if (file.exists()) {
+                            ExpressionMatrix matrixTiling = ExpressionMatrix.loadTab(fileName, true);
+                            String headerTiling = "LOGFC_" + comp + Tiling.EXTENSION;
+                            for (String gene : genome.getAllElementNames()) {
+                                // System.out.println(header+" "+gene+" "+comp);
+                                if (matrixTiling.getRowNames().containsKey(gene)) {
+                                    if (matrixTiling.getHeaders().contains(headerTiling)) {
+                                        // double value = matrixTiling.getValue(gene, headerTiling);
+                                        logFCMatrix.setValue(matrixTiling.getValue(gene, headerTiling), gene, comp);
+                                    }
+                                }
                             }
                         }
                     }
@@ -680,37 +687,5 @@ public class TranscriptomesCreation {
         return geneExprs;
     }
 
-    /**
-     * Look at the Expression of HouseKeeping genes<br>
-     * 
-     * @param exp
-     */
-    @SuppressWarnings("unused")
-    private static void qualityControl(Experiment exp) {
-        Database.initDatabase(Database.LISTERIOMICS_PROJECT);
-        Signature hkGenes = Signature.getSignatureFromName("House-Keeping genes");
-
-        ExpressionMatrix allGeneExpr = ExpressionMatrix.load(Expression.PATH_ALLGENEXPR);
-        allGeneExpr = allGeneExpr.getSubMatrixRow(hkGenes.getElements());
-        allGeneExpr.saveTab(Database.getTEMP_PATH() + "GeneExprHouseKeeping_QC.txt", "r");
-        allGeneExpr = ExpressionMatrix.loadTab(Expression.PATH_ALLGENEXPR + "_WT.txt", true);
-        allGeneExpr = allGeneExpr.getSubMatrixRow(hkGenes.getElements());
-        allGeneExpr.saveTab(Database.getTEMP_PATH() + "GeneExprHouseKeeping_WT_QC.txt", "r");
-
-        ExpressionMatrix allTiling = ExpressionMatrix.load(Expression.PATH_ALLTILING);
-        allTiling = allTiling.getSubMatrixRow(hkGenes.getElements());
-        allTiling.saveTab(Database.getTEMP_PATH() + "TilingHouseKeeping_QC.txt", "r");
-        allTiling = ExpressionMatrix.loadTab(Expression.PATH_ALLTILING + "_WT.txt", true);
-        allTiling = allTiling.getSubMatrixRow(hkGenes.getElements());
-        allTiling.saveTab(Database.getTEMP_PATH() + "TilingHouseKeeping_WT_QC.txt", "r");
-
-        /*
-         * Then execute in bacnet.rcp.test.test.runPostInit():
-         * HeatMapView.displayMatrix(ExpressionMatrix.loadTab(Project.getTEMP_PATH()+
-         * "GeneExprHouseKeeping_QC.txt", true), "GeneExprHouseKeeping_QC");
-         * HeatMapView.displayMatrix(ExpressionMatrix.loadTab(Project.getTEMP_PATH()+
-         * "TilingHouseKeeping_QC.txt", true), "TilingHouseKeeping_QC");
-         */
-
-    }
+    
 }

@@ -4,8 +4,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
+
 import javax.inject.Inject;
 import javax.inject.Named;
+
 import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.rap.e4.E4ApplicationConfig;
@@ -15,16 +17,19 @@ import org.eclipse.rap.rwt.application.Application.OperationMode;
 import org.eclipse.rap.rwt.application.ApplicationConfiguration;
 import org.eclipse.rap.rwt.application.ExceptionHandler;
 import org.eclipse.rap.rwt.client.WebClient;
-import org.eclipse.rap.rwt.internal.service.ServletLog;
 import org.eclipse.rap.rwt.service.ResourceLoader;
 import org.eclipse.swt.widgets.Shell;
+
 import bacnet.Database;
 
 public class BasicApplication implements ApplicationConfiguration {
 
     //public static String projectName = Database.BACNET;
+    //public static String projectName = "ListeriomicsSample";
+//    public static String projectName = Database.YERSINIOMICS_PROJECT;
     public static String projectName = "ListeriomicsSample";
     //public static String projectName = Database.YERSINIOMICS_PROJECT;
+    //public static String projectName = Database.URY_YERSINIOMICS_PROJECT;
     //public static String projectName = "CRISPRGo";
     //public static String projectName = Database.BACNET;
     //public static String projectName = "ListeriomicsSample";
@@ -42,8 +47,8 @@ public class BasicApplication implements ApplicationConfiguration {
     private Shell shell;
 
     public void configure(Application application) {
-
-        //System.out.println("prop: " + System.getProperty("enableFrameworkControls")+" - "+System.getProperty(CONFIGURATION_PARAM));
+    	System.out.println("Start Application");
+        System.out.println("prop: " + System.getProperty("enableFrameworkControls")+" - "+System.getProperty(CONFIGURATION_PARAM));
     	
         Map<String, String> properties = new HashMap<String, String>();
         String title = "";
@@ -67,6 +72,9 @@ public class BasicApplication implements ApplicationConfiguration {
         } else if (projectName == Database.YERSINIOMICS_PROJECT) {
             title = "Yersiniomics website";
             googleId = "UA-80335618-5";
+        } else if (projectName == Database.URY_YERSINIOMICS_PROJECT) {
+            title = "Yersiniomics website";
+            googleId = "UA-80335618-7";
         }
         application.addResource("theme/favicon.ico", createResourceLoader("theme/favicon.ico"));
         properties.put(WebClient.FAVICON, "theme/favicon.ico");
