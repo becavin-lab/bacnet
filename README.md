@@ -11,8 +11,6 @@ All these tools are already implemented in _Listeriomics_ website. See the [List
 
 ![Bacnet Ad](https://github.com/becavin-lab/bacnet/blob/master/wiki/BACNET%20Ad.png)
 
-BACNET allows also to develop websites using <a rel="nofollow" class="external text" href="http://eclipse.org/rap/">Eclipse RAP</a>
-
 Bacnet includes four plug-ins which should be imported from the github repository: 
 * _**bacnet.core**_ package for all the necessary tools of the platform; 
 * _**bacnet.scripts**_ for all methods allowing creation of the database_
@@ -23,8 +21,7 @@ It includes also 2 features for the deployement of bacnet websites on Apache Tom
 * _**bacnet.setup.feature**_ a web interface for multi-omics database creation
 * _**bacnet.webapp.feature**_ for creating the mult-iomics website
 
-
-The choice of Eclipse RAP (based on Eclipse RCP) was made because of its easy to use interface named [WindowBuilder](https://www.eclipse.org/windowbuilder/). It allows the user to quickly design its own view by adding panels, buttons, canvas in a “one click” fashion. One can also add existing graphical API based on Javascript. This capability is of particular interest when creating multi-omics website for specific organism, paving the way for ‘personalized omics’ platforms.
+BACNET allows to develop websites using <a rel="nofollow" class="external text" href="http://eclipse.org/rap/">Eclipse RAP</a>. The choice of Eclipse RAP (based on Eclipse RCP) was made because of its easy to use interface named [WindowBuilder](https://www.eclipse.org/windowbuilder/). It allows the user to quickly design its own view by adding panels, buttons, canvas in a “one click” fashion. One can also add existing graphical API based on Javascript. This capability is of particular interest when creating multi-omics website for specific organism, paving the way for ‘personalized omics’ platforms.
 
 See the Bacnet Javadoc for more information: [Bacnet Javadoc](https://becavin-lab.github.io/bacnet/index.html)
 
