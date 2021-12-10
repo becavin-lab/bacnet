@@ -91,7 +91,7 @@ public class Database {
     /**
      * Path when using MAC OX X
      */
-    public static String PATH_MAC = "/mnt/c/bacnet/BacnetDatabases.ini";
+    public static String PATH_MAC = "/Users/christophebecavin/Documents/DataBacnet/BacnetDatabases.ini";
     /**
      * Path for website database on Windows
      */
@@ -299,8 +299,10 @@ public class Database {
         String os = System.getProperty("os.name");
         String path_list_database = "";
         System.out.println(os);
-        if (os.equals("Mac OS X"))
+        if (os.equals("Mac OS X")) {
             path_list_database = Database.PATH_MAC;
+        	System.out.println(path_list_database);
+        	}
         else if (os.contains("Windows"))
             path_list_database = Database.PATH_WIN;
         else

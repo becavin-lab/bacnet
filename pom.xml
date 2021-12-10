@@ -18,7 +18,7 @@
 
 	<!-- Setup some properties -->
 	<properties>
-		<tycho.version>2.2.0</tycho.version>
+		<tycho.version>2.5.0</tycho.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
@@ -59,7 +59,6 @@
 				<version>${tycho.version}</version>
 				<configuration>
 					<!-- Optional set the Java version your are using -->
-					<executionEnvironment>JavaSE-15</executionEnvironment>
 					<target>
 						<artifact>
 							<groupId>bacnet</groupId>

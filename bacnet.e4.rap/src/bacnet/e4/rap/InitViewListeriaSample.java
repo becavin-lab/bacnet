@@ -114,6 +114,8 @@ public class InitViewListeriaSample implements SelectionListener {
         lblListeriomicsIsSo.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/ToolBar/LogoListeriomics.png"));
         new Label(composite_Intro, SWT.NONE);
         Label lblNewLabel_1 = new Label(composite_Intro, SWT.WRAP);
+        lblNewLabel_1.setData(RWT.MARKUP_ENABLED, Boolean.TRUE);
+
         lblNewLabel_1.setAlignment(SWT.CENTER);
         GridData gd_lblNewLabel_1 = new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1);
         gd_lblNewLabel_1.widthHint = 700;
@@ -124,8 +126,7 @@ public class InitViewListeriaSample implements SelectionListener {
                         + "Use Listeriomics for deciphering regulatory mechanisms of your genome element of interest.\r");
         // lblNewLabel_1.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
         lblNewLabel_1.setFont(SWTResourceManager.getBodyFont(SWT.NORMAL));
-        lblNewLabel_1.setData(RWT.MARKUP_ENABLED, Boolean.TRUE);
-
+        
         Composite composite_11 = new Composite(composite, SWT.BORDER);
         GridData gd_composite_11 = new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1);
         gd_composite_11.widthHint = 850;
@@ -463,7 +464,7 @@ public class InitViewListeriaSample implements SelectionListener {
 
         scrolledComposite.setContent(composite);
         scrolledComposite.setMinSize(composite.computeSize(SWT.DEFAULT, SWT.DEFAULT));
-
+        
         pushState();
         
         /*
