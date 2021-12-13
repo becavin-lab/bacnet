@@ -83,7 +83,6 @@ public class GenomicsView implements SelectionListener {
 	private BioConditionComparator comparatorBioCondition;
 	private Table tableGenome;
 	private ArrayList<String> selectedGenomes = new ArrayList<>();
-	@SuppressWarnings("unused")
 	private String url = "";
 
 	/**

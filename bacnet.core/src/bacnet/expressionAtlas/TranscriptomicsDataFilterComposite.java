@@ -246,18 +246,10 @@ public class TranscriptomicsDataFilterComposite extends org.eclipse.swt.widgets.
          * For each category count the number of data available
          */
         int geneExpr = 0;
-        int tiling = 0;
         int tss = 0;
-        int termseq = 0;
-        int riboseq = 0;
         int rnaSeq = 0;
-        int lag = 0;
         int expo = 0;
         int stat = 0;
-        int surival = 0;
-        int death = 0;
-        int regrowth = 0;
-        int unpublished = 0;
         for (String[] row : view.getBioCondsToDisplay()) {
             // Data type
             String dataType = row[ArrayUtils.findColumn(view.getBioCondsArray(), "Type")];
@@ -265,36 +257,36 @@ public class TranscriptomicsDataFilterComposite extends org.eclipse.swt.widgets.
                 geneExpr++;
             if (dataType.contains("GeneExpr"))
                 geneExpr++;
-            if (dataType.contains("Tiling"))
-                tiling++;
+            if (dataType.contains("Tiling")) {
+			}
             if (dataType.contains("TSS"))
                 tss++;
-            if (dataType.contains("RiboSeq"))
-                riboseq++;
-            if (dataType.contains("TermSeq"))
-                termseq++;
+            if (dataType.contains("RiboSeq")) {
+			}
+            if (dataType.contains("TermSeq")) {
+			}
             if (dataType.contains("RNASeq"))
                 rnaSeq++;
 
             // Unpublished data
             String reference = row[ArrayUtils.findColumn(view.getBioCondsArray(), "Reference")];
-            if (reference.contains("Unpublished"))
-                unpublished++;
+            if (reference.contains("Unpublished")) {
+			}
 
             // growth type
             String growth = row[ArrayUtils.findColumn(view.getBioCondsArray(), "Growth")];
-            if (growth.contains("Lag"))
-                lag++;
+            if (growth.contains("Lag")) {
+			}
             if (growth.contains("Logarithmic"))
                 expo++;
             if (growth.contains("Stationary"))
                 stat++;
-            if (growth.contains("survival"))
-                surival++;
-            if (growth.contains("Death"))
-                death++;
-            if (growth.contains("Regrowth"))
-                regrowth++;
+            if (growth.contains("survival")) {
+			}
+            if (growth.contains("Death")) {
+			}
+            if (growth.contains("Regrowth")) {
+			}
 
         }
 

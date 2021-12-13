@@ -15,7 +15,6 @@ import java.util.TreeSet;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
-import bacnet.datamodel.dataset.OmicsData.ColNames;
 import bacnet.reader.TabDelimitedTableReader;
 import bacnet.utils.ArrayUtils;
 import bacnet.utils.FileUtils;

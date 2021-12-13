@@ -1,26 +1,12 @@
 package bacnet.expressionAtlas.core;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.TreeSet;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
-import java.util.zip.GZIPInputStream;
-import java.util.zip.GZIPOutputStream;
 import bacnet.Database;
 import bacnet.datamodel.dataset.ExpressionMatrix;
-import bacnet.datamodel.expdesign.BioCondition;
-import bacnet.datamodel.expdesign.Experiment;
 import bacnet.datamodel.sequence.Sequence;
-import bacnet.reader.TabDelimitedTableReader;
 import bacnet.utils.Filter;
 
 public class GenomeElementAtlas implements Serializable {
@@ -39,12 +25,6 @@ public class GenomeElementAtlas implements Serializable {
 
     private String name = "";
     
-    /**
-     * True : if it is a genomeelementatlas on transcriptomic data
-     * False : if it is a genomeelementatlas on proteomic data
-     */
-    private boolean transcriptome = true;
-
     private TreeSet<String> overBioConds = new TreeSet<>();
     private TreeSet<String> underBioConds = new TreeSet<>();
     private TreeSet<String> notDiffExpresseds = new TreeSet<>();
@@ -65,7 +45,6 @@ public class GenomeElementAtlas implements Serializable {
     public GenomeElementAtlas(Sequence seq, Filter filter, boolean transcriptome) {
         System.out.println(seq.getGenomeName());
         ExpressionMatrix logFCMatrix = null;
-        this.transcriptome = transcriptome;
         if(transcriptome) {
         	logFCMatrix = Database.getInstance().getLogFCTranscriptomesTable(seq.getGenomeName());
         } else {

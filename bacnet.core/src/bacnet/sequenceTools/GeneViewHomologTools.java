@@ -20,7 +20,6 @@ import org.eclipse.swt.widgets.Text;
 import bacnet.Database;
 import bacnet.datamodel.phylogeny.Phylogenomic;
 import bacnet.datamodel.sequence.Gene;
-import bacnet.datamodel.sequence.Genome;
 import bacnet.datamodel.sequence.Sequence;
 import bacnet.datamodel.sequenceNCBI.GenomeNCBI;
 import bacnet.raprcp.SaveFileUtils;

@@ -70,13 +70,6 @@
       </view>
       <view
             allowMultiple="true"
-            class="bacnet.expressionAtlas.TableSWTView"
-            icon="icons/heatmap.bmp"
-            id="bacnet.TableSWTView"
-            name="Table tools">
-      </view>
-      <view
-            allowMultiple="true"
             class="bacnet.expressionAtlas.HeatMapTranscriptomicsView"
             icon="icons/heatmap.bmp"
             id="bacnet.HeatMapTranscriptomicsView"
@@ -95,20 +88,6 @@
             icon="icons/genome/genomeView2.bmp"
             id="bacnet.GenomeTranscriptomeView"
             name="Genome Viewer">
-      </view>
-      <view
-            allowMultiple="true"
-            class="bacnet.genomeBrowser.VesicleGenomeTranscriptomeView"
-            icon="icons/genome/genomeView2.bmp"
-            id="bacnet.VesicleGenomeTranscriptomeView"
-            name="Vesicle Genome Viewer">
-      </view>
-      <view
-            allowMultiple="false"
-            class="bacnet.genomeBrowser.RiboProfilingView"
-            icon="icons/genome/genomeView2.bmp"
-            id="bacnet.RiboProfilingView"
-            name="RiboProfile">
       </view>
       <view
             allowMultiple="true"

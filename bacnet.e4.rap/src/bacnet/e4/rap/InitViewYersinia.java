@@ -27,8 +27,6 @@ import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Link;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.ToolBar;
-
 import bacnet.datamodel.sequence.Genome;
 import bacnet.datamodel.sequence.Genome.OpenGenomesThread;
 import bacnet.expressionAtlas.ProteomicsView;
@@ -67,10 +65,6 @@ public class InitViewYersinia implements SelectionListener {
     private Button btnY11;
     private Button btn8081;
     private Button btnWA;
-    private Button btnIP38023;
-    private Button btnIP37485;
-    private Button btnIP38326;
-    private Button btnIP37574;
     private Button btnQMA0440;
     private Button btn91001;
     private Button btnCoExpression;

@@ -41,7 +41,6 @@ import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 import bacnet.Database;
 import bacnet.datamodel.dataset.Network;
-import bacnet.datamodel.phylogeny.Phylogenomic;
 import bacnet.datamodel.sequence.Chromosome;
 import bacnet.datamodel.sequence.Gene;
 import bacnet.datamodel.sequence.Genome;
@@ -85,7 +84,6 @@ public class CoExprNetworkView implements SelectionListener {
     private Button btnCorrPlus;
     private Button btnCorrMinus;
 
-    private final String svgName = "CircosBackground.svg";
     private String genomeName;
     private Network generalNetwork;
     private Network filteredNetwork;

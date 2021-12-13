@@ -13,9 +13,7 @@
 	</parent>
 
 	<!--  Setting up properties of this feature -->
-	<groupId>bacnet</groupId>
 	<artifactId>bacnet.webapp.feature</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
 	<packaging>eclipse-feature</packaging>
 	<properties>
 		<output-directory>${basedir}/target/WEB-INF</output-directory>

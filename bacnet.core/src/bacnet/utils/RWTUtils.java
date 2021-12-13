@@ -18,7 +18,7 @@ public class RWTUtils {
     public static String MARKUP_ENABLED = "org.eclipse.rap.rwt.markupEnabled"; // RWT.MARKUP_ENABLED;
 
     public static void setPreloadedItems(Composite composite) {
-        composite.setData(PRELOADED_ITEMS, new Integer(10));
+        composite.setData(PRELOADED_ITEMS, new int[10]);
     }
 
     public static void setMarkup(Composite composite) {

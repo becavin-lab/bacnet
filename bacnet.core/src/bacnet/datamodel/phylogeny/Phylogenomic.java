@@ -2,11 +2,7 @@ package bacnet.datamodel.phylogeny;
 
 import java.io.File;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.TreeMap;
-
 import bacnet.Database;
-import bacnet.datamodel.sequenceNCBI.GenomeNCBI;
 
 public class Phylogenomic {
 
@@ -33,7 +29,7 @@ public class Phylogenomic {
      */
     public static HashMap<String, String> parsePhylogenomicFigure(String svgTxt) {
     	HashMap<String, String> genomeToAttribute = new HashMap<String, String>();
-    	String yo = svgTxt.replaceAll("\n","");
+    	svgTxt.replaceAll("\n","");
     	String[] phyloTree = svgTxt.replaceAll("\n","").split("<text");
 		
     	/*

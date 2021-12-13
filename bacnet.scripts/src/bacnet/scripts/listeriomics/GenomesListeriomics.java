@@ -1,7 +1,5 @@
 package bacnet.scripts.listeriomics;
 
-import bacnet.datamodel.annotation.LocusTag;
-
 public class GenomesListeriomics {
 
     public static void run() {

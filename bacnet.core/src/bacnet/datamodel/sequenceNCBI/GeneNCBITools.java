@@ -1,16 +1,11 @@
 package bacnet.datamodel.sequenceNCBI;
 
-import java.util.ArrayList;
-
 import org.biojava3.core.sequence.AccessionID;
 import org.biojava3.core.sequence.DNASequence;
 import bacnet.datamodel.annotation.COGannotation;
 import bacnet.datamodel.annotation.GlaserFCannotation;
 import bacnet.datamodel.sequence.Srna;
-import bacnet.utils.ArrayUtils;
-import bacnet.utils.ListUtils;
 import bacnet.utils.StringColor;
-import bacnet.utils.VectorUtils;
 
 /**
  * 

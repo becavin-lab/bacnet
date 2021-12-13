@@ -158,7 +158,6 @@ public class GeneView implements SelectionListener, MouseListener {
      */
     private Composite compositeTranscriptome;
     private String[][] arrayDataList = new String[0][0];
-    private ArrayList<String[]> arrayDataToDisplay;
     private Table tableOver;
     private Table tableUnder;
     private Table tableNodiff;
@@ -186,7 +185,6 @@ public class GeneView implements SelectionListener, MouseListener {
      * Protein atlas variables
      */
     private String[][] arrayProteinAtlasList = new String[0][0];
-    private ArrayList<String[]> arrayProteinAtlasToDisplay;
     private Composite compositeProteome;
     private Table tableOverProteome;
     private Table tableUnderProteome;
@@ -198,7 +196,6 @@ public class GeneView implements SelectionListener, MouseListener {
     private TabItem tbtmProteomeData;
     private Button btnUpdateCutoffProteome;
     private Text txtCutoffLogFCProteome;
-    private Text txtCutoffPvalueProteome;
     private Button btnHeatmapviewProteome;
     private Button btnGenomeViewerProteome;
     
@@ -208,7 +205,6 @@ public class GeneView implements SelectionListener, MouseListener {
      */
     private TabItem tbtmProteomes;
     private String[][] arrayProteomeList = new String[0][0];
-    private ArrayList<String[]> arrayProteomeToDisplay;
     private Composite composite_09;
     private Composite composite_091;
     private Composite composite_092;
@@ -1389,13 +1385,13 @@ public class GeneView implements SelectionListener, MouseListener {
         //System.out.println("initYersiniomics");
 
         arrayDataList = TabDelimitedTableReader.read(Database.getInstance().getTranscriptomesComparisonsArrayPath());
-        arrayDataToDisplay = TabDelimitedTableReader.readList(Database.getInstance().getTranscriptomesComparisonsArrayPath(), true, true);
+        TabDelimitedTableReader.readList(Database.getInstance().getTranscriptomesComparisonsArrayPath(), true, true);
         
         arrayProteomeList = TabDelimitedTableReader.read(Database.getInstance().getProteomesArrayPath());
-        arrayProteomeToDisplay = TabDelimitedTableReader.readList(Database.getInstance().getProteomesArrayPath(), true, true);
+        TabDelimitedTableReader.readList(Database.getInstance().getProteomesArrayPath(), true, true);
         arrayTranscriptomesList = TabDelimitedTableReader.read(Database.getInstance().getTranscriptomesArrayPath());
         arrayProteinAtlasList = TabDelimitedTableReader.read(Database.getInstance().getProteomesComparisonsArrayPath());
-        arrayProteinAtlasToDisplay = TabDelimitedTableReader.readList(Database.getInstance().getProteomesComparisonsArrayPath(), true, true);
+        TabDelimitedTableReader.readList(Database.getInstance().getProteomesComparisonsArrayPath(), true, true);
         System.out.println("rownames ");
         /*
   	  if (Database.getInstance().getProjectName() != Database.URY_YERSINIOMICS_PROJECT) {

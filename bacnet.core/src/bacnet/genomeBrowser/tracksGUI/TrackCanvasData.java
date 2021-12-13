@@ -1804,7 +1804,7 @@ public class TrackCanvasData extends Canvas implements MouseMoveListener {
 
         for (Sequence sequence : sequences) {
             String accession = sequence.getName();
-            String accessionOld = sequence.getFeature("old_locus_tag"); //most of the ArrayExpress data are with old_locus_tag
+            sequence.getFeature("old_locus_tag");
 
             int begin = sequence.getBegin();
             int end = sequence.getEnd();

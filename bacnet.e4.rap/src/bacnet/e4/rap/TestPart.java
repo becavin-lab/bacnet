@@ -1,8 +1,5 @@
 package bacnet.e4.rap;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.inject.Inject;
@@ -13,26 +10,6 @@ import org.eclipse.e4.ui.workbench.modeling.EModelService;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Shell;
-import bacnet.Database;
-import bacnet.datamodel.annotation.Annotation;
-import bacnet.datamodel.dataset.ExpressionData;
-import bacnet.datamodel.dataset.ExpressionMatrix;
-import bacnet.datamodel.dataset.GeneExpression;
-import bacnet.datamodel.dataset.NGS;
-import bacnet.datamodel.dataset.NTermData;
-import bacnet.datamodel.dataset.OmicsData;
-import bacnet.datamodel.dataset.OmicsData.ColNames;
-import bacnet.datamodel.dataset.OmicsData.TypeData;
-import bacnet.datamodel.dataset.ProteomicsData;
-import bacnet.datamodel.dataset.Tiling;
-import bacnet.datamodel.expdesign.BioCondition;
-import bacnet.datamodel.sequence.Gene;
-import bacnet.datamodel.sequence.Genome;
-import bacnet.datamodel.sequence.NcRNA;
-import bacnet.expressionAtlas.core.GenomeElementAtlas;
-import bacnet.genomeBrowser.GenomeTranscriptomeView;
-import bacnet.utils.Filter;
-import bacnet.utils.VectorUtils;
 
 public class TestPart {
 
