@@ -12,13 +12,13 @@
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 
+
 	<!--  Setting up properties of this feature -->
-	<groupId>bacnet</groupId>
 	<artifactId>bacnet.setup.feature</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
 	<packaging>eclipse-feature</packaging>
 	<properties>
-		<output-directory>${basedir}/target/WEB-INF</output-directory>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+			<output-directory>${basedir}/target/WEB-INF</output-directory>
 		<!--  Setting up webapp name        -->
 		<!--  Need to be changed by user     -->
 		<webapp.name>bacnet-setup</webapp.name>
