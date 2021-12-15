@@ -12,13 +12,13 @@
 
 	<!-- Declare name of the project -->
 	<groupId>bacnet</groupId>
-	<artifactId>main.plugin</artifactId>
+	<artifactId>general</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<!-- Setup some properties -->
 	<properties>
-		<tycho.version>2.2.0</tycho.version>
+		<tycho.version>2.5.0</tycho.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
@@ -97,8 +97,7 @@
 		<module>bacnet.e4.rap</module>
 		<module>bacnet.e4.rap.setup</module>
 		<module>bacnet.webapp.feature</module>
-		<module>bacnet.setup.feature</module>
-	
+		<module>bacnet.setup.feature</module>	
 	</modules>
 
 </project>
