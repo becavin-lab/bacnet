@@ -19,7 +19,7 @@
 		<output-directory>${basedir}/target/WEB-INF</output-directory>
 		<!--  Setting up webapp name        -->
 		<!--  Need to be changed by user     -->
-		<webapp.name>Yersiniomics</webapp.name>
+		<webapp.name>bacnet-webapp</webapp.name>
 		<!--                                -->
 	</properties>
 
