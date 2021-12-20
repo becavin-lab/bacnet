@@ -24,11 +24,12 @@
     
     <!-- Framework Controls could be useful for testing purpose, but
          we disable it in RAP environment per default -->
+		<!--
 		<init-param>
 			<param-name>enableFrameworkControls</param-name>
 			<param-value>false</param-value>			
 		</init-param>
-		
+		-->
 		<!--
 		  org.eclipse.equinox.servletbridge and the Servlet API are exported automatically to the underlying OSGi framework.
 		  The extendedFrameworkExports parameter allows the specification of additional java package exports.
