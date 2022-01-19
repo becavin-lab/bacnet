@@ -1,4 +1,4 @@
-BIG MAJ December 2021 - BACNET V2
+BACNET V2 - December 2021
 
 Bacnet is a Java based platform for fast development of ‘personalized’ multiomics website. Bacnet is easy to import, modify and deploy on web server. Bacnet was used already for the development of [four websites](http://www.genomique.info:10080/Bacnet/), two of them being already published [Listeriomics](https://listeriomics.pasteur.fr/Listeriomics/#bacnet.Listeria) ([Bécavin et al., 2017](https://msystems.asm.org/content/2/2/e00186-16)), [CrisprGo](http://hub13.hosting.pasteur.fr:8080/CRISPRBrowser/) ([Rousset et al., 2018](https://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1007749)). We believe Bacnet is the only platform available which allows to easily create website for sharing and publishing scientific results of specific multiomics analysis, opening the era of ‘personalized omics’.
 
