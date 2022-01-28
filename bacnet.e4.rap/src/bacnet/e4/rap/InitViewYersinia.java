@@ -69,6 +69,10 @@ public class InitViewYersinia implements SelectionListener {
     private Button btnQMA0440;
     private Button btn91001;
     private Button btnMH96;
+    private Button btnIP38326;
+    private Button btnIP38023;
+    private Button btnIP37485;
+    private Button btnIP37574;
     private Button btnCoExpression;
     private Button btnLoadData;
     private Button btnGeneView;

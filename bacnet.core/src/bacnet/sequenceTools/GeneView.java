@@ -1530,18 +1530,6 @@ public class GeneView implements SelectionListener, MouseListener {
 	/**
 	 * Init Widgets for Yersiniomics
 	 */
-	private void initYersiniomics() {
-		//System.out.println("initYersiniomics");
-
-		arrayDataList = TabDelimitedTableReader.read(Database.getInstance().getTranscriptomesComparisonsArrayPath());
-		arrayDataToDisplay = TabDelimitedTableReader.readList(Database.getInstance().getTranscriptomesComparisonsArrayPath(), true, true);
-
-		arrayProteomeList = TabDelimitedTableReader.read(Database.getInstance().getProteomesArrayPath());
-		arrayProteomeToDisplay = TabDelimitedTableReader.readList(Database.getInstance().getProteomesArrayPath(), true, true);
-		arrayTranscriptomesList = TabDelimitedTableReader.read(Database.getInstance().getTranscriptomesArrayPath());
-		arrayProteinAtlasList = TabDelimitedTableReader.read(Database.getInstance().getProteomesComparisonsArrayPath());
-		arrayProteinAtlasToDisplay = TabDelimitedTableReader.readList(Database.getInstance().getProteomesComparisonsArrayPath(), true, true);
-
 
     
     /**
