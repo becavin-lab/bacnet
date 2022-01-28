@@ -50,7 +50,9 @@ import bacnet.expressionAtlas.core.SelectGenomeElementDialog;
 import bacnet.raprcp.NavigationManagement;
 import bacnet.raprcp.SaveFileUtils;
 import bacnet.reader.TabDelimitedTableReader;
+import bacnet.sequenceTools.GeneViewTranscriptomeTools;
 import bacnet.swt.ResourceManager;
+import bacnet.utils.ArrayUtils;
 import bacnet.utils.BasicColor;
 import bacnet.utils.HTMLUtils;
 
@@ -79,10 +81,13 @@ public class CoExprNetworkView implements SelectionListener {
     private Genome genome;
     private TabFolder tabFolder;
     private TabItem tbtmGraphVisualization;
-    //private TabItem tbtmRadialNetwork;
-    //private Browser browserRadial;
+    private TabItem tbtmRadialNetwork;
+    private Browser browserRadial;
     private Button btnCorrPlus;
     private Button btnCorrMinus;
+    private Button btnUpdateCutoff;
+    private Button btnExportNetwork;
+    private final String svgName = "CircosBackground.svg";
 
     private String genomeName;
     private Network generalNetwork;
@@ -122,14 +127,11 @@ public class CoExprNetworkView implements SelectionListener {
         comboGenome.setLayoutData(gd_comboGenome);
         comboGenome.addSelectionListener(this);
         
-        
         new Label(compositeGenome, SWT.NONE);
         new Label(compositeGenome, SWT.NONE);
         new Label(compositeGenome, SWT.NONE);
         new Label(compositeGenome, SWT.NONE);
         new Label(compositeGenome, SWT.NONE);
-
-       
         
         Composite compositeGeneselection = new Composite(parent, SWT.BORDER);
         compositeGeneselection.setLayoutData(new GridData(SWT.LEFT, SWT.FILL, false, true, 1, 2));
@@ -206,11 +208,19 @@ public class CoExprNetworkView implements SelectionListener {
         btnCorrMinus.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/genome/zoomOUT.bmp"));
         btnCorrMinus.addSelectionListener(this);
         textCutOff = new Text(composite, SWT.BORDER);
-        textCutOff.setText("0.98");
-        textCutOff.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-
+        textCutOff.setText("1.0000");
+        textCutOff.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));        
         btnCorrPlus = new Button(composite, SWT.NONE);
         btnCorrPlus.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/genome/zoomIN.bmp"));
+        
+        btnUpdateCutoff = new Button(composite, SWT.NONE);
+        //btnUpdateCutoff.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 5, 1));
+        btnUpdateCutoff.setText("Choose cut-off and update Co-Expression network");
+        btnUpdateCutoff.addSelectionListener(this);
+        
+        btnExportNetwork = new Button(composite, SWT.NONE);
+        btnExportNetwork.setText("Export filtered network");
+        btnExportNetwork.addSelectionListener(this);
 
         btnHelp = new Button(composite, SWT.NONE);
         btnHelp.setToolTipText("How to use Co-expression network panel ?");
@@ -226,10 +236,10 @@ public class CoExprNetworkView implements SelectionListener {
         browserGraph = new Browser(tabFolder, SWT.BORDER);
         tbtmGraphVisualization.setControl(browserGraph);
 
-//        tbtmRadialNetwork = new TabItem(tabFolder, SWT.NONE);
-//        tbtmRadialNetwork.setText("Circular visualization");
-//        browserRadial = new Browser(tabFolder, SWT.NONE);
-//        tbtmRadialNetwork.setControl(browserRadial);
+        tbtmRadialNetwork = new TabItem(tabFolder, SWT.NONE);
+        tbtmRadialNetwork.setText("Circular visualization");
+        browserRadial = new Browser(tabFolder, SWT.NONE);
+        tbtmRadialNetwork.setControl(browserRadial);
 
         tabFolder.addSelectionListener(new SelectionAdapter() {
             /**
@@ -312,7 +322,7 @@ public class CoExprNetworkView implements SelectionListener {
             monitor.done();
         }
     }
-
+    
     public void initComboGenome() {
     	genome = Genome.loadGenome(genomeName);
     }
@@ -322,7 +332,7 @@ public class CoExprNetworkView implements SelectionListener {
      */
     public void loadNetwork() {
         generalNetwork = new Network();
-        generalNetwork.load(Database.getCOEXPR_NETWORK_TRANSCRIPTOMES_PATH() + "_" + genomeName);
+        generalNetwork = generalNetwork.load(Database.getCOEXPR_NETWORK_TRANSCRIPTOMES_PATH() + "_" + genomeName);
         System.out.println("Network loaded");
     }
 
@@ -381,7 +391,7 @@ public class CoExprNetworkView implements SelectionListener {
     }
 
     /**
-     * Push Naviagtion state
+     * Push Navigation state
      */
     private void pushState() {
         HashMap<String, String> stateParameters = new HashMap<>();
@@ -419,6 +429,7 @@ public class CoExprNetworkView implements SelectionListener {
             // System.out.println("Corr data - "+dataPath);
             filterNetwork();
             ArrayList<String> networkList = filteredNetwork.toArrayList();
+            System.out.println("networkList "+networkList);
             TabDelimitedTableReader.saveList(networkList, dataPath);
 
             /*
@@ -436,12 +447,12 @@ public class CoExprNetworkView implements SelectionListener {
                 /*
                  * Update circos.html
                  */
-//                String html = SaveFileUtils.modifyHTMLwithFile(dataPath, HTMLUtils.CIRCOS);
-//                String fileNameResource = SaveFileUtils.registerTextFile(svgName, new File(dataPath));
-//                System.out.println("Add: " + fileNameResource + " to " + HTMLUtils.CIRCOS);
-//                html = html.replaceFirst("_Background", fileNameResource);
-//                browserRadial.setText(html);
-//                browserRadial.redraw();
+                String html = SaveFileUtils.modifyHTMLwithFile(dataPath, HTMLUtils.CIRCOS);
+                String fileNameResource = SaveFileUtils.registerTextFile(svgName, new File(dataPath));
+                System.out.println("Add: " + fileNameResource + " to " + HTMLUtils.CIRCOS);
+                html = html.replaceFirst("_Background", fileNameResource);
+                browserRadial.setText(html);
+                browserRadial.redraw();
             }
             file.delete();
         } catch (IOException e) {
@@ -449,7 +460,7 @@ public class CoExprNetworkView implements SelectionListener {
             e.printStackTrace();
         }
     }
-
+    
     /**
      * Search a text file in the annotation<br>
      * <li>Search if it is a position and go
@@ -460,6 +471,7 @@ public class CoExprNetworkView implements SelectionListener {
      * @param text
      * @return
      */
+    
     public ArrayList<String> search(String text) {
         Chromosome chromosome = genome.getFirstChromosome();
         ArrayList<String> searchResult = new ArrayList<>();
@@ -518,7 +530,7 @@ public class CoExprNetworkView implements SelectionListener {
                     listSrnaTemp.add(rna);
 
                 /*
-                 * Go through all Srna and search information in the anniotation of each gene
+                 * Go through all Srna and search information in the annotation of each gene
                  */
                 text = text.toUpperCase();
                 for (String name : listSrnaTemp) {
@@ -610,21 +622,30 @@ public class CoExprNetworkView implements SelectionListener {
         } else if (e.getSource() == btnCorrMinus) {
             double cutoff = Double.parseDouble(textCutOff.getText());
             if (cutoff > Network.CORR_CUTOFF) {
-                cutoff = cutoff - 0.01;
+                cutoff = cutoff - 0.005;
                 String cutoffString = cutoff + "";
-                if (cutoffString.length() >= 4)
-                    cutoffString = cutoffString.substring(0, 4);
+                if (cutoffString.length() >= 5)
+                    cutoffString = cutoffString.substring(0, 5);
                 textCutOff.setText(cutoffString);
                 updateCoExpressionFigure();
             }
         } else if (e.getSource() == btnCorrPlus) {
             double cutoff = Double.parseDouble(textCutOff.getText());
-            cutoff = cutoff + 0.01;
+            cutoff = cutoff + 0.005;
             String cutoffString = cutoff + "";
-            if (cutoffString.length() >= 4)
-                cutoffString = cutoffString.substring(0, 4);
+            if (cutoffString.length() >= 5)
+                cutoffString = cutoffString.substring(0, 5);
             textCutOff.setText(cutoffString);
             updateCoExpressionFigure();
+            
+        } else if (e.getSource() == btnUpdateCutoff) {
+        	updateCoExpressionFigure();
+        } else if (e.getSource() == btnExportNetwork) {
+            //String[][] networkList = filteredNetwork.toArray();
+            ArrayList<String> networkList = filteredNetwork.toArrayList();
+            String arrayRep = filteredNetwork.toString();
+            String arrayRepHTML = TabDelimitedTableReader.getTableInHTML(networkList);
+            SaveFileUtils.saveTextFile("network.txt", arrayRep, true, "", arrayRepHTML, partService, shell);
         } else if (e.getSource() == tableGenes) {
             updateCoExpressionFigure();
         } else if (e.getSource() == btnSelectGenomeElements) {

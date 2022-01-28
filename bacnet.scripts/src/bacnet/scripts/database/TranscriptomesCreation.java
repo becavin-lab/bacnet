@@ -137,7 +137,7 @@ public class TranscriptomesCreation {
                         /*
                          * Save matrix
                          */
-                        matrix = MedianNormalization.norm(matrix, "LOGFC");
+                        //matrix = MedianNormalization.norm(matrix, "LOGFC");
                         matrix.saveTab(OmicsData.PATH_EXPR_NORM + comparison + ".txt", "Gene");
                         matrix.setName(comparison);
                         matrix.setBioCondName(comparison);

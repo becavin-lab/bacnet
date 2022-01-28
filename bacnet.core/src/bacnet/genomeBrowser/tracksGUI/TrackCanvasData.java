@@ -1047,6 +1047,7 @@ public class TrackCanvasData extends Canvas implements MouseMoveListener {
                  * Manage logTransformed or not HERE !
                  * Add : if data is NGS -> if logTransformed then ...
                  */
+                
                 if (typeData == TypeData.RNASeq || typeData == TypeData.TSS || typeData == TypeData.TermSeq || typeData == TypeData.RiboSeq) {
                     // System.out.println(name);
                     if (name.contains("DNA") || name.contains("LC-E75") || name.contains("dCas9")) {
@@ -1068,7 +1069,7 @@ public class TrackCanvasData extends Canvas implements MouseMoveListener {
                             i = i + 2;
                         }
                     }
-                } else {
+                } else { 
                     while (i < max) {
                         int valuePosition = getDataPosition(name, 1, dataIndex, i, min, max, minPosition)[1];
                         gc.drawLine(1, valuePosition, 3, valuePosition);

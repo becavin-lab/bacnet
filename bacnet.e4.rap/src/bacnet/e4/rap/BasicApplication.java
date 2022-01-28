@@ -33,9 +33,8 @@ public class BasicApplication implements ApplicationConfiguration {
     //public static String projectName = "CRISPRGo";
     //public static String projectName = Database.BACNET;
     //public static String projectName = "ListeriomicsSample";
-//    public static String projectName = Database.YERSINIOMICS_PROJECT;
+    //public static String projectName = Database.YERSINIOMICS_PROJECT;
     // public static String projectName = "CRISPRGo";
-
     // public static String projectName = "Leishomics";
     public static String MAIN_ENTRYPOINT = "/";
 

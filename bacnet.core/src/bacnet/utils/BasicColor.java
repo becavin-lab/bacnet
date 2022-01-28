@@ -68,6 +68,8 @@ public class BasicColor {
      * Light red color used for plus strand genes
      */
     public static Color REDLIGHT_GENE = new Color(display, 255, 229, 189);
+    public static Color REDLIGHT_COV = new Color(display, 239, 172, 73);
+
     /**
      * Dark red color used for plus strand genes
      */
@@ -81,6 +83,8 @@ public class BasicColor {
      * Light blue color used for plus strand genes
      */
     public static Color BLUELIGHT_GENE = new Color(display, 184, 232, 255);
+    public static Color BLUELIGHT_COV = new Color(display, 79, 183, 232);
+
     /**
      * Dark blue color used for plus strand genes
      */

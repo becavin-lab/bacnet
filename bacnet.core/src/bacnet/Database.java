@@ -19,6 +19,7 @@ import org.eclipse.swt.widgets.Shell;
 import bacnet.datamodel.annotation.Signature;
 import bacnet.datamodel.dataset.ExpressionMatrix;
 import bacnet.datamodel.dataset.GeneExpression;
+import bacnet.datamodel.dataset.Network;
 import bacnet.datamodel.dataset.Tiling;
 import bacnet.datamodel.expdesign.BioCondition;
 import bacnet.datamodel.expdesign.Experiment;
@@ -222,6 +223,11 @@ public class Database {
      * ProbeInformation for GeneExpression
      */
     private TreeMap<String, Integer> probesGExpression = new TreeMap<String, Integer>();
+    
+    /**
+     * Load a Network and keep it in memory
+     */
+    private TreeMap<String, Network> networks = new TreeMap<String, Network>();
 
     ///////////////////////////////////////////////////////////////////////////////////////
     // Listeria Specific //
@@ -910,6 +916,14 @@ public class Database {
 
     public void setGenomes(TreeMap<String, Genome> genomes) {
         this.genomes = genomes;
+    }
+    
+    public TreeMap<String, Network> getNetworks() {
+        return networks;
+    }
+
+    public void setNetworks(TreeMap<String, Network> networks) {
+        this.networks = networks;
     }
 
     public TreeMap<String, GenomeNCBI> getGenomesNCBI() {

@@ -156,10 +156,12 @@ public class DataTrack {
                     } else if (tscData.getType() == TypeData.RNASeq || tscData.getType() == TypeData.DNASeq
                             || tscData.getType() == TypeData.TSS || tscData.getType() == TypeData.TermSeq
                             || tscData.getType() == TypeData.RiboSeq) {
-                        if (tscData.getName().contains("+") || tscData.getName().contains("_f")) {
-                            dataColors.put(tscData.getName(), BasicColor.RED);
-                        } else if (tscData.getName().contains("-") || tscData.getName().contains("_r")) {
-                            dataColors.put(tscData.getName(), BasicColor.BLUE);
+                        //if (tscData.getName().contains("+") || tscData.getName().contains("_f")) {
+                        if (tscData.getName().contains("_f")) {
+                            dataColors.put(tscData.getName(), BasicColor.REDLIGHT_COV);
+                        //} else if (tscData.getName().contains("-") || tscData.getName().contains("_r")) {
+                        } else if (tscData.getName().contains("_r")) {
+                            dataColors.put(tscData.getName(), BasicColor.BLUELIGHT_COV);
                         } else
                             dataColors.put(tscData.getName(), BasicColor.RNASEQ_NOSTRAND);
                     } else if (tscData instanceof NTermData) {
