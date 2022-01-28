@@ -18,8 +18,6 @@ import org.eclipse.rap.rwt.client.WebClient;
 import org.eclipse.rap.rwt.service.ResourceLoader;
 import org.eclipse.swt.widgets.Shell;
 
-import bacnet.Database;
-
 public class BasicApplication implements ApplicationConfiguration {
 
     //public static String projectName = Database.YERSINIOMICS_PROJECT;

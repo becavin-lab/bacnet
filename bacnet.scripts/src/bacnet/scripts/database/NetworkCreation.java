@@ -4,22 +4,13 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.TreeSet;
 import bacnet.Database;
-import bacnet.datamodel.annotation.Annotation;
 import bacnet.datamodel.dataset.ExpressionMatrix;
-import bacnet.datamodel.dataset.NTermData;
 import bacnet.datamodel.dataset.Network;
-import bacnet.datamodel.dataset.OmicsData;
-import bacnet.datamodel.dataset.OmicsData.ColNames;
 import bacnet.datamodel.dataset.OmicsData.TypeData;
-import bacnet.datamodel.dataset.ProteomicsData;
 import bacnet.datamodel.expdesign.BioCondition;
-import bacnet.datamodel.expdesign.Experiment;
-import bacnet.datamodel.proteomics.NTerm;
 import bacnet.datamodel.sequence.Genome;
-import bacnet.datamodel.sequenceNCBI.GenomeNCBI;
 import bacnet.reader.TabDelimitedTableReader;
 import bacnet.scripts.core.Expression;
-import bacnet.utils.ArrayUtils;
 import bacnet.utils.FileUtils;
 
 public class NetworkCreation {

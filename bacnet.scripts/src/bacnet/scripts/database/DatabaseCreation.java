@@ -1,6 +1,5 @@
 package bacnet.scripts.database;
 
-import java.io.IOException;
 import bacnet.scripts.listeriomics.MainListeriomics;
 
 /**

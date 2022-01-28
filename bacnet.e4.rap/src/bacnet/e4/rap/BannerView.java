@@ -22,11 +22,11 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.ToolBar;
 import org.eclipse.swt.widgets.ToolItem;
+
 import bacnet.Database;
 import bacnet.expressionAtlas.ProteomicsView;
 import bacnet.expressionAtlas.TranscriptomicsView;
 import bacnet.raprcp.NavigationManagement;
-import bacnet.raprcp.SaveFileUtils;
 import bacnet.sequenceTools.GenomicsView;
 import bacnet.swt.ResourceManager;
 import bacnet.utils.BasicColor;

@@ -13,7 +13,6 @@ import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
-import bacnet.Database;
 import bacnet.datamodel.expdesign.BioCondition;
 import bacnet.raprcp.NavigationManagement;
 import bacnet.swt.SWTResourceManager;

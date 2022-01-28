@@ -2,7 +2,6 @@ package bacnet.scripts.database;
 
 import java.util.HashMap;
 import bacnet.Database;
-import bacnet.datamodel.dataset.ExpressionData;
 import bacnet.datamodel.dataset.ExpressionMatrix;
 import bacnet.datamodel.dataset.GeneExpression;
 import bacnet.datamodel.dataset.NGS;

@@ -40,8 +40,8 @@ public class GeneMarkGTFReader {
         log.info("Gff.read(): Reading " + filename);
 
         FeatureList features = new FeatureList();
-        BufferedReader br = new BufferedReader(new FileReader(filename));
-
+        @SuppressWarnings("resource")
+		BufferedReader br = new BufferedReader(new FileReader(filename));
         String s;
         for (s = br.readLine(); null != s; s = br.readLine()) {
             s = s.trim();

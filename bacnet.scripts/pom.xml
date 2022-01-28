@@ -8,13 +8,11 @@
 	<!--  Setting up parent project -->
 	<parent>
 		<groupId>bacnet</groupId>
-		<artifactId>main.plugin</artifactId>
-		<version>1.0.0-SNAPSHOT</version>
+		<artifactId>general</artifactId>
+		<version>2.0.0-SNAPSHOT</version>
 	</parent>
 
 	<!--  Setting up properties of this plugin -->
-	<groupId>bacnet</groupId>
 	<artifactId>bacnet.scripts</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
 	<packaging>eclipse-plugin</packaging>
 </project>

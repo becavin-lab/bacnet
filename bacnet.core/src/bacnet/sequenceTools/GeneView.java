@@ -306,6 +306,7 @@ public class GeneView implements SelectionListener, MouseListener {
 	@Inject
 	public GeneView() {
 
+
 	}
 
 	/**
@@ -1542,8 +1543,23 @@ public class GeneView implements SelectionListener, MouseListener {
 		arrayProteinAtlasToDisplay = TabDelimitedTableReader.readList(Database.getInstance().getProteomesComparisonsArrayPath(), true, true);
 
 
+    
+    /**
+     * Init Widgets for Yersiniomics
+     */
+    private void initYersiniomics() {
+        //System.out.println("initYersiniomics");
 
-		/*
+        arrayDataList = TabDelimitedTableReader.read(Database.getInstance().getTranscriptomesComparisonsArrayPath());
+        TabDelimitedTableReader.readList(Database.getInstance().getTranscriptomesComparisonsArrayPath(), true, true);
+        
+        arrayProteomeList = TabDelimitedTableReader.read(Database.getInstance().getProteomesArrayPath());
+        TabDelimitedTableReader.readList(Database.getInstance().getProteomesArrayPath(), true, true);
+        arrayTranscriptomesList = TabDelimitedTableReader.read(Database.getInstance().getTranscriptomesArrayPath());
+        arrayProteinAtlasList = TabDelimitedTableReader.read(Database.getInstance().getProteomesComparisonsArrayPath());
+        TabDelimitedTableReader.readList(Database.getInstance().getProteomesComparisonsArrayPath(), true, true);
+        System.out.println("rownames ");
+        /*
   	  if (Database.getInstance().getProjectName() != Database.URY_YERSINIOMICS_PROJECT) {
   		  List<Integer> rowNum = new ArrayList<>(); 
           int i=0;

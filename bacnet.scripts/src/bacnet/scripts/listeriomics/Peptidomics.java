@@ -2,13 +2,8 @@ package bacnet.scripts.listeriomics;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
-
-import bacnet.datamodel.sequence.Genome;
 import bacnet.datamodel.sequenceNCBI.GenomeNCBI;
 import bacnet.reader.TabDelimitedTableReader;
-import bacnet.scripts.database.HomologCreation;
-import bacnet.utils.ArrayUtils;
 
 public class Peptidomics {
 

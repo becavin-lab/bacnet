@@ -19,7 +19,6 @@ import bacnet.datamodel.sequence.Genome;
 import bacnet.reader.TabDelimitedTableReader;
 import bacnet.utils.ArrayUtils;
 import bacnet.utils.FileUtils;
-import bacnet.utils.MathUtils;
 
 public class ProteomicsCreation {
 

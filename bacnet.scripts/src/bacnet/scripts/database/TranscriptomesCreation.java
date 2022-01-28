@@ -4,7 +4,6 @@ import java.io.File;
 import java.util.ArrayList;
 import bacnet.Database;
 import bacnet.datamodel.annotation.Annotation;
-import bacnet.datamodel.annotation.Signature;
 import bacnet.datamodel.dataset.ExpressionMatrix;
 import bacnet.datamodel.dataset.GeneExpression;
 import bacnet.datamodel.dataset.NGS;
@@ -24,7 +23,6 @@ import bacnet.scripts.core.normalization.VarianceNormalization;
 import bacnet.scripts.core.stat.StatTest;
 import bacnet.scripts.core.stat.StatTest.TypeStat;
 import bacnet.scripts.listeriomics.TilingGeneExprDataBase;
-import bacnet.utils.ArrayUtils;
 import bacnet.utils.ExpressionMatrixStat;
 import bacnet.utils.FileUtils;
 import bacnet.utils.Filter;
@@ -53,7 +51,6 @@ public class TranscriptomesCreation {
         /*
          * List biological conditions to add
          */
-        @SuppressWarnings("unused")
         boolean logTransformed = true;
         Experiment exp = new Experiment();
         for (String bioCond : bioConds) {

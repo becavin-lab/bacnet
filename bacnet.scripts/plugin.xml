@@ -4,11 +4,10 @@
    <extension
          point="org.eclipse.ui.views">
       <view
-            class="bacnet.scripts.blast.BlastResultView"
-            id="ListTranscript.BlastResultView"
-            name="BlastResults"
+            class="bacnet.views.InitView"
+            id="bacnet.InitView"
+            name="Home"
             restorable="true">
       </view>
-   </extension>
-   
+   </extension>     
 </plugin>

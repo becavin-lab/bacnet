@@ -426,7 +426,7 @@ public class Chromosome extends ChromosomeSequence {
         return proteinIDToOldLocusTagMap;
     }
     
-    public void setProteinIDToOldLocusTagMap(LinkedHashMap<String, String> ProteinIDToOldLocusTagMap) {
+    public void setProteinIDToOldLocusTagMap(LinkedHashMap<String, String> proteinIDToOldLocusTagMap) {
         this.proteinIDToOldLocusTagMap = proteinIDToOldLocusTagMap;
     } 
     

@@ -5,7 +5,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.rap.rwt.RWT;
-import org.eclipse.rap.rwt.client.service.JavaScriptExecutor;
 import org.eclipse.swt.widgets.Shell;
 import bacnet.utils.FileUtils;
 import bacnet.utils.HTMLUtils;

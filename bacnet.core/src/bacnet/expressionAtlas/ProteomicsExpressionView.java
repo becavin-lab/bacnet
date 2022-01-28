@@ -535,10 +535,10 @@ public class ProteomicsExpressionView implements SelectionListener {
                         genomeToBioConds.get(genomeName), "");
             }
         } else if (e.getSource() == btnHeatmap) {
-            HashMap<String, ArrayList<String>> genomeToBioConds = getSelectedBioConditions();
-            for (String genomeName : genomeToBioConds.keySet()) {
+            //HashMap<String, ArrayList<String>> genomeToBioConds = getSelectedBioConditions();
+            //for (String genomeName : genomeToBioConds.keySet()) {
                 //HeatMapProteomicsView.displayBioConditions(genomeName, genomeToBioConds.get(genomeName), partService);
-            }
+            //}
         } else if (e.getSource() == tableProteomeViewer.getTable()) {
         } else if (e.getSource() == btnHelp) {
             HelpPage.helpProteomicView(partService);

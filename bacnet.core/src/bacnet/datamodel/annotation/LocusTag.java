@@ -133,7 +133,8 @@ public class LocusTag {
      * Create a HashMap with all "old_locus_tag" and "locus_tag" from the new GFF folder
      * Listeriomics/NCBIGenomesNew/
      */
-    public static void parseNewLocusTagChange() {
+    @SuppressWarnings("deprecation")
+	public static void parseNewLocusTagChange() {
         ArrayList<String> listLocusTag = new ArrayList<>();
         for (String genomeName : Genome.getAvailableGenomes()) {
             File path = new File(GenomeNCBI.PATH_GENOMES_NEW + genomeName);

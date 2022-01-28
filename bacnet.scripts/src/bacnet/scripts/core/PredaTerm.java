@@ -50,7 +50,6 @@ public class PredaTerm {
      * @param fastaFileName
      * @throws IOException
      */
-    @SuppressWarnings("resource")
     public static void run(String fastaFileName, String pssmFileName, String finalGTFFile) throws IOException {
         System.out.println("\n" + "============================================================================\n"
                 + "    ___     ___     ____    __      _    _____   ____   ____    __   __\n"
@@ -323,7 +322,6 @@ public class PredaTerm {
             double best = 0, score = 0, best_end = 0;
             Region = SequenceTAB[i][1].substring(SequenceTAB[i][1].length() - 800 - upCDS,
                     SequenceTAB[i][1].length() - 800 + downCDS);
-            @SuppressWarnings("resource")
             Scanner AG = new Scanner(new BufferedReader(new StringReader(Region))).useDelimiter("AG");
             while (AG.hasNext()) {
                 Segment = AG.next();

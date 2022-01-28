@@ -1,35 +1,20 @@
 package bacnet.scripts.database;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FilenameFilter;
 import java.io.IOException;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.TreeSet;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
-import org.biojava3.core.sequence.ProteinSequence;
-import org.biojava3.core.sequence.compound.AminoAcidCompound;
-import org.biojava3.core.sequence.compound.AminoAcidCompoundSet;
-import org.biojava3.core.sequence.io.FastaReader;
-import org.biojava3.core.sequence.io.ProteinSequenceCreator;
 import bacnet.Database;
 import bacnet.datamodel.phylogeny.Phylogenomic;
 import bacnet.datamodel.sequence.Gene;
 import bacnet.datamodel.sequence.Genome;
 import bacnet.datamodel.sequenceNCBI.GenomeNCBI;
-import bacnet.reader.NCBIFastaHeaderParser;
 import bacnet.reader.TabDelimitedTableReader;
 import bacnet.scripts.blast.BlastOutput.BlastOutputTYPE;
 import bacnet.utils.ArrayUtils;
@@ -874,7 +859,7 @@ public class HomologCreation {
 	}
 
 	public static String getBlastExtension() {
-		String os = System.getProperty("os.arch");
+		System.getProperty("os.arch");
 //		if (os.equals("amd64"))
 //			return ".exe";
 //		else

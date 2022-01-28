@@ -16,7 +16,6 @@ import bacnet.datamodel.sequence.Gene;
 import bacnet.datamodel.sequence.Genome;
 import bacnet.datamodel.sequence.Sequence;
 import bacnet.datamodel.sequence.Srna;
-import bacnet.reader.TabDelimitedTableReader;
 import bacnet.utils.FileUtils;
 import bacnet.utils.VectorUtils;
 

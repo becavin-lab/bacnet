@@ -1,18 +1,5 @@
 package bacnet.e4.rap.setup;
 
-import bacnet.datamodel.annotation.Annotation;
-import bacnet.datamodel.sequence.Genome;
-import bacnet.datamodel.sequenceNCBI.GenomeConversion;
-import bacnet.datamodel.sequenceNCBI.GenomeNCBI;
-import bacnet.datamodel.sequenceNCBI.GenomeNCBITools;
-import bacnet.reader.TabDelimitedTableReader;
-import bacnet.scripts.arrayexpress.ArrayExpress;
-import bacnet.scripts.arrayexpress.ArrayExpressDataImport;
-import bacnet.scripts.arrayexpress.ArrayExpressTechnology;
-import bacnet.scripts.genome.RASTEGDeGenome;
-import bacnet.scripts.listeriomics.Peptidomics;
-import bacnet.scripts.listeriomics.technology.Agilent;
-
 
 /**
  * All methods which will be executed before or after interface run
