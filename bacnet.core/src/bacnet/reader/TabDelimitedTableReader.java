@@ -385,6 +385,29 @@ public class TabDelimitedTableReader {
      * @param fileName
      * @return
      */
+    public static String getTableInHTML(ArrayList<String> list) {
+        String html = "<table border=\"1\">\n";
+        for (String element : list) {
+        	html += "<tr>";
+        	int index1=0;
+        	int index2=0;
+        	for (int i = 0; i < 3; i++) {
+        		index2 = element.indexOf("\t",index1+1);
+        		if (i==0) {
+            		html += "<th>" + element.substring(0,index2) + "</th>";
+        		} else if (i==1) {
+            		html += "<th>" + element.substring(index1+1,index2) + "</th>";
+        		} else {
+            		html += "<th>" + element.substring(index1+1) + "</th>";
+        		}
+        		index1=index2;
+        	}
+        	html += "</tr>\n";
+        }
+        html += "</table>";
+        return html;
+    }
+    
     public static String getHTMLVersion(Object[][] a) {
         String html = "<table border=\"1\">\n";
         for (int i = 0; i < a.length; i++) {

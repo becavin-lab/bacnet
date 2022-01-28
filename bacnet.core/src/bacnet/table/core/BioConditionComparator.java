@@ -53,7 +53,8 @@ public class BioConditionComparator extends ViewerComparator {
             rc = value1Int.compareTo(value2Int);
         } else if (columnName.equals("Log2FoldChange") || columnName.equals(ColNames.LOGFC + "")
                 || columnName.equals(ColNames.PVALUE + "") || columnName.equals(ColNames.FC + "")) {
-            Double value1Int = Double.parseDouble(value1);
+
+        	Double value1Int = Double.parseDouble(value1);
             Double value2Int = Double.parseDouble(value2);
             rc = value1Int.compareTo(value2Int);
         } else {

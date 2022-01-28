@@ -1,5 +1,6 @@
 package bacnet.datamodel.dataset;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -7,6 +8,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.TreeMap;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 import bacnet.Database;
@@ -25,7 +27,7 @@ import bacnet.utils.VectorUtils;
  */
 public class Network extends OmicsData {
 
-    public static double CORR_CUTOFF = 0.75;
+    public static double CORR_CUTOFF = 0.99;
     public static String CIRCOS_BACK_PATH = Database.getANNOTATIONDATA_PATH() + "CircosBackground.svg";
     /**
      * 
@@ -68,6 +70,7 @@ public class Network extends OmicsData {
                         /*
                          * Insert also other vertices linked to target edge
                          */
+                        /*
                         if (this.getEdges().containsKey(targetVertice)) {
                             HashMap<String, Double> edgesTempTarget = this.getEdges().get(targetVertice);
                             HashMap<String, Double> newEdgesTarget = new HashMap<>();
@@ -78,7 +81,7 @@ public class Network extends OmicsData {
                                 }
                             }
                             filteredNetwork.getEdges().put(targetVertice, newEdgesTarget);
-                        }
+                        }*/
                     }
                 }
                 filteredNetwork.getEdges().put(vertice, newEdges);
@@ -101,6 +104,44 @@ public class Network extends OmicsData {
                 String row = vertice + this.getVertices().get(vertice) + "\t" + edgesTemp.get(targetVertice) + "\t"
                         + targetVertice + this.getVertices().get(targetVertice);
                 networkList.add(row);
+            }
+        }
+        return networkList;
+    }
+    
+    public String toString() {
+    	StringBuffer sb = new StringBuffer();
+    	sb.append("from\tweight\tto\n");
+    	for (String vertice : this.getEdges().keySet()) {
+            HashMap<String, Double> edgesTemp = this.getEdges().get(vertice);
+            for (String targetVertice : edgesTemp.keySet()) {
+            	sb.append(""+ vertice + this.getVertices().get(vertice)+ "\t"+edgesTemp.get(targetVertice) + "\t"
+                        + targetVertice + this.getVertices().get(targetVertice)+"\n");
+            }
+        }
+    	return sb.toString();
+    }
+            
+       
+    /**
+     * Export to String[][] to download
+     * 
+     * @return
+     */
+    public String[][] toArray() {
+    	String[][] networkList = new String[this.getEdges().keySet().size()][3];
+    	networkList[0][0] = "from";
+    	networkList[0][1] = "weigth";
+    	networkList[0][2] = "to";
+
+        for (String vertice : this.getEdges().keySet()) {
+        	int i = 1;
+            HashMap<String, Double> edgesTemp = this.getEdges().get(vertice);
+            for (String targetVertice : edgesTemp.keySet()) {
+            	networkList[i][0] = vertice + this.getVertices().get(vertice);
+            	networkList[i][1] = edgesTemp.get(targetVertice).toString();
+            	networkList[i][2] = targetVertice + this.getVertices().get(targetVertice);
+            	i = i+1;
             }
         }
         return networkList;
@@ -139,25 +180,59 @@ public class Network extends OmicsData {
      * @param fileName Path for the file "Info.data"
      * @throws IOException
      */
-    public void load(String fileName) {
-        try {
-            // Create necessary input streams
-            FileInputStream fis = new FileInputStream(fileName); // Read from file
-            GZIPInputStream gzis = new GZIPInputStream(fis); // Uncompress
-            ObjectInputStream in = new ObjectInputStream(gzis); // Read objects
-            // Read in an object. It should be a vector of scribbles
-            Network data = (Network) in.readObject();
-            in.close();
-            setName(data.getName());
-            setNote(data.getNote());
-            setType(data.getType());
-            setDate(data.getDate());
-            setBioCondName(data.getBioCondName());
-            setEdges(data.getEdges());
-            setVertices(data.getVertices());
-        } catch (Exception e) {
-            e.printStackTrace();
+    public static Network load(String fileName) {
+    	
+    	TreeMap<String, Network> networks = Database.getInstance().getNetworks();
+        Network network = new Network();
+        if (networks.size() == 0) {
+            try {
+            	// Create necessary input streams
+                FileInputStream fis = new FileInputStream(fileName); // Read from file
+                GZIPInputStream gzis = new GZIPInputStream(fis); // Uncompress
+                ObjectInputStream in = new ObjectInputStream(gzis); // Read objects
+                // Read in an object. It should be a vector of scribbles
+                network = (Network) in.readObject();
+                in.close();
+                //setName(network.getName());
+                //setNote(network.getNote());
+                //setType(network.getType());
+                //setDate(network.getDate());
+                //setBioCondName(network.getBioCondName());
+                //setEdges(network.getEdges());
+                //setVertices(network.getVertices());
+            } catch (Exception e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            Database.getInstance().getNetworks().put(fileName, network);
+        } else {
+            // System.out.println("Genome already loaded");
+            network = networks.get(fileName);
+            if (network == null) { // if this genome has not been loaded -> load it
+            	 try {
+                 	// Create necessary input streams
+                     FileInputStream fis = new FileInputStream(fileName); // Read from file
+                     GZIPInputStream gzis = new GZIPInputStream(fis); // Uncompress
+                     ObjectInputStream in = new ObjectInputStream(gzis); // Read objects
+                     // Read in an object. It should be a vector of scribbles
+                     network = (Network) in.readObject();
+                     in.close();
+                     //setName(network.getName());
+                     //setNote(network.getNote());
+                     //setType(network.getType());
+                     //setDate(network.getDate());
+                     //setBioCondName(network.getBioCondName());
+                     //setEdges(network.getEdges());
+                     //setVertices(network.getVertices());
+                 } catch (Exception e) {
+                     // TODO Auto-generated catch block
+                     e.printStackTrace();
+                 }
+                 Database.getInstance().getNetworks().put(fileName, network);
+            }
         }
+        return network;
+
     }
 
     /**

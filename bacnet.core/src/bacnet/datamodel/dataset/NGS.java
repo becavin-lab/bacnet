@@ -275,6 +275,8 @@ public class NGS extends OmicsData implements Serializable {
                 }
                 values = newValues;
             }
+       
+
             /*
              * Copy values into the data
              */

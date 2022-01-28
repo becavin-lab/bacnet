@@ -33,7 +33,8 @@ public class GenomeElementAtlas implements Serializable {
     public static String PATH = Database.getDATA_PATH() + "GenomeElementAtlas" + File.separator;
     public static double DEFAULT_LOGFC_CUTOFF = 1.5;
     public static double DEFAULT_LOGFC_PROTEOMIC_CUTOFF = 1.5;
-    
+    public static double DEFAULT_COEXP_CUTOFF = 0.99;
+
     public static double DEFAULT_PVAL_CUTOFF = 0.05;
     public static double DEFAULT_PVAL_PROTEOMIC_CUTOFF = 0.05;
 
