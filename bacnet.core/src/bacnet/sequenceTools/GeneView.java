@@ -138,6 +138,7 @@ public class GeneView implements SelectionListener, MouseListener {
 	@SuppressWarnings("unused")
 	private boolean browserIsFocus = false;
 	private Network generalNetwork;
+	private Network filteredNetwork;
 
 	/*
 	 * General buttons
@@ -248,6 +249,9 @@ public class GeneView implements SelectionListener, MouseListener {
 	private String[][] negCoExpArray;
 	private String[][] posCoExpArrayTemp;
 	private String[][] negCoExpArrayTemp;
+    private Button btnCorrPlus;
+    private Button btnCorrMinus;
+    private Button btnExportNetwork;
 
 	/*
 	 * Other
@@ -753,8 +757,14 @@ public class GeneView implements SelectionListener, MouseListener {
 						.getText(columnNames.indexOf("Homolog Locus") + 1);
 				//System.out.println(tableHomologViewer.getTable().getSelectionIndex()+ " " + columnNames.indexOf("Name")+ "yahou "+selectedGene+" "+selectedGenome);
 				Genome genome = Genome.loadGenome(selectedGenome);
-				generalNetwork = new Network();
-				generalNetwork = Network.load(Database.getCOEXPR_NETWORK_TRANSCRIPTOMES_PATH() + "_" + genome.getSpecies());
+				ArrayList<String> genomeNames = new ArrayList<>();
+				genomeNames.add(selectedGenome);
+				if(selectedGenome.equals("Yersinia pestis CO92")||selectedGenome.equals("Yersinia pestis KIM5")||selectedGenome.equals("Yersinia pestis 91001")
+						||selectedGenome.equals("Yersinia pseudotuberculosis YPIII")||selectedGenome.equals("Yersinia pseudotuberculosis IP32953")||selectedGenome.equals("Yersinia entomophaga MH96")
+						||selectedGenome.equals("Yersinia enterocolitica Y1")||selectedGenome.equals("Yersinia enterocolitica Y11")) {
+					generalNetwork = new Network();
+					generalNetwork = Network.load(Database.getCOEXPR_NETWORK_TRANSCRIPTOMES_PATH() + "_" + genome.getSpecies());
+				}
 				Gene gene = genome.getGeneFromName(selectedGene);
 				GeneView.displayGene(gene, partService);
 			}
@@ -901,7 +911,7 @@ public class GeneView implements SelectionListener, MouseListener {
 
 		Label transcriptomesExpl = new Label(composite_102, SWT.NONE);
 		transcriptomesExpl.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 0, 0));
-		transcriptomesExpl.setText("For RNASeq experiments, displayed value is Log2(DESeq2 normalized feature counts), when the condition was done in replicate, or RPKM otherwise.");
+		transcriptomesExpl.setText("For RNASeq experiments, feature counts were normalized for comparison inside one experiment using DESeq2 if duplicate were done, or RPKM otherwise. \nThis normalized count were re-normalized between experiment dividing by the total normalized read counts to infer co-expression network. \nThe Log2 of this value is displayed here and is only indicative for the presence or absence of transcript. It should not be used for direct analysis.");
 
 		composite_103 = new Composite(composite_101, SWT.NONE);
 		composite_103.setLayout(new GridLayout(2, false));
@@ -1113,23 +1123,33 @@ public class GeneView implements SelectionListener, MouseListener {
 		Composite composite_9 = new Composite(compositeCoExpression, SWT.BORDER);
 		composite_9.setLayout(new GridLayout(1, false));
 
-		{
-			Composite composite_CoExp = new Composite(composite_9, SWT.NONE);
-			composite_CoExp.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
-			composite_CoExp.setLayout(new GridLayout(2, false));
+		Composite composite_CoExp = new Composite(composite_9, SWT.NONE);
+		//composite_CoExp.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
+		composite_CoExp.setLayout(new GridLayout(5, false));
 
-			Label lblCoExp= new Label(composite_CoExp, SWT.NONE);
-			lblCoExp.setText("Correlation >");
+		Label lblCoExp= new Label(composite_CoExp, SWT.NONE);
+		lblCoExp.setText("Display links for two genomic elements having a correlation higher than");
+		btnCorrMinus = new Button(composite_CoExp, SWT.NONE);
+		btnCorrMinus.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/genome/zoomOUT.bmp"));
+		btnCorrMinus.addSelectionListener(this);
+		txtCutoffCoExp = new Text(composite_CoExp, SWT.BORDER);
+		txtCutoffCoExp.setText(GenomeElementAtlas.DEFAULT_COEXP_CUTOFF+"");
 
-			txtCutoffCoExp = new Text(composite_CoExp, SWT.BORDER);
-			txtCutoffCoExp.setText(GenomeElementAtlas.DEFAULT_COEXP_CUTOFF+"");
-		}
+		
+        btnCorrPlus = new Button(composite_CoExp, SWT.NONE);
+        btnCorrPlus.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/genome/zoomIN.bmp"));
+		btnCorrPlus.addSelectionListener(this);
 
 		btnUpdateCutoffCoExp = new Button(composite_9, SWT.NONE);
 		btnUpdateCutoffCoExp.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 5, 1));
 		btnUpdateCutoffCoExp.setText("Choose cut-off and update Co-Expression view");
 		btnUpdateCutoffCoExp.addSelectionListener(this);
-
+		
+        btnExportNetwork = new Button(composite_9, SWT.NONE);
+        btnExportNetwork.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 5, 1));
+        btnExportNetwork.setText("Export filtered network");
+        btnExportNetwork.addSelectionListener(this);
+        
 		Composite composite_3 = new Composite(compositeCoExpression, SWT.NONE);
 		composite_3.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
 		composite_3.setLayout(new GridLayout(4, false));
@@ -1158,6 +1178,33 @@ public class GeneView implements SelectionListener, MouseListener {
 		tableNegCoExpViewer.getTable().addSelectionListener(this);
 		tableNegCoExpViewer.getTable().setHeaderVisible(true);
 		tableNegCoExpViewer.getTable().setLinesVisible(true);
+		
+		tablePosCoExpViewer.addDoubleClickListener(new IDoubleClickListener() {
+			@Override
+			public void doubleClick(DoubleClickEvent event) {
+				String selectedGene =
+						tablePosCoExpViewer.getTable().getItem(tablePosCoExpViewer.getTable().getSelectionIndex())
+						.getText(coExpCol.indexOf("Gene"));
+				System.out.println("selectedGene: "+selectedGene);
+				//System.out.println(tableHomologViewer.getTable().getSelectionIndex()+ " " + columnNames.indexOf("Name")+ "yahou "+selectedGene+" "+selectedGenome);
+				Gene gene = genome.getGeneFromName(selectedGene);
+				System.out.println("gene: "+gene);
+
+				GeneView.displayGene(gene, partService);
+			}
+		});
+		
+		tableNegCoExpViewer.addDoubleClickListener(new IDoubleClickListener() {
+			@Override
+			public void doubleClick(DoubleClickEvent event) {
+				String selectedGene =
+						tableNegCoExpViewer.getTable().getItem(tableNegCoExpViewer.getTable().getSelectionIndex())
+						.getText(coExpCol.indexOf("Gene"));
+				//System.out.println(tableHomologViewer.getTable().getSelectionIndex()+ " " + columnNames.indexOf("Name")+ "yahou "+selectedGene+" "+selectedGenome);
+				Gene gene = genome.getGeneFromName(selectedGene);
+				GeneView.displayGene(gene, partService);
+			}
+		});
 		
 		tbtmSynteny = new TabItem(tabFolder, SWT.NONE);
 		tbtmSynteny.setText("Synteny");
@@ -1249,7 +1296,7 @@ public class GeneView implements SelectionListener, MouseListener {
 				pathGraphHTML = realUrl + "SynTView/flash/indexFinal.html";
 			} else if (genome.getSpecies().equals("Yersinia pestis CO92")){
 				//pathGraphHTML = "http://hub15.hosting.pasteur.fr:8080/SynTView/site/?dataDir=\"data/CO92\"";
-				pathGraphHTML = "https://yersiniomics.pasteur.fr/SynTView/site/?dataDir=\"data/CO92\"";
+				//pathGraphHTML = "https://yersiniomics.pasteur.fr/SynTView/site/?dataDir=\"data/CO92\"";
 				System.out.println("SyntView: " + pathGraphHTML);
 				browserSynteny.setUrl(pathGraphHTML);
 				browserSynteny.redraw();
@@ -1287,7 +1334,7 @@ public class GeneView implements SelectionListener, MouseListener {
 			ArrayList<String> genomeNames = new ArrayList<>();
 			genomeNames.add(genomeName);
 			if(genomeName.equals("Yersinia pestis CO92")||genomeName.equals("Yersinia pestis KIM5")||genomeName.equals("Yersinia pestis 91001")
-					||genomeName.equals("Yersinia pseudotuberculosis YPIII")||genomeName.equals("Yersinia pseudotuberculosis IP32953")||genomeName.equals("Yersinia entomophage MH96")
+					||genomeName.equals("Yersinia pseudotuberculosis YPIII")||genomeName.equals("Yersinia pseudotuberculosis IP32953")||genomeName.equals("Yersinia entomophaga MH96")
 					||genomeName.equals("Yersinia enterocolitica Y1")||genomeName.equals("Yersinia enterocolitica Y11")) {
 				OpenGenomesAndNetworkThread thread = new OpenGenomesAndNetworkThread(genomeNames);
 				new ProgressMonitorDialog(this.shell).run(true, false, thread);
@@ -1368,7 +1415,7 @@ public class GeneView implements SelectionListener, MouseListener {
 			ArrayList<String> genomeNames = new ArrayList<>();
 			genomeNames.add(genomeName);
 			if(genomeName.equals("Yersinia pestis CO92")||genomeName.equals("Yersinia pestis KIM5")||genomeName.equals("Yersinia pestis 91001")
-					||genomeName.equals("Yersinia pseudotuberculosis YPIII")||genomeName.equals("Yersinia pseudotuberculosis IP32953")||genomeName.equals("Yersinia entomophage MH96")
+					||genomeName.equals("Yersinia pseudotuberculosis YPIII")||genomeName.equals("Yersinia pseudotuberculosis IP32953")||genomeName.equals("Yersinia entomophaga MH96")
 					||genomeName.equals("Yersinia enterocolitica Y1")||genomeName.equals("Yersinia enterocolitica Y11")) {
 				OpenGenomesAndNetworkThread thread = new OpenGenomesAndNetworkThread(genomeNames);
 				new ProgressMonitorDialog(this.shell).run(true, false, thread);
@@ -1849,7 +1896,7 @@ public class GeneView implements SelectionListener, MouseListener {
 		 */
 		updateHomolog();
 		if(genome.getSpecies().equals("Yersinia pestis CO92")||genome.getSpecies().equals("Yersinia pestis KIM5")||genome.getSpecies().equals("Yersinia pestis 91001")
-				||genome.getSpecies().equals("Yersinia pseudotuberculosis YPIII")||genome.getSpecies().equals("Yersinia pseudotuberculosis IP32953")||genome.getSpecies().equals("Yersinia entomophage MH96")
+				||genome.getSpecies().equals("Yersinia pseudotuberculosis YPIII")||genome.getSpecies().equals("Yersinia pseudotuberculosis IP32953")||genome.getSpecies().equals("Yersinia entomophaga MH96")
 				||genome.getSpecies().equals("Yersinia enterocolitica Y1")||genome.getSpecies().equals("Yersinia enterocolitica Y11")) {
 			updateCoExp();
 		} else {
@@ -1953,7 +2000,7 @@ public class GeneView implements SelectionListener, MouseListener {
 		
 		ArrayList<String> genomeElementArrayList = new ArrayList<>();
 		genomeElementArrayList.add(sequence.getName());
-		Network filteredNetwork = generalNetwork.filterNetwork(genomeElementArrayList,Double.parseDouble(txtCutoffCoExp.getText()));
+		filteredNetwork = generalNetwork.filterNetwork(genomeElementArrayList,Double.parseDouble(txtCutoffCoExp.getText()));
 		//ArrayList<String> networkList = filteredNetwork.toArrayList();
 
 		setColumnNames();
@@ -2172,32 +2219,7 @@ public class GeneView implements SelectionListener, MouseListener {
 			}
 
 		}
-		tablePosCoExpViewer.addDoubleClickListener(new IDoubleClickListener() {
-			@Override
-			public void doubleClick(DoubleClickEvent event) {
-				String selectedGene =
-						tablePosCoExpViewer.getTable().getItem(tablePosCoExpViewer.getTable().getSelectionIndex())
-						.getText(coExpCol.indexOf("Gene"));
-				System.out.println("selectedGene: "+selectedGene);
-				//System.out.println(tableHomologViewer.getTable().getSelectionIndex()+ " " + columnNames.indexOf("Name")+ "yahou "+selectedGene+" "+selectedGenome);
-				Gene gene = genome.getGeneFromName(selectedGene);
-				System.out.println("gene: "+gene);
-
-				GeneView.displayGene(gene, partService);
-			}
-		});
 		
-		tableNegCoExpViewer.addDoubleClickListener(new IDoubleClickListener() {
-			@Override
-			public void doubleClick(DoubleClickEvent event) {
-				String selectedGene =
-						tableNegCoExpViewer.getTable().getItem(tableNegCoExpViewer.getTable().getSelectionIndex())
-						.getText(coExpCol.indexOf("Gene"));
-				//System.out.println(tableHomologViewer.getTable().getSelectionIndex()+ " " + columnNames.indexOf("Name")+ "yahou "+selectedGene+" "+selectedGenome);
-				Gene gene = genome.getGeneFromName(selectedGene);
-				GeneView.displayGene(gene, partService);
-			}
-		});
 	}
 
 	private SelectionAdapter getPosSelectionAdapter(final TableColumn column, final int index) {
@@ -2724,7 +2746,7 @@ public class GeneView implements SelectionListener, MouseListener {
 		if (e.getSource() == comboGenome) {
 			genome = Genome.loadGenome(getGenomeSelected());
 			if(genome.getSpecies().equals("Yersinia pestis CO92")||genome.getSpecies().equals("Yersinia pestis KIM5")||genome.getSpecies().equals("Yersinia pestis 91001")
-					||genome.getSpecies().equals("Yersinia pseudotuberculosis YPIII")||genome.getSpecies().equals("Yersinia pseudotuberculosis IP32953")||genome.getSpecies().equals("Yersinia entomophage MH96")
+					||genome.getSpecies().equals("Yersinia pseudotuberculosis YPIII")||genome.getSpecies().equals("Yersinia pseudotuberculosis IP32953")||genome.getSpecies().equals("Yersinia entomophaga MH96")
 					||genome.getSpecies().equals("Yersinia enterocolitica Y1")||genome.getSpecies().equals("Yersinia enterocolitica Y11")) {
 				generalNetwork = new Network();
 				generalNetwork = Network.load(Database.getCOEXPR_NETWORK_TRANSCRIPTOMES_PATH() + "_" + genome.getSpecies());
@@ -2839,7 +2861,31 @@ public class GeneView implements SelectionListener, MouseListener {
 			GeneViewProteomeTools.updateProteinAtlas(sequence, txtCutoffLogFCProteome, this, arrayProteinAtlasList);
 		} else if (e.getSource() == btnUpdateCutoffCoExp) {
 			updateCoExp();
-		}else if (e.getSource() == btnHeatmapview) {
+		} else if (e.getSource() == btnCorrMinus) {
+            double cutoff = Double.parseDouble(txtCutoffCoExp.getText());
+            if (cutoff > Network.CORR_CUTOFF) {
+                cutoff = cutoff - 0.005;
+                String cutoffString = cutoff + "";
+                if (cutoffString.length() >= 5)
+                    cutoffString = cutoffString.substring(0, 5);
+                txtCutoffCoExp.setText(cutoffString);
+                updateCoExp();
+            }
+        } else if (e.getSource() == btnExportNetwork) {
+            //String[][] networkList = filteredNetwork.toArray();
+            ArrayList<String> networkList = filteredNetwork.toArrayList();
+            String arrayRep = filteredNetwork.toString();
+            String arrayRepHTML = TabDelimitedTableReader.getTableInHTML(networkList);
+            SaveFileUtils.saveTextFile("network.txt", arrayRep, true, "", arrayRepHTML, partService, shell);
+        } else if (e.getSource() == btnCorrPlus) {
+            double cutoff = Double.parseDouble(txtCutoffCoExp.getText());
+            cutoff = cutoff + 0.005;
+            String cutoffString = cutoff + "";
+            if (cutoffString.length() >= 5)
+                cutoffString = cutoffString.substring(0, 5);
+            txtCutoffCoExp.setText(cutoffString);
+            updateCoExp();
+        } else if (e.getSource() == btnHeatmapview) {
 			String sequenceName = sequence.getName();
 			HeatMapTranscriptomicsView.displayComparisonsAndElement(genome.getSpecies(), getSelectedComparisons(),
 					sequenceName, partService);

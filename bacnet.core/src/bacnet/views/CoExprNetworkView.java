@@ -208,7 +208,7 @@ public class CoExprNetworkView implements SelectionListener {
         btnCorrMinus.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/genome/zoomOUT.bmp"));
         btnCorrMinus.addSelectionListener(this);
         textCutOff = new Text(composite, SWT.BORDER);
-        textCutOff.setText("1.0000");
+        textCutOff.setText("DEFAULT_COEXP_CUTOFF");
         textCutOff.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));        
         btnCorrPlus = new Button(composite, SWT.NONE);
         btnCorrPlus.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/genome/zoomIN.bmp"));

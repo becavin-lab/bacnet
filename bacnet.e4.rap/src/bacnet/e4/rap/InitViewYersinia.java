@@ -99,8 +99,8 @@ public class InitViewYersinia implements SelectionListener {
 
     @PostConstruct
     public void createPartControl(Composite parent) {
-    	//AppSpecificMethods AppSpecificMethods = new AppSpecificMethods();
-    	//AppSpecificMethods.openPasswordDialog(shell);
+    	AppSpecificMethods AppSpecificMethods = new AppSpecificMethods();
+    	AppSpecificMethods.openPasswordDialog(shell);
 
         //System.out.println("Load InitView");
 
@@ -889,16 +889,16 @@ public class InitViewYersinia implements SelectionListener {
         composite_19.setLayout(new GridLayout(1, false));
 
         Label lblLastUpdate = new Label(composite_19, SWT.NONE);
-        lblLastUpdate.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, true, 1, 1));
+        lblLastUpdate.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, true, true, 1, 1));
         lblLastUpdate.setText("Last update: January 2022");
 
         linkPubli = new Link(composite_19, SWT.NONE);
-        linkPubli.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
+        linkPubli.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, true, false, 1, 1));
         linkPubli.setText("<a>Cite Yersiniomics</a>");
         linkPubli.addSelectionListener(this);
 
         Link link = new Link(composite_19, SWT.NONE);
-        link.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
+        link.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, true, false, 1, 1));
         link.setText("Contact us if you have a recently published \"omics\" dataset you want to be integrated to Yersiniomics:  <a href=\"mailto:yersiniomics@pasteur.fr\">yersiniomics@pasteur.fr</a>");
 
         new Label(composite_19, SWT.NONE);
@@ -908,7 +908,7 @@ public class InitViewYersinia implements SelectionListener {
         lblImagelicence.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/logos/cccommons.png"));
 
         Label lblThisWorkIs = new Label(composite_19, SWT.NONE);
-        lblThisWorkIs.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
+        lblThisWorkIs.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, true, false, 1, 1));
         lblThisWorkIs.setAlignment(SWT.CENTER);
         lblThisWorkIs.setText("This work is licensed under");
         linkLicenceField = new Link(composite_19, SWT.NONE);

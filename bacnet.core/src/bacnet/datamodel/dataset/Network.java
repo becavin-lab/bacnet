@@ -26,7 +26,7 @@ import bacnet.utils.VectorUtils;
  */
 public class Network extends OmicsData {
 
-    public static double CORR_CUTOFF = 0.99;
+    public static double CORR_CUTOFF = 0.5;
     public static String CIRCOS_BACK_PATH = Database.getANNOTATIONDATA_PATH() + "CircosBackground.svg";
     /**
      * 
