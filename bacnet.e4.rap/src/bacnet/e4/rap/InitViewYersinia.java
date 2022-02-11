@@ -987,6 +987,9 @@ public class InitViewYersinia implements SelectionListener {
         }else if (e.getSource() == btnKIM) {
             GeneView.openKIMGeneView(partService);
         	//GenomeTranscriptomeView.displayYersiKIM(partService);
+        } else if (e.getSource() == btn91001) {
+            GeneView.open91001GeneView(partService);
+        	//GenomeTranscriptomeView.displayYersiCSF007(partService);
         } else if (e.getSource() == btnPestoides) {
             GeneView.openPestoidesGeneView(partService);
         } else if (e.getSource() == btnIP32953) {
@@ -1005,14 +1008,20 @@ public class InitViewYersinia implements SelectionListener {
         } else if (e.getSource() == btn8081) {
             GeneView.open8081GeneView(partService);
         	//GenomeTranscriptomeView.displayYersi8081(partService);
+        } else if (e.getSource() == btnIP38326) {
+            GeneView.openIP38326GeneView(partService);
         } else if (e.getSource() == btnWA) {
             GeneView.openWAGeneView(partService);
+        } else if (e.getSource() == btnIP38023) {
+            GeneView.openIP38023GeneView(partService);
+        } else if (e.getSource() == btnIP37485) {
+            GeneView.openIP37485GeneView(partService);
+        } else if (e.getSource() == btnIP37574) {
+            GeneView.openIP37574GeneView(partService);
         } else if (e.getSource() == btnQMA0440) {
             GeneView.openQMA0440GeneView(partService);
         	//GenomeTranscriptomeView.displayYersiCSF007(partService);
-        } else if (e.getSource() == btn91001) {
-            GeneView.open91001GeneView(partService);
-        	//GenomeTranscriptomeView.displayYersiCSF007(partService);
+    
         } else if (e.getSource() == btnMH96) {
             GeneView.openMH96GeneView(partService);
         }else if (e.getSource() == btnProteomics) {

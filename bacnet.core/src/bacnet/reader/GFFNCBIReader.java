@@ -58,7 +58,7 @@ public class GFFNCBIReader {
             if (featureGene.type().equals("gene") || featureGene.type().equals("RNA")
                     || featureGene.type().equals("pseudogene")) {
                 String locus_tag = listGenes.get(j).getAttribute("locus_tag");
-
+                //System.out.println("locus: "+locus_tag);
                 if (locus_tag == null) { // if locus_tag attribute was not found, take ID information
                     locus_tag = listGenes.get(j).getAttribute("ID");
                     // if(locus_tag.split(":").length>1) locus_tag = locus_tag.split(":")[1];
@@ -174,18 +174,28 @@ public class GFFNCBIReader {
                  * Multiple features available
                  */
                 for (FeatureI feature : listFeatures) {
+                	System.out.println("feature type: "+feature.type());
+
 
                     /*
                      * Create the genome element
                      */
                     String chromoID = feature.seqname();
+                	System.out.println("chromoID: "+chromoID);
+                	for (String text : chromosomes.keySet()) {
+                    	System.out.println("chromosome accession: "+text);
+
+                	}
                     // System.out.println("search chromoID: "+chromoID);
                     if (chromosomes.containsKey(chromoID)) {
+                    	System.out.println("chromoID : "+chromoID);
                         ChromosomeBacteriaSequence chromosome = chromosomes.get(chromoID);
                         /*
                          * Add the different information available
                          */
                         if (feature.type().equals("gene")) { // Add coding sequence
+                        	System.out.println("feature type gene: "+feature.type());
+
                             sequence.setBioBegin(feature.location().bioStart());
                             sequence.setBioEnd(feature.location().bioEnd());
 

@@ -37,11 +37,11 @@ public class AppSpecificMethods {
                 new InputDialog(shell, "Type password", "Need to type a password to enter website", "", null);
         if (dialog.open() == 0) {
             // System.out.println(dialog.getValue());
-            String password = "Y3rsinia!";
+            String password = "";
             if (Database.getInstance().getProjectName() == Database.UIBCLISTERIOMICS_PROJECT) {
-                password = "BecChris";
+                password = "";
             } else if (Database.getInstance().getProjectName() == Database.LEISHOMICS_PROJECT) {
-                password = "donovani";
+                password = "";
             }
 
             if (dialog.getValue().equals(password)) {

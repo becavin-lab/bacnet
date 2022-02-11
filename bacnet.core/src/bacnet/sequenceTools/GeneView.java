@@ -2576,6 +2576,58 @@ public class GeneView implements SelectionListener, MouseListener {
 		view.initGenomeInfo(genomeName);
 		view.setGenomeSelected(genomeName);
 	}
+	public static void openIP38326GeneView(EPartService partService) {
+		String id = GeneView.ID + "-" + String.valueOf(Math.random() * 1000).substring(0, 3);
+		// initiate view
+		ResourceManager.openView(partService, GeneView.ID, id);
+		// update data
+		MPart part = partService.findPart(id);
+		NavigationManagement.pushStateView(id, new HashMap<>());
+		GeneView view = (GeneView) part.getObject();
+		view.setViewID(id);
+		String genomeName = "Yersinia enterocolitica IP38326";
+		view.initGenomeInfo(genomeName);
+		view.setGenomeSelected(genomeName);
+	}
+	public static void openIP38023GeneView(EPartService partService) {
+		String id = GeneView.ID + "-" + String.valueOf(Math.random() * 1000).substring(0, 3);
+		// initiate view
+		ResourceManager.openView(partService, GeneView.ID, id);
+		// update data
+		MPart part = partService.findPart(id);
+		NavigationManagement.pushStateView(id, new HashMap<>());
+		GeneView view = (GeneView) part.getObject();
+		view.setViewID(id);
+		String genomeName = "Yersinia enterocolitica IP38023";
+		view.initGenomeInfo(genomeName);
+		view.setGenomeSelected(genomeName);
+	}
+	public static void openIP37485GeneView(EPartService partService) {
+		String id = GeneView.ID + "-" + String.valueOf(Math.random() * 1000).substring(0, 3);
+		// initiate view
+		ResourceManager.openView(partService, GeneView.ID, id);
+		// update data
+		MPart part = partService.findPart(id);
+		NavigationManagement.pushStateView(id, new HashMap<>());
+		GeneView view = (GeneView) part.getObject();
+		view.setViewID(id);
+		String genomeName = "Yersinia enterocolitica IP37485";
+		view.initGenomeInfo(genomeName);
+		view.setGenomeSelected(genomeName);
+	}
+	public static void openIP37574GeneView(EPartService partService) {
+		String id = GeneView.ID + "-" + String.valueOf(Math.random() * 1000).substring(0, 3);
+		// initiate view
+		ResourceManager.openView(partService, GeneView.ID, id);
+		// update data
+		MPart part = partService.findPart(id);
+		NavigationManagement.pushStateView(id, new HashMap<>());
+		GeneView view = (GeneView) part.getObject();
+		view.setViewID(id);
+		String genomeName = "Yersinia enterocolitica IP37574";
+		view.initGenomeInfo(genomeName);
+		view.setGenomeSelected(genomeName);
+	}
 
 	/**
 	 * Display GeneView <br>
