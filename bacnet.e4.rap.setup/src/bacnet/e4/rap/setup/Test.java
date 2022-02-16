@@ -1,6 +1,7 @@
 package bacnet.e4.rap.setup;
 
 
+
 /**
  * All methods which will be executed before or after interface run
  * @author ipmc
@@ -13,6 +14,15 @@ public class Test {
 	 */
 	public static void runPreTest() {
 		System.out.println("Run Pre-test");
+		
+		
+//		try {
+//			Peptidomics.run();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+
 		
 		/*
 		String[][] array = TabDelimitedTableReader.read("D:\\Yersiniomics\\Yersiniomics\\ArrayExpress\\probes.txt");
@@ -35,22 +45,7 @@ public class Test {
 //		
 //		TabDelimitedTableReader.save(Annotation.getAnnotationGenes(genome,genome.getFirstChromosome().getGeneNameList()),"C:\\Users\\ipmc\\Desktop\\EGDe.txt");
 		
-//		Peptidomics.run();
-//		String genome = "Listeria monocytogenes 2015TE24968";
-//		GenomeNCBI genomeNCBI = GenomeNCBITools.loadGenome(genome, GenomeNCBI.PATH_GENOMES, false, true);
-//        GenomeConversion.run(genomeNCBI, GenomeNCBI.PATH_GENOMES + "/" + genome, genome);
-//        Genome genomeTemp = Genome.loadGenome(genome);
-//        String message = "";
-//        if (genomeTemp == null) {
-//        	message += genome + " does not exists. Click: Add unvalidated Genome to the database" + "\n";
-//        } else if (genomeTemp.getFirstChromosome().getGenes().size() == 0) {
-//        	message += genome + " was not added to the database, check errors in the console" + "\n";
-//        } else {
-//        	message += genome + " was added to the database" + "\n";
-//            message += "Save Protein to Locus tag hashmap for faster computing of homolog search: " + genome;
-//            genomeTemp.saveProteinIdToLocusTag();
-//        }
-//        System.out.println(message);
+		
 	}
 	
 	/**

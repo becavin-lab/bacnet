@@ -1,78 +1,324 @@
 package bacnet.scripts.listeriomics;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FilenameFilter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map.Entry;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+
+import org.biojava3.core.sequence.DNASequence;
+import org.biojava3.core.sequence.ProteinSequence;
+import org.biojava3.core.sequence.compound.AminoAcidCompound;
+import org.biojava3.core.sequence.compound.AminoAcidCompoundSet;
+import org.biojava3.core.sequence.compound.DNACompoundSet;
+import org.biojava3.core.sequence.compound.NucleotideCompound;
+import org.biojava3.core.sequence.io.DNASequenceCreator;
+import org.biojava3.core.sequence.io.FastaReader;
+import org.biojava3.core.sequence.io.GenericFastaHeaderParser;
+import org.biojava3.core.sequence.io.ProteinSequenceCreator;
+import org.biojava3.core.sequence.io.template.SequenceCreatorInterface;
+
+import bacnet.Database;
+import bacnet.datamodel.sequence.Genome;
 import bacnet.datamodel.sequenceNCBI.GenomeNCBI;
+import bacnet.reader.NCBIFastaHeaderParser;
 import bacnet.reader.TabDelimitedTableReader;
+import bacnet.scripts.database.HomologCreation;
+import bacnet.utils.FileUtils;
 
 public class Peptidomics {
 
-	public static void run() {
+	public static void run() throws IOException {
 		/*
 		 * Create fake protein fasta in Excel
-		 * EGD_Listeria_peptides_190923.xslx
+		 * UPDATE 15th february
+		 * Suppl table S2 - Listeria epitopes 211130.xlsx
 		 * to
-		 * C:\Users\ipmc\OneDrive\Listeriomics\GenomeNCBI\Temp\BLASTDB\peptidomics\peptidomics.ORF.faa
+		 * Peptidomics/peptidomics.ORF.faa
 		 */
 		
 		/*
 		 * Exec blastDB creation
-		 * "C:/Program Files/NCBI/blast-2.9.0+/bin/makeblastdb".exe -in "C:\\Users\\ipmc\\OneDrive\\Listeriomics\GenomeNCBI\\BLASTDB\peptidomics\peptidomics.ORF.faa" -parse_seqids -out "C:\\Users\\ipmc\\OneDrive\\Listeriomics\\GenomeNCBI\\BLASTDB\peptidomics\peptidomics.ORF" -dbtype prot -title peptidomics
- 		*
+		 *  "/opt/ncbi-blast-2.12.0+/bin/makeblastdb" -in "//Users//christophebecavin//Documents//Peptidomics//GenomeNCBI//Blastdb//peptidomics//peptidomics.ORF.faa" -parse_seqids -out "//Users//christophebecavin//Documents//Peptidomics//GenomeNCBI//Blastdb/peptidomics/peptidomics.ORF" -dbtype prot -title peptidomics
  		*
 		 */
+		
+		/*
+		 * Create all blastDB
+		 * 
+		 */
+		//HomologCreation.createBlastDB("");
 		
 		/*
 		 * Modify function for blastscript creation to add peptidomics
-		 * HomologCreation.createBlastScript <- remoive second line of blastp and parameter -max_target_seqs 1 
-		 * Genome.getAvailableGenomes() <- add first line "peptidomics" to ArrayList of genome
 		 */
+		//createBlastScript("");
 		
 		/*
-		 * Run every Blast on the server
+		 * Run every Blast on MACOSX : cat ls *.sh | sh
 		 */
-		// Done there : /pasteur/projets/policy01/BioIT/Chris_Listeriomics/
-		//  sbatch --array=1-236 RunBlast.sh ListScriptPeptidomics.txt
-		/*
-		 * Combine results
-		 */
-		String path = "C:\\Users\\ipmc\\OneDrive\\Peptidomics\\";
-		String results_folder = path + "Blast_result\\";
-		
+
+
 		/*
 		 * Add identities
 		 */
-//		ArrayList<String> listGenomes = Genome.getAvailableGenomes();
-//		for(String genome : listGenomes) {
-//			HashMap<String,String> proteinIdtoLocusTagTarget = Genome.loadGeneFromProteinId(GenomeNCBI.unprocessGenomeName(genome));
-//			genome = GenomeNCBI.processGenomeName(genome);
-//			String path_fileblast = results_folder + "resultBlast_peptidomics_vs_" + genome + ".blast.txt";
-//			System.out.println(path_fileblast);
-//			String[][] genomeT_vs_genomeP = TabDelimitedTableReader.read(path_fileblast);
-//			ArrayList<String> resultTable = new ArrayList<String>();
-//			if(genomeT_vs_genomeP.length!=0) {
-//				String[] columToAdd_T_VS_P = new String[genomeT_vs_genomeP.length];
-//				ArrayList<Integer> indexRemove = new ArrayList<Integer>();
-//				for (int i = 0; i < genomeT_vs_genomeP.length; i++) {
-//					float identitiesT_vs_P = (Float.valueOf(genomeT_vs_genomeP[i][5]))
-//							/ (Float.valueOf(genomeT_vs_genomeP[i][2]));
-//					columToAdd_T_VS_P[i] = String.valueOf(identitiesT_vs_P);
-//					String querySeq = genomeT_vs_genomeP[i][genomeT_vs_genomeP[i].length-2];
-//					String hitSeq = genomeT_vs_genomeP[i][genomeT_vs_genomeP[i].length-1];
-//					if(querySeq.equals(hitSeq) && identitiesT_vs_P == 1) {
-//						String proteinId = genomeT_vs_genomeP[i][1].substring(4,genomeT_vs_genomeP[i][1].length()-1);
-//						String geneName = proteinIdtoLocusTagTarget.get(proteinId);
-//						String newRow = genomeT_vs_genomeP[i][0] + "\t" + proteinId + "\t" + geneName;
-//						newRow += "\t" + genomeT_vs_genomeP[i][2] + "\t" + genomeT_vs_genomeP[i][3] + "\t"+querySeq+"\t"+hitSeq+"\t"+identitiesT_vs_P;
-//						resultTable.add(newRow);
-//						
-//						
-//					}
-//				}
-//				TabDelimitedTableReader.saveList(resultTable,results_folder + "peptidomics_vs_" + genome + ".blast.txt");
-//			}			
-//		}
+		//addIdentitesandFilter();
 		
+		/*
+		 * Create final table
+		 */
+		createFinalTable();
+	}
+		
+	
+	/**
+	 * Create final table: Count number of epitopes conserved per genomes
+	 * 
+	 * Create multiple tables for each epi: pathEpiBlast + peptideID + "_Blast_search.txt"
+	 * Create one table for heatmap visu genome vs epitopes:  Database.getInstance().getPath() + "/Result_Blast.txt"
+	 * Create one table with the number of genome per epitopes: Database.getInstance().getPath() + "/Result_peptides.txt"
+	 * 
+	 */
+	public static void createFinalTable() {
+		// Read genomes and Epitopes
+		ArrayList<String> genomes = Genome.getAvailableGenomes();
+		String[][] peptidomics = TabDelimitedTableReader.read(Database.getInstance().getPath() + "/Suppl table S2 - Listeria epitopes 211130.txt");
+		// Prepare final tables
+		ArrayList<String> listResults = new ArrayList<String>();
+		String headers = "Peptide\tNbGenome in which it is found\tnbGenome for search\tnb of results found";
+		for(int k=1;k<7;k++) {
+			headers+="\t"+peptidomics[0][k];
+		}
+		listResults.add(headers);
+		String[][] finalTable = new String[genomes.size()+1][peptidomics.length+1];
+		
+		String pathEpiBlast = Database.getInstance().getPath() + "/EpiBlast/";
+		HomologCreation.folderCreation(pathEpiBlast);
+		
+		finalTable[0][0] = "Peptidomics";
+		for(int j=1;j < peptidomics.length; j++) {
+			int nbGenome = 0;
+			String peptideID = peptidomics[j][0];
+			finalTable[0][j+1] = peptideID;
+			ArrayList<String> resultsPeptide = new ArrayList<String>();
+			resultsPeptide.add("Genome\tIdentity\tProtein\tqlen\tslen");
+			int nbLine = 0;			
+			for(int i=0; i< genomes.size(); i++) {
+				String genome = genomes.get(i);
+				finalTable[i+1][0] = genome; 
+				genome = GenomeNCBI.processGenomeName(genome);
+				File file = new File(HomologCreation.PATH_RESULTS + "peptidomics_vs_" + genome + ".blast.txt");
+				String resultGene = "";
+				if(file.exists()) {
+					String[][] blastResult = TabDelimitedTableReader.read(HomologCreation.PATH_RESULTS + "peptidomics_vs_" + genome + ".blast.txt");
+					boolean found = false;
+					for(int k=0; k < blastResult.length; k++) {
+						if(peptideID.equals(blastResult[k][0])) {
+							/*
+							 * Test if perfect match
+							 */
+							double identity = Double.parseDouble(blastResult[k][blastResult[0].length-1]);
+							String new_row = genome + "\t"+identity;
+							for(int w = 1; w <(blastResult[0].length-1); w++) {
+								new_row += "\t"+ blastResult[k][w];
+							}
+							resultsPeptide.add(new_row);
+							found = true;
+							nbLine++;
+							resultGene += blastResult[k][1]+";";
+							
+						}
+					}
+					if(!found) {
+						resultsPeptide.add(genome + "\t0\t0\t0\t0\t0");
+						nbLine++;
+						finalTable[i+1][j+1] = "0";
+					} else {
+						nbGenome++;
+						finalTable[i+1][j+1] = resultGene.split(";").length + "";
+					}
+				} else {
+					resultsPeptide.add(genome + "\t0\t0\t0\t0\t0");
+					nbLine++;
+				}				
+			}
+			
+			TabDelimitedTableReader.saveList(resultsPeptide, pathEpiBlast + peptideID + "_Blast_search.txt");
+			String resultLine = peptideID + "\t"+nbGenome+"\t"+(genomes.size())+"\t"+nbLine;
+			for(int k=1;k<7;k++) {
+				resultLine+="\t"+peptidomics[j][k];
+			}
+			listResults.add(resultLine);
+		}
+		TabDelimitedTableReader.save(finalTable, Database.getInstance().getPath() + "/Result_Blast.txt");
+		TabDelimitedTableReader.saveList(listResults, Database.getInstance().getPath() + "/Result_peptides.txt");
+	}
+
+	
+	
+	/**
+	 * Add similiarities ratio in all tables : similarities = nident / qlen   (column 5 / column 2)
+	 * Filter and keep only 100% match
+	 * Save to : HomologCreation.PATH_RESULTS + "peptidomics_vs_" + genome + ".blast.txt"
+	 */
+	public static void addIdentitesandFilter() {
+		int column_nident = 5;
+		int column_qlen = 2;
+		ArrayList<String> listGenomes = Genome.getAvailableGenomes();
+		for(String genome : listGenomes) {
+			genome = GenomeNCBI.processGenomeName(genome);
+			String path_fileblast = HomologCreation.PATH_RESULTS + "resultBlast_peptidomics_vs_" + genome + ".blast.txt";
+			System.out.println(path_fileblast);
+			String[][] genomeT_vs_genomeP = TabDelimitedTableReader.read(path_fileblast);
+			ArrayList<String> resultTable = new ArrayList<String>();
+			if(genomeT_vs_genomeP.length!=0) {
+				for (int i = 0; i < genomeT_vs_genomeP.length; i++) {
+					float identitiesT_vs_P = (Float.valueOf(genomeT_vs_genomeP[i][column_nident]))
+							/ (Float.valueOf(genomeT_vs_genomeP[i][column_qlen]));
+					if(identitiesT_vs_P == 1) {
+						String proteinId = genomeT_vs_genomeP[i][1].substring(4,genomeT_vs_genomeP[i][1].length()-1);
+						String newRow = genomeT_vs_genomeP[i][0] + "\t" + proteinId ;
+						newRow += "\t" + genomeT_vs_genomeP[i][column_qlen] + "\t" + genomeT_vs_genomeP[i][column_nident] + "\t" + identitiesT_vs_P;
+						resultTable.add(newRow);
+					}
+				}
+				TabDelimitedTableReader.saveList(resultTable,HomologCreation.PATH_RESULTS + "peptidomics_vs_" + genome + ".blast.txt");
+			}			
+		}
+	}
+	
+	/**
+	 * Creation of the general command file that will be used to create the ones for
+	 * each blast
+	 */
+	public static String createBlastScript(String logs) {
+		/*
+		 * Change DB directory if you want to run it on a cluster
+		 */
+		String blastDBFolder = HomologCreation.PATH_BLASTDB;
+		String blastOutFolder = HomologCreation.PATH_RESULTS;
+
+		/*
+		 * Run bidirectionnal BlastP 
+		 */
+		ArrayList<String> blastFile = new ArrayList<>();
+		blastFile.add("\"" + HomologCreation.blastP + "\"" + " -query " + blastDBFolder + "_fileGenomePivot -db " + blastDBFolder
+				+ "_databaseTarget -out " + blastOutFolder
+				+ "_blastP_VS_T -evalue 100 -max_target_seqs 5 -outfmt \"6 qseqid sseqid qlen slen length nident positive evalue bitscore\"");
+				blastFile.add("echo _fileGenomePivot VS _fileGenomeTarget Blast search completed");
+		// ">" + scriptFolder + "_fileGenomePivotVS_fileGenomeTarget.control.txt");
+
+		TabDelimitedTableReader.saveList(blastFile, HomologCreation.BLAST_SCRIPT_TEMP);
+		/*
+		 * Create the blast commands
+		 */
+		ArrayList<String> listGenomes = Genome.getAvailableGenomes();
+		ArrayList<String> list_genomes_toBlast = HomologCreation.extractList(listGenomes, 0, listGenomes.size());
+		String genome_pivot_path = HomologCreation.getFAAPath("peptidomics");
+		createBlastCommands("peptidomics", ".ORF", genome_pivot_path, list_genomes_toBlast);
+		System.out.println("Blast commands done for " + "peptidomics");
+		
+		logs += "All blast script created in : " + GenomeNCBI.PATH_THREADS
+				+ "\nRun them with bash or using a cluster (see bacnet.scripts.ext.scripts.RunBlastSGE.sh or"
+				+ " RunBlastSlurm.sh)\nBut fix first value of: HomologCreation.PATH_SCRIPT -> " + HomologCreation.PATH_SCRIPT
+				+ " which is the path for data on your server.\n"
+				+ "You need also to fix the value of: HomologCreation.PATH_BLAST -> " + HomologCreation.PATH_BLAST
+				+ " which is the path for blastp on your server.\n"
+				+ "Run again script creation after fixing these path\n";
+		System.out.println(logs);
+		return logs;
+	}
+
+	
+	/**
+	 * Create .bat or .sh files with the command lines for each blast.
+	 * 
+	 * @param genomePivot
+	 * @param proteinGenome
+	 * @param suffix
+	 * @param pathGenome
+	 * @param listGenomes
+	 * @param evalueCutoff
+	 */
+	public static void createBlastCommands(String genomePivot, String suffix, String pathGenome,
+			ArrayList<String> listGenomes) {
+		final ArrayList<String> listGenome = listGenomes;
+
+		ExecutorService executor = Executors.newFixedThreadPool(2 * Runtime.getRuntime().availableProcessors());
+
+		for (String genomeNameTemp : listGenome) {
+			final String genomeName = genomeNameTemp;
+			final String suffixFinal = suffix;
+
+			if (!genomeName.equals(genomePivot)) {
+				/*
+				 * Create .bat file for each blast
+				 */
+				Runnable runnable = new Runnable() {
+					@Override
+					public void run() {
+						String databaseTarget = genomeName + HomologCreation.FILE_SEPARATOR + genomeName + suffixFinal;
+						String databasePivot = genomePivot + HomologCreation.FILE_SEPARATOR + genomePivot + suffixFinal;
+						String fileGenomePivot = genomePivot + HomologCreation.FILE_SEPARATOR + genomePivot + suffix + ".faa";
+						String fileGenomeTarget = genomeName + HomologCreation.FILE_SEPARATOR + genomeName + suffix + ".faa";
+						String blastP_VS_T = "resultBlast_" + genomePivot + "_vs_" + genomeName + ".blast.txt";
+						String blastT_VS_P = "resultBlast_" + genomeName + "_vs_" + genomePivot	+ ".blast.txt";
+						String args = FileUtils
+								.readText(HomologCreation.BLAST_SCRIPT_TEMP);
+						args = args.replaceAll("_fileGenomePivot", fileGenomePivot);
+						args = args.replaceAll("_fileGenomeTarget", fileGenomeTarget);
+						args = args.replaceAll("_blastP_VS_T", blastP_VS_T);
+						args = args.replaceAll("_blastT_VS_P", blastT_VS_P);
+						args = args.replaceAll("_databasePivot", databasePivot);
+						args = args.replaceAll("_databaseTarget", databaseTarget);
+						String extension = ".sh";
+//						String os = System.getProperty("os.name");
+//				        if (os.contains("Windows"))
+//				        	extension = ".bat";
+						FileUtils.saveText(args, GenomeNCBI.PATH_THREADS + genomePivot + "_vs_" + genomeName + extension);
+					}
+				};
+				executor.execute(runnable);
+			}
+		}
+
+		executor.shutdown();
+		try {
+			executor.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
+		} catch (InterruptedException e) {
+			System.err.println("Interrupted exception");
+		}
+	}
+	
+	
+	@Deprecated
+	public static void readFAAProteins(String genome) throws IOException {
+		// Read protein.faa and get all proteins id vs length in mapProteins
+		String proteinpath = HomologCreation.PATH_BLASTDB + genome + File.separator +  genome + ".ORF.faa";
+		FileInputStream inStream = new FileInputStream( proteinpath );
+		FastaReader<ProteinSequence,AminoAcidCompound> fastaReader = 
+				new FastaReader<ProteinSequence,AminoAcidCompound>(inStream, 
+						new GenericFastaHeaderParser<ProteinSequence,AminoAcidCompound>(), 
+						new ProteinSequenceCreator(AminoAcidCompoundSet.getAminoAcidCompoundSet()));
+		LinkedHashMap<String, ProteinSequence> b = fastaReader.process();
+		LinkedHashMap<String, Integer> mapProteins = new LinkedHashMap<>();
+		for (  Entry<String, ProteinSequence> entry : b.entrySet() ) {
+			String seqId = entry.getValue().getOriginalHeader().split(" ")[0];
+			int sequence = entry.getValue().getSequenceAsString().length();
+			mapProteins.put(seqId, sequence);
+			System.out.println(seqId +" "+ sequence);
+		}
+	}
+	
+	@Deprecated
+	public static void OrganizePhylogenetic(String path, String results_folder) {
 		// Read list of genomes organized by phylogenomic
 		ArrayList<String> listResults = new ArrayList<String>();
 		listResults.add("Peptide\tNbGenome in which it is found\tnbGenome for search\tnb of results found");
@@ -140,6 +386,7 @@ public class Peptidomics {
 		}
 		TabDelimitedTableReader.save(finalTable, path + "Result_Blast.txt");
 		TabDelimitedTableReader.saveList(listResults, path + "Result_peptides.txt");
-		
 	}
+	
+	
 }

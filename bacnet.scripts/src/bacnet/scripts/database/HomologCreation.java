@@ -28,7 +28,7 @@ public class HomologCreation {
 	 * that is why I fix it in the script.
 	 */
 	//public static String FILE_SEPARATOR = "/";
-	public static String FILE_SEPARATOR = "\\";
+	public static String FILE_SEPARATOR = File.separator;
 
 	
 	/**
@@ -36,17 +36,15 @@ public class HomologCreation {
 	 */
 
 //	public static String PATH_SCRIPT = "//home//becavin//ListeriomicsSample//";
-//	public static String PATH_SCRIPT = "/pasteur/homes/cbecavin/ListeriomicsSample/";
-//	public static String PATH_SCRIPT = "D:/Programming/GitRepository/ListeriomicsSample/GenomeNCBI/Temp/";
-//	public static String PATH_SCRIPT = "C:"+ FILE_SEPARATOR +"Users"+ FILE_SEPARATOR +"ipmc"+ FILE_SEPARATOR +
-//			"Documents"+ FILE_SEPARATOR +"BACNET"+ FILE_SEPARATOR +"ListeriomicsSample" + FILE_SEPARATOR + "GenomeNCBI" + FILE_SEPARATOR;
-	public static String PATH_SCRIPT = "C:\\Users\\Pierre\\Documents\\Yersiniomics\\Yersiniomics\\GenomeNCBI\\";
+	public static String PATH_SCRIPT = "/Users/christophebecavin/Documents/Peptidomics//GenomeNCBI/";
+	//public static String PATH_SCRIPT = "C:\\Users\\Pierre\\Documents\\Yersiniomics\\Yersiniomics\\GenomeNCBI\\";
+
 	/**
 	 * Path for Blast+ 
 	 */
-//	public static String PATH_BLAST = "";
+	public static String PATH_BLAST = "/opt/ncbi-blast-2.12.0+/bin/";
 //	public static String PATH_BLAST = "/share/apps/local/rmblast-2-2-28/bin/";
-	public static String PATH_BLAST = "C:/Program Files/NCBI/blast-2.9.0+/bin/";
+//	public static String PATH_BLAST = "C:/Program Files/NCBI/blast-2.9.0+/bin/";
 
 	/**
 	 * Shortcut for running blastP
@@ -55,7 +53,8 @@ public class HomologCreation {
 	/**
 	 * Shortcut for running makeblastdb
 	 */
-	public static String makeblastdb = "\"" + getBlastFolder() + "makeblastdb\"" + getBlastExtension();
+	public static String makeblastdb =  getBlastFolder() + "makeblastdb" + getBlastExtension();
+	//public static String makeblastdb = "\"" + getBlastFolder() + "makeblastdb\"" + getBlastExtension();
 	/**
 	 * Path for BlastDB folder
 	 */
@@ -63,7 +62,7 @@ public class HomologCreation {
 	/**
 	 * Path for BlastDB folder
 	 */
-	public static String PATH_BLASTDB = PATH_SCRIPT + "BLASTDB" + FILE_SEPARATOR;
+	public static String PATH_BLASTDB = PATH_SCRIPT + "Blastdb" + FILE_SEPARATOR;
 	/**
 	 * Path for BlastDB folder
 	 */
@@ -83,7 +82,9 @@ public class HomologCreation {
 	 */
 	public static String createBlastDB(String logs) {
 		logs += "Run Blast database creation.\n";
+		System.out.println(logs);
 		folderCreation(PATH_BLASTDB);
+		folderCreation(PATH_RESULTS);
 
 		/*
 		 * Blast database creation will be performed in different threads
@@ -167,8 +168,10 @@ public class HomologCreation {
 						String suffix = ".ORF";
 						final String out = PATH_BLASTDB + genome + FILE_SEPARATOR + genome + suffix;
 						folderCreation(PATH_BLASTDB + genome + FILE_SEPARATOR);
-						String execProcess = HomologCreation.makeblastdb + " -in \"" + path_faa
-								+ "\" -parse_seqids -out \"" + out + "\" -dbtype " + dbtypeFinal + " -title " + genome;
+						String execProcess = HomologCreation.makeblastdb + " -in " + path_faa
+								+ " -parse_seqids -out " + out + " -dbtype " + dbtypeFinal + " -title " + genome;
+						//String execProcess = HomologCreation.makeblastdb + " -in \"" + path_faa
+						//		+ "\" -parse_seqids -out \"" + out + "\" -dbtype " + dbtypeFinal + " -title " + genome;
 						System.out.println(execProcess);
 						CMD.runProcess(execProcess, true, PATH_BLASTDB);
 
@@ -252,13 +255,13 @@ public class HomologCreation {
 		ArrayList<String> blastFile = new ArrayList<>();
 		blastFile.add("\"" + HomologCreation.blastP + "\"" + " -query " + blastDBFolder + "_fileGenomePivot -db " + blastDBFolder
 				+ "_databaseTarget -out " + blastOutFolder
-				+ "_blastP_VS_T -evalue 0.01 -max_target_seqs 1 -outfmt \"6 qseqid sseqid qlen slen length nident positive evalue bitscore\"");
+				+ "_blastP_VS_T -evalue 0.01 -max_target_seqs 10 -outfmt \"6 qseqid sseqid qlen slen length nident positive evalue bitscore\"");
 		System.out.println("\"" + HomologCreation.blastP + "\"" + " -query " + blastDBFolder + "_fileGenomePivot -db " + blastDBFolder
 				+ "_databaseTarget -out " + blastOutFolder
-				+ "_blastP_VS_T -evalue 0.01 -max_target_seqs 1 -outfmt \"6 qseqid sseqid qlen slen length nident positive evalue bitscore\"");
+				+ "_blastP_VS_T -evalue 0.01 -max_target_seqs 10 -outfmt \"6 qseqid sseqid qlen slen length nident positive evalue bitscore\"");
 		blastFile.add("\"" + HomologCreation.blastP + "\"" + " -query " + blastDBFolder + "_fileGenomeTarget -db " + blastDBFolder
 				+ "_databasePivot -out " + blastOutFolder
-				+ "_blastT_VS_P -evalue 0.01 -max_target_seqs 1 -outfmt \"6 qseqid sseqid qlen slen length nident positive evalue bitscore\"");
+				+ "_blastT_VS_P -evalue 0.01 -max_target_seqs 10 -outfmt \"6 qseqid sseqid qlen slen length nident positive evalue bitscore\"");
 
 		blastFile.add("echo _fileGenomePivot VS _fileGenomeTarget Blast search completed");
 		// ">" + scriptFolder + "_fileGenomePivotVS_fileGenomeTarget.control.txt");
