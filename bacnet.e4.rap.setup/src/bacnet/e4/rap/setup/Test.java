@@ -1,6 +1,8 @@
 package bacnet.e4.rap.setup;
 
+import java.io.IOException;
 
+import bacnet.scripts.listeriomics.Peptidomics;
 
 /**
  * All methods which will be executed before or after interface run
@@ -17,7 +19,8 @@ public class Test {
 		
 		
 //		try {
-//			Peptidomics.run();
+//			Peptidomics.runEpitopes();
+//			Peptidomics.runAntigen();
 //		} catch (IOException e) {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();

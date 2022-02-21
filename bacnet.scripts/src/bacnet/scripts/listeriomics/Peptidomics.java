@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map.Entry;
+import java.util.TreeSet;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -26,6 +27,7 @@ import org.biojava3.core.sequence.io.ProteinSequenceCreator;
 import org.biojava3.core.sequence.io.template.SequenceCreatorInterface;
 
 import bacnet.Database;
+import bacnet.datamodel.sequence.Gene;
 import bacnet.datamodel.sequence.Genome;
 import bacnet.datamodel.sequenceNCBI.GenomeNCBI;
 import bacnet.reader.NCBIFastaHeaderParser;
@@ -35,7 +37,11 @@ import bacnet.utils.FileUtils;
 
 public class Peptidomics {
 
-	public static void run() throws IOException {
+	/**
+	 * BlastP the epitope sequences versus all Listeria genomes
+	 * @throws IOException
+	 */
+	public static void runEpitopes() throws IOException {
 		/*
 		 * Create fake protein fasta in Excel
 		 * UPDATE 15th february
@@ -59,10 +65,10 @@ public class Peptidomics {
 		/*
 		 * Modify function for blastscript creation to add peptidomics
 		 */
-		//createBlastScript("");
+		//createBlastScript("","peptidomics");
 		
 		/*
-		 * Run every Blast on MACOSX : cat ls *.sh | sh
+		 * Run every Blast on MACOSX : cat ls peptidomics*.sh | sh
 		 */
 
 
@@ -76,7 +82,225 @@ public class Peptidomics {
 		 */
 		createFinalTable();
 	}
+	
+	
+	/**
+	 * BlastP the EDG antigene sequences versus all Listeria genomes
+	 * @throws IOException
+	 */
+	public static void runAntigen() throws IOException {
+		/*
+		 * Create fasta file with protein antigens
+		 */
+		//createFastaAntigen();
 		
+		/*
+		 * Exec blastDB creation
+		 *  "/opt/ncbi-blast-2.12.0+/bin/makeblastdb" -in "//Users//christophebecavin//Documents//Peptidomics//GenomeNCBI//Blastdb//EGD_antigen//EGD_antigen.ORF.faa" -parse_seqids -out "//Users//christophebecavin//Documents//Peptidomics//GenomeNCBI//Blastdb/EGD_antigen/EGD_antigen.ORF" -dbtype prot -title EGD_antigen
+ 		*
+		 */
+		
+		/*
+		 * Create all blastDB
+		 * 
+		 */
+		//HomologCreation.createBlastDB("");
+		
+		/*
+		 * Modify function for blastscript creation to add peptidomics
+		 */
+		//createBlastScript("", "EGD_antigen");
+		
+		/*
+		 * Run every Blast on MACOSX : cat ls EGD_antigen*.sh | sh
+		 */
+
+		/*
+		 * Add identities
+		 */
+		//addIdentites();
+		
+		/**
+		 * Create a conservation table for all EGD antigen
+		 */
+		//createAntigenResults();
+		
+		
+		/*
+		 * Add antigen conservation info to final table - Be careful that epitopes hit int the same protein_id than antigen full protein
+		 * id WP_ peptidomics should be the same than id WP_ antigen
+		 */
+		combineEpiBlastTables();
+		addToResultTable();
+	}
+	
+	
+	/*
+	 * Add One column with average protein conservation in Result_peptides table
+	 */
+	public static void addToResultTable() {
+		ArrayList<String> listResults = new ArrayList<String>();
+		HashMap<String, String> geneToIdent = TabDelimitedTableReader.readHashMap(Database.getInstance().getPath() + "/EGD_antigen_Blast.txt");
+		String[][] resultPeptide = TabDelimitedTableReader.read(Database.getInstance().getPath() + "/Result_peptides.txt");
+		String header = "";
+		for(int j=0;j<resultPeptide[0].length;j++) {
+			header += resultPeptide[0][j] + "\t";
+		}
+		listResults.add(header+"Global_conservation");
+		for(int i=0;i<resultPeptide.length;i++){
+			String genename = resultPeptide[i][6];
+			String newrow = "";
+			for(int j=0;j<resultPeptide[i].length;j++) {
+				newrow += resultPeptide[i][j] + "\t";
+			}
+			System.out.println(genename+" "+geneToIdent.get(genename));
+			listResults.add(newrow+geneToIdent.get(genename));
+		}
+		TabDelimitedTableReader.saveList(listResults, Database.getInstance().getPath() + "/Result_peptides_final.txt");
+	}
+	
+	/*
+	 * Add antigen conservation info to final table - Be careful that epitopes hit int the same protein_id than antigen full protein
+	 * id WP_ peptidomics should be the same than id WP_ antigen
+	 */
+	public static void combineEpiBlastTables() {
+		// Read genomes and Epitopes
+		ArrayList<String> genomes = Genome.getAvailableGenomes();
+		String[][] peptidomics = TabDelimitedTableReader.read(Database.getInstance().getPath() + "/Suppl table S2 - Listeria epitopes 211130.txt");
+		String pathEpiBlast = Database.getInstance().getPath() + "/EpiBlast/";
+		String pathAntigen = Database.getInstance().getPath() + "/AntigenBlast/";
+		for(int j=1;j < peptidomics.length; j++) {
+			int nbGenome = 0;
+			String peptideID = peptidomics[j][0];
+			String genename = peptidomics[j][3];
+			System.out.println(pathEpiBlast + peptideID + "_Blast_search.txt");
+			String[][] epiblast = TabDelimitedTableReader.read(pathEpiBlast + peptideID + "_Blast_search.txt");
+			ArrayList<String> resultsPeptide = new ArrayList<String>();
+			resultsPeptide.add("Genome\tIdentity\tProtein\tqlen\tslen\tProtein_Cons\tprotLen\thitLen\tBlast_hit");
+			for(int i=1;i<epiblast.length;i++) {
+				String new_row = "";
+				for(int w = 0; w<epiblast[0].length; w++) {
+					new_row += epiblast[i][w] + "\t";
+				}
+				String genome = epiblast[i][0];
+				String[][] pathblast = TabDelimitedTableReader.read(pathAntigen + "/"+genename+"_Conservation.txt");
+				  for(int k=0; k<pathblast.length; k++) {
+					if(pathblast[k][1].equals(genome)) {
+						new_row += pathblast[k][3]+"\t"+ pathblast[k][4]+"\t"+pathblast[k][5]+"\t"+pathblast[k][2];
+					}
+				}
+				resultsPeptide.add(new_row);
+			}
+			//TabDelimitedTableReader.saveList(resultsPeptide, pathEpiBlast + peptideID + "_Blast_search_modif.txt");			
+			TabDelimitedTableReader.saveList(resultsPeptide, pathEpiBlast + peptideID + "_Blast_search.txt");			
+		}
+	}
+	
+	
+	/**
+	 * Read all results for LMON EGD gene conservation and summarize in tables
+	 * String pathAntigen = Database.getInstance().getPath() + "/AntigenBlast/";
+	 */
+	public static void createAntigenResults(){
+		String[][] peptidomics = TabDelimitedTableReader.read(Database.getInstance().getPath() + "/Suppl table S2 - Listeria epitopes 211130.txt");
+		TreeSet<String> listGene = new TreeSet<>();
+		for(int i=1; i<peptidomics.length; i++) {
+			String protein = peptidomics[i][3];
+			listGene.add(protein);
+		}
+		System.out.println("Antigen number "+listGene.size());
+		String pathAntigen = Database.getInstance().getPath() + "/AntigenBlast/";
+		HomologCreation.folderCreation(pathAntigen);
+		ArrayList<String> listResults = new ArrayList<>();
+		listResults.add("EGD_antigen\tGlobal Identity");
+		for(String antigen : listGene) {
+			System.out.println(antigen);
+			ArrayList<String> listResultsEGD = new ArrayList<>();
+			listResultsEGD.add("EGD_antigen\tGenome\tProtein_ID\tIdentity\tProtein_Len\tHit_Len");
+			float identMean = 0;
+			for(String genome : Genome.getAvailableGenomes()) {
+				genome = GenomeNCBI.processGenomeName(genome);
+				File file = new File(HomologCreation.PATH_RESULTS + "EGD_antigen_vs_" + genome + ".blast.txt");
+				String[][] blastResult = TabDelimitedTableReader.read(file);
+				boolean found = false;
+				int k=1;
+				while(!found) {
+					String name = blastResult[k][0];
+					if(name.equals(antigen)) {
+						String proteinid = blastResult[k][1];
+						String ident = blastResult[k][4];
+						identMean = identMean + Float.valueOf(ident);
+						String qlen = blastResult[k][2];
+						String hlen = blastResult[k][3];
+						listResultsEGD.add(antigen+"\t"+genome+"\t"+proteinid+"\t"+ident+"\t"+qlen+"\t"+hlen);
+						found = true;
+					}
+					k++;
+				}
+			}
+			TabDelimitedTableReader.saveList(listResultsEGD, pathAntigen + "/"+antigen+"_Conservation.txt");
+			identMean = identMean / Genome.getAvailableGenomes().size();
+			listResults.add(antigen + "\t" + identMean);
+		}
+		TabDelimitedTableReader.saveList(listResults, Database.getInstance().getPath() + "/EGD_antigen_Blast.txt");
+	}
+
+	
+	/**
+	 * Read epitopes list and EGD genome
+	 * Extract antigen from the genome
+	 * Save as a fasta to GenomeNCBI.PATH_BLASTDB + "EGD_antigen/EGD_antigen.ORF.faa"
+	 */
+	public static void createFastaAntigen() {
+		/*
+		 * Load EGD genomes, extract the protein and create fasta file
+		 */
+		Genome genome = Genome.loadGenome(Genome.EGDC_NAME);
+		String[][] peptidomics = TabDelimitedTableReader.read(Database.getInstance().getPath() + "/Suppl table S2 - Listeria epitopes 211130.txt");
+		TreeSet<String> listGene = new TreeSet<>();
+		for(int i=1; i<peptidomics.length; i++) {
+			String protein = peptidomics[i][3];
+			listGene.add(protein);
+		}
+		/*
+		 * Need to load GFF file and extract old locus tag versus new locus tag
+		 * Example : locus_tag=LMON_RS14580   vs     old_locus_tag=LMON_2875
+		 */
+		String fileGFF = GenomeNCBI.PATH_GENOMES + Genome.EGDC_NAME + "/genomic_light.gff";
+		LinkedHashMap<String, String> newTOoldlocus = new LinkedHashMap<String, String>();
+		String[][] tableGFF = TabDelimitedTableReader.read(fileGFF);
+		for(int i=0;i<tableGFF.length;i++) {
+			if(tableGFF[i][2].contains("gene")) {
+				System.out.println(tableGFF[i][8]);
+				String locus = "";
+				String oldlocustag = "";
+				for(String feature : tableGFF[i][8].split(";")) {
+					if(feature.startsWith("locus_tag")) {
+						locus = feature.replace("locus_tag=", "");
+						System.out.println(locus);
+					}else if(feature.startsWith("old_locus_tag")) {
+						oldlocustag = feature.replace("old_locus_tag=", "");
+						System.out.println(oldlocustag);
+					}
+				}
+				newTOoldlocus.put(oldlocustag, locus);
+
+			}
+		}
+		
+		ArrayList<String> faaFile = new ArrayList<>();
+		for(String genename : listGene) {
+			System.out.println("GetGene:"+genename);
+			String genenameNew = newTOoldlocus.get(genename);
+			System.out.println(genenameNew);
+			Gene gene = genome.getGeneFromName(genenameNew);
+			faaFile.add(">"+genename);
+			faaFile.add(gene.getSequenceAA());
+		}
+		String pathAntigen = GenomeNCBI.PATH_BLASTDB + "EGD_antigen/";
+		HomologCreation.folderCreation(pathAntigen);
+		TabDelimitedTableReader.saveList(faaFile, pathAntigen + "EGD_antigen.ORF.faa");
+	}
 	
 	/**
 	 * Create final table: Count number of epitopes conserved per genomes
@@ -137,7 +361,7 @@ public class Peptidomics {
 						}
 					}
 					if(!found) {
-						resultsPeptide.add(genome + "\t0\t0\t0\t0\t0");
+						resultsPeptide.add(genome + "\t0\t0\t0\t0");
 						nbLine++;
 						finalTable[i+1][j+1] = "0";
 					} else {
@@ -145,7 +369,7 @@ public class Peptidomics {
 						finalTable[i+1][j+1] = resultGene.split(";").length + "";
 					}
 				} else {
-					resultsPeptide.add(genome + "\t0\t0\t0\t0\t0");
+					resultsPeptide.add(genome + "\t0\t0\t0\t0");
 					nbLine++;
 				}				
 			}
@@ -164,6 +388,7 @@ public class Peptidomics {
 	
 	
 	/**
+	 * Version for Epitopes !
 	 * Add similiarities ratio in all tables : similarities = nident / qlen   (column 5 / column 2)
 	 * Filter and keep only 100% match
 	 * Save to : HomologCreation.PATH_RESULTS + "peptidomics_vs_" + genome + ".blast.txt"
@@ -190,15 +415,45 @@ public class Peptidomics {
 					}
 				}
 				TabDelimitedTableReader.saveList(resultTable,HomologCreation.PATH_RESULTS + "peptidomics_vs_" + genome + ".blast.txt");
-			}			
+			}
 		}
 	}
+	
+	/**
+	 * Version for Antigen !
+	 * Add similiarities ratio in all tables : similarities = nident / qlen   (column 5 / column 2)
+	 * Save to : HomologCreation.PATH_RESULTS + "EGD_antigen_vs_" + genome + ".blast.txt"
+	 */
+	public static void addIdentites() {
+		int column_nident = 5;
+		int column_qlen = 2;
+		ArrayList<String> listGenomes = Genome.getAvailableGenomes();
+		for(String genome : listGenomes) {
+			genome = GenomeNCBI.processGenomeName(genome);
+			String path_fileblast = HomologCreation.PATH_RESULTS + "resultBlast_EGD_antigen_vs_" + genome + ".blast.txt";
+			System.out.println(path_fileblast);
+			String[][] genomeT_vs_genomeP = TabDelimitedTableReader.read(path_fileblast);
+			ArrayList<String> resultTable = new ArrayList<String>();
+			if(genomeT_vs_genomeP.length!=0) {
+				for (int i = 0; i < genomeT_vs_genomeP.length; i++) {
+					float identitiesT_vs_P = (Float.valueOf(genomeT_vs_genomeP[i][column_nident]))
+							/ (Float.valueOf(genomeT_vs_genomeP[i][column_qlen]));
+					String proteinId = genomeT_vs_genomeP[i][1].substring(4,genomeT_vs_genomeP[i][1].length()-1);
+					String newRow = genomeT_vs_genomeP[i][0] + "\t" + proteinId ;
+					newRow += "\t" + genomeT_vs_genomeP[i][column_qlen] + "\t" + genomeT_vs_genomeP[i][column_nident] + "\t" + identitiesT_vs_P;
+					resultTable.add(newRow);
+				}
+				TabDelimitedTableReader.saveList(resultTable,HomologCreation.PATH_RESULTS + "EGD_antigen_vs_" + genome + ".blast.txt");
+			}
+		}
+	}
+	
 	
 	/**
 	 * Creation of the general command file that will be used to create the ones for
 	 * each blast
 	 */
-	public static String createBlastScript(String logs) {
+	public static String createBlastScript(String logs, String queryname) {
 		/*
 		 * Change DB directory if you want to run it on a cluster
 		 */
@@ -221,9 +476,9 @@ public class Peptidomics {
 		 */
 		ArrayList<String> listGenomes = Genome.getAvailableGenomes();
 		ArrayList<String> list_genomes_toBlast = HomologCreation.extractList(listGenomes, 0, listGenomes.size());
-		String genome_pivot_path = HomologCreation.getFAAPath("peptidomics");
-		createBlastCommands("peptidomics", ".ORF", genome_pivot_path, list_genomes_toBlast);
-		System.out.println("Blast commands done for " + "peptidomics");
+		String genome_pivot_path = HomologCreation.getFAAPath(queryname);
+		createBlastCommands(queryname, ".ORF", genome_pivot_path, list_genomes_toBlast);
+		System.out.println("Blast commands done for " + queryname);
 		
 		logs += "All blast script created in : " + GenomeNCBI.PATH_THREADS
 				+ "\nRun them with bash or using a cluster (see bacnet.scripts.ext.scripts.RunBlastSGE.sh or"
