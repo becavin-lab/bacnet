@@ -475,6 +475,9 @@ public class GeneView implements SelectionListener, MouseListener {
 		tbtmGeneralInformation = new TabItem(tabFolder, SWT.NONE);
 		tbtmGeneralInformation.setText("General information");
 
+		scrolledComposite.setContent(composite_11);
+		scrolledComposite.setMinSize(composite_11.computeSize(SWT.DEFAULT, SWT.DEFAULT));
+		
 		Composite composite_1 = new Composite(tabFolder, SWT.BORDER);
 		tbtmGeneralInformation.setControl(composite_1);
 		composite_1.setLayout(new GridLayout(3, false));
@@ -578,7 +581,7 @@ public class GeneView implements SelectionListener, MouseListener {
 		lblCog.setText("COG");
 
 		lblConservation = new Text(compSuppInfo, SWT.NONE);
-		lblConservation.setText("Homologs in 00/50 Listeria genomes");
+		lblConservation.setText("Homologs in 00/00 Yersinia genomes");
 
 		composite_localization = new Composite(composite_1, SWT.BORDER);
 		composite_localization.setLayoutData(new GridData(SWT.FILL, SWT.TOP, false, true, 1, 4));
@@ -627,7 +630,7 @@ public class GeneView implements SelectionListener, MouseListener {
 		btnExportToFasta.addSelectionListener(this);
 
 		lblConservation2 = new Label(composite_14, SWT.NONE);
-		lblConservation2.setText("Homologs in 00/50 Listeria genomes");
+		lblConservation2.setText("Homologs in 00/00 Yersinia genomes");
 		new Label(composite_14, SWT.NONE);
 
 		Composite composite_18 = new Composite(composite_13, SWT.NONE);
@@ -1094,19 +1097,14 @@ public class GeneView implements SelectionListener, MouseListener {
 		tableProteomes = new Table(composite_09, SWT.BORDER | SWT.FULL_SELECTION | SWT.MULTI);
 		tableProteomes.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1));
 
-		scrolledComposite.setContent(composite_11);
-		scrolledComposite.setMinSize(composite_11.computeSize(SWT.DEFAULT, SWT.DEFAULT));
+
+
+		/*
+		 * Interactome viewer
+		 */
 
 		tbtmInteractome = new TabItem(tabFolder, SWT.NONE);
 		tbtmInteractome.setText("Interactome");
-
-		compositeInteractome = new Composite(tabFolder, SWT.BORDER);
-		tbtmInteractome.setControl(compositeInteractome);
-		compositeInteractome.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
-		compositeInteractome.setLayout(new GridLayout(2, false));
-
-		Composite composite_8 = new Composite(compositeInteractome, SWT.BORDER);
-		composite_8.setLayout(new GridLayout(1, false));
 
 		/*
 		 * Co-Expression viewer
@@ -1114,97 +1112,10 @@ public class GeneView implements SelectionListener, MouseListener {
 
 		tbtmCoExp = new TabItem(tabFolder, SWT.NONE);
 		tbtmCoExp.setText("Co-Expression");
-
-		compositeCoExpression = new Composite(tabFolder, SWT.BORDER);
-		tbtmCoExp.setControl(compositeCoExpression);
-		compositeCoExpression.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
-		compositeCoExpression.setLayout(new GridLayout(2, false));
-
-		Composite composite_9 = new Composite(compositeCoExpression, SWT.BORDER);
-		composite_9.setLayout(new GridLayout(1, false));
-
-		Composite composite_CoExp = new Composite(composite_9, SWT.NONE);
-		//composite_CoExp.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
-		composite_CoExp.setLayout(new GridLayout(5, false));
-
-		Label lblCoExp= new Label(composite_CoExp, SWT.NONE);
-		lblCoExp.setText("Display links for two genomic elements having a correlation higher than");
-		btnCorrMinus = new Button(composite_CoExp, SWT.NONE);
-		btnCorrMinus.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/genome/zoomOUT.bmp"));
-		btnCorrMinus.addSelectionListener(this);
-		txtCutoffCoExp = new Text(composite_CoExp, SWT.BORDER);
-		txtCutoffCoExp.setText(GenomeElementAtlas.DEFAULT_COEXP_CUTOFF+"");
-
 		
-        btnCorrPlus = new Button(composite_CoExp, SWT.NONE);
-        btnCorrPlus.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/genome/zoomIN.bmp"));
-		btnCorrPlus.addSelectionListener(this);
-
-		btnUpdateCutoffCoExp = new Button(composite_9, SWT.NONE);
-		btnUpdateCutoffCoExp.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 5, 1));
-		btnUpdateCutoffCoExp.setText("Choose cut-off and update Co-Expression view");
-		btnUpdateCutoffCoExp.addSelectionListener(this);
-		
-        btnExportNetwork = new Button(composite_9, SWT.NONE);
-        btnExportNetwork.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 5, 1));
-        btnExportNetwork.setText("Export filtered network");
-        btnExportNetwork.addSelectionListener(this);
-        
-		Composite composite_3 = new Composite(compositeCoExpression, SWT.NONE);
-		composite_3.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
-		composite_3.setLayout(new GridLayout(4, false));
-
-		Label lblCoExpPos = new Label(compositeCoExpression, SWT.NONE);
-		lblCoExpPos.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-		lblCoExpPos.setText("Positively coexpressed with");
-
-		tablePosCoExpViewer = new TableViewer(compositeCoExpression, SWT.BORDER | SWT.FULL_SELECTION | SWT.MULTI);
-		GridData gd_listPos = new GridData(SWT.FILL, SWT.TOP, true, false, 2, 1);
-		gd_listPos.heightHint = 205;
-		tablePosCoExpViewer.getTable().setLayoutData(gd_listPos);
-		tablePosCoExpViewer.getTable().addSelectionListener(this);
-		tablePosCoExpViewer.getTable().setHeaderVisible(true);
-		tablePosCoExpViewer.getTable().setLinesVisible(true);
-
-		
-		Label lblCoExpNeg = new Label(compositeCoExpression, SWT.NONE);
-		lblCoExpNeg.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-		lblCoExpNeg.setText("Negatively coexpressed with");
-		
-		tableNegCoExpViewer = new TableViewer(compositeCoExpression, SWT.BORDER | SWT.FULL_SELECTION | SWT.MULTI);
-		GridData gd_listNeg = new GridData(SWT.FILL, SWT.TOP, true, false, 2, 1);
-		gd_listNeg.heightHint = 205;
-		tableNegCoExpViewer.getTable().setLayoutData(gd_listNeg);
-		tableNegCoExpViewer.getTable().addSelectionListener(this);
-		tableNegCoExpViewer.getTable().setHeaderVisible(true);
-		tableNegCoExpViewer.getTable().setLinesVisible(true);
-		
-		tablePosCoExpViewer.addDoubleClickListener(new IDoubleClickListener() {
-			@Override
-			public void doubleClick(DoubleClickEvent event) {
-				String selectedGene =
-						tablePosCoExpViewer.getTable().getItem(tablePosCoExpViewer.getTable().getSelectionIndex())
-						.getText(coExpCol.indexOf("Gene"));
-				System.out.println("selectedGene: "+selectedGene);
-				//System.out.println(tableHomologViewer.getTable().getSelectionIndex()+ " " + columnNames.indexOf("Name")+ "yahou "+selectedGene+" "+selectedGenome);
-				Gene gene = genome.getGeneFromName(selectedGene);
-				System.out.println("gene: "+gene);
-
-				GeneView.displayGene(gene, partService);
-			}
-		});
-		
-		tableNegCoExpViewer.addDoubleClickListener(new IDoubleClickListener() {
-			@Override
-			public void doubleClick(DoubleClickEvent event) {
-				String selectedGene =
-						tableNegCoExpViewer.getTable().getItem(tableNegCoExpViewer.getTable().getSelectionIndex())
-						.getText(coExpCol.indexOf("Gene"));
-				//System.out.println(tableHomologViewer.getTable().getSelectionIndex()+ " " + columnNames.indexOf("Name")+ "yahou "+selectedGene+" "+selectedGenome);
-				Gene gene = genome.getGeneFromName(selectedGene);
-				GeneView.displayGene(gene, partService);
-			}
-		});
+		/*
+		 * Synteny viewer
+		 */
 		
 		tbtmSynteny = new TabItem(tabFolder, SWT.NONE);
 		tbtmSynteny.setText("Synteny");
@@ -1296,7 +1207,7 @@ public class GeneView implements SelectionListener, MouseListener {
 				pathGraphHTML = realUrl + "SynTView/flash/indexFinal.html";
 			} else if (genome.getSpecies().equals("Yersinia pestis CO92")){
 				//pathGraphHTML = "http://hub15.hosting.pasteur.fr:8080/SynTView/site/?dataDir=\"data/CO92\"";
-				//pathGraphHTML = "https://yersiniomics.pasteur.fr/SynTView/site/?dataDir=\"data/CO92\"";
+				pathGraphHTML = "https://yersiniomics.pasteur.fr/SynTView/site/?dataDir=\"data/CO92\"";
 				System.out.println("SyntView: " + pathGraphHTML);
 				browserSynteny.setUrl(pathGraphHTML);
 				browserSynteny.redraw();
@@ -1304,6 +1215,13 @@ public class GeneView implements SelectionListener, MouseListener {
 			} else if (genome.getSpecies().equals("Yersinia pseudotuberculosis YPIII")){
 				//pathGraphHTML = "http://hub15.hosting.pasteur.fr:8080/SynTView/site/?dataDir=\"data/pseudo\"";
 				pathGraphHTML = "https://yersiniomics.pasteur.fr/SynTView/site/?dataDir=\"data/pseudo\"";
+				System.out.println("SyntView: " + pathGraphHTML);
+				browserSynteny.setUrl(pathGraphHTML);
+				browserSynteny.redraw();
+				
+			} else if (genome.getSpecies().equals("Yersinia pseudotuberculosis IP31758")){
+				//pathGraphHTML = "http://hub15.hosting.pasteur.fr:8080/SynTView/site/?dataDir=\"data/pseudo\"";
+				//pathGraphHTML = "https://yersiniomics.pasteur.fr/SynTView/site/?dataDir=\"data/pseudo\"";
 				System.out.println("SyntView: " + pathGraphHTML);
 				browserSynteny.setUrl(pathGraphHTML);
 				browserSynteny.redraw();
@@ -1333,6 +1251,7 @@ public class GeneView implements SelectionListener, MouseListener {
 		try {
 			ArrayList<String> genomeNames = new ArrayList<>();
 			genomeNames.add(genomeName);
+			
 			if(genomeName.equals("Yersinia pestis CO92")||genomeName.equals("Yersinia pestis KIM5")||genomeName.equals("Yersinia pestis 91001")
 					||genomeName.equals("Yersinia pseudotuberculosis YPIII")||genomeName.equals("Yersinia pseudotuberculosis IP32953")||genomeName.equals("Yersinia entomophaga MH96")
 					||genomeName.equals("Yersinia enterocolitica Y1")||genomeName.equals("Yersinia enterocolitica Y11")) {
@@ -1341,10 +1260,17 @@ public class GeneView implements SelectionListener, MouseListener {
 				genome = Genome.loadGenome(genomeName);
 				generalNetwork = new Network();
 				generalNetwork = Network.load(Database.getCOEXPR_NETWORK_TRANSCRIPTOMES_PATH() + "_" + genome.getSpecies());
+				updateCoExpViewer();
 			} else {
 				OpenGenomesThread thread = new OpenGenomesThread(genomeNames);
 				new ProgressMonitorDialog(this.shell).run(true, false, thread);
 				genome = Genome.loadGenome(genomeName);
+			}
+			
+			if(genomeName.equals("Yersinia pestis CO92")){
+				updateInteractomeViewer();
+			} else {
+				tbtmInteractome.dispose();
 			}
 
 		
@@ -1353,25 +1279,13 @@ public class GeneView implements SelectionListener, MouseListener {
 		} catch (InterruptedException ex) {
 			ex.printStackTrace();
 		}
-		System.out.println("before initGenome Info");
 		//for (String genomeItem : comboGenome.getItems()) {System.out.println("before initGenome Info genomeItem: "+genomeItem)}
 		initGenomeInfo();
+		
 		updateSyntenyBrowser();
 
-		/*
-        if (genomeName.contains("pestis CO92")) {
-            System.out.println("SynTView update 1: pestis CO92");
-        } else if (genomeName.contains("pseudotuberculosis YPIII")) {
-            System.out.println("SynTView update 1: pseudotuberculosis YPIII");
-            updateSyntenyBrowser();
-        } else if (genomeName.contains("enterocolitica 8081")) {
-            System.out.println("SynTView update 1: enterocolitica 8081");
-            updateSyntenyBrowser();
-        } else {
-            System.out.println("SynTView update 1: no");
-        	tbtmSynteny.dispose();
-        }
-		 */
+
+		
 		//for (String genomeItem2 : comboGenome.getItems()) {System.out.println("after initGenome Info genomeItem: "+genomeItem2)}
 		this.setGenomeSelected(genomeName);
 		this.chromoID = genome.getFirstChromosome().getChromosomeID();
@@ -1584,7 +1498,7 @@ public class GeneView implements SelectionListener, MouseListener {
      */
     private void initYersiniomics() {
         //System.out.println("initYersiniomics");
-
+    	ArrayList<String> omicsGenomes = new ArrayList<String>();
         arrayDataList = TabDelimitedTableReader.read(Database.getInstance().getTranscriptomesComparisonsArrayPath());
         TabDelimitedTableReader.readList(Database.getInstance().getTranscriptomesComparisonsArrayPath(), true, true);
         
@@ -1593,7 +1507,6 @@ public class GeneView implements SelectionListener, MouseListener {
         arrayTranscriptomesList = TabDelimitedTableReader.read(Database.getInstance().getTranscriptomesArrayPath());
         arrayProteinAtlasList = TabDelimitedTableReader.read(Database.getInstance().getProteomesComparisonsArrayPath());
         TabDelimitedTableReader.readList(Database.getInstance().getProteomesComparisonsArrayPath(), true, true);
-        System.out.println("rownames ");
         /*
   	  if (Database.getInstance().getProjectName() != Database.URY_YERSINIOMICS_PROJECT) {
   		  List<Integer> rowNum = new ArrayList<>(); 
@@ -1659,6 +1572,7 @@ public class GeneView implements SelectionListener, MouseListener {
 				genomeTemp = genomeTemp + " *";
 			}
 			comboGenome.add(genomeTemp);
+			omicsGenomes.add(genomeTemp);
 
 		}
 		//tbtmSynteny.dispose();
@@ -1903,6 +1817,12 @@ public class GeneView implements SelectionListener, MouseListener {
 			tbtmCoExp.dispose();
 		}
 		
+		if(genome.getSpecies().equals("Yersinia pestis CO92")) {
+			updateInteractome();
+		} else {
+			tbtmInteractome.dispose();
+		}
+
 
 		/*
 		 * Load localization
@@ -1936,6 +1856,7 @@ public class GeneView implements SelectionListener, MouseListener {
 			tableOver.removeAll();
 			tableUnder.removeAll();
 			tableNodiff.removeAll();
+			tbtmExpressionData.dispose();
 		}
 
 		/*
@@ -1949,6 +1870,8 @@ public class GeneView implements SelectionListener, MouseListener {
 		} else {
 			tableTranscriptomes.removeAll();
 			lblExprTranscriptomes.setText("No data");
+			tbtmTranscriptomes.dispose();
+
 		}
 
 		/*
@@ -1964,6 +1887,7 @@ public class GeneView implements SelectionListener, MouseListener {
 			tableOverProteome.removeAll();
 			tableUnderProteome.removeAll();
 			tableNodiffProteome.removeAll();
+			tbtmProteomeData.dispose();
 		}
 
 		/*
@@ -1977,7 +1901,7 @@ public class GeneView implements SelectionListener, MouseListener {
 		} else {
 			tableProteomes.removeAll();
 			lblExprProteomes.setText("No data");
-
+			tbtmProteomes.dispose();
 		}
 
 	}
@@ -1988,14 +1912,456 @@ public class GeneView implements SelectionListener, MouseListener {
 		GeneViewHomologTools.updateHomologTable(tableHomologViewer, bioCondsArray, bioCondsToDisplay, bioConds,
 				comparatorBioCondition, columnNames, selectedGenomes, txtSearchGenome);
 	}
+
+	public void updateTranscrAndProtViewers() {
+		tbtmExpressionData.dispose();
+		tbtmTranscriptomes.dispose();
+		tbtmProteomeData.dispose();
+		tbtmProteomes.dispose();
+
+		/*
+		 * Differential transcriptomics section
+		 */
+		{
+			tbtmExpressionData = new TabItem(tabFolder, SWT.NONE);
+			tbtmExpressionData.setText("Transcript differential expressions");
+
+			compositeTranscriptome = new Composite(tabFolder, SWT.BORDER);
+			tbtmExpressionData.setControl(compositeTranscriptome);
+			compositeTranscriptome.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+			compositeTranscriptome.setLayout(new GridLayout(2, false));
+
+			Composite composite_8 = new Composite(compositeTranscriptome, SWT.BORDER);
+			composite_8.setLayout(new GridLayout(1, false));
+
+			{
+				Composite composite_logfc = new Composite(composite_8, SWT.NONE);
+				composite_logfc.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
+				composite_logfc.setLayout(new GridLayout(2, false));
+
+				Label lbllogfoldchange = new Label(composite_logfc, SWT.NONE);
+				lbllogfoldchange.setText("|Log(Fold-Change)| >");
+
+				txtCutoffLogFC = new Text(composite_logfc, SWT.BORDER);
+				txtCutoffLogFC.setText(GenomeElementAtlas.DEFAULT_LOGFC_CUTOFF+"");
+			}
+			{
+				Composite  composite_pvalue = new Composite(composite_8, SWT.NONE);
+				composite_pvalue.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
+				composite_pvalue.setLayout(new GridLayout(3, false));
+
+				Label lblAnd = new Label(composite_pvalue, SWT.NONE);
+				lblAnd.setText("and");
+
+				Label lblPvalueFdrby = new Label(composite_pvalue, SWT.NONE);
+				lblPvalueFdrby.setText("p-value FDRBY <");
+
+				txtCutoffPvalue = new Text(composite_pvalue, SWT.BORDER);
+				txtCutoffPvalue.setText(GenomeElementAtlas.DEFAULT_LOGFC_CUTOFF+"");
+				if (Database.getInstance().getProjectName() != Database.UIBCLISTERIOMICS_PROJECT) {
+					composite_pvalue.dispose();
+				}
+			}
+			btnUpdateCutoff = new Button(composite_8, SWT.NONE);
+			btnUpdateCutoff.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 5, 1));
+			btnUpdateCutoff.setText("Choose cut-off and update Expression Atlas");
+			btnUpdateCutoff.addSelectionListener(this);
+
+			Composite composite_3 = new Composite(compositeTranscriptome, SWT.NONE);
+			composite_3.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
+			composite_3.setLayout(new GridLayout(4, false));
+
+			Label lblClickOnOne = new Label(composite_3, SWT.WRAP);
+			lblClickOnOne.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 2));
+			lblClickOnOne.setText("Select data and click here to display on:");
+			lblClickOnOne.setForeground(BasicColor.GREY);
+
+			Label lblGenomeViewer = new Label(composite_3, SWT.NONE);
+			lblGenomeViewer.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
+			lblGenomeViewer.setText("Genome Viewer");
+
+			Label lblOr = new Label(composite_3, SWT.NONE);
+			lblOr.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 2));
+			lblOr.setText("   or   ");
+			lblOr.setForeground(BasicColor.GREY);
+
+			Label lblHeatmapViewer = new Label(composite_3, SWT.NONE);
+			lblHeatmapViewer.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
+			lblHeatmapViewer.setText("HeatMap Viewer");
+
+			btnGenomeViewer = new Button(composite_3, SWT.NONE);
+			btnGenomeViewer.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
+			btnGenomeViewer.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/genomeViewer.bmp"));
+			btnGenomeViewer.addSelectionListener(this);
+
+			btnHeatmapview = new Button(composite_3, SWT.NONE);
+			btnHeatmapview.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
+			btnHeatmapview.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/compareexpression.bmp"));
+			btnHeatmapview.addSelectionListener(this);
+
+			Label lblOverExpressedIn = new Label(compositeTranscriptome, SWT.NONE);
+			lblOverExpressedIn.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+			lblOverExpressedIn.setText("Over expressed in");
+
+			lblOver = new Label(compositeTranscriptome, SWT.NONE);
+			lblOver.setText("over");
+
+			tableOver = new Table(compositeTranscriptome, SWT.BORDER | SWT.FULL_SELECTION | SWT.MULTI);
+			GridData gd_listOver = new GridData(SWT.FILL, SWT.TOP, true, false, 2, 1);
+			gd_listOver.heightHint = 150;
+			tableOver.setLayoutData(gd_listOver);
+			tableOver.addSelectionListener(this);
+
+			Label lblUnderExpressedIn = new Label(compositeTranscriptome, SWT.NONE);
+			lblUnderExpressedIn.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+			lblUnderExpressedIn.setText("Under expressed in");
+
+			lblUnder = new Label(compositeTranscriptome, SWT.NONE);
+			lblUnder.setText("under");
+
+			tableUnder = new Table(compositeTranscriptome, SWT.BORDER | SWT.FULL_SELECTION | SWT.MULTI);
+			GridData gd_listUnder = new GridData(SWT.FILL, SWT.TOP, true, false, 2, 1);
+			gd_listUnder.heightHint = 150;
+			tableUnder.setLayoutData(gd_listUnder);
+			tableUnder.addSelectionListener(this);
+
+			Label lblNoDiffExpression = new Label(compositeTranscriptome, SWT.NONE);
+			lblNoDiffExpression.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+			lblNoDiffExpression.setText("No diff. expression in");
+
+			lblNodiff = new Label(compositeTranscriptome, SWT.NONE);
+			lblNodiff.setText("nodiff");
+
+			tableNodiff = new Table(compositeTranscriptome, SWT.BORDER | SWT.FULL_SELECTION | SWT.MULTI);
+			GridData gd_listNodiff = new GridData(SWT.FILL, SWT.TOP, true, false, 2, 1);
+			gd_listNodiff.heightHint = 150;
+			tableNodiff.setLayoutData(gd_listNodiff);
+			tableNodiff.addSelectionListener(this);
+		}
+
+		/*
+		 * Transpcriptome Expression (RNASeq) tab
+		 */
+
+		tbtmTranscriptomes = new TabItem(tabFolder, SWT.NONE);
+		tbtmTranscriptomes.setText("Transcriptomes");
+
+
+		composite_101 = new Composite(tabFolder, SWT.NONE);
+		tbtmTranscriptomes.setControl(composite_101);
+		composite_101.setLayout(new GridLayout(1, false));
+		composite_101.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+
+		composite_102 = new Composite(composite_101, SWT.NONE);
+		composite_102.setLayout(new GridLayout(1, false));
+
+		Label transcriptomesExpl = new Label(composite_102, SWT.NONE);
+		transcriptomesExpl.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 0, 0));
+		transcriptomesExpl.setText("For RNASeq experiments, feature counts were normalized for comparison inside one experiment using DESeq2 if duplicate were done, or RPKM otherwise. \nThis normalized count were re-normalized between experiment dividing by the total normalized read counts to infer co-expression network. \nThe Log2 of this value is displayed here and is only indicative for the presence or absence of transcript. It should not be used for direct analysis.");
+
+		composite_103 = new Composite(composite_101, SWT.NONE);
+		composite_103.setLayout(new GridLayout(2, false));
+
+		Label lblOverExpressedInTranscriptomes = new Label(composite_103, SWT.NONE);
+		lblOverExpressedInTranscriptomes.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 0, 0));
+		lblOverExpressedInTranscriptomes.setText("Found in");
+
+		lblExprTranscriptomes = new Label(composite_103, SWT.NONE);
+		lblExprTranscriptomes.setText("");
+
+		tableTranscriptomes = new Table(composite_101, SWT.BORDER | SWT.FULL_SELECTION | SWT.MULTI);
+		tableTranscriptomes.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1));
+
+
+		/*
+		 * Protein atlas section
+		 */
+
+		{
+			tbtmProteomeData = new TabItem(tabFolder, SWT.NONE);
+			tbtmProteomeData.setText("Protein differential expressions");
+
+			compositeProteome = new Composite(tabFolder, SWT.BORDER);
+			tbtmProteomeData.setControl(compositeProteome);
+			compositeProteome.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+			compositeProteome.setLayout(new GridLayout(2, false));
+
+			Composite composite_8 = new Composite(compositeProteome, SWT.BORDER);
+			composite_8.setLayout(new GridLayout(1, false));
+
+			{
+				Composite composite_logfc = new Composite(composite_8, SWT.NONE);
+				composite_logfc.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
+				composite_logfc.setLayout(new GridLayout(2, false));
+
+				Label lbllogfoldchange = new Label(composite_logfc, SWT.NONE);
+				lbllogfoldchange.setText("|Log(Fold-Change)| >");
+
+				txtCutoffLogFCProteome = new Text(composite_logfc, SWT.BORDER);
+				txtCutoffLogFCProteome.setText(GenomeElementAtlas.DEFAULT_LOGFC_PROTEOMIC_CUTOFF+"");
+			}
+			{
+				Composite  composite_pvalue = new Composite(composite_8, SWT.NONE);
+				composite_pvalue.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
+				composite_pvalue.setLayout(new GridLayout(3, false));
+
+				Label lblAnd = new Label(composite_pvalue, SWT.NONE);
+				lblAnd.setText("and");
+
+				Label lblPvalueFdrby = new Label(composite_pvalue, SWT.NONE);
+				lblPvalueFdrby.setText("p-value FDRBY <");
+
+				txtCutoffPvalue = new Text(composite_pvalue, SWT.BORDER);
+				txtCutoffPvalue.setText(GenomeElementAtlas.DEFAULT_LOGFC_PROTEOMIC_CUTOFF+"");
+				if (Database.getInstance().getProjectName() != Database.UIBCLISTERIOMICS_PROJECT) {
+					composite_pvalue.dispose();
+				}
+			}
+			btnUpdateCutoffProteome = new Button(composite_8, SWT.NONE);
+			btnUpdateCutoffProteome.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 5, 1));
+			btnUpdateCutoffProteome.setText("Choose cut-off and update Protein Atlas");
+			btnUpdateCutoffProteome.addSelectionListener(this);
+
+			Composite composite_3 = new Composite(compositeProteome, SWT.NONE);
+			composite_3.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
+			composite_3.setLayout(new GridLayout(4, false));
+
+			Label lblClickOnOne = new Label(composite_3, SWT.WRAP);
+			lblClickOnOne.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 2));
+			lblClickOnOne.setText("Select data and click here to display on:");
+			lblClickOnOne.setForeground(BasicColor.GREY);
+
+			Label lblGenomeViewer = new Label(composite_3, SWT.NONE);
+			lblGenomeViewer.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
+			lblGenomeViewer.setText("Genome Viewer");
+
+			Label lblOr = new Label(composite_3, SWT.NONE);
+			lblOr.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 2));
+			lblOr.setText("   or   ");
+			lblOr.setForeground(BasicColor.GREY);
+
+			Label lblHeatmapViewer = new Label(composite_3, SWT.NONE);
+			lblHeatmapViewer.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
+			lblHeatmapViewer.setText("HeatMap Viewer");
+
+			btnGenomeViewerProteome = new Button(composite_3, SWT.NONE);
+			btnGenomeViewerProteome.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
+			btnGenomeViewerProteome.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/genomeViewer.bmp"));
+			btnGenomeViewerProteome.addSelectionListener(this);
+
+			btnHeatmapviewProteome = new Button(composite_3, SWT.NONE);
+			btnHeatmapviewProteome.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
+			btnHeatmapviewProteome.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/compareexpression.bmp"));
+			btnHeatmapviewProteome.addSelectionListener(this);
+
+			Label lblOverExpressedIn = new Label(compositeProteome, SWT.NONE);
+			lblOverExpressedIn.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+			lblOverExpressedIn.setText("Over expressed in");
+
+			lblOverProteome = new Label(compositeProteome, SWT.NONE);
+			lblOverProteome.setText("over");
+
+			tableOverProteome = new Table(compositeProteome, SWT.BORDER | SWT.FULL_SELECTION | SWT.MULTI);
+			GridData gd_listOver = new GridData(SWT.FILL, SWT.TOP, true, false, 2, 1);
+			gd_listOver.heightHint = 150;
+			tableOverProteome.setLayoutData(gd_listOver);
+			tableOverProteome.addSelectionListener(this);
+
+			Label lblUnderExpressedIn = new Label(compositeProteome, SWT.NONE);
+			lblUnderExpressedIn.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+			lblUnderExpressedIn.setText("Under expressed in");
+
+			lblUnderProteome = new Label(compositeProteome, SWT.NONE);
+			lblUnderProteome.setText("under");
+
+			tableUnderProteome = new Table(compositeProteome, SWT.BORDER | SWT.FULL_SELECTION | SWT.MULTI);
+			GridData gd_listUnder = new GridData(SWT.FILL, SWT.TOP, true, false, 2, 1);
+			gd_listUnder.heightHint = 150;
+			tableUnderProteome.setLayoutData(gd_listUnder);
+			tableUnderProteome.addSelectionListener(this);
+
+			Label lblNoDiffExpression = new Label(compositeProteome, SWT.NONE);
+			lblNoDiffExpression.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+			lblNoDiffExpression.setText("No diff. expression in");
+
+			lblNodiffProteome = new Label(compositeProteome, SWT.NONE);
+			lblNodiffProteome.setText("nodiff");
+
+			tableNodiffProteome = new Table(compositeProteome, SWT.BORDER | SWT.FULL_SELECTION | SWT.MULTI);
+			GridData gd_listNodiff = new GridData(SWT.FILL, SWT.TOP, true, false, 2, 1);
+			gd_listNodiff.heightHint = 150;
+			tableNodiffProteome.setLayoutData(gd_listNodiff);
+			tableNodiffProteome.addSelectionListener(this);
+		}
+
+
+
+
+
+		tbtmProteomes = new TabItem(tabFolder, SWT.NONE);
+		tbtmProteomes.setText("Proteomes");
+
+		composite_09 = new Composite(tabFolder, SWT.NONE);
+		tbtmProteomes.setControl(composite_09);
+		composite_09.setLayout(new GridLayout(1, false));
+
+		composite_091 = new Composite(composite_09, SWT.NONE);
+		composite_091.setLayout(new GridLayout(1, false));
+
+		Label proteomesExpl1 = new Label(composite_091, SWT.NONE);
+		proteomesExpl1.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1));
+		proteomesExpl1.setText("For Orbitrap experiments, displayed value is log10(raw LFQ).");
+
+		Label proteomesExpl2 = new Label(composite_091, SWT.NONE);
+		proteomesExpl2.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1));
+		proteomesExpl2.setText("For FTICR experiments, displayed value is raw FTICR intensity.");
+
+		Label proteomesExpl3 = new Label(composite_091, SWT.NONE);
+		proteomesExpl3.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1));
+		proteomesExpl3.setText("For 2D gel experiments, if proteins are detected in several spots, displayed value is the most intense measured spot intensity value.");
+
+		Label proteomesExpl4 = new Label(composite_091, SWT.NONE);
+		proteomesExpl4.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1));
+		proteomesExpl4.setText("'-1' means that the protein is detected but no value is available.");
+
+
+		composite_092 = new Composite(composite_09, SWT.NONE);
+		composite_092.setLayout(new GridLayout(2, false));
+
+		Label lblOverExpressedInProteomes = new Label(composite_092, SWT.NONE);
+		lblOverExpressedInProteomes.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		lblOverExpressedInProteomes.setText("Found in");
+
+		lblExprProteomes = new Label(composite_092, SWT.NONE);
+		lblExprProteomes.setText("");
+
+		tableProteomes = new Table(composite_09, SWT.BORDER | SWT.FULL_SELECTION | SWT.MULTI);
+		tableProteomes.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1));
+
+	}
+
+	public void updateInteractomeViewer() {
+		tbtmInteractome.dispose();
+		tbtmInteractome = new TabItem(tabFolder, SWT.NONE);
+		tbtmInteractome.setText("Interactome");
+		compositeInteractome = new Composite(tabFolder, SWT.BORDER);
+		tbtmInteractome.setControl(compositeInteractome);
+		compositeInteractome.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		compositeInteractome.setLayout(new GridLayout(2, false));
+
+		Composite composite_8 = new Composite(compositeInteractome, SWT.BORDER);
+		composite_8.setLayout(new GridLayout(1, false));
+	}
+	
+	public void updateInteractome() {
+		
+	}
+
 	private void setColumnNames() {
 		coExpCol = new ArrayList<>();
 		coExpCol.add("Correlation coefficient");
 		coExpCol.add("Gene");
 		coExpCol.add("About");
 	}
+	
+	public void updateCoExpViewer() {
+		tbtmCoExp.dispose();
+		tbtmCoExp = new TabItem(tabFolder, SWT.NONE);
+		tbtmCoExp.setText("Co-Expression");
 
+		compositeCoExpression = new Composite(tabFolder, SWT.BORDER);
+		tbtmCoExp.setControl(compositeCoExpression);
+		compositeCoExpression.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		compositeCoExpression.setLayout(new GridLayout(2, false));
 
+		Composite composite_9 = new Composite(compositeCoExpression, SWT.BORDER);
+		composite_9.setLayout(new GridLayout(1, false));
+
+		Composite composite_CoExp = new Composite(composite_9, SWT.NONE);
+		//composite_CoExp.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
+		composite_CoExp.setLayout(new GridLayout(5, false));
+
+		Label lblCoExp= new Label(composite_CoExp, SWT.NONE);
+		lblCoExp.setText("Display links for two genomic elements having a correlation higher than");
+		btnCorrMinus = new Button(composite_CoExp, SWT.NONE);
+		btnCorrMinus.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/genome/zoomOUT.bmp"));
+		btnCorrMinus.addSelectionListener(this);
+		txtCutoffCoExp = new Text(composite_CoExp, SWT.BORDER);
+		txtCutoffCoExp.setText(GenomeElementAtlas.DEFAULT_COEXP_CUTOFF+"");
+
+		
+        btnCorrPlus = new Button(composite_CoExp, SWT.NONE);
+        btnCorrPlus.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/genome/zoomIN.bmp"));
+		btnCorrPlus.addSelectionListener(this);
+
+		btnUpdateCutoffCoExp = new Button(composite_9, SWT.NONE);
+		btnUpdateCutoffCoExp.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 5, 1));
+		btnUpdateCutoffCoExp.setText("Choose cut-off and update Co-Expression view");
+		btnUpdateCutoffCoExp.addSelectionListener(this);
+		
+        btnExportNetwork = new Button(composite_9, SWT.NONE);
+        btnExportNetwork.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 5, 1));
+        btnExportNetwork.setText("Export filtered network");
+        btnExportNetwork.addSelectionListener(this);
+        
+		Composite composite_3 = new Composite(compositeCoExpression, SWT.NONE);
+		composite_3.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
+		composite_3.setLayout(new GridLayout(4, false));
+
+		Label lblCoExpPos = new Label(compositeCoExpression, SWT.NONE);
+		lblCoExpPos.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		lblCoExpPos.setText("Positively coexpressed with");
+
+		tablePosCoExpViewer = new TableViewer(compositeCoExpression, SWT.BORDER | SWT.FULL_SELECTION | SWT.MULTI);
+		GridData gd_listPos = new GridData(SWT.FILL, SWT.TOP, true, false, 2, 1);
+		gd_listPos.heightHint = 205;
+		tablePosCoExpViewer.getTable().setLayoutData(gd_listPos);
+		tablePosCoExpViewer.getTable().addSelectionListener(this);
+		tablePosCoExpViewer.getTable().setHeaderVisible(true);
+		tablePosCoExpViewer.getTable().setLinesVisible(true);
+
+		
+		Label lblCoExpNeg = new Label(compositeCoExpression, SWT.NONE);
+		lblCoExpNeg.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		lblCoExpNeg.setText("Negatively coexpressed with");
+		
+		tableNegCoExpViewer = new TableViewer(compositeCoExpression, SWT.BORDER | SWT.FULL_SELECTION | SWT.MULTI);
+		GridData gd_listNeg = new GridData(SWT.FILL, SWT.TOP, true, false, 2, 1);
+		gd_listNeg.heightHint = 205;
+		tableNegCoExpViewer.getTable().setLayoutData(gd_listNeg);
+		tableNegCoExpViewer.getTable().addSelectionListener(this);
+		tableNegCoExpViewer.getTable().setHeaderVisible(true);
+		tableNegCoExpViewer.getTable().setLinesVisible(true);
+		
+		tablePosCoExpViewer.addDoubleClickListener(new IDoubleClickListener() {
+			@Override
+			public void doubleClick(DoubleClickEvent event) {
+				String selectedGene =
+						tablePosCoExpViewer.getTable().getItem(tablePosCoExpViewer.getTable().getSelectionIndex())
+						.getText(coExpCol.indexOf("Gene"));
+				System.out.println("selectedGene: "+selectedGene);
+				//System.out.println(tableHomologViewer.getTable().getSelectionIndex()+ " " + columnNames.indexOf("Name")+ "yahou "+selectedGene+" "+selectedGenome);
+				Gene gene = genome.getGeneFromName(selectedGene);
+				System.out.println("gene: "+gene);
+
+				GeneView.displayGene(gene, partService);
+			}
+		});
+		
+		tableNegCoExpViewer.addDoubleClickListener(new IDoubleClickListener() {
+			@Override
+			public void doubleClick(DoubleClickEvent event) {
+				String selectedGene =
+						tableNegCoExpViewer.getTable().getItem(tableNegCoExpViewer.getTable().getSelectionIndex())
+						.getText(coExpCol.indexOf("Gene"));
+				//System.out.println(tableHomologViewer.getTable().getSelectionIndex()+ " " + columnNames.indexOf("Name")+ "yahou "+selectedGene+" "+selectedGenome);
+				Gene gene = genome.getGeneFromName(selectedGene);
+				GeneView.displayGene(gene, partService);
+			}
+		});
+	}
+		
+	
 	public void updateCoExp() {
 		
 		ArrayList<String> genomeElementArrayList = new ArrayList<>();
@@ -2460,7 +2826,7 @@ public class GeneView implements SelectionListener, MouseListener {
 		view.setGenomeSelected(genomeName);
 	}
 
-	public static void openPB1GeneView(EPartService partService) {
+	public static void openIP31758GeneView(EPartService partService) {
 		String id = GeneView.ID + "-" + String.valueOf(Math.random() * 1000).substring(0, 3);
 		// initiate view
 		ResourceManager.openView(partService, GeneView.ID, id);
@@ -2469,7 +2835,7 @@ public class GeneView implements SelectionListener, MouseListener {
 		NavigationManagement.pushStateView(id, new HashMap<>());
 		GeneView view = (GeneView) part.getObject();
 		view.setViewID(id);
-		String genomeName = "Yersinia pseudotuberculosis PB1+";
+		String genomeName = "Yersinia pseudotuberculosis IP31758";
 		view.initGenomeInfo(genomeName);
 		view.setGenomeSelected(genomeName);
 	}
@@ -2797,11 +3163,16 @@ public class GeneView implements SelectionListener, MouseListener {
 	public void widgetSelected(SelectionEvent e) {
 		if (e.getSource() == comboGenome) {
 			genome = Genome.loadGenome(getGenomeSelected());
+			updateTranscrAndProtViewers();
 			if(genome.getSpecies().equals("Yersinia pestis CO92")||genome.getSpecies().equals("Yersinia pestis KIM5")||genome.getSpecies().equals("Yersinia pestis 91001")
 					||genome.getSpecies().equals("Yersinia pseudotuberculosis YPIII")||genome.getSpecies().equals("Yersinia pseudotuberculosis IP32953")||genome.getSpecies().equals("Yersinia entomophaga MH96")
 					||genome.getSpecies().equals("Yersinia enterocolitica Y1")||genome.getSpecies().equals("Yersinia enterocolitica Y11")) {
 				generalNetwork = new Network();
 				generalNetwork = Network.load(Database.getCOEXPR_NETWORK_TRANSCRIPTOMES_PATH() + "_" + genome.getSpecies());
+				updateCoExpViewer();
+			}
+			if(genome.getSpecies().equals("Yersinia pestis CO92")) {
+				updateInteractomeViewer();
 			}
 
 			chromoID = genome.getFirstChromosome().getAccession().toString();
