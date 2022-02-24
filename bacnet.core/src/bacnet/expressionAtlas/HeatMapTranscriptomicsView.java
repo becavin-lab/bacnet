@@ -285,40 +285,20 @@ public class HeatMapTranscriptomicsView implements SelectionListener {
      */
     public static void displayBioConditionsExpressionAtlas(HashMap<String, ArrayList<String>> genomeToComparisons,
             EPartService partService) {
-    	System.out.println("test7");
 
         // Create a heatmap for each genome
         for (String genomeName : genomeToComparisons.keySet()) {
-        	System.out.println("test8");
-
             ArrayList<String> genomeArrays = BioCondition.getTranscriptomesGenomes();
-        	System.out.println("test9");
-
             if (genomeArrays.contains(genomeName)) {
-            	System.out.println("test10");
-
                 ArrayList<String> comparisons = genomeToComparisons.get(genomeName);
-            	System.out.println("test11");
-
                 String id = HeatMapTranscriptomicsView.ID + "-" + String.valueOf(Math.random() * 1000).substring(0, 3);
-            	System.out.println("test12");
-
                 // initiate view
                 //ResourceManager.openView(partService, "test", id);
                 ResourceManager.openView(partService, HeatMapTranscriptomicsView.ID, id);
-
-            	System.out.println("test13");
-
                 // update data
                 MPart part = partService.findPart(id);
-            	System.out.println("test14");
-
                 HeatMapTranscriptomicsView view = (HeatMapTranscriptomicsView) part.getObject();
-            	System.out.println("test15");
-
                 view.setViewId(id);
-            	System.out.println("test16");
-
                 view.initData(genomeName);
                 view.updateExcludeColumns(comparisons);
                 view.updateComboData(comparisons);

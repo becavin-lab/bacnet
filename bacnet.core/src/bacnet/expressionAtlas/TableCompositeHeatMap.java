@@ -115,7 +115,6 @@ public class TableCompositeHeatMap extends Composite implements SelectionListene
         this.genomeName = genomeName;
         this.packColumns = packColumns;
         setLayout(new GridLayout(1, false));
-
         Composite compositeTable = new Composite(this, SWT.NONE);
         compositeTable.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 2, 1));
         compositeTable.setLayout(new GridLayout(2, false));
@@ -183,7 +182,9 @@ public class TableCompositeHeatMap extends Composite implements SelectionListene
         tableViewer = new TableViewer(this, SWT.BORDER | SWT.HIDE_SELECTION | SWT.VIRTUAL);
         tableViewer.setUseHashlookup(true);
         table = tableViewer.getTable();
-        RWTUtils.setPreloadedItems(table);
+
+        //RWTUtils.setPreloadedItems(table);
+
         table.setHeaderVisible(true);
         table.setLinesVisible(true);
         table.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
