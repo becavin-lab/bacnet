@@ -26,9 +26,9 @@ public class BasicApplication implements ApplicationConfiguration {
 
     //public static String projectName = Database.BACNET;
     //public static String projectName = Database.YERSINIOMICS_PROJECT;
-    public static String projectName = Database.URY_YERSINIOMICS_PROJECT;  
+    //public static String projectName = Database.URY_YERSINIOMICS_PROJECT;  
     //public static String projectName = "ListeriomicsSample";
-    //public static String projectName = Database.YERSINIOMICS_PROJECT;
+    public static String projectName = Database.YERSINIOMICS_PROJECT;
     // public static String projectName = "CRISPRGo";
     // public static String projectName = "Leishomics";
     public static String MAIN_ENTRYPOINT = "/";
@@ -70,8 +70,8 @@ public class BasicApplication implements ApplicationConfiguration {
             title = "Yersiniomics website";
             googleId = "UA-80335618-7";
         }
-        application.addResource("theme/favicon.ico", createResourceLoader("theme/favicon.ico"));
-        properties.put(WebClient.FAVICON, "theme/favicon.ico");
+        application.addResource("theme/favicon.png", createResourceLoader("theme/favicon.png"));
+        properties.put(WebClient.FAVICON, "theme/favicon.png");
         properties.put(WebClient.PAGE_TITLE, title);
         // WebClient.
         String webpage_head = "";
@@ -105,6 +105,7 @@ public class BasicApplication implements ApplicationConfiguration {
             public void handleException(Throwable exception) {
                 System.out.println("Error : " + exception.getMessage());
             }
+            
         });
         System.out.println("Application started");
     }

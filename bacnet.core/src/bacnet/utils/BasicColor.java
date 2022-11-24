@@ -35,7 +35,7 @@ public class BasicColor {
     public static Color CYAN = new Color(display, 0, 217, 217);
 
 
-    public static Color BANNER_COLOR = new Color(display, 199, 255, 247);
+    public static Color BANNER_COLOR = new Color(display, 217, 253, 254);
     
     public static Color LIGHT_ONE = new Color(display, 202, 240, 248);
     public static Color DARK_ONE = new Color(display, 255, 255, 255);

@@ -29,6 +29,7 @@ import bacnet.expressionAtlas.TranscriptomicsView;
 import bacnet.raprcp.NavigationManagement;
 import bacnet.sequenceTools.GenomicsView;
 import bacnet.swt.ResourceManager;
+import bacnet.swt.SWTResourceManager;
 import bacnet.utils.BasicColor;
 
 public class BannerView implements SelectionListener {
@@ -82,19 +83,23 @@ public class BannerView implements SelectionListener {
         Composite container = new Composite(parent, SWT.BORDER);
         container.setLayout(new GridLayout(3, false));
         container.setBackground(BasicColor.BANNER_COLOR);
+        
         canvas = new Canvas(container, SWT.NONE);
-        canvas.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+        GridData canvasLayoutData = new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1);
+        canvas.setLayoutData(canvasLayoutData);
         canvas.setLayout(new GridLayout(1, false));
+        
         
         /*
          * Paint the Banner of the software/website
          */
+        
         canvas.addPaintListener(new PaintListener() {
             /**
              * 
              */
             private static final long serialVersionUID = 1241919382522062960L;
-
+            
             @Override
             public void paintControl(PaintEvent event) {
                 event.gc.setBackground(BasicColor.BANNER_COLOR);
@@ -109,26 +114,31 @@ public class BannerView implements SelectionListener {
                 
                 Image image = ResourceManager.getPluginImage("bacnet.core", Database.getInstance().getLogo());
                 if(image!=null) {
-	                int xPosition = event.x + 20;
+	                int xPosition = event.x + 10;
 	                int yPosition = event.y + event.height / 2 - image.getBounds().height / 2;
 	                event.gc.drawImage(image, xPosition, yPosition);
                 }else {
                 	System.out.println("Cannot read logo : "+Database.getInstance().getLogo()+" check value in database.ini");
                 }
             }
+            
         });
-
+ 
         toolBar = new ToolBar(container, SWT.FLAT | SWT.RIGHT);
         toolBar.setBackground(BasicColor.BANNER_COLOR);
         tltmGenomics = new ToolItem(toolBar, SWT.NONE);
-        tltmGenomics.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/ToolBar/genomics.png"));
+        //tltmGenomics.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/ToolBar/genomics.png"));
+        tltmGenomics.setText("Genomics");
         tltmGenomics.addSelectionListener(this);
         tltmTranscriptomics = new ToolItem(toolBar, SWT.NONE);
-        tltmTranscriptomics.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/ToolBar/Transcriptomics.png"));
+        tltmTranscriptomics.setText("Transcriptomics");
+
+        //tltmTranscriptomics.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/ToolBar/Transcriptomics.png"));
         tltmTranscriptomics.addSelectionListener(this);
         tltmProteomics = new ToolItem(toolBar, SWT.NONE);
-        tltmProteomics.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/ToolBar/Proteomics.png"));
+        //tltmProteomics.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/ToolBar/Proteomics.png"));
         tltmProteomics.addSelectionListener(this);
+        tltmProteomics.setText("Proteomics");
 
         if (appName.equals(Database.BACNET)) {
             tltmGitlab = new ToolItem(toolBar, SWT.NONE);
@@ -141,9 +151,11 @@ public class BannerView implements SelectionListener {
         new ToolItem(toolBar, SWT.SEPARATOR);
 
         tltmAbout = new ToolItem(toolBar, SWT.NONE);
-        tltmAbout.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/ToolBar/howto.png"));
+        //tltmAbout.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/ToolBar/howto.png"));
         tltmAbout.addSelectionListener(this);
+        tltmAbout.setText("How-to");
 
+        
         if (appName.equals(Database.CRISPRGO_PROJECT) || appName.equals(Database.BACNET)) {
             tltmGenomics.dispose();
             tltmTranscriptomics.dispose();
@@ -153,7 +165,7 @@ public class BannerView implements SelectionListener {
         System.out.println("BannerView loaded");
 
     }
-
+    
     @Override
     public void widgetSelected(SelectionEvent e) {
         if (e.getSource() == tltmProteomics) {

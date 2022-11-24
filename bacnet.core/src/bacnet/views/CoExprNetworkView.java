@@ -46,6 +46,7 @@ import bacnet.datamodel.sequence.Gene;
 import bacnet.datamodel.sequence.Genome;
 import bacnet.datamodel.sequence.Sequence;
 import bacnet.datamodel.sequence.Srna;
+import bacnet.expressionAtlas.core.GenomeElementAtlas;
 import bacnet.expressionAtlas.core.SelectGenomeElementDialog;
 import bacnet.raprcp.NavigationManagement;
 import bacnet.raprcp.SaveFileUtils;
@@ -208,7 +209,7 @@ public class CoExprNetworkView implements SelectionListener {
         btnCorrMinus.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/genome/zoomOUT.bmp"));
         btnCorrMinus.addSelectionListener(this);
         textCutOff = new Text(composite, SWT.BORDER);
-        textCutOff.setText("DEFAULT_COEXP_CUTOFF");
+        textCutOff.setText(GenomeElementAtlas.DEFAULT_COEXP_CUTOFF+"");
         textCutOff.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));        
         btnCorrPlus = new Button(composite, SWT.NONE);
         btnCorrPlus.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/genome/zoomIN.bmp"));

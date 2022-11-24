@@ -315,7 +315,7 @@ public class SWTResourceManager {
      */
     public static Font getTitleFont() {
         String name = DEFAULT_FONT;
-        int height = 16;
+        int height = 25;
         int style = SWT.BOLD;
         return getFont(name, height, style, false, false);
     }
@@ -327,7 +327,7 @@ public class SWTResourceManager {
      */
     public static Font getTitleFont(int style) {
         String name = DEFAULT_FONT;
-        int height = 16;
+        int height = 25;
         return getFont(name, height, style, false, false);
     }
 
@@ -339,7 +339,7 @@ public class SWTResourceManager {
      */
     public static Font getBodyFont(int style) {
         String name = DEFAULT_FONT;
-        int height = 12;
+        int height = 18;
         return getFont(name, height, style, false, false);
     }
 

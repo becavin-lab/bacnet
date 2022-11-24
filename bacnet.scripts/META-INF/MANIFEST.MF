@@ -11,7 +11,7 @@ Require-Bundle: org.eclipse.e4.ui.workbench;bundle-version="0.0.0",
  org.apache.commons.io;bundle-version="2.2.0",
  org.eclipse.rap.rwt
 Bundle-ActivationPolicy: lazy
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Export-Package: 
  bacnet.scripts,
  bacnet.scripts.arrayexpress,

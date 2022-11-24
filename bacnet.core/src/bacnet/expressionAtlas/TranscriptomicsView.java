@@ -635,22 +635,11 @@ public class TranscriptomicsView implements SelectionListener {
                         genomeToBioConds.get(genomeName), "");
             }
         } else if (e.getSource() == btnExpressionAtlas) {
-        	System.out.println("test1");
             HashMap<String, ArrayList<String>> genomeToComparisons = new HashMap<>();
-        	System.out.println("test2");
-
             try {
-            	System.out.println("test3");
-
                 IRunnableWithProgress thread = new OpenExpressionMatrixAndComparisons(selectedTranscriptomes, genomeToComparisons, true);
-            	System.out.println("test4");
-
                 new ProgressMonitorDialog(shell).run(true, false, thread);
-            	System.out.println("test5");
-
                 HeatMapTranscriptomicsView.displayBioConditionsExpressionAtlas(genomeToComparisons, partService);
-            	System.out.println("test6");
-
             } catch (InvocationTargetException ex) {
                 ex.printStackTrace();
             } catch (InterruptedException ex) {

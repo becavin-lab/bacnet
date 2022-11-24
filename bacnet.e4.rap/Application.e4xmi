@@ -6,7 +6,7 @@
     <children xsi:type="advanced:PerspectiveStack" xmi:id="_SqT8cL96EeWDbLadD9j-Ig" elementId="bacnet.e4.rap.perspectivestack.0">
       <children xsi:type="advanced:Perspective" xmi:id="_Tft6cL96EeWDbLadD9j-Ig" elementId="bacnet.e4.rap.perspective.main" selectedElement="_GBnhIL97EeWDbLadD9j-Ig">
         <children xsi:type="basic:PartSashContainer" xmi:id="_GBnhIL97EeWDbLadD9j-Ig" elementId="bacnet.e4.rap.partsashcontainer.0">
-          <children xsi:type="basic:Part" xmi:id="_gb418L96EeWDbLadD9j-Ig" elementId="bacnet.e4.rap.BannerView" containerData="15" contributionURI="bundleclass://bacnet.e4.rap/bacnet.e4.rap.BannerView" label="Banner"/>
+          <children xsi:type="basic:Part" xmi:id="_gb418L96EeWDbLadD9j-Ig" elementId="bacnet.e4.rap.BannerView" containerData="5" contributionURI="bundleclass://bacnet.e4.rap/bacnet.e4.rap.BannerView" label="Banner"/>
           <children xsi:type="basic:PartStack" xmi:id="_JjdhIL-EEeWsuPw69uRWRQ" elementId="bacnet.e4.rap.partstack" containerData="85">
             <children xsi:type="basic:Part" xmi:id="_UrHSoCE8EeiVPa_NUg7IlQ" elementId="bacnet.CRISPROmics" toBeRendered="false" containerData="" contributionURI="bundleclass://bacnet.e4.rap/bacnet.e4.rap.InitViewCRISPR" label="Home"/>
             <children xsi:type="basic:Part" xmi:id="_t2IncOsSEeWT3_-N6wyLHg" elementId="bacnet.Listeria" toBeRendered="false" containerData="" contributionURI="bundleclass://bacnet.e4.rap/bacnet.e4.rap.InitViewListeria" label="Home"/>

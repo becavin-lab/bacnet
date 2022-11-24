@@ -436,7 +436,7 @@ public class GeneView implements SelectionListener, MouseListener {
 
 		tableGenes = new Table(composite_7, SWT.BORDER | SWT.V_SCROLL | SWT.VIRTUAL);
 		GridData gd_list = new GridData(SWT.CENTER, SWT.FILL, false, true, 1, 1);
-		gd_list.widthHint = 200;
+		gd_list.widthHint = 300;
 		tableGenes.setLayoutData(gd_list);
 		tableGenes.addListener(SWT.SetData, new Listener() {
 			/**
@@ -506,7 +506,7 @@ public class GeneView implements SelectionListener, MouseListener {
 
 		Composite compGeneralInfo = new Composite(composite_1, SWT.BORDER);
 		GridData gd_compGeneralInfo = new GridData(SWT.FILL, SWT.FILL, false, false, 1, 2);
-		gd_compGeneralInfo.widthHint = 350;
+		gd_compGeneralInfo.widthHint = 450;
 		compGeneralInfo.setLayoutData(gd_compGeneralInfo);
 		compGeneralInfo.setLayout(new GridLayout(2, false));
 
@@ -583,6 +583,7 @@ public class GeneView implements SelectionListener, MouseListener {
 		lblConservation = new Text(compSuppInfo, SWT.NONE);
 		lblConservation.setText("Homologs in 00/00 Yersinia genomes");
 
+		/*
 		composite_localization = new Composite(composite_1, SWT.BORDER);
 		composite_localization.setLayoutData(new GridData(SWT.FILL, SWT.TOP, false, true, 1, 4));
 		composite_localization.setLayout(new GridLayout(1, false));
@@ -607,6 +608,7 @@ public class GeneView implements SelectionListener, MouseListener {
 		gd_browserLocalization.widthHint = 184;
 		gd_browserLocalization.heightHint = 250;
 		browserLocalization.setLayoutData(gd_browserLocalization);
+		*/
 		textFeature = new Text(composite_1, SWT.BORDER | SWT.WRAP | SWT.H_SCROLL | SWT.V_SCROLL | SWT.CANCEL);
 		textFeature.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		new Label(composite_1, SWT.NONE);
@@ -1211,6 +1213,12 @@ public class GeneView implements SelectionListener, MouseListener {
 				System.out.println("SyntView: " + pathGraphHTML);
 				browserSynteny.setUrl(pathGraphHTML);
 				browserSynteny.redraw();
+			} else if (genome.getSpecies().equals("Yersinia pestis KIM5")){
+				//pathGraphHTML = "http://hub15.hosting.pasteur.fr:8080/SynTView/site/?dataDir=\"data/KIM5\"";
+				pathGraphHTML = "https://yersiniomics.pasteur.fr/SynTView/site/?dataDir=\"data/KIM5\"";
+				System.out.println("SyntView: " + pathGraphHTML);
+				browserSynteny.setUrl(pathGraphHTML);
+				browserSynteny.redraw();
 
 			} else if (genome.getSpecies().equals("Yersinia pseudotuberculosis YPIII")){
 				//pathGraphHTML = "http://hub15.hosting.pasteur.fr:8080/SynTView/site/?dataDir=\"data/pseudo\"";
@@ -1219,20 +1227,34 @@ public class GeneView implements SelectionListener, MouseListener {
 				browserSynteny.setUrl(pathGraphHTML);
 				browserSynteny.redraw();
 				
-			} else if (genome.getSpecies().equals("Yersinia pseudotuberculosis IP31758")){
-				//pathGraphHTML = "http://hub15.hosting.pasteur.fr:8080/SynTView/site/?dataDir=\"data/pseudo\"";
-				//pathGraphHTML = "https://yersiniomics.pasteur.fr/SynTView/site/?dataDir=\"data/pseudo\"";
+			} else if (genome.getSpecies().equals("Yersinia pseudotuberculosis IP32953")){
+				//pathGraphHTML = "http://hub15.hosting.pasteur.fr:8080/SynTView/site/?dataDir=\"data/IP32953\"";
+				pathGraphHTML = "https://yersiniomics.pasteur.fr/SynTView/site/?dataDir=\"data/IP32953\"";
 				System.out.println("SyntView: " + pathGraphHTML);
 				browserSynteny.setUrl(pathGraphHTML);
 				browserSynteny.redraw();
-
+			
+				/* only private version
+			} else if (genome.getSpecies().equals("Yersinia pseudotuberculosis IP31758")){
+				//pathGraphHTML = "http://hub15.hosting.pasteur.fr:8080/SynTView/site/?dataDir=\"data/pseudo\"";
+				pathGraphHTML = "https://yersiniomics.pasteur.fr/SynTView/site/?dataDir=\"data/IP31758\"";
+				System.out.println("SyntView: " + pathGraphHTML);
+				browserSynteny.setUrl(pathGraphHTML);
+				browserSynteny.redraw();
+				*/
+				
 			} else if (genome.getSpecies().equals("Yersinia enterocolitica 8081")){
 				//pathGraphHTML = "http://hub15.hosting.pasteur.fr:8080/SynTView/site/?dataDir=\"data/entero\"";
 				pathGraphHTML = "https://yersiniomics.pasteur.fr/SynTView/site/?dataDir=\"data/entero\"";
 				System.out.println("SyntView: " + pathGraphHTML);
 				browserSynteny.setUrl(pathGraphHTML);
 				browserSynteny.redraw();
-
+			} else if (genome.getSpecies().equals("Yersinia enterocolitica Y11")){
+				//pathGraphHTML = "http://hub15.hosting.pasteur.fr:8080/SynTView/site/?dataDir=\"data/entero\"";
+				pathGraphHTML = "https://yersiniomics.pasteur.fr/SynTView/site/?dataDir=\"data/Y11\"";
+				System.out.println("SyntView: " + pathGraphHTML);
+				browserSynteny.setUrl(pathGraphHTML);
+				browserSynteny.redraw();
 			} else {
 				tbtmSynteny.dispose();
 			}
@@ -1255,6 +1277,7 @@ public class GeneView implements SelectionListener, MouseListener {
 			if(genomeName.equals("Yersinia pestis CO92")||genomeName.equals("Yersinia pestis KIM5")||genomeName.equals("Yersinia pestis 91001")
 					||genomeName.equals("Yersinia pseudotuberculosis YPIII")||genomeName.equals("Yersinia pseudotuberculosis IP32953")||genomeName.equals("Yersinia entomophaga MH96")
 					||genomeName.equals("Yersinia enterocolitica Y1")||genomeName.equals("Yersinia enterocolitica Y11")) {
+				
 				OpenGenomesAndNetworkThread thread = new OpenGenomesAndNetworkThread(genomeNames);
 				new ProgressMonitorDialog(this.shell).run(true, false, thread);
 				genome = Genome.loadGenome(genomeName);
@@ -1267,11 +1290,14 @@ public class GeneView implements SelectionListener, MouseListener {
 				genome = Genome.loadGenome(genomeName);
 			}
 			
+			// interactome to add for CO92
+			/*
 			if(genomeName.equals("Yersinia pestis CO92")){
 				updateInteractomeViewer();
 			} else {
+			*/
 				tbtmInteractome.dispose();
-			}
+			//}
 
 		
 		} catch (InvocationTargetException ex) {
@@ -1576,7 +1602,7 @@ public class GeneView implements SelectionListener, MouseListener {
 
 		}
 		//tbtmSynteny.dispose();
-		composite_localization.dispose();
+		//composite_localization.dispose();
 		// arrayGeneToLocalization =
 		// TabDelimitedTableReader.read(SubCellCompartment.LOCALIZATION_PATH);
 	}
@@ -1816,12 +1842,12 @@ public class GeneView implements SelectionListener, MouseListener {
 		} else {
 			tbtmCoExp.dispose();
 		}
-		
+		/* to add
 		if(genome.getSpecies().equals("Yersinia pestis CO92")) {
 			updateInteractome();
-		} else {
+		} else { */
 			tbtmInteractome.dispose();
-		}
+		//}
 
 
 		/*
@@ -3171,10 +3197,11 @@ public class GeneView implements SelectionListener, MouseListener {
 				generalNetwork = Network.load(Database.getCOEXPR_NETWORK_TRANSCRIPTOMES_PATH() + "_" + genome.getSpecies());
 				updateCoExpViewer();
 			}
+			/* to add
 			if(genome.getSpecies().equals("Yersinia pestis CO92")) {
 				updateInteractomeViewer();
 			}
-
+			 */
 			chromoID = genome.getFirstChromosome().getAccession().toString();
 			updateComboChromosome(chromoID);
 			updateListGenomeElements();
