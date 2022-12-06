@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="ASCII"?>
 <application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmi:id="_XqkCQKknEeObFrG_clJBYA" elementId="">
-  <children xsi:type="basic:TrimmedWindow" xmi:id="_Zdy6cKknEeObFrG_clJBYA" elementId="rap4.window" selectedElement="_SqT8cL96EeWDbLadD9j-Ig" label="" x="10" y="10" width="500" height="500">
+  <children xsi:type="basic:TrimmedWindow" xmi:id="_Zdy6cKknEeObFrG_clJBYA" elementId="rap4.window" selectedElement="_SqT8cL96EeWDbLadD9j-Ig" label="" x="10" y="10" width="1000" height="1000">
     <persistedState key="styleOverride" value="8"/>
     <tags>shellMaximized</tags>
     <children xsi:type="advanced:PerspectiveStack" xmi:id="_SqT8cL96EeWDbLadD9j-Ig" elementId="bacnet.e4.rap.perspectivestack.0">
       <children xsi:type="advanced:Perspective" xmi:id="_Tft6cL96EeWDbLadD9j-Ig" elementId="bacnet.e4.rap.perspective.main" selectedElement="_GBnhIL97EeWDbLadD9j-Ig">
         <children xsi:type="basic:PartSashContainer" xmi:id="_GBnhIL97EeWDbLadD9j-Ig" elementId="bacnet.e4.rap.partsashcontainer.0">
-          <children xsi:type="basic:Part" xmi:id="_gb418L96EeWDbLadD9j-Ig" elementId="bacnet.e4.rap.BannerView" containerData="5" contributionURI="bundleclass://bacnet.e4.rap/bacnet.e4.rap.BannerView" label="Banner"/>
+          <children xsi:type="basic:Part" xmi:id="_gb418L96EeWDbLadD9j-Ig" elementId="bacnet.e4.rap.BannerView" visible="false" containerData="5" contributionURI="bundleclass://bacnet.e4.rap/bacnet.e4.rap.BannerView" label="Banner"/>
           <children xsi:type="basic:PartStack" xmi:id="_JjdhIL-EEeWsuPw69uRWRQ" elementId="bacnet.e4.rap.partstack" containerData="85">
             <children xsi:type="basic:Part" xmi:id="_UrHSoCE8EeiVPa_NUg7IlQ" elementId="bacnet.CRISPROmics" toBeRendered="false" containerData="" contributionURI="bundleclass://bacnet.e4.rap/bacnet.e4.rap.InitViewCRISPR" label="Home"/>
             <children xsi:type="basic:Part" xmi:id="_t2IncOsSEeWT3_-N6wyLHg" elementId="bacnet.Listeria" toBeRendered="false" containerData="" contributionURI="bundleclass://bacnet.e4.rap/bacnet.e4.rap.InitViewListeria" label="Home"/>
@@ -27,7 +27,7 @@
   <descriptors xmi:id="_C9nzYL91EeWgHPGw7Po5aA" elementId="bacnet.CoExprNetworkView" label="Co-Expression network view" closeable="true" contributionURI="bundleclass://bacnet.core/bacnet.views.CoExprNetworkView">
     <tags>REMOVE_ON_HIDE_TAG</tags>
   </descriptors>
-  <descriptors xmi:id="_Q68C0L91EeWgHPGw7Po5aA" elementId="bacnet.e4.rap.InitViewYersinia" label="Home" contributionURI="bundleclass://bacnet.e4.rap/bacnet.e4.rap.InitViewYersinia"/>
+  <descriptors xmi:id="_Q68C0L91EeWgHPGw7Po5aA" elementId="bacnet.e4.rap.InitViewYersinia" label="Home" iconURI="" contributionURI="bundleclass://bacnet.e4.rap/bacnet.e4.rap.InitViewYersinia"/>
   <descriptors xmi:id="_ZCDT4L91EeWgHPGw7Po5aA" elementId="bacnet.e4.rap.InitViewNTerm" label="Home NTerminomics" contributionURI="bundleclass://bacnet.e4.rap/bacnet.e4.rap.InitViewCRISPRNTerm"/>
   <descriptors xmi:id="_erg2wL91EeWgHPGw7Po5aA" elementId="bacnet.e4.rap.SubmitDataView" label="Submit data to Listeriomics" allowMultiple="true" closeable="true" contributionURI="bundleclass://bacnet.e4.rap/bacnet.e4.rap.SubmitDataView">
     <tags>REMOVE_ON_HIDE_TAG</tags>

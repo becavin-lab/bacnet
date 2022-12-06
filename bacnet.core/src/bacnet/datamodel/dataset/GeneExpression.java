@@ -292,8 +292,8 @@ public class GeneExpression extends ExpressionData {
          */
         this.read();
         data2.read();
-        GeneExpression compData = new GeneExpression(this.getName() + " vs " + data2.getName());
-        compData.setBioCondName(this.getBioCondName() + " vs " + data2.getBioCondName());
+        GeneExpression compData = new GeneExpression(this.getName() + "_vs_" + data2.getName());
+        compData.setBioCondName(this.getBioCondName() + "_vs_" + data2.getBioCondName());
         compData.setLength(this.getLength());
 
         /*

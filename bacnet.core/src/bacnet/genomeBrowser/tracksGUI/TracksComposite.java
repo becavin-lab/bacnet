@@ -931,15 +931,20 @@ public class TracksComposite extends Composite implements SelectionListener, Mou
                 initNTermInfo();
                 setTrack(track);
             }
+
         } else if (e.getSource() == btnAddProteomicsData) {
             AddProteomicsDataDialog dialog = new AddProteomicsDataDialog(shell, track);
             int ok = dialog.open();
+            System.out.println("after dialog");
+
             if (ok == Status.OK) {
                 if (track.getDatas().isDisplayAbsoluteValue())
                     comboAbsoluteRelative.select(0);
                 else
                     comboAbsoluteRelative.select(1);
                 initNTermInfo();
+                System.out.println("after nterm");
+
                 setTrack(track);
             }
         } else if (e.getSource() == btnLegendManagement) {

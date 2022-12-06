@@ -93,10 +93,12 @@ public class FileUtils {
                 bufferW.newLine();
                 bufferW.newLine();
             }
-            String[] texts = text.split("\\r?\\n");
+            String[] texts = text.split("\\r?\\n"); //if written by Windows
+            
             for (String line : texts) {
                 bufferW.write(line);
-                bufferW.newLine();
+                //bufferW.write("\n"); //to run blast on cluster
+                bufferW.newLine(); //for Windows
             }
             bufferW.close();
             fileW.close();
@@ -384,5 +386,7 @@ public class FileUtils {
 
         return sb.toString();
     }
+    
+    
 
 }

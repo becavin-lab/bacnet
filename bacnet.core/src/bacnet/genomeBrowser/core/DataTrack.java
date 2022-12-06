@@ -294,25 +294,25 @@ public class DataTrack {
      * @param genomeSize
      */
     public void addBioCondition(String bioCondName) {
-        System.out.println("Add: " + bioCondName);
+        //System.out.println("Add: " + bioCondName);
         if (this.getDisplay().length == 0) {
             initDisplayBoolean();
         }
         BioCondition bioCond = BioCondition.getBioCondition(bioCondName, true);
-        System.out.println("biocond: "+bioCond);
+        //System.out.println("biocond: "+bioCond);
 
         if (bioCond.getOmicsData().size() != 0 || bioCond.getComparisons().size() != 0) {
-            System.out.println("addBioCondition if 1");
-            System.out.println("bioCond.getOmicsData(): " + bioCond.getOmicsData());
-            System.out.println("bioCond.getComparisons(): "+bioCond.getComparisons());
+           // System.out.println("addBioCondition if 1");
+            //System.out.println("bioCond.getOmicsData(): " + bioCond.getOmicsData());
+            //System.out.println("bioCond.getComparisons(): "+bioCond.getComparisons());
 
             /*
              * If the biological condition we add has no Absolute value expression data, we force the view to
              * switch to relative expression mode
              */
             if (bioCond.getOmicsData().size() == 0 && bioCond.getComparisons().size() != 0) {
-                System.out.println("addBioCondition if 2");
-                System.out.println("Add: " + bioCondName + " with no omics data");
+                //System.out.println("addBioCondition if 2");
+                //System.out.println("Add: " + bioCondName + " with no omics data");
                 if (isDisplayAbsoluteValue()) {
                     setDisplayAbsoluteValue(false);
                     absoluteTOrelativeValue();
@@ -320,25 +320,25 @@ public class DataTrack {
             }
 
             if (displayAbsoluteValue) {
-                System.out.println("addBioCondition if 3");
+               // System.out.println("addBioCondition if 3");
 
                 bioConditionHashMaps.put(bioCond.getName(), bioCond);
             } else {
-                System.out.println("addBioCondition if 4");
+                //System.out.println("addBioCondition if 4");
 
                 /*
                  * Create and add Comparison BioCondition if available
                  */
                 if (bioCond.getComparisons().size() != 0 ) {
-                    System.out.println("addBioCondition if 5");
+                    //System.out.println("addBioCondition if 5");
 
                     for (String bioCond2Name : bioCond.getComparisons()) {
                         BioCondition comparisonBioCond =
                                 bioCond.compare(BioCondition.getBioCondition(bioCond2Name), false);
                         bioConditionHashMaps.put(comparisonBioCond.getName(), comparisonBioCond);
                     }
-                } else {                System.out.println("addBioCondition if 6");
-
+                } else {               
+                	//System.out.println("addBioCondition if 6");
                     bioConditionHashMaps.put(bioCond.getName(), bioCond);
                 }
             }
@@ -348,28 +348,39 @@ public class DataTrack {
     }
 
     /**
-     * Changed all BioCondition to display when switching from "ABSOLUTE VALUE DISPLAY3 to "RELATIVE
+     * Changed all BioCondition to display when switching from "ABSOLUTE VALUE DISPLAY" to "RELATIVE
      * VALUE DISPLAY"
      */
     public void absoluteTOrelativeValue() {
         LinkedHashMap<String, BioCondition> newBioConditionHashMaps = new LinkedHashMap<String, BioCondition>();
         for (BioCondition bioCond : bioConditionHashMaps.values()) {
-            if (bioCond.getComparisons().size() != 0) {
-                for (String bioCond2Name : bioCond.getComparisons()) {
-                    BioCondition comparisonBioCond = bioCond.compare(BioCondition.getBioCondition(bioCond2Name), false);
-                    newBioConditionHashMaps.put(comparisonBioCond.getName(), comparisonBioCond);
-                }
-            } else if (bioCond.getAntiComparisons().size() != 0) {
-                for (String bioCond2Name : bioCond.getAntiComparisons()) {
-                    BioCondition comparisonBioCond = BioCondition.getBioCondition(bioCond2Name).compare(bioCond, false);
-                    newBioConditionHashMaps.put(comparisonBioCond.getName(), comparisonBioCond);
-                }
-            }
+            //System.out.println("in absolute to relative for: "+bioCond.getName());
+        	if (bioCond.getName().contains("_vs_")) {
+                newBioConditionHashMaps.put(bioCond.getName(), bioCond);
+        	} else {
+        		if (bioCond.getComparisons().size() != 0) {
+                     for (String bioCond2Name : bioCond.getComparisons()) {
+                         BioCondition comparisonBioCond = bioCond.compare(BioCondition.getBioCondition(bioCond2Name), false);
+                         newBioConditionHashMaps.put(comparisonBioCond.getName(), comparisonBioCond);
+                         //System.out.println("comparisonBiocomd: "+comparisonBioCond.getName());
+                     }
+                 } else if (bioCond.getAntiComparisons().size() != 0) {
+                     for (String bioCond2Name : bioCond.getAntiComparisons()) {
+                         BioCondition comparisonBioCond = BioCondition.getBioCondition(bioCond2Name).compare(bioCond, false);
+                         newBioConditionHashMaps.put(comparisonBioCond.getName(), comparisonBioCond);
+                         //System.out.println("antiComparisonBiocomd: "+comparisonBioCond.getName());
+
+                     }
+                 }
+        	}
+
+           
             // else{
             // newBioConditionHashMaps.put(bioCond.getName(), bioCond);
             // }
         }
         this.setBioConditionHashMaps(newBioConditionHashMaps);
+        
         orderBioCondition();
         loadData();
         setDataColors();
@@ -383,7 +394,7 @@ public class DataTrack {
     public void relativeTOabsoluteValue() {
         LinkedHashMap<String, BioCondition> newBioConditionHashMaps = new LinkedHashMap<String, BioCondition>();
         for (BioCondition comparisonBioCond : bioConditionHashMaps.values()) {
-            if (comparisonBioCond.getName().contains(" vs ")) {
+            if (comparisonBioCond.getName().contains("_vs_")) {
                 BioCondition bioCond1 =
                         BioCondition.getBioCondition(BioCondition.parseName(comparisonBioCond.getName())[0]);
                 BioCondition bioCond2 =
@@ -410,15 +421,25 @@ public class DataTrack {
         this.setBioConditionHashMaps(newBioConditionHashMaps);
         orderBioCondition();
         loadData();
+        System.out.println("after load data");
+
         setDataColors();
+        
         setDataSizes();
+        System.out.println("after datasize");
+
     }
 
     /**
      * Load all data included in the Biological Condition (bioConditionHashMaps)
      */
     private void loadData() {
+        
+    	System.out.println("in loadData: "+    	bioConditionHashMaps.values().size());
+
         for (BioCondition bioCond : bioConditionHashMaps.values()) {
+            System.out.println("in for loadData: "+bioCond.getName());
+
         	for (Tiling tiling : bioCond.getTilings()) {
                 if (!tiling.isInfoRead()) {
                     tiling.load();
@@ -430,6 +451,8 @@ public class DataTrack {
                 }
             }
             for (NGS ngsExpr : bioCond.getNGSSeqs()) {
+                System.out.println("in loadData ngsExpr: "+ngsExpr.getBioCondName());
+
                 if (!ngsExpr.isInfoRead()) {
                     ngsExpr.load();
                 }
@@ -444,15 +467,22 @@ public class DataTrack {
             }
             //System.out.println("bioCond.getMatrices: "+bioCond.getMatrices());
             for (ExpressionMatrix matrix : bioCond.getMatrices()) {
-
+                System.out.println("in loadData matrix: "+matrix.getBioCondName());
                 if (!matrix.isLoaded()) {
+                    System.out.println("not loaded "+matrix.getBioCondName());
+
                     matrix.load();
                     //System.out.println("matrix row names: " + matrix.getRowNamesToList());
                     //System.out.println("matrix loaded ");
                 }
             }
-        }
+            System.out.println("finish in loadData: "+bioCond.getName());
+
+        } 
+
     }
+    
+    
 
     /**
      * Add BioCondition in BioConditionHashMaps respecting a certain order: 1 - RNASeq 2 - Tiling 3 -

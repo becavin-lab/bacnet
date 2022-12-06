@@ -54,7 +54,7 @@ public class TranscriptomesCreation {
         boolean logTransformed = true;
         Experiment exp = new Experiment();
         for (String bioCond : bioConds) {
-        	System.out.println("for 1 " + bioConds);
+        	//System.out.println("for 1 " + bioConds);
             exp.addBioCond(BioCondition.getBioCondition(bioCond));
         }
 
@@ -67,6 +67,7 @@ public class TranscriptomesCreation {
          * Optional NGSCreation.normalizeCountFiles(exp);
          */
         NGSCreation.normalizeCountFiles(exp);
+        
         
         /*
          * Tiling and GeneExpressionData
@@ -104,7 +105,7 @@ public class TranscriptomesCreation {
     private static void convertExpressionMatrix(Experiment exp) {
         for (BioCondition bioCondition : exp.getBioConditions()) {
             if (bioCondition.getTypeDataContained().contains(TypeData.ExpressionMatrix)) {
-                System.out.println(bioCondition.getName());
+               // System.out.println(bioCondition.getName());
                 for (ExpressionMatrix data : bioCondition.getMatrices()) {
                     File fileRawData = new File(OmicsData.PATH_EXPR_RAW + data.getName() + ".txt");
                     if (fileRawData.exists()) {

@@ -129,7 +129,7 @@ public class GenomicsView implements SelectionListener {
 		lblXxSrnas = new Label(container, SWT.BORDER | SWT.CENTER);
 		lblXxSrnas.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 3, 1));
 		lblXxSrnas.setFont(SWTResourceManager.getTitleFont());
-		lblXxSrnas.setText("XX Listeria Complete Genomes");
+		lblXxSrnas.setText("XX Yersinia Complete Genomes");
 		lblXxSrnas.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
 
 		btnHelp = new Button(container, SWT.NONE);
@@ -143,15 +143,16 @@ public class GenomicsView implements SelectionListener {
 		Label lblSaveAs = new Label(composite_1, SWT.NONE);
 		lblSaveAs.setText("Download phylogenomic tree as ");
 		lblSaveAs.setFont(SWTResourceManager.getBodyFont(10, SWT.NORMAL));
-
+		/*
 		btnSavePng = new Button(composite_1, SWT.NONE);
 		btnSavePng.setToolTipText("Download as PNG image");
 		btnSavePng.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/fileIO/png.bmp"));
-
+		btnSavePng.addSelectionListener(this);
+	*/
+		
 		btnSaveSVG = new Button(composite_1, SWT.NONE);
 		btnSaveSVG.setToolTipText("Download as SVG vector image (for Illustrator, GIMP, ...)");
 		btnSaveSVG.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/fileIO/svg.bmp"));
-		btnSavePng.addSelectionListener(this);
 		btnSaveSVG.addSelectionListener(this);
 		ScrolledComposite scrolledComposite = new ScrolledComposite(container,
 				SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
@@ -218,7 +219,7 @@ public class GenomicsView implements SelectionListener {
 				public void selectionChanged(SelectionChangedEvent event) {
 
 					for (int i : tableGenome.getSelectionIndices()) {
-						String selectedGenome = tableGenome.getItem(i).getText(columnNames.indexOf("Name") + 1);
+						String selectedGenome = tableGenome.getItem(i).getText(columnNames.indexOf("Name (GenBank)") + 1);
 						selectedGenome = GenomeNCBI.processGenomeName(selectedGenome);
 						if (selectedGenomes.contains(selectedGenome)) {
 							if (tableGenome.getSelectionIndices().length == 1) {
@@ -243,7 +244,7 @@ public class GenomicsView implements SelectionListener {
 				public void doubleClick(DoubleClickEvent event) {
 					String selectedGenome = tableGenomeViewer.getTable()
 							.getItem(tableGenomeViewer.getTable().getSelectionIndex())
-							.getText(columnNames.indexOf("Name") + 1);
+							.getText(columnNames.indexOf("Name (GenBank)") + 1);
 					System.out.println("Select: " + selectedGenome);
 					Genome genome = Genome.loadGenome(selectedGenome);
 
@@ -291,7 +292,7 @@ public class GenomicsView implements SelectionListener {
 
 			browserPhylo = new Browser(composite, SWT.NONE);
 			GridData gd_browserPhylo = new GridData(SWT.LEFT, SWT.TOP, true, true, 1, 1);
-			gd_browserPhylo.heightHint = 1000;
+			gd_browserPhylo.heightHint = 2000;
 			gd_browserPhylo.widthHint = 700;
 			browserPhylo.setLayoutData(gd_browserPhylo);
 			scrolledCompositeCanvas.setContent(composite);
@@ -542,8 +543,9 @@ public class GenomicsView implements SelectionListener {
 		HashMap<String, String> genomeToAttribute = Phylogenomic.parsePhylogenomicFigure(textSVG);
 
 		/*
-		 * Highlight selected strain
+		 * Highlight selected strain (old method, depending on SVG content)
 		 */
+		/*
 		for (String genome : genomeNames) {
 			String lineAttribute = genomeToAttribute.get(genome);
 			int indexOfLine = textSVG.indexOf(lineAttribute);
@@ -551,6 +553,16 @@ public class GenomicsView implements SelectionListener {
 			int lengthStyle = "style=\"".length();
 			int posToADD = indexOfLine + indexOfstyle + lengthStyle;
 			String textToADD = "fill:purple; ";
+			textSVG = textSVG.substring(0, posToADD) + textToADD + textSVG.substring(posToADD, textSVG.length());
+		}*/
+		/*
+		 * Highlight selected strain (new method, depending on SVG content)
+		 */
+		for (String genome : genomeNames) {
+			String lineAttribute = genomeToAttribute.get(genome);
+			int indexOfLine = textSVG.indexOf(lineAttribute);
+			int posToADD = indexOfLine;
+			String textToADD = "style=\"fill:red; font-weight:bold\" ";
 			textSVG = textSVG.substring(0, posToADD) + textToADD + textSVG.substring(posToADD, textSVG.length());
 		}
 		return textSVG;
@@ -587,7 +599,7 @@ public class GenomicsView implements SelectionListener {
 								+ ImageMagick.getConvertPATH());
 
 				CMD.runProcess(ImageMagick.getConvertPATH() + " " + tempSVGFile.getAbsolutePath() + " " + tempPNGFile);
-				SaveFileUtils.saveFile("Listeria_Phylogenomic_Tree.png", tempPNGFile, "PNG image file", partService,
+				SaveFileUtils.saveFile("Yersinia_Phylogenomic_Tree.png", tempPNGFile, "PNG image file", partService,
 						shell);
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
@@ -595,7 +607,7 @@ public class GenomicsView implements SelectionListener {
 			}
 		} else if (e.getSource() == btnSaveSVG) {
 			String textSVG = getPhyloFigure(selectedGenomes);
-			SaveFileUtils.saveTextFile("Listeria_Phylogenomic_Tree.svg", textSVG, true, "SVG (vector image) file",
+			SaveFileUtils.saveTextFile("Yersinia_Phylogenomic_Tree.svg", textSVG, true, "SVG (vector image) file",
 					textSVG, partService, shell);
 		} else if (e.getSource() == btnSaveTxt) {
 			String[][] arrayToSave = new String[1][columnNames.size()];
@@ -612,14 +624,14 @@ public class GenomicsView implements SelectionListener {
 			}
 			String arrayRep = ArrayUtils.toString(arrayToSave);
 			String arrayRepHTML = TabDelimitedTableReader.getHTMLVersion(arrayToSave);
-			SaveFileUtils.saveTextFile("Listeria_Genomic_Table.txt", arrayRep, true, "", arrayRepHTML, partService,
+			SaveFileUtils.saveTextFile("Yersinia_Genomic_Table.txt", arrayRep, true, "", arrayRepHTML, partService,
 					shell);
 		} else if (e.getSource() == btnSelectall) {
 			selectedGenomes = new ArrayList<>();
 			tableGenome.selectAll();
 			for (int i : tableGenome.getSelectionIndices()) {
 				String selectedGenome = GenomeNCBI
-						.processGenomeName(tableGenome.getItem(i).getText(columnNames.indexOf("Name") + 1));
+						.processGenomeName(tableGenome.getItem(i).getText(columnNames.indexOf("Name (GenBank)") + 1));
 				if (!selectedGenomes.contains(selectedGenome)) {
 					selectedGenomes.add(selectedGenome);
 				}

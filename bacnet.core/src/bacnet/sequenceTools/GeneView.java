@@ -1,7 +1,8 @@
 package bacnet.sequenceTools;
 
-import java.io.File;
-import java.io.IOException;
+import java.net.*;
+import java.nio.file.Files;
+import java.io.*;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,6 +11,7 @@ import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.apache.commons.io.IOUtils;
 import org.biojava3.core.sequence.Strand;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.e4.ui.di.Focus;
@@ -31,6 +33,9 @@ import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.browser.Browser;
+import org.eclipse.swt.browser.ProgressListener;
+import org.eclipse.swt.browser.ProgressEvent;
+
 import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.KeyListener;
@@ -86,6 +91,7 @@ import bacnet.utils.ArrayUtils;
 import bacnet.utils.BasicColor;
 import bacnet.utils.CMD;
 import bacnet.utils.FileUtils;
+import bacnet.utils.HTMLUtils;
 import bacnet.utils.ImageMagick;
 import bacnet.utils.ListUtils;
 import bacnet.utils.RWTUtils;
@@ -109,7 +115,11 @@ public class GeneView implements SelectionListener, MouseListener {
 	 * Indicates if we focus the view, so we can pushState navigation
 	 */
 	private boolean focused = false;
-
+	
+	/**
+	 * Light version without Synteny
+	 **/
+	
 	/**
 	 * Egde Genome loaded
 	 */
@@ -130,6 +140,9 @@ public class GeneView implements SelectionListener, MouseListener {
 	private Label lblProtID;
 	private Combo comboGenome;
 	private Text textFeature;
+
+	private boolean loading; 
+
 	private Text lblOperon;
 	private Table tableGenes;
 	private Label lblGene;
@@ -150,12 +163,35 @@ public class GeneView implements SelectionListener, MouseListener {
 
 
 	private TabItem tbtmSynteny;
-	private Composite compositeSynteny;
+	private Composite compSynt;
 	private Browser browserSynteny;
+	
+	private TabItem tbtmKEGG;
+	private Composite compositeKEGG;
+	private Browser browserKEGG;
+
+	private TabItem tbtmUniprot;
+	private Composite compositeUniprot;
+	private Browser browserUniprot;
+	
+	private TabItem tbtmInterpro;
+	private Composite compositeInterpro;
+	private Browser browserInterpro;
+	
+	private TabItem tbtmIntact;
+	private Composite compositeIntact;
+	private Browser browserIntact;
+		
+	private TabItem tbtmString;
+	private Composite compositeString;
+	private Browser browserString;
+	
 	private Composite composite_15;
 	private Button btnNucleotideSequence;
 	private Button btnAminoAcidSequence;
 	private Button btnLocalization;
+	private Button btnShowSynteny;
+
 
 	/*
 	 * GenomeViewer
@@ -228,12 +264,6 @@ public class GeneView implements SelectionListener, MouseListener {
 
 
 	/*
-	 * Interactomes
-	 */
-	private TabItem tbtmInteractome;
-	private Composite compositeInteractome;
-
-	/*
 	 * Coregulation
 	 */
 	private ArrayList<String> coExpCol = new ArrayList<>();
@@ -253,6 +283,8 @@ public class GeneView implements SelectionListener, MouseListener {
     private Button btnCorrMinus;
     private Button btnExportNetwork;
 
+    private Boolean browserCompleted =false;
+    
 	/*
 	 * Other
 	 */
@@ -304,14 +336,20 @@ public class GeneView implements SelectionListener, MouseListener {
 	private Text txtSearchGenome;
 	private Button btnSelectall;
 	private Button btnUnselectall;
-	private Button btnDonwloadtxt;
+	private Button btnDownloadtxt;
 	private Composite compSuppInfo;
+	private Composite composite_1;
+	private HashMap<String, String> syntenyHashMap;
+	private HashMap<String, String> KEGGHashMap;
+	private HashMap<String, String> stringHashMap;
 
+	
 	@Inject
 	public GeneView() {
 
 
 	}
+	
 
 	/**
 	 * Create contents of the view part.
@@ -321,55 +359,111 @@ public class GeneView implements SelectionListener, MouseListener {
 	@PostConstruct
 	public void createPartControl(Composite parent) {
 		focused = true;
+		
+		/*
+		 * create HashMap for genomes with synteny
+		 */
+		syntenyHashMap = new HashMap<String,String>();
+		File syntenyFile = new File(Database.getInstance().getSyntenyHashMapPath());
+		if(syntenyFile.exists()) {
+			syntenyHashMap = HashMapFromTextFile(Database.getInstance().getSyntenyHashMapPath());
+		}else {
+			System.out.println("Cannot read: "+Database.getInstance().getSyntenyHashMapPath());
+		}
+		/*
+		syntenyHashMap.put("Yersinia pestis CO92", "CO92");
+		syntenyHashMap.put("Yersinia enterocolitica Y11", "Y11");
+		syntenyHashMap.put("Yersinia enterocolitica 8081", "8081");
+*/
+		
+		/*
+		 * create HashMap for KEGG and Uniprot genomes
+		 */
+		
+		KEGGHashMap = new HashMap<String,String>();
+		File KEGGFile = new File(Database.getInstance().getKEGGHashMapPath());
+		if(KEGGFile.exists()) {
+			KEGGHashMap = HashMapFromTextFile(Database.getInstance().getKEGGHashMapPath());
+		}else {
+			System.out.println("Cannot read: "+Database.getInstance().getKEGGHashMapPath());
+		}
+		
+		/*
+		 * create HashMap for String genomes
+		 */
+		stringHashMap = new HashMap<String,String>();		
+		File stringFile = new File(Database.getInstance().getStringHashMapPath());
+		if(stringFile.exists()) {
+			stringHashMap = HashMapFromTextFile(Database.getInstance().getStringHashMapPath());
+		}else {
+			System.out.println("Cannot read: "+Database.getInstance().getStringHashMapPath());
+		}
+		
+		/*
+		stringHashMap.put("Yersinia pestis CO92", "214092");
+		stringHashMap.put("Yersinia enterocolitica 8081", "393305");
+*/
 		Composite container = new Composite(parent, SWT.NONE);
 		container.setBounds(0, 0, 586, 480);
 		container.setLayout(new GridLayout(4, false));
-
+        
 		compositeGenome = new Composite(container, SWT.NONE);
-		compositeGenome.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, false, 2, 1));
-		compositeGenome.setLayout(new GridLayout(7, false));
-
+		compositeGenome.setLayoutData(new GridData(SWT.LEFT, SWT.FILL, true, false, 2, 1));
+		compositeGenome.setLayout(new GridLayout(9, false));
+		
 		Label lblSelectAGenome = new Label(compositeGenome, SWT.NONE);
-		lblSelectAGenome.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
 		lblSelectAGenome.setText("Select genome");
-
+		
 		comboGenome = new Combo(compositeGenome, SWT.NONE);
-		GridData gd_comboGenome = new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1);
-		gd_comboGenome.widthHint = 220;
+		GridData gd_comboGenome = new GridData(SWT.LEFT, SWT.CENTER, true, false, 1, 1);
+		gd_comboGenome.widthHint = 300;
 		comboGenome.setLayoutData(gd_comboGenome);
 
+		lblTranscriptomesData = new Label(compositeGenome, SWT.NONE);
+		GridData gd_lblTranscriptomesData = new GridData(SWT.LEFT, SWT.CENTER, true, false, 1, 1);
+		gd_lblTranscriptomesData.widthHint = 200;
+		lblTranscriptomesData.setLayoutData(gd_lblTranscriptomesData);
+		lblTranscriptomesData.setText(" * Transcriptomics or \nproteomics data available");
+		lblTranscriptomesData.setFont(SWTResourceManager.getBodyFont(10, SWT.NORMAL));
+		
+		
 		Label lblChromosome = new Label(compositeGenome, SWT.NONE);
-		lblChromosome.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-		lblChromosome.setText("Chromosome");
+		lblChromosome.setText("Chromosome/Plasmids");
 
 		comboChromosome = new Combo(compositeGenome, SWT.NONE);
-		GridData gd_comboChromosome = new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1);
-		gd_comboChromosome.widthHint = 125;
+		GridData gd_comboChromosome = new GridData(SWT.RIGHT, SWT.CENTER, true, false, 1, 1);
+		gd_comboChromosome.widthHint = 200;
 		comboChromosome.setLayoutData(gd_comboChromosome);
 
 		btnNcbiChromosome = new Button(compositeGenome, SWT.NONE);
+
 		btnNcbiChromosome.setToolTipText("Access to more information on the genome");
-		btnNcbiChromosome.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/logos/ncbi.png"));
+		
+		btnNcbiChromosome.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/refseq.png"));
 		btnNcbiChromosome.addSelectionListener(this);
 
 		btnGetAnnotationInformation = new Button(compositeGenome, SWT.NONE);
+
 		btnGetAnnotationInformation.setText("Browse and download annotation table");
 		btnGetAnnotationInformation.setToolTipText("Browse and download annotation table");
 		btnGetAnnotationInformation.addSelectionListener(this);
 		btnGetAnnotationInformation.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/fileIO/txt.bmp"));
-		new Label(compositeGenome, SWT.NONE);
+		//new Label(compositeGenome, SWT.NONE);
 
-		lblTranscriptomesData = new Label(compositeGenome, SWT.NONE);
-		lblTranscriptomesData.setText(" * Transcriptomics or proteomics data available");
-		lblTranscriptomesData.setFont(SWTResourceManager.getBodyFont(10, SWT.NORMAL));
+
+		
+		/*
 		new Label(compositeGenome, SWT.NONE);
 		new Label(compositeGenome, SWT.NONE);
 		new Label(compositeGenome, SWT.NONE);
 		new Label(compositeGenome, SWT.NONE);
 		new Label(compositeGenome, SWT.NONE);
 		new Label(compositeGenome, SWT.NONE);
+		*/
+		
 		comboChromosome.addSelectionListener(this);
 		comboGenome.addSelectionListener(this);
+		
 		new Label(container, SWT.NONE);
 		btnHelp = new Button(container, SWT.NONE);
 		btnHelp.setToolTipText("How to use Gene panel");
@@ -405,9 +499,10 @@ public class GeneView implements SelectionListener, MouseListener {
 						listGenes.clear();
 						for (String gene : searchResults) {
 							String text = gene;
-							String oldLocusTag = genome.getChromosomes().get(chromoID).getGenes().get(gene).getFeature("old_locus_tag");
+							String oldLocusTag = genome.getChromosomes().get(chromoID).getGenes().get(gene).getOldLocusTag();
 							if (!oldLocusTag.equals("")) {
 								text += " - " + oldLocusTag;
+								
 							}
 							String geneName = genome.getChromosomes().get(chromoID).getGenes().get(gene).getGeneName();
 							if (!geneName.equals("")) {
@@ -466,7 +561,7 @@ public class GeneView implements SelectionListener, MouseListener {
 		gd_lblGene.widthHint = 400;
 		lblGene.setLayoutData(gd_lblGene);
 		lblGene.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
-		lblGene.setFont(SWTResourceManager.getTitleFont());
+		lblGene.setFont(SWTResourceManager.getBodyFont(15, SWT.BOLD));
 		lblGene.setText("gene");
 
 		tabFolder = new TabFolder(composite_11, SWT.NONE);
@@ -474,16 +569,16 @@ public class GeneView implements SelectionListener, MouseListener {
 		tabFolder.addSelectionListener(this);
 		tbtmGeneralInformation = new TabItem(tabFolder, SWT.NONE);
 		tbtmGeneralInformation.setText("General information");
-
+		
 		scrolledComposite.setContent(composite_11);
 		scrolledComposite.setMinSize(composite_11.computeSize(SWT.DEFAULT, SWT.DEFAULT));
 		
-		Composite composite_1 = new Composite(tabFolder, SWT.BORDER);
+		composite_1 = new Composite(tabFolder, SWT.BORDER);
 		tbtmGeneralInformation.setControl(composite_1);
-		composite_1.setLayout(new GridLayout(3, false));
+		composite_1.setLayout(new GridLayout(4, false));
 
 		Composite compGenomeViewer = new Composite(composite_1, SWT.NONE);
-		compGenomeViewer.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 3, 1));
+		compGenomeViewer.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 4, 1));
 		compGenomeViewer.setLayout(new GridLayout(2, false));
 
 		canvasGenome = new TrackCanvasGenome(compGenomeViewer, SWT.BORDER);
@@ -505,21 +600,19 @@ public class GeneView implements SelectionListener, MouseListener {
 		btnZoomminus.addSelectionListener(this);
 
 		Composite compGeneralInfo = new Composite(composite_1, SWT.BORDER);
-		GridData gd_compGeneralInfo = new GridData(SWT.FILL, SWT.FILL, false, false, 1, 2);
-		gd_compGeneralInfo.widthHint = 450;
+		GridData gd_compGeneralInfo = new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1);
+		//gd_compGeneralInfo.widthHint = 450;
 		compGeneralInfo.setLayoutData(gd_compGeneralInfo);
-		compGeneralInfo.setLayout(new GridLayout(2, false));
+		compGeneralInfo.setLayout(new GridLayout(5, false));
 
 		lblLocus = new Text(compGeneralInfo, SWT.READ_ONLY);
 		lblLocus.setTouchEnabled(true);
 		GridData gd_lblLocus = new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1);
-		gd_lblLocus.widthHint = 160;
+		gd_lblLocus.widthHint = 250;
 		lblLocus.setLayoutData(gd_lblLocus);
 		lblLocus.setText("Locus");
 
-		lblBegin = new Text(compGeneralInfo, SWT.READ_ONLY);
-		lblBegin.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
-		lblBegin.setText("Begin");
+		
 
 		lblStrand = new Text(compGeneralInfo, SWT.READ_ONLY);
 		GridData gd_lblStrand = new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1);
@@ -527,13 +620,17 @@ public class GeneView implements SelectionListener, MouseListener {
 		lblStrand.setLayoutData(gd_lblStrand);
 		lblStrand.setText("Strand");
 
+		lblBegin = new Text(compGeneralInfo, SWT.READ_ONLY);
+		lblBegin.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
+		lblBegin.setText("Begin");
+		
 		lblEnd = new Text(compGeneralInfo, SWT.READ_ONLY);
 		lblEnd.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
 		lblEnd.setText("End");
 
 		lblSizeBP = new Text(compGeneralInfo, SWT.READ_ONLY);
 		GridData gd_lblSizeBP = new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1);
-		gd_lblSizeBP.widthHint = 50;
+		gd_lblSizeBP.widthHint = 65;
 		lblSizeBP.setLayoutData(gd_lblSizeBP);
 		lblSizeBP.setText("Size");
 
@@ -542,47 +639,84 @@ public class GeneView implements SelectionListener, MouseListener {
 		lblSizeaa.setText("SizeAA");
 
 		lblName = new Text(compGeneralInfo, SWT.READ_ONLY);
-		lblName.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 2, 1));
+		lblName.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
 		lblName.setText("Name: ");
 
-		lblProduct = new Text(compGeneralInfo, SWT.READ_ONLY | SWT.WRAP);
-		GridData gd_lblProduct = new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1);
-		gd_lblProduct.heightHint = 60;
+		lblProduct = new Text(compGeneralInfo, SWT.READ_ONLY);
+		GridData gd_lblProduct = new GridData(SWT.FILL, SWT.CENTER, true, false, 3, 1);
+		//gd_lblProduct.heightHint = 60;
 		lblProduct.setLayoutData(gd_lblProduct);
 		lblProduct.setText("Product");
-		new Label(compGeneralInfo, SWT.NONE);
-		new Label(compGeneralInfo, SWT.NONE);
-		new Label(compGeneralInfo, SWT.NONE);
 
-		composite_15 = new Composite(compGeneralInfo, SWT.BORDER);
-		composite_15.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 2, 1));
-		composite_15.setLayout(new GridLayout(2, false));
+		
+		composite_15 = new Composite(composite_1, SWT.BORDER);
+		composite_15.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1));
+		composite_15.setLayout(new GridLayout(1, false));
 
-		btnNucleotideSequence = new Button(composite_15, SWT.NONE);
+		btnNucleotideSequence = new Button(composite_15, SWT.CENTER);
 		btnNucleotideSequence.setText("Nucleotide sequence");
 		btnNucleotideSequence.addSelectionListener(this);
-		btnAminoAcidSequence = new Button(composite_15, SWT.NONE);
+		btnAminoAcidSequence = new Button(composite_15, SWT.CENTER);
 		btnAminoAcidSequence.setText("Amino acid sequence");
 		btnAminoAcidSequence.addSelectionListener(this);
 
 		compSuppInfo = new Composite(composite_1, SWT.BORDER);
-		GridData gd_compSuppInfo = new GridData(SWT.LEFT, SWT.FILL, false, false, 1, 1);
-		gd_compSuppInfo.widthHint = 300;
+		GridData gd_compSuppInfo = new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1);
+		//gd_compSuppInfo.widthHint = 550;
 		compSuppInfo.setLayoutData(gd_compSuppInfo);
 		compSuppInfo.setLayout(new GridLayout(1, false));
 
+		/*
 		lblOperon = new Text(compSuppInfo, SWT.READ_ONLY);
 		lblOperon.setText("Operon");
-		lblProtID = new Label(compSuppInfo, SWT.READ_ONLY);
+		*/
+		
+		lblProtID = new Label(compSuppInfo, SWT.NONE);
 		RWTUtils.setMarkup(lblProtID);
-		lblProtID.setText("protid");
-
+		lblProtID.setText("ProteinId");
+		
+		
+		/*
 		lblCog = new Text(compSuppInfo, SWT.READ_ONLY | SWT.WRAP);
 		lblCog.setText("COG");
-
+		*/
+		
 		lblConservation = new Text(compSuppInfo, SWT.NONE);
-		lblConservation.setText("Homologs in 00/00 Yersinia genomes");
+		lblConservation.setText("Homologs in 000/000 Yersinia genomes");
 
+		
+		//textFeature = new Text(compSuppInfo, SWT.BORDER | SWT.WRAP | SWT.H_SCROLL | SWT.V_SCROLL | SWT.CANCEL);		
+		//textFeature.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		
+		Composite compFeatures = new Composite(composite_1, SWT.BORDER);
+		GridData gd_compFeatures = new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1);
+		gd_compFeatures.heightHint = 50;
+		compFeatures.setLayoutData(gd_compFeatures);
+		compFeatures.setLayout(new GridLayout(1, false));
+		
+		textFeature = new Text(compFeatures, SWT.WRAP);
+		GridData gd_textFeature = new GridData(SWT.RIGHT, SWT.FILL, false, true, 1, 1);
+		gd_textFeature.heightHint = 50;
+		textFeature.setLayoutData(gd_textFeature);
+		
+		
+		compSynt = new Composite(composite_1, SWT.BORDER);
+		GridData gd_compSynt = new GridData(SWT.FILL, SWT.FILL, false, true, 4, 1);
+		compSynt.setLayoutData(gd_compSynt);
+		compSynt.setLayout(new GridLayout(1, false));
+
+		/*
+		btnShowSynteny = new Button(compSynt, SWT.CENTER);
+		btnShowSynteny.setText("Show synteny");
+		btnShowSynteny.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, true, true, 1, 1));
+		btnShowSynteny.setFont(SWTResourceManager.getBodyFont(22,SWT.NORMAL));
+		
+		browserSynteny = new Browser(compSynt, SWT.NONE);
+		*/
+		//browserSynteny.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		
+		
+		
 		/*
 		composite_localization = new Composite(composite_1, SWT.BORDER);
 		composite_localization.setLayoutData(new GridData(SWT.FILL, SWT.TOP, false, true, 1, 4));
@@ -609,13 +743,7 @@ public class GeneView implements SelectionListener, MouseListener {
 		gd_browserLocalization.heightHint = 250;
 		browserLocalization.setLayoutData(gd_browserLocalization);
 		*/
-		textFeature = new Text(composite_1, SWT.BORDER | SWT.WRAP | SWT.H_SCROLL | SWT.V_SCROLL | SWT.CANCEL);
-		textFeature.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
-		new Label(composite_1, SWT.NONE);
-		new Label(composite_1, SWT.NONE);
-		new Label(composite_1, SWT.NONE);
-		new Label(composite_1, SWT.NONE);
-
+		
 		tbtmHomologs = new TabItem(tabFolder, SWT.NONE);
 		tbtmHomologs.setText("Homologs");
 
@@ -628,7 +756,8 @@ public class GeneView implements SelectionListener, MouseListener {
 		composite_14.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 3, 1));
 
 		btnExportToFasta = new Button(composite_14, SWT.NONE);
-		btnExportToFasta.setText("Export selected gene to multi sequence fasta file");
+		// a corriger
+		btnExportToFasta.setText("Export selected gene to multi sequence fasta file");		
 		btnExportToFasta.addSelectionListener(this);
 
 		lblConservation2 = new Label(composite_14, SWT.NONE);
@@ -645,16 +774,18 @@ public class GeneView implements SelectionListener, MouseListener {
 		Label lblDownloadPhylogenomicConservation = new Label(composite_6, SWT.NONE);
 		lblDownloadPhylogenomicConservation.setText("Download Phylogenomic conservation tree as");
 		lblDownloadPhylogenomicConservation.setFont(SWTResourceManager.getBodyFont(10, SWT.NORMAL));
-
+		
+		/*
 		btnSaveAsPng = new Button(composite_6, SWT.NONE);
 		btnSaveAsPng.setToolTipText("Download as PNG image");
 		btnSaveAsPng.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/fileIO/png.bmp"));
+		btnSaveAsPng.addSelectionListener(this);
 
+		*/
 		btnSaveAsSvg = new Button(composite_6, SWT.NONE);
 		btnSaveAsSvg.setToolTipText("Download as SVG vector image (for Illustrator, GIMP, ...)");
 		btnSaveAsSvg.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/fileIO/svg.bmp"));
 		btnSaveAsSvg.addSelectionListener(this);
-		btnSaveAsPng.addSelectionListener(this);
 
 		browserHomolog = new Browser(composite_18, SWT.BORDER);
 		GridData gd_browserHomolog = new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1);
@@ -688,7 +819,7 @@ public class GeneView implements SelectionListener, MouseListener {
 			@Override
 			public void keyPressed(KeyEvent e) {}
 		});
-
+//a corriger
 		Label lblSearch_1 = new Label(composite_17, SWT.NONE);
 		lblSearch_1.setText("Search");
 		lblSearch_1.setFont(SWTResourceManager.getBodyFont(10, SWT.NORMAL));
@@ -711,9 +842,9 @@ public class GeneView implements SelectionListener, MouseListener {
 		lblUnselectAll.setText("Unselect all");
 		lblUnselectAll.setFont(SWTResourceManager.getBodyFont(10, SWT.NORMAL));
 
-		btnDonwloadtxt = new Button(composite_17, SWT.NONE);
-		btnDonwloadtxt.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/fileIO/txt.bmp"));
-		btnDonwloadtxt.addSelectionListener(this);
+		btnDownloadtxt = new Button(composite_17, SWT.NONE);
+		btnDownloadtxt.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/fileIO/txt.bmp"));
+		btnDownloadtxt.addSelectionListener(this);
 
 		Label lblDownload = new Label(composite_17, SWT.NONE);
 		lblDownload.setText("Download gene selection as a table");
@@ -736,7 +867,7 @@ public class GeneView implements SelectionListener, MouseListener {
 			@Override
 			public void selectionChanged(SelectionChangedEvent event) {
 				for (int i : tableHomolog.getSelectionIndices()) {
-					String selectedGenome = tableHomolog.getItem(i).getText(columnNames.indexOf("Name") + 1);
+					String selectedGenome = tableHomolog.getItem(i).getText(columnNames.indexOf("Name (GenBank)") + 1);
 					selectedGenome = GenomeNCBI.processGenomeName(selectedGenome);
 					if (selectedGenomes.contains(selectedGenome)) {
 						if (tableHomolog.getSelectionIndices().length == 1) {
@@ -756,27 +887,25 @@ public class GeneView implements SelectionListener, MouseListener {
 			public void doubleClick(DoubleClickEvent event) {
 				String selectedGenome =
 						tableHomologViewer.getTable().getItem(tableHomologViewer.getTable().getSelectionIndex())
-						.getText(columnNames.indexOf("Name") + 1);
+						.getText(columnNames.indexOf("Name (GenBank)") + 1);
 				String selectedGene =
 						tableHomologViewer.getTable().getItem(tableHomologViewer.getTable().getSelectionIndex())
 						.getText(columnNames.indexOf("Homolog Locus") + 1);
-				//System.out.println(tableHomologViewer.getTable().getSelectionIndex()+ " " + columnNames.indexOf("Name")+ "yahou "+selectedGene+" "+selectedGenome);
 				Genome genome = Genome.loadGenome(selectedGenome);
 				ArrayList<String> genomeNames = new ArrayList<>();
 				genomeNames.add(selectedGenome);
+				/*
 				if(selectedGenome.equals("Yersinia pestis CO92")||selectedGenome.equals("Yersinia pestis KIM5")||selectedGenome.equals("Yersinia pestis 91001")
 						||selectedGenome.equals("Yersinia pseudotuberculosis YPIII")||selectedGenome.equals("Yersinia pseudotuberculosis IP32953")||selectedGenome.equals("Yersinia entomophaga MH96")
 						||selectedGenome.equals("Yersinia enterocolitica Y1")||selectedGenome.equals("Yersinia enterocolitica Y11")) {
 					generalNetwork = new Network();
 					generalNetwork = Network.load(Database.getCOEXPR_NETWORK_TRANSCRIPTOMES_PATH() + "_" + genome.getSpecies());
-				}
+				} */
 				Gene gene = genome.getGeneFromName(selectedGene);
 				GeneView.displayGene(gene, partService);
 			}
 		});
 		new Label(composite_13, SWT.NONE);
-
-
 
 		/*
 		 * Differential transcriptomics section
@@ -1055,10 +1184,6 @@ public class GeneView implements SelectionListener, MouseListener {
 			tableNodiffProteome.addSelectionListener(this);
 		}
 
-
-
-
-
 		tbtmProteomes = new TabItem(tabFolder, SWT.NONE);
 		tbtmProteomes.setText("Proteomes");
 
@@ -1099,49 +1224,114 @@ public class GeneView implements SelectionListener, MouseListener {
 		tableProteomes = new Table(composite_09, SWT.BORDER | SWT.FULL_SELECTION | SWT.MULTI);
 		tableProteomes.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1));
 
-
-
-		/*
-		 * Interactome viewer
-		 */
-
-		tbtmInteractome = new TabItem(tabFolder, SWT.NONE);
-		tbtmInteractome.setText("Interactome");
-
 		/*
 		 * Co-Expression viewer
 		 */
 
-		tbtmCoExp = new TabItem(tabFolder, SWT.NONE);
-		tbtmCoExp.setText("Co-Expression");
+		//tbtmCoExp = new TabItem(tabFolder, SWT.NONE);
+		//tbtmCoExp.setText("Co-Expression");
 		
 		/*
 		 * Synteny viewer
 		 */
-		
+		/*
 		tbtmSynteny = new TabItem(tabFolder, SWT.NONE);
 		tbtmSynteny.setText("Synteny");
 
 		compositeSynteny = new Composite(tabFolder, SWT.NONE);
 		tbtmSynteny.setControl(compositeSynteny);
 		compositeSynteny.setLayout(new GridLayout(1, false));
-		browserSynteny = new Browser(compositeSynteny, SWT.NONE);
-		browserSynteny.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		//browserSynteny = new Browser(compositeSynteny, SWT.NONE);
+		//browserSynteny.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 
 		if (Database.getInstance().getProjectName() == Database.LISTERIOMICS_PROJECT
 				|| Database.getInstance().getProjectName() == Database.UIBCLISTERIOMICS_PROJECT || Database.getInstance().getProjectName() == Database.YERSINIOMICS_PROJECT || Database.getInstance().getProjectName() == Database.URY_YERSINIOMICS_PROJECT) {
 			initSyntenyBrowser();
 		}
 
+		/*
+		 * KEGG
+		 */
+		
+		tbtmKEGG = new TabItem(tabFolder, SWT.NONE);
+		//tbtmKEGG.setText("KEGG");
+		tbtmKEGG.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/KEGG.png"));
+
+		compositeKEGG = new Composite(tabFolder, SWT.NONE);
+		tbtmKEGG.setControl(compositeKEGG);
+		compositeKEGG.setLayout(new GridLayout(1, false));
+		browserKEGG = new Browser(compositeKEGG, SWT.NONE);
+		browserKEGG.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		browserKEGG.setUrl("");
+		
+		/*
+		 * Uniprot
+		 */
+		
+		tbtmUniprot = new TabItem(tabFolder, SWT.NONE);
+		//tbtmUniprot.setText("UniProt");
+		tbtmUniprot.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/uniprot.png"));
+
+		compositeUniprot = new Composite(tabFolder, SWT.NONE);
+		tbtmUniprot.setControl(compositeUniprot);
+		compositeUniprot.setLayout(new GridLayout(1, false));
+		browserUniprot = new Browser(compositeUniprot, SWT.NONE);
+		browserUniprot.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		browserUniprot.setUrl("");
+		
+		/*
+		 * InterPro
+		 */
+		
+		tbtmInterpro = new TabItem(tabFolder, SWT.NONE);
+		tbtmInterpro.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/interpro.png"));
+
+		compositeInterpro = new Composite(tabFolder, SWT.NONE);
+		tbtmInterpro.setControl(compositeInterpro);
+		compositeInterpro.setLayout(new GridLayout(1, false));
+		browserInterpro = new Browser(compositeInterpro, SWT.NONE);
+		browserInterpro.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		browserInterpro.setUrl("");
+		
+		/*
+		 * IntAct
+		 */
+		
+		tbtmIntact = new TabItem(tabFolder, SWT.NONE);
+		tbtmIntact.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/intact.png"));
+		compositeIntact = new Composite(tabFolder, SWT.NONE);
+		tbtmIntact.setControl(compositeIntact);
+		compositeIntact.setLayout(new GridLayout(1, false));
+		browserIntact = new Browser(compositeIntact, SWT.NONE);
+		browserIntact.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		browserIntact.setUrl("");
+		
+		/*
+		 * String
+		 */
+		
+		tbtmString = new TabItem(tabFolder, SWT.NONE);
+		//tbtmString.setText("String");
+		tbtmString.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/string.png"));
+		compositeString = new Composite(tabFolder, SWT.NONE);
+		tbtmString.setControl(compositeString);
+		compositeString.setLayout(new GridLayout(1, false));
+		compositeString.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		browserString = new Browser(compositeString, SWT.NONE);
+		browserString.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		browserString.setText("");
+			
 	}
 
+	
+	
     public static class OpenGenomesAndNetworkThread implements IRunnableWithProgress {
         private ArrayList<String> genomeNames = new ArrayList<>();
         Network generalNetwork = new Network();
         public OpenGenomesAndNetworkThread(ArrayList<String> genomeNames) {
             this.genomeNames = genomeNames;
         }
-
+        
         @Override
         public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
             int sizeProcess = genomeNames.size()*2;
@@ -1162,6 +1352,8 @@ public class GeneView implements SelectionListener, MouseListener {
             monitor.done();
         }
     }
+    
+    /*
 	private void initSyntenyBrowser() {
 		try {
 			String realUrl = FileUtils.getPath(NavigationManagement.getURL());
@@ -1178,86 +1370,249 @@ public class GeneView implements SelectionListener, MouseListener {
 				pathGraphHTML = "";
 			}
 			System.out.println("SyntView: " + pathGraphHTML);
-			browserSynteny.setUrl(pathGraphHTML);
-			browserSynteny.redraw();
+			//browserSynteny.setUrl(pathGraphHTML);
 		} catch (Exception e) {
 			System.out.println("Cannot create browser");
 		}
 	}
-
+*/
+	
 	private void updateSyntenyBrowser() {
-		tbtmSynteny.dispose();
-		tbtmSynteny = new TabItem(tabFolder, SWT.NONE);
-		tbtmSynteny.setText("Synteny");
+		compSynt.dispose();
+		compSynt = new Composite(composite_1, SWT.BORDER);
+		GridData gd_compSynt = new GridData(SWT.FILL, SWT.FILL, false, true, 4, 1);
+		compSynt.setLayoutData(gd_compSynt);
+		compSynt.setLayout(new GridLayout(1, false));
+		composite_1.layout(true,true);
 
-		compositeSynteny = new Composite(tabFolder, SWT.NONE);
-		tbtmSynteny.setControl(compositeSynteny);
-		compositeSynteny.setLayout(new GridLayout(1, false));
-		browserSynteny = new Browser(compositeSynteny, SWT.NONE);
-		browserSynteny.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		if(syntenyHashMap.containsKey(genome.getSpecies())){
+				btnShowSynteny = new Button(compSynt, SWT.CENTER);
+				btnShowSynteny.setText("Show synteny");
+				btnShowSynteny.addSelectionListener(this);
+				btnShowSynteny.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, true, true, 1, 1));
+				btnShowSynteny.setFont(SWTResourceManager.getBodyFont(22,SWT.NORMAL));
+				browserSynteny = new Browser(compSynt, SWT.NONE);
+				browserSynteny.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+				composite_1.layout(true,true);
+
+			 }
+		}
+	
+	private void loadSynteny() {
+		String syntenyURL = new String();
+		String syntenyURLPrefix = "https://yersiniomics.pasteur.fr/SynTView/site/?dataDir=\"data/";
 
 		try {
-			String realUrl = FileUtils.getPath(NavigationManagement.getURL());
-			String pathGraphHTML = new String();
-			if (realUrl.contains("Listeriomics")) {
-				if (realUrl.contains("/Listeriomics/")) {
-					realUrl = realUrl.replaceAll("Listeriomics/", "");
-				} else if (realUrl.contains("/UIBCListeriomics/")) {
-					realUrl = realUrl.replaceAll("UIBCListeriomics/", "");
-				}
-				realUrl = "https://listeriomics.pasteur.fr/";
-				pathGraphHTML = realUrl + "SynTView/flash/indexFinal.html";
-			} else if (genome.getSpecies().equals("Yersinia pestis CO92")){
-				//pathGraphHTML = "http://hub15.hosting.pasteur.fr:8080/SynTView/site/?dataDir=\"data/CO92\"";
-				pathGraphHTML = "https://yersiniomics.pasteur.fr/SynTView/site/?dataDir=\"data/CO92\"";
-				System.out.println("SyntView: " + pathGraphHTML);
-				browserSynteny.setUrl(pathGraphHTML);
-				browserSynteny.redraw();
-			} else if (genome.getSpecies().equals("Yersinia pestis KIM5")){
-				//pathGraphHTML = "http://hub15.hosting.pasteur.fr:8080/SynTView/site/?dataDir=\"data/KIM5\"";
-				pathGraphHTML = "https://yersiniomics.pasteur.fr/SynTView/site/?dataDir=\"data/KIM5\"";
-				System.out.println("SyntView: " + pathGraphHTML);
-				browserSynteny.setUrl(pathGraphHTML);
-				browserSynteny.redraw();
+			//pathGraphHTML = "http://hub15.hosting.pasteur.fr:8080/SynTView/site/?dataDir=\"data/CO92\"";
+			syntenyURL = syntenyURLPrefix + syntenyHashMap.get(genome.getSpecies()) + "\"";
+			browserSynteny.setUrl(syntenyURL);
+		} catch (Exception e) {
+			System.out.println("Cannot create Synteny browser");
+		}
+	}
+	
+	private void updateCrossRefs() {
+		String KEGGPath = new String();
+		String UniprotPath = new String();
+		String IntactPath = new String();
+		String InterproPath = new String();
+		String StringPath = new String();
 
-			} else if (genome.getSpecies().equals("Yersinia pseudotuberculosis YPIII")){
-				//pathGraphHTML = "http://hub15.hosting.pasteur.fr:8080/SynTView/site/?dataDir=\"data/pseudo\"";
-				pathGraphHTML = "https://yersiniomics.pasteur.fr/SynTView/site/?dataDir=\"data/pseudo\"";
-				System.out.println("SyntView: " + pathGraphHTML);
-				browserSynteny.setUrl(pathGraphHTML);
-				browserSynteny.redraw();
-				
-			} else if (genome.getSpecies().equals("Yersinia pseudotuberculosis IP32953")){
-				//pathGraphHTML = "http://hub15.hosting.pasteur.fr:8080/SynTView/site/?dataDir=\"data/IP32953\"";
-				pathGraphHTML = "https://yersiniomics.pasteur.fr/SynTView/site/?dataDir=\"data/IP32953\"";
-				System.out.println("SyntView: " + pathGraphHTML);
-				browserSynteny.setUrl(pathGraphHTML);
-				browserSynteny.redraw();
-			
-				/* only private version
-			} else if (genome.getSpecies().equals("Yersinia pseudotuberculosis IP31758")){
-				//pathGraphHTML = "http://hub15.hosting.pasteur.fr:8080/SynTView/site/?dataDir=\"data/pseudo\"";
-				pathGraphHTML = "https://yersiniomics.pasteur.fr/SynTView/site/?dataDir=\"data/IP31758\"";
-				System.out.println("SyntView: " + pathGraphHTML);
-				browserSynteny.setUrl(pathGraphHTML);
-				browserSynteny.redraw();
-				*/
-				
-			} else if (genome.getSpecies().equals("Yersinia enterocolitica 8081")){
-				//pathGraphHTML = "http://hub15.hosting.pasteur.fr:8080/SynTView/site/?dataDir=\"data/entero\"";
-				pathGraphHTML = "https://yersiniomics.pasteur.fr/SynTView/site/?dataDir=\"data/entero\"";
-				System.out.println("SyntView: " + pathGraphHTML);
-				browserSynteny.setUrl(pathGraphHTML);
-				browserSynteny.redraw();
-			} else if (genome.getSpecies().equals("Yersinia enterocolitica Y11")){
-				//pathGraphHTML = "http://hub15.hosting.pasteur.fr:8080/SynTView/site/?dataDir=\"data/entero\"";
-				pathGraphHTML = "https://yersiniomics.pasteur.fr/SynTView/site/?dataDir=\"data/Y11\"";
-				System.out.println("SyntView: " + pathGraphHTML);
-				browserSynteny.setUrl(pathGraphHTML);
-				browserSynteny.redraw();
+		try {
+			if(KEGGHashMap.containsKey(genome.getSpecies())) {
+				String locus = sequence.getOldLocusTag();
+				if (locus.equals("")) {
+					locus = sequence.getName();
+				} else {
+					if(genome.getSpecies().equals("Yersinia pestis 91001")) {
+						String[] splitLoc = locus.split("%2C");
+						if (splitLoc.length==2) {
+							locus = splitLoc[1];
+						} else {
+							locus = sequence.getName();
+						}		
+					}
+				}
+
+					KEGGPath = "https://www.genome.jp/entry/"+ KEGGHashMap.get(genome.getSpecies()) + ":" + locus;
+					browserKEGG.setUrl(KEGGPath);
+					
+					IntactPath = "https://www.ebi.ac.uk/intact/search?query="+ locus;
+						    
+					// open and read HTML page at KEGG conversion API tool
+					URL url = new URL("https://rest.kegg.jp/conv/uniprot/"+ KEGGHashMap.get(genome.getSpecies()) + ":" + locus);
+					InputStream is = url.openStream();
+					int ptr = 0;
+					StringBuffer buffer = new StringBuffer();
+					while ((ptr = is.read()) != -1) {
+					    buffer.append((char)ptr);
+					}
+					if (buffer.length()==1) { //if string buffer is empty because no Uniprot accession is found in KEGG conversion tool
+						browserUniprot.setText("<h2 style=\"text-align:center\">Could not find UniProt ID</h2>");
+						browserInterpro.setText("<h2 style=\"text-align:center\">Could not find UniProt ID for InterPro query</h2>");
+						//query IntAct only by locus name
+						IntactPath = "https://www.ebi.ac.uk/intact/search?query="+ locus;
+						browserIntact.setUrl(IntactPath);
+						
+					} else {
+						String conversion = buffer.toString();
+						String[] splitUp = conversion.split(":");
+						String UpAccession = splitUp[2].substring(0,splitUp[2].length()-1);
+						UniprotPath ="https://www.uniprot.org/uniprotkb/"+UpAccession;
+						browserUniprot.setUrl(UniprotPath);	
+						InterproPath ="https://www.ebi.ac.uk/interpro/protein/UniProt/"+UpAccession;
+						browserInterpro.setUrl(InterproPath);
+						
+						//query IntAct by locus name and UniProt accession
+						IntactPath = "https://www.ebi.ac.uk/intact/search?query="+ locus + "%20" + UpAccession;
+						browserIntact.setUrl(IntactPath);
+
+					}
 			} else {
-				tbtmSynteny.dispose();
+				System.out.println("does not contains key genome for KEGG browser: "+ genome.getSpecies());
 			}
+		} catch (Exception e) {
+			System.out.println("Cannot create KEGG browser");
+		}
+		
+		/*
+		 * Update String Network
+		 */
+		
+		if (stringHashMap.containsKey(genome.getSpecies())) {
+			String locus2 = sequence.getOldLocusTag();
+
+			if (locus2.equals("")) {
+				locus2 = sequence.getName();
+			}
+			StringPath = "https://string-db.org/api/tsv-no-header/get_link?identifiers="+ locus2 +"&species="+stringHashMap.get(genome.getSpecies());
+			try {
+				InputStream in = new URL(StringPath).openStream();
+				String result = IOUtils.toString(in);
+				browserString.setUrl(result);
+			} catch (Exception e) {
+				
+		}
+			
+			
+			//String htmlText = HTMLUtils.getPluginTextFile("bacnet.core", "html/string.html");
+			//browserString.setText(htmlText);
+			/*try {
+				//wait until end of loading for first genome opening
+				
+				ProgressListener stringListener = new ProgressListener() { 
+
+					@Override
+					public void changed(final ProgressEvent arg0) {}
+
+					@Override
+					public void completed(final ProgressEvent event) {
+							browserString.evaluate("javascript:send_request_to_string(['" + sequence.getOldLocusTag() + "'] , '" + stringHashMap.get(genome.getSpecies())+ "')");					
+
+					}
+				};
+				
+				//browserString.addProgressListener(stringListener);
+				
+				//browserString.removeProgressListener(stringListener);
+				// when updating gene info
+				//browserString.evaluate("javascript:send_request_to_string(['" + sequence.getOldLocusTag() + "'] , '" + stringHashMap.get(genome.getSpecies())+ "')");
+				
+				//System.out.println("evaluate OK");
+			} catch (Exception e) {
+				System.out.println("Cannot evaluate string: " + "javascript:send_request_to_string(['" + sequence.getOldLocusTag() + "'] , '" + stringHashMap.get(genome.getSpecies())+ "')");
+			}*/
+		} else {
+			//browserString.setText("");
+		}
+	}
+	
+	private void updateCrossRefsBrowsers() {		
+		
+		tbtmKEGG.dispose();
+		tbtmKEGG = new TabItem(tabFolder, SWT.NONE);
+		tbtmKEGG.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/KEGG.png"));
+
+		compositeKEGG = new Composite(tabFolder, SWT.NONE);
+		tbtmKEGG.setControl(compositeKEGG);
+		compositeKEGG.setLayout(new GridLayout(1, false));
+		browserKEGG = new Browser(compositeKEGG, SWT.NONE);
+		browserKEGG.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		
+		tbtmUniprot.dispose();
+		tbtmUniprot = new TabItem(tabFolder, SWT.NONE);
+		tbtmUniprot.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/uniprot.png"));
+
+		compositeUniprot = new Composite(tabFolder, SWT.NONE);
+		tbtmUniprot.setControl(compositeUniprot);
+		compositeUniprot.setLayout(new GridLayout(1, false));
+		browserUniprot = new Browser(compositeUniprot, SWT.NONE);
+		browserUniprot.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		
+
+		tbtmInterpro.dispose();
+		tbtmInterpro = new TabItem(tabFolder, SWT.NONE);
+		tbtmInterpro.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/interpro.png"));
+
+		compositeInterpro = new Composite(tabFolder, SWT.NONE);
+		tbtmInterpro.setControl(compositeInterpro);
+		compositeInterpro.setLayout(new GridLayout(1, false));
+		browserInterpro = new Browser(compositeInterpro, SWT.NONE);
+		browserInterpro.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		
+		tbtmIntact.dispose();
+		tbtmIntact = new TabItem(tabFolder, SWT.NONE);
+		tbtmIntact.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/intact.png"));
+
+		compositeIntact = new Composite(tabFolder, SWT.NONE);
+		tbtmIntact.setControl(compositeIntact);
+		compositeIntact.setLayout(new GridLayout(1, false));
+		browserIntact = new Browser(compositeIntact, SWT.NONE);
+		browserIntact.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		
+		tbtmString.dispose();
+
+		if (stringHashMap.containsKey(genome.getSpecies())) {
+			tbtmString = new TabItem(tabFolder, SWT.NONE);
+			compositeString = new Composite(tabFolder, SWT.NONE);
+			tbtmString.setControl(compositeString);
+			tbtmString.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/string.png"));
+			compositeString.setLayout(new GridLayout(1, false));
+			compositeString.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+
+			browserString = new Browser(compositeString, SWT.NONE);
+			browserString.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+			browserString.setText("");
+	
+		} else {
+			
+		}
+		
+		
+		
+		try {
+			String KEGGPath = new String();
+			String UniprotPath = new String();
+			String IntactPath = new String();
+			String InterproPath = new String();
+
+			if (KEGGHashMap.containsKey(genome.getSpecies())){
+				KEGGPath = "";
+				UniprotPath = "";
+				IntactPath = "";
+				InterproPath = "";
+				browserKEGG.setUrl(KEGGPath);
+				browserUniprot.setUrl(UniprotPath);
+				browserIntact.setUrl(IntactPath);
+				browserInterpro.setUrl(InterproPath);
+
+				
+			} else {
+				tbtmKEGG.dispose();
+				tbtmUniprot.dispose();
+				tbtmIntact.dispose();
+				tbtmInterpro.dispose();
+				}
 
 		} catch (Exception e) {
 			System.out.println("Cannot create browser");
@@ -1269,11 +1624,17 @@ public class GeneView implements SelectionListener, MouseListener {
 	 * 
 	 * @param genomeName
 	 */
+	
+	
+	
 	private void initGenomeInfo(String genomeName) {
+		
+
 		try {
 			ArrayList<String> genomeNames = new ArrayList<>();
 			genomeNames.add(genomeName);
 			
+			/*
 			if(genomeName.equals("Yersinia pestis CO92")||genomeName.equals("Yersinia pestis KIM5")||genomeName.equals("Yersinia pestis 91001")
 					||genomeName.equals("Yersinia pseudotuberculosis YPIII")||genomeName.equals("Yersinia pseudotuberculosis IP32953")||genomeName.equals("Yersinia entomophaga MH96")
 					||genomeName.equals("Yersinia enterocolitica Y1")||genomeName.equals("Yersinia enterocolitica Y11")) {
@@ -1284,19 +1645,10 @@ public class GeneView implements SelectionListener, MouseListener {
 				generalNetwork = new Network();
 				generalNetwork = Network.load(Database.getCOEXPR_NETWORK_TRANSCRIPTOMES_PATH() + "_" + genome.getSpecies());
 				updateCoExpViewer();
-			} else {
+			} else { */
 				OpenGenomesThread thread = new OpenGenomesThread(genomeNames);
 				new ProgressMonitorDialog(this.shell).run(true, false, thread);
 				genome = Genome.loadGenome(genomeName);
-			}
-			
-			// interactome to add for CO92
-			/*
-			if(genomeName.equals("Yersinia pestis CO92")){
-				updateInteractomeViewer();
-			} else {
-			*/
-				tbtmInteractome.dispose();
 			//}
 
 		
@@ -1307,11 +1659,8 @@ public class GeneView implements SelectionListener, MouseListener {
 		}
 		//for (String genomeItem : comboGenome.getItems()) {System.out.println("before initGenome Info genomeItem: "+genomeItem)}
 		initGenomeInfo();
-		
 		updateSyntenyBrowser();
-
-
-		
+		updateCrossRefsBrowsers();	
 		//for (String genomeItem2 : comboGenome.getItems()) {System.out.println("after initGenome Info genomeItem: "+genomeItem2)}
 		this.setGenomeSelected(genomeName);
 		this.chromoID = genome.getFirstChromosome().getChromosomeID();
@@ -1350,10 +1699,11 @@ public class GeneView implements SelectionListener, MouseListener {
 	 * @param genomeName
 	 */
 	private void initGenomeInfo(String genomeName, String chromoID) {
-		System.out.println("initGenomeInfo 2");
+		//System.out.println("initGenomeInfo 2");
 		try {
 			ArrayList<String> genomeNames = new ArrayList<>();
 			genomeNames.add(genomeName);
+			/*
 			if(genomeName.equals("Yersinia pestis CO92")||genomeName.equals("Yersinia pestis KIM5")||genomeName.equals("Yersinia pestis 91001")
 					||genomeName.equals("Yersinia pseudotuberculosis YPIII")||genomeName.equals("Yersinia pseudotuberculosis IP32953")||genomeName.equals("Yersinia entomophaga MH96")
 					||genomeName.equals("Yersinia enterocolitica Y1")||genomeName.equals("Yersinia enterocolitica Y11")) {
@@ -1362,11 +1712,11 @@ public class GeneView implements SelectionListener, MouseListener {
 				genome = Genome.loadGenome(genomeName);
 				generalNetwork = new Network();
 				generalNetwork = Network.load(Database.getCOEXPR_NETWORK_TRANSCRIPTOMES_PATH() + "_" + genome.getSpecies());
-			} else {
+			} else { */
 				OpenGenomesThread thread = new OpenGenomesThread(genomeNames);
 				new ProgressMonitorDialog(this.shell).run(true, false, thread);
 				genome = Genome.loadGenome(genomeName);
-			}
+			//}
 
 		} catch (InvocationTargetException ex) {
 			ex.printStackTrace();
@@ -1376,16 +1726,7 @@ public class GeneView implements SelectionListener, MouseListener {
 		initGenomeInfo();
 
 		this.chromoID = chromoID;
-		if (genomeName.contains("pestis")) {
-			System.out.println("SynTView update 2: pestis");
-		} else if (genomeName.contains("pseudotuberculosis")) {
-			System.out.println("SynTView update 2: pseudotub");
-		} else if (genomeName.contains("enterocolitica")) {
-			System.out.println("SynTView update 2: entero");
-		} else {
-			System.out.println("SynTView update 2: no");
-			tbtmSynteny.dispose();
-		}
+				
 		updateComboChromosome(this.chromoID);
 		updateListGenomeElements();
 		updateGenomeViewer();
@@ -1601,10 +1942,6 @@ public class GeneView implements SelectionListener, MouseListener {
 			omicsGenomes.add(genomeTemp);
 
 		}
-		//tbtmSynteny.dispose();
-		//composite_localization.dispose();
-		// arrayGeneToLocalization =
-		// TabDelimitedTableReader.read(SubCellCompartment.LOCALIZATION_PATH);
 	}
 
 	
@@ -1670,7 +2007,7 @@ public class GeneView implements SelectionListener, MouseListener {
 		listGenes = new ArrayList<>();
 		for (String gene : genome.getChromosomes().get(chromoID).getGenes().keySet()) {
 			String text = gene;
-			String oldLocusTag = genome.getChromosomes().get(chromoID).getGenes().get(gene).getFeature("old_locus_tag");
+			String oldLocusTag = genome.getChromosomes().get(chromoID).getGenes().get(gene).getOldLocusTag();
 			if (!oldLocusTag.equals("")) {
 				text += " - " + oldLocusTag;
 			}
@@ -1813,67 +2150,53 @@ public class GeneView implements SelectionListener, MouseListener {
 	 * <li>Proteome update
 	 */
 	public void updateAllGeneOmicsInfo() {
+		/*
 		if (!sequence.getOperon().equals("")) {
 			Operon operon = genome.getChromosomes().get(chromoID).getOperons().get(sequence.getOperon());
 			lblOperon.setText("In " + sequence.getOperon() + " containing " + operon.getGenes().size() + " genes");
 		} else {
 			lblOperon.setText("Not in an operon");
 		}
+		*/
 		lblConservation.setText("Homologs in " + (sequence.getConservation() - 1) + "/"
 				+ Genome.getAvailableGenomes().size() + " "+Database.getInstance().getSpecies()+" genomes");
 		lblConservation2.setText("Homologs in " + (sequence.getConservation() - 1) + "/"
 				+ Genome.getAvailableGenomes().size() + " "+Database.getInstance().getSpecies()+" genomes");
 		lblProduct.setText("Product: " + sequence.getProduct());
 		lblProtID.setText("ProteinId: " + RWTUtils.setProteinNCBILink(sequence.getProtein_id()));
-		lblCog.setText("COG: " + sequence.getCog());
-
+		//lblCog.setText("COG: " + sequence.getCog());
+		
+		/*
+		 * Bioconditions update
+		 */
 		ArrayList<String> genomeTranscriptomes = BioCondition.getTranscriptomesGenomes();
 		ArrayList<String> genomeProteomes = BioCondition.getProteomeGenomes();
 		ArrayList<String> genomeRNASeq = BioCondition.getRNASeqGenomes();
+		
+		/*
+		 * KEGG and Uniprot update
+		 */
+		
+		updateCrossRefs();
 
 		/*
 		 * Homolog update
 		 */
 		updateHomolog();
-		if(genome.getSpecies().equals("Yersinia pestis CO92")||genome.getSpecies().equals("Yersinia pestis KIM5")||genome.getSpecies().equals("Yersinia pestis 91001")
-				||genome.getSpecies().equals("Yersinia pseudotuberculosis YPIII")||genome.getSpecies().equals("Yersinia pseudotuberculosis IP32953")||genome.getSpecies().equals("Yersinia entomophaga MH96")
-				||genome.getSpecies().equals("Yersinia enterocolitica Y1")||genome.getSpecies().equals("Yersinia enterocolitica Y11")) {
-			updateCoExp();
-		} else {
-			tbtmCoExp.dispose();
-		}
-		/* to add
-		if(genome.getSpecies().equals("Yersinia pestis CO92")) {
-			updateInteractome();
-		} else { */
-			tbtmInteractome.dispose();
-		//}
-
-
-		/*
-		 * Load localization
-		 */
-		GeneViewLocalizationTools.loadLocalizationFigure(browserLocalization, arrayGeneToLocalization, sequence,
-				bioCondsArray, null, genome);
-
+		
 		/*
 		 * Update synteny view
 		 */
-
-
-		try {
-			//System.out.println("before evaluate " + sequence.getName());
+		try {			
 			browserSynteny.evaluate("goToGene('" + sequence.getName() + "')");
-			//System.out.println("evaluate OK");
 		} catch (Exception e) {
 			System.out.println("Cannot evaluate: " + "goToGene('" + sequence.getName() + "')");
 		}
-
+		
 		/*
 		 * Transcriptome update
 		 */
 		if (genomeTranscriptomes.contains(genome.getSpecies())) {
-			//System.out.println(genome.getSpecies());
 			GeneViewTranscriptomeTools.updateExpressionAtlas(sequence, txtCutoffLogFC, this, arrayDataList);
 		} else {
 			lblOver.setText("No data");
@@ -1892,12 +2215,10 @@ public class GeneView implements SelectionListener, MouseListener {
 			//System.out.println("yes: " +genome.getSpecies());
 			GeneViewTranscriptomeTools.updateTranscriptomesTable(sequence, this, arrayTranscriptomesList);
 			//System.out.println("updateProteomesTable done");
-
 		} else {
 			tableTranscriptomes.removeAll();
 			lblExprTranscriptomes.setText("No data");
 			tbtmTranscriptomes.dispose();
-
 		}
 
 		/*
@@ -1929,7 +2250,27 @@ public class GeneView implements SelectionListener, MouseListener {
 			lblExprProteomes.setText("No data");
 			tbtmProteomes.dispose();
 		}
+		
+		/*
+		 * Coexpression network update
+		 */
+		/*
+		if(genome.getSpecies().equals("Yersinia pestis CO92")||genome.getSpecies().equals("Yersinia pestis KIM5")||genome.getSpecies().equals("Yersinia pestis 91001")
+				||genome.getSpecies().equals("Yersinia pseudotuberculosis YPIII")||genome.getSpecies().equals("Yersinia pseudotuberculosis IP32953")||genome.getSpecies().equals("Yersinia entomophaga MH96")
+				||genome.getSpecies().equals("Yersinia enterocolitica Y1")||genome.getSpecies().equals("Yersinia enterocolitica Y11")) {
+			updateCoExp();
+		} else {
+			tbtmCoExp.dispose();
+		}
+		*/
 
+		/*
+		 * Load localization
+		 */
+		/*	
+		GeneViewLocalizationTools.loadLocalizationFigure(browserLocalization, arrayGeneToLocalization, sequence,
+				bioCondsArray, null, genome);
+			*/
 	}
 
 	public void updateHomolog() {
@@ -1937,6 +2278,7 @@ public class GeneView implements SelectionListener, MouseListener {
 		GeneViewHomologTools.loadFigureHomologs(sequence, browserHomolog, selectedGenomes);
 		GeneViewHomologTools.updateHomologTable(tableHomologViewer, bioCondsArray, bioCondsToDisplay, bioConds,
 				comparatorBioCondition, columnNames, selectedGenomes, txtSearchGenome);
+
 	}
 
 	public void updateTranscrAndProtViewers() {
@@ -2266,22 +2608,6 @@ public class GeneView implements SelectionListener, MouseListener {
 
 	}
 
-	public void updateInteractomeViewer() {
-		tbtmInteractome.dispose();
-		tbtmInteractome = new TabItem(tabFolder, SWT.NONE);
-		tbtmInteractome.setText("Interactome");
-		compositeInteractome = new Composite(tabFolder, SWT.BORDER);
-		tbtmInteractome.setControl(compositeInteractome);
-		compositeInteractome.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
-		compositeInteractome.setLayout(new GridLayout(2, false));
-
-		Composite composite_8 = new Composite(compositeInteractome, SWT.BORDER);
-		composite_8.setLayout(new GridLayout(1, false));
-	}
-	
-	public void updateInteractome() {
-		
-	}
 
 	private void setColumnNames() {
 		coExpCol = new ArrayList<>();
@@ -2365,10 +2691,10 @@ public class GeneView implements SelectionListener, MouseListener {
 				String selectedGene =
 						tablePosCoExpViewer.getTable().getItem(tablePosCoExpViewer.getTable().getSelectionIndex())
 						.getText(coExpCol.indexOf("Gene"));
-				System.out.println("selectedGene: "+selectedGene);
-				//System.out.println(tableHomologViewer.getTable().getSelectionIndex()+ " " + columnNames.indexOf("Name")+ "yahou "+selectedGene+" "+selectedGenome);
+				//System.out.println("selectedGene: "+selectedGene);
+				//System.out.println(tableHomologViewer.getTable().getSelectionIndex()+ " " + columnNames.indexOf("Name (GenBank)")+ "yahou "+selectedGene+" "+selectedGenome);
 				Gene gene = genome.getGeneFromName(selectedGene);
-				System.out.println("gene: "+gene);
+				//System.out.println("gene: "+gene);
 
 				GeneView.displayGene(gene, partService);
 			}
@@ -2380,7 +2706,7 @@ public class GeneView implements SelectionListener, MouseListener {
 				String selectedGene =
 						tableNegCoExpViewer.getTable().getItem(tableNegCoExpViewer.getTable().getSelectionIndex())
 						.getText(coExpCol.indexOf("Gene"));
-				//System.out.println(tableHomologViewer.getTable().getSelectionIndex()+ " " + columnNames.indexOf("Name")+ "yahou "+selectedGene+" "+selectedGenome);
+				//System.out.println(tableHomologViewer.getTable().getSelectionIndex()+ " " + columnNames.indexOf("Name (GenBank)")+ "yahou "+selectedGene+" "+selectedGenome);
 				Gene gene = genome.getGeneFromName(selectedGene);
 				GeneView.displayGene(gene, partService);
 			}
@@ -2397,7 +2723,7 @@ public class GeneView implements SelectionListener, MouseListener {
 
 		setColumnNames();
 
-		System.out.println("update");
+		//System.out.println("update");
 
 		for (String vertice : filteredNetwork.getEdges().keySet()) {
 			//System.out.println("vertices "+ vertice);
@@ -2406,7 +2732,7 @@ public class GeneView implements SelectionListener, MouseListener {
 			posCoExpArrayTemp = new String[l][3];
 			negCoExpArrayTemp = new String[l][3];
 
-			System.out.println("edgesTemp "+ edgesTemp);
+			//System.out.println("edgesTemp "+ edgesTemp);
 			int ipos=0;
 			int ineg=0;
 			for (String targetVertice : edgesTemp.keySet()) {
@@ -2701,12 +3027,12 @@ public class GeneView implements SelectionListener, MouseListener {
 		ArrayList<String> comparisons = new ArrayList<>();
 		for (int index : tableOver.getSelectionIndices()) {
 			String comparison = tableOver.getItem(index).getText(ArrayUtils.findColumn(arrayDataList, "Data Name")+1);
-			System.out.println("over comp: " +comparison);
+			//System.out.println("over comp: " +comparison);
 			comparisons.add(comparison);
 		}
 		for (int index : tableUnder.getSelectionIndices()) {
 			String comparison = tableUnder.getItem(index).getText(ArrayUtils.findColumn(arrayDataList, "Data Name")+1);
-			System.out.println("under comp: " +comparison);
+			//System.out.println("under comp: " +comparison);
 			comparisons.add(comparison);
 		}
 		for (int index : tableNodiff.getSelectionIndices()) {
@@ -2714,7 +3040,7 @@ public class GeneView implements SelectionListener, MouseListener {
 			// System.out.println(comparison);
 			comparisons.add(comparison);
 		}
-		System.out.println("comparisons: "+ comparisons);
+		//System.out.println("comparisons: "+ comparisons);
 		return comparisons;
 	}
 
@@ -2735,7 +3061,7 @@ public class GeneView implements SelectionListener, MouseListener {
 			// System.out.println(comparison);
 			comparisons.add(comparison);
 		}
-		System.out.println("comparisons: "+ comparisons);
+		//System.out.println("comparisons: "+ comparisons);
 		return comparisons;
 	}
 	/**
@@ -2745,7 +3071,7 @@ public class GeneView implements SelectionListener, MouseListener {
 	 * @param partService
 	 */
 	public static void displayGene(Gene gene, EPartService partService) {
-		System.out.println("displayGene");
+		//System.out.println("displayGene");
 
 		String id = GeneView.ID + "-" + String.valueOf(Math.random() * 1000).substring(0, 3);
 		// initiate view
@@ -3150,10 +3476,18 @@ public class GeneView implements SelectionListener, MouseListener {
 			/*
 			 * go through chromosome and search for a Gene with this name
 			 */
+			
 			text = text.toUpperCase();
 			for (Gene gene : chromosome.getGenes().values()) {
 				String geneName = gene.getName();
 				String geneNameTemp = geneName.toUpperCase();
+				if (geneNameTemp.contains(text)) {
+					if (!searchResult.contains(gene.getName())) {
+						searchResult.add(gene.getName());
+					}
+				}
+				geneName = gene.getOldLocusTag();
+				geneNameTemp = geneName.toUpperCase();
 				if (geneNameTemp.contains(text)) {
 					if (!searchResult.contains(gene.getName())) {
 						searchResult.add(gene.getName());
@@ -3185,11 +3519,49 @@ public class GeneView implements SelectionListener, MouseListener {
 
 
 
+    /**
+     * Read and convert a .txt file to a HashMap
+     * 
+     * @param filePath
+     * @return
+     */
+    
+    public static HashMap<String, String> HashMapFromTextFile(String filePath) {
+    	HashMap<String,String> map = new HashMap<String,String>();
+    	BufferedReader br = null;
+    	try {
+    		File file = new File(filePath);
+    		br = new BufferedReader(new FileReader(file));
+    		String line = null;
+    		while ((line=br.readLine()) != null) {
+    			String[] parts =line.split("\t");
+    			String key = parts[0].trim();
+
+
+    			String value = parts[1].trim();
+    			//System.out.println("key: "+key);
+    			//System.out.println("value: "+value);
+    			map.put(key, value);
+    		}
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    	} finally {
+    		if(br != null) {
+    			try {
+    				br.close();
+    			} catch (Exception e) {
+    			}
+    		}
+    	}
+    	return map;
+    }
+    
 	@Override
 	public void widgetSelected(SelectionEvent e) {
 		if (e.getSource() == comboGenome) {
 			genome = Genome.loadGenome(getGenomeSelected());
 			updateTranscrAndProtViewers();
+			/*
 			if(genome.getSpecies().equals("Yersinia pestis CO92")||genome.getSpecies().equals("Yersinia pestis KIM5")||genome.getSpecies().equals("Yersinia pestis 91001")
 					||genome.getSpecies().equals("Yersinia pseudotuberculosis YPIII")||genome.getSpecies().equals("Yersinia pseudotuberculosis IP32953")||genome.getSpecies().equals("Yersinia entomophaga MH96")
 					||genome.getSpecies().equals("Yersinia enterocolitica Y1")||genome.getSpecies().equals("Yersinia enterocolitica Y11")) {
@@ -3197,17 +3569,15 @@ public class GeneView implements SelectionListener, MouseListener {
 				generalNetwork = Network.load(Database.getCOEXPR_NETWORK_TRANSCRIPTOMES_PATH() + "_" + genome.getSpecies());
 				updateCoExpViewer();
 			}
-			/* to add
-			if(genome.getSpecies().equals("Yersinia pestis CO92")) {
-				updateInteractomeViewer();
-			}
+			
 			 */
 			chromoID = genome.getFirstChromosome().getAccession().toString();
 			updateComboChromosome(chromoID);
 			updateListGenomeElements();
 			updateGenomeViewer();
-			updateGeneInfo();
+			updateCrossRefsBrowsers();
 			updateSyntenyBrowser();
+			updateGeneInfo();
 		} else if (e.getSource() == comboChromosome) {
 			chromoID = comboChromosome.getItem(comboChromosome.getSelectionIndex()).split(" - ")[1];
 			updateListGenomeElements();
@@ -3227,7 +3597,7 @@ public class GeneView implements SelectionListener, MouseListener {
 				File tempPNGFile = File.createTempFile("Highlightstrain", "Phylogeny.png");
 				//System.out.println("Convert Phylogeny.svg to Phylogeny.png\nHave you set ImageMagick PATH in ImageMagick.getConvertPATH()\nYours is set to: "+ImageMagick.getConvertPATH());
 				CMD.runProcess(ImageMagick.getConvertPATH() + " " + tempSVGFile.getAbsolutePath() + " " + tempPNGFile);
-				SaveFileUtils.saveFile("Listeria_Phylogenomic_Tree_" + sequence.getName() + ".png", tempPNGFile,
+				SaveFileUtils.saveFile("Yersinia_Phylogenomic_Tree_" + sequence.getName() + ".png", tempPNGFile,
 						"PNG image file", partService, shell);
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
@@ -3235,30 +3605,32 @@ public class GeneView implements SelectionListener, MouseListener {
 			}
 		} else if (e.getSource() == btnSaveAsSvg) {
 			String textSVG = GeneViewHomologTools.getPhyloFigure(sequence, selectedGenomes);
-			SaveFileUtils.saveTextFile("Listeria_Phylogenomic_Tree_" + sequence.getName() + ".svg", textSVG, true,
+			SaveFileUtils.saveTextFile("Yersinia_Phylogenomic_Tree_" + sequence.getName() + ".svg", textSVG, true,
 					"SVG (vector image) file", textSVG, partService, shell);
-		} else if (e.getSource() == btnDonwloadtxt) {
+		} else if (e.getSource() == btnDownloadtxt) {
+			System.out.println("click on btnDonwload: " +columnNames.size());
 			String[][] arrayToSave = new String[1][columnNames.size()];
 			for (int i = 0; i < columnNames.size(); i++) {
 				arrayToSave[0][i] = columnNames.get(i);
 			}
 			int k = 1;
 			for (int i = 1; i < bioCondsArray.length; i++) {
-				String genomeName = bioCondsArray[i][columnNames.indexOf("Name")];
-				if (selectedGenomes.contains(genomeName)) {
+				String genomeName = bioCondsArray[i][columnNames.indexOf("Name (GenBank)")];
+				String processedGenomeName = GenomeNCBI.processGenomeName(genomeName);
+				if (selectedGenomes.contains(processedGenomeName)) {
 					arrayToSave = ArrayUtils.addRow(arrayToSave, ArrayUtils.getRow(bioCondsArray, i), k);
 					k++;
 				}
 			}
 			String arrayRep = ArrayUtils.toString(arrayToSave);
 			String arrayRepHTML = TabDelimitedTableReader.getHTMLVersion(arrayToSave);
-			SaveFileUtils.saveTextFile("Listeria_Genomic_Table_" + sequence.getName() + ".txt", arrayRep, true, "",
+			SaveFileUtils.saveTextFile("Yersinia_Genomic_Table_" + sequence.getName() + ".txt", arrayRep, true, "",
 					arrayRepHTML, partService, shell);
 		} else if (e.getSource() == btnSelectall) {
 			selectedGenomes.clear();
 			tableHomolog.selectAll();
 			for (int i : tableHomolog.getSelectionIndices()) {
-				String selectedGenome = GenomeNCBI.processGenomeName(tableHomolog.getItem(i).getText(columnNames.indexOf("Name") + 1));
+				String selectedGenome = GenomeNCBI.processGenomeName(tableHomolog.getItem(i).getText(columnNames.indexOf("Name (GenBank)") + 1));
 				if (!selectedGenomes.contains(selectedGenome)) {
 					selectedGenomes.add(selectedGenome);
 				}
@@ -3281,6 +3653,12 @@ public class GeneView implements SelectionListener, MouseListener {
 		} else if (e.getSource() == btnZoomminus) {
 			trackGenome.zoom(false);
 			canvasGenome.redraw();
+			
+		} else if (e.getSource() == btnShowSynteny) {
+			btnShowSynteny.dispose();
+			compSynt.layout(true,true);
+			loadSynteny();
+			
 		} else if (e.getSource() == btnNucleotideSequence) {
 			Strand strand = Strand.POSITIVE;
 			if (!sequence.isStrand())
@@ -3349,7 +3727,7 @@ public class GeneView implements SelectionListener, MouseListener {
 			HashMap<String, String> genomeToGenes = new HashMap<>();
 			for (int i : tableHomologViewer.getTable().getSelectionIndices()) {
 				TableItem item = tableHomologViewer.getTable().getItem(i);
-				String genomeName = item.getText(ArrayUtils.findColumn(bioCondsArray, "Name")+1);
+				String genomeName = item.getText(ArrayUtils.findColumn(bioCondsArray, "Name (GenBank)")+1);
 				String gene = item.getText(ArrayUtils.findColumn(bioCondsArray, "Homolog Protein")+1);
 				genomeToGenes.put(genomeName, gene);
 			}
@@ -3431,6 +3809,8 @@ public class GeneView implements SelectionListener, MouseListener {
 			return element.toString();
 		}
 	}
+	
+	
 
 	public Gene getSequence() {
 		return sequence;

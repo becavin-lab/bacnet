@@ -1367,6 +1367,8 @@ public class ExpressionMatrix extends OmicsData implements Cloneable, Serializab
         this.setRowNames(matrixLoaded.getRowNames());
         this.setValues(matrixLoaded.getValues());
         this.setLoaded(true);
+        System.out.println(" finish load transcriptomics data : " +OmicsData.PATH_STREAMING + this.getName() + EXTENSION);
+
     }
 
     /**

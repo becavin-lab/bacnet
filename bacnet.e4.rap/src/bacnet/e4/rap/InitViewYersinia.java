@@ -102,7 +102,6 @@ public class InitViewYersinia implements SelectionListener {
     public void createPartControl(Composite parent) {
     	//AppSpecificMethods AppSpecificMethods = new AppSpecificMethods();
     	//AppSpecificMethods.openPasswordDialog(shell);
-
         //System.out.println("Load InitView");
 
         focused = true;
@@ -776,7 +775,7 @@ public class InitViewYersinia implements SelectionListener {
         GridData gd_lblGoThroughAll = new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1);
         gd_lblGoThroughAll.widthHint = 460;
         lblGoThroughAll.setLayoutData(gd_lblGoThroughAll);
-        lblGoThroughAll.setText("Browse all 121 <i>Yersinia</i> complete genomes available on Yersiniomics."
+        lblGoThroughAll.setText("Browse all 194 <i>Yersinia</i> complete genomes available on Yersiniomics."
                 + " Visualize strain relationship in a phylogenomic tree. Access to all their annotated genome elements.");
         lblGoThroughAll.setFont(SWTResourceManager.getBodyFont(15,SWT.NORMAL));
         lblGoThroughAll.setBackground(BasicColor.LIGHT_TWO);
@@ -933,7 +932,7 @@ public class InitViewYersinia implements SelectionListener {
 
         Label lblLastUpdate = new Label(composite_19, SWT.NONE);
         lblLastUpdate.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, true, true, 1, 1));
-        lblLastUpdate.setText("Last update: September 2022");
+        lblLastUpdate.setText("Last update: December 2022");
         lblLastUpdate.setFont(SWTResourceManager.getBodyFont(20,SWT.BOLD));
 
         new Label(composite_19, SWT.NONE);

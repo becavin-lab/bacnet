@@ -158,31 +158,56 @@ public class BioConditionCreation {
          */
         BioCondition bioCond = new BioCondition();
         bioCond.setName(name);
-        bioCond.setGenomeName(bioCondTable[1][ArrayUtils.findColumn(bioCondTable, "Strain array")]);
-        bioCond.setGenomeUsed(bioCondTable[1][ArrayUtils.findColumn(bioCondTable, "Strain used")]);
+        bioCond.setGenomeName(bioCondTable[1][ArrayUtils.findColumn(bioCondTable, "ReferenceStrain")]);
+        bioCond.setGenomeUsed(bioCondTable[1][ArrayUtils.findColumn(bioCondTable, "StrainUsed")]);
         bioCond.setComment(bioCondTable[1][ArrayUtils.findColumn(bioCondTable, "Comment")]);
-        bioCond.setReference(bioCondTable[1][ArrayUtils.findColumn(bioCondTable, "Reference")]);
+        bioCond.setReference(bioCondTable[1][ArrayUtils.findColumn(bioCondTable, "BibliographicalReference")]);
         /*
          * Study Name
          */
         if (ArrayUtils.findColumn(bioCondTable, "StudyName") != -1) {
-            bioCond.setArrayExpressId(bioCondTable[1][ArrayUtils.findColumn(bioCondTable, "StudyName")]);
+            bioCond.setStudyName(bioCondTable[1][ArrayUtils.findColumn(bioCondTable, "StudyName")]);
         }
 
         /*
          * ArrayExpress information
          */
-        if (ArrayUtils.findColumn(bioCondTable, "ArrayExpressId") != -1) {
-            bioCond.setArrayExpressId(bioCondTable[1][ArrayUtils.findColumn(bioCondTable, "ArrayExpressId")]);
+        if (ArrayUtils.findColumn(bioCondTable, "ArrayExpressID") != -1) {
+            bioCond.setArrayExpressId(bioCondTable[1][ArrayUtils.findColumn(bioCondTable, "ArrayExpressID")]);
         }
         /*
          * ArrayExpress Technology ID
          */
-        if (ArrayUtils.findColumn(bioCondTable, "arrayExpressTechnoID") != -1) {
+        if (ArrayUtils.findColumn(bioCondTable, "ArrayExpressTechnoID") != -1) {
             bioCond.setArrayExpressTechnoId(
-                    bioCondTable[1][ArrayUtils.findColumn(bioCondTable, "arrayExpressTechnoID")]);
+                    bioCondTable[1][ArrayUtils.findColumn(bioCondTable, "ArrayExpressTechnoID")]);
         }
 
+        if (ArrayUtils.findColumn(bioCondTable, "ENAProject") != -1) {
+            bioCond.setENAProject(
+                    bioCondTable[1][ArrayUtils.findColumn(bioCondTable, "ENAProject")]);
+        }
+        if (ArrayUtils.findColumn(bioCondTable, "GEOProject") != -1) {
+            bioCond.setGEOProject(
+                    bioCondTable[1][ArrayUtils.findColumn(bioCondTable, "GEOProject")]);
+        }
+        if (ArrayUtils.findColumn(bioCondTable, "GEOPlatform") != -1) {
+            bioCond.setGEOPlatform(
+                    bioCondTable[1][ArrayUtils.findColumn(bioCondTable, "GEOPlatform")]);
+        }
+        if (ArrayUtils.findColumn(bioCondTable, "SequencingPlatform") != -1) {
+            bioCond.setSequencingPlatform(
+                    bioCondTable[1][ArrayUtils.findColumn(bioCondTable, "SequencingPlatform")]);
+        }
+        if (ArrayUtils.findColumn(bioCondTable, "MassSpectrometer") != -1) {
+            bioCond.setMassSpectrometer(
+                    bioCondTable[1][ArrayUtils.findColumn(bioCondTable, "MassSpectrometer")]);
+        }
+        
+        if (ArrayUtils.findColumn(bioCondTable, "PrideID") != -1) {
+            bioCond.setPrideID(
+                    bioCondTable[1][ArrayUtils.findColumn(bioCondTable, "PrideID")]);
+        }
         /*
          * Localization of the proteins if available
          */
@@ -495,7 +520,11 @@ public class BioConditionCreation {
         /*
          * Update list of Comparison in each BioCondition
          */
+        System.out.println("in addComparisonFromTable");
+
         for (String comparison : listCompsToCreates) {
+            System.out.println("in for: " +comparison);
+
             String leftBC = BioCondition.parseName(comparison)[0];
             String rightBC = BioCondition.parseName(comparison)[1];
             BioCondition bioCond1 = BioCondition.getBioCondition(leftBC);
@@ -532,7 +561,7 @@ public class BioConditionCreation {
         ArrayList<String> tableResult = new ArrayList<>();
         String[] titles =
                 {"Data Name", "Type", "Date", "Growth", "TimePoint", "Temp.", "Mutant", "Media", "MediaGrowthProperties", "Nb genes",
-                        "Strain used", "Strain array", "Reference", "ArrayExpressId", "ArrayExpressTechnoID"};
+                        "Strain used", "Reference strain", "Bibliographical reference", "ENA project", "Sequencing platform", "GEO project", "GEO platform", "ArrayExpressID", "ArrayExpressTechnoID"};
         String header = "";
         for (String title : titles)
             header += title + "\t";
@@ -563,6 +592,10 @@ public class BioConditionCreation {
                 row += bioCondition.getGenomeUsed() + "\t";
                 row += bioCondition.getGenomeName() + "\t";
                 row += bioCondition.getReference() + "\t";
+                row += bioCondition.getENAProject() + "\t";
+                row += bioCondition.getSequencingPlatform() + "\t";
+                row += bioCondition.getGEOProject() + "\t";
+                row += bioCondition.getGEOPlatform() + "\t";
                 row += bioCondition.getArrayExpressId() + "\t";
                 row += bioCondition.getArrayExpressTechnoId();
                 tableResult.add(row.trim());
@@ -579,8 +612,8 @@ public class BioConditionCreation {
     public static void createSummaryTranscriptomesComparisonsTable() {
         ArrayList<String> tableResult = new ArrayList<>();
         String[] titles = {"Data Name", "Growth", "Temp.", "Mutant", "Media", "MediaGrowthProperties", "VS", "Growth",
-                "Temp.", "Mutant", "Media", "MediaGrowthProperties", "Type", "ArrayExpressId", "Date", "Strain used", "Strain array",
-                "Reference"};
+                "Temp.", "Mutant", "Media", "MediaGrowthProperties", "Type", "Sequencing platform", "ArrayExpressId", "Date", "Strain used", "Reference strain",
+                "Bibliographical reference"};
         String header = "";
         for (String title : titles)
             header += title + "\t";
@@ -623,6 +656,7 @@ public class BioConditionCreation {
                     // typeDatacontained = typeDatacontained.replaceAll("GeneExpr",
                     // "GeneExpression");
                     row += typeDatacontained.trim() + "\t";
+                    row += bioCondition.getSequencingPlatform() + "\t";
                     row += bioCondition.getArrayExpressId() + "\t";
                     row += bioCondition.getDate() + "\t";
                     row += bioCondition.getGenomeUsed() + "\t";
@@ -644,8 +678,8 @@ public class BioConditionCreation {
     public static void createSummaryProteomesComparisonsTable() {
         ArrayList<String> tableResult = new ArrayList<>();
         String[] titles = {"Data Name", "Growth", "Temp.", "Mutant", "Media", "MediaGrowthProperties", "VS", "Growth",
-                "Temp.", "Mutant", "Media", "MediaGrowthProperties", "Type", "ArrayExpressId", "Date", "Strain used", "Strain array",
-                "Reference"};
+                "Temp.", "Mutant", "Media", "MediaGrowthProperties", "Type",  "Date", "Strain used", "Reference strain",
+                "Bibliographical reference", "Mass spectrometer",};
         String header = "";
         for (String title : titles)
             header += title + "\t";
@@ -690,12 +724,12 @@ public class BioConditionCreation {
                     // typeDatacontained = typeDatacontained.replaceAll("GeneExpr",
                     // "GeneExpression");
                     row += typeDatacontained.trim() + "\t";
-                    row += bioCondition.getArrayExpressId() + "\t";
                     row += bioCondition.getDate() + "\t";
                     row += bioCondition.getGenomeUsed() + "\t";
                     row += bioCondition.getGenomeName() + "\t";
-
                     row += bioCondition.getReference() + "\t";
+                    row += bioCondition.getMassSpectrometer() + "\t";
+
                     tableResult.add(row.trim());
                 }
             }
@@ -709,8 +743,8 @@ public class BioConditionCreation {
      */
     public static void createSummaryProteomesTable() {
         ArrayList<String> tableResult = new ArrayList<>();
-        String[] titles = {"Data Name", "Localization", "Type", "Date", "Nb proteins", "Comment", "Growth", "TimePoint",
-                "Temp.", "Mutant", "Media", "MediaGrowthProperties", "Pride Id", "Reference", "Strain used", "Strain array",};
+        String[] titles = {"Data Name", "Localization", "Type", "Date", "Nb proteins", "Growth", "TimePoint",
+                "Temp.", "Mutant", "Media", "MediaGrowthProperties", "Pride ID", "Strain used", "Reference strain","Bibliographical reference", "Mass spectrometer"};
         String header = "";
         for (String title : titles)
             header += title + "\t";
@@ -727,9 +761,9 @@ public class BioConditionCreation {
                 String typeDatacontained =
                         bioCondition.getTypeDataContained().toString().replace('[', ' ').replace(']', ' ');
                 row += typeDatacontained.trim() + "\t";
+
                 row += bioCondition.getDate() + "\t";
                 row += " \t";
-                row += bioCondition.getComment() + "\t";
                 row += bioCondition.getGrowth().toString().replace('[', ' ').replace(']', ' ').trim() + "\t";
                 row += bioCondition.getTime() + "\t";
                 row += bioCondition.getTemperature().toString().replace('[', ' ').replace(']', ' ').replace('C', ' ')
@@ -738,10 +772,12 @@ public class BioConditionCreation {
                 row += bioCondition.getMedia().toString().replace('[', ' ').replace(']', ' ').trim() + "\t";
                 row += bioCondition.getMediaGrowthProperties().toString().replace('[', ' ').replace(']', ' ').trim()
                         + "\t";
-                row += bioCondition.getArrayExpressId() + "\t";
-                row += bioCondition.getReference() + "\t";
+                row += bioCondition.getPrideID() + "\t";
                 row += bioCondition.getGenomeUsed() + "\t";
                 row += bioCondition.getGenomeName() + "\t";
+                row += bioCondition.getReference() + "\t";
+                row += bioCondition.getMassSpectrometer() + "\t";
+
                 tableResult.add(row.trim());
             }
         }

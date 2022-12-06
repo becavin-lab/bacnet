@@ -96,7 +96,7 @@ public class Database {
     /**
      * Path for website database on Windows
      */
-    public static String PATH_WIN = "C:\\bacnet\\BacnetDatabases.ini";
+    public static String PATH_WIN = "C:\\Users\\pilebury\\Documents\\Yersiniomics\\bacnet\\BacnetDatabases.ini";
     //public static String PATH_WIN = "/mnt/c/bacnet/BacnetDatabases.ini";
     //public static String PATH_WIN = "C:\\Users\\ipmc\\Documents\\BACNET\\bacnet-private\\BacnetDatabases.ini";
     //public static String PATH_WIN = "C:\\Users\\Pierre\\Documents\\Yersiniomics\\bacnet\\BacnetDatabases.ini";
@@ -187,9 +187,15 @@ public class Database {
      */
     private String bioconditionsArrayPath = "";
     /**
-     * Path for the table with all compariosns for database creation
+     * Path for the table with all comparisons for database creation
      */
     private String comparisonsArrayPath = "";
+    
+    private String stringHashMapPath = "";
+    
+    private String syntenyHashMapPath = "";
+    
+    private String KEGGHashMapPath = "";
 
     /*******************************************************************
      * Non static variables: genomes, biocondition
@@ -358,6 +364,9 @@ public class Database {
                 setCoExprNetworkArrayPath(getNETWORK_PATH() + "CoExpressionNetworks.txt");
                 setBioConditionsArrayPath(getDATA_PATH() + "BioConditions.txt");
                 setExperimentComparisonTablePath(getDATA_PATH() + "Comparisons.txt");
+                setSyntenyHashMapPath(getDATA_PATH() + "SyntenyHashMap.txt");
+                setStringHashMapPath(getDATA_PATH() + "StringHashMap.txt");
+                setKEGGHashMapPath(getDATA_PATH() + "KEGGHashMap.txt");
                 System.out.println("Every file path has been setup");
                 return true;
             }else {
@@ -1039,6 +1048,30 @@ public class Database {
 
     public void setExperimentComparisonTablePath(String experimentComparisonTablePath) {
         this.comparisonsArrayPath = experimentComparisonTablePath;
+    }
+    
+    public String getKEGGHashMapPath() {
+        return KEGGHashMapPath;
+    }
+
+    public void setKEGGHashMapPath(String KEGGHashMapPath) {
+        this.KEGGHashMapPath = KEGGHashMapPath;
+    }
+    
+    public String getSyntenyHashMapPath() {
+        return syntenyHashMapPath;
+    }
+
+    public void setSyntenyHashMapPath(String syntenyHashMapPath) {
+        this.syntenyHashMapPath = syntenyHashMapPath;
+    }
+    
+    public String getStringHashMapPath() {
+        return stringHashMapPath;
+    }
+
+    public void setStringHashMapPath(String stringHashMapPath) {
+        this.stringHashMapPath = stringHashMapPath;
     }
 
     public String getLogo() {

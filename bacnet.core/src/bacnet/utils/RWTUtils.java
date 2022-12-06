@@ -60,6 +60,7 @@ public class RWTUtils {
         return "https://www.ncbi.nlm.nih.gov/pubmed/" + pubmedID;
     }
 
+    /*
     public static String setArrayExpressExpLink(String expID) {
         if (expID.startsWith("E-")) {
             return "<a href='" + getArrayExpressExpLink(expID) + "' target='_blank'>" + expID + "</a>";
@@ -69,6 +70,40 @@ public class RWTUtils {
             return expID;
         }
     }
+  */
+    
+    public static String setArrayExpressArrayLink(String arrayID) {
+        if (arrayID.startsWith("A-")) {
+            return "<a href='" + getArrayExpressArrayLink(arrayID) + "' target='_blank'>" + arrayID + "</a>";
+        } else {
+            return arrayID;
+        }
+    }
+    
+    public static String setArrayExpressExpLink(String expID) {
+    	 if (expID.startsWith("E-")) {
+             return "<a href='" + getArrayExpressExpLink(expID) + "' target='_blank'>" + expID + "</a>";
+         } else {
+             return expID;
+         }
+    }
+    
+    public static String setENAExpLink(String expID) {
+    	if (expID.startsWith("PRJ")) {
+            return "<a href='" + getENALink(expID) + "' target='_blank'>" + expID + "</a>";
+        } else {
+            return expID;
+        }
+    }
+    
+    public static String setGEOLink(String expID) {
+    	if (expID.startsWith("G")) {
+         return "<a href='" + getGEOLink(expID) + "' target='_blank'>" + expID + "</a>";
+        } else {
+            return expID;
+        }
+    }
+    
     
     public static String setPrideLink(String expID) {
         if (expID.startsWith("PRD")) {
@@ -97,18 +132,16 @@ public class RWTUtils {
     public static String getArrayExpressExpLink(String expID) {
         return "https://www.ebi.ac.uk/arrayexpress/experiments/" + expID;
     }
+    
+    public static String getGEOLink(String expID) {
+        return "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=" + expID;
+    }
 
     public static String getENALink(String enaID) {
         return "http://www.ebi.ac.uk/ena/data/view/" + enaID;
     }
 
-    public static String setArrayExpressArrayLink(String arrayID) {
-        if (arrayID.startsWith("A-")) {
-            return "<a href='" + getArrayExpressArrayLink(arrayID) + "' target='_blank'>" + arrayID + "</a>";
-        } else {
-            return arrayID;
-        }
-    }
+
 
     public static String getArrayExpressArrayLink(String arrayID) {
         return "https://www.ebi.ac.uk/arrayexpress/arrays/" + arrayID;

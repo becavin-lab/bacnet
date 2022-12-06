@@ -39,6 +39,7 @@ public class NGSCreation {
         /*
          * Calculate comparison data for vizualization, and organize diff expression matrices
          */
+        /*
         for (BioCondition bioCond : exp.getBioConditions()) {
             for (NGS data : bioCond.getNGSSeqs()) {
                 if (data.getType() == TypeData.RNASeq) {
@@ -52,7 +53,7 @@ public class NGSCreation {
                     }
                 }
             }
-        }
+        }*/
 
     }
 
@@ -64,14 +65,13 @@ public class NGSCreation {
     public static void normalizeCountFiles(Experiment exp) {
         for (BioCondition bioCond : exp.getBioConditions()) {
             if(bioCond.getTypeDataContained().contains(TypeData.RNASeq)) {
-                for (String bioCondName2 : bioCond.getComparisons()) {
-                    BioCondition compBioCond = bioCond.compare(BioCondition.getBioCondition(bioCondName2), false);
-                    String fileName = OmicsData.PATH_NGS_NORM + bioCond.getName() + "_vs_" + bioCondName2 + NGS.EXTENSION;
+                for (String comparison : bioCond.getComparisonDataNames()) {
+                    String fileName = OmicsData.PATH_NGS_NORM + comparison + NGS.EXTENSION;
                     System.out.println("Search "+fileName);
                     File file = new File(fileName);
                     if (file.exists()) {
                         System.out.println("Modify: " + fileName);
-                        String[][] array = TabDelimitedTableReader.read(new File(fileName), ",");
+                        String[][] array = TabDelimitedTableReader.read(fileName);
 
                         // small RNA names have to be changed from "rli11_sbrA" to "rli11 - sbrA"
                         for (int i = 0; i < array.length; i++) {
@@ -87,11 +87,14 @@ public class NGSCreation {
                         }
 
                         ExpressionMatrix matrix = ExpressionMatrix.arrayToExpressionMatrix(array, true);
-                        matrix.getHeaders().clear();
-                        matrix.getHeaders().add("LOGFC");
-                        matrix.getHeaders().add("p-value");
-                        matrix.saveTab(OmicsData.PATH_NGS_NORM + compBioCond.getName() + NGS.EXTENSION,
-                                "GenomeElements");
+                        //matrix.getHeaders().clear();
+                        //matrix.getHeaders().add("LOGFC");
+                        //matrix.getHeaders().add("p-value");
+                        //matrix.saveTab(OmicsData.PATH_NGS_NORM + compBioCond.getName() + NGS.EXTENSION,"GenomeElements");
+                        matrix.setName(comparison);
+                        matrix.setBioCondName(comparison);
+                        matrix.save(OmicsData.PATH_STREAMING + comparison + OmicsData.EXTENSION);
+                        
                     }
                 }
             }
@@ -100,6 +103,7 @@ public class NGSCreation {
         /*
          * Process expression matrix
          */
+        /*
         for (BioCondition bioCond : exp.getBioConditions()) {
             if (bioCond.getTypeDataContained().contains(TypeData.RNASeq)) {
                 int nbDuplicate = bioCond.getNGSSeqs().get(0).getRawDatas().size();
@@ -186,7 +190,7 @@ public class NGSCreation {
                     }
                 }
             }
-        }
+        }*/
     }
 
 }

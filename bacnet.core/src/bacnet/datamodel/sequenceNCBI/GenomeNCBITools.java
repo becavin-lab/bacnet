@@ -125,7 +125,7 @@ public class GenomeNCBITools {
             GenomeNCBI genome = new GenomeNCBI();
             if (genomes.size() == 0) {
                 try {
-                    System.out.println(path + File.separator + genomeAccession);
+                    //System.out.println(path + File.separator + genomeAccession);
                     genome = new GenomeNCBI(path + File.separator + genomeAccession, annotation);
                     /*
                      * We found that some GeneName have the same locustag: prfA (lmo0200) prfA (lmo2543) this function

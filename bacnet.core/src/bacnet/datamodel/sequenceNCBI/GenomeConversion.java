@@ -122,7 +122,7 @@ public class GenomeConversion {
             // create Annotation
             createAnnotation(genome, genomePath);
 
-            System.out.println(genome.getSpecies());
+            //System.out.println(genome.getSpecies());
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -164,7 +164,6 @@ public class GenomeConversion {
                 	genome.getChromosomes().get(chromosomeNCBI.getAccession().toString()).getLocusTagToOldLocusTagMap().put(gene.getName(), gene.getOldLocusTag());
                 	genome.getChromosomes().get(chromosomeNCBI.getAccession().toString()).getProteinIDToOldLocusTagMap().put(gene.getProtein_id(), gene.getOldLocusTag());
                 }
-              
                 gene.save(pathSequences + gene.getName());
                 // for(String note:dnaSeq.getNotesList()){
                 // System.out.println(note);
@@ -175,6 +174,7 @@ public class GenomeConversion {
             }
         }
     }
+
 
     /**
      * Some Gene name are associated to multiple lmo locus, with this function we delete gene name if
@@ -440,7 +440,7 @@ public class GenomeConversion {
         });
         for (int i = 0; i < files.length; i++) {
             String accession = FileUtils.removePath(files[i].getAbsolutePath());
-            System.out.println(accession);
+            //System.out.println(accession);
             try {
                 FileUtils.copy(files[i].getAbsolutePath(), path + File.separator + accession);
             } catch (IOException e) {
@@ -459,7 +459,7 @@ public class GenomeConversion {
         });
         for (int i = 0; i < files.length; i++) {
             String accession = FileUtils.removePath(files[i].getAbsolutePath());
-            System.out.println(accession);
+            //System.out.println(accession);
             try {
                 FileUtils.copy(files[i].getAbsolutePath(), path + File.separator + accession);
             } catch (IOException e) {

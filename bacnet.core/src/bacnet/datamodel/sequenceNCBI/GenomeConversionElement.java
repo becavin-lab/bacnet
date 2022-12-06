@@ -98,7 +98,7 @@ public class GenomeConversionElement {
     }
 
     /**
-     * From a DNASequence make a Gene object
+     * From a DNASequence make a NcRNA object
      * 
      * @param dnaSeq
      * @return
@@ -109,6 +109,8 @@ public class GenomeConversionElement {
         ncRNA.setComment(FileUtils.cleanStringFromHex(GeneNCBITools.getNote(dnaSeq)));
         ncRNA.setRef(dnaSeq.getSource());
         ncRNA.setProduct(GeneNCBITools.getProduct(dnaSeq));
+        ncRNA.setOldLocusTag(GeneNCBITools.getOldLocusTag(dnaSeq));
+
         // add remaining features
         for (String notess : dnaSeq.getNotesList()) {
             String[] notes = notess.split("\n");

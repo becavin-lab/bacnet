@@ -272,7 +272,7 @@ public class ProteomicsView implements SelectionListener {
         if (Database.getInstance().getProjectName() == Database.UIBCLISTERIOMICS_PROJECT) {
             ArrayList<String[]> bioCondsToDisplayTemp = new ArrayList<String[]>();
             for (String[] row : bioCondsToDisplay) {
-                String info = row[ArrayUtils.findColumn(bioCondsArray, "Reference")];
+                String info = row[ArrayUtils.findColumn(bioCondsArray, "Bibliographical reference")];
                 if (info.contains("Unpublished (Cossart lab)")) {
                     //
                 } else {
@@ -281,6 +281,7 @@ public class ProteomicsView implements SelectionListener {
             }
             bioCondsToDisplay = bioCondsToDisplayTemp;
         }
+        /*
         if (Database.getInstance().getProjectName() != Database.URY_YERSINIOMICS_PROJECT) {
             ArrayList<String[]> bioCondsToDisplayTemp = new ArrayList<String[]>();
             for (String[] row : bioCondsToDisplay) {
@@ -292,10 +293,11 @@ public class ProteomicsView implements SelectionListener {
                 }
             }
             bioCondsToDisplay = bioCondsToDisplayTemp;
-        }
+        }*/
         bioConds.remove(0);
         bioCondsToDisplay.remove(0);
         updateBioConditionTable();
+        
         /*
          * Fill combos
          */
@@ -428,7 +430,7 @@ public class ProteomicsView implements SelectionListener {
                     String text = bioCond[k];
                     if (colName.equals("Type")) {
                         return "";
-                    } else if (colName.equals("Reference")) {
+                    } else if (colName.equals("Bibliographical reference")) {
                         return RWTUtils.setPubMedLink(text);
                     } else if (colName.equals("Pride Id")) {
                         return RWTUtils.setPrideLink(text);

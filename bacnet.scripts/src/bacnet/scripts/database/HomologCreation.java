@@ -27,24 +27,24 @@ public class HomologCreation {
 	 * We added manually this variable because when running .bat file on windows the file separator can get tricky.
 	 * that is why I fix it in the script.
 	 */
-	//public static String FILE_SEPARATOR = "/";
-	public static String FILE_SEPARATOR = File.separator;
+	public static String FILE_SEPARATOR = "/";
+	//public static String FILE_SEPARATOR = File.separator;
 
 	
 	/**
 	 * Path for data on the server when running homolog search blasts
 	 */
 
-//	public static String PATH_SCRIPT = "//home//becavin//ListeriomicsSample//";
-	public static String PATH_SCRIPT = "/Users/christophebecavin/Documents/Peptidomics//GenomeNCBI/";
-	//public static String PATH_SCRIPT = "C:\\Users\\Pierre\\Documents\\Yersiniomics\\Yersiniomics\\GenomeNCBI\\";
+	//public static String PATH_SCRIPT = "/pasteur/zeus/projets/p02/yersiniomics/BLAST/";
+	//public static String PATH_SCRIPT = "/Users/christophebecavin/Documents/Peptidomics//GenomeNCBI/";
+	public static String PATH_SCRIPT = "C:\\Users\\pilebury\\Documents\\Yersiniomics\\Yersiniomics\\GenomeNCBI\\";
 
 	/**
 	 * Path for Blast+ 
 	 */
-	public static String PATH_BLAST = "/opt/ncbi-blast-2.12.0+/bin/";
+	public static String PATH_BLAST = "";
 //	public static String PATH_BLAST = "/share/apps/local/rmblast-2-2-28/bin/";
-//	public static String PATH_BLAST = "C:/Program Files/NCBI/blast-2.9.0+/bin/";
+//	public static String PATH_BLAST = "C:/Program Files/NCBI/blast-BLAST_VERSION+/bin/";
 
 	/**
 	 * Shortcut for running blastP
@@ -73,9 +73,9 @@ public class HomologCreation {
 	public static String BLAST_SCRIPT_TEMP = GenomeNCBI.PATH_THREADS + "BlastTemp.txt";
 			
 	/**
-	 * Cutoff for indeityt value
+	 * Cutoff for identity value
 	 */
-	public static float IDENTITY_CUTOFF = 0.2f;
+	public static float IDENTITY_CUTOFF = 0;
 
 	/**
 	 * Create blastP databases
@@ -253,15 +253,16 @@ public class HomologCreation {
 		 * Run bidirectionnal BlastP 
 		 */
 		ArrayList<String> blastFile = new ArrayList<>();
+		blastFile.add("#!/bin/bash");
 		blastFile.add("\"" + HomologCreation.blastP + "\"" + " -query " + blastDBFolder + "_fileGenomePivot -db " + blastDBFolder
 				+ "_databaseTarget -out " + blastOutFolder
-				+ "_blastP_VS_T -evalue 0.01 -max_target_seqs 10 -outfmt \"6 qseqid sseqid qlen slen length nident positive evalue bitscore\"");
+				+ "_blastP_VS_T -evalue 0.01 -max_target_seqs 1 -outfmt \"6 qseqid sseqid qlen qstart qend slen sstart send length pident nident positive evalue qcovs bitscore\"");
 		System.out.println("\"" + HomologCreation.blastP + "\"" + " -query " + blastDBFolder + "_fileGenomePivot -db " + blastDBFolder
 				+ "_databaseTarget -out " + blastOutFolder
-				+ "_blastP_VS_T -evalue 0.01 -max_target_seqs 10 -outfmt \"6 qseqid sseqid qlen slen length nident positive evalue bitscore\"");
+				+ "_blastP_VS_T -evalue 0.01 -max_target_seqs 1 -outfmt \"6 qseqid sseqid qlen qstart qend slen sstart send length pident nident positive evalue qcovs bitscore\"");
 		blastFile.add("\"" + HomologCreation.blastP + "\"" + " -query " + blastDBFolder + "_fileGenomeTarget -db " + blastDBFolder
 				+ "_databasePivot -out " + blastOutFolder
-				+ "_blastT_VS_P -evalue 0.01 -max_target_seqs 10 -outfmt \"6 qseqid sseqid qlen slen length nident positive evalue bitscore\"");
+				+ "_blastT_VS_P -evalue 0.01 -max_target_seqs 1 -outfmt \"6 qseqid sseqid qlen qstart qend slen sstart send length pident nident positive evalue qcovs bitscore\"");
 
 		blastFile.add("echo _fileGenomePivot VS _fileGenomeTarget Blast search completed");
 		// ">" + scriptFolder + "_fileGenomePivotVS_fileGenomeTarget.control.txt");
@@ -470,7 +471,7 @@ public class HomologCreation {
 		ArrayList<String> finalLog = new ArrayList<String>();
 		finalLog.add("Nb of protein Id not found in query genome in: "+proteinNotFound.size());
 		finalLog.add("Nb of protein Id with no homolog in target genome: "+noHomologs.size());
-		finalLog.add("Nb of protein Id with low similarity (<20%) in target genome: "+lowHomologs.size());
+		finalLog.add("Nb of protein Id with low similarity (<0%) in target genome: "+lowHomologs.size());
 		finalLog.add("Nb of genomes in which homolog search was added: "+ genomeModified.size()+"/"+Genome.getAvailableGenomes().size());
 		TabDelimitedTableReader.saveList(finalLog, Phylogenomic.HOMOLOG_SUMMARY);
 		logs+= Phylogenomic.HOMOLOG_SUMMARY + " created\n";
@@ -564,7 +565,7 @@ public class HomologCreation {
 	 * For each blast go through the table and add the column identity nident/qlen
 	 * = column 5 / column 2
 	 * BlastP results:
-	 * qseqid sseqid qlen slen length nident positive evalue bitscore
+	 * qseqid sseqid qlen qstart qend slen sstart send length pident nident positive evalue qcovs bitscore
 	 * 
 	 * @param genome_pivot
 	 * @param listGenomes
@@ -577,58 +578,100 @@ public class HomologCreation {
 		
 		for (String genome_target : listGenomes) {
 			System.out.println("Add column for: " + genome_pivot + " vs " + genome_target);
-			/*
+			
 			File file = new File(results_folder + "resultBlast_" + genome_pivot + "_vs_" + genome_target + ".blast.txt");
 			if (file.exists()) {
 				String[][] genomeP_vs_genomeT = TabDelimitedTableReader
 						.read(results_folder + "resultBlast_" + genome_pivot + "_vs_" + genome_target + ".blast.txt");
-				String[] columToAdd_P_VS_T = new String[genomeP_vs_genomeT.length];
+				//String[] columToAdd_P_VS_T_identity = new String[genomeP_vs_genomeT.length];
+				String[] columToAdd_P_VS_T_bidirectional = new String[genomeP_vs_genomeT.length];
+				//String[] columToAdd_P_VS_T_coverage = new String[genomeP_vs_genomeT.length];
 
-
-//				String[][] genomeT_vs_genomeP = TabDelimitedTableReader
-//						.read(results_folder + "resultBlast_" + genome_target + "_vs_" + genome_pivot + ".blast.txt");
-				//String[] columToAdd_T_VS_P = new String[genomeT_vs_genomeP.length];
+				
+				String[][] genomeT_vs_genomeP = TabDelimitedTableReader
+						.read(results_folder + "resultBlast_" + genome_target + "_vs_" + genome_pivot + ".blast.txt");
+				//String[] columToAdd_T_VS_P_identity = new String[genomeT_vs_genomeP.length];
+				//String[] columToAdd_T_VS_P_origin = new String[genomeT_vs_genomeP.length];
 
 				for (int i = 0; i < genomeP_vs_genomeT.length; i++) {
-					//String id_genomeT = genomeP_vs_genomeT[i][1].split("\\|")[1];
-					//HashMap<String, Integer> indexRow_T_vs_P = indexRows(genomeT_vs_genomeP);
-					float identitiesP_vs_T = (Float.valueOf(genomeP_vs_genomeT[i][5]))
+					String id_genomeT = genomeP_vs_genomeT[i][1].split("\\|")[1];
+					HashMap<String, Integer> indexRow_T_vs_P = indexRows(genomeT_vs_genomeP); //for "target vs pivot", value of the first column is mapped to the row number
+					
+					/*
+					float identitiesP_vs_T = (100*Float.valueOf(genomeP_vs_genomeT[i][5]))
+							/ (Float.valueOf(genomeP_vs_genomeT[i][4])); // calcul of identity (number identical / query length) for "pivot vs target" file
+					float coverageP_vs_T = (100*Float.valueOf(genomeP_vs_genomeT[i][4]))
 							/ (Float.valueOf(genomeP_vs_genomeT[i][2]));
-					columToAdd_P_VS_T[i] = String.valueOf(identitiesP_vs_T);
-//					float identitiesP_vs_T = (Float.valueOf(genomeP_vs_genomeT[i][5]))
-//							/ (Float.valueOf(genomeP_vs_genomeT[i][3]));
-//					if (indexRow_T_vs_P.containsKey(id_genomeT)) {
-//						int row = indexRow_T_vs_P.get(id_genomeT);
-//						float identitiesT_vs_P = (Float.valueOf(genomeT_vs_genomeP[row][5]))
-//								/ (Float.valueOf(genomeT_vs_genomeP[row][3]));
-//						if (identitiesP_vs_T > identitiesT_vs_P) {
-//							columToAdd_P_VS_T[i] = String.valueOf(identitiesP_vs_T);
-//							columToAdd_T_VS_P[row] = String.valueOf(identitiesP_vs_T);
-//						} else {
-//							columToAdd_P_VS_T[i] = String.valueOf(identitiesT_vs_P);
-//							columToAdd_T_VS_P[row] = String.valueOf(identitiesT_vs_P);
-//						}
-//					} else {
-//						columToAdd_P_VS_T[i] = String.valueOf(identitiesP_vs_T);
-//					}
+					columToAdd_P_VS_T_identity[i] = String.valueOf(identitiesP_vs_T);
+					columToAdd_P_VS_T_coverage[i] = String.valueOf(coverageP_vs_T);
+*/
+				
+					if (indexRow_T_vs_P.containsKey(id_genomeT)) { //check in "target vs pivot" file if first column contains target id
+						int row = indexRow_T_vs_P.get(id_genomeT);
+						String id_genomeP = genomeT_vs_genomeP[row][1].split("\\|")[1];
+						/*
+						float identitiesT_vs_P = (Float.valueOf(genomeT_vs_genomeP[row][5]))
+								/ (Float.valueOf(genomeT_vs_genomeP[row][2])); // calcul of identity (number identical / query length) for "target vs pivot" file
+									
+						/*
+						 * add better identity of blast between "pivot vs target" and " target vs pivot" files
+						 */
+						/*
+						if (identitiesP_vs_T > identitiesT_vs_P) {
+							columToAdd_P_VS_T_identity[i] = String.valueOf(identitiesP_vs_T);
+							columToAdd_P_VS_T_bidirectional[i] = "query";
+							
+							columToAdd_T_VS_P_identity[row] = String.valueOf(identitiesP_vs_T);
+							columToAdd_T_VS_P_origin[row] = "subject";
+
+						} else {
+							columToAdd_P_VS_T_identity[i] = String.valueOf(identitiesT_vs_P);
+							columToAdd_P_VS_T_origin[i] = "subject";
+							columToAdd_T_VS_P_identity[row] = String.valueOf(identitiesT_vs_P);
+							columToAdd_T_VS_P_origin[row] = "query";
+
+						}*/
+						
+						if (id_genomeP.equals(genomeP_vs_genomeT[i][0])) {
+							columToAdd_P_VS_T_bidirectional[i] = "yes";
+						} else {
+							columToAdd_P_VS_T_bidirectional[i] = "no";
+						}
+						
+					} else { // if no target id in first column of "target vs pivot"
+						//columToAdd_P_VS_T_identity[i] = String.valueOf(identitiesP_vs_T);
+						//columToAdd_P_VS_T_origin[i] = "query";
+						columToAdd_P_VS_T_bidirectional[i] = "no";
+					}
 				}
-//				for (int i = 0; i < genomeT_vs_genomeP.length; i++) {
-//					try {
-//						if (columToAdd_T_VS_P[i].equals(""))
-//							;
-//					} catch (NullPointerException e) {
-//						float identitiesT_vs_P = (Float.valueOf(genomeT_vs_genomeP[i][5]))
-//								/ (Float.valueOf(genomeT_vs_genomeP[i][3]));
-//						columToAdd_T_VS_P[i] = String.valueOf(identitiesT_vs_P);
-//					}
-//				}
-				genomeP_vs_genomeT = ArrayUtils.addColumn(genomeP_vs_genomeT, columToAdd_P_VS_T);
-				//genomeT_vs_genomeP = ArrayUtils.addColumn(genomeT_vs_genomeP, columToAdd_T_VS_P);
+				/*
+				 * pour quoi faire ?
+				 */
+				/*
+				for (int i = 0; i < genomeT_vs_genomeP.length; i++) {
+					try {
+						if (columToAdd_T_VS_P_identity[i].equals(""))
+							;
+					} catch (NullPointerException e) {
+						float identitiesT_vs_P = (Float.valueOf(genomeT_vs_genomeP[i][5]))
+								/ (Float.valueOf(genomeT_vs_genomeP[i][2]));
+						columToAdd_T_VS_P_identity[i] = String.valueOf(identitiesT_vs_P);
+						//columToAdd_T_VS_P_origin[i] = "query";
+					}
+					
+				}*/
+				//genomeP_vs_genomeT = ArrayUtils.addColumn(genomeP_vs_genomeT, columToAdd_P_VS_T_coverage);
+				//genomeP_vs_genomeT = ArrayUtils.addColumn(genomeP_vs_genomeT, columToAdd_P_VS_T_identity);
+				genomeP_vs_genomeT = ArrayUtils.addColumn(genomeP_vs_genomeT, columToAdd_P_VS_T_bidirectional);
+
+				//genomeT_vs_genomeP = ArrayUtils.addColumn(genomeT_vs_genomeP, columToAdd_T_VS_P_identity);
+				//genomeT_vs_genomeP = ArrayUtils.addColumn(genomeT_vs_genomeP, columToAdd_T_VS_P_origin);
+
 				TabDelimitedTableReader.save(genomeP_vs_genomeT,
 						addedcolumn_folder + genome_pivot + "_vs_" + genome_target + ".blast.txt");
 				//TabDelimitedTableReader.save(genomeT_vs_genomeP,
-				//		addedcolumn_folder + genome_target + "_vs_" + genome_pivot + ".blast.txt");
-				//System.out.println("Column added: " + genome_pivot + " vs " + genome_target);
+					//	addedcolumn_folder + genome_target + "_vs_" + genome_pivot + ".blast.txt");
+				System.out.println("Column added: " + genome_pivot + " vs " + genome_target);
 				
 				/*
 				 * Add column the other way
@@ -651,10 +694,11 @@ public class HomologCreation {
 					//System.out.println("Column added: " + genome_target + " vs " + genome_pivot);
 				
 				}
-				
+				*/
 			}
-			*/
 			
+				
+			/*
 			File file = new File(results_folder + "resultBlast_" + genome_pivot + "_vs_" + genome_target + ".blast.txt");
 			if (file.exists()) {
 				String[][] genomeP_vs_genomeT = TabDelimitedTableReader
@@ -669,11 +713,11 @@ public class HomologCreation {
 				genomeP_vs_genomeT = ArrayUtils.addColumn(genomeP_vs_genomeT, columToAdd_P_VS_T);
 				TabDelimitedTableReader.save(genomeP_vs_genomeT,
 						addedcolumn_folder + genome_pivot + "_vs_" + genome_target + ".blast.txt");
-
+*/
 				/*
 				 * Add column the other way and intervert column 0 identifiers with column 1 identifiers
 				 */
-				
+				/*
 			} else {
 				String[][] genomeT_vs_genomeP = TabDelimitedTableReader
 				.read(results_folder + "resultBlast_" + genome_target + "_vs_" + genome_pivot + ".blast.txt");
@@ -691,6 +735,7 @@ public class HomologCreation {
 						addedcolumn_folder + genome_pivot + "_vs_" + genome_target + ".blast.txt");
 				//System.out.println("Column added: " + genome_target + " vs " + genome_pivot);
 			}		
+			*/
 		}	
 	}
 
@@ -729,10 +774,25 @@ public class HomologCreation {
 					newTable[i][0] = gene;
 					if (indexRowHashmap.containsKey(proteinName)) {
 						int indexRow = indexRowHashmap.get(proteinName);
-						float identity = Float.parseFloat(homologyTable[indexRow][homologyTable[indexRow].length - 1]);
+						// 0:qseqid 1:sseqid 2:qlen 3:qstart 4:qend 5:slen 6:sstart 7:send 8:length 
+						// 9:pident 10:nident 11:positive 12:evalue 13:qcovs 14:bitscore 15:bidirectional
+
+						int qstart = Integer.parseInt(homologyTable[indexRow][3]);
+						int qend = Integer.parseInt(homologyTable[indexRow][4]);
+						int slen = Integer.parseInt(homologyTable[indexRow][5]);
+						int sstart = Integer.parseInt(homologyTable[indexRow][6]);
+						int send = Integer.parseInt(homologyTable[indexRow][7]);
+						int matchedLength = Integer.parseInt(homologyTable[indexRow][8]);
+						float pident = Float.parseFloat(homologyTable[indexRow][9]);
+						int nident = Integer.parseInt(homologyTable[indexRow][10]);
+						String evalue = homologyTable[indexRow][12];
+						float qcovs = Float.parseFloat(homologyTable[indexRow][13]);
+						float bitscore = Float.parseFloat(homologyTable[indexRow][14]);
+						String bidirectional = homologyTable[indexRow][15];
+
 						String proteinTargetName = homologyTable[indexRow][1].replaceAll("ref|", "")
 								.replace('|', ' ').trim();
-						if (identity > IDENTITY_CUTOFF) {
+						if (pident > IDENTITY_CUTOFF) {
 							// Replace proteinId by locustag
 							String geneTarget = proteinIdtoLocusTagTarget.get(proteinTargetName);
 							String oldLocusTarget = proteinIdtoOldLocusTagTarget.get(proteinTargetName);
@@ -744,9 +804,10 @@ public class HomologCreation {
 							}
 
 							newTable[i][1] += GenomeNCBI.unprocessGenomeName(genome_target) + ";" + geneTarget + ";" + oldLocusTarget
-									+ ";"+proteinTargetName+ ";" + homologyTable[indexRow][homologyTable[indexRow].length - 1] + ";;";
+									+ ";"+proteinTargetName+ ";" + qcovs + ";" + pident + ";" + bidirectional +";" + evalue +";" + bitscore +";" + qstart 
+									+";" + qend +";" + sstart +";" + send +";" + slen +";" + nident +";" + matchedLength +";;";
 						}else {
-							String rowNotFound = genome_pivot + "\t" + proteinName + "\t" + genome_target + "\t" + proteinTargetName +"\t"+ identity;
+							String rowNotFound = genome_pivot + "\t" + proteinName + "\t" + genome_target + "\t" + proteinTargetName +"\t"+ pident;
 							lowHomologs.add(rowNotFound);
 						}
 					} else {
@@ -802,14 +863,22 @@ public class HomologCreation {
 			String allInfo = blastArray[i][1];
 			// System.out.println(locus);
 			Gene gene = genomeLoaded.getGeneFromName(locus);
+	
 			if (gene != null) {
 				LinkedHashMap<String, String> conservationHashMap = new LinkedHashMap<>();
-				conservationHashMap.put(GenomeNCBI.unprocessGenomeName(genome), locus + ";" + gene.getFeature("old_locus_tag") +";"+gene.getProtein_id()+";1.0");
+				conservationHashMap.put(GenomeNCBI.unprocessGenomeName(genome), locus + ";" + gene.getFeature("old_locus_tag") +";"+gene.getProtein_id()+";100;100;N/A;N/A;0;0;0;0;0;0;0;0");
 				if (!allInfo.equals("")) {
 					String[] conservations = allInfo.split(";;");
+				//  0: genome_target 1:geneTarget 2:oldLocusTarget
+				//	3: proteinTargetName 4:qcovs 5:pident 6:bidirectional 7:evalue 8:bitscore 9:qstart 
+				//	10:qend 11:sstart 12:send 13:slen 14:nident 15:matchedLength
 					for (String conservation : conservations) {
 						String genomeTarget = conservation.split(";")[0];
-						String geneTarget = conservation.split(";")[1] + ";" + conservation.split(";")[2] + ";" + conservation.split(";")[3] + ";" + conservation.split(";")[4];
+						String geneTarget = conservation.split(";")[1] + ";" + conservation.split(";")[2] + ";" + conservation.split(";")[3] 
+								+ ";" + conservation.split(";")[4]+ ";" + conservation.split(";")[5]+ ";" + conservation.split(";")[6]
+								+ ";" + conservation.split(";")[7]+ ";" + conservation.split(";")[8]+ ";" + conservation.split(";")[9]
+								+ ";" + conservation.split(";")[10]+ ";" + conservation.split(";")[11]+ ";" + conservation.split(";")[12]
+								+ ";" + conservation.split(";")[13]+ ";" + conservation.split(";")[14]+ ";" + conservation.split(";")[15];
 						//System.out.println(genomeTarget + " -----" + geneTarget);
 						conservationHashMap.put(genomeTarget, geneTarget);
 					}
@@ -817,6 +886,7 @@ public class HomologCreation {
 				gene.setConservationHashMap(conservationHashMap);
 				//System.out.println("Found "+conservationHashMap.size()+ " homologs for "+gene.getName());
 				gene.setConservation(conservationHashMap.size());
+			
 				String genepath = Database.getGENOMES_PATH() + GenomeNCBI.unprocessGenomeName(genome) + FILE_SEPARATOR
 						+ "Sequences" + FILE_SEPARATOR + gene.getName();
 				//System.out.println(genepath);

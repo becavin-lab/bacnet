@@ -3,7 +3,7 @@ package bacnet.e4.rap.setup;
 import java.io.IOException;
 
 import bacnet.scripts.listeriomics.Peptidomics;
-
+import bacnet.scripts.database.GenomesCreation;
 /**
  * All methods which will be executed before or after interface run
  * @author ipmc
@@ -17,7 +17,6 @@ public class Test {
 	public static void runPreTest() {
 		System.out.println("Run Pre-test");
 		
-		
 //		try {
 //			Peptidomics.runEpitopes();
 //			Peptidomics.runAntigen();
@@ -26,6 +25,7 @@ public class Test {
 //			e.printStackTrace();
 //		}
 
+		//bacnet.scripts.database.GenomesCreation.correctKIM5OldLocusTag();
 		
 		/*
 		String[][] array = TabDelimitedTableReader.read("D:\\Yersiniomics\\Yersiniomics\\ArrayExpress\\probes.txt");

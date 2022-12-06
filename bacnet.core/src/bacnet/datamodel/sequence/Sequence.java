@@ -731,6 +731,8 @@ public class Sequence implements Serializable {
     public void setFeatures(LinkedHashMap<String, String> features) {
         this.features = features;
     }
+  
+
 
     public TreeSet<String> getSignatures() {
         return signatures;

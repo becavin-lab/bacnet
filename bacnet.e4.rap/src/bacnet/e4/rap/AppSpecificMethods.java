@@ -37,7 +37,7 @@ public class AppSpecificMethods {
                 new InputDialog(shell, "Type password", "Need to type a password to enter website", "", null);
         if (dialog.open() == 0) {
             // System.out.println(dialog.getValue());
-            String password = "";
+            String password = "P3stis4ever!";
             if (Database.getInstance().getProjectName() == Database.UIBCLISTERIOMICS_PROJECT) {
                 password = "";
             } else if (Database.getInstance().getProjectName() == Database.LEISHOMICS_PROJECT) {

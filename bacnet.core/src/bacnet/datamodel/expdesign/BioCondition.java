@@ -40,7 +40,7 @@ public class BioCondition implements Serializable {
      * BioConditoon separator for comparisons<br>
      * equal to " vs "
      */
-    public static String SEPARATOR = " vs ";
+    public static String SEPARATOR = "_vs_";
 
     /**
      * Name of the BioCondition
@@ -131,11 +131,11 @@ public class BioCondition implements Serializable {
     /**
      * Temperature is specified here
      */
-    private String temperature = "37C";
+    private String temperature = "";
     /**
      * time point if necessary
      */
-    private String time = "Overnight";
+    private String time = "";
     /**
      * Article in which data is published
      */
@@ -158,6 +158,14 @@ public class BioCondition implements Serializable {
      * BioCondComparison vs This Biocondition
      */
     private ArrayList<String> antiComparisons = new ArrayList<>();
+    
+    private String ENAProject = "";
+    private String GEOProject = "";
+    private String GEOPlatform = "";
+    private String sequencingPlatform = "";
+    private String massSpectrometer = "";
+    private String prideID = "";
+
     /**
      * True if no data are associated to this BioCondition<br>
      * It is used principaly to indicate that the BioCondition is a reference condition for another
@@ -454,20 +462,26 @@ public class BioCondition implements Serializable {
             bioConditionCompare.getTypeDataContained().add(TypeData.Tiling);
         }
         
-        /*
+        
         for (int i = 0; i < this.getNGSSeqs().size(); i++) {
             NGS data1 = this.getNGSSeqs().get(i);
             NGS data2 = bioCond2.getNGSSeqs().get(i);
-            NGS compData = data1.compare(data2, calcData);
-            bioConditionCompare.getNGSSeqs().add(compData);
-            bioConditionCompare.getTypeDataContained().add(TypeData.RNASeq);
-        } */
+            System.out.println("in compare: "+ data1.getBioCondName() + " + " + data2.getBioCondName());
+            GeneExpression compData = data1.compare(data2, calcData);
+            bioConditionCompare.getGeneExprs().add(compData);
+            bioConditionCompare.getTypeDataContained().add(TypeData.ExpressionMatrix);
+
+        } 
         
         /*
          * Proteomics data comparison if they exists
          */
         File file = new File(OmicsData.PATH_STREAMING + bioConditionCompare.getName() + ProteomicsData.EXTENSION);
+        System.out.println("in compare add proteomics: "+ file.getName());
+
         if (file.exists()) {
+            System.out.println("in compare add proteomics if: "+ file.getName());
+
             ProteomicsData matrix = new ProteomicsData();
             matrix.setName(bioConditionCompare.getName());
             bioConditionCompare.getProteomes().add(matrix);
@@ -478,7 +492,11 @@ public class BioCondition implements Serializable {
          * Expression data comparison if they exists
          */
         file = new File(OmicsData.PATH_STREAMING + bioConditionCompare.getName() + OmicsData.EXTENSION);
+        System.out.println("in compare add matrix: "+ file.getName());
+
         if (file.exists()) {
+            System.out.println("in compare add matrix if: "+ file.getName());
+
             ExpressionMatrix matrix = new ExpressionMatrix();
             matrix.setName(bioConditionCompare.getName());
             bioConditionCompare.getMatrices().add(matrix);
@@ -909,5 +927,55 @@ public class BioCondition implements Serializable {
     public void setLocalization(ArrayList<String> localization) {
         this.localization = localization;
     }
+        
+    public String getENAProject() {
+        return ENAProject;
+    }
 
+    public void setENAProject(String ENAProject) {
+        this.ENAProject = ENAProject;
+    }
+
+    public String getGEOProject() {
+        return GEOProject;
+    }
+
+    public void setGEOProject(String GEOProject) {
+        this.GEOProject = GEOProject;
+    }
+
+    public String getGEOPlatform() {
+        return GEOPlatform;
+    }
+
+    public void setGEOPlatform(String GEOPlatform) {
+        this.GEOPlatform = GEOPlatform;
+    }
+
+    public String getSequencingPlatform() {
+        return sequencingPlatform;
+    }
+
+    public void setSequencingPlatform(String sequencingPlatform) {
+        this.sequencingPlatform = sequencingPlatform;
+    }
+
+    public String getMassSpectrometer() {
+        return massSpectrometer;
+    }
+
+    public void setMassSpectrometer(String massSpectrometer) {
+        this.massSpectrometer = massSpectrometer;
+    }
+    
+    public String getPrideID() {
+        return prideID;
+    }
+
+    public void setPrideID(String prideID) {
+        this.prideID = prideID;
+    }
+    
 }
+
+    

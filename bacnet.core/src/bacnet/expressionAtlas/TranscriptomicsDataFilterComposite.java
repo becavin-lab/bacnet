@@ -88,7 +88,7 @@ public class TranscriptomicsDataFilterComposite extends org.eclipse.swt.widgets.
         {
             Label lblGenome = new Label(this, SWT.NONE);
             lblGenome.setFont(SWTResourceManager.getBodyFont(SWT.BOLD));
-            lblGenome.setText("Genome");
+            lblGenome.setText("Reference strain");
         }
         {
             comboGenome = new Combo(this, SWT.NONE);
@@ -111,13 +111,13 @@ public class TranscriptomicsDataFilterComposite extends org.eclipse.swt.widgets.
             composite.setLayout(new GridLayout(1, false));
 
             btnGeneExpression = new Button(composite, SWT.CHECK);
-            btnGeneExpression.setText("Gene Expression");
+            btnGeneExpression.setText("Array");
 
             //btnTiling = new Button(composite, SWT.CHECK);
             //btnTiling.setText("Tiling");
 
-            btnTss = new Button(composite, SWT.CHECK);
-            btnTss.setText("TSS");
+            //btnTss = new Button(composite, SWT.CHECK);
+            //btnTss.setText("TSS");
 
             //btnTermSeq = new Button(composite, SWT.CHECK);
             //btnTermSeq.setText("TermSeq");
@@ -130,7 +130,7 @@ public class TranscriptomicsDataFilterComposite extends org.eclipse.swt.widgets.
 
             btnGeneExpression.addSelectionListener(this);
             //btnTiling.addSelectionListener(this);
-            btnTss.addSelectionListener(this);
+            //btnTss.addSelectionListener(this);
             btnRnaseq.addSelectionListener(this);
             //btnRiboSeq.addSelectionListener(this);
             //btnTermSeq.addSelectionListener(this);
@@ -230,7 +230,7 @@ public class TranscriptomicsDataFilterComposite extends org.eclipse.swt.widgets.
         //allButtons.add(btnRegrowth);
         allButtons.add(btnGeneExpression);
         //allButtons.add(btnTiling);
-        allButtons.add(btnTss);
+        //allButtons.add(btnTss);
         //allButtons.add(btnTermSeq);
         allButtons.add(btnRnaseq);
         //allButtons.add(btnRiboSeq);
@@ -246,7 +246,7 @@ public class TranscriptomicsDataFilterComposite extends org.eclipse.swt.widgets.
          * For each category count the number of data available
          */
         int geneExpr = 0;
-        int tss = 0;
+        //int tss = 0;
         int rnaSeq = 0;
         int expo = 0;
         int stat = 0;
@@ -259,8 +259,8 @@ public class TranscriptomicsDataFilterComposite extends org.eclipse.swt.widgets.
                 geneExpr++;
             if (dataType.contains("Tiling")) {
 			}
-            if (dataType.contains("TSS"))
-                tss++;
+            //if (dataType.contains("TSS"))
+                //tss++;
             if (dataType.contains("RiboSeq")) {
 			}
             if (dataType.contains("TermSeq")) {
@@ -269,7 +269,7 @@ public class TranscriptomicsDataFilterComposite extends org.eclipse.swt.widgets.
                 rnaSeq++;
 
             // Unpublished data
-            String reference = row[ArrayUtils.findColumn(view.getBioCondsArray(), "Reference")];
+            String reference = row[ArrayUtils.findColumn(view.getBioCondsArray(), "Bibliographical reference")];
             if (reference.contains("Unpublished")) {
 			}
 
@@ -293,11 +293,11 @@ public class TranscriptomicsDataFilterComposite extends org.eclipse.swt.widgets.
         /*
          * Update checkbox text with the number of data available for each category
          */
-        btnGeneExpression.setText("Gene Expression (" + geneExpr + ")");
+        btnGeneExpression.setText("Array (" + geneExpr + ")");
         //btnTiling.setText("Tiling (" + tiling + ")");
-        btnTss.setText("TSS (" + tss + ")");
+        //btnTss.setText("TSS (" + tss + ")");
         //btnTermSeq.setText("TermSeq (" + termseq + ")");
-        btnRnaseq.setText("RNASeq (" + rnaSeq + ")");
+        btnRnaseq.setText("RNA-Seq (" + rnaSeq + ")");
         //btnRiboSeq.setText("RiboSeq (" + riboseq + ")");
         /*
         if (Database.getInstance().getProjectName() == Database.UIBCLISTERIOMICS_PROJECT) {
@@ -324,7 +324,7 @@ public class TranscriptomicsDataFilterComposite extends org.eclipse.swt.widgets.
             for (String[] row : view.getBioConds()) {
                 boolean found = false;
                 for (String cell : row) {
-                    if (cell.contains(textSearch.getText())) {
+                    if (cell.toLowerCase().contains(textSearch.getText().toLowerCase())) {
                         found = true;
                     }
                 }
@@ -346,7 +346,7 @@ public class TranscriptomicsDataFilterComposite extends org.eclipse.swt.widgets.
         if (!genome.equals("All")) {
             ArrayList<String[]> bioCondsToDisplayTemp = new ArrayList<>();
             for (String[] row : view.getBioCondsToDisplay()) {
-                String genomeRow = row[ArrayUtils.findColumn(view.getBioCondsArray(), "Strain array")];
+                String genomeRow = row[ArrayUtils.findColumn(view.getBioCondsArray(), "Reference strain")];
                 if (genomeRow.equals(genome)) {
                     bioCondsToDisplayTemp.add(row);
                 }
@@ -386,7 +386,7 @@ public class TranscriptomicsDataFilterComposite extends org.eclipse.swt.widgets.
                 }
             }
         }
-        */
+        
         if (btnTss.getSelection()) {
             selected = true;
             for (String[] row : view.getBioCondsToDisplay()) {
@@ -397,7 +397,7 @@ public class TranscriptomicsDataFilterComposite extends org.eclipse.swt.widgets.
                 }
             }
         }
-        /*
+        
         if (btnTermSeq.getSelection()) {
             selected = true;
             for (String[] row : view.getBioCondsToDisplay()) {
@@ -489,6 +489,8 @@ public class TranscriptomicsDataFilterComposite extends org.eclipse.swt.widgets.
          * Update with Mutant
          */
         bioCondsToDisplayTemp = new ArrayList<>();
+        selected = false;
+
         if (btnNoneMutant.getSelection()) {
             selected = true;
             for (String[] row : view.getBioCondsToDisplay()) {

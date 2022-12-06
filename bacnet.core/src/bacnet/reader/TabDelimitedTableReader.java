@@ -439,6 +439,7 @@ public class TabDelimitedTableReader {
             BufferedWriter bufferW = new BufferedWriter(fileW);
             for (String line : list) {
                 bufferW.write(line);
+                //bufferW.write("\n");
                 bufferW.newLine();
             }
 

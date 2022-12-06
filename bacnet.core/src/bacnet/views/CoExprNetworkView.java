@@ -315,11 +315,13 @@ public class CoExprNetworkView implements SelectionListener {
             monitor.beginTask("Display Co-expression network", 3);
             monitor.worked(1);
             view.initComboGenome();
+            /*
             monitor.subTask("Load Co-expression network");
             monitor.worked(1);
             view.loadNetwork();
             monitor.subTask("Filter and display network");
             monitor.worked(1);
+            */
             monitor.done();
         }
     }

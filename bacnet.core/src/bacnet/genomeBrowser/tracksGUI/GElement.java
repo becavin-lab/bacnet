@@ -175,7 +175,7 @@ public class GElement {
                 } else {
                     gc.drawString(gene.getName(), rectangle.x + decayString, rectangle.y + rectangle.height / 2 - 17);
                 }
-                gc.drawString(((Gene) sequence).getFeature("old_locus_tag"), rectangle.x + decayString,
+                gc.drawString(((Gene) sequence).getOldLocusTag(), rectangle.x + decayString,
                         rectangle.y + rectangle.height / 2 - 5 );
                 gc.drawString(((Gene) sequence).getProduct(), rectangle.x + decayString,
                         rectangle.y + rectangle.height / 2 + 6);
@@ -185,7 +185,7 @@ public class GElement {
                         rectangle.x + decayString, rectangle.y + rectangle.height / 2 + 5);
             } else {
                 gc.drawString(sequence.getName(), rectangle.x + decayString, rectangle.y + rectangle.height / 2 - 7);
-                gc.drawString(((Gene) sequence).getFeature("old_locus_tag"), rectangle.x + decayString,
+                gc.drawString(((Gene) sequence).getOldLocusTag(), rectangle.x + decayString,
                         rectangle.y + rectangle.height / 2 - 5 );
             }
         } else if (rectangle.width > 150) {
@@ -202,7 +202,7 @@ public class GElement {
                     }
                 }
                 gc.drawString(name, rectangle.x + decayString, rectangle.y + rectangle.height / 2 - 9);
-                gc.drawString(((Gene) sequence).getFeature("old_locus_tag"), rectangle.x + decayString,
+                gc.drawString(((Gene) sequence).getOldLocusTag(), rectangle.x + decayString,
                         rectangle.y + rectangle.height / 2 + 3 );
             }
         } else if (rectangle.width > 60) {

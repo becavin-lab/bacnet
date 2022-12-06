@@ -271,7 +271,7 @@ public class SetupPart implements SelectionListener {
         btnCreatBlastpScript.setText("Create BlastP script");
         btnCreatBlastpScript.addSelectionListener(this);
         btnCheckBlastResult = new Button(composite_9, SWT.NONE);
-        btnCheckBlastResult.setText("Check BlastP script");
+        btnCheckBlastResult.setText("Check BlastP Results");
         btnCheckBlastResult.addSelectionListener(this);
         btnCreateHomologTables = new Button(composite_9, SWT.NONE);
         btnCreateHomologTables.setText("Create Homolog tables");
@@ -661,7 +661,7 @@ public class SetupPart implements SelectionListener {
             }
             TreeSet<String> setBioCond = new TreeSet<>();
             for (int i = 1; i < bioConds.length; i++) {
-                setBioCond.add(bioConds[i][0] + " vs " + bioConds[i][1]);
+                setBioCond.add(bioConds[i][0] + "_vs_" + bioConds[i][1]);
             }
             for (String biocond : setBioCond) {
                 dataValidation.getComparisons().put(biocond, false);
@@ -941,7 +941,6 @@ public class SetupPart implements SelectionListener {
             logs += "--- Download genomes from RefSeq\n";
             String[][] newGenomes = TabDelimitedTableReader.read(Database.getInstance().getGenomeArrayPath());
             int index = ArrayUtils.findColumn(newGenomes, GenomesCreation.COLNAME_REFSEQ);
-            System.out.println("yes"+ index);
             if (index == -1) {
             	String message = "No \""+GenomesCreation.COLNAME_REFSEQ+"\" column available in " + Database.getInstance().getGenomeArrayPath() + "\n";
             	logs += message;
@@ -1052,6 +1051,7 @@ public class SetupPart implements SelectionListener {
                     comparisons.add(bioCondName);
                 }
             }
+
             logs = BioConditionCreation.addComparisonFromTable(comparisons, logs);
             logs = dataValidation.validateComparisons(logs);
             updateConsole();

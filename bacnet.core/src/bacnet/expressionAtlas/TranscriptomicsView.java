@@ -273,22 +273,23 @@ public class TranscriptomicsView implements SelectionListener {
             label_1.setImage(imageGeneExpr);
             Label lblGeneExpressionArray = new Label(composite_1, SWT.NONE);
             lblGeneExpressionArray.setText("Gene expression array");
-
+/*
             Label lblNewLabel = new Label(composite_1, SWT.NONE);
             lblNewLabel.setImage(imageTiling);
             Label lblTilingArrayAvailable = new Label(composite_1, SWT.NONE);
             lblTilingArrayAvailable.setText("Tiling array");
 
+            
             Label lblNewLabel_1 = new Label(composite_1, SWT.NONE);
             lblNewLabel_1.setImage(imageTSS);
             Label lblTssAvailable = new Label(composite_1, SWT.NONE);
             lblTssAvailable.setText("TSS and TermSeq");
-
+*/
             Label label = new Label(composite_1, SWT.NONE);
             label.setImage(imageRNASeq);
 
             Label lblRnaseq = new Label(composite_1, SWT.NONE);
-            lblRnaseq.setText("RNASeq and RiboSeq");
+            lblRnaseq.setText("RNA-Seq and Ribo-Seq");
         }
         tableBioConditionViewer.getTable().addSelectionListener(this);
         new Label(container, SWT.NONE);
@@ -327,7 +328,7 @@ public class TranscriptomicsView implements SelectionListener {
         if (Database.getInstance().getProjectName() != Database.URY_YERSINIOMICS_PROJECT) {
             ArrayList<String[]> bioCondsToDisplayTemp = new ArrayList<String[]>();
             for (String[] row : bioCondsToDisplay) {
-                String info = row[ArrayUtils.findColumn(bioCondsArray, "Reference")];
+                String info = row[ArrayUtils.findColumn(bioCondsArray, "Bibliographical reference")];
                 if (info.contains("Unpublished (URY)")) {
                   	//
                 } else {
@@ -469,7 +470,6 @@ public class TranscriptomicsView implements SelectionListener {
                 return image;
             }
         });
-
         for (int i = 0; i < bioConds.get(0).length; i++) {
             final int k = i;
             TableViewerColumn col2 = createTableViewerColumn(bioCondsArray[0][i], i + 1);
@@ -487,8 +487,14 @@ public class TranscriptomicsView implements SelectionListener {
                     	String text = bioCond[k];
 	                    if (colName.equals("Type")) {
 	                        return "";
-	                    } else if (colName.equals("Reference")) {
+	                    } else if (colName.equals("Bibliographical reference")) {
 	                        return RWTUtils.setPubMedLink(text);
+	                    } else if (colName.equals("ENA project")) {
+	                        return RWTUtils.setENAExpLink(text);
+	                    } else if (colName.equals("GEO project")) {
+	                        return RWTUtils.setGEOLink(text);
+	                    } else if (colName.equals("GEO platform")) {
+	                        return RWTUtils.setGEOLink(text);
 	                    } else if (colName.equals("ArrayExpressId")) {
 	                        return RWTUtils.setArrayExpressExpLink(text);
 	                    } else if (colName.equals("ArrayExpressTechnoID")) {
@@ -528,7 +534,6 @@ public class TranscriptomicsView implements SelectionListener {
 
             });
             col2.getColumn().pack();
-
         }
 
     }

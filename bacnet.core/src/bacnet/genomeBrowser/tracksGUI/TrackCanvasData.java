@@ -488,7 +488,7 @@ public class TrackCanvasData extends Canvas implements MouseMoveListener {
         /*
          * Display Tiling datasets
          */
-        displayTiling(gc, track.getDatas().getTilings(), min, max, 0, 0);
+        //displayTiling(gc, track.getDatas().getTilings(), min, max, 0, 0);
         /*
          * Display GeneExpression datasets
          */

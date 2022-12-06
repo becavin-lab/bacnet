@@ -22,6 +22,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import bacnet.Database;
 import bacnet.datamodel.annotation.Annotation;
+import bacnet.datamodel.sequenceNCBI.GenomeConversionElement;
 import bacnet.datamodel.sequenceNCBI.GenomeNCBI;
 import bacnet.reader.FastaFileReader;
 import bacnet.reader.GFFNCBIReader;
@@ -128,7 +129,7 @@ public class Genome {
             /*
              * read Genome sequence in .fna
              */
-            System.out.println(files[i]);
+            //System.out.println(files[i]);
             FileInputStream inStream = new FileInputStream(files[i]);
             DNACompoundSet compoundSet = DNACompoundSet.getDNACompoundSet();
             FastaFileReader<DNASequence, NucleotideCompound> fastaReader =
@@ -232,6 +233,7 @@ public class Genome {
      * @return
      */
     public Gene getGeneFromProteinId(String proteinId) {
+    	
         for (String accessionChromo : this.getChromosomes().keySet()) {
         	Chromosome chromo = this.getChromosomes().get(accessionChromo);
         	if(chromo.getProteinIDTolocusTag().containsKey(proteinId)) {
@@ -246,6 +248,8 @@ public class Genome {
      * @return
      */
     public void saveProteinIdToLocusTag() {
+		folderCreation(GenomeNCBI.PATH_PROTEINID);
+
     	//System.out.println("save 1");
     	ArrayList<String> hashMapProteinId = new ArrayList<String>();
         for (String accessionChromo : this.getChromosomes().keySet()) {
@@ -265,6 +269,7 @@ public class Genome {
      * @return
      */
     public void saveLocusTagToOldLocusTag() {
+    	folderCreation(GenomeNCBI.PATH_OLDLOCUSTAG);
     	//System.out.println("save 2");
 
     	ArrayList<String> hashMapOldLocusTag = new ArrayList<String>();
@@ -284,6 +289,7 @@ public class Genome {
      */
     public void saveProteinIdToOldLocusTag() {
     	//System.out.println("save 2");
+		folderCreation(GenomeNCBI.PATH_PROTEINIDTOOLDLOCUSTAG);
 
     	ArrayList<String> hashMapOldLocusTag = new ArrayList<String>();
         for (String accessionChromo : this.getChromosomes().keySet()) {
@@ -786,7 +792,9 @@ public class Genome {
         }
         return sequenceAA;
     }
-
+    
+        
+    
     /*
      * ************************************************************** Getters and Setters
      * *********************************************
@@ -820,4 +828,11 @@ public class Genome {
         this.chromosomes = chromosomes;
     }
 
+    public static void folderCreation(String path) {
+		File file = new File(path);
+		if (!file.exists()) {
+			file.mkdirs();
+			System.out.println("Folder: " + path + " created");
+		}
+	}
 }

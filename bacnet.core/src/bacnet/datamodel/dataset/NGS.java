@@ -322,16 +322,23 @@ public class NGS extends OmicsData implements Serializable {
      * @return
      * @throws IOException
      */
-    public NGS compare(NGS data2, boolean calcData) {
-        if (calcData) {
+    public GeneExpression compare(NGS data2, boolean calcData) {
+        
+    	if (calcData) {
             this.read();
             data2.read();
         } else {
             // do not create the vector double[] et read[]
             this.load();
         }
-        NGS compRNASeq = new NGS(this.getName() + " vs " + data2.getName(), this.getGenomeName());
-        compRNASeq.setBioCondName(this.getBioCondName() + " vs " + data2.getBioCondName());
+        NGS compRNASeq = new NGS(this.getName() + "_vs_" + data2.getName(), this.getGenomeName());
+        compRNASeq.setBioCondName(this.getBioCondName() + "_vs_" + data2.getBioCondName());
+        
+        GeneExpression compData = new GeneExpression(this.getName() + "_vs_" + data2.getName());
+       compData.setBioCondName(this.getBioCondName() + "_vs_" + data2.getBioCondName());
+
+        
+        /*
         for (String chromoID : this.getDatasets().keySet()) {
             ExpressionData dataset1 = this.getDatasets().get(chromoID);
             ExpressionData dataset2 = data2.getDatasets().get(chromoID);
@@ -368,9 +375,9 @@ public class NGS extends OmicsData implements Serializable {
                 compData.setStat();
             }
             compRNASeq.getDatasets().put(chromoID, compData);
-        }
+        }*/
 
-        return compRNASeq;
+        return compData;
     }
 
     /**

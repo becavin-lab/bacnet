@@ -36,7 +36,6 @@ public class TestPart {
          * Run Scripts here!
          */
         // BioCondition bioCond = BioCondition.getBioCondition("EGDe_TIS_Final");
-        
         System.out.println("Finished script!");
 
     }
@@ -57,8 +56,7 @@ public class TestPart {
         /*
          * PUT YOUR SCRIPT HERE!
          */
-        //System.out.println("test run");
-        
+        System.out.println("test run");
         /*
          * PUT YOUR SCRIPT HERE!
          */

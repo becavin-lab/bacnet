@@ -136,19 +136,33 @@ public class PhylogenomicsCreation {
 		
 		String phyloTreeTemp = FileUtils.readText(Phylogenomic.PHYLO_GENOME_SVG);
 		HashMap<String, String> genomeToAttribute = Phylogenomic.parsePhylogenomicFigure(phyloTreeTemp);
+		//System.out.println("phylogeny parse length "+genomeToAttribute.size());
 
+		
 		LinkedHashMap<String, Integer> strainToPyloId = new LinkedHashMap<String, Integer>();
 		TreeMap<Double, String> heightToStrain = new TreeMap<Double, String>();
 		// Organize strain by phyloId
 		for (String genome : genomeToAttribute.keySet()) {
+			//System.out.println("in for phylogeny "+genome);
 			String matrixInfo = genomeToAttribute.get(genome);
+			//System.out.println("matrixInfo: "+matrixInfo);
+
 			if(matrixInfo.contains("matrix")) {
-				System.out.println(matrixInfo.substring(matrixInfo.indexOf("matrix("), matrixInfo.indexOf(")")));
+				//System.out.println(matrixInfo.substring(matrixInfo.indexOf("matrix("), matrixInfo.indexOf(")")));
 				String[] parseLine = matrixInfo.substring(matrixInfo.indexOf("matrix("), matrixInfo.indexOf(")")).split(",");
 				String heigth = parseLine[parseLine.length - 1];
 				double value = Double.valueOf(heigth);
 				heightToStrain.put(value, GenomeNCBI.unprocessGenomeName(genome));
-				System.out.println(genome + " " + GenomeNCBI.unprocessGenomeName(genome) + " " + heigth);
+				//System.out.println(genome + " " + GenomeNCBI.unprocessGenomeName(genome) + " " + heigth);
+			} else if(matrixInfo.contains("translate")) {
+				//System.out.println("translate: "+matrixInfo.substring(matrixInfo.indexOf("translate("), matrixInfo.indexOf("rotate(90)")));
+				String[] parseLine = matrixInfo.substring(matrixInfo.indexOf("translate("), matrixInfo.indexOf("rotate(90)")).split(" ");
+				String heigthTemp = parseLine[0];
+				String heigth = heigthTemp.substring(10);
+				//System.out.println("substring heigth: "+ heigth);
+				double value = Double.valueOf(heigth);
+				heightToStrain.put(value, GenomeNCBI.unprocessGenomeName(genome));
+				//System.out.println(genome + " " + GenomeNCBI.unprocessGenomeName(genome) + " " + heigth);
 			}
 		}
 
@@ -163,7 +177,7 @@ public class PhylogenomicsCreation {
 		TreeMap<String, Integer> newRowNames = new TreeMap<String, Integer>();
 		for (String key : genomesMatrix.getRowNames().keySet()) {
 			Integer value = genomesMatrix.getRowNames().get(key);
-			String strain = genomesMatrix.getValueAnnotation(key, "Name");
+			String strain = genomesMatrix.getValueAnnotation(key, "Name (GenBank)");
 			String phyloIdStrain = String.valueOf(strainToPyloId.get(strain));
 			if (phyloIdStrain.length() == 1) {
 				phyloIdStrain = "0" + phyloIdStrain;

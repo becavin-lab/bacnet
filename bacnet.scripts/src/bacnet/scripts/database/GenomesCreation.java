@@ -11,6 +11,8 @@ import java.util.HashMap;
 import bacnet.Database;
 import bacnet.datamodel.sequence.Chromosome;
 import bacnet.datamodel.sequence.Gene;
+import bacnet.datamodel.sequence.Sequence;
+
 import bacnet.datamodel.sequence.Genome;
 import bacnet.datamodel.sequenceNCBI.GenomeConversion;
 import bacnet.datamodel.sequenceNCBI.GenomeNCBI;
@@ -80,6 +82,36 @@ public class GenomesCreation {
         System.out.println("Save Table: " + Database.getInstance().getPath() + "/VerifyGenomeConversion.txt");
         TabDelimitedTableReader.saveList(results, Database.getInstance().getPath() + "/VerifyGenomeConversion.txt");
     }
+    
+    /**
+     * Correct old locus from KIM5 with a manually curated proteinID to oldLocus Hashmap from KIM10+ and CO92
+     */
+    public static void correctKIM5OldLocusTag() {
+    	Genome genome = Genome.loadGenome("Yersinia pestis KIM5");
+    	HashMap<String,String> proteinIDToOldLocusTag = TabDelimitedTableReader.readHashMap(GenomeNCBI.PATH_PROTEINIDTOOLDLOCUSTAG +"Yersinia pestis KIM5_protIDToOldLocusTag.txt");
+
+    	for (Chromosome chromosome : genome.getChromosomes().values()) {
+            for (String key : chromosome.getGenes().keySet()) {
+                Gene gene = chromosome.getGenes().get(key);
+                String protID = gene.getProtein_id();
+                System.out.println("proteinID: "+ protID);
+                if(proteinIDToOldLocusTag.containsKey(protID)) {
+                	gene.setOldLocusTag(proteinIDToOldLocusTag.get(protID));
+                    System.out.println("proteinIDToOldLocusTag old: "+ proteinIDToOldLocusTag.get(protID));
+                    System.out.println("old feature: "+ gene.getFeature("old_locus_tag"));
+
+                    gene.getFeatures().put("old_locus_tag", gene.getOldLocusTag());
+                    gene.save(Database.getGENOMES_PATH() + "Yersinia pestis KIM5\\Sequences\\" + gene.getName());
+                    System.out.println("proteinIDToOldLocusTag new: "+ gene.getOldLocusTag());
+                    System.out.println("new feature: "+ gene.getFeature("old_locus_tag"));
+
+                }
+                
+            }
+        }
+    }
+                    
+                
 
     /**
      * Download new genomes taken from a text file and open all gzip files
@@ -88,7 +120,7 @@ public class GenomesCreation {
     	System.out.println("Download Genomes");
         String[][] newGenomes = TabDelimitedTableReader.read(Database.getInstance().getGenomeArrayPath());
         for (int i = 1; i < newGenomes.length; i++) {
-            String strain = newGenomes[i][ArrayUtils.findColumn(newGenomes, "Name")];
+            String strain = newGenomes[i][ArrayUtils.findColumn(newGenomes, "Name (GenBank)")];
             if (listGenomes.contains(strain)) {
                 String refSeqFTP = newGenomes[i][ArrayUtils.findColumn(newGenomes, GenomesCreation.COLNAME_REFSEQ)];
                 String ftp = refSeqFTP;
@@ -270,10 +302,10 @@ public class GenomesCreation {
         for (String genomeName : Genome.getAvailableGenomes()) {
             Genome genome = Genome.loadGenome(genomeName);
             for (Chromosome chromo : genome.getChromosomes().values()) {
-                System.out.println(chromo.getAccession().toString());
+                //System.out.println(chromo.getAccession().toString());
                 String fileName = GenomeNCBI.PATH_GENOMES + File.separator + genomeName + File.separator
                         + chromo.getAccession().toString() + ".ptt";
-                System.out.println(fileName);
+                //System.out.println(fileName);
                 ArrayList<Gene> genes = new ArrayList<>();
                 for (Gene gene : chromo.getGenes().values())
                     genes.add(gene);
