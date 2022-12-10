@@ -452,9 +452,10 @@ public class DataTrack {
             }
             for (NGS ngsExpr : bioCond.getNGSSeqs()) {
                 System.out.println("in loadData ngsExpr: "+ngsExpr.getBioCondName());
-
-                if (!ngsExpr.isInfoRead()) {
-                    ngsExpr.load();
+                if (!ngsExpr.getBioCondName().contains("_vs_")) {
+                	if (!ngsExpr.isInfoRead()) {
+                        ngsExpr.load();
+                    }    	
                 }
             }
             for (NTermData nTermData : bioCond.getnTerms()) {

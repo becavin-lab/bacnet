@@ -106,7 +106,7 @@ public class OmicsData implements Serializable {
     /**
      * Every Found missing values are replaced by this number
      */
-    public static int MISSING_VALUE = -1000000;
+    public static int MISSING_VALUE = 0;
     public static int MISSING_VALUE_ABS = -15;
     public static int MISSING_VALUE_PRES = 15;
 

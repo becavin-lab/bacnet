@@ -467,8 +467,8 @@ public class BioCondition implements Serializable {
             NGS data1 = this.getNGSSeqs().get(i);
             NGS data2 = bioCond2.getNGSSeqs().get(i);
             System.out.println("in compare: "+ data1.getBioCondName() + " + " + data2.getBioCondName());
-            GeneExpression compData = data1.compare(data2, calcData);
-            bioConditionCompare.getGeneExprs().add(compData);
+            NGS compData = data1.compare(data2, calcData);
+            bioConditionCompare.getNGSSeqs().add(compData);
             bioConditionCompare.getTypeDataContained().add(TypeData.ExpressionMatrix);
 
         } 

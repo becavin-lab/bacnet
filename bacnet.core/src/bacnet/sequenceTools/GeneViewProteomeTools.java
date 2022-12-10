@@ -21,22 +21,31 @@ public class GeneViewProteomeTools {
 	/**
      * Update display of expression data results
      */
-    public static void updateProteinAtlas(Sequence sequence, Text txtCutoffLogFC, GeneView viewer, String[][] arrayProteinAtlasList) {
+    public static void updateProteinAtlas(Sequence sequence, Text txtCutoffLogFC, Text txtCutoffPvalue, GeneView viewer, String[][] arrayProteinAtlasList) {
         if (sequence != null) {
         	//System.out.println("true");
             double cutoffLogFC = GenomeElementAtlas.DEFAULT_LOGFC_PROTEOMIC_CUTOFF;
+			double cutoffPvalue = GenomeElementAtlas.DEFAULT_PVAL_CUTOFF;
 
             try {
                 cutoffLogFC = Double.parseDouble(viewer.getTxtCutoffLogFCProteome().getText());
+				cutoffPvalue = Double.parseDouble(viewer.getTxtCutoffPvalueProteome().getText());
+
                 
             } catch (Exception e) {
-                viewer.getTxtCutoffLogFC().setText(GenomeElementAtlas.DEFAULT_LOGFC_PROTEOMIC_CUTOFF + "");
+                viewer.getTxtCutoffLogFCProteome().setText(GenomeElementAtlas.DEFAULT_LOGFC_PROTEOMIC_CUTOFF + "");
+				viewer.getTxtCutoffPvalueProteome().setText(GenomeElementAtlas.DEFAULT_PVAL_CUTOFF + "");
+
             }
         	//System.out.println("cutoff: "+ cutoffLogFC);
 
-            Filter filter = new Filter();
-            filter.setCutOff1(cutoffLogFC);
-            GenomeElementAtlas atlas = new GenomeElementAtlas(sequence, filter, false);
+            Filter filter1 = new Filter();
+			filter1.setCutOff1(cutoffLogFC);
+			
+			Filter filter2 = new Filter();
+			filter2.setCutOff1(cutoffPvalue);
+			
+            GenomeElementAtlas atlas = new GenomeElementAtlas(sequence, filter1, filter2, false);
             viewer.getLblOverProteome().setText(atlas.getOverBioConds().size() + " data");
             viewer.getLblUnderProteome().setText(atlas.getUnderBioConds().size() + " data");
             viewer.getLblNodiffProteome().setText(atlas.getNotDiffExpresseds().size() + " data");
@@ -59,6 +68,12 @@ public class GeneViewProteomeTools {
 		TableColumn column01 = new TableColumn(tableOver, SWT.NONE);
 		column01.setText("Log2(FC)");
 		column01.setAlignment(SWT.LEFT);
+		TableColumn column011 = new TableColumn(tableOver, SWT.NONE);
+		column011.setText("p-value");
+		column011.setAlignment(SWT.LEFT);
+		TableColumn column012 = new TableColumn(tableOver, SWT.NONE);
+		column012.setText("adj. p-value");
+		column012.setAlignment(SWT.LEFT);
         for (int i = 0; i < arrayProteinAtlasList[0].length; i++) {
             TableColumn column = new TableColumn(tableOver, SWT.NONE);
             column.setText(arrayProteinAtlasList[0][i]);
@@ -69,13 +84,16 @@ public class GeneViewProteomeTools {
             String dataName = arrayProteinAtlasList[i][ArrayUtils.findColumn(arrayProteinAtlasList, "Data Name")];
             if (atlas.getOverBioConds().contains(dataName)) {
                 TableItem item = new TableItem(tableOver, SWT.NONE);
-				item.setText(0, atlas.getValues().get(dataName).toString());
+				item.setText(0, String.format("%.2f",atlas.getValues().get(dataName)));
+				item.setText(1, String.format("%.1e",atlas.getPvalues().get(dataName)));
+				item.setText(2, String.format("%.1e",atlas.getAdjPvalues().get(dataName)));
+
                 for (int j = 0; j < arrayProteinAtlasList[0].length; j++) {
-                    item.setText(j+1, arrayProteinAtlasList[i][j]);
+                    item.setText(j+3, arrayProteinAtlasList[i][j]);
                 }
             }
         }
-        for (int i = 0; i < arrayProteinAtlasList[0].length; i++) {
+        for (int i = 0; i < arrayProteinAtlasList[0].length+3; i++) {
             tableOver.getColumn(i).pack();
         }
         tableOver.update();
@@ -91,6 +109,12 @@ public class GeneViewProteomeTools {
 		TableColumn column02 = new TableColumn(tableUnder, SWT.NONE);
 		column02.setText("Log2(FC)");
 		column02.setAlignment(SWT.LEFT);
+		column02.setAlignment(SWT.LEFT);
+		TableColumn column021 = new TableColumn(tableUnder, SWT.NONE);
+		column021.setText("p-value");
+		TableColumn column022 = new TableColumn(tableUnder, SWT.NONE);
+		column022.setText("adj. p-value");
+		column022.setAlignment(SWT.LEFT);
         for (int i = 0; i < arrayProteinAtlasList[0].length; i++) {
             TableColumn column = new TableColumn(tableUnder, SWT.NONE);
             column.setText(arrayProteinAtlasList[0][i]);
@@ -100,13 +124,16 @@ public class GeneViewProteomeTools {
             String dataName = arrayProteinAtlasList[i][ArrayUtils.findColumn(arrayProteinAtlasList, "Data Name")];
             if (atlas.getUnderBioConds().contains(dataName)) {
                 TableItem item = new TableItem(tableUnder, SWT.NONE);
-				item.setText(0, atlas.getValues().get(dataName).toString());
+				item.setText(0, String.format("%.2f",atlas.getValues().get(dataName)));
+				item.setText(1, String.format("%.1e",atlas.getPvalues().get(dataName)));
+				item.setText(2, String.format("%.1e",atlas.getAdjPvalues().get(dataName)));
+
                 for (int j = 0; j < arrayProteinAtlasList[0].length; j++) {
-                    item.setText(j+1, arrayProteinAtlasList[i][j]);
+                    item.setText(j+3, arrayProteinAtlasList[i][j]);
                 }
             }
         }
-        for (int i = 0; i < arrayProteinAtlasList[0].length; i++) {
+        for (int i = 0; i < arrayProteinAtlasList[0].length+3; i++) {
             tableUnder.getColumn(i).pack();
         }
         tableUnder.update();
@@ -122,6 +149,12 @@ public class GeneViewProteomeTools {
 		TableColumn column03 = new TableColumn(tableNodiff, SWT.NONE);
 		column03.setText("Log2(FC)");
 		column03.setAlignment(SWT.LEFT);
+		TableColumn column031 = new TableColumn(tableNodiff, SWT.NONE);
+		column031.setText("p-value");
+		column031.setAlignment(SWT.LEFT);
+		TableColumn column032 = new TableColumn(tableNodiff, SWT.NONE);
+		column032.setText("adj. p-value");
+		column032.setAlignment(SWT.LEFT);
         for (int i = 0; i < arrayProteinAtlasList[0].length; i++) {
             TableColumn column = new TableColumn(tableNodiff, SWT.NONE);
             column.setText(arrayProteinAtlasList[0][i]);
@@ -131,14 +164,16 @@ public class GeneViewProteomeTools {
             String dataName = arrayProteinAtlasList[i][ArrayUtils.findColumn(arrayProteinAtlasList, "Data Name")];
             if (atlas.getNotDiffExpresseds().contains(dataName)) {
                 TableItem item = new TableItem(tableNodiff, SWT.NONE);
-				item.setText(0, atlas.getValues().get(dataName).toString());
+				item.setText(0, String.format("%.2f",atlas.getValues().get(dataName)));
+				item.setText(1, String.format("%.1e",atlas.getPvalues().get(dataName)));
+				item.setText(2, String.format("%.1e",atlas.getAdjPvalues().get(dataName)));
 
-                for (int j = 0; j < arrayProteinAtlasList[0].length; j++) {
-                    item.setText(j+1, arrayProteinAtlasList[i][j]);
+				for (int j = 0; j < arrayProteinAtlasList[0].length; j++) {
+                    item.setText(j+3, arrayProteinAtlasList[i][j]);
                 }
             }
         }
-        for (int i = 0; i < arrayProteinAtlasList[0].length; i++) {
+        for (int i = 0; i < arrayProteinAtlasList[0].length+3; i++) {
             tableNodiff.getColumn(i).pack();
         }
         tableNodiff.update();
@@ -206,7 +241,7 @@ public class GeneViewProteomeTools {
                 //System.out.println("dataName "+dataName);
 
                 TableItem item = new TableItem(tableProteomes, SWT.NONE);
-                item.setText(0, LFQValues.get(dataName).toString());
+                item.setText(0, String.format("%.2f",LFQValues.get(dataName)));
                 for (int j = 0; j < arrayProteomeList[0].length; j++) {
                     //System.out.println("j "+ j);
 

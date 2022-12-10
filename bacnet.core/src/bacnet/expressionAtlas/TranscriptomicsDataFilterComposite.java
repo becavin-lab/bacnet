@@ -34,10 +34,18 @@ public class TranscriptomicsDataFilterComposite extends org.eclipse.swt.widgets.
     private Button btnLagPhase;
     private Button btnExponential;
     private Button btnStationnary;
-    private Button btnSurvival;
-    private Button btnDeath;
-    private Button btnRegrowth;
     private Button btnTiling;
+    private Button btnTemp28;
+    private Button btnTemp37;
+    private Button btnTempOther;
+    private Button btnBCS;
+    private Button btnMinimalMedia;
+    private Button btnDMEM;
+    private Button btnBlood;
+    private Button btnLB;
+    private Button btnInVivo;
+    private Button btnInCellulo;
+    private Button btnOtherMedia;
     private Combo comboMutant;
     private Button btnChooseOneMutant;
     private Button btnNoneMutant;
@@ -135,17 +143,6 @@ public class TranscriptomicsDataFilterComposite extends org.eclipse.swt.widgets.
             //btnRiboSeq.addSelectionListener(this);
             //btnTermSeq.addSelectionListener(this);
         }
-
-        Composite composite_1 = new Composite(this, SWT.NONE);
-        composite_1.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
-        composite_1.setLayout(new GridLayout(1, false));
-
-        /*
-        btnUnpublished = new Button(composite_1, SWT.CHECK);
-        btnUnpublished.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-        btnUnpublished.setText("Unpublished (0)");
-        btnUnpublished.addSelectionListener(this);
-*/
         
         new Label(this, SWT.NONE);
 
@@ -179,38 +176,87 @@ public class TranscriptomicsDataFilterComposite extends org.eclipse.swt.widgets.
 
         new Label(this, SWT.NONE);
 
+        Label lblTemp = new Label(this, SWT.NONE);
+        lblTemp.setFont(SWTResourceManager.getBodyFont(SWT.BOLD));
+        lblTemp.setText("Temperature");
+
+        Composite composite_21 = new Composite(this, SWT.NONE);
+        composite_21.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
+        composite_21.setLayout(new GridLayout(1, false));
+
+        btnTemp28 = new Button(composite_21, SWT.CHECK);
+        btnTemp28.setText("25°C to 28°C");
+
+        btnTemp37 = new Button(composite_21, SWT.CHECK);
+        btnTemp37.setText("37°");
+
+        btnTempOther = new Button(composite_21, SWT.CHECK);
+        btnTempOther.setText("Other");
+
+        btnTemp28.addSelectionListener(this);
+        btnTemp37.addSelectionListener(this);
+        btnTempOther.addSelectionListener(this);
+
+        new Label(this, SWT.NONE);
+
+        Label lblGrowth = new Label(this, SWT.NONE);
+        lblGrowth.setFont(SWTResourceManager.getBodyFont(SWT.BOLD));
+        lblGrowth.setText("Growth Medium");
+
+        Composite composite_1_1 = new Composite(this, SWT.NONE);
+        composite_1_1.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
+        composite_1_1.setLayout(new GridLayout(1, false));
+
+        btnBCS = new Button(composite_1_1, SWT.CHECK);
+        btnBCS.setText("BCS");
+        btnBCS.addSelectionListener(this);
+
+        btnLB = new Button(composite_1_1, SWT.CHECK);
+        btnLB.setText("LB");
+        btnLB.addSelectionListener(this);
+
+        btnMinimalMedia = new Button(composite_1_1, SWT.CHECK);
+        btnMinimalMedia.setText("Chemically Defined Media");
+        btnMinimalMedia.addSelectionListener(this);
+
+        btnDMEM = new Button(composite_1_1, SWT.CHECK);
+        btnDMEM.setText("DMEM");
+        btnDMEM.addSelectionListener(this);
+        
+        btnInCellulo = new Button(composite_1_1, SWT.CHECK);
+        btnInCellulo.setText("in cellulo");
+        btnInCellulo.addSelectionListener(this);
+        
+        btnBlood = new Button(composite_1_1, SWT.CHECK);
+        btnBlood.setText("Blood");
+        btnBlood.addSelectionListener(this);
+        
+        btnInVivo = new Button(composite_1_1, SWT.CHECK);
+        btnInVivo.setText("in vivo");
+        btnInVivo.addSelectionListener(this);
+        
+        btnOtherMedia = new Button(composite_1_1, SWT.CHECK);
+        btnOtherMedia.setText("Other Media");
+        btnOtherMedia.addSelectionListener(this);
+        
+        new Label(this, SWT.NONE);
+
         Label lblGrowthPhases = new Label(this, SWT.NONE);
         lblGrowthPhases.setFont(SWTResourceManager.getBodyFont(SWT.BOLD));
-        lblGrowthPhases.setText("Growth Phases");
+        lblGrowthPhases.setText("Growth Phase");
 
         Composite composite_2 = new Composite(this, SWT.NONE);
         composite_2.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
         composite_2.setLayout(new GridLayout(1, false));
 
-        //btnLagPhase = new Button(composite_2, SWT.CHECK);
-        //btnLagPhase.setText("Lag");
-
         btnExponential = new Button(composite_2, SWT.CHECK);
-        btnExponential.setText("Logarithmic Phase");
+        btnExponential.setText("Logarithmic");
 
         btnStationnary = new Button(composite_2, SWT.CHECK);
-        btnStationnary.setText("Stationary Phase");
+        btnStationnary.setText("Stationary");
 
-        //btnSurvival = new Button(composite_2, SWT.CHECK);
-        //btnSurvival.setText("Survival");
-
-        //btnDeath = new Button(composite_2, SWT.CHECK);
-        //btnDeath.setText("Death");
-
-        //btnRegrowth = new Button(composite_2, SWT.CHECK);
-        //btnRegrowth.setText("Regrowth");
-
-        //btnLagPhase.addSelectionListener(this);
         btnExponential.addSelectionListener(this);
         btnStationnary.addSelectionListener(this);
-        //btnSurvival.addSelectionListener(this);
-        //btnDeath.addSelectionListener(this);
-        //btnRegrowth.addSelectionListener(this);
 
         getComboGenome().add("All");
         ArrayList<String> genomes = BioCondition.getTranscriptomesGenomes();
@@ -222,18 +268,27 @@ public class TranscriptomicsDataFilterComposite extends org.eclipse.swt.widgets.
             getComboGenome().add(genome);
         }
         getComboGenome().select(0);
-        //allButtons.add(btnLagPhase);
-        allButtons.add(btnExponential);
-        allButtons.add(btnStationnary);
-        //allButtons.add(btnSurvival);
-        //allButtons.add(btnDeath);
-        //allButtons.add(btnRegrowth);
         allButtons.add(btnGeneExpression);
         //allButtons.add(btnTiling);
         //allButtons.add(btnTss);
         //allButtons.add(btnTermSeq);
         allButtons.add(btnRnaseq);
         //allButtons.add(btnRiboSeq);
+        allButtons.add(btnExponential);
+        allButtons.add(btnStationnary);
+        allButtons.add(btnBlood);
+        allButtons.add(btnDMEM);
+        allButtons.add(btnBCS);
+        allButtons.add(btnLB);
+        allButtons.add(btnMinimalMedia);
+        allButtons.add(btnInVivo);
+        allButtons.add(btnInCellulo);
+        allButtons.add(btnOtherMedia);
+        allButtons.add(btnTemp28);
+        allButtons.add(btnTemp37);
+        allButtons.add(btnTempOther);
+
+        
 
     }
 
@@ -250,6 +305,19 @@ public class TranscriptomicsDataFilterComposite extends org.eclipse.swt.widgets.
         int rnaSeq = 0;
         int expo = 0;
         int stat = 0;
+        int temp28 = 0;
+        int temp37 = 0;
+        int tempOther = 0;
+        int blood = 0;
+        int dmem = 0;
+        int inVivo = 0;
+        int inCellulo = 0;
+        int BCS = 0;
+        int lb = 0;
+        int mm = 0;
+        int mediaOther = 0;
+
+        
         for (String[] row : view.getBioCondsToDisplay()) {
             // Data type
             String dataType = row[ArrayUtils.findColumn(view.getBioCondsArray(), "Type")];
@@ -273,21 +341,61 @@ public class TranscriptomicsDataFilterComposite extends org.eclipse.swt.widgets.
             if (reference.contains("Unpublished")) {
 			}
 
-            // growth type
+            // temperature
+            String temperature = row[ArrayUtils.findColumn(view.getBioCondsArray(), "Temp.")];
+            if (temperature.contains("28") || temperature.contains("26") || temperature.contains("25")|| temperature.contains("37")) {
+            	 if (temperature.contains("37"))
+                     temp37++;
+                 if (temperature.contains("28") || temperature.contains("26") || temperature.contains("25")) {
+                     temp28++;
+     			}
+			} else {
+                tempOther++;
+			}
+            
+         // Broth type
+            String broth = row[ArrayUtils.findColumn(view.getBioCondsArray(), "Media")];
+            if (broth.contains("BCS"))
+                BCS++;
+            if (broth.contains("LB"))
+                lb++;
+            if (broth.contains("Minimal Media")||broth.contains("M9")||broth.contains("TMH")||broth.contains("PMH"))
+                mm++;
+            if (broth.contains("Plasma") || broth.contains("Blood"))
+                blood++;
+            if (broth.contains("DMEM"))
+                dmem++;
+            if (broth.contains("Brown Norway")|| broth.contains("C57BL")|| broth.contains("Xenopsylla")
+            		|| broth.contains("Galleria")|| broth.contains("BALB")|| broth.contains("OF1")
+            		|| broth.contains("FVB"))
+                inVivo++;
+            if (broth.contains("THP-1")|| broth.contains("J774")
+            	|| broth.contains("Monocyte")|| broth.contains("Neutrophil"))
+                inCellulo++;
+            if (!(broth.contains("BCS") || broth.contains("Minimal Media")||broth.contains("M9")||broth.contains("LB")
+            		||broth.contains("TMH")||broth.contains("PMH")||broth.contains("Plasma")
+            		|| broth.contains("Blood")||broth.contains("DMEM")||broth.contains("Brown Norway")
+            		|| broth.contains("C57BL")|| broth.contains("Xenopsylla")
+            		|| broth.contains("Galleria")|| broth.contains("BALB")|| broth.contains("OF1")
+            		|| broth.contains("FVB"))||broth.contains("THP-1")|| broth.contains("J774")
+            		|| broth.contains("Monocyte")|| broth.contains("Neutrophil")) {
+            	mediaOther++;
+            }
+            
+         // growth type
             String growth = row[ArrayUtils.findColumn(view.getBioCondsArray(), "Growth")];
             if (growth.contains("Lag")) {
 			}
-            if (growth.contains("Logarithmic"))
+            if (growth.contains("Log"))
                 expo++;
-            if (growth.contains("Stationary"))
+            if (growth.contains("Stat"))
                 stat++;
             if (growth.contains("survival")) {
 			}
             if (growth.contains("Death")) {
 			}
             if (growth.contains("Regrowth")) {
-			}
-
+			}   
         }
 
         /*
@@ -299,19 +407,20 @@ public class TranscriptomicsDataFilterComposite extends org.eclipse.swt.widgets.
         //btnTermSeq.setText("TermSeq (" + termseq + ")");
         btnRnaseq.setText("RNA-Seq (" + rnaSeq + ")");
         //btnRiboSeq.setText("RiboSeq (" + riboseq + ")");
-        /*
-        if (Database.getInstance().getProjectName() == Database.UIBCLISTERIOMICS_PROJECT) {
-            btnUnpublished.dispose();
-        } else {
-            btnUnpublished.setText("Unpublished (" + unpublished + ")");
-        }
-        */
-        //btnLagPhase.setText("Lag (" + lag + ")");
-        btnExponential.setText("Logarithmic Phase (" + expo + ")");
-        btnStationnary.setText("Stationnary Phase (" + stat + ")");
-        //btnSurvival.setText("Survival (" + surival + ")");
-        //btnDeath.setText("Death (" + death + ")");
-        //btnRegrowth.setText("Regrowth (" + regrowth + ")");
+        
+        btnTemp28.setText("25°C to 28°C (" + temp28 + ")");
+        btnTemp37.setText("37°C (" + temp37 + ")");
+        btnTempOther.setText("Other (" + tempOther + ")");
+        btnBlood.setText("Blood (" + blood + ")");
+        btnDMEM.setText("DMEM (" + dmem + ")");
+        btnBCS.setText("BCS (" + BCS + ")");
+        btnLB.setText("LB (" + lb + ")");
+        btnMinimalMedia.setText("Chemically Defined Media (" + mm + ")");
+        btnInVivo.setText("in vivo (" + inVivo + ")");
+        btnInCellulo.setText("in cellulo (" + inCellulo + ")");
+        btnOtherMedia.setText("Other Media (" + mediaOther + ")");
+        btnExponential.setText("Logarithmic (" + expo + ")");
+        btnStationnary.setText("Stationnary (" + stat + ")");
 
     }
 
@@ -437,53 +546,6 @@ public class TranscriptomicsDataFilterComposite extends org.eclipse.swt.widgets.
                 view.getBioCondsToDisplay().add(row);
         }
 
-        /*
-         * Reference section
-         */
-        /*
-        if (Database.getInstance().getProjectName() == Database.UIBCLISTERIOMICS_PROJECT) {
-            selected = false;
-            if (btnUnpublished.getSelection()) {
-                selected = true;
-                for (String[] row : view.getBioCondsToDisplay()) {
-                    String info = row[ArrayUtils.findColumn(view.getBioCondsArray(), "Reference")];
-                    if (info.contains("Unpublished (Cossart lab)")) {
-                        if (!bioCondsToDisplayTemp.contains(row))
-                            bioCondsToDisplayTemp.add(row);
-                    }
-                }
-
-            }
-            if (selected) {
-                view.getBioCondsToDisplay().clear();
-                for (String[] row : bioCondsToDisplayTemp)
-                    view.getBioCondsToDisplay().add(row);
-            }
-        }
-        */
-        /*
-         * Update with intracellular Media type
-         */
-        bioCondsToDisplayTemp = new ArrayList<>();
-        selected = false;
-        
-        if (selected) {
-            view.getBioCondsToDisplay().clear();
-            for (String[] row : bioCondsToDisplayTemp)
-                view.getBioCondsToDisplay().add(row);
-        }
-
-        /*
-         * Update with Broth type
-         */
-        bioCondsToDisplayTemp = new ArrayList<>();
-        selected = false;
-        
-        if (selected) {
-            view.getBioCondsToDisplay().clear();
-            for (String[] row : bioCondsToDisplayTemp)
-                view.getBioCondsToDisplay().add(row);
-        }
 
         /*
          * Update with Mutant
@@ -520,27 +582,163 @@ public class TranscriptomicsDataFilterComposite extends org.eclipse.swt.widgets.
         }
 
         /*
-         * Update with Growth type
+         * Update with temperature
          */
+        
         bioCondsToDisplayTemp = new ArrayList<>();
         selected = false;
-        /*
-        if (btnLagPhase.getSelection()) {
+        
+        if (btnTemp28.getSelection()) {
             selected = true;
             for (String[] row : view.getBioCondsToDisplay()) {
-                String info = row[ArrayUtils.findColumn(view.getBioCondsArray(), "Growth")];
-                if (info.contains("Lag")) {
+                String info = row[ArrayUtils.findColumn(view.getBioCondsArray(), "Temp.")];
+                if (info.contains("25") || info.contains("26") || info.contains("28")) {
                     if (!bioCondsToDisplayTemp.contains(row))
                         bioCondsToDisplayTemp.add(row);
                 }
             }
         }
-        */
+        if (btnTemp37.getSelection()) {
+            selected = true;
+            for (String[] row : view.getBioCondsToDisplay()) {
+                String info = row[ArrayUtils.findColumn(view.getBioCondsArray(), "Temp.")];
+                if (info.contains("37")) {
+                    if (!bioCondsToDisplayTemp.contains(row))
+                        bioCondsToDisplayTemp.add(row);
+                }
+            }
+        }
+        if (btnTempOther.getSelection()) {
+            selected = true;
+            for (String[] row : view.getBioCondsToDisplay()) {
+                String info = row[ArrayUtils.findColumn(view.getBioCondsArray(), "Temp.")];
+                if (!(info.contains("25") || info.contains("26") || info.contains("28")||info.contains("37"))) {
+                    if (!bioCondsToDisplayTemp.contains(row))
+                        bioCondsToDisplayTemp.add(row);
+                }
+            }
+        }
+        
+        if (selected) {
+            view.getBioCondsToDisplay().clear();
+            for (String[] row : bioCondsToDisplayTemp)
+                view.getBioCondsToDisplay().add(row);
+        }
+        
+        /*
+         * Update with Media type
+         */
+        bioCondsToDisplayTemp = new ArrayList<>();
+        selected = false;
+        
+        if (btnBlood.getSelection()) {
+            selected = true;
+            for (String[] row : view.getBioCondsToDisplay()) {
+                String info = row[ArrayUtils.findColumn(view.getBioCondsArray(), "Media")];
+                if (info.contains("Plasma") || info.contains("Blood")) {
+                    if (!bioCondsToDisplayTemp.contains(row))
+                        bioCondsToDisplayTemp.add(row);
+                }
+            }
+        }
+        if (btnDMEM.getSelection()) {
+            selected = true;
+            for (String[] row : view.getBioCondsToDisplay()) {
+                String info = row[ArrayUtils.findColumn(view.getBioCondsArray(), "Media")];
+                if (info.contains("DMEM")) {
+                    if (!bioCondsToDisplayTemp.contains(row))
+                        bioCondsToDisplayTemp.add(row);
+                }
+            }
+        }
+        if (btnBCS.getSelection()) {
+            selected = true;
+            for (String[] row : view.getBioCondsToDisplay()) {
+                String info = row[ArrayUtils.findColumn(view.getBioCondsArray(), "Media")];
+                if (info.contains("BCS")) {
+                    if (!bioCondsToDisplayTemp.contains(row))
+                        bioCondsToDisplayTemp.add(row);
+                }
+            }
+        }
+        if (btnLB.getSelection()) {
+            selected = true;
+            for (String[] row : view.getBioCondsToDisplay()) {
+                String info = row[ArrayUtils.findColumn(view.getBioCondsArray(), "Media")];
+                if (info.contains("LB")) {
+                    if (!bioCondsToDisplayTemp.contains(row))
+                        bioCondsToDisplayTemp.add(row);
+                }
+            }
+        }
+        if (btnMinimalMedia.getSelection()) {
+            selected = true;
+            for (String[] row : view.getBioCondsToDisplay()) {
+                String info = row[ArrayUtils.findColumn(view.getBioCondsArray(), "Media")];
+                if (info.contains("Minimal Media") ||info.contains("M9")||info.contains("TMH")||info.contains("PMH")) {
+                    if (!bioCondsToDisplayTemp.contains(row))
+                        bioCondsToDisplayTemp.add(row);
+                }
+            }
+        }
+        if (btnInVivo.getSelection()) {
+            selected = true;
+            for (String[] row : view.getBioCondsToDisplay()) {
+                String info = row[ArrayUtils.findColumn(view.getBioCondsArray(), "Media")];
+                if (info.contains("Brown Norway")|| info.contains("C57BL")|| info.contains("Xenopsylla")
+                		|| info.contains("Galleria")|| info.contains("BALB")|| info.contains("OF1")
+                		|| info.contains("FVB")) {
+                    if (!bioCondsToDisplayTemp.contains(row))
+                        bioCondsToDisplayTemp.add(row);
+                }
+            }
+        }
+        
+        if (btnInCellulo.getSelection()) {
+            selected = true;
+            for (String[] row : view.getBioCondsToDisplay()) {
+                String info = row[ArrayUtils.findColumn(view.getBioCondsArray(), "Media")];
+                if (info.contains("THP-1")|| info.contains("J774")|| info.contains("Monocyte")|| info.contains("Neutrophil")) {
+                    if (!bioCondsToDisplayTemp.contains(row))
+                        bioCondsToDisplayTemp.add(row);
+                }
+            }
+        }
+        if (btnOtherMedia.getSelection()) {
+            selected = true;
+            for (String[] row : view.getBioCondsToDisplay()) {
+                String info = row[ArrayUtils.findColumn(view.getBioCondsArray(), "Media")];
+                if (!(info.contains("BCS") || info.contains("Minimal Media")||info.contains("M9")||info.contains("LB")
+                		||info.contains("TMH")||info.contains("PMH")||info.contains("Plasma")
+                		|| info.contains("Blood")||info.contains("DMEM")||info.contains("Brown Norway")
+                		|| info.contains("C57BL")|| info.contains("Xenopsylla")
+                		|| info.contains("Galleria")|| info.contains("BALB")|| info.contains("OF1")
+                		|| info.contains("FVB") || info.contains("THP-1")|| info.contains("J774")
+                		|| info.contains("Monocyte")|| info.contains("Neutrophil"))) {
+                    if (!bioCondsToDisplayTemp.contains(row))
+                        bioCondsToDisplayTemp.add(row);
+                }
+            }
+        }
+        
+        if (selected) {
+            view.getBioCondsToDisplay().clear();
+            for (String[] row : bioCondsToDisplayTemp)
+                view.getBioCondsToDisplay().add(row);
+        }
+        
+        /*
+         * Update with Growth type
+         */
+        
+        bioCondsToDisplayTemp = new ArrayList<>();
+        selected = false;
+        
         if (btnExponential.getSelection()) {
             selected = true;
             for (String[] row : view.getBioCondsToDisplay()) {
                 String info = row[ArrayUtils.findColumn(view.getBioCondsArray(), "Growth")];
-                if (info.contains("Logarithmic")) {
+                if (info.contains("Log")) {
                     if (!bioCondsToDisplayTemp.contains(row))
                         bioCondsToDisplayTemp.add(row);
                 }
@@ -550,64 +748,22 @@ public class TranscriptomicsDataFilterComposite extends org.eclipse.swt.widgets.
             selected = true;
             for (String[] row : view.getBioCondsToDisplay()) {
                 String info = row[ArrayUtils.findColumn(view.getBioCondsArray(), "Growth")];
-                if (info.contains("Stationary")) {
+                if (info.contains("Stat")) {
                     if (!bioCondsToDisplayTemp.contains(row))
                         bioCondsToDisplayTemp.add(row);
                 }
             }
         }
-        /*
-        if (btnSurvival.getSelection()) {
-            selected = true;
-            for (String[] row : view.getBioCondsToDisplay()) {
-                String info = row[ArrayUtils.findColumn(view.getBioCondsArray(), "Growth")];
-                if (info.contains("survival")) {
-                    if (!bioCondsToDisplayTemp.contains(row))
-                        bioCondsToDisplayTemp.add(row);
-                }
-            }
-        }
-        if (btnDeath.getSelection()) {
-            selected = true;
-            for (String[] row : view.getBioCondsToDisplay()) {
-                String info = row[ArrayUtils.findColumn(view.getBioCondsArray(), "Growth")];
-                if (info.contains("Death")) {
-                    if (!bioCondsToDisplayTemp.contains(row))
-                        bioCondsToDisplayTemp.add(row);
-                }
-            }
-        }
-        if (btnRegrowth.getSelection()) {
-            selected = true;
-            for (String[] row : view.getBioCondsToDisplay()) {
-                String info = row[ArrayUtils.findColumn(view.getBioCondsArray(), "Growth")];
-                if (info.contains("Regrowth")) {
-                    if (!bioCondsToDisplayTemp.contains(row))
-                        bioCondsToDisplayTemp.add(row);
-                }
-            }
-        }
-        */
+        
         if (selected) {
             view.getBioCondsToDisplay().clear();
             for (String[] row : bioCondsToDisplayTemp)
                 view.getBioCondsToDisplay().add(row);
         }
-/*
-        if (Database.getInstance().getProjectName() == Database.UIBCLISTERIOMICS_PROJECT) {
-            bioCondsToDisplayTemp = new ArrayList<String[]>();
-            for (String[] row : view.getBioCondsToDisplay()) {
-                String info = row[ArrayUtils.findColumn(view.getBioCondsArray(), "Reference")];
-                if (info.contains("Unpublished (Cossart lab)")) {
-                    //
-                } else {
-                    bioCondsToDisplayTemp.add(row);
-                }
-            }
-            view.setBioCondsToDisplay(bioCondsToDisplayTemp);
-        }
-        */
+
     }
+    
+    
 
     public void pushState() {
         HashMap<String, String> statesParameters = new HashMap<>();
@@ -749,28 +905,28 @@ public class TranscriptomicsDataFilterComposite extends org.eclipse.swt.widgets.
         this.btnStationnary = btnStationnary;
     }
 
-    public Button getBtnSurvival() {
-        return btnSurvival;
+    public Button getTemp28() {
+        return btnTemp28;
     }
 
-    public void setBtnSurvival(Button btnSurvival) {
-        this.btnSurvival = btnSurvival;
+    public void setBtnTemp28(Button btnTemp28) {
+        this.btnTemp28 = btnTemp28;
     }
 
-    public Button getBtnDeath() {
-        return btnDeath;
+    public Button getTemp37() {
+        return btnTemp37;
     }
 
-    public void setBtnDeath(Button btnDeath) {
-        this.btnDeath = btnDeath;
+    public void setBtnTemp37(Button btnTemp37) {
+        this.btnTemp37 = btnTemp37;
+    }
+    
+    public Button getTempOther() {
+        return btnTempOther;
     }
 
-    public Button getBtnRegrowth() {
-        return btnRegrowth;
-    }
-
-    public void setBtnRegrowth(Button btnRegrowth) {
-        this.btnRegrowth = btnRegrowth;
+    public void setBtnTempOther(Button btnTempOther) {
+        this.btnTempOther = btnTempOther;
     }
 
     public Button getBtnTiling() {

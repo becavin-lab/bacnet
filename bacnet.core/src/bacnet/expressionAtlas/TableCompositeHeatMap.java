@@ -94,7 +94,7 @@ public class TableCompositeHeatMap extends Composite implements SelectionListene
     private final Button btnZoomOut;
     private final Composite composite_4;
     private final Label lblX;
-    private Button btnHelp;
+    //private Button btnHelp;
     private Shell shell;
     private EPartService partService;
 
@@ -172,13 +172,13 @@ public class TableCompositeHeatMap extends Composite implements SelectionListene
         btnSaveText = new Button(composite, SWT.NONE);
         btnSaveText.setToolTipText("Save to Tab separated text format");
         btnSaveText.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/fileIO/txt.bmp"));
-
+/*
         btnHelp = new Button(composite, SWT.NONE);
         btnHelp.setToolTipText("How to use HeatMap viewer ?");
         btnHelp.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/help.png"));
         btnHelp.addSelectionListener(this);
         btnSaveText.addSelectionListener(this);
-
+*/
         tableViewer = new TableViewer(this, SWT.BORDER | SWT.HIDE_SELECTION | SWT.VIRTUAL);
         tableViewer.setUseHashlookup(true);
         table = tableViewer.getTable();
@@ -341,7 +341,7 @@ public class TableCompositeHeatMap extends Composite implements SelectionListene
                         if (!row[k].equals("")) {
                             double value = Double.parseDouble(row[k]);
                             // display only two digits
-                            DecimalFormat twoDForm = new DecimalFormat("#.##", new DecimalFormatSymbols(Locale.US));
+                            DecimalFormat twoDForm = new DecimalFormat("0.00E0", new DecimalFormatSymbols(Locale.US));
                             value = Double.valueOf(twoDForm.format(value));
                             return value + "";
                         } else
@@ -595,12 +595,12 @@ public class TableCompositeHeatMap extends Composite implements SelectionListene
                     }
                     updateInfo();
                 }
-            } else if (e.getSource() == btnHelp) {
+            /*} else if (e.getSource() == btnHelp) {
                 if (this.isTranscriptomics()) {
                     HelpPage.helpTranscriptHeatMapViewer(partService);
                 } else {
                     HelpPage.helpProteomHeatMapViewer(partService);
-                }
+                }*/
             }
         } catch (Exception e1) {
 

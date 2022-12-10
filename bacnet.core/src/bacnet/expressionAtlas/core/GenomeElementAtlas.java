@@ -17,8 +17,8 @@ public class GenomeElementAtlas implements Serializable {
     private static final long serialVersionUID = 6277013816841128158L;
 
     public static String PATH = Database.getDATA_PATH() + "GenomeElementAtlas" + File.separator;
-    public static double DEFAULT_LOGFC_CUTOFF = 1.5;
-    public static double DEFAULT_LOGFC_PROTEOMIC_CUTOFF = 1.5;
+    public static double DEFAULT_LOGFC_CUTOFF = 1;
+    public static double DEFAULT_LOGFC_PROTEOMIC_CUTOFF = 1;
     public static double DEFAULT_COEXP_CUTOFF = 0.950;
 
     public static double DEFAULT_PVAL_CUTOFF = 0.05;
@@ -30,6 +30,10 @@ public class GenomeElementAtlas implements Serializable {
     private TreeSet<String> underBioConds = new TreeSet<>();
     private TreeSet<String> notDiffExpresseds = new TreeSet<>();
     private HashMap<String, Double> values = new HashMap<>();
+    private HashMap<String, Double> pValues = new HashMap<>();
+    private HashMap<String, Double> adjPvalues = new HashMap<>();
+
+
     //add hashmap for each with values
 
     public GenomeElementAtlas() {}
@@ -43,23 +47,38 @@ public class GenomeElementAtlas implements Serializable {
      * @param filter object encapsulated cutoff values: cutOff1 = logFC , cutOff2 = pvalue
      * @param stat if the statistical value should be taken, into account or not
      */
-    public GenomeElementAtlas(Sequence seq, Filter filter, boolean transcriptome) {
+    public GenomeElementAtlas(Sequence seq, Filter filter1, Filter filter2, boolean transcriptome) {
         System.out.println(seq.getGenomeName());
         ExpressionMatrix logFCMatrix = null;
+        ExpressionMatrix pValueMatrix = null;
+        ExpressionMatrix adjPvalueMatrix = null;
+
         if(transcriptome) {
         	logFCMatrix = Database.getInstance().getLogFCTranscriptomesTable(seq.getGenomeName());
+        	pValueMatrix = Database.getInstance().getPvalueTranscriptomesTable(seq.getGenomeName());
         } else {
         	logFCMatrix = Database.getInstance().getLogFCProteomesTable(seq.getGenomeName());
+        	pValueMatrix = Database.getInstance().getPvalueProteomesTable(seq.getGenomeName());
+        	adjPvalueMatrix = Database.getInstance().getAdjPvalueProteomesTable(seq.getGenomeName());
+
         }
         String genomeElement = seq.getName();
         if (logFCMatrix.getRowNames().containsKey(genomeElement)) {
             for (String bioCondName : logFCMatrix.getHeaders()) {
                 double logFC = logFCMatrix.getValue(genomeElement, bioCondName);
+                double pvalue = pValueMatrix.getValue(genomeElement, bioCondName);
                 this.values.put(bioCondName, logFC);
-                if (logFC <= -filter.getCutOff1()) {
+                this.pValues.put(bioCondName, pvalue);
+                
+                if(!transcriptome) {
+                    double adjPvalue = adjPvalueMatrix.getValue(genomeElement, bioCondName);
+                    this.adjPvalues.put(bioCondName, adjPvalue);
+                }
+
+                if (logFC < -filter1.getCutOff1() && pvalue < filter2.getCutOff1()) {
                     // under-expressed
                     this.underBioConds.add(bioCondName);
-                } else if (logFC > filter.getCutOff1()) {
+                } else if (logFC > filter1.getCutOff1() && pvalue < filter2.getCutOff1()) {
                     // over-expressed
                 	this.overBioConds.add(bioCondName);
                 } else {
@@ -107,6 +126,14 @@ public class GenomeElementAtlas implements Serializable {
     
     public HashMap<String, Double> getValues() {
         return values;
+    }
+    
+    public HashMap<String, Double> getPvalues() {
+        return pValues;
+    }
+
+    public HashMap<String, Double> getAdjPvalues() {
+        return adjPvalues;
     }
 
 

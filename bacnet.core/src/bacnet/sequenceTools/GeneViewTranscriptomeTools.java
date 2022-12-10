@@ -20,18 +20,27 @@ public class GeneViewTranscriptomeTools {
 	/**
 	 * Update display of expression data results
 	 */
-	public static void updateExpressionAtlas(Sequence sequence, Text txtCutoffLogFC, GeneView viewer,
+	public static void updateExpressionAtlas(Sequence sequence, Text txtCutoffLogFC, Text txtCutoffPvalue, GeneView viewer,
 			String[][] arrayDataList) {
 		if (sequence != null) {
 			double cutoffLogFC = GenomeElementAtlas.DEFAULT_LOGFC_CUTOFF;
+			double cutoffPvalue = GenomeElementAtlas.DEFAULT_PVAL_CUTOFF;
 			try {
 				cutoffLogFC = Double.parseDouble(viewer.getTxtCutoffLogFC().getText());
+				cutoffPvalue = Double.parseDouble(viewer.getTxtCutoffPvalue().getText());
+
 			} catch (Exception e) {
 				viewer.getTxtCutoffLogFC().setText(GenomeElementAtlas.DEFAULT_LOGFC_CUTOFF + "");
+				viewer.getTxtCutoffPvalue().setText(GenomeElementAtlas.DEFAULT_PVAL_CUTOFF + "");
+
 			}
-			Filter filter = new Filter();
-			filter.setCutOff1(cutoffLogFC);
-			GenomeElementAtlas atlas = new GenomeElementAtlas(sequence, filter, true);
+			Filter filter1 = new Filter();
+			filter1.setCutOff1(cutoffLogFC);
+			
+			Filter filter2 = new Filter();
+			filter2.setCutOff1(cutoffPvalue);
+			
+			GenomeElementAtlas atlas = new GenomeElementAtlas(sequence, filter1, filter2, true);
 			viewer.getLblOver().setText(atlas.getOverBioConds().size() + " data");
 			viewer.getLblUnder().setText(atlas.getUnderBioConds().size() + " data");
 			viewer.getLblNodiff().setText(atlas.getNotDiffExpresseds().size() + " data");
@@ -54,6 +63,9 @@ public class GeneViewTranscriptomeTools {
 		TableColumn column01 = new TableColumn(tableOver, SWT.NONE);
 		column01.setText("Log2(FC)");
 		column01.setAlignment(SWT.LEFT);
+		TableColumn column011 = new TableColumn(tableOver, SWT.NONE);
+		column011.setText("adj. p-value");
+		column011.setAlignment(SWT.LEFT);
 		for (int i = 0; i < arrayDataList[0].length; i++) {
 			TableColumn column = new TableColumn(tableOver, SWT.NONE);
 			column.setText(arrayDataList[0][i]);
@@ -64,13 +76,14 @@ public class GeneViewTranscriptomeTools {
 			String dataName = arrayDataList[i][ArrayUtils.findColumn(arrayDataList, "Data Name")];
 			if (atlas.getOverBioConds().contains(dataName)) {
 				TableItem item = new TableItem(tableOver, SWT.NONE);
-				item.setText(0, atlas.getValues().get(dataName).toString());
+				item.setText(0, String.format("%.2f",atlas.getValues().get(dataName)));
+				item.setText(1, String.format("%.1e",atlas.getPvalues().get(dataName)));
 				for (int j = 0; j < arrayDataList[0].length; j++) {
-					item.setText(j+1, arrayDataList[i][j]);
+					item.setText(j+2, arrayDataList[i][j]);
 				}
 			}
 		}
-		for (int i = 0; i < arrayDataList[0].length; i++) {
+		for (int i = 0; i < arrayDataList[0].length+2; i++) {
 			tableOver.getColumn(i).pack();
 		}
 		tableOver.update();
@@ -86,6 +99,9 @@ public class GeneViewTranscriptomeTools {
 		TableColumn column02 = new TableColumn(tableUnder, SWT.NONE);
 		column02.setText("Log2(FC)");
 		column02.setAlignment(SWT.LEFT);
+		TableColumn column021 = new TableColumn(tableUnder, SWT.NONE);
+		column021.setText("adj. p-value");
+		column021.setAlignment(SWT.LEFT);
 		for (int i = 0; i < arrayDataList[0].length; i++) {
 			TableColumn column = new TableColumn(tableUnder, SWT.NONE);
 			column.setText(arrayDataList[0][i]);
@@ -95,14 +111,14 @@ public class GeneViewTranscriptomeTools {
 			String dataName = arrayDataList[i][ArrayUtils.findColumn(arrayDataList, "Data Name")];
 			if (atlas.getUnderBioConds().contains(dataName)) {
 				TableItem item = new TableItem(tableUnder, SWT.NONE);
-				item.setText(0, atlas.getValues().get(dataName).toString());
-
+				item.setText(0, String.format("%.2f",atlas.getValues().get(dataName)));
+				item.setText(1, String.format("%.1e",atlas.getPvalues().get(dataName)));
 				for (int j = 0; j < arrayDataList[0].length; j++) {
-					item.setText(j+1, arrayDataList[i][j]);
+					item.setText(j+2, arrayDataList[i][j]);
 				}
 			}
 		}
-		for (int i = 0; i < arrayDataList[0].length; i++) {
+		for (int i = 0; i < arrayDataList[0].length+2; i++) {
 			tableUnder.getColumn(i).pack();
 		}
 		tableUnder.update();
@@ -118,6 +134,9 @@ public class GeneViewTranscriptomeTools {
 		TableColumn column03 = new TableColumn(tableNodiff, SWT.NONE);
 		column03.setText("Log2(FC)");
 		column03.setAlignment(SWT.LEFT);
+		TableColumn column031 = new TableColumn(tableNodiff, SWT.NONE);
+		column031.setText("adj. p-value");
+		column031.setAlignment(SWT.LEFT);
 		for (int i = 0; i < arrayDataList[0].length; i++) {
 			TableColumn column = new TableColumn(tableNodiff, SWT.NONE);
 			column.setText(arrayDataList[0][i]);
@@ -127,14 +146,15 @@ public class GeneViewTranscriptomeTools {
 			String dataName = arrayDataList[i][ArrayUtils.findColumn(arrayDataList, "Data Name")];
 			if (atlas.getNotDiffExpresseds().contains(dataName)) {
 				TableItem item = new TableItem(tableNodiff, SWT.NONE);
-				item.setText(0, atlas.getValues().get(dataName).toString());
+				item.setText(0, String.format("%.2f",atlas.getValues().get(dataName)));
+				item.setText(1, String.format("%.1e",atlas.getPvalues().get(dataName)));
 
 				for (int j = 0; j < arrayDataList[0].length; j++) {
-					item.setText(j+1, arrayDataList[i][j]);
+					item.setText(j+2, arrayDataList[i][j]);
 				}
 			}
 		}
-		for (int i = 0; i < arrayDataList[0].length; i++) {
+		for (int i = 0; i < arrayDataList[0].length+2; i++) {
 			tableNodiff.getColumn(i).pack();
 		}
 		tableNodiff.update();
@@ -183,7 +203,7 @@ public class GeneViewTranscriptomeTools {
 		tableTranscriptomes.setHeaderVisible(true);
 		tableTranscriptomes.setLinesVisible(true);
 		TableColumn column1 = new TableColumn(tableTranscriptomes, SWT.NONE);
-		column1.setText("Value");
+		column1.setText("TPM");
 		column1.setAlignment(SWT.LEFT);
 		//System.out.println("column 1");
 		//System.out.println("length "+arrayTranscriptomesList[0].length);
@@ -205,7 +225,7 @@ public class GeneViewTranscriptomeTools {
 				TableItem item = new TableItem(tableTranscriptomes, SWT.NONE);
 				//System.out.println("TableItem ");
 
-				item.setText(0, normValues.get(dataName).toString());
+				item.setText(0, String.format("%.2f",normValues.get(dataName)));
 				//System.out.println("TableItem 2");
 
 				for (int j = 0; j < arrayTranscriptomesList[0].length; j++) {

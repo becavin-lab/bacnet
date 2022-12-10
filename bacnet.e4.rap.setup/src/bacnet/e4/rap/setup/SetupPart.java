@@ -1091,6 +1091,7 @@ public class SetupPart implements SelectionListener {
             for (String bioCondName : dataValidation.getTranscriptomes().keySet()) {
                 bioConds.add(bioCondName);
             }
+            
             logs = TranscriptomesCreation.createLogfcTranscriptomeTable(bioConds, logs, true);
             updateConsole();
         } else if (e.getSource() == btnValidateProteomics) {

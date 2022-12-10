@@ -89,7 +89,7 @@ public class ProteomicsView implements SelectionListener {
     private ProteomicsDataFilterComposite compositeDataFilter;
     private Table tableProteome;
     private ArrayList<String> selectedProteomes = new ArrayList<>();
-    private Button btnHelp;
+    //private Button btnHelp;
     private Button btnSaveTxt;
     private Button btnUnselectall;
     private Button btnSelectall;
@@ -119,16 +119,16 @@ public class ProteomicsView implements SelectionListener {
         container.setBounds(0, 0, 688, 439);
         container.setLayout(new GridLayout(3, false));
         Label lblXxSrnas = new Label(container, SWT.BORDER | SWT.CENTER);
-        lblXxSrnas.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
+        lblXxSrnas.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 3, 1));
         lblXxSrnas.setFont(SWTResourceManager.getTitleFont(SWT.BOLD));
         lblXxSrnas.setText(Database.getInstance().getSpecies() + " Proteomics Datasets");
         lblXxSrnas.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
-
+/*
         btnHelp = new Button(container, SWT.NONE);
         btnHelp.setToolTipText("How to use Proteomic summary panel ?");
         btnHelp.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/help.png"));
         btnHelp.addSelectionListener(this);
-
+*/
         // if(Database.getInstance().getTypeProject()==TypeProject.Listeriomics ||
         // Database.getInstance().getTypeProject()==TypeProject.UIBCListeriomics){
 
@@ -432,7 +432,7 @@ public class ProteomicsView implements SelectionListener {
                         return "";
                     } else if (colName.equals("Bibliographical reference")) {
                         return RWTUtils.setPubMedLink(text);
-                    } else if (colName.equals("Pride Id")) {
+                    } else if (colName.equals("Pride ID")) {
                         return RWTUtils.setPrideLink(text);
                     } else {
                         return text;
@@ -578,8 +578,8 @@ public class ProteomicsView implements SelectionListener {
         
         
         else if (e.getSource() == tableProteomeViewer.getTable()) {
-        } else if (e.getSource() == btnHelp) {
-            HelpPage.helpProteomicView(partService);
+        /*} else if (e.getSource() == btnHelp) {
+            HelpPage.helpProteomicView(partService);*/
         } else if (e.getSource() == btnSelectall) {
             selectedProteomes = new ArrayList<>();
             tableProteome.selectAll();

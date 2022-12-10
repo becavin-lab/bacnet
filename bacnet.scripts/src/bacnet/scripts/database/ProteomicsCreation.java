@@ -33,7 +33,7 @@ public class ProteomicsCreation {
     	System.out.println("addProteomesToDatabase");
         Experiment exp = new Experiment();
         for (String bioCond : bioConds) {
-        	System.out.println("for 1 " + bioConds);
+        	//System.out.println("for 1 " + bioConds);
             exp.addBioCond(BioCondition.getBioCondition(bioCond));
         }
         /*
@@ -79,7 +79,7 @@ public class ProteomicsCreation {
         for (BioCondition bioCondition : massSpecBioCond) {
             System.out.println("convertProteomicsData: " +bioCondition.getName());
             if (bioCondition.getTypeDataContained().contains(TypeData.Proteome)) {
-                System.out.println("datatype : proteome");
+                System.out.println("datatype : proteome. size: "+bioCondition.getProteomes().size());
 
             	/*
                  * Read data
@@ -89,8 +89,12 @@ public class ProteomicsCreation {
 
                     //String fileName = OmicsData.PATH_PROTEOMICS_NORM + proteome.getRawDatas().get(0);
                     String fileName = OmicsData.PATH_PROTEOMICS_NORM + proteome.getName() + ".txt";
+                    System.out.println("proteome file: " + fileName);
+
                     File file = new File(fileName);
                     if (file.exists()) {
+                        System.out.println("in if: " + fileName);
+
                         ExpressionMatrix matrix = ExpressionMatrix.loadTab(fileName, false);
                         System.out.println("Convert: " + fileName);
                         /*
@@ -144,8 +148,17 @@ public class ProteomicsCreation {
                          */
                         ArrayList<String> includeColNames = new ArrayList<>();
                         includeColNames.add(ColNames.LOGFC + "");
+                        includeColNames.add(ColNames.PVALUE + "");
+                        includeColNames.add(ColNames.PADJ + "");
+
                         if (!matrix.getHeaders().contains(ColNames.LOGFC + "")) {
                             System.out.println("No " + ColNames.LOGFC + " column found for " + fileName);
+                        }
+                        if (!matrix.getHeaders().contains(ColNames.PVALUE + "")) {
+                            System.out.println("No " + ColNames.PVALUE + " column found for " + fileName);
+                        }
+                        if (!matrix.getHeaders().contains(ColNames.PADJ + "")) {
+                            System.out.println("No " + ColNames.PADJ + " column found for " + fileName);
                         }
                         matrix = matrix.getSubMatrixColumn(includeColNames);
                         //System.out.println("mtrix: " + matrix.getBioCondName());
@@ -282,8 +295,6 @@ public class ProteomicsCreation {
          */
         logs += "Create Protein table\n";
         ArrayList<String> genomeList = BioCondition.getProteomeGenomes();
-        System.out.println("genomeList:" + genomeList);
-
         for (String genomeName : genomeList) {
             Experiment expTemp = new Experiment();
             for (BioCondition bioCond : exp.getBioConditions()) {
@@ -468,22 +479,32 @@ public class ProteomicsCreation {
          */
         Genome genome = Genome.loadGenome(genomeName);
         ExpressionMatrix logFCMatrix = new ExpressionMatrix();
+        ExpressionMatrix pValueMatrix = new ExpressionMatrix();
+        ExpressionMatrix adjPValueMatrix = new ExpressionMatrix();
+
         int i = 0;
         for (String genomeElement : genome.getAllElementNames()) {
             logFCMatrix.getRowNames().put(genomeElement, i);
+            pValueMatrix.getRowNames().put(genomeElement, i);
+            adjPValueMatrix.getRowNames().put(genomeElement, i);
             i++;
         }
         for (BioCondition bioCond : exp.getBioConditions()) {
             for (String comparison : bioCond.getComparisonNames()) {
-                System.out.println(comparison);
+                System.out.println("comparison: "+comparison);
                 logFCMatrix.addHeader(comparison);
+                pValueMatrix.addHeader(comparison);
+                adjPValueMatrix.addHeader(comparison);
             }
         }
         double[][] values = new double[logFCMatrix.getRowNames().size()][logFCMatrix.getHeaders().size()];
         logFCMatrix.setValues(values);
-
+        double[][] values2 = new double[pValueMatrix.getRowNames().size()][pValueMatrix.getHeaders().size()];
+        pValueMatrix.setValues(values2);        
+        double[][] values3 = new double[adjPValueMatrix.getRowNames().size()][adjPValueMatrix.getHeaders().size()];
+        adjPValueMatrix.setValues(values3);
         /*
-         * Fill the matrix with LogFC values
+         * Fill the matrix with LogFC values: ATTENTION: first row must be full, or it will not find last column
          */
         for (BioCondition bioCond : exp.getBioConditions()) {
             ArrayList<String> comparisonNames = bioCond.getComparisonNames();
@@ -491,40 +512,105 @@ public class ProteomicsCreation {
                 ProteomicsData proteome = new ProteomicsData();
                 proteome.setName(comparisonName);
                 proteome.load();
-                for (String gene : genome.getAllElementNames()) {
-                	Gene geneTemp = genome.getGeneFromName(gene);
-                	String geneName = geneTemp.getGeneName();
-                    if (proteome.getRowNames().containsKey(gene)) {
-                        logFCMatrix.setValue(proteome.getValue(gene, ColNames.LOGFC + ""), gene, comparisonName);
-                    } 
-                    // test if we can find the gene by its gene name
-                    else if (!geneName.equals("") & proteome.getRowNames().containsKey(geneName)) {
-                    	System.out.println("gene Name does contain Key");
-                    	logFCMatrix.setValue(proteome.getValue(geneName, ColNames.LOGFC + ""), gene, comparisonName);
+                if (proteome.getHeaders().contains(ColNames.PVALUE + "")) {
+                    if (proteome.getHeaders().contains(ColNames.PADJ + "")) {
+                    	  for (String gene : genome.getAllElementNames()) {
+                          	Gene geneTemp = genome.getGeneFromName(gene);
+                          	String geneName = geneTemp.getGeneName();
+                              if (proteome.getRowNames().containsKey(gene)) {
+                                  logFCMatrix.setValue(proteome.getValue(gene, ColNames.LOGFC + ""), gene, comparisonName);
+                                  pValueMatrix.setValue(proteome.getValue(gene, ColNames.PVALUE + ""), gene, comparisonName);
+                                  adjPValueMatrix.setValue(proteome.getValue(gene, ColNames.PADJ + ""), gene, comparisonName);
+                              } 
+                              // test if we can find the gene by its gene name
+                              else if (!geneName.equals("") & proteome.getRowNames().containsKey(geneName)) {
+                              	logFCMatrix.setValue(proteome.getValue(geneName, ColNames.LOGFC + ""), gene, comparisonName);
+                              	pValueMatrix.setValue(proteome.getValue(geneName, ColNames.PVALUE + ""), gene, comparisonName);
+                                  adjPValueMatrix.setValue(proteome.getValue(geneName, ColNames.PADJ + ""), gene, comparisonName);
+                              }
+                              // test if we can find the gene by its old locus tag
+                              else if (genome.getGenes().get(gene) != null) {
+                                  //System.out.println("in if oldLocus: ");
+                              	//.getGenes() returns null if gene is a NcRNA 
+                              	String oldLocusTag = genome.getGenes().get(gene).getFeature("old_locus_tag");
+                              	if (!oldLocusTag.equals("") & proteome.getRowNames().containsKey(oldLocusTag)) {
+                              		logFCMatrix.setValue(proteome.getValue(oldLocusTag, ColNames.LOGFC + ""), gene, comparisonName);
+                              		pValueMatrix.setValue(proteome.getValue(oldLocusTag, ColNames.PVALUE + ""), gene, comparisonName);
+                                      adjPValueMatrix.setValue(proteome.getValue(oldLocusTag, ColNames.PADJ + ""), gene, comparisonName);
+                              	}
+                              	else if (oldLocusTag.contains(",")) {
+                              		for (String oldLocusTemp : oldLocusTag.split(",")) {
+                              			if (!oldLocusTemp.equals("") & proteome.getRowNames().containsKey(oldLocusTemp)) {
+                              				logFCMatrix.setValue(proteome.getValue(oldLocusTemp, ColNames.LOGFC + ""), gene, comparisonName);
+                              				pValueMatrix.setValue(proteome.getValue(oldLocusTemp, ColNames.PVALUE + ""), gene, comparisonName);
+                                              adjPValueMatrix.setValue(proteome.getValue(oldLocusTemp, ColNames.PADJ + ""), gene, comparisonName);
+                              			}
+                              		}
+                              	}
+                              }
+                          }
+                    } else { // add only FC and P-value if no adjusted p_value
+                    	for (String gene : genome.getAllElementNames()) {
+                          	Gene geneTemp = genome.getGeneFromName(gene);
+                          	String geneName = geneTemp.getGeneName();
+                            if (proteome.getRowNames().containsKey(gene)) {
+                                  logFCMatrix.setValue(proteome.getValue(gene, ColNames.LOGFC + ""), gene, comparisonName);
+                                  pValueMatrix.setValue(proteome.getValue(gene, ColNames.PVALUE + ""), gene, comparisonName);
+                            } 
+                              // test if we can find the gene by its gene name
+                            else if (!geneName.equals("") & proteome.getRowNames().containsKey(geneName)) {
+                              	logFCMatrix.setValue(proteome.getValue(geneName, ColNames.LOGFC + ""), gene, comparisonName);
+                              	pValueMatrix.setValue(proteome.getValue(geneName, ColNames.PVALUE + ""), gene, comparisonName);
+                            }
+                              // test if we can find the gene by its old locus tag
+                            else if (genome.getGenes().get(gene) != null) {
+                                  //System.out.println("in if oldLocus: ");
+                              	//.getGenes() returns null if gene is a NcRNA 
+                              	String oldLocusTag = genome.getGenes().get(gene).getFeature("old_locus_tag");
+                              	if (!oldLocusTag.equals("") & proteome.getRowNames().containsKey(oldLocusTag)) {
+                              		logFCMatrix.setValue(proteome.getValue(oldLocusTag, ColNames.LOGFC + ""), gene, comparisonName);
+                              		pValueMatrix.setValue(proteome.getValue(oldLocusTag, ColNames.PVALUE + ""), gene, comparisonName);
+                            } else if (oldLocusTag.contains(",")) {
+                              		for (String oldLocusTemp : oldLocusTag.split(",")) {
+                              			if (!oldLocusTemp.equals("") & proteome.getRowNames().containsKey(oldLocusTemp)) {
+                              				logFCMatrix.setValue(proteome.getValue(oldLocusTemp, ColNames.LOGFC + ""), gene, comparisonName);
+                              				pValueMatrix.setValue(proteome.getValue(oldLocusTemp, ColNames.PVALUE + ""), gene, comparisonName);
+                              			}
+                              		}
+                              	}
+                            }
+                        }
                     }
-                    // test if we can find the gene by its old locus tag
-                    else if (genome.getGenes().get(gene) != null) {
-                    	//System.out.println("test oldLocusTag");
-                    	//.getGenes() returns null if gene is a NcRNA 
-                    	String oldLocusTag = genome.getGenes().get(gene).getFeature("old_locus_tag");
-                    	//System.out.println("oldLocusTag: "+oldLocusTag);
-
-                    	if (!oldLocusTag.equals("") & proteome.getRowNames().containsKey(oldLocusTag)) {
-                    		logFCMatrix.setValue(proteome.getValue(oldLocusTag, ColNames.LOGFC + ""), gene, comparisonName);
-
-                    	}
-                    	else if (oldLocusTag.contains(",")) {
-                        	//System.out.println("oldLocusTag contains ,");
-                    		for (String oldLocusTemp : oldLocusTag.split(",")) {
-                    			//System.out.println("oldLocusTemp: " +oldLocusTemp);
-                    			if (!oldLocusTemp.equals("") & proteome.getRowNames().containsKey(oldLocusTemp)) {
-                    				
-                            		logFCMatrix.setValue(proteome.getValue(oldLocusTemp, ColNames.LOGFC + ""), gene, comparisonName);
-                    			}
-                    		}
-                    	}
+  
+                } else { // add only FC if no p_value nor adj. p-value
+                	for (String gene : genome.getAllElementNames()) {
+                      	Gene geneTemp = genome.getGeneFromName(gene);
+                      	String geneName = geneTemp.getGeneName();
+                        if (proteome.getRowNames().containsKey(gene)) {
+                              logFCMatrix.setValue(proteome.getValue(gene, ColNames.LOGFC + ""), gene, comparisonName);
+                        } 
+                          // test if we can find the gene by its gene name
+                        else if (!geneName.equals("") & proteome.getRowNames().containsKey(geneName)) {
+                          	logFCMatrix.setValue(proteome.getValue(geneName, ColNames.LOGFC + ""), gene, comparisonName);
+                        }
+                          // test if we can find the gene by its old locus tag
+                        else if (genome.getGenes().get(gene) != null) {
+                              //System.out.println("in if oldLocus: ");
+                          	//.getGenes() returns null if gene is a NcRNA 
+                          	String oldLocusTag = genome.getGenes().get(gene).getFeature("old_locus_tag");
+                          	if (!oldLocusTag.equals("") & proteome.getRowNames().containsKey(oldLocusTag)) {
+                          		logFCMatrix.setValue(proteome.getValue(oldLocusTag, ColNames.LOGFC + ""), gene, comparisonName);
+                        } else if (oldLocusTag.contains(",")) {
+                          		for (String oldLocusTemp : oldLocusTag.split(",")) {
+                          			if (!oldLocusTemp.equals("") & proteome.getRowNames().containsKey(oldLocusTemp)) {
+                          				logFCMatrix.setValue(proteome.getValue(oldLocusTemp, ColNames.LOGFC + ""), gene, comparisonName);
+                          			}
+                          		}
+                          	}
+                        }
                     }
                 }
+
             }
         }
 
@@ -537,6 +623,23 @@ public class ProteomicsCreation {
         logFCMatrix.saveTab(Database.getLOGFC_MATRIX_PROTEOMES_PATH() + "_" + genome.getSpecies() + ".excel", "Probes");
         System.out.println("Saved: " + Database.getLOGFC_MATRIX_PROTEOMES_PATH() + "_" + genome.getSpecies());
 
+        pValueMatrix.setAnnotations(new String[0][0]);
+        pValueMatrix.getHeaderAnnotation().clear();
+        pValueMatrix = Annotation.addAnnotationLite(pValueMatrix, genome);
+        pValueMatrix.setName(
+                FileUtils.removePath(Database.getPVALUE_MATRIX_PROTEOMES_PATH() + "_" + genome.getSpecies()));
+        pValueMatrix.save(Database.getPVALUE_MATRIX_PROTEOMES_PATH() + "_" + genome.getSpecies());
+        pValueMatrix.saveTab(Database.getPVALUE_MATRIX_PROTEOMES_PATH() + "_" + genome.getSpecies() + ".excel",
+                "Probes");
+        
+        adjPValueMatrix.setAnnotations(new String[0][0]);
+        adjPValueMatrix.getHeaderAnnotation().clear();
+        adjPValueMatrix = Annotation.addAnnotationLite(adjPValueMatrix, genome);
+        adjPValueMatrix.setName(
+                FileUtils.removePath(Database.getADJPVALUE_MATRIX_PROTEOMES_PATH() + "_" + genome.getSpecies()));
+        adjPValueMatrix.save(Database.getADJPVALUE_MATRIX_PROTEOMES_PATH() + "_" + genome.getSpecies());
+        adjPValueMatrix.saveTab(Database.getADJPVALUE_MATRIX_PROTEOMES_PATH() + "_" + genome.getSpecies() + ".excel",
+                "Probes");
     }
 
     /**

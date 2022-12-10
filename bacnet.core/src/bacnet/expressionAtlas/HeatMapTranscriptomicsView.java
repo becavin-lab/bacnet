@@ -242,6 +242,7 @@ public class HeatMapTranscriptomicsView implements SelectionListener {
 
     public static void displayComparisonsAndElement(String genomeName, ArrayList<String> comparisons, String sequence,
             EPartService partService) {
+    	System.out.println("in displayComparisonsAndElement");
         ArrayList<String> genomeArrays = BioCondition.getTranscriptomesGenomes();
         if (genomeArrays.contains(genomeName)) {
             String id = HeatMapTranscriptomicsView.ID + "-" + String.valueOf(Math.random() * 1000).substring(0, 3);

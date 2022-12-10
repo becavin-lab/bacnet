@@ -108,7 +108,7 @@ public class TranscriptomicsView implements SelectionListener {
     private final Image imageTiling;
     private Table tableBioCondition;
     private Button btnExpressionAtlas;
-    private Button btnHelp;
+    //private Button btnHelp;
     private Button btnUnselectall;
     private Button btnSelectall;
     private Button btnSaveTxt;
@@ -142,16 +142,16 @@ public class TranscriptomicsView implements SelectionListener {
         container.setBounds(0, 0, 1031, 903);
         container.setLayout(new GridLayout(3, false));
         Label lblXxSrnas = new Label(container, SWT.BORDER | SWT.CENTER);
-        lblXxSrnas.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
+        lblXxSrnas.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 3, 1));
         lblXxSrnas.setFont(SWTResourceManager.getTitleFont(SWT.BOLD));
         lblXxSrnas.setText(Database.getInstance().getSpecies() + " Transcriptomics Datasets");
         lblXxSrnas.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
-
+/*
         btnHelp = new Button(container, SWT.NONE);
         btnHelp.setToolTipText("How to use Transcriptomic summary panel ?");
         btnHelp.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/help.png"));
         btnHelp.addSelectionListener(this);
-
+*/
         ScrolledComposite scrolledComposite =
                 new ScrolledComposite(container, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
         GridData gd_scrolledComposite = new GridData(SWT.FILL, SWT.FILL, false, true, 1, 1);
@@ -681,8 +681,8 @@ public class TranscriptomicsView implements SelectionListener {
             String arrayRepHTML = TabDelimitedTableReader.getHTMLVersion(arrayToSave);
             SaveFileUtils.saveTextFile(Database.getInstance().getSpecies() + "_Transcriptomic_Table.txt", arrayRep, true, "", arrayRepHTML,
                     partService, shell);
-        } else if (e.getSource() == btnHelp) {
-            HelpPage.helpTrancriptomicView(partService);
+       /* } else if (e.getSource() == btnHelp) {
+            HelpPage.helpTrancriptomicView(partService);*/
         } else {
             compositeDataFilter.updateBioConditionList();
             compositeDataFilter.pushState();

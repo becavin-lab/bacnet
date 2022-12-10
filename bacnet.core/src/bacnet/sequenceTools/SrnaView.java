@@ -135,7 +135,7 @@ public class SrnaView implements SelectionListener, MouseListener {
     private Text txtCutoffPvalue;
     private Button btnZoomplus;
     private Button btnZoomminus;
-    private Button btnHelp;
+    //private Button btnHelp;
 
     @Inject
     private EPartService partService;
@@ -244,12 +244,12 @@ public class SrnaView implements SelectionListener, MouseListener {
         lblGene.setBackground(ResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
         lblGene.setFont(ResourceManager.getTitleFont());
         lblGene.setText("gene");
-
+/*
         btnHelp = new Button(composite_2, SWT.NONE);
         btnHelp.setToolTipText("How to use Small RNA panel ?");
         btnHelp.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/help.png"));
         btnHelp.addSelectionListener(this);
-
+*/
         tabFolder = new TabFolder(composite_2, SWT.NONE);
         tabFolder.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1));
         tabFolder.addSelectionListener(this);
@@ -573,7 +573,10 @@ public class SrnaView implements SelectionListener, MouseListener {
             }
             Filter filter = new Filter();
             filter.setCutOff1(cutoffLogFC);
-            GenomeElementAtlas atlas = new GenomeElementAtlas(seq, filter, true);
+            //add second filter pvalue 
+            Filter filter2 = new Filter();
+            filter.setCutOff1(cutoffLogFC);
+            GenomeElementAtlas atlas = new GenomeElementAtlas(seq, filter, filter2, true);
             lblOver.setText(atlas.getOverBioConds().size() + " data");
             lblUnder.setText(atlas.getUnderBioConds().size() + " data");
             lblNodiff.setText(atlas.getNotDiffExpresseds().size() + " data");
@@ -903,9 +906,9 @@ public class SrnaView implements SelectionListener, MouseListener {
                 strand = Strand.NEGATIVE;
             SequenceDisplayDialog dialog = new SequenceDisplayDialog(shell, partService, genome,
                     Genome.EGDE_CHROMO_NAME, true, seq.getBegin(), seq.getEnd(), strand);
-            dialog.open();
+            dialog.open();/*
         } else if (e.getSource() == btnHelp) {
-            HelpPage.helpSrnaView(partService);
+            HelpPage.helpSrnaView(partService);*/
         }
     }
 

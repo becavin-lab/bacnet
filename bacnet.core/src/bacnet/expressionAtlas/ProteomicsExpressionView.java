@@ -89,7 +89,7 @@ public class ProteomicsExpressionView implements SelectionListener {
     private ProteomicsDataFilterComposite compositeDataFilter;
     private Table tableProteome;
     private ArrayList<String> selectedProteomes = new ArrayList<>();
-    private Button btnHelp;
+    //private Button btnHelp;
     private Button btnSaveTxt;
     private Button btnUnselectall;
     private Button btnSelectall;
@@ -112,7 +112,7 @@ public class ProteomicsExpressionView implements SelectionListener {
      * 
      * @param parent
      */
-    @PostConstruct
+    @PostConstruct/*
     public void createPartControl(Composite parent) {
         focused = true;
         Composite container = new Composite(parent, SWT.NONE);
@@ -540,8 +540,9 @@ public class ProteomicsExpressionView implements SelectionListener {
                 //HeatMapProteomicsView.displayBioConditions(genomeName, genomeToBioConds.get(genomeName), partService);
             //}
         } else if (e.getSource() == tableProteomeViewer.getTable()) {
+        /*
         } else if (e.getSource() == btnHelp) {
-            HelpPage.helpProteomicView(partService);
+            HelpPage.helpProteomicView(partService);*/
         } else if (e.getSource() == btnSelectall) {
             selectedProteomes = new ArrayList<>();
             tableProteome.selectAll();

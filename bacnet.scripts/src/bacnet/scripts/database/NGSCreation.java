@@ -58,19 +58,19 @@ public class NGSCreation {
     }
 
     /**
-     * ConvertCountFile and add them to the database
+     * convert differential expression matrix for NGS and add them to the database
      * 
      * @param exp
      */
-    public static void normalizeCountFiles(Experiment exp) {
+    public static void addDifferentialExpression(Experiment exp) {
         for (BioCondition bioCond : exp.getBioConditions()) {
             if(bioCond.getTypeDataContained().contains(TypeData.RNASeq)) {
                 for (String comparison : bioCond.getComparisonDataNames()) {
                     String fileName = OmicsData.PATH_NGS_NORM + comparison + NGS.EXTENSION;
-                    System.out.println("Search "+fileName);
+                    //System.out.println("Search "+fileName);
                     File file = new File(fileName);
                     if (file.exists()) {
-                        System.out.println("Modify: " + fileName);
+                        //System.out.println("Modify: " + fileName);
                         String[][] array = TabDelimitedTableReader.read(fileName);
 
                         // small RNA names have to be changed from "rli11_sbrA" to "rli11 - sbrA"
@@ -99,11 +99,13 @@ public class NGSCreation {
                 }
             }
         }
+    }
 
         /*
-         * Process expression matrix
+         * Process expression matrix, old normalization method, DO NOT USE
          */
-        /*
+    public static void normalizeValue(Experiment exp) {
+        
         for (BioCondition bioCond : exp.getBioConditions()) {
             if (bioCond.getTypeDataContained().contains(TypeData.RNASeq)) {
                 int nbDuplicate = bioCond.getNGSSeqs().get(0).getRawDatas().size();
@@ -190,7 +192,7 @@ public class NGSCreation {
                     }
                 }
             }
-        }*/
+        }
     }
 
 }

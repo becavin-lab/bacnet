@@ -37,18 +37,10 @@ public class Phylogenomic {
     	 * Go through all text line
     	 */
     	for(String line : phyloTree) {
-			System.out.println("in line: "+line);
-
     		if(line.contains("/text") && line.contains(Database.getInstance().getSpecies())) {
-    			System.out.println("in if: ");
-
     			line = line.split("/text")[0].trim();
     			String attribute = line.substring(0,line.indexOf(">")).trim();
-    			System.out.println("attribute: "+attribute);
-
     			String genomeTemp = line.substring(line.indexOf(">")+1, line.indexOf("<")).trim();
-    			System.out.println("genomeTemp: "+genomeTemp);
-
 				genomeToAttribute.put(genomeTemp, attribute);
     		}
 		}

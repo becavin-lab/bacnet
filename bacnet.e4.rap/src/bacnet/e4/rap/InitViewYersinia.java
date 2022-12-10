@@ -765,7 +765,7 @@ public class InitViewYersinia implements SelectionListener {
         btnGenomics = new Button(composite_10, SWT.BORDER);
         btnGenomics.setText("Genomics browser");
         btnGenomics.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
-        btnGenomics.setFont(SWTResourceManager.getBodyFont(22,SWT.NORMAL));
+        btnGenomics.setFont(SWTResourceManager.getBodyFont(20,SWT.NORMAL));
         btnGenomics.addSelectionListener(this);
         btnGenomics.setBackground(BasicColor.DARK_TWO);
 
@@ -790,7 +790,7 @@ public class InitViewYersinia implements SelectionListener {
         btnTranscriptomics = new Button(composite_21, SWT.BORDER);
         btnTranscriptomics.setText("Transcriptomics browser");
         btnTranscriptomics.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
-        btnTranscriptomics.setFont(SWTResourceManager.getBodyFont(22,SWT.NORMAL));
+        btnTranscriptomics.setFont(SWTResourceManager.getBodyFont(20,SWT.NORMAL));
         btnTranscriptomics.addSelectionListener(this);
         btnTranscriptomics.setBackground(BasicColor.DARK_TWO);
 
@@ -816,7 +816,7 @@ public class InitViewYersinia implements SelectionListener {
         btnProteomics = new Button(composite_22, SWT.BORDER);
         btnProteomics.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
         btnProteomics.setText("Proteomics browser");
-        btnProteomics.setFont(SWTResourceManager.getBodyFont(22,SWT.NORMAL));
+        btnProteomics.setFont(SWTResourceManager.getBodyFont(20,SWT.NORMAL));
         btnProteomics.addSelectionListener(this);
         btnProteomics.setBackground(BasicColor.DARK_TWO);
 
@@ -833,6 +833,7 @@ public class InitViewYersinia implements SelectionListener {
         lblGoThroughAll_2.setBackground(BasicColor.LIGHT_TWO);
         lblGoThroughAll_2.setForeground(BasicColor.BLACK);
 
+        /*
         Composite composite_16 = new Composite(composite, SWT.BORDER);
         GridData gd_composite_16 = new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1);
         gd_composite_16.widthHint = 1800;
@@ -876,29 +877,31 @@ public class InitViewYersinia implements SelectionListener {
         lblExpressionAtlas_1.setFont(SWTResourceManager.getBodyFont(15,SWT.NORMAL));
         lblExpressionAtlas_1.setBackground(BasicColor.LIGHT_THREE);
         lblExpressionAtlas_1.setForeground(BasicColor.BLACK);
-
-        Composite composite_18 = new Composite(composite_16, SWT.NONE);
-        composite_18.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1));
-        composite_18.setBackground(BasicColor.LIGHT_THREE);
+*/
+        Composite composite_18 = new Composite(composite, SWT.NONE);
+        composite_18.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
+        //composite_18.setBackground(BasicColor.LIGHT_THREE);
         composite_18.setLayout(new GridLayout(1, false));
         btnLoadData = new Button(composite_18, SWT.BORDER | SWT.CENTER);
         btnLoadData.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
         btnLoadData.setText(" Load data selection");
         btnLoadData.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/fileIO/txtload.bmp"));
-        btnLoadData.setFont(SWTResourceManager.getBodyFont(22,SWT.NORMAL));
-        btnLoadData.setBackground(BasicColor.DARK_THREE);
+        btnLoadData.setFont(SWTResourceManager.getBodyFont(20,SWT.NORMAL));
+        //btnLoadData.setBackground(BasicColor.DARK_THREE);
 
         Label lblLoadAPrevious = new Label(composite_18, SWT.WRAP);
         lblLoadAPrevious.setAlignment(SWT.CENTER);
         lblLoadAPrevious.setFont(SWTResourceManager.getBodyFont(15,SWT.NORMAL));
         GridData gd_lblLoadAPrevious = new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1);
-        gd_lblLoadAPrevious.widthHint = 460;
+        //gd_lblLoadAPrevious.widthHint = 460;
         lblLoadAPrevious.setLayoutData(gd_lblLoadAPrevious);
         lblLoadAPrevious.setText("Load a previous genome viewer visualization saved in .gview file");
-        lblLoadAPrevious.setBackground(BasicColor.LIGHT_THREE);
+        //lblLoadAPrevious.setBackground(BasicColor.LIGHT_THREE);
         lblLoadAPrevious.setForeground(BasicColor.BLACK);
         btnLoadData.addSelectionListener(this);
+        new Label(composite_18, SWT.NONE);
 
+        /*
         Composite composite_5 = new Composite(composite_16, SWT.NONE);
         composite_5.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1));
         composite_5.setLayout(new GridLayout(1, false));
@@ -921,8 +924,7 @@ public class InitViewYersinia implements SelectionListener {
                         + "Be careful, it might not display if you disallow your internet browser to display pop-up webpage.");
         lblGoToThe.setBackground(BasicColor.LIGHT_THREE);
         lblGoToThe.setForeground(BasicColor.BLACK);
-
-        //new Label(composite_16, SWT.NONE);
+*/
         //new Label(composite_16, SWT.NONE);
         //new Label(composite_16, SWT.NONE);
 

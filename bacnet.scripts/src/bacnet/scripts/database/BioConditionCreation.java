@@ -561,7 +561,7 @@ public class BioConditionCreation {
         ArrayList<String> tableResult = new ArrayList<>();
         String[] titles =
                 {"Data Name", "Type", "Date", "Growth", "TimePoint", "Temp.", "Mutant", "Media", "MediaGrowthProperties", "Nb genes",
-                        "Strain used", "Reference strain", "Bibliographical reference", "ENA project", "Sequencing platform", "GEO project", "GEO platform", "ArrayExpressID", "ArrayExpressTechnoID"};
+                        "Strain used", "Reference strain", "Comment", "Bibliographical reference", "ENA project", "Sequencing platform", "GEO project", "GEO platform", "ArrayExpressID", "ArrayExpressTechnoID"};
         String header = "";
         for (String title : titles)
             header += title + "\t";
@@ -591,6 +591,7 @@ public class BioConditionCreation {
                 row += "\t";
                 row += bioCondition.getGenomeUsed() + "\t";
                 row += bioCondition.getGenomeName() + "\t";
+                row += bioCondition.getComment()+ "\t";
                 row += bioCondition.getReference() + "\t";
                 row += bioCondition.getENAProject() + "\t";
                 row += bioCondition.getSequencingPlatform() + "\t";
@@ -598,6 +599,7 @@ public class BioConditionCreation {
                 row += bioCondition.getGEOPlatform() + "\t";
                 row += bioCondition.getArrayExpressId() + "\t";
                 row += bioCondition.getArrayExpressTechnoId();
+
                 tableResult.add(row.trim());
             }
 
@@ -613,7 +615,7 @@ public class BioConditionCreation {
         ArrayList<String> tableResult = new ArrayList<>();
         String[] titles = {"Data Name", "Growth", "Temp.", "Mutant", "Media", "MediaGrowthProperties", "VS", "Growth",
                 "Temp.", "Mutant", "Media", "MediaGrowthProperties", "Type", "Sequencing platform", "ArrayExpressId", "Date", "Strain used", "Reference strain",
-                "Bibliographical reference"};
+                "Bibliographical reference", "Comment"};
         String header = "";
         for (String title : titles)
             header += title + "\t";
@@ -663,6 +665,8 @@ public class BioConditionCreation {
                     row += bioCondition.getGenomeName() + "\t";
 
                     row += bioCondition.getReference() + "\t";
+                    row += bioCondition.getComment();
+
                     tableResult.add(row.trim());
                 }
 
@@ -679,7 +683,7 @@ public class BioConditionCreation {
         ArrayList<String> tableResult = new ArrayList<>();
         String[] titles = {"Data Name", "Growth", "Temp.", "Mutant", "Media", "MediaGrowthProperties", "VS", "Growth",
                 "Temp.", "Mutant", "Media", "MediaGrowthProperties", "Type",  "Date", "Strain used", "Reference strain",
-                "Bibliographical reference", "Mass spectrometer",};
+                "Bibliographical reference", "Mass spectrometer","Comment"};
         String header = "";
         for (String title : titles)
             header += title + "\t";
@@ -729,6 +733,8 @@ public class BioConditionCreation {
                     row += bioCondition.getGenomeName() + "\t";
                     row += bioCondition.getReference() + "\t";
                     row += bioCondition.getMassSpectrometer() + "\t";
+                    row += bioCondition.getComment();
+
 
                     tableResult.add(row.trim());
                 }
@@ -744,7 +750,7 @@ public class BioConditionCreation {
     public static void createSummaryProteomesTable() {
         ArrayList<String> tableResult = new ArrayList<>();
         String[] titles = {"Data Name", "Localization", "Type", "Date", "Nb proteins", "Growth", "TimePoint",
-                "Temp.", "Mutant", "Media", "MediaGrowthProperties", "Pride ID", "Strain used", "Reference strain","Bibliographical reference", "Mass spectrometer"};
+                "Temp.", "Mutant", "Media", "MediaGrowthProperties", "Strain used", "Reference strain","Comment", "Bibliographical reference","Pride ID", "Mass spectrometer",};
         String header = "";
         for (String title : titles)
             header += title + "\t";
@@ -772,12 +778,13 @@ public class BioConditionCreation {
                 row += bioCondition.getMedia().toString().replace('[', ' ').replace(']', ' ').trim() + "\t";
                 row += bioCondition.getMediaGrowthProperties().toString().replace('[', ' ').replace(']', ' ').trim()
                         + "\t";
-                row += bioCondition.getPrideID() + "\t";
                 row += bioCondition.getGenomeUsed() + "\t";
                 row += bioCondition.getGenomeName() + "\t";
+                row += bioCondition.getComment()+ "\t";
                 row += bioCondition.getReference() + "\t";
-                row += bioCondition.getMassSpectrometer() + "\t";
-
+                row += bioCondition.getPrideID()+ "\t";
+                row += bioCondition.getMassSpectrometer() ;
+ 
                 tableResult.add(row.trim());
             }
         }

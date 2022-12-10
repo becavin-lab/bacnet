@@ -268,7 +268,6 @@ public class HeatMapProteomicsView implements SelectionListener {
     public static void displayBioConditionsExpressionAtlas(HashMap<String, ArrayList<String>> genomeToComparisons, EPartService partService) {
         // Create a heatmap for each genome
         for (String genomeName : genomeToComparisons.keySet()) {
-        	System.out.println("Expressionatlas: "+genomeName);
             ArrayList<String> genomeArrays = BioCondition.getProteomeGenomes();
             if (genomeArrays.contains(genomeName)) {
                 ArrayList<String> comparisons = genomeToComparisons.get(genomeName);

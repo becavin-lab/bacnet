@@ -75,6 +75,7 @@ public class NGS extends OmicsData implements Serializable {
         infoRead = true;
     }
 
+    
     /**
      * Load the entire TranscriptomeData
      * 
@@ -322,7 +323,7 @@ public class NGS extends OmicsData implements Serializable {
      * @return
      * @throws IOException
      */
-    public GeneExpression compare(NGS data2, boolean calcData) {
+    public NGS compare(NGS data2, boolean calcData) {
         
     	if (calcData) {
             this.read();
@@ -377,7 +378,7 @@ public class NGS extends OmicsData implements Serializable {
             compRNASeq.getDatasets().put(chromoID, compData);
         }*/
 
-        return compData;
+        return compRNASeq;
     }
 
     /**

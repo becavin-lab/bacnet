@@ -169,23 +169,36 @@ public class GeneView implements SelectionListener, MouseListener {
 	private TabItem tbtmKEGG;
 	private Composite compositeKEGG;
 	private Browser browserKEGG;
-
+	private String KEGGPath;
+	private Button btnKEGG;
+	
 	private TabItem tbtmUniprot;
 	private Composite compositeUniprot;
 	private Browser browserUniprot;
+	private String UniprotPath;
+	private Button btnUniprot;
 	
 	private TabItem tbtmInterpro;
 	private Composite compositeInterpro;
 	private Browser browserInterpro;
-	
+	private String InterproPath;
+	private Button btnInterpro;
+
 	private TabItem tbtmIntact;
 	private Composite compositeIntact;
 	private Browser browserIntact;
+	private Button btnIntact;
+	private String IntactPath;
+
 		
 	private TabItem tbtmString;
 	private Composite compositeString;
 	private Browser browserString;
-	
+	private Button btnString;
+	private String StringPath;
+	private String stringURL;
+
+
 	private Composite composite_15;
 	private Button btnNucleotideSequence;
 	private Button btnAminoAcidSequence;
@@ -318,7 +331,7 @@ public class GeneView implements SelectionListener, MouseListener {
 	private Composite composite_localization;
 	private Label lblPredictedSubcellularLocalization;
 	private String[][] arrayGeneToLocalization;
-	private Button btnHelp;
+	//private Button btnHelp;
 	private Browser browserLocalization;
 	private Browser browserHomolog;
 	private ArrayList<String> selectedGenomes = new ArrayList<>();
@@ -349,7 +362,8 @@ public class GeneView implements SelectionListener, MouseListener {
 
 
 	}
-	
+	private ArrayList<String> test;
+
 
 	/**
 	 * Create contents of the view part.
@@ -379,6 +393,8 @@ public class GeneView implements SelectionListener, MouseListener {
 		/*
 		 * create HashMap for KEGG and Uniprot genomes
 		 */
+		
+		
 		
 		KEGGHashMap = new HashMap<String,String>();
 		File KEGGFile = new File(Database.getInstance().getKEGGHashMapPath());
@@ -465,11 +481,14 @@ public class GeneView implements SelectionListener, MouseListener {
 		comboGenome.addSelectionListener(this);
 		
 		new Label(container, SWT.NONE);
+		new Label(container, SWT.NONE);
+
+		/*
 		btnHelp = new Button(container, SWT.NONE);
 		btnHelp.setToolTipText("How to use Gene panel");
 		btnHelp.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/help.png"));
 		btnHelp.addSelectionListener(this);
-
+*/
 		Composite composite_7 = new Composite(container, SWT.BORDER);
 		composite_7.setLayout(new GridLayout(1, false));
 		composite_7.setLayoutData(new GridData(SWT.LEFT, SWT.FILL, false, true, 1, 1));
@@ -493,7 +512,6 @@ public class GeneView implements SelectionListener, MouseListener {
 					updateListGenomeElements();
 				}
 				if (e.keyCode == 16777296 || e.keyCode == 13) {
-					System.out.println("Search for " + txtSearch.getText());
 					ArrayList<String> searchResults = search(txtSearch.getText());
 					if (searchResults.size() != 0) {
 						listGenes.clear();
@@ -751,56 +769,30 @@ public class GeneView implements SelectionListener, MouseListener {
 		tbtmHomologs.setControl(composite_13);
 		composite_13.setLayout(new GridLayout(3, false));
 
-		composite_14 = new Composite(composite_13, SWT.NONE);
-		composite_14.setLayout(new GridLayout(3, false));
-		composite_14.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 3, 1));
-
-		btnExportToFasta = new Button(composite_14, SWT.NONE);
-		// a corriger
-		btnExportToFasta.setText("Export selected gene to multi sequence fasta file");		
-		btnExportToFasta.addSelectionListener(this);
-
-		lblConservation2 = new Label(composite_14, SWT.NONE);
-		lblConservation2.setText("Homologs in 00/00 Yersinia genomes");
-		new Label(composite_14, SWT.NONE);
-
 		Composite composite_18 = new Composite(composite_13, SWT.NONE);
 		composite_18.setLayoutData(new GridData(SWT.LEFT, SWT.FILL, false, false, 1, 1));
 		composite_18.setLayout(new GridLayout(1, false));
 
-		Composite composite_6 = new Composite(composite_18, SWT.NONE);
-		composite_6.setLayout(new GridLayout(3, false));
-
-		Label lblDownloadPhylogenomicConservation = new Label(composite_6, SWT.NONE);
-		lblDownloadPhylogenomicConservation.setText("Download Phylogenomic conservation tree as");
-		lblDownloadPhylogenomicConservation.setFont(SWTResourceManager.getBodyFont(10, SWT.NORMAL));
-		
-		/*
-		btnSaveAsPng = new Button(composite_6, SWT.NONE);
-		btnSaveAsPng.setToolTipText("Download as PNG image");
-		btnSaveAsPng.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/fileIO/png.bmp"));
-		btnSaveAsPng.addSelectionListener(this);
-
-		*/
-		btnSaveAsSvg = new Button(composite_6, SWT.NONE);
-		btnSaveAsSvg.setToolTipText("Download as SVG vector image (for Illustrator, GIMP, ...)");
-		btnSaveAsSvg.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/fileIO/svg.bmp"));
-		btnSaveAsSvg.addSelectionListener(this);
-
 		browserHomolog = new Browser(composite_18, SWT.BORDER);
 		GridData gd_browserHomolog = new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1);
-		gd_browserHomolog.widthHint = 400;
+		gd_browserHomolog.widthHint = 430;
 		browserHomolog.setLayoutData(gd_browserHomolog);
 
 		Composite composite_16 = new Composite(composite_13, SWT.BORDER);
-		composite_16.setLayoutData(new GridData(SWT.LEFT, SWT.FILL, true, true, 1, 1));
+		composite_16.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		composite_16.setLayout(new GridLayout(1, false));
 
 		Composite composite_17 = new Composite(composite_16, SWT.NONE);
-		composite_17.setLayout(new GridLayout(8, false));
+		composite_17.setLayout(new GridLayout(9, false));
 
+
+		lblConservation2 = new Label(composite_17, SWT.NONE);
+		lblConservation2.setText("Homologs in 000/000 Yersinia genomes");
+		
 		txtSearchGenome = new Text(composite_17, SWT.BORDER);
 		txtSearchGenome.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		txtSearchGenome.setToolTipText("Search");
+
 		txtSearchGenome.addKeyListener(new KeyListener() {
 			/**
 			 * 
@@ -819,11 +811,12 @@ public class GeneView implements SelectionListener, MouseListener {
 			@Override
 			public void keyPressed(KeyEvent e) {}
 		});
-//a corriger
+
+		/*
 		Label lblSearch_1 = new Label(composite_17, SWT.NONE);
 		lblSearch_1.setText("Search");
 		lblSearch_1.setFont(SWTResourceManager.getBodyFont(10, SWT.NORMAL));
-
+*/
 		btnSelectall = new Button(composite_17, SWT.NONE);
 		btnSelectall.setToolTipText("Select all genes");
 		btnSelectall.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/checked.bmp"));
@@ -843,28 +836,47 @@ public class GeneView implements SelectionListener, MouseListener {
 		lblUnselectAll.setFont(SWTResourceManager.getBodyFont(10, SWT.NORMAL));
 
 		btnDownloadtxt = new Button(composite_17, SWT.NONE);
-		btnDownloadtxt.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/fileIO/txt.bmp"));
+		btnDownloadtxt.setText("Export selection as table");
+		//btnDownloadtxt.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/fileIO/txt.bmp"));
 		btnDownloadtxt.addSelectionListener(this);
-
+		
+		btnExportToFasta = new Button(composite_17, SWT.NONE);
+		btnExportToFasta.setText("Export selection as fasta");		
+		btnExportToFasta.addSelectionListener(this);
+		/*
 		Label lblDownload = new Label(composite_17, SWT.NONE);
 		lblDownload.setText("Download gene selection as a table");
 		lblDownload.setFont(SWTResourceManager.getBodyFont(10, SWT.NORMAL));
-
+*/	
+		/*
+		Label lblDownloadPhylogenomicConservation = new Label(composite_14, SWT.NONE);
+		lblDownloadPhylogenomicConservation.setText("Download Phylogenomic conservation tree as");
+		lblDownloadPhylogenomicConservation.setFont(SWTResourceManager.getBodyFont(10, SWT.NORMAL));
+	*/	
+		btnSaveAsSvg = new Button(composite_17, SWT.NONE);
+		btnSaveAsSvg.setToolTipText("Download as SVG vector image (for Illustrator, GIMP, ...)");
+		//btnSaveAsSvg.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/fileIO/svg.bmp"));
+		btnSaveAsSvg.setText("Download tree");
+		btnSaveAsSvg.addSelectionListener(this);
+		
 		Label lblClickOneTime = new Label(composite_16, SWT.NONE);
 		lblClickOneTime.setText(
 				"Select strain to highlight. Double click to acces gene information");
 		lblClickOneTime.setFont(SWTResourceManager.getBodyFont(10, SWT.NORMAL));
 
+		
+		
 		tableHomologViewer = new TableViewer(composite_16, SWT.BORDER | SWT.FULL_SELECTION | SWT.MULTI);
 		tableHomolog = tableHomologViewer.getTable();
 		RWTUtils.setMarkup(tableHomolog);
 		tableHomolog.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+
 		tableHomologViewer.getTable().setHeaderVisible(true);
 		tableHomologViewer.getTable().setLinesVisible(true);
 		tableHomologViewer.setLabelProvider(new TableLabelProvider());
 		tableHomologViewer.addSelectionChangedListener(new ISelectionChangedListener() {
 
-			@Override
+		@Override
 			public void selectionChanged(SelectionChangedEvent event) {
 				for (int i : tableHomolog.getSelectionIndices()) {
 					String selectedGenome = tableHomolog.getItem(i).getText(columnNames.indexOf("Name (GenBank)") + 1);
@@ -920,7 +932,7 @@ public class GeneView implements SelectionListener, MouseListener {
 			compositeTranscriptome.setLayout(new GridLayout(2, false));
 
 			Composite composite_8 = new Composite(compositeTranscriptome, SWT.BORDER);
-			composite_8.setLayout(new GridLayout(1, false));
+			composite_8.setLayout(new GridLayout(2, false));
 
 			{
 				Composite composite_logfc = new Composite(composite_8, SWT.NONE);
@@ -928,7 +940,7 @@ public class GeneView implements SelectionListener, MouseListener {
 				composite_logfc.setLayout(new GridLayout(2, false));
 
 				Label lbllogfoldchange = new Label(composite_logfc, SWT.NONE);
-				lbllogfoldchange.setText("|Log(Fold-Change)| >");
+				lbllogfoldchange.setText("|Log2(Fold-Change)| >");
 
 				txtCutoffLogFC = new Text(composite_logfc, SWT.BORDER);
 				txtCutoffLogFC.setText(GenomeElementAtlas.DEFAULT_LOGFC_CUTOFF+"");
@@ -936,19 +948,25 @@ public class GeneView implements SelectionListener, MouseListener {
 			{
 				Composite  composite_pvalue = new Composite(composite_8, SWT.NONE);
 				composite_pvalue.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
-				composite_pvalue.setLayout(new GridLayout(3, false));
+				composite_pvalue.setLayout(new GridLayout(4, false));
 
 				Label lblAnd = new Label(composite_pvalue, SWT.NONE);
 				lblAnd.setText("and");
 
-				Label lblPvalueFdrby = new Label(composite_pvalue, SWT.NONE);
-				lblPvalueFdrby.setText("p-value FDRBY <");
+				Label lblPvalue = new Label(composite_pvalue, SWT.NONE);
+				lblPvalue.setText("adj. p-value <");
 
 				txtCutoffPvalue = new Text(composite_pvalue, SWT.BORDER);
-				txtCutoffPvalue.setText(GenomeElementAtlas.DEFAULT_LOGFC_CUTOFF+"");
+				txtCutoffPvalue.setText(GenomeElementAtlas.DEFAULT_PVAL_CUTOFF+"");
+				
+				Label lblZeroPvalue = new Label(composite_pvalue, SWT.NONE);
+				lblZeroPvalue.setText("adjusted p-value is only available for RNA-Seq data.\n0.00 means that the Log2(FC) is not known.\n0.0e+00 means the adjusted p-value is not known.");
+				lblZeroPvalue.setForeground(BasicColor.GREY);
+				
+				/*
 				if (Database.getInstance().getProjectName() != Database.UIBCLISTERIOMICS_PROJECT) {
 					composite_pvalue.dispose();
-				}
+				}*/
 			}
 			btnUpdateCutoff = new Button(composite_8, SWT.NONE);
 			btnUpdateCutoff.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 5, 1));
@@ -1045,8 +1063,9 @@ public class GeneView implements SelectionListener, MouseListener {
 
 		Label transcriptomesExpl = new Label(composite_102, SWT.NONE);
 		transcriptomesExpl.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 0, 0));
-		transcriptomesExpl.setText("For RNASeq experiments, feature counts were normalized for comparison inside one experiment using DESeq2 if duplicate were done, or RPKM otherwise. \nThis normalized count were re-normalized between experiment dividing by the total normalized read counts to infer co-expression network. \nThe Log2 of this value is displayed here and is only indicative for the presence or absence of transcript. It should not be used for direct analysis.");
-
+		transcriptomesExpl.setText("For RNASeq experiments, feature counts were normalized using the Transcripts Per Million (TPM) method.\nThis value is displayed here and is only indicative for the presence or absence of transcript. It should not be used for direct analysis.");
+		transcriptomesExpl.setForeground(BasicColor.GREY);
+		
 		composite_103 = new Composite(composite_101, SWT.NONE);
 		composite_103.setLayout(new GridLayout(2, false));
 
@@ -1077,7 +1096,7 @@ public class GeneView implements SelectionListener, MouseListener {
 			compositeProteome.setLayout(new GridLayout(2, false));
 
 			Composite composite_8 = new Composite(compositeProteome, SWT.BORDER);
-			composite_8.setLayout(new GridLayout(1, false));
+			composite_8.setLayout(new GridLayout(2, false));
 
 			{
 				Composite composite_logfc = new Composite(composite_8, SWT.NONE);
@@ -1085,7 +1104,7 @@ public class GeneView implements SelectionListener, MouseListener {
 				composite_logfc.setLayout(new GridLayout(2, false));
 
 				Label lbllogfoldchange = new Label(composite_logfc, SWT.NONE);
-				lbllogfoldchange.setText("|Log(Fold-Change)| >");
+				lbllogfoldchange.setText("|Log2(Fold-Change)| >");
 
 				txtCutoffLogFCProteome = new Text(composite_logfc, SWT.BORDER);
 				txtCutoffLogFCProteome.setText(GenomeElementAtlas.DEFAULT_LOGFC_PROTEOMIC_CUTOFF+"");
@@ -1093,19 +1112,24 @@ public class GeneView implements SelectionListener, MouseListener {
 			{
 				Composite  composite_pvalue = new Composite(composite_8, SWT.NONE);
 				composite_pvalue.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
-				composite_pvalue.setLayout(new GridLayout(3, false));
+				composite_pvalue.setLayout(new GridLayout(4, false));
 
 				Label lblAnd = new Label(composite_pvalue, SWT.NONE);
 				lblAnd.setText("and");
 
 				Label lblPvalueFdrby = new Label(composite_pvalue, SWT.NONE);
-				lblPvalueFdrby.setText("p-value FDRBY <");
+				lblPvalueFdrby.setText("p-value <");
 
-				txtCutoffPvalue = new Text(composite_pvalue, SWT.BORDER);
-				txtCutoffPvalue.setText(GenomeElementAtlas.DEFAULT_LOGFC_PROTEOMIC_CUTOFF+"");
-				if (Database.getInstance().getProjectName() != Database.UIBCLISTERIOMICS_PROJECT) {
+				txtCutoffPvalueProteome = new Text(composite_pvalue, SWT.BORDER);
+				txtCutoffPvalueProteome.setText(GenomeElementAtlas.DEFAULT_PVAL_PROTEOMIC_CUTOFF+"");
+				
+				Label lblZeroPvalue = new Label(composite_pvalue, SWT.NONE);
+				lblZeroPvalue.setText("0.00 means that the Log2(FC) is not known.\n0.0e+00 means the p-value or the adjusted p-value is not known.");
+				lblZeroPvalue.setForeground(BasicColor.GREY);
+				
+				/*if (Database.getInstance().getProjectName() != Database.UIBCLISTERIOMICS_PROJECT) {
 					composite_pvalue.dispose();
-				}
+				}*/
 			}
 			btnUpdateCutoffProteome = new Button(composite_8, SWT.NONE);
 			btnUpdateCutoffProteome.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 5, 1));
@@ -1196,20 +1220,12 @@ public class GeneView implements SelectionListener, MouseListener {
 
 		Label proteomesExpl1 = new Label(composite_091, SWT.NONE);
 		proteomesExpl1.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1));
-		proteomesExpl1.setText("For Orbitrap experiments, displayed value is log10(raw LFQ).");
+		proteomesExpl1.setText("For Orbitrap experiments, displayed value is log10(raw LFQ)."
+				+ "\nFor FTICR experiments, displayed value is raw FTICR intensity."
+				+ "\nFor 2D gel experiments, if proteins are detected in several spots, displayed value is the most intense measured spot intensity value."
+				+ "\n'-1' means that the protein is detected but no value is available.");
 
-		Label proteomesExpl2 = new Label(composite_091, SWT.NONE);
-		proteomesExpl2.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1));
-		proteomesExpl2.setText("For FTICR experiments, displayed value is raw FTICR intensity.");
-
-		Label proteomesExpl3 = new Label(composite_091, SWT.NONE);
-		proteomesExpl3.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1));
-		proteomesExpl3.setText("For 2D gel experiments, if proteins are detected in several spots, displayed value is the most intense measured spot intensity value.");
-
-		Label proteomesExpl4 = new Label(composite_091, SWT.NONE);
-		proteomesExpl4.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1));
-		proteomesExpl4.setText("'-1' means that the protein is detected but no value is available.");
-
+		proteomesExpl1.setForeground(BasicColor.GREY);
 
 		composite_092 = new Composite(composite_09, SWT.NONE);
 		composite_092.setLayout(new GridLayout(2, false));
@@ -1260,6 +1276,9 @@ public class GeneView implements SelectionListener, MouseListener {
 		compositeKEGG = new Composite(tabFolder, SWT.NONE);
 		tbtmKEGG.setControl(compositeKEGG);
 		compositeKEGG.setLayout(new GridLayout(1, false));
+		btnKEGG = new Button(compositeKEGG, SWT.NONE);
+		btnKEGG.addSelectionListener(this);
+		btnKEGG.setText("Open KEGG in a new tab of your browser");
 		browserKEGG = new Browser(compositeKEGG, SWT.NONE);
 		browserKEGG.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		browserKEGG.setUrl("");
@@ -1275,6 +1294,9 @@ public class GeneView implements SelectionListener, MouseListener {
 		compositeUniprot = new Composite(tabFolder, SWT.NONE);
 		tbtmUniprot.setControl(compositeUniprot);
 		compositeUniprot.setLayout(new GridLayout(1, false));
+		btnUniprot = new Button(compositeUniprot, SWT.NONE);
+		btnUniprot.addSelectionListener(this);
+		btnUniprot.setText("Open UniProt in a new tab of your browser");
 		browserUniprot = new Browser(compositeUniprot, SWT.NONE);
 		browserUniprot.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		browserUniprot.setUrl("");
@@ -1289,6 +1311,9 @@ public class GeneView implements SelectionListener, MouseListener {
 		compositeInterpro = new Composite(tabFolder, SWT.NONE);
 		tbtmInterpro.setControl(compositeInterpro);
 		compositeInterpro.setLayout(new GridLayout(1, false));
+		btnInterpro = new Button(compositeInterpro, SWT.NONE);
+		btnInterpro.addSelectionListener(this);
+		btnInterpro.setText("Open InterPro in a new tab of your browser");
 		browserInterpro = new Browser(compositeInterpro, SWT.NONE);
 		browserInterpro.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		browserInterpro.setUrl("");
@@ -1302,6 +1327,9 @@ public class GeneView implements SelectionListener, MouseListener {
 		compositeIntact = new Composite(tabFolder, SWT.NONE);
 		tbtmIntact.setControl(compositeIntact);
 		compositeIntact.setLayout(new GridLayout(1, false));
+		btnIntact = new Button(compositeIntact, SWT.NONE);
+		btnIntact.addSelectionListener(this);
+		btnIntact.setText("Open IntAct in a new tab of your browser");
 		browserIntact = new Browser(compositeIntact, SWT.NONE);
 		browserIntact.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		browserIntact.setUrl("");
@@ -1317,6 +1345,11 @@ public class GeneView implements SelectionListener, MouseListener {
 		tbtmString.setControl(compositeString);
 		compositeString.setLayout(new GridLayout(1, false));
 		compositeString.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		
+		btnString = new Button(compositeString, SWT.NONE);
+		btnString.addSelectionListener(this);
+		btnString.setText("Open String in a new tab of your browser");
+		
 		browserString = new Browser(compositeString, SWT.NONE);
 		browserString.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		browserString.setText("");
@@ -1353,29 +1386,7 @@ public class GeneView implements SelectionListener, MouseListener {
         }
     }
     
-    /*
-	private void initSyntenyBrowser() {
-		try {
-			String realUrl = FileUtils.getPath(NavigationManagement.getURL());
-			String pathGraphHTML = new String();
-			if (realUrl.contains("Listeriomics")) {
-				if (realUrl.contains("/Listeriomics/")) {
-					realUrl = realUrl.replaceAll("Listeriomics/", "");
-				} else if (realUrl.contains("/UIBCListeriomics/")) {
-					realUrl = realUrl.replaceAll("UIBCListeriomics/", "");
-				}
-				realUrl = "https://listeriomics.pasteur.fr/";
-				pathGraphHTML = realUrl + "SynTView/flash/indexFinal.html";
-			} else {
-				pathGraphHTML = "";
-			}
-			System.out.println("SyntView: " + pathGraphHTML);
-			//browserSynteny.setUrl(pathGraphHTML);
-		} catch (Exception e) {
-			System.out.println("Cannot create browser");
-		}
-	}
-*/
+ 
 	
 	private void updateSyntenyBrowser() {
 		compSynt.dispose();
@@ -1412,12 +1423,7 @@ public class GeneView implements SelectionListener, MouseListener {
 	}
 	
 	private void updateCrossRefs() {
-		String KEGGPath = new String();
-		String UniprotPath = new String();
-		String IntactPath = new String();
-		String InterproPath = new String();
-		String StringPath = new String();
-
+		
 		try {
 			if(KEGGHashMap.containsKey(genome.getSpecies())) {
 				String locus = sequence.getOldLocusTag();
@@ -1449,7 +1455,10 @@ public class GeneView implements SelectionListener, MouseListener {
 					}
 					if (buffer.length()==1) { //if string buffer is empty because no Uniprot accession is found in KEGG conversion tool
 						browserUniprot.setText("<h2 style=\"text-align:center\">Could not find UniProt ID</h2>");
+						UniprotPath = "";
 						browserInterpro.setText("<h2 style=\"text-align:center\">Could not find UniProt ID for InterPro query</h2>");
+						InterproPath = "";
+
 						//query IntAct only by locus name
 						IntactPath = "https://www.ebi.ac.uk/intact/search?query="+ locus;
 						browserIntact.setUrl(IntactPath);
@@ -1489,42 +1498,13 @@ public class GeneView implements SelectionListener, MouseListener {
 			try {
 				InputStream in = new URL(StringPath).openStream();
 				String result = IOUtils.toString(in);
-				browserString.setUrl(result);
+				stringURL = result;
+				browserString.setUrl(stringURL);
 			} catch (Exception e) {
-				
-		}
-			
-			
-			//String htmlText = HTMLUtils.getPluginTextFile("bacnet.core", "html/string.html");
-			//browserString.setText(htmlText);
-			/*try {
-				//wait until end of loading for first genome opening
-				
-				ProgressListener stringListener = new ProgressListener() { 
-
-					@Override
-					public void changed(final ProgressEvent arg0) {}
-
-					@Override
-					public void completed(final ProgressEvent event) {
-							browserString.evaluate("javascript:send_request_to_string(['" + sequence.getOldLocusTag() + "'] , '" + stringHashMap.get(genome.getSpecies())+ "')");					
-
-					}
-				};
-				
-				//browserString.addProgressListener(stringListener);
-				
-				//browserString.removeProgressListener(stringListener);
-				// when updating gene info
-				//browserString.evaluate("javascript:send_request_to_string(['" + sequence.getOldLocusTag() + "'] , '" + stringHashMap.get(genome.getSpecies())+ "')");
-				
-				//System.out.println("evaluate OK");
-			} catch (Exception e) {
-				System.out.println("Cannot evaluate string: " + "javascript:send_request_to_string(['" + sequence.getOldLocusTag() + "'] , '" + stringHashMap.get(genome.getSpecies())+ "')");
-			}*/
-		} else {
-			//browserString.setText("");
-		}
+				stringURL = "";
+				browserString.setText("<h2 style=\"text-align:center\">Could not find String ID</h2>");
+			}
+		} 
 	}
 	
 	private void updateCrossRefsBrowsers() {		
@@ -1536,6 +1516,9 @@ public class GeneView implements SelectionListener, MouseListener {
 		compositeKEGG = new Composite(tabFolder, SWT.NONE);
 		tbtmKEGG.setControl(compositeKEGG);
 		compositeKEGG.setLayout(new GridLayout(1, false));
+		btnKEGG = new Button(compositeKEGG, SWT.NONE);
+		btnKEGG.addSelectionListener(this);
+		btnKEGG.setText("Open KEGG in a new tab of your browser");
 		browserKEGG = new Browser(compositeKEGG, SWT.NONE);
 		browserKEGG.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		
@@ -1546,10 +1529,12 @@ public class GeneView implements SelectionListener, MouseListener {
 		compositeUniprot = new Composite(tabFolder, SWT.NONE);
 		tbtmUniprot.setControl(compositeUniprot);
 		compositeUniprot.setLayout(new GridLayout(1, false));
+		btnUniprot = new Button(compositeUniprot, SWT.NONE);
+		btnUniprot.addSelectionListener(this);
+		btnUniprot.setText("Open UniProt in a new tab of your browser");
 		browserUniprot = new Browser(compositeUniprot, SWT.NONE);
 		browserUniprot.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		
-
 		tbtmInterpro.dispose();
 		tbtmInterpro = new TabItem(tabFolder, SWT.NONE);
 		tbtmInterpro.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/interpro.png"));
@@ -1557,6 +1542,9 @@ public class GeneView implements SelectionListener, MouseListener {
 		compositeInterpro = new Composite(tabFolder, SWT.NONE);
 		tbtmInterpro.setControl(compositeInterpro);
 		compositeInterpro.setLayout(new GridLayout(1, false));
+		btnInterpro = new Button(compositeInterpro, SWT.NONE);
+		btnInterpro.addSelectionListener(this);
+		btnInterpro.setText("Open InterPro in a new tab of your browser");
 		browserInterpro = new Browser(compositeInterpro, SWT.NONE);
 		browserInterpro.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		
@@ -1567,6 +1555,9 @@ public class GeneView implements SelectionListener, MouseListener {
 		compositeIntact = new Composite(tabFolder, SWT.NONE);
 		tbtmIntact.setControl(compositeIntact);
 		compositeIntact.setLayout(new GridLayout(1, false));
+		btnIntact = new Button(compositeIntact, SWT.NONE);
+		btnIntact.addSelectionListener(this);
+		btnIntact.setText("Open IntAct in a new tab of your browser");
 		browserIntact = new Browser(compositeIntact, SWT.NONE);
 		browserIntact.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		
@@ -1579,7 +1570,11 @@ public class GeneView implements SelectionListener, MouseListener {
 			tbtmString.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/string.png"));
 			compositeString.setLayout(new GridLayout(1, false));
 			compositeString.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
-
+			
+			btnString = new Button(compositeString, SWT.NONE);
+			btnString.addSelectionListener(this);
+			btnString.setText("Open String in a new tab of your browser");
+			
 			browserString = new Browser(compositeString, SWT.NONE);
 			browserString.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 			browserString.setText("");
@@ -1591,10 +1586,7 @@ public class GeneView implements SelectionListener, MouseListener {
 		
 		
 		try {
-			String KEGGPath = new String();
-			String UniprotPath = new String();
-			String IntactPath = new String();
-			String InterproPath = new String();
+			
 
 			if (KEGGHashMap.containsKey(genome.getSpecies())){
 				KEGGPath = "";
@@ -2118,7 +2110,7 @@ public class GeneView implements SelectionListener, MouseListener {
 		 * Expression atlas update
 		 */
 		if (genomeTranscriptomes.contains(genome.getSpecies())) {
-			GeneViewTranscriptomeTools.updateExpressionAtlas(sequence, txtCutoffLogFC, this, arrayDataList);
+			GeneViewTranscriptomeTools.updateExpressionAtlas(sequence, txtCutoffLogFC,txtCutoffPvalue, this, arrayDataList);
 		} else {
 			lblOver.setText("No data");
 			lblUnder.setText("No data");
@@ -2197,7 +2189,7 @@ public class GeneView implements SelectionListener, MouseListener {
 		 * Transcriptome update
 		 */
 		if (genomeTranscriptomes.contains(genome.getSpecies())) {
-			GeneViewTranscriptomeTools.updateExpressionAtlas(sequence, txtCutoffLogFC, this, arrayDataList);
+			GeneViewTranscriptomeTools.updateExpressionAtlas(sequence, txtCutoffLogFC, txtCutoffPvalue, this, arrayDataList);
 		} else {
 			lblOver.setText("No data");
 			lblUnder.setText("No data");
@@ -2226,7 +2218,7 @@ public class GeneView implements SelectionListener, MouseListener {
 		 */
 		if (genomeProteomes.contains(genome.getSpecies())) {
 			// System.out.println(genome.getSpecies());
-			GeneViewProteomeTools.updateProteinAtlas(sequence, txtCutoffLogFCProteome, this, arrayProteinAtlasList);
+			GeneViewProteomeTools.updateProteinAtlas(sequence, txtCutoffLogFCProteome, txtCutoffPvalueProteome, this, arrayProteinAtlasList);
 		} else {
 			lblOverProteome.setText("No data");
 			lblUnderProteome.setText("No data");
@@ -2308,7 +2300,7 @@ public class GeneView implements SelectionListener, MouseListener {
 				composite_logfc.setLayout(new GridLayout(2, false));
 
 				Label lbllogfoldchange = new Label(composite_logfc, SWT.NONE);
-				lbllogfoldchange.setText("|Log(Fold-Change)| >");
+				lbllogfoldchange.setText("|Log2(Fold-Change)| >");
 
 				txtCutoffLogFC = new Text(composite_logfc, SWT.BORDER);
 				txtCutoffLogFC.setText(GenomeElementAtlas.DEFAULT_LOGFC_CUTOFF+"");
@@ -2316,19 +2308,26 @@ public class GeneView implements SelectionListener, MouseListener {
 			{
 				Composite  composite_pvalue = new Composite(composite_8, SWT.NONE);
 				composite_pvalue.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
-				composite_pvalue.setLayout(new GridLayout(3, false));
+				composite_pvalue.setLayout(new GridLayout(4, false));
 
 				Label lblAnd = new Label(composite_pvalue, SWT.NONE);
 				lblAnd.setText("and");
 
 				Label lblPvalueFdrby = new Label(composite_pvalue, SWT.NONE);
-				lblPvalueFdrby.setText("p-value FDRBY <");
+				lblPvalueFdrby.setText("adj. p-value <");
+				
 
 				txtCutoffPvalue = new Text(composite_pvalue, SWT.BORDER);
-				txtCutoffPvalue.setText(GenomeElementAtlas.DEFAULT_LOGFC_CUTOFF+"");
-				if (Database.getInstance().getProjectName() != Database.UIBCLISTERIOMICS_PROJECT) {
+				txtCutoffPvalue.setText(GenomeElementAtlas.DEFAULT_PVAL_CUTOFF+"");
+
+				Label lblZeroPvalue = new Label(composite_pvalue, SWT.NONE);
+				lblZeroPvalue.setText("adjusted p-value is only available for RNA-Seq data.\n0.00 means that the Log2(FC) is not known.\n0.0e+00 means the adjusted p-value is not known.");
+				lblZeroPvalue.setForeground(BasicColor.GREY);
+				
+				
+				/*if (Database.getInstance().getProjectName() != Database.UIBCLISTERIOMICS_PROJECT) {
 					composite_pvalue.dispose();
-				}
+				}*/
 			}
 			btnUpdateCutoff = new Button(composite_8, SWT.NONE);
 			btnUpdateCutoff.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 5, 1));
@@ -2425,8 +2424,9 @@ public class GeneView implements SelectionListener, MouseListener {
 
 		Label transcriptomesExpl = new Label(composite_102, SWT.NONE);
 		transcriptomesExpl.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 0, 0));
-		transcriptomesExpl.setText("For RNASeq experiments, feature counts were normalized for comparison inside one experiment using DESeq2 if duplicate were done, or RPKM otherwise. \nThis normalized count were re-normalized between experiment dividing by the total normalized read counts to infer co-expression network. \nThe Log2 of this value is displayed here and is only indicative for the presence or absence of transcript. It should not be used for direct analysis.");
-
+		transcriptomesExpl.setText("For RNASeq experiments, feature counts were normalized using the Transcripts Per Million (TPM) method.\nThis value is displayed here and is only indicative for the presence or absence of transcript. It should not be used for direct analysis.");
+		transcriptomesExpl.setForeground(BasicColor.GREY);
+		
 		composite_103 = new Composite(composite_101, SWT.NONE);
 		composite_103.setLayout(new GridLayout(2, false));
 
@@ -2463,7 +2463,7 @@ public class GeneView implements SelectionListener, MouseListener {
 				composite_logfc.setLayout(new GridLayout(2, false));
 
 				Label lbllogfoldchange = new Label(composite_logfc, SWT.NONE);
-				lbllogfoldchange.setText("|Log(Fold-Change)| >");
+				lbllogfoldchange.setText("|Log2(Fold-Change)| >");
 
 				txtCutoffLogFCProteome = new Text(composite_logfc, SWT.BORDER);
 				txtCutoffLogFCProteome.setText(GenomeElementAtlas.DEFAULT_LOGFC_PROTEOMIC_CUTOFF+"");
@@ -2471,19 +2471,23 @@ public class GeneView implements SelectionListener, MouseListener {
 			{
 				Composite  composite_pvalue = new Composite(composite_8, SWT.NONE);
 				composite_pvalue.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
-				composite_pvalue.setLayout(new GridLayout(3, false));
+				composite_pvalue.setLayout(new GridLayout(4, false));
 
 				Label lblAnd = new Label(composite_pvalue, SWT.NONE);
 				lblAnd.setText("and");
 
 				Label lblPvalueFdrby = new Label(composite_pvalue, SWT.NONE);
-				lblPvalueFdrby.setText("p-value FDRBY <");
+				lblPvalueFdrby.setText("p-value <");
 
-				txtCutoffPvalue = new Text(composite_pvalue, SWT.BORDER);
-				txtCutoffPvalue.setText(GenomeElementAtlas.DEFAULT_LOGFC_PROTEOMIC_CUTOFF+"");
-				if (Database.getInstance().getProjectName() != Database.UIBCLISTERIOMICS_PROJECT) {
+				txtCutoffPvalueProteome = new Text(composite_pvalue, SWT.BORDER);
+				txtCutoffPvalueProteome.setText(GenomeElementAtlas.DEFAULT_PVAL_PROTEOMIC_CUTOFF+"");
+				
+				Label lblZeroPvalue = new Label(composite_pvalue, SWT.NONE);
+				lblZeroPvalue.setText("0.00 means that the Log2(FC) is not known.\n0.0e+00 means the p-value or the adjusted p-value is not known.");
+				lblZeroPvalue.setForeground(BasicColor.GREY);
+				/*if (Database.getInstance().getProjectName() != Database.UIBCLISTERIOMICS_PROJECT) {
 					composite_pvalue.dispose();
-				}
+				}*/
 			}
 			btnUpdateCutoffProteome = new Button(composite_8, SWT.NONE);
 			btnUpdateCutoffProteome.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 5, 1));
@@ -2578,20 +2582,12 @@ public class GeneView implements SelectionListener, MouseListener {
 
 		Label proteomesExpl1 = new Label(composite_091, SWT.NONE);
 		proteomesExpl1.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1));
-		proteomesExpl1.setText("For Orbitrap experiments, displayed value is log10(raw LFQ).");
+		proteomesExpl1.setText("For Orbitrap experiments, displayed value is log10(raw LFQ)."
+				+ "\nFor FTICR experiments, displayed value is raw FTICR intensity."
+				+ "\nFor 2D gel experiments, if proteins are detected in several spots, displayed value is the most intense measured spot intensity value."
+				+ "\n'-1' means that the protein is detected but no value is available.");
 
-		Label proteomesExpl2 = new Label(composite_091, SWT.NONE);
-		proteomesExpl2.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1));
-		proteomesExpl2.setText("For FTICR experiments, displayed value is raw FTICR intensity.");
-
-		Label proteomesExpl3 = new Label(composite_091, SWT.NONE);
-		proteomesExpl3.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1));
-		proteomesExpl3.setText("For 2D gel experiments, if proteins are detected in several spots, displayed value is the most intense measured spot intensity value.");
-
-		Label proteomesExpl4 = new Label(composite_091, SWT.NONE);
-		proteomesExpl4.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1));
-		proteomesExpl4.setText("'-1' means that the protein is detected but no value is available.");
-
+		proteomesExpl1.setForeground(BasicColor.GREY);
 
 		composite_092 = new Composite(composite_09, SWT.NONE);
 		composite_092.setLayout(new GridLayout(2, false));
@@ -3026,18 +3022,15 @@ public class GeneView implements SelectionListener, MouseListener {
 	public ArrayList<String> getSelectedComparisons() {
 		ArrayList<String> comparisons = new ArrayList<>();
 		for (int index : tableOver.getSelectionIndices()) {
-			String comparison = tableOver.getItem(index).getText(ArrayUtils.findColumn(arrayDataList, "Data Name")+1);
-			//System.out.println("over comp: " +comparison);
+			String comparison = tableOver.getItem(index).getText(ArrayUtils.findColumn(arrayDataList, "Data Name")+2);
 			comparisons.add(comparison);
 		}
 		for (int index : tableUnder.getSelectionIndices()) {
-			String comparison = tableUnder.getItem(index).getText(ArrayUtils.findColumn(arrayDataList, "Data Name")+1);
-			//System.out.println("under comp: " +comparison);
+			String comparison = tableUnder.getItem(index).getText(ArrayUtils.findColumn(arrayDataList, "Data Name")+2);
 			comparisons.add(comparison);
 		}
 		for (int index : tableNodiff.getSelectionIndices()) {
-			String comparison = tableNodiff.getItem(index).getText(ArrayUtils.findColumn(arrayDataList, "Data Name")+1);
-			// System.out.println(comparison);
+			String comparison = tableNodiff.getItem(index).getText(ArrayUtils.findColumn(arrayDataList, "Data Name")+2);
 			comparisons.add(comparison);
 		}
 		//System.out.println("comparisons: "+ comparisons);
@@ -3047,18 +3040,15 @@ public class GeneView implements SelectionListener, MouseListener {
 	public ArrayList<String> getSelectedComparisonsProteome() {
 		ArrayList<String> comparisons = new ArrayList<>();
 		for (int index : tableOverProteome.getSelectionIndices()) {
-			String comparison = tableOverProteome.getItem(index).getText(ArrayUtils.findColumn(arrayProteomeList, "Data Name")+1);
-			// System.out.println(comparison);
+			String comparison = tableOverProteome.getItem(index).getText(ArrayUtils.findColumn(arrayProteomeList, "Data Name")+3);
 			comparisons.add(comparison);
 		}
 		for (int index : tableUnderProteome.getSelectionIndices()) {
-			String comparison = tableUnderProteome.getItem(index).getText(ArrayUtils.findColumn(arrayProteomeList, "Data Name")+1);
-			// System.out.println(comparison);
+			String comparison = tableUnderProteome.getItem(index).getText(ArrayUtils.findColumn(arrayProteomeList, "Data Name")+3);
 			comparisons.add(comparison);
 		}
 		for (int index : tableNodiffProteome.getSelectionIndices()) {
-			String comparison = tableNodiffProteome.getItem(index).getText(ArrayUtils.findColumn(arrayProteomeList, "Data Name")+1);
-			// System.out.println(comparison);
+			String comparison = tableNodiffProteome.getItem(index).getText(ArrayUtils.findColumn(arrayProteomeList, "Data Name")+3);
 			comparisons.add(comparison);
 		}
 		//System.out.println("comparisons: "+ comparisons);
@@ -3653,11 +3643,20 @@ public class GeneView implements SelectionListener, MouseListener {
 		} else if (e.getSource() == btnZoomminus) {
 			trackGenome.zoom(false);
 			canvasGenome.redraw();
-			
 		} else if (e.getSource() == btnShowSynteny) {
 			btnShowSynteny.dispose();
 			compSynt.layout(true,true);
 			loadSynteny();
+		} else if (e.getSource() == btnKEGG) {
+			NavigationManagement.openURLInExternalBrowser(KEGGPath, partService);
+		} else if (e.getSource() == btnUniprot) {
+			NavigationManagement.openURLInExternalBrowser(UniprotPath, partService);
+		} else if (e.getSource() == btnInterpro) {
+			NavigationManagement.openURLInExternalBrowser(InterproPath, partService);
+		} else if (e.getSource() == btnIntact) {
+			NavigationManagement.openURLInExternalBrowser(IntactPath, partService);
+		} else if (e.getSource() == btnString) {
+			NavigationManagement.openURLInExternalBrowser(stringURL, partService);
 			
 		} else if (e.getSource() == btnNucleotideSequence) {
 			Strand strand = Strand.POSITIVE;
@@ -3677,16 +3676,16 @@ public class GeneView implements SelectionListener, MouseListener {
 			LocalizationDialog dialog =
 					new LocalizationDialog(shell, arrayGeneToLocalization, sequence, bioCondsArray, genome);
 			dialog.open();
-		} else if (e.getSource() == btnGenomeViewer) {
+		} else if (e.getSource() == btnGenomeViewer) {			
 			GenomeTranscriptomeView.displayGenomeElementAndBioConditions(partService, genome.getSpecies(),
 					getSelectedComparisons(), sequence.getName());
 		} else if (e.getSource() == btnGenomeViewerProteome) {
 			GenomeTranscriptomeView.displayGenomeElementAndBioConditions(partService, genome.getSpecies(),
 					getSelectedComparisonsProteome(), sequence.getName());
 		} else if (e.getSource() == btnUpdateCutoff) {
-			GeneViewTranscriptomeTools.updateExpressionAtlas(sequence, txtCutoffLogFC, this, arrayDataList);
+			GeneViewTranscriptomeTools.updateExpressionAtlas(sequence, txtCutoffLogFC, txtCutoffPvalue, this, arrayDataList);
 		} else if (e.getSource() == btnUpdateCutoffProteome) {
-			GeneViewProteomeTools.updateProteinAtlas(sequence, txtCutoffLogFCProteome, this, arrayProteinAtlasList);
+			GeneViewProteomeTools.updateProteinAtlas(sequence, txtCutoffLogFCProteome, txtCutoffPvalue, this, arrayProteinAtlasList);
 		} else if (e.getSource() == btnUpdateCutoffCoExp) {
 			updateCoExp();
 		} else if (e.getSource() == btnCorrMinus) {
@@ -3725,12 +3724,15 @@ public class GeneView implements SelectionListener, MouseListener {
 			ArrayList<String> fastaFile = new ArrayList<String>();
 			// Load genomes
 			HashMap<String, String> genomeToGenes = new HashMap<>();
-			for (int i : tableHomologViewer.getTable().getSelectionIndices()) {
-				TableItem item = tableHomologViewer.getTable().getItem(i);
-				String genomeName = item.getText(ArrayUtils.findColumn(bioCondsArray, "Name (GenBank)")+1);
-				String gene = item.getText(ArrayUtils.findColumn(bioCondsArray, "Homolog Protein")+1);
-				genomeToGenes.put(genomeName, gene);
+			
+			for (int i = 1; i < bioCondsArray.length; i++) {
+				String genomeName = bioCondsArray[i][columnNames.indexOf("Name (GenBank)")];
+				String processedGenomeName = GenomeNCBI.processGenomeName(genomeName);
+				if (selectedGenomes.contains(processedGenomeName)) {
+					genomeToGenes.put(genomeName, bioCondsArray[i][columnNames.indexOf("Homolog Protein")]);
+				}
 			}
+			
 			try {
 				GetMultiFastaThread thread = new GetMultiFastaThread(genomeToGenes);
 				ProgressMonitorDialog dialog = new ProgressMonitorDialog(this.shell);
@@ -3746,9 +3748,9 @@ public class GeneView implements SelectionListener, MouseListener {
 				ex.printStackTrace();
 			} catch (InterruptedException ex) {
 				ex.printStackTrace();
-			}
+			}/*
 		} else if (e.getSource() == btnHelp) {
-			HelpPage.helpGeneView(partService);
+			HelpPage.helpGeneView(partService);*/
 		}
 	}
 
@@ -3963,7 +3965,13 @@ public class GeneView implements SelectionListener, MouseListener {
 	public void setTxtCutoffPvalue(Text txtCutoffPvalue) {
 		this.txtCutoffPvalue = txtCutoffPvalue;
 	}
+	public Text getTxtCutoffPvalueProteome() {
+		return txtCutoffPvalueProteome;
+	}
 
+	public void getTxtCutoffPvalueProteome(Text txtCutoffPvalueProteome) {
+		this.txtCutoffPvalueProteome = txtCutoffPvalueProteome;
+	}
 	public Label getLblTranscriptomesData() {
 		return lblTranscriptomesData;
 	}

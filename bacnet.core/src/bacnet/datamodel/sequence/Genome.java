@@ -655,7 +655,7 @@ public class Genome {
      * @return
      */
     public static String getDefautGenome() {
-        return getAvailableGenomes().get(7);
+        return getAvailableGenomes().get(27);
     }
 
     /**

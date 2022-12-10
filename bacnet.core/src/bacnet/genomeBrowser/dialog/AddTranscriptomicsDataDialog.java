@@ -89,15 +89,22 @@ public class AddTranscriptomicsDataDialog extends TitleAreaDialog implements Sel
     private Button btnGeneExpression;
     private Button btnRnaseq;
     private Button btnTss;
+    private Button btnTiling;
     private Button btnRiboSeq;
     private Button btnTermSeq;
-    private Button btnLagPhase;
     private Button btnExponential;
     private Button btnStationnary;
-    private Button btnSurvival;
-    private Button btnDeath;
-    private Button btnRegrowth;
-    private Button btnTiling;
+    private Button btnTemp28;
+    private Button btnTemp37;
+    private Button btnTempOther;
+    private Button btnBCS;
+    private Button btnMinimalMedia;
+    private Button btnDMEM;
+    private Button btnBlood;
+    private Button btnLB;
+    private Button btnInVivo;
+    private Button btnInCellulo;
+    private Button btnOtherMedia;
     private Combo comboMutant;
     private Button btnChooseOneMutant;
     private Button btnNoneMutant;
@@ -183,8 +190,9 @@ public class AddTranscriptomicsDataDialog extends TitleAreaDialog implements Sel
                             bioCondsToDisplay.add(row);
                         }
                     }
-                    updateInfo();
                     updateBioConditionTable();
+                    updateInfo();
+
                 }
             }
 
@@ -279,21 +287,86 @@ public class AddTranscriptomicsDataDialog extends TitleAreaDialog implements Sel
         btnNoneMutant.addSelectionListener(this);
         btnChooseOneMutant.addSelectionListener(this);
 
-        Label label_5 = new Label(composite_3, SWT.NONE);
+        Label label_55 = new Label(composite_3, SWT.NONE);
+
+        Label lblTemp = new Label(composite_3, SWT.NONE);
+        lblTemp.setFont(SWTResourceManager.getBodyFont(SWT.BOLD));
+        lblTemp.setText("Temperature");
+
+        Composite composite_21 = new Composite(composite_3, SWT.NONE);
+        composite_21.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
+        composite_21.setLayout(new GridLayout(1, false));
+
+        btnTemp28 = new Button(composite_21, SWT.CHECK);
+        btnTemp28.setText("25°C to 28°C");
+
+        btnTemp37 = new Button(composite_21, SWT.CHECK);
+        btnTemp37.setText("37°");
+
+        btnTempOther = new Button(composite_21, SWT.CHECK);
+        btnTempOther.setText("Other");
+
+        btnTemp28.addSelectionListener(this);
+        btnTemp37.addSelectionListener(this);
+        btnTempOther.addSelectionListener(this);
+        
+        new Label(composite_3, SWT.NONE);
+
+        Label lblGrowth = new Label(composite_3, SWT.NONE);
+        lblGrowth.setFont(SWTResourceManager.getBodyFont(SWT.BOLD));
+        lblGrowth.setText("Growth Medium");
+
+        Composite composite_1_1 = new Composite(composite_3, SWT.NONE);
+        composite_1_1.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
+        composite_1_1.setLayout(new GridLayout(1, false));
+
+        btnBCS = new Button(composite_1_1, SWT.CHECK);
+        btnBCS.setText("BCS");
+        btnBCS.addSelectionListener(this);
+
+        btnLB = new Button(composite_1_1, SWT.CHECK);
+        btnLB.setText("LB Broth");
+        btnLB.addSelectionListener(this);
+
+        btnMinimalMedia = new Button(composite_1_1, SWT.CHECK);
+        btnMinimalMedia.setText("Chemically Defined Media");
+        btnMinimalMedia.addSelectionListener(this);
+        
+        btnDMEM = new Button(composite_1_1, SWT.CHECK);
+        btnDMEM.setText("DMEM");
+        btnDMEM.addSelectionListener(this);
+        
+        btnInCellulo = new Button(composite_1_1, SWT.CHECK);
+        btnInCellulo.setText("in cellulo");
+        btnInCellulo.addSelectionListener(this);
+        
+        btnBlood = new Button(composite_1_1, SWT.CHECK);
+        btnBlood.setText("Blood");
+        btnBlood.addSelectionListener(this);
+        
+        btnInVivo = new Button(composite_1_1, SWT.CHECK);
+        btnInVivo.setText("in vivo");
+        btnInVivo.addSelectionListener(this);
+        
+        btnOtherMedia = new Button(composite_1_1, SWT.CHECK);
+        btnOtherMedia.setText("Other Media");
+        btnOtherMedia.addSelectionListener(this);
+        
+        new Label(composite_3, SWT.NONE);
 
         Label lblGrowthPhases = new Label(composite_3, SWT.NONE);
         lblGrowthPhases.setFont(SWTResourceManager.getBodyFont(SWT.BOLD));
-        lblGrowthPhases.setText("Growth phases");
+        lblGrowthPhases.setText("Growth phase");
 
         Composite composite_2 = new Composite(composite_3, SWT.NONE);
         composite_2.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
         composite_2.setLayout(new GridLayout(1, false));
 
         btnExponential = new Button(composite_2, SWT.CHECK);
-        btnExponential.setText("Logarithmic Phase");
+        btnExponential.setText("Logarithmic");
 
         btnStationnary = new Button(composite_2, SWT.CHECK);
-        btnStationnary.setText("Stationnary Phase");
+        btnStationnary.setText("Stationnary");
 
         btnExponential.addSelectionListener(this);
         btnStationnary.addSelectionListener(this);
@@ -335,9 +408,9 @@ public class AddTranscriptomicsDataDialog extends TitleAreaDialog implements Sel
             lblRnaseq.setText("RNA-Seq and Ribo-Seq");
         }
         setData();
-        updateInfo();
         updateBioConditionList();
         updateBioConditionTable();
+        updateInfo();
         return area;
 
     }
@@ -400,8 +473,20 @@ public class AddTranscriptomicsDataDialog extends TitleAreaDialog implements Sel
         int geneExpr = 0;
         //int tss = 0;
         int rnaSeq = 0;
+        int temp28 = 0;
+        int temp37 = 0;
+        int tempOther = 0;
+        int blood = 0;
+        int inVivo = 0;
+        int inCellulo = 0;
+        int dmem = 0;
+        int BCS = 0;
+        int lb = 0;
+        int mm = 0;
+        int mediaOther = 0;
         int expo = 0;
         int stat = 0;
+        
         for (String[] row : bioCondsToDisplay) {
             // Data type
             String dataType = row[ArrayUtils.findColumn(bioCondsArray, "Type")];
@@ -420,28 +505,72 @@ public class AddTranscriptomicsDataDialog extends TitleAreaDialog implements Sel
             if (dataType.contains("RNASeq"))
                 rnaSeq++;
 
-            // growth type
-            String growth = row[ArrayUtils.findColumn(bioCondsArray, "Growth")];
-            if (growth.contains("Lag")) {
-			}
-            if (growth.contains("Logarithmic"))
-                expo++;
-            if (growth.contains("Stationary"))
-                stat++;
-            if (growth.contains("survival")) {
-			}
-            if (growth.contains("Death")) {
-			}
-            if (growth.contains("Regrowth")) {
-			}
 
-        }
+            // Temperature
+               String temperature = row[ArrayUtils.findColumn(bioCondsArray, "Temp.")];
+               if (temperature.contains("28") || temperature.contains("26") || temperature.contains("25")|| temperature.contains("37")) {
+               	 if (temperature.contains("37"))
+                        temp37++;
+                    if (temperature.contains("28") || temperature.contains("26") || temperature.contains("25")) {
+                        temp28++;
+        			}
+   			} else {
+                   tempOther++;
+   			}
+               
+               // Broth type
+               String broth = row[ArrayUtils.findColumn(bioCondsArray, "Media")];
+               if (broth.contains("BCS"))
+                   BCS++;
+               if (broth.contains("LB"))
+                   lb++;
+               if (broth.contains("Minimal Media")||broth.contains("M9")||broth.contains("TMH")||broth.contains("PMH"))
+                   mm++;
+               if (broth.contains("Blood") || broth.contains("Plasma"))
+                   blood++;
+               if (broth.contains("DMEM"))
+                   dmem++;
+               if (broth.contains("Brown Norway")|| broth.contains("C57BL")|| broth.contains("Xenopsylla")
+               		|| broth.contains("Galleria")|| broth.contains("BALB")|| broth.contains("OF1")
+               		|| broth.contains("FVB"))
+                   inVivo++;
+               if (broth.contains("THP-1")|| broth.contains("J774")
+                   	|| broth.contains("Monocyte")|| broth.contains("Neutrophil"))
+                       inCellulo++;
+               if (!(broth.contains("BCS") || broth.contains("Minimal Media")||broth.contains("M9")||broth.contains("LB")
+               		||broth.contains("TMH")||broth.contains("PMH")||broth.contains("Plasma")
+               		|| broth.contains("Blood")||broth.contains("DMEM")||broth.contains("Brown Norway")
+               		|| broth.contains("C57BL")|| broth.contains("Xenopsylla")
+               		|| broth.contains("Galleria")|| broth.contains("BALB")|| broth.contains("OF1")
+               		|| broth.contains("FVB")|| broth.contains("THP-1")|| broth.contains("J774")
+                   	|| broth.contains("Monocyte")|| broth.contains("Neutrophil"))) {
+               	mediaOther++;
+               }
 
+               // growth type
+               String growth = row[ArrayUtils.findColumn(bioCondsArray, "Growth")];
+               if (growth.contains("Log"))
+                   expo++;
+               if (growth.contains("Stat"))
+                   stat++;
+
+           }
         /*
          * Update checkbox text with the number of data available for each category
          */
         btnGeneExpression.setText("Array (" + geneExpr + ")");
         btnRnaseq.setText("RNA-Seq (" + rnaSeq + ")");
+        btnTemp28.setText("25°C to 28°C (" + temp28 + ")");
+        btnTemp37.setText("37°C (" + temp37 + ")");
+        btnTempOther.setText("Other (" + tempOther + ")");
+        btnBlood.setText("Blood (" + blood + ")");
+        btnDMEM.setText("DMEM (" + dmem + ")");
+        btnInVivo.setText("in vivo (" + inVivo + ")");
+        btnInCellulo.setText("in cellulo (" + inCellulo + ")");
+        btnBCS.setText("BCS (" + BCS + ")");
+        btnLB.setText("LB (" + lb + ")");
+        btnMinimalMedia.setText("Chemically Defined Media (" + mm + ")");
+        btnOtherMedia.setText("Other Media (" + mediaOther + ")");
         btnExponential.setText("Logarithmic Phase (" + expo + ")");
         btnStationnary.setText("Stationnary Phase (" + stat + ")");
 
@@ -548,9 +677,7 @@ public class AddTranscriptomicsDataDialog extends TitleAreaDialog implements Sel
         /*
          * Update with Mutant
          */
-        bioCondsToDisplayTemp = new ArrayList<>();
-        selected = false;
-
+       
         if (btnNoneMutant.getSelection()) {
             selected = true;
             for (String[] row : bioCondsToDisplay) {
@@ -580,16 +707,152 @@ public class AddTranscriptomicsDataDialog extends TitleAreaDialog implements Sel
         }
 
         /*
-         * Update with Growth type
+         * Update with temperature
+         */
+        
+        if (btnTemp28.getSelection()) {
+            selected = true;
+            for (String[] row :bioCondsToDisplay) {
+                String info = row[ArrayUtils.findColumn(bioCondsArray, "Temp.")];
+                if (info.contains("25") || info.contains("26") || info.contains("28")) {
+                    if (!bioCondsToDisplayTemp.contains(row))
+                        bioCondsToDisplayTemp.add(row);
+                }
+            }
+        }
+        if (btnTemp37.getSelection()) {
+            selected = true;
+            for (String[] row : bioCondsToDisplay) {
+                String info = row[ArrayUtils.findColumn(bioCondsArray, "Temp.")];
+                if (info.contains("37")) {
+                    if (!bioCondsToDisplayTemp.contains(row))
+                        bioCondsToDisplayTemp.add(row);
+                }
+            }
+        }
+        if (btnTempOther.getSelection()) {
+            selected = true;
+            for (String[] row : bioCondsToDisplay) {
+                String info = row[ArrayUtils.findColumn(bioCondsArray, "Temp.")];
+                if (!(info.contains("25") || info.contains("26") || info.contains("28")||info.contains("37"))) {
+                    if (!bioCondsToDisplayTemp.contains(row))
+                        bioCondsToDisplayTemp.add(row);
+                }
+            }
+        }
+        /*
+         * Update with media type
          */
         bioCondsToDisplayTemp = new ArrayList<>();
         selected = false;
         
+        if (btnBlood.getSelection()) {
+            selected = true;
+            for (String[] row : bioCondsToDisplay) {
+                String info = row[ArrayUtils.findColumn(bioCondsArray, "Media")];
+                if (info.contains("Plasma") || info.contains("Blood")) {
+                    if (!bioCondsToDisplayTemp.contains(row))
+                        bioCondsToDisplayTemp.add(row);
+                }
+            }
+        }
+        if (btnDMEM.getSelection()) {
+            selected = true;
+            for (String[] row : bioCondsToDisplay) {
+                String info = row[ArrayUtils.findColumn(bioCondsArray, "Media")];
+                if (info.contains("DMEM")) {
+                    if (!bioCondsToDisplayTemp.contains(row))
+                        bioCondsToDisplayTemp.add(row);
+                }
+            }
+        }
+        if (btnBCS.getSelection()) {
+            selected = true;
+            for (String[] row : bioCondsToDisplay) {
+                String info = row[ArrayUtils.findColumn(bioCondsArray, "Media")];
+                if (info.contains("BCS")) {
+                    if (!bioCondsToDisplayTemp.contains(row))
+                        bioCondsToDisplayTemp.add(row);
+                }
+            }
+        }
+        if (btnLB.getSelection()) {
+            selected = true;
+            for (String[] row : bioCondsToDisplay) {
+                String info = row[ArrayUtils.findColumn(bioCondsArray, "Media")];
+                if (info.contains("LB")) {
+                    if (!bioCondsToDisplayTemp.contains(row))
+                        bioCondsToDisplayTemp.add(row);
+                }
+            }
+        }
+        if (btnMinimalMedia.getSelection()) {
+            selected = true;
+            for (String[] row : bioCondsToDisplay) {
+                String info = row[ArrayUtils.findColumn(bioCondsArray, "Media")];
+                if (info.contains("Minimal Media")||info.contains("M9")||info.contains("TMH")||info.contains("PMH")) {
+                    if (!bioCondsToDisplayTemp.contains(row))
+                        bioCondsToDisplayTemp.add(row);
+                }
+            }
+        }
+        
+        if (btnInVivo.getSelection()) {
+            selected = true;
+            for (String[] row : bioCondsToDisplay) {
+                String info = row[ArrayUtils.findColumn(bioCondsArray, "Media")];
+                if (info.contains("Brown Norway")|| info.contains("C57BL")|| info.contains("Xenopsylla")
+                		|| info.contains("Galleria")|| info.contains("BALB")|| info.contains("OF1")
+                		|| info.contains("FVB")) {
+                    if (!bioCondsToDisplayTemp.contains(row))
+                        bioCondsToDisplayTemp.add(row);
+                }
+            }
+        }
+        
+        if (btnInCellulo.getSelection()) {
+            selected = true;
+            for (String[] row : bioCondsToDisplay) {
+                String info = row[ArrayUtils.findColumn(bioCondsArray, "Media")];
+                if (info.contains("THP-1")|| info.contains("J774")|| info.contains("Monocyte")|| info.contains("Neutrophil")) {
+                    if (!bioCondsToDisplayTemp.contains(row))
+                        bioCondsToDisplayTemp.add(row);
+                }
+            }
+        }
+        
+        if (btnOtherMedia.getSelection()) {
+            selected = true;
+            for (String[] row : bioCondsToDisplay) {
+                String info = row[ArrayUtils.findColumn(bioCondsArray, "Media")];
+                if (!(info.contains("BCS") || info.contains("Minimal Media")||info.contains("M9")
+                		||info.contains("TMH")||info.contains("PMH")||info.contains("Plasma")||info.contains("LB")
+                		|| info.contains("Blood")||info.contains("DMEM")||info.contains("Brown Norway")
+                		|| info.contains("C57BL")|| info.contains("Xenopsylla")
+                		|| info.contains("Galleria")|| info.contains("BALB")|| info.contains("OF1")
+                		|| info.contains("FVB") || info.contains("THP-1")|| info.contains("J774")
+                		|| info.contains("Monocyte")|| info.contains("Neutrophil"))) {
+                    if (!bioCondsToDisplayTemp.contains(row))
+                        bioCondsToDisplayTemp.add(row);
+                }
+            }
+        }
+        if (selected) {
+            bioCondsToDisplay.clear();
+            for (String[] row : bioCondsToDisplayTemp)
+                bioCondsToDisplay.add(row);
+        }
+
+        /*
+         * Update with Growth type
+         */
+        bioCondsToDisplayTemp = new ArrayList<>();
+        selected = false;
         if (btnExponential.getSelection()) {
             selected = true;
             for (String[] row : bioCondsToDisplay) {
                 String info = row[ArrayUtils.findColumn(bioCondsArray, "Growth")];
-                if (info.contains("Exp phase")) {
+                if (info.contains("Log")) {
                     if (!bioCondsToDisplayTemp.contains(row))
                         bioCondsToDisplayTemp.add(row);
                 }
@@ -599,31 +862,18 @@ public class AddTranscriptomicsDataDialog extends TitleAreaDialog implements Sel
             selected = true;
             for (String[] row : bioCondsToDisplay) {
                 String info = row[ArrayUtils.findColumn(bioCondsArray, "Growth")];
-                if (info.contains("Stationary")) {
+                if (info.contains("Stat")) {
                     if (!bioCondsToDisplayTemp.contains(row))
                         bioCondsToDisplayTemp.add(row);
                 }
             }
         }
-       
         if (selected) {
             bioCondsToDisplay.clear();
             for (String[] row : bioCondsToDisplayTemp)
                 bioCondsToDisplay.add(row);
         }
 
-        if (Database.getInstance().getProjectName() != Database.UIBCLISTERIOMICS_PROJECT) {
-            bioCondsToDisplayTemp = new ArrayList<String[]>();
-            for (String[] row : bioCondsToDisplay) {
-                String info = row[ArrayUtils.findColumn(bioCondsArray, "Bibliographical reference")];
-                if (info.contains("Unpublished (Cossart lab)")) {
-                    //
-                } else {
-                    bioCondsToDisplayTemp.add(row);
-                }
-            }
-            bioCondsToDisplay = bioCondsToDisplayTemp;
-        }
 
     }
 

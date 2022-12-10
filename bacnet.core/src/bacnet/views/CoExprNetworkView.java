@@ -222,11 +222,12 @@ public class CoExprNetworkView implements SelectionListener {
         btnExportNetwork = new Button(composite, SWT.NONE);
         btnExportNetwork.setText("Export filtered network");
         btnExportNetwork.addSelectionListener(this);
-
+/*
         btnHelp = new Button(composite, SWT.NONE);
         btnHelp.setToolTipText("How to use Co-expression network panel ?");
         btnHelp.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/help.png"));
         btnHelp.addSelectionListener(this);
+        */
         btnCorrPlus.addSelectionListener(this);
 
         tabFolder = new TabFolder(parent, SWT.NONE);
@@ -670,8 +671,8 @@ public class CoExprNetworkView implements SelectionListener {
                 }
                 updateCoExpressionFigure();
             }
-        } else if (e.getSource() == btnHelp) {
-            HelpPage.helpNetworkView(partService);
+       /*} else if (e.getSource() == btnHelp) {
+            HelpPage.helpNetworkView(partService);*/
         }
     }
 

@@ -260,14 +260,30 @@ public class Database {
      */
     private HashMap<String, ExpressionMatrix> logFCTable = new HashMap<>();
     /**
+     * HashMap linking genome name to transcriptome pvalue matrices<br>
+     * Matrices containing all p-values in a matrix GenomeElement vs BioCondition
+     */
+    private HashMap<String, ExpressionMatrix> pValueTable = new HashMap<>();
+    /**
      * HashMap linking genome name to LofFC proteomic matrices<br>
      * Matrices containing all logFC values of proteomic in a matrix GenomeElement vs BioCondition
      */
     private HashMap<String, ExpressionMatrix> logFCProteomeTable = new HashMap<>();
     /**
+     * HashMap linking genome name to proteome p-value matrices<br>
+     * Matrices containing all p-values in a matrix GenomeElement vs BioCondition
+     */
+    private HashMap<String, ExpressionMatrix> pValueProteomeTable = new HashMap<>();
+    /**
+     * HashMap linking genome name to proteome adjusted p-value matrices<br>
+     * Matrices containing all adjusted p-values in a matrix GenomeElement vs BioCondition
+     */
+    private HashMap<String, ExpressionMatrix> adjPvalueProteomeTable = new HashMap<>();
+    /**
      * HashMap linking genome name to Expr proteomes matrices<br>
      * Matrices containing all logFC values in a matrix GenomeElement vs BioCondition
      */
+    
     private HashMap<String, ExpressionMatrix> exprProteomesTable = new HashMap<>();
     
     /**
@@ -517,6 +533,32 @@ public class Database {
     }
     
     /**
+     * Load p-value transcriptome table for a specific genome
+     * @param genomeName
+     * @return
+     */
+    public ExpressionMatrix getPvalueTranscriptomesTable(String genomeName) {
+        if (pValueTable.containsKey(genomeName)) {
+            return pValueTable.get(genomeName);
+        } else {
+            if (Database.getInstance().getProjectName() == Database.UIBCLISTERIOMICS_PROJECT
+                    && genomeName.equals(Genome.EGDE_NAME)) {
+                System.out.println(getPVALUE_MATRIX_TRANSCRIPTOMES_PATH() + "_" + genomeName + "_PRIVATE");
+                ExpressionMatrix matrix =
+                        ExpressionMatrix.load(getPVALUE_MATRIX_TRANSCRIPTOMES_PATH() + "_" + genomeName + "_PRIVATE");
+                pValueTable.put(genomeName, matrix);
+                return matrix;
+            } else {
+                System.out.println(getPVALUE_MATRIX_TRANSCRIPTOMES_PATH() + "_" + genomeName);
+                ExpressionMatrix matrix =
+                        ExpressionMatrix.load(getPVALUE_MATRIX_TRANSCRIPTOMES_PATH() + "_" + genomeName);
+                pValueTable.put(genomeName, matrix);
+                return matrix;
+            }
+        }
+    }
+    
+    /**
      * Load Logfc proteome tables for a specific genome
      * @param genomeName
      * @return
@@ -541,7 +583,55 @@ public class Database {
             }
         }
     }
-
+    /**
+     * Load p-value proteome table for a specific genome
+     * @param genomeName
+     * @return
+     */
+    public ExpressionMatrix getPvalueProteomesTable(String genomeName) {
+        if (pValueProteomeTable.containsKey(genomeName)) {
+            return pValueProteomeTable.get(genomeName);
+        } else {
+            if (Database.getInstance().getProjectName() == Database.UIBCLISTERIOMICS_PROJECT
+                    && genomeName.equals(Genome.EGDE_NAME)) {
+                System.out.println(getPVALUE_MATRIX_PROTEOMES_PATH() + "_" + genomeName + "_PRIVATE");
+                ExpressionMatrix matrix =
+                        ExpressionMatrix.load(getPVALUE_MATRIX_PROTEOMES_PATH() + "_" + genomeName + "_PRIVATE");
+                pValueProteomeTable.put(genomeName, matrix);
+                return matrix;
+            } else {
+                System.out.println(getPVALUE_MATRIX_PROTEOMES_PATH() + "_" + genomeName);
+                ExpressionMatrix matrix =
+                        ExpressionMatrix.load(getPVALUE_MATRIX_PROTEOMES_PATH() + "_" + genomeName);
+                pValueProteomeTable.put(genomeName, matrix);
+                return matrix;
+            }
+        }
+    }    /**
+     * Load adjusted p-value proteome table for a specific genome
+     * @param genomeName
+     * @return
+     */
+    public ExpressionMatrix getAdjPvalueProteomesTable(String genomeName) {
+        if (adjPvalueProteomeTable.containsKey(genomeName)) {
+            return adjPvalueProteomeTable.get(genomeName);
+        } else {
+            if (Database.getInstance().getProjectName() == Database.UIBCLISTERIOMICS_PROJECT
+                    && genomeName.equals(Genome.EGDE_NAME)) {
+                System.out.println(getADJPVALUE_MATRIX_PROTEOMES_PATH() + "_" + genomeName + "_PRIVATE");
+                ExpressionMatrix matrix =
+                        ExpressionMatrix.load(getADJPVALUE_MATRIX_PROTEOMES_PATH() + "_" + genomeName + "_PRIVATE");
+                adjPvalueProteomeTable.put(genomeName, matrix);
+                return matrix;
+            } else {
+                System.out.println(getADJPVALUE_MATRIX_PROTEOMES_PATH() + "_" + genomeName);
+                ExpressionMatrix matrix =
+                        ExpressionMatrix.load(getADJPVALUE_MATRIX_PROTEOMES_PATH() + "_" + genomeName);
+                adjPvalueProteomeTable.put(genomeName, matrix);
+                return matrix;
+            }
+        }
+    }
     public ExpressionMatrix getExprProteomesTable(String genomeName) {
         if (exprProteomesTable.containsKey(genomeName)) {
             return exprProteomesTable.get(genomeName);
@@ -757,6 +847,12 @@ public class Database {
         return Database.getTRANSCRIPTOMES_PATH() + "Table_LOGFC";
     }
     /**
+     * Path for loading Transcriptomes matrix data showing Fold Change p-values
+     */
+    public static String getPVALUE_MATRIX_TRANSCRIPTOMES_PATH() {
+        return Database.getTRANSCRIPTOMES_PATH() + "Table_PVALUE";
+    }
+    /**
      * Path for loading Transcriptomes matrix data showing expression values
      */
     public static String getEXPRESSION_MATRIX_TRANSCRIPTOMES_PATH() {
@@ -783,7 +879,20 @@ public class Database {
     public static String getLOGFC_MATRIX_PROTEOMES_PATH() {
         return Database.getPROTEOMES_PATH() + "Table_LOGFC";
     }
-
+    /**
+     * Path for loading proteomes matrix data showing Fold Change p-values
+     */
+    public static String getPVALUE_MATRIX_PROTEOMES_PATH() {
+        return Database.getPROTEOMES_PATH() + "Table_PVALUE";
+    }
+    
+    /**
+     * Path for loading proteomes matrix data showing Fold Change adjusted p-values
+     */
+    public static String getADJPVALUE_MATRIX_PROTEOMES_PATH() {
+        return Database.getPROTEOMES_PATH() + "Table_ADJPVALUE";
+    }
+    
     /**
      * Path for loading Proteomes matrix data showing Fold Change values
      */

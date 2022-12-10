@@ -111,7 +111,7 @@ public class TracksComposite extends Composite implements SelectionListener, Mou
     private final Button btnAddProteomicsData;
     private final Button btnSaveDataSelection;
     private final Button btnLoadData;
-    private final Button btnHelp;
+    //private final Button btnHelp;
     private final Button btnZoomIn;
     private final Button btnZoomOut;
     private final Button btnAddTranscriptomicsData;
@@ -222,18 +222,18 @@ public class TracksComposite extends Composite implements SelectionListener, Mou
         Composite compositeGenome;
         compositeGenome_1 = new Composite(this, SWT.NONE);
         compositeGenome_1.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 2));
-        compositeGenome_1.setLayout(new GridLayout(2, false));
+        compositeGenome_1.setLayout(new GridLayout(1, false));
 
         Composite compositeSettings = new Composite(compositeGenome_1, SWT.BORDER);
-        compositeSettings.setLayout(new GridLayout(5, false));
+        compositeSettings.setLayout(new GridLayout(10, false));
         compositeSettings.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
-
+/*
         Composite composite_5 = new Composite(compositeSettings, SWT.NONE);
         composite_5.setLayoutData(new GridData(SWT.LEFT, SWT.FILL, false, false, 1, 1));
         composite_5.setLayout(new GridLayout(1, false));
         composite_5.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
-
-        lblTutorial = new Label(composite_5, SWT.WRAP);
+*/
+        lblTutorial = new Label(compositeSettings, SWT.WRAP);
         GridData gd_lblTutorial = new GridData(SWT.LEFT, SWT.CENTER, false, true, 1, 1);
         gd_lblTutorial.widthHint = 150;
         lblTutorial.setLayoutData(gd_lblTutorial);
@@ -241,27 +241,43 @@ public class TracksComposite extends Composite implements SelectionListener, Mou
                 "Left-click: Position in BP\nRight-click: Center view\nDouble-click: Display Gene/RNA Information");
         lblTutorial.setFont(SWTResourceManager.getBodyFont(10, SWT.NORMAL));
         lblTutorial.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
-
+/*
         btnHelp = new Button(composite_5, SWT.NONE);
         btnHelp.setToolTipText("How to use Genome viewer ?");
         btnHelp.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/help.png"));
         btnHelp.addSelectionListener(this);
-
-        Composite composite_1 = new Composite(compositeSettings, SWT.BORDER);
-        composite_1.setLayout(new GridLayout(7, false));
-        composite_1.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
-
+*/
+        
+        
+/*
         Composite composite = new Composite(composite_1, SWT.NONE);
         composite.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 2));
         composite.setLayout(new GridLayout(2, false));
         composite.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
+*/
+        /*
+        compositeChromosome = new Composite(compositeSettings, SWT.NONE);
+        compositeChromosome.setLayout(new GridLayout(2, false));
+        compositeChromosome.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 7, 1));
+        compositeChromosome.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
+*/
+        Label lblChromosome = new Label(compositeSettings, SWT.NONE);
+        lblChromosome.setText("Chromosome");
+        lblChromosome.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
 
-        Label lblSearch = new Label(composite, SWT.NONE);
+        comboChromosome = new Combo(compositeSettings, SWT.NONE);
+        GridData gd_comboChromosome = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
+        gd_comboChromosome.widthHint = 205;
+        comboChromosome.setLayoutData(gd_comboChromosome);
+        comboChromosome.addSelectionListener(this);
+
+        
+        Label lblSearch = new Label(compositeSettings, SWT.NONE);
         lblSearch.setAlignment(SWT.RIGHT);
         lblSearch.setText("Search:");
         lblSearch.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
 
-        Text txtSearch = new Text(composite, SWT.BORDER);
+        Text txtSearch = new Text(compositeSettings, SWT.BORDER);
         GridData gd_txtSearch = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
         gd_txtSearch.widthHint = 83;
         txtSearch.setLayoutData(gd_txtSearch);
@@ -288,7 +304,10 @@ public class TracksComposite extends Composite implements SelectionListener, Mou
             @Override
             public void keyPressed(KeyEvent e) {}
         });
-
+        
+        Composite composite_1 = new Composite(compositeSettings, SWT.BORDER);
+        composite_1.setLayout(new GridLayout(6, false));
+        composite_1.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
         Label lblHorizontal = new Label(composite_1, SWT.NONE);
         lblHorizontal.setText("Genome");
         lblHorizontal.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
@@ -300,7 +319,6 @@ public class TracksComposite extends Composite implements SelectionListener, Mou
         btnZoomOut.setToolTipText("Zoom Out horizontally");
         btnZoomOut.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/genome/zoomOUT.bmp"));
 
-        btnZoomOut.addSelectionListener(this);
 
         btnSequence = new Button(composite_1, SWT.NONE);
         btnSequence.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 2));
@@ -321,35 +339,20 @@ public class TracksComposite extends Composite implements SelectionListener, Mou
         btnZoomOutVertical = new Button(composite_1, SWT.NONE);
         btnZoomOutVertical.setToolTipText("Zoom Out vertically");
         btnZoomOutVertical.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/genome/zoomOUT.bmp"));
-        new Label(composite_1, SWT.NONE);
-        new Label(composite_1, SWT.NONE);
-
-        compositeChromosome = new Composite(composite_1, SWT.NONE);
-        compositeChromosome.setLayout(new GridLayout(2, false));
-        compositeChromosome.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 7, 1));
-        compositeChromosome.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
-
-        Label lblChromosome = new Label(compositeChromosome, SWT.NONE);
-        lblChromosome.setText("Chromosome");
-        lblChromosome.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
-
-        comboChromosome = new Combo(compositeChromosome, SWT.NONE);
-        GridData gd_comboChromosome = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
-        gd_comboChromosome.widthHint = 205;
-        comboChromosome.setLayoutData(gd_comboChromosome);
-        comboChromosome.addSelectionListener(this);
+        
         btnZoomOutVertical.addSelectionListener(this);
+        btnZoomOut.addSelectionListener(this);
         btnZoomInVertical.addSelectionListener(this);
         btnZoomIn.addSelectionListener(this);
+        
+        new Label(composite_1, SWT.NONE);
+        new Label(composite_1, SWT.NONE);
+
+      
 
         Composite composite_4 = new Composite(compositeSettings, SWT.NONE);
         composite_4.setLayout(new GridLayout(1, false));
         composite_4.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
-        btnLegendManagement = new Button(composite_4, SWT.NONE);
-        btnLegendManagement.setText("Legend and Data Management");
-        btnLegendManagement.setToolTipText("Display data legend");
-        btnLegendManagement.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/genome/legend.bmp"));
-        btnLegendManagement.addSelectionListener(this);
 
         btnSaveDataSelection = new Button(composite_4, SWT.NONE);
         btnSaveDataSelection.setText("Save data selection");
@@ -365,7 +368,7 @@ public class TracksComposite extends Composite implements SelectionListener, Mou
         compositeAddData.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
 
         btnAddTranscriptomicsData = new Button(compositeAddData, SWT.NONE);
-        btnAddTranscriptomicsData.setText("AddTranscriptomics Data");
+        btnAddTranscriptomicsData.setText("Add Transcriptomics Data");
         btnAddTranscriptomicsData.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/genome/hideData.bmp"));
         btnAddTranscriptomicsData.setToolTipText("Choose transcriptomics data to display");
 
@@ -394,8 +397,15 @@ public class TracksComposite extends Composite implements SelectionListener, Mou
         comboTypeDisplay.add("Overlay all");
 
         comboTypeDisplay.addSelectionListener(this);
+        
+        btnLegendManagement = new Button(compositeSettings, SWT.NONE);
+        btnLegendManagement.setText("Legend and Data Management");
+        btnLegendManagement.setToolTipText("Display data legend");
+        btnLegendManagement.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/genome/legend.bmp"));
+        btnLegendManagement.addSelectionListener(this);
 
-        new Label(compositeGenome_1, SWT.NONE);
+
+       // new Label(compositeGenome_1, SWT.NONE);
 
         compositeGenome = new Composite(compositeGenome_1, SWT.NONE);
         compositeGenome.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
@@ -1036,8 +1046,8 @@ public class TracksComposite extends Composite implements SelectionListener, Mou
             canvasData.setnTermHighlight(nTerm);
             redrawAllCanvas();
             setHorizontalBarProperties();
-        } else if (e.getSource() == btnHelp) {
-            HelpPage.helpGenomeViewer(partService);
+        /*} else if (e.getSource() == btnHelp) {
+            HelpPage.helpGenomeViewer(partService);*/
         }
         // else if(e.getSource()==btnAnimate){
         // int initpos = sliderHbar.getSelection();

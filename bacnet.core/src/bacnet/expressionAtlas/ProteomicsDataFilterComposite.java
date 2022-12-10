@@ -27,16 +27,22 @@ public class ProteomicsDataFilterComposite extends org.eclipse.swt.widgets.Compo
    
     private Button btnPellet;
     private Button btnCytoplasm;
+    private Button btnPeriplasm;
     private Button btnSupernatant;
     private Button btnMembrane;
-    private Button btnBCSBroth;
-    private Button btnMinimalMediaBroth;
-    private Button btnDMEM;
-    private Button btnHumanPlasma;
+    private Button btnTemp28;
+    private Button btnTemp37;
+    private Button btnTempOther;
     private Button btnExponential;
     private Button btnStationnary;
-    private Button btnPeriplasm;
-    private Button btnLbBroth;
+    private Button btnBCS;
+    private Button btnMinimalMedia;
+    private Button btnDMEM;
+    private Button btnBlood;
+    private Button btnLB;
+    private Button btnInVivo;
+    private Button btnInCellulo;
+    private Button btnOtherMedia;
     private Combo comboMutant;
     private Button btnChooseOneMutant;
     private Button btnNoneMutant;
@@ -152,15 +158,36 @@ public class ProteomicsDataFilterComposite extends org.eclipse.swt.widgets.Compo
             btnSupernatant = new Button(composite, SWT.CHECK);
             btnSupernatant.setText("Supernatant");
 
-            //btnUnpublished = new Button(composite, SWT.CHECK);
-            //btnUnpublished.setText("Unpublished");
-
+            btnPellet.addSelectionListener(this);
             btnCytoplasm.addSelectionListener(this);
             btnPeriplasm.addSelectionListener(this);
             btnMembrane.addSelectionListener(this);
             btnSupernatant.addSelectionListener(this);
 
         }
+        
+        new Label(this, SWT.NONE);
+
+        Label lblTemp = new Label(this, SWT.NONE);
+        lblTemp.setFont(SWTResourceManager.getBodyFont(SWT.BOLD));
+        lblTemp.setText("Temperature");
+
+        Composite composite_21 = new Composite(this, SWT.NONE);
+        composite_21.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
+        composite_21.setLayout(new GridLayout(1, false));
+
+        btnTemp28 = new Button(composite_21, SWT.CHECK);
+        btnTemp28.setText("25°C to 28°C");
+
+        btnTemp37 = new Button(composite_21, SWT.CHECK);
+        btnTemp37.setText("37°");
+
+        btnTempOther = new Button(composite_21, SWT.CHECK);
+        btnTempOther.setText("Other");
+
+        btnTemp28.addSelectionListener(this);
+        btnTemp37.addSelectionListener(this);
+        btnTempOther.addSelectionListener(this);
 
         new Label(this, SWT.NONE);
 
@@ -172,25 +199,37 @@ public class ProteomicsDataFilterComposite extends org.eclipse.swt.widgets.Compo
         composite_1_1.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
         composite_1_1.setLayout(new GridLayout(1, false));
 
-        btnBCSBroth = new Button(composite_1_1, SWT.CHECK);
-        btnBCSBroth.setText("BCS");
-        btnBCSBroth.addSelectionListener(this);
+        btnBCS = new Button(composite_1_1, SWT.CHECK);
+        btnBCS.setText("BCS");
+        btnBCS.addSelectionListener(this);
 
-        btnLbBroth = new Button(composite_1_1, SWT.CHECK);
-        btnLbBroth.setText("LB");
-        btnLbBroth.addSelectionListener(this);
+        btnLB = new Button(composite_1_1, SWT.CHECK);
+        btnLB.setText("LB");
+        btnLB.addSelectionListener(this);
 
-        btnMinimalMediaBroth = new Button(composite_1_1, SWT.CHECK);
-        btnMinimalMediaBroth.setText("Chemically Defined Media");
-        btnMinimalMediaBroth.addSelectionListener(this);
-
-        btnHumanPlasma = new Button(composite_1_1, SWT.CHECK);
-        btnHumanPlasma.setText("Human Plasma");
-        btnHumanPlasma.addSelectionListener(this);
+        btnMinimalMedia = new Button(composite_1_1, SWT.CHECK);
+        btnMinimalMedia.setText("Chemically Defined Media");
+        btnMinimalMedia.addSelectionListener(this);
 
         btnDMEM = new Button(composite_1_1, SWT.CHECK);
         btnDMEM.setText("DMEM");
         btnDMEM.addSelectionListener(this);
+        
+        btnInCellulo = new Button(composite_1_1, SWT.CHECK);
+        btnInCellulo.setText("in cellulo");
+        btnInCellulo.addSelectionListener(this);
+        
+        btnBlood = new Button(composite_1_1, SWT.CHECK);
+        btnBlood.setText("Blood");
+        btnBlood.addSelectionListener(this);
+        
+        btnInVivo = new Button(composite_1_1, SWT.CHECK);
+        btnInVivo.setText("in vivo");
+        btnInVivo.addSelectionListener(this);
+        
+        btnOtherMedia = new Button(composite_1_1, SWT.CHECK);
+        btnOtherMedia.setText("Other Media");
+        btnOtherMedia.addSelectionListener(this);
 
         new Label(this, SWT.NONE);
 
@@ -212,22 +251,31 @@ public class ProteomicsDataFilterComposite extends org.eclipse.swt.widgets.Compo
 
         new Label(this, SWT.NONE);
 
+        allButtons.add(btnPellet);
         allButtons.add(btnCytoplasm);
         allButtons.add(btnPeriplasm);
         allButtons.add(btnMembrane);
         allButtons.add(btnSupernatant);
-        allButtons.add(btnHumanPlasma);
+        allButtons.add(btnBlood);
         allButtons.add(btnDMEM);
-        allButtons.add(btnBCSBroth);
-        allButtons.add(btnLbBroth);
-        allButtons.add(btnMinimalMediaBroth);
+        allButtons.add(btnBCS);
+        allButtons.add(btnBCS);
+        allButtons.add(btnMinimalMedia);
+        allButtons.add(btnInVivo);
+        allButtons.add(btnInCellulo);
+        allButtons.add(btnOtherMedia);
         allButtons.add(btnExponential);
         allButtons.add(btnStationnary);
-
+        allButtons.add(btnTemp28);
+        allButtons.add(btnTemp37);
+        allButtons.add(btnTempOther);
+        
         initComboGenome();
 
     }
     
+    //not used
+    /*
     public ProteomicsDataFilterComposite(org.eclipse.swt.widgets.Composite parent, int style, ProteomicsExpressionView view) {
         super(parent, style);
         this.setLayout(new GridLayout(1, false));
@@ -243,9 +291,7 @@ public class ProteomicsDataFilterComposite extends org.eclipse.swt.widgets.Compo
         textSearch.setLayoutData(gd_textSearch);
         textSearch.addKeyListener(new org.eclipse.swt.events.KeyListener() {
 
-            /**
-             * 
-             */
+            
             private static final long serialVersionUID = 1L;
 
             @Override
@@ -301,9 +347,7 @@ public class ProteomicsDataFilterComposite extends org.eclipse.swt.widgets.Compo
             btnSupernatant = new Button(composite, SWT.CHECK);
             btnSupernatant.setText("Supernatant");
 
-            //btnUnpublished = new Button(composite, SWT.CHECK);
-            //btnUnpublished.setText("Unpublished");
-
+           
             btnCytoplasm.addSelectionListener(this);
             btnPeriplasm.addSelectionListener(this);
             btnMembrane.addSelectionListener(this);
@@ -321,26 +365,29 @@ public class ProteomicsDataFilterComposite extends org.eclipse.swt.widgets.Compo
         composite_1_1.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
         composite_1_1.setLayout(new GridLayout(1, false));
 
-        btnBCSBroth = new Button(composite_1_1, SWT.CHECK);
-        btnBCSBroth.setText("BCS");
+        btnBCSinfo = new Button(composite_1_1, SWT.CHECK);
+        btnBCSinfo.setText("BCS");
+        btnBCSinfo.addSelectionListener(this);
 
-        btnBCSBroth.addSelectionListener(this);
+        btnLbinfo = new Button(composite_1_1, SWT.CHECK);
+        btnLbinfo.setText("LB");
+        btnLbinfo.addSelectionListener(this);
 
-        btnLbBroth = new Button(composite_1_1, SWT.CHECK);
-        btnLbBroth.setText("LB");
-        btnLbBroth.addSelectionListener(this);
+        btnMinimalMediainfo = new Button(composite_1_1, SWT.CHECK);
+        btnMinimalMediainfo.setText("Chemically Defined Media");
+        btnMinimalMediainfo.addSelectionListener(this);
 
-        btnMinimalMediaBroth = new Button(composite_1_1, SWT.CHECK);
-        btnMinimalMediaBroth.setText("Chemically Defined Media");
-        btnMinimalMediaBroth.addSelectionListener(this);
-
-        btnHumanPlasma = new Button(composite_1_1, SWT.CHECK);
-        btnHumanPlasma.setText("Human Plasma");
-        btnHumanPlasma.addSelectionListener(this);
+        btnBlood = new Button(composite_1_1, SWT.CHECK);
+        btnBlood.setText("Blood");
+        btnBlood.addSelectionListener(this);
 
         btnDMEM = new Button(composite_1_1, SWT.CHECK);
         btnDMEM.setText("DMEM");
         btnDMEM.addSelectionListener(this);
+        
+        btnOtherMedia = new Button(composite_1_1, SWT.CHECK);
+        btnOtherMedia.setText("Other Media");
+        btnOtherMedia.addSelectionListener(this);
 
         new Label(this, SWT.NONE);
 
@@ -366,18 +413,19 @@ public class ProteomicsDataFilterComposite extends org.eclipse.swt.widgets.Compo
         allButtons.add(btnPeriplasm);
         allButtons.add(btnMembrane);
         allButtons.add(btnSupernatant);
-        allButtons.add(btnHumanPlasma);
+        allButtons.add(btnBlood);
         allButtons.add(btnDMEM);
-        allButtons.add(btnBCSBroth);
-        allButtons.add(btnLbBroth);
-        allButtons.add(btnMinimalMediaBroth);
+        allButtons.add(btnBCSinfo);
+        allButtons.add(btnLbinfo);
+        allButtons.add(btnMinimalMediainfo);
         allButtons.add(btnExponential);
         allButtons.add(btnStationnary);
+        allButtons.add(btnOtherMedia);
 
         initComboGenome();
 
     }
-
+*/
     private void initComboGenome() {
         /**
          * Update combo genome
@@ -404,13 +452,20 @@ public class ProteomicsDataFilterComposite extends org.eclipse.swt.widgets.Compo
         int peri = 0;
         int memb = 0;
         int sup = 0;
-        int humanblood = 0;
+        int temp28 = 0;
+        int temp37 = 0;
+        int tempOther = 0;
+        int blood = 0;
         int dmem = 0;
+        int inVivo = 0;
+        int inCellulo = 0;
         int BCS = 0;
         int lb = 0;
         int mm = 0;
+        int mediaOther = 0;
         int expo = 0;
         int stat = 0;
+        
         //int unpublished = 0;
         for (String[] row : view.getBioCondsToDisplay()) {
             // Data type
@@ -426,13 +481,19 @@ public class ProteomicsDataFilterComposite extends org.eclipse.swt.widgets.Compo
             if (dataType.contains("Supernatant"))
                 sup++;
 
-            // Unpublished data
-            //String reference = row[ArrayUtils.findColumn(view.getBioCondsArray(), "Reference")];
-            //if (reference.contains("Unpublished"))
-            //    unpublished++;
-
-
-            // Broth type
+            // Temperature
+            String temperature = row[ArrayUtils.findColumn(view.getBioCondsArray(), "Temp.")];
+            if (temperature.contains("28") || temperature.contains("26") || temperature.contains("25")|| temperature.contains("37")) {
+            	 if (temperature.contains("37"))
+                     temp37++;
+                 if (temperature.contains("28") || temperature.contains("26") || temperature.contains("25")) {
+                     temp28++;
+     			}
+			} else {
+                tempOther++;
+			}
+            
+            // broth type
             String broth = row[ArrayUtils.findColumn(view.getBioCondsArray(), "Media")];
             if (broth.contains("BCS"))
                 BCS++;
@@ -440,16 +501,32 @@ public class ProteomicsDataFilterComposite extends org.eclipse.swt.widgets.Compo
                 lb++;
             if (broth.contains("Minimal Media")||broth.contains("M9")||broth.contains("TMH")||broth.contains("PMH"))
                 mm++;
-            if (broth.contains("Human Plasma"))
-                humanblood++;
+            if (broth.contains("Plasma") || broth.contains("Blood"))
+                blood++;
             if (broth.contains("DMEM"))
                 dmem++;
+            if (broth.contains("Brown Norway")|| broth.contains("C57BL")|| broth.contains("Xenopsylla")
+            		|| broth.contains("Galleria")|| broth.contains("BALB")|| broth.contains("OF1")
+            		|| broth.contains("FVB"))
+                inVivo++;
+            if (broth.contains("THP-1")|| broth.contains("J774")
+            	|| broth.contains("Monocyte")|| broth.contains("Neutrophil"))
+                inCellulo++;
+            if (!(broth.contains("BCS") || broth.contains("Minimal Media")||broth.contains("M9")||broth.contains("LB")
+            		||broth.contains("TMH")||broth.contains("PMH")||broth.contains("Plasma")
+            		|| broth.contains("Blood")||broth.contains("DMEM")||broth.contains("Brown Norway")
+            		|| broth.contains("C57BL")|| broth.contains("Xenopsylla")
+            		|| broth.contains("Galleria")|| broth.contains("BALB")|| broth.contains("OF1")
+            		|| broth.contains("FVB"))||broth.contains("THP-1")|| broth.contains("J774")
+            		|| broth.contains("Monocyte")|| broth.contains("Neutrophil")) {
+            	mediaOther++;
+            }
 
             // growth type
             String growth = row[ArrayUtils.findColumn(view.getBioCondsArray(), "Growth")];
-            if (growth.contains("Logarithmic"))
+            if (growth.contains("Log"))
                 expo++;
-            if (growth.contains("Stationary"))
+            if (growth.contains("Stat"))
                 stat++;
 
         }
@@ -462,19 +539,19 @@ public class ProteomicsDataFilterComposite extends org.eclipse.swt.widgets.Compo
         btnPeriplasm.setText("Periplasm (" + peri + ")");
         btnMembrane.setText("Membrane (" + memb + ")");
         btnSupernatant.setText("Supernatant (" + sup + ")");
-        btnHumanPlasma.setText("Human Plasma (" + humanblood + ")");
+        btnTemp28.setText("25°C to 28°C (" + temp28 + ")");
+        btnTemp37.setText("37°C (" + temp37 + ")");
+        btnTempOther.setText("Other (" + tempOther + ")");
+        btnBlood.setText("Blood (" + blood + ")");
         btnDMEM.setText("DMEM (" + dmem + ")");
-        btnBCSBroth.setText("BCS (" + BCS + ")");
-        btnLbBroth.setText("LB (" + lb + ")");
-        btnMinimalMediaBroth.setText("Chemically Defined Media (" + mm + ")");
+        btnInVivo.setText("in vivo (" + inVivo + ")");
+        btnInCellulo.setText("in cellulo (" + inCellulo + ")");
+        btnBCS.setText("BCS (" + BCS + ")");
+        btnLB.setText("LB (" + lb + ")");
+        btnMinimalMedia.setText("Chemically Defined Media (" + mm + ")");
+        btnOtherMedia.setText("Other Media (" + mediaOther + ")");
         btnExponential.setText("Logarithmic Phase (" + expo + ")");
         btnStationnary.setText("Stationnary Phase (" + stat + ")");
-        /*
-        if (Database.getInstance().getProjectName() != Database.UIBCLISTERIOMICS_PROJECT) {
-            btnUnpublished.dispose();
-        } else {
-            btnUnpublished.setText("Unpublished (" + unpublished + ")");
-        } */
 
     }
 
@@ -520,36 +597,6 @@ public class ProteomicsDataFilterComposite extends org.eclipse.swt.widgets.Compo
         }
 
         /*
-         * Update with Data type
-         */
-        
-
-        /*
-         * Reference section
-         */
-        /*
-        if (Database.getInstance().getProjectName() == Database.UIBCLISTERIOMICS_PROJECT) {
-            selected = false;
-            if (btnUnpublished.getSelection()) {
-                selected = true;
-                for (String[] row : view.getBioCondsToDisplay()) {
-                    String info = row[ArrayUtils.findColumn(view.getBioCondsArray(), "Reference")];
-                    if (info.contains("Unpublished (Cossart lab)")) {
-                        if (!bioCondsToDisplayTemp.contains(row))
-                            bioCondsToDisplayTemp.add(row);
-                    }
-                }
-
-            }
-            if (selected) {
-                view.getBioCondsToDisplay().clear();
-                for (String[] row : bioCondsToDisplayTemp)
-                    view.getBioCondsToDisplay().add(row);
-            }
-        }
-        */
-
-        /*
          * Update with Mutant
          */
         ArrayList<String[]> bioCondsToDisplayTemp = new ArrayList<>();
@@ -586,9 +633,10 @@ public class ProteomicsDataFilterComposite extends org.eclipse.swt.widgets.Compo
         /*
          * Update with localization
          */
-        
         bioCondsToDisplayTemp = new ArrayList<>();
         selected = false;
+        
+
         if (btnPellet.getSelection()) {
             selected = true;
             for (String[] row : view.getBioCondsToDisplay()) {
@@ -636,7 +684,6 @@ public class ProteomicsDataFilterComposite extends org.eclipse.swt.widgets.Compo
                 if (info.contains("Supernatant")) {
                     if (!bioCondsToDisplayTemp.contains(row)) {
                         bioCondsToDisplayTemp.add(row);
-                        System.out.println("length: "+bioCondsToDisplayTemp.size());
                         
                     }
                 }
@@ -649,15 +696,60 @@ public class ProteomicsDataFilterComposite extends org.eclipse.swt.widgets.Compo
         }
         
         /*
-         * Update with Media type
+         * Update with temperature
          */
         bioCondsToDisplayTemp = new ArrayList<>();
         selected = false;
-        if (btnHumanPlasma.getSelection()) {
+        
+        if (btnTemp28.getSelection()) {
+            selected = true;
+            for (String[] row : view.getBioCondsToDisplay()) {
+                String info = row[ArrayUtils.findColumn(view.getBioCondsArray(), "Temp.")];
+                if (info.contains("25") || info.contains("26") || info.contains("28")) {
+                    if (!bioCondsToDisplayTemp.contains(row))
+                        bioCondsToDisplayTemp.add(row);
+                }
+            }
+        }
+        if (btnTemp37.getSelection()) {
+            selected = true;
+            for (String[] row : view.getBioCondsToDisplay()) {
+                String info = row[ArrayUtils.findColumn(view.getBioCondsArray(), "Temp.")];
+                if (info.contains("37")) {
+                    if (!bioCondsToDisplayTemp.contains(row))
+                        bioCondsToDisplayTemp.add(row);
+                }
+            }
+        }
+        if (btnTempOther.getSelection()) {
+            selected = true;
+            for (String[] row : view.getBioCondsToDisplay()) {
+                String info = row[ArrayUtils.findColumn(view.getBioCondsArray(), "Temp.")];
+                if (!(info.contains("25") || info.contains("26") || info.contains("28")||info.contains("37"))) {
+                    if (!bioCondsToDisplayTemp.contains(row))
+                        bioCondsToDisplayTemp.add(row);
+                }
+            }
+        }
+        
+        if (selected) {
+            view.getBioCondsToDisplay().clear();
+            for (String[] row : bioCondsToDisplayTemp)
+                view.getBioCondsToDisplay().add(row);
+        }
+        
+        /*
+         * Update with Media type
+         */
+        
+        bioCondsToDisplayTemp = new ArrayList<>();
+        selected = false;
+        
+        if (btnBlood.getSelection()) {
             selected = true;
             for (String[] row : view.getBioCondsToDisplay()) {
                 String info = row[ArrayUtils.findColumn(view.getBioCondsArray(), "Media")];
-                if (info.contains("Human Plasma")) {
+                if (info.contains("Plasma") || info.contains("Blood")) {
                     if (!bioCondsToDisplayTemp.contains(row))
                         bioCondsToDisplayTemp.add(row);
                 }
@@ -673,7 +765,7 @@ public class ProteomicsDataFilterComposite extends org.eclipse.swt.widgets.Compo
                 }
             }
         }
-        if (btnBCSBroth.getSelection()) {
+        if (btnBCS.getSelection()) {
             selected = true;
             for (String[] row : view.getBioCondsToDisplay()) {
                 String info = row[ArrayUtils.findColumn(view.getBioCondsArray(), "Media")];
@@ -683,7 +775,7 @@ public class ProteomicsDataFilterComposite extends org.eclipse.swt.widgets.Compo
                 }
             }
         }
-        if (btnLbBroth.getSelection()) {
+        if (btnLB.getSelection()) {
             selected = true;
             for (String[] row : view.getBioCondsToDisplay()) {
                 String info = row[ArrayUtils.findColumn(view.getBioCondsArray(), "Media")];
@@ -693,7 +785,7 @@ public class ProteomicsDataFilterComposite extends org.eclipse.swt.widgets.Compo
                 }
             }
         }
-        if (btnMinimalMediaBroth.getSelection()) {
+        if (btnMinimalMedia.getSelection()) {
             selected = true;
             for (String[] row : view.getBioCondsToDisplay()) {
                 String info = row[ArrayUtils.findColumn(view.getBioCondsArray(), "Media")];
@@ -703,6 +795,48 @@ public class ProteomicsDataFilterComposite extends org.eclipse.swt.widgets.Compo
                 }
             }
         }
+        
+        if (btnInVivo.getSelection()) {
+            selected = true;
+            for (String[] row : view.getBioCondsToDisplay()) {
+                String info = row[ArrayUtils.findColumn(view.getBioCondsArray(), "Media")];
+                if (info.contains("Brown Norway")|| info.contains("C57BL")|| info.contains("Xenopsylla")
+                		|| info.contains("Galleria")|| info.contains("BALB")|| info.contains("OF1")
+                		|| info.contains("FVB")) {
+                    if (!bioCondsToDisplayTemp.contains(row))
+                        bioCondsToDisplayTemp.add(row);
+                }
+            }
+        }
+        
+        if (btnInCellulo.getSelection()) {
+            selected = true;
+            for (String[] row : view.getBioCondsToDisplay()) {
+                String info = row[ArrayUtils.findColumn(view.getBioCondsArray(), "Media")];
+                if (info.contains("THP-1")|| info.contains("J774")|| info.contains("Monocyte")|| info.contains("Neutrophil")) {
+                    if (!bioCondsToDisplayTemp.contains(row))
+                        bioCondsToDisplayTemp.add(row);
+                }
+            }
+        }
+        
+        if (btnOtherMedia.getSelection()) {
+            selected = true;
+            for (String[] row : view.getBioCondsToDisplay()) {
+                String info = row[ArrayUtils.findColumn(view.getBioCondsArray(), "Media")];
+                if (!(info.contains("BCS") || info.contains("Minimal Media")||info.contains("M9")||info.contains("LB")
+                		||info.contains("TMH")||info.contains("PMH")||info.contains("Plasma")
+                		|| info.contains("Blood")||info.contains("DMEM")||info.contains("Brown Norway")
+                		|| info.contains("C57BL")|| info.contains("Xenopsylla")
+                		|| info.contains("Galleria")|| info.contains("BALB")|| info.contains("OF1")
+                		|| info.contains("FVB") || info.contains("THP-1")|| info.contains("J774")
+                		|| info.contains("Monocyte")|| info.contains("Neutrophil"))) {
+                    if (!bioCondsToDisplayTemp.contains(row))
+                        bioCondsToDisplayTemp.add(row);
+                }
+            }
+        }
+        
         if (selected) {
             view.getBioCondsToDisplay().clear();
             for (String[] row : bioCondsToDisplayTemp)
@@ -712,13 +846,15 @@ public class ProteomicsDataFilterComposite extends org.eclipse.swt.widgets.Compo
         /*
          * Update with Growth type
          */
+        
         bioCondsToDisplayTemp = new ArrayList<>();
         selected = false;
+        
         if (btnExponential.getSelection()) {
             selected = true;
             for (String[] row : view.getBioCondsToDisplay()) {
                 String info = row[ArrayUtils.findColumn(view.getBioCondsArray(), "Growth")];
-                if (info.contains("Logarithmic")) {
+                if (info.contains("Log")) {
                     if (!bioCondsToDisplayTemp.contains(row))
                         bioCondsToDisplayTemp.add(row);
                 }
@@ -728,7 +864,7 @@ public class ProteomicsDataFilterComposite extends org.eclipse.swt.widgets.Compo
             selected = true;
             for (String[] row : view.getBioCondsToDisplay()) {
                 String info = row[ArrayUtils.findColumn(view.getBioCondsArray(), "Growth")];
-                if (info.contains("Stationary")) {
+                if (info.contains("Stat")) {
                     if (!bioCondsToDisplayTemp.contains(row))
                         bioCondsToDisplayTemp.add(row);
                 }
@@ -739,19 +875,7 @@ public class ProteomicsDataFilterComposite extends org.eclipse.swt.widgets.Compo
             for (String[] row : bioCondsToDisplayTemp)
                 view.getBioCondsToDisplay().add(row);
         }
-        /*
-        if (Database.getInstance().getProjectName() == Database.UIBCLISTERIOMICS_PROJECT) {
-            bioCondsToDisplayTemp = new ArrayList<String[]>();
-            for (String[] row : view.getBioCondsToDisplay()) {
-                String info = row[ArrayUtils.findColumn(view.getBioCondsArray(), "Reference")];
-                if (info.contains("Unpublished (Cossart lab)")) {
-                    //
-                } else {
-                    bioCondsToDisplayTemp.add(row);
-                }
-            }
-            view.setBioCondsToDisplay(bioCondsToDisplayTemp);
-        } */
+       
     }
 
     public void pushState() {

@@ -147,14 +147,14 @@ public class PhylogenomicsCreation {
 			String matrixInfo = genomeToAttribute.get(genome);
 			//System.out.println("matrixInfo: "+matrixInfo);
 
-			if(matrixInfo.contains("matrix")) {
+			if(matrixInfo.contains("matrix")) { //old methods for svg created by FigTree v1.4.4
 				//System.out.println(matrixInfo.substring(matrixInfo.indexOf("matrix("), matrixInfo.indexOf(")")));
 				String[] parseLine = matrixInfo.substring(matrixInfo.indexOf("matrix("), matrixInfo.indexOf(")")).split(",");
 				String heigth = parseLine[parseLine.length - 1];
 				double value = Double.valueOf(heigth);
 				heightToStrain.put(value, GenomeNCBI.unprocessGenomeName(genome));
 				//System.out.println(genome + " " + GenomeNCBI.unprocessGenomeName(genome) + " " + heigth);
-			} else if(matrixInfo.contains("translate")) {
+			} else if(matrixInfo.contains("translate")) { // new method for svg created by iroki.net
 				//System.out.println("translate: "+matrixInfo.substring(matrixInfo.indexOf("translate("), matrixInfo.indexOf("rotate(90)")));
 				String[] parseLine = matrixInfo.substring(matrixInfo.indexOf("translate("), matrixInfo.indexOf("rotate(90)")).split(" ");
 				String heigthTemp = parseLine[0];
