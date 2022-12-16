@@ -129,7 +129,7 @@ public class AddTranscriptomicsDataDialog extends TitleAreaDialog implements Sel
         imageRNASeq = ResourceManager.getPluginImage("bacnet.core", "icons/rnaSeq.bmp");
         imageTSSTilingGeneExpr = ResourceManager.getPluginImage("bacnet.core", "icons/tssTilingGeneExpr.bmp");
         imageTilingGeneExpr = ResourceManager.getPluginImage("bacnet.core", "icons/TilingGeneExpr.bmp");
-        imageGeneExpr = ResourceManager.getPluginImage("bacnet.core", "icons/GeneExpr.bmp");
+        imageGeneExpr = ResourceManager.getPluginImage("bacnet.core", "icons/geneexpr.bmp");
     }
 
     /**

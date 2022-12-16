@@ -456,8 +456,8 @@ public class GenomicsView implements SelectionListener {
 					String colName = bioCondsArray[0][cell.getColumnIndex() - 1];
 					if (colName.equals("Reference")) {
 						RWTUtils.setPubMedLink(text);
-					} else if (colName.equals("Sequence ID")) {
-						cell.setText("<a href='https://www.ncbi.nlm.nih.gov/nuccore/" + text + "' target='_blank'>"
+					} else if (colName.equals("Assembly")) {
+						cell.setText("<a href='https://www.ncbi.nlm.nih.gov/data-hub/genome/" + text + "' target='_blank'>"
 								+ text + "</a>");
 					} else {
 						cell.setText(text);
@@ -468,7 +468,7 @@ public class GenomicsView implements SelectionListener {
 						colorBack = BasicColor.WHITE;
 					}
 					if (!txtSearch.getText().equals("")) {
-						if (bioCond[cell.getColumnIndex() - 1].contains(txtSearch.getText())) {
+						if (bioCond[cell.getColumnIndex() - 1].toLowerCase().contains(txtSearch.getText().toLowerCase())) {
 							colorBack = BasicColor.YELLOW;
 						}
 					}

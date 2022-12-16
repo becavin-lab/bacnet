@@ -648,7 +648,7 @@ public class GeneView implements SelectionListener, MouseListener {
 
 		lblSizeBP = new Text(compGeneralInfo, SWT.READ_ONLY);
 		GridData gd_lblSizeBP = new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1);
-		gd_lblSizeBP.widthHint = 65;
+		gd_lblSizeBP.widthHint = 80;
 		lblSizeBP.setLayoutData(gd_lblSizeBP);
 		lblSizeBP.setText("Size");
 
@@ -3146,6 +3146,22 @@ public class GeneView implements SelectionListener, MouseListener {
 		view.setGenomeSelected(genomeName);
 	}
 
+	
+	public static void openEV76GeneView(EPartService partService) {
+		String id = GeneView.ID + "-" + String.valueOf(Math.random() * 1000).substring(0, 3);
+		// initiate view
+		ResourceManager.openView(partService, GeneView.ID, id);
+		// update data
+		MPart part = partService.findPart(id);
+		NavigationManagement.pushStateView(id, new HashMap<>());
+		GeneView view = (GeneView) part.getObject();
+		view.setViewID(id);
+		String genomeName = "Yersinia pestis EV76-CN";
+		view.initGenomeInfo(genomeName);
+		view.setGenomeSelected(genomeName);
+	}
+
+	
 	/**
 	 * Display GeneView <br>
 	 * It will display IP32953
@@ -3345,7 +3361,7 @@ public class GeneView implements SelectionListener, MouseListener {
 	 * @param partService
 	 */
 
-	public static void openQMA0440GeneView(EPartService partService) {
+	public static void openSC09GeneView(EPartService partService) {
 		String id = GeneView.ID + "-" + String.valueOf(Math.random() * 1000).substring(0, 3);
 		// initiate view
 		ResourceManager.openView(partService, GeneView.ID, id);
@@ -3354,7 +3370,7 @@ public class GeneView implements SelectionListener, MouseListener {
 		NavigationManagement.pushStateView(id, new HashMap<>());
 		GeneView view = (GeneView) part.getObject();
 		view.setViewID(id);
-		String genomeName = "Yersinia ruckeri QMA0440";
+		String genomeName = "Yersinia ruckeri SC09";
 		view.initGenomeInfo(genomeName);
 		view.setGenomeSelected(genomeName);
 	}

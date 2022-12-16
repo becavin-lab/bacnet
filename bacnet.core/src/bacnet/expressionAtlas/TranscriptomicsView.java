@@ -126,7 +126,7 @@ public class TranscriptomicsView implements SelectionListener {
         imageRNASeq = ResourceManager.getPluginImage("bacnet.core", "icons/rnaSeq.bmp");
         imageTSSTilingGeneExpr = ResourceManager.getPluginImage("bacnet.core", "icons/tssTilingGeneExpr.bmp");
         imageTilingGeneExpr = ResourceManager.getPluginImage("bacnet.core", "icons/TilingGeneExpr.bmp");
-        imageGeneExpr = ResourceManager.getPluginImage("bacnet.core", "icons/GeneExpr.bmp");
+        imageGeneExpr = ResourceManager.getPluginImage("bacnet.core", "icons/geneexpr.bmp");
         imageTiling = ResourceManager.getPluginImage("bacnet.core", "icons/tiling.bmp");
     }
 

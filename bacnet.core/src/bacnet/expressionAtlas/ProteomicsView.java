@@ -104,7 +104,7 @@ public class ProteomicsView implements SelectionListener {
     @Inject
     public ProteomicsView() {
         imageTSS = ResourceManager.getPluginImage("bacnet.core", "icons/tss.bmp");
-        imageGeneExpr = ResourceManager.getPluginImage("bacnet.core", "icons/GeneExpr.bmp");
+        imageGeneExpr = ResourceManager.getPluginImage("bacnet.core", "icons/geneexpr.bmp");
     }
 
     /**

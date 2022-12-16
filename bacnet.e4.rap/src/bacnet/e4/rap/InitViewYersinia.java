@@ -62,12 +62,12 @@ public class InitViewYersinia implements SelectionListener {
     private Button btnYPIII;
     private Button btnIP32953;
     private Button btnIP31758;
-    private Button btnPB1;
+    private Button btnEV76;
     private Button btnY11;
     private Button btnY1;
     private Button btn8081;
     private Button btnWA;
-    private Button btnQMA0440;
+    private Button btnSC09;
     private Button btn91001;
     private Button btnMH96;
     private Button btnIP38326;
@@ -244,6 +244,8 @@ public class InitViewYersinia implements SelectionListener {
         btn91001.setFont(SWTResourceManager.getBodyFont(SWT.NORMAL));
         btn91001.setBackground(BasicColor.DARK_ONE);
         
+        
+        
         Composite composite_001 = new Composite(composite_01, SWT.NONE);
         GridData gd_composite_001 = new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1);
         //gd_composite_1.widthHint = 100;
@@ -251,7 +253,7 @@ public class InitViewYersinia implements SelectionListener {
         //gd_composite_1.heightHint = 115;
         composite_001.setLayoutData(gd_composite_001);
         composite_001.setSize(480, 109);
-        composite_001.setLayout(new GridLayout(1, false));
+        composite_001.setLayout(new GridLayout(2, false));
         composite_001.setBackground(BasicColor.LIGHT_ONE);
         
         btnPestoides = new Button(composite_001, SWT.BORDER);
@@ -261,6 +263,15 @@ public class InitViewYersinia implements SelectionListener {
         btnPestoides.setBackground(BasicColor.DARK_ONE);
         //btnKIM.setForeground(BasicColor.BLACK);
         btnPestoides.addSelectionListener(this);
+        
+
+        btnEV76 = new Button(composite_001, SWT.BORDER);
+        btnEV76.setLayoutData(new GridData(SWT.CENTER, SWT.TOP, false, false, 1, 1));
+        btnEV76.setText("EV76-CN");
+        btnEV76.setFont(SWTResourceManager.getBodyFont(SWT.NORMAL));
+        btnEV76.setBackground(BasicColor.DARK_ONE);
+        //btnKIM.setForeground(BasicColor.BLACK);
+        btnEV76.addSelectionListener(this);
         
         
 /*
@@ -656,12 +667,12 @@ public class InitViewYersinia implements SelectionListener {
         lblRuck.setForeground(BasicColor.BLACK);
         lblRuck.setText("<i>Y. ruckeri</i>");
         
-        btnQMA0440 = new Button(composite_020, SWT.BORDER);
-        btnQMA0440.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
-        btnQMA0440.addSelectionListener(this);
-        btnQMA0440.setText("QMA0440");
-        btnQMA0440.setFont(SWTResourceManager.getBodyFont(SWT.NORMAL));
-        btnQMA0440.setBackground(BasicColor.DARK_ONE);
+        btnSC09 = new Button(composite_020, SWT.BORDER);
+        btnSC09.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
+        btnSC09.addSelectionListener(this);
+        btnSC09.setText("SC09");
+        btnSC09.setFont(SWTResourceManager.getBodyFont(SWT.NORMAL));
+        btnSC09.setBackground(BasicColor.DARK_ONE);
         
         Composite composite_0020 = new Composite(composite_20, SWT.NONE);
         GridData gd_composite_0020 = new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1);
@@ -801,7 +812,7 @@ public class InitViewYersinia implements SelectionListener {
         gd_lblGoThroughAll_1.widthHint = 460;
         lblGoThroughAll_1.setLayoutData(gd_lblGoThroughAll_1);
         lblGoThroughAll_1
-                .setText("Browse all 253 <i>Yersinia</i> species transcriptomics datasets available on Yersiniomics. "
+                .setText("Browse all 251 <i>Yersinia</i> species transcriptomics datasets available on Yersiniomics. "
                         + "Visualize them on the genome browser. Extract differently expressed genome elements and display their fold changes in a heatmap viewer.");
         lblGoThroughAll_1.setFont(SWTResourceManager.getBodyFont(15,SWT.NORMAL));
         lblGoThroughAll_1.setBackground(BasicColor.LIGHT_TWO);
@@ -827,7 +838,7 @@ public class InitViewYersinia implements SelectionListener {
         gd_lblGoThroughAll_2.widthHint = 460;
         lblGoThroughAll_2.setLayoutData(gd_lblGoThroughAll_2);
         lblGoThroughAll_2
-                .setText("Browse all 76 <i>Yersinia</i> species proteomics datasets available on Yersiniomics. "
+                .setText("Browse all 62 <i>Yersinia</i> species proteomics datasets available on Yersiniomics. "
                         + "Visualize them on the genome browser. Display protein detection patterns for each datasets in a heatmap viewer.");
         lblGoThroughAll_2.setFont(SWTResourceManager.getBodyFont(15,SWT.NORMAL));
         lblGoThroughAll_2.setBackground(BasicColor.LIGHT_TWO);
@@ -1071,6 +1082,8 @@ public class InitViewYersinia implements SelectionListener {
         	//GenomeTranscriptomeView.displayYersiCSF007(partService);
         } else if (e.getSource() == btnPestoides) {
             GeneView.openPestoidesGeneView(partService);
+        } else if (e.getSource() == btnEV76) {
+            GeneView.openEV76GeneView(partService);
         } else if (e.getSource() == btnIP32953) {
             GeneView.openIP32953GeneView(partService);
         	//GenomeTranscriptomeView.displayYersiIP32953(partService);
@@ -1098,8 +1111,8 @@ public class InitViewYersinia implements SelectionListener {
             GeneView.openIP37485GeneView(partService);
         } else if (e.getSource() == btnIP37574) {
             GeneView.openIP37574GeneView(partService);
-        } else if (e.getSource() == btnQMA0440) {
-            GeneView.openQMA0440GeneView(partService);
+        } else if (e.getSource() == btnSC09) {
+            GeneView.openSC09GeneView(partService);
         	//GenomeTranscriptomeView.displayYersiCSF007(partService);
     
         } else if (e.getSource() == btnMH96) {

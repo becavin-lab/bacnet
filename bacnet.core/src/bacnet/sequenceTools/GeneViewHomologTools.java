@@ -334,10 +334,13 @@ public class GeneViewHomologTools {
                     String colName = bioCondsArray[0][cell.getColumnIndex() - 1];
                     if (colName.equals("Reference")) {
                         cell.setText(RWTUtils.setPubMedLink(text));
-                    } else if (colName.equals("Sequence ID")) {
+                    } else if (colName.equals("Homolog Protein")) {
                         cell.setText("<a href='https://www.ncbi.nlm.nih.gov/nuccore/" + text + "' target='_blank'>"
                                 + text + "</a>");
-                    } else {
+                    } else if (colName.equals("Assembly")) {
+						cell.setText("<a href='https://www.ncbi.nlm.nih.gov/data-hub/genome/" + text + "' target='_blank'>"
+								+ text + "</a>");
+						} else {
                         cell.setText(text);
                     }
                     Color colorBack = BasicColor.LIGHTGREY;
