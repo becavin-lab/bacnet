@@ -954,13 +954,13 @@ public class GeneView implements SelectionListener, MouseListener {
 				lblAnd.setText("and");
 
 				Label lblPvalue = new Label(composite_pvalue, SWT.NONE);
-				lblPvalue.setText("adj. p-value <");
+				lblPvalue.setText("p-value <");
 
 				txtCutoffPvalue = new Text(composite_pvalue, SWT.BORDER);
 				txtCutoffPvalue.setText(GenomeElementAtlas.DEFAULT_PVAL_CUTOFF+"");
 				
 				Label lblZeroPvalue = new Label(composite_pvalue, SWT.NONE);
-				lblZeroPvalue.setText("adjusted p-value is only available for RNA-Seq data.\n0.00 means that the Log2(FC) is not known.\n0.0e+00 means the adjusted p-value is not known.");
+				lblZeroPvalue.setText("0.00 means that the Log2(FC) is not known.\n0.0e+00 means the p-value or the adjusted p-value is not known.");
 				lblZeroPvalue.setForeground(BasicColor.GREY);
 				
 				/*
@@ -970,7 +970,7 @@ public class GeneView implements SelectionListener, MouseListener {
 			}
 			btnUpdateCutoff = new Button(composite_8, SWT.NONE);
 			btnUpdateCutoff.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 5, 1));
-			btnUpdateCutoff.setText("Choose cut-off and update Expression Atlas");
+			btnUpdateCutoff.setText("Choose cut-off and update transcript differential expressions");
 			btnUpdateCutoff.addSelectionListener(this);
 
 			Composite composite_3 = new Composite(compositeTranscriptome, SWT.NONE);
@@ -1088,7 +1088,7 @@ public class GeneView implements SelectionListener, MouseListener {
 
 		{
 			tbtmProteomeData = new TabItem(tabFolder, SWT.NONE);
-			tbtmProteomeData.setText("Protein differential expressions");
+			tbtmProteomeData.setText("Protein differential abundances");
 
 			compositeProteome = new Composite(tabFolder, SWT.BORDER);
 			tbtmProteomeData.setControl(compositeProteome);
@@ -1133,7 +1133,7 @@ public class GeneView implements SelectionListener, MouseListener {
 			}
 			btnUpdateCutoffProteome = new Button(composite_8, SWT.NONE);
 			btnUpdateCutoffProteome.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 5, 1));
-			btnUpdateCutoffProteome.setText("Choose cut-off and update Protein Atlas");
+			btnUpdateCutoffProteome.setText("Choose cut-off and update protein differential abundances");
 			btnUpdateCutoffProteome.addSelectionListener(this);
 
 			Composite composite_3 = new Composite(compositeProteome, SWT.NONE);
@@ -2314,14 +2314,14 @@ public class GeneView implements SelectionListener, MouseListener {
 				lblAnd.setText("and");
 
 				Label lblPvalueFdrby = new Label(composite_pvalue, SWT.NONE);
-				lblPvalueFdrby.setText("adj. p-value <");
+				lblPvalueFdrby.setText("p-value <");
 				
 
 				txtCutoffPvalue = new Text(composite_pvalue, SWT.BORDER);
 				txtCutoffPvalue.setText(GenomeElementAtlas.DEFAULT_PVAL_CUTOFF+"");
 
 				Label lblZeroPvalue = new Label(composite_pvalue, SWT.NONE);
-				lblZeroPvalue.setText("adjusted p-value is only available for RNA-Seq data.\n0.00 means that the Log2(FC) is not known.\n0.0e+00 means the adjusted p-value is not known.");
+				lblZeroPvalue.setText("0.00 means that the Log2(FC) is not known.\n0.0e+00 means the p-value or the adjusted p-value is not known.");
 				lblZeroPvalue.setForeground(BasicColor.GREY);
 				
 				
@@ -2331,7 +2331,7 @@ public class GeneView implements SelectionListener, MouseListener {
 			}
 			btnUpdateCutoff = new Button(composite_8, SWT.NONE);
 			btnUpdateCutoff.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 5, 1));
-			btnUpdateCutoff.setText("Choose cut-off and update Expression Atlas");
+			btnUpdateCutoff.setText("Choose cut-off and update transcript differential expressions");
 			btnUpdateCutoff.addSelectionListener(this);
 
 			Composite composite_3 = new Composite(compositeTranscriptome, SWT.NONE);
@@ -2447,7 +2447,7 @@ public class GeneView implements SelectionListener, MouseListener {
 
 		{
 			tbtmProteomeData = new TabItem(tabFolder, SWT.NONE);
-			tbtmProteomeData.setText("Protein differential expressions");
+			tbtmProteomeData.setText("Protein differential abundances");
 
 			compositeProteome = new Composite(tabFolder, SWT.BORDER);
 			tbtmProteomeData.setControl(compositeProteome);
@@ -2491,7 +2491,7 @@ public class GeneView implements SelectionListener, MouseListener {
 			}
 			btnUpdateCutoffProteome = new Button(composite_8, SWT.NONE);
 			btnUpdateCutoffProteome.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 5, 1));
-			btnUpdateCutoffProteome.setText("Choose cut-off and update Protein Atlas");
+			btnUpdateCutoffProteome.setText("Choose cut-off and update protein differential abundances");
 			btnUpdateCutoffProteome.addSelectionListener(this);
 
 			Composite composite_3 = new Composite(compositeProteome, SWT.NONE);

@@ -56,6 +56,8 @@ public class GenomeElementAtlas implements Serializable {
         if(transcriptome) {
         	logFCMatrix = Database.getInstance().getLogFCTranscriptomesTable(seq.getGenomeName());
         	pValueMatrix = Database.getInstance().getPvalueTranscriptomesTable(seq.getGenomeName());
+        	adjPvalueMatrix = Database.getInstance().getAdjPvalueTranscriptomesTable(seq.getGenomeName());
+
         } else {
         	logFCMatrix = Database.getInstance().getLogFCProteomesTable(seq.getGenomeName());
         	pValueMatrix = Database.getInstance().getPvalueProteomesTable(seq.getGenomeName());
@@ -67,13 +69,14 @@ public class GenomeElementAtlas implements Serializable {
             for (String bioCondName : logFCMatrix.getHeaders()) {
                 double logFC = logFCMatrix.getValue(genomeElement, bioCondName);
                 double pvalue = pValueMatrix.getValue(genomeElement, bioCondName);
+                double adjPvalue = adjPvalueMatrix.getValue(genomeElement, bioCondName);
+
                 this.values.put(bioCondName, logFC);
                 this.pValues.put(bioCondName, pvalue);
+                this.adjPvalues.put(bioCondName, adjPvalue);
+
                 
-                if(!transcriptome) {
-                    double adjPvalue = adjPvalueMatrix.getValue(genomeElement, bioCondName);
-                    this.adjPvalues.put(bioCondName, adjPvalue);
-                }
+                
 
                 if (logFC < -filter1.getCutOff1() && pvalue < filter2.getCutOff1()) {
                     // under-expressed

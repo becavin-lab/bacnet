@@ -157,10 +157,10 @@ public class DataTrack {
                             || tscData.getType() == TypeData.TSS || tscData.getType() == TypeData.TermSeq
                             || tscData.getType() == TypeData.RiboSeq) {
                         //if (tscData.getName().contains("+") || tscData.getName().contains("_f")) {
-                        if (tscData.getName().contains("_f")) {
+                        if (tscData.getName().substring(tscData.getName().length()-2).equals("_f")) {
                             dataColors.put(tscData.getName(), BasicColor.REDLIGHT_COV);
                         //} else if (tscData.getName().contains("-") || tscData.getName().contains("_r")) {
-                        } else if (tscData.getName().contains("_r")) {
+                        } else if (tscData.getName().substring(tscData.getName().length()-2).equals("_r")) {
                             dataColors.put(tscData.getName(), BasicColor.BLUELIGHT_COV);
                         } else
                             dataColors.put(tscData.getName(), BasicColor.RNASEQ_NOSTRAND);
@@ -435,10 +435,10 @@ public class DataTrack {
      */
     private void loadData() {
         
-    	System.out.println("in loadData: "+    	bioConditionHashMaps.values().size());
+    	//System.out.println("in loadData: "+    	bioConditionHashMaps.values().size());
 
         for (BioCondition bioCond : bioConditionHashMaps.values()) {
-            System.out.println("in for loadData: "+bioCond.getName());
+            //System.out.println("in for loadData: "+bioCond.getName());
 
         	for (Tiling tiling : bioCond.getTilings()) {
                 if (!tiling.isInfoRead()) {
@@ -451,7 +451,7 @@ public class DataTrack {
                 }
             }
             for (NGS ngsExpr : bioCond.getNGSSeqs()) {
-                System.out.println("in loadData ngsExpr: "+ngsExpr.getBioCondName());
+                //System.out.println("in loadData ngsExpr: "+ngsExpr.getBioCondName());
                 if (!ngsExpr.getBioCondName().contains("_vs_")) {
                 	if (!ngsExpr.isInfoRead()) {
                         ngsExpr.load();
@@ -468,16 +468,16 @@ public class DataTrack {
             }
             //System.out.println("bioCond.getMatrices: "+bioCond.getMatrices());
             for (ExpressionMatrix matrix : bioCond.getMatrices()) {
-                System.out.println("in loadData matrix: "+matrix.getBioCondName());
+                //System.out.println("in loadData matrix: "+matrix.getBioCondName());
                 if (!matrix.isLoaded()) {
-                    System.out.println("not loaded "+matrix.getBioCondName());
+                    //System.out.println("not loaded "+matrix.getBioCondName());
 
                     matrix.load();
                     //System.out.println("matrix row names: " + matrix.getRowNamesToList());
                     //System.out.println("matrix loaded ");
                 }
             }
-            System.out.println("finish in loadData: "+bioCond.getName());
+            //System.out.println("finish in loadData: "+bioCond.getName());
 
         } 
 

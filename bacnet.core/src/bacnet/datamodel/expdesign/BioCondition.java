@@ -466,7 +466,7 @@ public class BioCondition implements Serializable {
         for (int i = 0; i < this.getNGSSeqs().size(); i++) {
             NGS data1 = this.getNGSSeqs().get(i);
             NGS data2 = bioCond2.getNGSSeqs().get(i);
-            System.out.println("in compare: "+ data1.getBioCondName() + " + " + data2.getBioCondName());
+            //System.out.println("in compare: "+ data1.getBioCondName() + " + " + data2.getBioCondName());
             NGS compData = data1.compare(data2, calcData);
             bioConditionCompare.getNGSSeqs().add(compData);
             bioConditionCompare.getTypeDataContained().add(TypeData.ExpressionMatrix);
@@ -477,10 +477,10 @@ public class BioCondition implements Serializable {
          * Proteomics data comparison if they exists
          */
         File file = new File(OmicsData.PATH_STREAMING + bioConditionCompare.getName() + ProteomicsData.EXTENSION);
-        System.out.println("in compare add proteomics: "+ file.getName());
+        //System.out.println("in compare add proteomics: "+ file.getName());
 
         if (file.exists()) {
-            System.out.println("in compare add proteomics if: "+ file.getName());
+            //System.out.println("in compare add proteomics if: "+ file.getName());
 
             ProteomicsData matrix = new ProteomicsData();
             matrix.setName(bioConditionCompare.getName());
@@ -492,10 +492,10 @@ public class BioCondition implements Serializable {
          * Expression data comparison if they exists
          */
         file = new File(OmicsData.PATH_STREAMING + bioConditionCompare.getName() + OmicsData.EXTENSION);
-        System.out.println("in compare add matrix: "+ file.getName());
+        //System.out.println("in compare add matrix: "+ file.getName());
 
         if (file.exists()) {
-            System.out.println("in compare add matrix if: "+ file.getName());
+            //System.out.println("in compare add matrix if: "+ file.getName());
 
             ExpressionMatrix matrix = new ExpressionMatrix();
             matrix.setName(bioConditionCompare.getName());

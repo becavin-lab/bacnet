@@ -33,7 +33,8 @@ public class Expression {
 
     public static String PATH_ALLGENEXPR = Database.getTRANSCRIPTOMES_PATH() + File.separator + "AllGeneExpr";
     public static String PATH_ALLTILING = Database.getTRANSCRIPTOMES_PATH() + File.separator + "AllTiling";
-    public static String PATH_ALLRNASEQ = Database.getTRANSCRIPTOMES_PATH() + File.separator + "AllRNASeq";
+    public static String PATH_ALLRNASEQTPM = Database.getTRANSCRIPTOMES_PATH() + File.separator + "AllRNASeqTPM";
+    public static String PATH_ALLRNASEQRPKM = Database.getTRANSCRIPTOMES_PATH() + File.separator + "AllRNASeqRPKM";
     public static String PATH_ALLExpMatrix = Database.getTRANSCRIPTOMES_PATH() + File.separator + "AllExpMatrix";
     public static String PATH_ALLDataType = Database.getTRANSCRIPTOMES_PATH() + File.separator + "AllDataType";
 
@@ -278,8 +279,8 @@ public class Expression {
             Expression showExpr = new Expression(genome, allGenomeElements, bioCondRNASeqs, TypeData.RNASeq);
             ExpressionMatrix matrix = showExpr.createExpressionMatrix(genome);
             Annotation.addAnnotation(matrix, genome);
-            matrix.saveTab(PATH_ALLRNASEQ + "_" + genome.getSpecies() + ".excel", "GenomeElements");
-            matrix.save(PATH_ALLRNASEQ + "_" + genome.getSpecies());
+            matrix.saveTab(PATH_ALLRNASEQTPM + "_" + genome.getSpecies() + ".excel", "GenomeElements");
+            matrix.save(PATH_ALLRNASEQTPM + "_" + genome.getSpecies());
             matrices.add(matrix);
         }
         /*
@@ -293,14 +294,16 @@ public class Expression {
             matrices.add(matrix);
         }
 
+        /*
         if (matrices.size() > 0) {
         	/*
              * Do not add GeneExpr in matrices because Tiling array are already present. 
              * No redundancy as Co-expression will be created using matrices
              */
+        /*
             ExpressionMatrix matrix = ExpressionMatrix.merge(matrices, false);
             matrix.saveTab(PATH_ALLDataType + "_" + genome.getSpecies() + ".excel", "GenomeElements");
-        }
+        }*/
 
     }
 

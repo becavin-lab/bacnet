@@ -491,6 +491,8 @@ public class TranscriptomicsView implements SelectionListener {
 	                        return RWTUtils.setPubMedLink(text);
 	                    } else if (colName.equals("ENA project")) {
 	                        return RWTUtils.setENAExpLink(text);
+	                    } else if (colName.equals("DESeq2 report")) {
+	                        return RWTUtils.setRNAdiffLink(text);
 	                    } else if (colName.equals("GEO project")) {
 	                        return RWTUtils.setGEOLink(text);
 	                    } else if (colName.equals("GEO platform")) {

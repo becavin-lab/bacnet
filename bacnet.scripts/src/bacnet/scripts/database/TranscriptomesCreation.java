@@ -431,11 +431,13 @@ public class TranscriptomesCreation {
          */
         ExpressionMatrix logFCMatrix = new ExpressionMatrix();
         ExpressionMatrix pValueMatrix = new ExpressionMatrix();
+        ExpressionMatrix adjPValueMatrix = new ExpressionMatrix();
 
         int i = 0;
         for (String genomeElement : genome.getAllElementNames()) {
             logFCMatrix.getRowNames().put(genomeElement, i);
             pValueMatrix.getRowNames().put(genomeElement, i);
+            adjPValueMatrix.getRowNames().put(genomeElement, i);
             i++;
         }
         for (BioCondition bioCond : exp.getBioConditions()) {
@@ -443,16 +445,23 @@ public class TranscriptomesCreation {
                 if (bioCond.getTypeDataContained().contains(TypeData.GeneExpr)) {
                     logFCMatrix.addHeader(comparison);
                     pValueMatrix.addHeader(comparison);
+                    adjPValueMatrix.addHeader(comparison);
+
                 } else {
                     logFCMatrix.addHeader(comparison);
                     pValueMatrix.addHeader(comparison);
+                    adjPValueMatrix.addHeader(comparison);
+
                 }
             }
         }
+
         double[][] values = new double[logFCMatrix.getRowNames().size()][logFCMatrix.getHeaders().size()];
         logFCMatrix.setValues(values);
         double[][] values2 = new double[pValueMatrix.getRowNames().size()][pValueMatrix.getHeaders().size()];
         pValueMatrix.setValues(values2);
+        double[][] values3 = new double[adjPValueMatrix.getRowNames().size()][adjPValueMatrix.getHeaders().size()];
+        adjPValueMatrix.setValues(values3);
 
         /*
          * Fill the matrix with GeneExpression/Fold change values
@@ -463,6 +472,8 @@ public class TranscriptomesCreation {
                 if (bioCond.getTypeDataContained().size() == 0
                         || bioCond.getTypeDataContained().contains(TypeData.ExpressionMatrix)) {
                     String fileName = OmicsData.PATH_STREAMING + comp + OmicsData.EXTENSION;
+                	System.out.println("ExpressionMatrix logFC: "+fileName);
+
                     ExpressionMatrix matrix = ExpressionMatrix.load(fileName);
                     for (String gene : genome.getAllElementNames()) {
                          	Gene geneTemp = genome.getGeneFromName(gene);
@@ -486,6 +497,8 @@ public class TranscriptomesCreation {
                     
                 } else if (bioCond.getTypeDataContained().contains(TypeData.RNASeq)) {
                     String fileNameRNASeq = OmicsData.PATH_NGS_NORM + comp + NGS.EXTENSION;
+                	System.out.println("RNASeq logFC: "+fileNameRNASeq);
+
                     File file = new File(fileNameRNASeq);
                     if (file.exists()) {
                         ExpressionMatrix matrix = ExpressionMatrix.loadTab(fileNameRNASeq, false);
@@ -497,9 +510,12 @@ public class TranscriptomesCreation {
 
                                 logFCMatrix.setValue(matrix.getValue(gene, ColNames.LOGFC + ""), gene, comp);
                                 pValueMatrix.setValue(matrix.getValue(gene, ColNames.PVALUE + ""), gene, comp);
+                                adjPValueMatrix.setValue(matrix.getValue(gene, ColNames.PADJ + ""), gene, comp);
+
                             }  else if (!geneName.equals("") & matrix.getRowNames().containsKey(geneName)) { // test if we can find the gene by its gene name   
                             	logFCMatrix.setValue(matrix.getValue(geneName, ColNames.LOGFC + ""), gene, comp);
                                 pValueMatrix.setValue(matrix.getValue(geneName, ColNames.PVALUE + ""), gene, comp);
+                                adjPValueMatrix.setValue(matrix.getValue(gene, ColNames.PADJ + ""), gene, comp);
                             }
                          // test if we can find the gene by its old locus tag
                             else if (genome.getGenes().get(gene) != null) { //.getGenes() returns null if gene is a NcRNA 
@@ -507,6 +523,7 @@ public class TranscriptomesCreation {
                             	if (!oldLocusTag.equals("") & matrix.getRowNames().containsKey(oldLocusTag)) {
                             		logFCMatrix.setValue(matrix.getValue(oldLocusTag, ColNames.LOGFC + ""), gene, comp);
                                     pValueMatrix.setValue(matrix.getValue(oldLocusTag, ColNames.PVALUE + ""), gene, comp);
+                                    adjPValueMatrix.setValue(matrix.getValue(gene, ColNames.PADJ + ""), gene, comp);
 
                             	}
                             }
@@ -571,8 +588,18 @@ public class TranscriptomesCreation {
         pValueMatrix.save(Database.getPVALUE_MATRIX_TRANSCRIPTOMES_PATH() + "_" + genome.getSpecies());
         pValueMatrix.saveTab(Database.getPVALUE_MATRIX_TRANSCRIPTOMES_PATH() + "_" + genome.getSpecies() + ".excel",
                 "Probes");
-        System.out.println("Saved: " + Database.getLOGFC_MATRIX_TRANSCRIPTOMES_PATH() + "_" + genome.getSpecies());
+        System.out.println("Saved: " + Database.getPVALUE_MATRIX_TRANSCRIPTOMES_PATH() + "_" + genome.getSpecies());
 
+        adjPValueMatrix.setAnnotations(new String[0][0]);
+        adjPValueMatrix.getHeaderAnnotation().clear();
+        adjPValueMatrix = Annotation.addAnnotationLite(adjPValueMatrix, genome);
+        adjPValueMatrix.setName(
+                FileUtils.removePath(Database.getADJPVALUE_MATRIX_TRANSCRIPTOMES_PATH() + "_" + genome.getSpecies()));
+        adjPValueMatrix.save(Database.getADJPVALUE_MATRIX_TRANSCRIPTOMES_PATH() + "_" + genome.getSpecies());
+        adjPValueMatrix.saveTab(Database.getADJPVALUE_MATRIX_TRANSCRIPTOMES_PATH() + "_" + genome.getSpecies() + ".excel",
+                "Probes");
+        System.out.println("Saved: " + Database.getADJPVALUE_MATRIX_TRANSCRIPTOMES_PATH() + "_" + genome.getSpecies());
+        
     }
   
 

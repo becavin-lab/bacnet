@@ -1252,7 +1252,7 @@ public class ExpressionMatrix extends OmicsData implements Cloneable, Serializab
                 array[i][0] = String.valueOf(key);
                 for (int j = 0; j < headers.size(); j++) {
                     if (this.getValue(key, headers.get(j)) == MISSING_VALUE) {
-                        array[i][j + 1] = "";
+                        array[i][j + 1] = "0";
                     } else
                         array[i][j + 1] = String.valueOf(this.getValue(key, headers.get(j)));
                 }
@@ -1351,7 +1351,7 @@ public class ExpressionMatrix extends OmicsData implements Cloneable, Serializab
      * with new data, and redraw everything.
      */
     public void load() {
-        System.out.println("load transcriptomics data : " +OmicsData.PATH_STREAMING + this.getName() + EXTENSION);
+        //System.out.println("load transcriptomics data : " +OmicsData.PATH_STREAMING + this.getName() + EXTENSION);
         ExpressionMatrix matrixLoaded = ExpressionMatrix.load(OmicsData.PATH_STREAMING + this.getName() + EXTENSION);
         this.setAnnotations(matrixLoaded.getAnnotations());
         this.setBioCondName(matrixLoaded.getBioCondName());
@@ -1367,7 +1367,7 @@ public class ExpressionMatrix extends OmicsData implements Cloneable, Serializab
         this.setRowNames(matrixLoaded.getRowNames());
         this.setValues(matrixLoaded.getValues());
         this.setLoaded(true);
-        System.out.println(" finish load transcriptomics data : " +OmicsData.PATH_STREAMING + this.getName() + EXTENSION);
+        //System.out.println(" finish load transcriptomics data : " +OmicsData.PATH_STREAMING + this.getName() + EXTENSION);
 
     }
 
@@ -1438,7 +1438,7 @@ public class ExpressionMatrix extends OmicsData implements Cloneable, Serializab
                 array[i][1] = key;
                 for (int j = 0; j < expr.getHeaders().size(); j++) {
                     if (expr.getValue(key, expr.getHeader(j)) == MISSING_VALUE) {
-                        array[i][j + 2] = "";
+                        array[i][j + 2] = "0";
                     } else
                         array[i][j + 2] = String.valueOf(expr.getValue(key, expr.getHeader(j)));
                 }

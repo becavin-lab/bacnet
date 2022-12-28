@@ -556,11 +556,13 @@ public class ProteomicsCreation {
                             if (proteome.getRowNames().containsKey(gene)) {
                                   logFCMatrix.setValue(proteome.getValue(gene, ColNames.LOGFC + ""), gene, comparisonName);
                                   pValueMatrix.setValue(proteome.getValue(gene, ColNames.PVALUE + ""), gene, comparisonName);
+                                  adjPValueMatrix.setValue(0, gene, comparisonName);
                             } 
                               // test if we can find the gene by its gene name
                             else if (!geneName.equals("") & proteome.getRowNames().containsKey(geneName)) {
                               	logFCMatrix.setValue(proteome.getValue(geneName, ColNames.LOGFC + ""), gene, comparisonName);
                               	pValueMatrix.setValue(proteome.getValue(geneName, ColNames.PVALUE + ""), gene, comparisonName);
+                                adjPValueMatrix.setValue(0, gene, comparisonName);
                             }
                               // test if we can find the gene by its old locus tag
                             else if (genome.getGenes().get(gene) != null) {
@@ -570,11 +572,13 @@ public class ProteomicsCreation {
                               	if (!oldLocusTag.equals("") & proteome.getRowNames().containsKey(oldLocusTag)) {
                               		logFCMatrix.setValue(proteome.getValue(oldLocusTag, ColNames.LOGFC + ""), gene, comparisonName);
                               		pValueMatrix.setValue(proteome.getValue(oldLocusTag, ColNames.PVALUE + ""), gene, comparisonName);
+                                    adjPValueMatrix.setValue(0, gene, comparisonName);
                             } else if (oldLocusTag.contains(",")) {
                               		for (String oldLocusTemp : oldLocusTag.split(",")) {
                               			if (!oldLocusTemp.equals("") & proteome.getRowNames().containsKey(oldLocusTemp)) {
                               				logFCMatrix.setValue(proteome.getValue(oldLocusTemp, ColNames.LOGFC + ""), gene, comparisonName);
                               				pValueMatrix.setValue(proteome.getValue(oldLocusTemp, ColNames.PVALUE + ""), gene, comparisonName);
+                                            adjPValueMatrix.setValue(0, gene, comparisonName);
                               			}
                               		}
                               	}
@@ -588,10 +592,14 @@ public class ProteomicsCreation {
                       	String geneName = geneTemp.getGeneName();
                         if (proteome.getRowNames().containsKey(gene)) {
                               logFCMatrix.setValue(proteome.getValue(gene, ColNames.LOGFC + ""), gene, comparisonName);
+                              pValueMatrix.setValue(0, gene, comparisonName);
+                              adjPValueMatrix.setValue(0, gene, comparisonName);
                         } 
                           // test if we can find the gene by its gene name
                         else if (!geneName.equals("") & proteome.getRowNames().containsKey(geneName)) {
                           	logFCMatrix.setValue(proteome.getValue(geneName, ColNames.LOGFC + ""), gene, comparisonName);
+                          	pValueMatrix.setValue(0, gene, comparisonName);
+                            adjPValueMatrix.setValue(0, gene, comparisonName);
                         }
                           // test if we can find the gene by its old locus tag
                         else if (genome.getGenes().get(gene) != null) {
@@ -600,10 +608,14 @@ public class ProteomicsCreation {
                           	String oldLocusTag = genome.getGenes().get(gene).getFeature("old_locus_tag");
                           	if (!oldLocusTag.equals("") & proteome.getRowNames().containsKey(oldLocusTag)) {
                           		logFCMatrix.setValue(proteome.getValue(oldLocusTag, ColNames.LOGFC + ""), gene, comparisonName);
+                          		pValueMatrix.setValue(0, gene, comparisonName);
+                                adjPValueMatrix.setValue(0, gene, comparisonName);
                         } else if (oldLocusTag.contains(",")) {
                           		for (String oldLocusTemp : oldLocusTag.split(",")) {
                           			if (!oldLocusTemp.equals("") & proteome.getRowNames().containsKey(oldLocusTemp)) {
                           				logFCMatrix.setValue(proteome.getValue(oldLocusTemp, ColNames.LOGFC + ""), gene, comparisonName);
+                          				pValueMatrix.setValue(0, gene, comparisonName);
+                                        adjPValueMatrix.setValue(0, gene, comparisonName);
                           			}
                           		}
                           	}

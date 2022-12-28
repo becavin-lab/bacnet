@@ -67,7 +67,7 @@ public class NGS extends OmicsData implements Serializable {
         for (String chromoID : genome.getChromosomes().keySet()) {
             String name = this.getName() + "_" + chromoID;
             String fileName = PATH_STREAMING + name + "Info" + ExpressionData.EXTENSION;
-            System.out.println(fileName);
+            //System.out.println(fileName);
             ExpressionData dataset = this.getDatasets().get(chromoID);
             dataset.load(fileName, false);
             getDatasets().put(chromoID, dataset);

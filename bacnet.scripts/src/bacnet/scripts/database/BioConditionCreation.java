@@ -307,7 +307,8 @@ public class BioConditionCreation {
                 System.out.println("datatype "+ dataType);
 
                 String rawDataName = bioCondTable[i][ArrayUtils.findColumn(bioCondTable, "FileName")];
-                
+                System.out.println("rawDataName "+ rawDataName);
+
                 date = bioCondTable[i][ArrayUtils.findColumn(bioCondTable, "Date")];
                 
                 bioCond.getTypeDataContained().add(dataType);
@@ -464,6 +465,7 @@ public class BioConditionCreation {
                         matrix.setType(dataType);
                         matrix.getRawDatas().add(rawDataName);
                         bioCond.getProteomes().add(matrix);
+                        System.out.println("biocond proteome size: "+ bioCond.getName()+ " "+ bioCond.getProteomes().size());
                         }
                     
                 } /*else if (dataType == TypeData.Proteome) {
@@ -561,7 +563,7 @@ public class BioConditionCreation {
         ArrayList<String> tableResult = new ArrayList<>();
         String[] titles =
                 {"Data Name", "Type", "Date", "Growth", "TimePoint", "Temp.", "Mutant", "Media", "MediaGrowthProperties", "Nb genes",
-                        "Strain used", "Reference strain", "Comment", "Bibliographical reference", "ENA project", "Sequencing platform", "GEO project", "GEO platform", "ArrayExpressID", "ArrayExpressTechnoID"};
+                        "Strain used", "Reference strain", "Comment", "Bibliographical reference", "DESeq2 report", "ENA project", "Sequencing platform", "GEO project", "GEO platform", "ArrayExpressID", "ArrayExpressTechnoID"};
         String header = "";
         for (String title : titles)
             header += title + "\t";
@@ -578,6 +580,7 @@ public class BioConditionCreation {
                     typeDatacontained = "GeneExpr";
                 if (typeDatacontained.contains("ExpressionMatrix"))
                     typeDatacontained = typeDatacontained.replaceAll("ExpressionMatrix", "GeneExpr");
+                
                 row += typeDatacontained.trim() + "\t";
                 row += bioCondition.getDate() + "\t";
                 row += bioCondition.getGrowth().toString().replace('[', ' ').replace(']', ' ').trim() + "\t";
@@ -593,6 +596,11 @@ public class BioConditionCreation {
                 row += bioCondition.getGenomeName() + "\t";
                 row += bioCondition.getComment()+ "\t";
                 row += bioCondition.getReference() + "\t";
+                String DESeq2 = "N/A";
+                if (typeDatacontained.contains("RNASeq")&& !(bioCondition.getComment().contains("No replicate")||bioCondition.getComment().contains("No differential"))) {
+                	DESeq2 = bioCondition.getENAProject();
+                }
+                row += DESeq2 + "\t";
                 row += bioCondition.getENAProject() + "\t";
                 row += bioCondition.getSequencingPlatform() + "\t";
                 row += bioCondition.getGEOProject() + "\t";
@@ -614,8 +622,8 @@ public class BioConditionCreation {
     public static void createSummaryTranscriptomesComparisonsTable() {
         ArrayList<String> tableResult = new ArrayList<>();
         String[] titles = {"Data Name", "Growth", "Temp.", "Mutant", "Media", "MediaGrowthProperties", "VS", "Growth",
-                "Temp.", "Mutant", "Media", "MediaGrowthProperties", "Type", "Sequencing platform", "ArrayExpressId", "Date", "Strain used", "Reference strain",
-                "Bibliographical reference", "Comment"};
+                "Temp.", "Mutant", "Media", "MediaGrowthProperties", "Type","DESeq2 report", "Comment", "Sequencing platform", "Date", "Strain used", "Reference strain",
+                "Bibliographical reference"};
         String header = "";
         for (String title : titles)
             header += title + "\t";
@@ -658,14 +666,19 @@ public class BioConditionCreation {
                     // typeDatacontained = typeDatacontained.replaceAll("GeneExpr",
                     // "GeneExpression");
                     row += typeDatacontained.trim() + "\t";
+                    String DESeq2 = "N/A";
+                    if (typeDatacontained.contains("RNASeq")&& !(bioCondition.getComment().contains("No replicate")||bioCondition.getComment().contains("No differential"))) {
+                    	DESeq2 = bioCondition.getENAProject();
+                    }
+                    row += DESeq2 + "\t";
+                    row += bioCondition.getComment()+"\t";
+
                     row += bioCondition.getSequencingPlatform() + "\t";
-                    row += bioCondition.getArrayExpressId() + "\t";
                     row += bioCondition.getDate() + "\t";
                     row += bioCondition.getGenomeUsed() + "\t";
                     row += bioCondition.getGenomeName() + "\t";
 
-                    row += bioCondition.getReference() + "\t";
-                    row += bioCondition.getComment();
+                    row += bioCondition.getReference();
 
                     tableResult.add(row.trim());
                 }

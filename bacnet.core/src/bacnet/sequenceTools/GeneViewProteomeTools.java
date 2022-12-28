@@ -109,7 +109,6 @@ public class GeneViewProteomeTools {
 		TableColumn column02 = new TableColumn(tableUnder, SWT.NONE);
 		column02.setText("Log2(FC)");
 		column02.setAlignment(SWT.LEFT);
-		column02.setAlignment(SWT.LEFT);
 		TableColumn column021 = new TableColumn(tableUnder, SWT.NONE);
 		column021.setText("p-value");
 		TableColumn column022 = new TableColumn(tableUnder, SWT.NONE);

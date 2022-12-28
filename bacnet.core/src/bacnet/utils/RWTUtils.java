@@ -51,6 +51,9 @@ public class RWTUtils {
         if (text.contains("PubMed") || text.contains("Pubmed")) {
             String pubmedLink = text.substring(text.indexOf(':') + 1, text.indexOf(')'));
             return "<a href='" + getPubMedLink(pubmedLink) + "' target='_blank'>" + text + "</a>";
+        } else if (text.contains("DOI")){
+        	String pubmedLink = text.substring(text.indexOf(':') + 1, text.indexOf(')'));
+            return "<a href='" + getDOILink(pubmedLink) + "' target='_blank'>" + text + "</a>";
         } else {
             return text;
         }
@@ -58,6 +61,10 @@ public class RWTUtils {
 
     public static String getPubMedLink(String pubmedID) {
         return "https://www.ncbi.nlm.nih.gov/pubmed/" + pubmedID;
+    }
+    
+    public static String getDOILink(String DOI) {
+        return "https://www.doi.org/" + DOI;
     }
 
     /*
@@ -91,6 +98,14 @@ public class RWTUtils {
     public static String setENAExpLink(String expID) {
     	if (expID.startsWith("PRJ")) {
             return "<a href='" + getENALink(expID) + "' target='_blank'>" + expID + "</a>";
+        } else {
+            return expID;
+        }
+    }
+    
+    public static String setRNAdiffLink(String expID) {
+    	if (expID.startsWith("PRJ")) {
+            return "<a href='" + getRNAdiffLink(expID) + "' target='_blank'>" + expID + "</a>";
         } else {
             return expID;
         }
@@ -139,6 +154,10 @@ public class RWTUtils {
 
     public static String getENALink(String enaID) {
         return "http://www.ebi.ac.uk/ena/data/view/" + enaID;
+    }
+
+    public static String getRNAdiffLink(String enaID) {
+        return "https://yersiniomics.pasteur.fr/RNAdiff/" + enaID;
     }
 
 

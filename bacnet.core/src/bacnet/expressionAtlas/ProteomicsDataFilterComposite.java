@@ -212,7 +212,7 @@ public class ProteomicsDataFilterComposite extends org.eclipse.swt.widgets.Compo
         btnMinimalMedia.addSelectionListener(this);
 
         btnDMEM = new Button(composite_1_1, SWT.CHECK);
-        btnDMEM.setText("DMEM");
+        btnDMEM.setText("DMEM/RPMI");
         btnDMEM.addSelectionListener(this);
         
         btnInCellulo = new Button(composite_1_1, SWT.CHECK);
@@ -499,26 +499,26 @@ public class ProteomicsDataFilterComposite extends org.eclipse.swt.widgets.Compo
                 BCS++;
             if (broth.contains("LB"))
                 lb++;
-            if (broth.contains("Minimal Media")||broth.contains("M9")||broth.contains("TMH")||broth.contains("PMH"))
+            if (broth.contains("Minimal Media")||broth.contains("M9")||broth.contains("M63")||broth.contains("TMH")||broth.contains("PMH"))
                 mm++;
             if (broth.contains("Plasma") || broth.contains("Blood"))
                 blood++;
-            if (broth.contains("DMEM"))
+            if (broth.contains("DMEM")||broth.contains("RPMI"))
                 dmem++;
             if (broth.contains("Brown Norway")|| broth.contains("C57BL")|| broth.contains("Xenopsylla")
             		|| broth.contains("Galleria")|| broth.contains("BALB")|| broth.contains("OF1")
-            		|| broth.contains("FVB"))
+            		|| broth.contains("FVB")|| broth.contains("Ictalurus"))
                 inVivo++;
-            if (broth.contains("THP-1")|| broth.contains("J774")
+            if (broth.contains("THP-1")|| broth.contains("J774")|| broth.contains("P388")
             	|| broth.contains("Monocyte")|| broth.contains("Neutrophil"))
                 inCellulo++;
-            if (!(broth.contains("BCS") || broth.contains("Minimal Media")||broth.contains("M9")||broth.contains("LB")
+            if (!(broth.contains("BCS") || broth.contains("Minimal Media")||broth.contains("M9")||broth.contains("M63")||broth.contains("LB")
             		||broth.contains("TMH")||broth.contains("PMH")||broth.contains("Plasma")
-            		|| broth.contains("Blood")||broth.contains("DMEM")||broth.contains("Brown Norway")
+            		|| broth.contains("Blood")||broth.contains("DMEM")||broth.contains("RPMI")||broth.contains("Brown Norway")
             		|| broth.contains("C57BL")|| broth.contains("Xenopsylla")
             		|| broth.contains("Galleria")|| broth.contains("BALB")|| broth.contains("OF1")
-            		|| broth.contains("FVB"))||broth.contains("THP-1")|| broth.contains("J774")
-            		|| broth.contains("Monocyte")|| broth.contains("Neutrophil")) {
+            		|| broth.contains("FVB")|| broth.contains("Ictalurus")||broth.contains("THP-1")|| broth.contains("J774")|| broth.contains("P388")
+            		|| broth.contains("Monocyte")|| broth.contains("Neutrophil"))) {
             	mediaOther++;
             }
 
@@ -543,7 +543,7 @@ public class ProteomicsDataFilterComposite extends org.eclipse.swt.widgets.Compo
         btnTemp37.setText("37°C (" + temp37 + ")");
         btnTempOther.setText("Other (" + tempOther + ")");
         btnBlood.setText("Blood (" + blood + ")");
-        btnDMEM.setText("DMEM (" + dmem + ")");
+        btnDMEM.setText("DMEM/RPMI (" + dmem + ")");
         btnInVivo.setText("in vivo (" + inVivo + ")");
         btnInCellulo.setText("in cellulo (" + inCellulo + ")");
         btnBCS.setText("BCS (" + BCS + ")");
@@ -759,7 +759,7 @@ public class ProteomicsDataFilterComposite extends org.eclipse.swt.widgets.Compo
             selected = true;
             for (String[] row : view.getBioCondsToDisplay()) {
                 String info = row[ArrayUtils.findColumn(view.getBioCondsArray(), "Media")];
-                if (info.contains("DMEM")) {
+                if (info.contains("DMEM")||info.contains("RPMI")) {
                     if (!bioCondsToDisplayTemp.contains(row))
                         bioCondsToDisplayTemp.add(row);
                 }
@@ -789,7 +789,7 @@ public class ProteomicsDataFilterComposite extends org.eclipse.swt.widgets.Compo
             selected = true;
             for (String[] row : view.getBioCondsToDisplay()) {
                 String info = row[ArrayUtils.findColumn(view.getBioCondsArray(), "Media")];
-                if (info.contains("Minimal Media") ||info.contains("M9")||info.contains("TMH")||info.contains("PMH")) {
+                if (info.contains("Minimal Media") ||info.contains("M9")||info.contains("M63")||info.contains("TMH")||info.contains("PMH")) {
                     if (!bioCondsToDisplayTemp.contains(row))
                         bioCondsToDisplayTemp.add(row);
                 }
@@ -802,7 +802,7 @@ public class ProteomicsDataFilterComposite extends org.eclipse.swt.widgets.Compo
                 String info = row[ArrayUtils.findColumn(view.getBioCondsArray(), "Media")];
                 if (info.contains("Brown Norway")|| info.contains("C57BL")|| info.contains("Xenopsylla")
                 		|| info.contains("Galleria")|| info.contains("BALB")|| info.contains("OF1")
-                		|| info.contains("FVB")) {
+                		|| info.contains("FVB")|| info.contains("Ictalurus")) {
                     if (!bioCondsToDisplayTemp.contains(row))
                         bioCondsToDisplayTemp.add(row);
                 }
@@ -813,7 +813,7 @@ public class ProteomicsDataFilterComposite extends org.eclipse.swt.widgets.Compo
             selected = true;
             for (String[] row : view.getBioCondsToDisplay()) {
                 String info = row[ArrayUtils.findColumn(view.getBioCondsArray(), "Media")];
-                if (info.contains("THP-1")|| info.contains("J774")|| info.contains("Monocyte")|| info.contains("Neutrophil")) {
+                if (info.contains("THP-1")|| info.contains("J774")|| info.contains("P388")|| info.contains("Monocyte")|| info.contains("Neutrophil")) {
                     if (!bioCondsToDisplayTemp.contains(row))
                         bioCondsToDisplayTemp.add(row);
                 }
@@ -824,12 +824,12 @@ public class ProteomicsDataFilterComposite extends org.eclipse.swt.widgets.Compo
             selected = true;
             for (String[] row : view.getBioCondsToDisplay()) {
                 String info = row[ArrayUtils.findColumn(view.getBioCondsArray(), "Media")];
-                if (!(info.contains("BCS") || info.contains("Minimal Media")||info.contains("M9")||info.contains("LB")
+                if (!(info.contains("BCS") || info.contains("Minimal Media")||info.contains("M9")||info.contains("M63")||info.contains("LB")
                 		||info.contains("TMH")||info.contains("PMH")||info.contains("Plasma")
-                		|| info.contains("Blood")||info.contains("DMEM")||info.contains("Brown Norway")
+                		|| info.contains("Blood")||info.contains("DMEM")||info.contains("RPMI")||info.contains("Brown Norway")
                 		|| info.contains("C57BL")|| info.contains("Xenopsylla")
                 		|| info.contains("Galleria")|| info.contains("BALB")|| info.contains("OF1")
-                		|| info.contains("FVB") || info.contains("THP-1")|| info.contains("J774")
+                		|| info.contains("FVB")|| info.contains("Ictalurus") || info.contains("THP-1")|| info.contains("J774")|| info.contains("P388")
                 		|| info.contains("Monocyte")|| info.contains("Neutrophil"))) {
                     if (!bioCondsToDisplayTemp.contains(row))
                         bioCondsToDisplayTemp.add(row);
