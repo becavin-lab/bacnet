@@ -42,9 +42,9 @@ public class HomologCreation {
 	/**
 	 * Path for Blast+ 
 	 */
-	public static String PATH_BLAST = "";
+	//public static String PATH_BLAST = "";
 //	public static String PATH_BLAST = "/share/apps/local/rmblast-2-2-28/bin/";
-//	public static String PATH_BLAST = "C:/Program Files/NCBI/blast-BLAST_VERSION+/bin/";
+	public static String PATH_BLAST = "C:\\Program Files\\NCBI\\blast-BLAST_VERSION+\\bin\\";
 
 	/**
 	 * Shortcut for running blastP
@@ -364,7 +364,7 @@ public class HomologCreation {
 	}
 
 	/**
-	 * Check every if every blastP has been performed and extract first information by calcuating indentities metric of each blast
+	 * Check every if every blastP has been performed and extract first information by calculating indentities metric of each blast
 	 * @param logs
 	 * @return
 	 */

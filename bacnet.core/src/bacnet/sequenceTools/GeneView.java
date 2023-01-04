@@ -31,6 +31,7 @@ import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredViewer;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
+import org.eclipse.rap.rwt.RWT;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.browser.ProgressListener;
@@ -117,10 +118,6 @@ public class GeneView implements SelectionListener, MouseListener {
 	private boolean focused = false;
 	
 	/**
-	 * Light version without Synteny
-	 **/
-	
-	/**
 	 * Egde Genome loaded
 	 */
 	private Genome genome;
@@ -193,6 +190,8 @@ public class GeneView implements SelectionListener, MouseListener {
 		
 	private TabItem tbtmString;
 	private Composite compositeString;
+	private Composite compositeString_row_1;
+
 	private Browser browserString;
 	private Button btnString;
 	private String StringPath;
@@ -446,24 +445,25 @@ public class GeneView implements SelectionListener, MouseListener {
 		Label lblChromosome = new Label(compositeGenome, SWT.NONE);
 		lblChromosome.setText("Chromosome/Plasmids");
 
-		comboChromosome = new Combo(compositeGenome, SWT.NONE);
+		comboChromosome = new Combo(compositeGenome, SWT.FLAT);
 		GridData gd_comboChromosome = new GridData(SWT.RIGHT, SWT.CENTER, true, false, 1, 1);
 		gd_comboChromosome.widthHint = 200;
 		comboChromosome.setLayoutData(gd_comboChromosome);
 
-		btnNcbiChromosome = new Button(compositeGenome, SWT.NONE);
+		btnNcbiChromosome = new Button(compositeGenome, SWT.TOGGLE);
+		btnNcbiChromosome.setBackground(BasicColor.WHITE);
+		btnNcbiChromosome.setToolTipText("Access more information on the genome");
+		btnNcbiChromosome.setBackground(BasicColor.BUTTON);
 
-		btnNcbiChromosome.setToolTipText("Access to more information on the genome");
-		
 		btnNcbiChromosome.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/refseq.png"));
 		btnNcbiChromosome.addSelectionListener(this);
 
-		btnGetAnnotationInformation = new Button(compositeGenome, SWT.NONE);
-
+		btnGetAnnotationInformation = new Button(compositeGenome, SWT.TOGGLE);
 		btnGetAnnotationInformation.setText("Browse and download annotation table");
 		btnGetAnnotationInformation.setToolTipText("Browse and download annotation table");
 		btnGetAnnotationInformation.addSelectionListener(this);
-		btnGetAnnotationInformation.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/fileIO/txt.bmp"));
+		btnGetAnnotationInformation.setBackground(BasicColor.BUTTON);
+		//btnGetAnnotationInformation.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/fileIO/txt.bmp"));
 		//new Label(compositeGenome, SWT.NONE);
 
 
@@ -499,6 +499,8 @@ public class GeneView implements SelectionListener, MouseListener {
 		lblSearch.setForeground(BasicColor.GREY);
 
 		txtSearch = new Text(composite_7, SWT.BORDER);
+		txtSearch.setBackground(BasicColor.WHITE);
+
 		txtSearch.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		txtSearch.addKeyListener(new KeyListener() {
 			/**
@@ -516,16 +518,17 @@ public class GeneView implements SelectionListener, MouseListener {
 					if (searchResults.size() != 0) {
 						listGenes.clear();
 						for (String gene : searchResults) {
-							String text = gene;
+							String text = "";
 							String oldLocusTag = genome.getChromosomes().get(chromoID).getGenes().get(gene).getOldLocusTag();
 							if (!oldLocusTag.equals("")) {
-								text += " - " + oldLocusTag;
+								text += oldLocusTag+" - ";
 								
 							}
 							String geneName = genome.getChromosomes().get(chromoID).getGenes().get(gene).getGeneName();
 							if (!geneName.equals("")) {
-								text += " (" + geneName + ")";
+								text += geneName +" - ";
 							}
+							text += gene;
 							listGenes.add(text);
 						}
 						tableGenes.removeAll();
@@ -549,7 +552,7 @@ public class GeneView implements SelectionListener, MouseListener {
 
 		tableGenes = new Table(composite_7, SWT.BORDER | SWT.V_SCROLL | SWT.VIRTUAL);
 		GridData gd_list = new GridData(SWT.CENTER, SWT.FILL, false, true, 1, 1);
-		gd_list.widthHint = 300;
+		gd_list.widthHint = 200;
 		tableGenes.setLayoutData(gd_list);
 		tableGenes.addListener(SWT.SetData, new Listener() {
 			/**
@@ -562,10 +565,11 @@ public class GeneView implements SelectionListener, MouseListener {
 				TableItem item = (TableItem) event.item;
 				int index = event.index;
 				item.setText(listGenes.get(index));
+				
 			}
 		});
 		tableGenes.addSelectionListener(this);
-
+		
 		ScrolledComposite scrolledComposite = new ScrolledComposite(container, SWT.H_SCROLL | SWT.V_SCROLL);
 		scrolledComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 3, 1));
 		scrolledComposite.setExpandHorizontal(true);
@@ -578,8 +582,9 @@ public class GeneView implements SelectionListener, MouseListener {
 		GridData gd_lblGene = new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1);
 		gd_lblGene.widthHint = 400;
 		lblGene.setLayoutData(gd_lblGene);
-		lblGene.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
-		lblGene.setFont(SWTResourceManager.getBodyFont(15, SWT.BOLD));
+		lblGene.setBackground(BasicColor.HEADER);
+		lblGene.setFont(SWTResourceManager.getBodyFont(20, SWT.BOLD));
+		//lblGene.setForeground(BasicColor.WHITE);
 		lblGene.setText("gene");
 
 		tabFolder = new TabFolder(composite_11, SWT.NONE);
@@ -599,23 +604,28 @@ public class GeneView implements SelectionListener, MouseListener {
 		compGenomeViewer.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 4, 1));
 		compGenomeViewer.setLayout(new GridLayout(2, false));
 
+		btnZoomminus = new Button(compGenomeViewer, SWT.TOGGLE);
+		btnZoomminus.setBackground(BasicColor.BUTTON);
+		btnZoomminus.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false, false, 1, 1));
+		btnZoomminus.setToolTipText("Zoom Out horizontally");
+		btnZoomminus.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/genome/zoomOUT.bmp"));
+		btnZoomminus.addSelectionListener(this);
+		
+		btnZoomplus = new Button(compGenomeViewer, SWT.TOGGLE);
+		btnZoomplus.setBackground(BasicColor.BUTTON);
+		btnZoomplus.setLayoutData(new GridData(SWT.LEFT, SWT.BOTTOM, false, false, 1, 1));
+		btnZoomplus.setToolTipText("Zoom In horizontally");
+		btnZoomplus.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/genome/zoomIN.bmp"));
+		btnZoomplus.addSelectionListener(this);
+		
+		
 		canvasGenome = new TrackCanvasGenome(compGenomeViewer, SWT.BORDER);
-		GridData gd_canvasGenome = new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 2);
+		GridData gd_canvasGenome = new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1);
 		gd_canvasGenome.heightHint = 125;
 		canvasGenome.setLayoutData(gd_canvasGenome);
 		canvasGenome.setLayout(new GridLayout(1, false));
 		canvasGenome.addMouseListener(this);
 
-		btnZoomplus = new Button(compGenomeViewer, SWT.NONE);
-		btnZoomplus.setLayoutData(new GridData(SWT.LEFT, SWT.BOTTOM, false, false, 1, 1));
-		btnZoomplus.setToolTipText("Zoom In horizontally");
-		btnZoomplus.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/genome/zoomIN.bmp"));
-		btnZoomplus.addSelectionListener(this);
-		btnZoomminus = new Button(compGenomeViewer, SWT.NONE);
-		btnZoomminus.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false, false, 1, 1));
-		btnZoomminus.setToolTipText("Zoom Out horizontally");
-		btnZoomminus.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/genome/zoomOUT.bmp"));
-		btnZoomminus.addSelectionListener(this);
 
 		Composite compGeneralInfo = new Composite(composite_1, SWT.BORDER);
 		GridData gd_compGeneralInfo = new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1);
@@ -671,11 +681,19 @@ public class GeneView implements SelectionListener, MouseListener {
 		composite_15.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1));
 		composite_15.setLayout(new GridLayout(1, false));
 
-		btnNucleotideSequence = new Button(composite_15, SWT.CENTER);
+		btnNucleotideSequence = new Button(composite_15, SWT.TOGGLE);
 		btnNucleotideSequence.setText("Nucleotide sequence");
+		btnNucleotideSequence.setToolTipText("Display the nucleotide sequence of the gene, available for download.");
+		btnNucleotideSequence.setFont(SWTResourceManager.getBodyFont(12, SWT.BOLD));
+		btnNucleotideSequence.setBackground(BasicColor.BUTTON);
+		
 		btnNucleotideSequence.addSelectionListener(this);
-		btnAminoAcidSequence = new Button(composite_15, SWT.CENTER);
+		btnAminoAcidSequence = new Button(composite_15, SWT.TOGGLE);
+		btnAminoAcidSequence.setBackground(BasicColor.BUTTON);
+		btnAminoAcidSequence.setToolTipText("Display the amino acid sequence of the protein, available for download.");
 		btnAminoAcidSequence.setText("Amino acid sequence");
+		btnAminoAcidSequence.setFont(SWTResourceManager.getBodyFont(12, SWT.BOLD));
+
 		btnAminoAcidSequence.addSelectionListener(this);
 
 		compSuppInfo = new Composite(composite_1, SWT.BORDER);
@@ -700,6 +718,7 @@ public class GeneView implements SelectionListener, MouseListener {
 		*/
 		
 		lblConservation = new Text(compSuppInfo, SWT.NONE);
+		lblConservation.setData(RWT.MARKUP_ENABLED, Boolean.TRUE);
 		lblConservation.setText("Homologs in 000/000 Yersinia genomes");
 
 		
@@ -782,12 +801,56 @@ public class GeneView implements SelectionListener, MouseListener {
 		composite_16.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		composite_16.setLayout(new GridLayout(1, false));
 
-		Composite composite_17 = new Composite(composite_16, SWT.NONE);
-		composite_17.setLayout(new GridLayout(9, false));
+		Composite composite_171 = new Composite(composite_16, SWT.NONE);
+		composite_171.setLayout(new GridLayout(5, false));
+		btnSelectall = new Button(composite_171, SWT.TOGGLE);
+		btnSelectall.setToolTipText("Select all genes");
+		btnSelectall.setFont(SWTResourceManager.getBodyFont(12, SWT.NORMAL));
+		btnSelectall.setBackground(BasicColor.BUTTON);
+		btnSelectall.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/checked.bmp"));
+		btnSelectall.addSelectionListener(this);
+		btnSelectall.setText("Select all");
 
+		btnUnselectall = new Button(composite_171, SWT.TOGGLE);
+		btnUnselectall.setBackground(BasicColor.BUTTON);
+		btnUnselectall.setToolTipText("Unselect all genes");
+		btnUnselectall.setFont(SWTResourceManager.getBodyFont(12, SWT.NORMAL));
+		btnUnselectall.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/unchecked.bmp"));
+		btnUnselectall.addSelectionListener(this);
+		btnUnselectall.setText("Unselect all");
+
+		btnDownloadtxt = new Button(composite_171, SWT.TOGGLE);
+		btnDownloadtxt.setText("Export selection as table");
+		btnDownloadtxt.setBackground(BasicColor.BUTTON);
+		btnDownloadtxt.setFont(SWTResourceManager.getBodyFont(12, SWT.NORMAL));
+		btnDownloadtxt.addSelectionListener(this);
+		
+		btnExportToFasta = new Button(composite_171, SWT.TOGGLE);
+		btnExportToFasta.setText("Export selection as fasta");
+		btnExportToFasta.setBackground(BasicColor.BUTTON);
+		btnExportToFasta.setFont(SWTResourceManager.getBodyFont(12, SWT.NORMAL));
+		btnExportToFasta.addSelectionListener(this);
+
+		btnSaveAsSvg = new Button(composite_171, SWT.TOGGLE);
+		btnSaveAsSvg.setToolTipText("Download as SVG vector image (for Illustrator, GIMP, ...)");
+		btnSaveAsSvg.setBackground(BasicColor.BUTTON);
+		btnSaveAsSvg.setFont(SWTResourceManager.getBodyFont(12, SWT.NORMAL));
+		btnSaveAsSvg.setText("Download tree");
+		btnSaveAsSvg.addSelectionListener(this);
+		
+		
+		Composite composite_17 = new Composite(composite_16, SWT.NONE);
+		composite_17.setLayout(new GridLayout(5, false));
 
 		lblConservation2 = new Label(composite_17, SWT.NONE);
 		lblConservation2.setText("Homologs in 000/000 Yersinia genomes");
+
+		new Label(composite_17, SWT.NONE);
+		new Label(composite_17, SWT.NONE);
+		
+		Label lblSearch_1 = new Label(composite_17, SWT.NONE);
+		lblSearch_1.setText("Search:");
+		lblSearch_1.setFont(SWTResourceManager.getBodyFont(12, SWT.NORMAL));
 		
 		txtSearchGenome = new Text(composite_17, SWT.BORDER);
 		txtSearchGenome.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
@@ -812,52 +875,8 @@ public class GeneView implements SelectionListener, MouseListener {
 			public void keyPressed(KeyEvent e) {}
 		});
 
-		/*
-		Label lblSearch_1 = new Label(composite_17, SWT.NONE);
-		lblSearch_1.setText("Search");
-		lblSearch_1.setFont(SWTResourceManager.getBodyFont(10, SWT.NORMAL));
-*/
-		btnSelectall = new Button(composite_17, SWT.NONE);
-		btnSelectall.setToolTipText("Select all genes");
-		btnSelectall.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/checked.bmp"));
-		btnSelectall.addSelectionListener(this);
+	
 
-		Label lblSelectAll = new Label(composite_17, SWT.NONE);
-		lblSelectAll.setText("Select all");
-		lblSelectAll.setFont(SWTResourceManager.getBodyFont(10, SWT.NORMAL));
-
-		btnUnselectall = new Button(composite_17, SWT.NONE);
-		btnUnselectall.setToolTipText("Unselect all genes");
-		btnUnselectall.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/unchecked.bmp"));
-		btnUnselectall.addSelectionListener(this);
-
-		Label lblUnselectAll = new Label(composite_17, SWT.NONE);
-		lblUnselectAll.setText("Unselect all");
-		lblUnselectAll.setFont(SWTResourceManager.getBodyFont(10, SWT.NORMAL));
-
-		btnDownloadtxt = new Button(composite_17, SWT.NONE);
-		btnDownloadtxt.setText("Export selection as table");
-		//btnDownloadtxt.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/fileIO/txt.bmp"));
-		btnDownloadtxt.addSelectionListener(this);
-		
-		btnExportToFasta = new Button(composite_17, SWT.NONE);
-		btnExportToFasta.setText("Export selection as fasta");		
-		btnExportToFasta.addSelectionListener(this);
-		/*
-		Label lblDownload = new Label(composite_17, SWT.NONE);
-		lblDownload.setText("Download gene selection as a table");
-		lblDownload.setFont(SWTResourceManager.getBodyFont(10, SWT.NORMAL));
-*/	
-		/*
-		Label lblDownloadPhylogenomicConservation = new Label(composite_14, SWT.NONE);
-		lblDownloadPhylogenomicConservation.setText("Download Phylogenomic conservation tree as");
-		lblDownloadPhylogenomicConservation.setFont(SWTResourceManager.getBodyFont(10, SWT.NORMAL));
-	*/	
-		btnSaveAsSvg = new Button(composite_17, SWT.NONE);
-		btnSaveAsSvg.setToolTipText("Download as SVG vector image (for Illustrator, GIMP, ...)");
-		//btnSaveAsSvg.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/fileIO/svg.bmp"));
-		btnSaveAsSvg.setText("Download tree");
-		btnSaveAsSvg.addSelectionListener(this);
 		
 		Label lblClickOneTime = new Label(composite_16, SWT.NONE);
 		lblClickOneTime.setText(
@@ -968,9 +987,10 @@ public class GeneView implements SelectionListener, MouseListener {
 					composite_pvalue.dispose();
 				}*/
 			}
-			btnUpdateCutoff = new Button(composite_8, SWT.NONE);
+			btnUpdateCutoff = new Button(composite_8, SWT.TOGGLE);
 			btnUpdateCutoff.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 5, 1));
 			btnUpdateCutoff.setText("Choose cut-off and update transcript differential expressions");
+			btnUpdateCutoff.setBackground(BasicColor.BUTTON);
 			btnUpdateCutoff.addSelectionListener(this);
 
 			Composite composite_3 = new Composite(compositeTranscriptome, SWT.NONE);
@@ -995,12 +1015,14 @@ public class GeneView implements SelectionListener, MouseListener {
 			lblHeatmapViewer.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
 			lblHeatmapViewer.setText("HeatMap Viewer");
 
-			btnGenomeViewer = new Button(composite_3, SWT.NONE);
+			btnGenomeViewer = new Button(composite_3, SWT.TOGGLE);
+			btnGenomeViewer.setBackground(BasicColor.BUTTON);
 			btnGenomeViewer.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
 			btnGenomeViewer.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/genomeViewer.bmp"));
 			btnGenomeViewer.addSelectionListener(this);
 
-			btnHeatmapview = new Button(composite_3, SWT.NONE);
+			btnHeatmapview = new Button(composite_3, SWT.TOGGLE);
+			btnHeatmapview.setBackground(BasicColor.BUTTON);
 			btnHeatmapview.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
 			btnHeatmapview.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/compareexpression.bmp"));
 			btnHeatmapview.addSelectionListener(this);
@@ -1015,6 +1037,7 @@ public class GeneView implements SelectionListener, MouseListener {
 			tableOver = new Table(compositeTranscriptome, SWT.BORDER | SWT.FULL_SELECTION | SWT.MULTI);
 			GridData gd_listOver = new GridData(SWT.FILL, SWT.TOP, true, false, 2, 1);
 			gd_listOver.heightHint = 150;
+			RWTUtils.setMarkup(tableOver);
 			tableOver.setLayoutData(gd_listOver);
 			tableOver.addSelectionListener(this);
 
@@ -1030,6 +1053,7 @@ public class GeneView implements SelectionListener, MouseListener {
 			gd_listUnder.heightHint = 150;
 			tableUnder.setLayoutData(gd_listUnder);
 			tableUnder.addSelectionListener(this);
+			RWTUtils.setMarkup(tableUnder);
 
 			Label lblNoDiffExpression = new Label(compositeTranscriptome, SWT.NONE);
 			lblNoDiffExpression.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
@@ -1043,6 +1067,8 @@ public class GeneView implements SelectionListener, MouseListener {
 			gd_listNodiff.heightHint = 150;
 			tableNodiff.setLayoutData(gd_listNodiff);
 			tableNodiff.addSelectionListener(this);
+			RWTUtils.setMarkup(tableNodiff);
+
 		}
 
 		/*
@@ -1076,6 +1102,7 @@ public class GeneView implements SelectionListener, MouseListener {
 		lblExprTranscriptomes = new Label(composite_103, SWT.NONE);
 		lblExprTranscriptomes.setText("");
 
+		
 		tableTranscriptomes = new Table(composite_101, SWT.BORDER | SWT.FULL_SELECTION | SWT.MULTI);
 		tableTranscriptomes.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1));
 
@@ -1131,9 +1158,11 @@ public class GeneView implements SelectionListener, MouseListener {
 					composite_pvalue.dispose();
 				}*/
 			}
-			btnUpdateCutoffProteome = new Button(composite_8, SWT.NONE);
+			btnUpdateCutoffProteome = new Button(composite_8, SWT.TOGGLE);
 			btnUpdateCutoffProteome.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 5, 1));
 			btnUpdateCutoffProteome.setText("Choose cut-off and update protein differential abundances");
+			btnUpdateCutoffProteome.setBackground(BasicColor.BUTTON);
+
 			btnUpdateCutoffProteome.addSelectionListener(this);
 
 			Composite composite_3 = new Composite(compositeProteome, SWT.NONE);
@@ -1158,12 +1187,15 @@ public class GeneView implements SelectionListener, MouseListener {
 			lblHeatmapViewer.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
 			lblHeatmapViewer.setText("HeatMap Viewer");
 
-			btnGenomeViewerProteome = new Button(composite_3, SWT.NONE);
+			btnGenomeViewerProteome = new Button(composite_3, SWT.TOGGLE);
+			btnGenomeViewerProteome.setBackground(BasicColor.BUTTON);
 			btnGenomeViewerProteome.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
 			btnGenomeViewerProteome.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/genomeViewer.bmp"));
 			btnGenomeViewerProteome.addSelectionListener(this);
 
-			btnHeatmapviewProteome = new Button(composite_3, SWT.NONE);
+			btnHeatmapviewProteome = new Button(composite_3, SWT.TOGGLE);
+			btnHeatmapviewProteome.setBackground(BasicColor.BUTTON);
+
 			btnHeatmapviewProteome.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
 			btnHeatmapviewProteome.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/compareexpression.bmp"));
 			btnHeatmapviewProteome.addSelectionListener(this);
@@ -1180,6 +1212,7 @@ public class GeneView implements SelectionListener, MouseListener {
 			gd_listOver.heightHint = 150;
 			tableOverProteome.setLayoutData(gd_listOver);
 			tableOverProteome.addSelectionListener(this);
+			RWTUtils.setMarkup(tableOverProteome);
 
 			Label lblUnderExpressedIn = new Label(compositeProteome, SWT.NONE);
 			lblUnderExpressedIn.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
@@ -1193,6 +1226,7 @@ public class GeneView implements SelectionListener, MouseListener {
 			gd_listUnder.heightHint = 150;
 			tableUnderProteome.setLayoutData(gd_listUnder);
 			tableUnderProteome.addSelectionListener(this);
+			RWTUtils.setMarkup(tableUnderProteome);
 
 			Label lblNoDiffExpression = new Label(compositeProteome, SWT.NONE);
 			lblNoDiffExpression.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
@@ -1206,6 +1240,8 @@ public class GeneView implements SelectionListener, MouseListener {
 			gd_listNodiff.heightHint = 150;
 			tableNodiffProteome.setLayoutData(gd_listNodiff);
 			tableNodiffProteome.addSelectionListener(this);
+			RWTUtils.setMarkup(tableNodiffProteome);
+
 		}
 
 		tbtmProteomes = new TabItem(tabFolder, SWT.NONE);
@@ -1276,9 +1312,10 @@ public class GeneView implements SelectionListener, MouseListener {
 		compositeKEGG = new Composite(tabFolder, SWT.NONE);
 		tbtmKEGG.setControl(compositeKEGG);
 		compositeKEGG.setLayout(new GridLayout(1, false));
-		btnKEGG = new Button(compositeKEGG, SWT.NONE);
+		btnKEGG = new Button(compositeKEGG, SWT.TOGGLE);
 		btnKEGG.addSelectionListener(this);
 		btnKEGG.setText("Open KEGG in a new tab of your browser");
+		btnKEGG.setBackground(BasicColor.BUTTON);
 		browserKEGG = new Browser(compositeKEGG, SWT.NONE);
 		browserKEGG.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		browserKEGG.setUrl("");
@@ -1294,8 +1331,10 @@ public class GeneView implements SelectionListener, MouseListener {
 		compositeUniprot = new Composite(tabFolder, SWT.NONE);
 		tbtmUniprot.setControl(compositeUniprot);
 		compositeUniprot.setLayout(new GridLayout(1, false));
-		btnUniprot = new Button(compositeUniprot, SWT.NONE);
+		btnUniprot = new Button(compositeUniprot, SWT.TOGGLE);
 		btnUniprot.addSelectionListener(this);
+		btnUniprot.setBackground(BasicColor.BUTTON);
+
 		btnUniprot.setText("Open UniProt in a new tab of your browser");
 		browserUniprot = new Browser(compositeUniprot, SWT.NONE);
 		browserUniprot.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
@@ -1311,8 +1350,10 @@ public class GeneView implements SelectionListener, MouseListener {
 		compositeInterpro = new Composite(tabFolder, SWT.NONE);
 		tbtmInterpro.setControl(compositeInterpro);
 		compositeInterpro.setLayout(new GridLayout(1, false));
-		btnInterpro = new Button(compositeInterpro, SWT.NONE);
+		btnInterpro = new Button(compositeInterpro, SWT.TOGGLE);
 		btnInterpro.addSelectionListener(this);
+		btnInterpro.setBackground(BasicColor.BUTTON);
+
 		btnInterpro.setText("Open InterPro in a new tab of your browser");
 		browserInterpro = new Browser(compositeInterpro, SWT.NONE);
 		browserInterpro.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
@@ -1327,7 +1368,9 @@ public class GeneView implements SelectionListener, MouseListener {
 		compositeIntact = new Composite(tabFolder, SWT.NONE);
 		tbtmIntact.setControl(compositeIntact);
 		compositeIntact.setLayout(new GridLayout(1, false));
-		btnIntact = new Button(compositeIntact, SWT.NONE);
+		btnIntact = new Button(compositeIntact, SWT.TOGGLE);
+		btnIntact.setBackground(BasicColor.BUTTON);
+
 		btnIntact.addSelectionListener(this);
 		btnIntact.setText("Open IntAct in a new tab of your browser");
 		browserIntact = new Browser(compositeIntact, SWT.NONE);
@@ -1346,9 +1389,17 @@ public class GeneView implements SelectionListener, MouseListener {
 		compositeString.setLayout(new GridLayout(1, false));
 		compositeString.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		
-		btnString = new Button(compositeString, SWT.NONE);
+		compositeString_row_1 = new Composite(compositeString, SWT.NONE);
+		compositeString_row_1.setLayout(new GridLayout(2, false));
+		compositeString_row_1.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1));
+		
+		btnString = new Button(compositeString_row_1, SWT.TOGGLE);
 		btnString.addSelectionListener(this);
-		btnString.setText("Open String in a new tab of your browser");
+		btnString.setBackground(BasicColor.BUTTON);
+		btnString.setText("Open STRING in a new tab of your browser");
+		
+		Label lblString = new Label(compositeString_row_1, SWT.NONE);
+		lblString.setText("Open Yersiniomics in Mozilla Firefox if STRING cannot load.");		
 		
 		browserString = new Browser(compositeString, SWT.NONE);
 		browserString.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
@@ -1397,8 +1448,10 @@ public class GeneView implements SelectionListener, MouseListener {
 		composite_1.layout(true,true);
 
 		if(syntenyHashMap.containsKey(genome.getSpecies())){
-				btnShowSynteny = new Button(compSynt, SWT.CENTER);
+				btnShowSynteny = new Button(compSynt, SWT.TOGGLE);
+				btnShowSynteny.setBackground(BasicColor.BUTTON);
 				btnShowSynteny.setText("Show synteny");
+				btnShowSynteny.setToolTipText("Load the genome synteny computed with the other genomes of the same genus available in Yersiniomics, in the SynTVieW software.");
 				btnShowSynteny.addSelectionListener(this);
 				btnShowSynteny.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, true, true, 1, 1));
 				btnShowSynteny.setFont(SWTResourceManager.getBodyFont(22,SWT.NORMAL));
@@ -1516,9 +1569,10 @@ public class GeneView implements SelectionListener, MouseListener {
 		compositeKEGG = new Composite(tabFolder, SWT.NONE);
 		tbtmKEGG.setControl(compositeKEGG);
 		compositeKEGG.setLayout(new GridLayout(1, false));
-		btnKEGG = new Button(compositeKEGG, SWT.NONE);
+		btnKEGG = new Button(compositeKEGG, SWT.TOGGLE);
 		btnKEGG.addSelectionListener(this);
 		btnKEGG.setText("Open KEGG in a new tab of your browser");
+		btnKEGG.setBackground(BasicColor.BUTTON);
 		browserKEGG = new Browser(compositeKEGG, SWT.NONE);
 		browserKEGG.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		
@@ -1529,7 +1583,8 @@ public class GeneView implements SelectionListener, MouseListener {
 		compositeUniprot = new Composite(tabFolder, SWT.NONE);
 		tbtmUniprot.setControl(compositeUniprot);
 		compositeUniprot.setLayout(new GridLayout(1, false));
-		btnUniprot = new Button(compositeUniprot, SWT.NONE);
+		btnUniprot = new Button(compositeUniprot, SWT.TOGGLE);
+		btnUniprot.setBackground(BasicColor.BUTTON);
 		btnUniprot.addSelectionListener(this);
 		btnUniprot.setText("Open UniProt in a new tab of your browser");
 		browserUniprot = new Browser(compositeUniprot, SWT.NONE);
@@ -1538,12 +1593,12 @@ public class GeneView implements SelectionListener, MouseListener {
 		tbtmInterpro.dispose();
 		tbtmInterpro = new TabItem(tabFolder, SWT.NONE);
 		tbtmInterpro.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/interpro.png"));
-
 		compositeInterpro = new Composite(tabFolder, SWT.NONE);
 		tbtmInterpro.setControl(compositeInterpro);
 		compositeInterpro.setLayout(new GridLayout(1, false));
-		btnInterpro = new Button(compositeInterpro, SWT.NONE);
+		btnInterpro = new Button(compositeInterpro, SWT.TOGGLE);
 		btnInterpro.addSelectionListener(this);
+		btnInterpro.setBackground(BasicColor.BUTTON);
 		btnInterpro.setText("Open InterPro in a new tab of your browser");
 		browserInterpro = new Browser(compositeInterpro, SWT.NONE);
 		browserInterpro.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
@@ -1551,12 +1606,12 @@ public class GeneView implements SelectionListener, MouseListener {
 		tbtmIntact.dispose();
 		tbtmIntact = new TabItem(tabFolder, SWT.NONE);
 		tbtmIntact.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/intact.png"));
-
 		compositeIntact = new Composite(tabFolder, SWT.NONE);
 		tbtmIntact.setControl(compositeIntact);
 		compositeIntact.setLayout(new GridLayout(1, false));
-		btnIntact = new Button(compositeIntact, SWT.NONE);
+		btnIntact = new Button(compositeIntact, SWT.TOGGLE);
 		btnIntact.addSelectionListener(this);
+		btnIntact.setBackground(BasicColor.BUTTON);
 		btnIntact.setText("Open IntAct in a new tab of your browser");
 		browserIntact = new Browser(compositeIntact, SWT.NONE);
 		browserIntact.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
@@ -1570,10 +1625,18 @@ public class GeneView implements SelectionListener, MouseListener {
 			tbtmString.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/string.png"));
 			compositeString.setLayout(new GridLayout(1, false));
 			compositeString.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+
+			compositeString_row_1 = new Composite(compositeString, SWT.NONE);
+			compositeString_row_1.setLayout(new GridLayout(2, false));
+			compositeString_row_1.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1));
 			
-			btnString = new Button(compositeString, SWT.NONE);
+			btnString = new Button(compositeString_row_1, SWT.TOGGLE);
 			btnString.addSelectionListener(this);
-			btnString.setText("Open String in a new tab of your browser");
+			btnString.setBackground(BasicColor.BUTTON);
+			btnString.setText("Open STRING in a new tab of your browser");
+			
+			Label lblString = new Label(compositeString_row_1, SWT.NONE);
+			lblString.setText("Open Yersiniomics in Mozilla Firefox if STRING cannot load.");	
 			
 			browserString = new Browser(compositeString, SWT.NONE);
 			browserString.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
@@ -1998,15 +2061,16 @@ public class GeneView implements SelectionListener, MouseListener {
 		 */
 		listGenes = new ArrayList<>();
 		for (String gene : genome.getChromosomes().get(chromoID).getGenes().keySet()) {
-			String text = gene;
+			String text = "";
 			String oldLocusTag = genome.getChromosomes().get(chromoID).getGenes().get(gene).getOldLocusTag();
 			if (!oldLocusTag.equals("")) {
-				text += " - " + oldLocusTag;
+				text += oldLocusTag + " - ";
 			}
 			String geneName = genome.getChromosomes().get(chromoID).getGenes().get(gene).getGeneName();
 			if (!geneName.equals("")) {
-				text += " (" + geneName + ")";
+				text += "(" + geneName + ") - ";
 			}
+			text += gene;
 			listGenes.add(text);
 		}
 		for (String gene : genome.getChromosomes().get(chromoID).getGenesAlternative().keySet()) {
@@ -2079,9 +2143,12 @@ public class GeneView implements SelectionListener, MouseListener {
 	}
 
 	public void updateGeneBasicInfo() {
-		String title = sequence.getName();
+		String title = "";
+		if (!sequence.getFeature("old_locus_tag").equals(""))
+			title += sequence.getFeature("old_locus_tag") + " - ";
 		if (!sequence.getGeneName().equals("") && !sequence.getGeneName().equals("-"))
-			title += " - " + sequence.getGeneName();
+			title += sequence.getGeneName() +" - " ;
+		title += sequence.getName();
 		lblGene.setText(title);
 		lblLocus.setText("Locus: " + sequence.getName() +  " - "+ sequence.getFeature("old_locus_tag") );
 		lblBegin.setText("Begin: " + sequence.getBegin() + "");
@@ -2150,9 +2217,9 @@ public class GeneView implements SelectionListener, MouseListener {
 			lblOperon.setText("Not in an operon");
 		}
 		*/
-		lblConservation.setText("Homologs in " + (sequence.getConservation() - 1) + "/"
+		lblConservation.setText("Homologs in " + (sequence.getConservation()) + "/"
 				+ Genome.getAvailableGenomes().size() + " "+Database.getInstance().getSpecies()+" genomes");
-		lblConservation2.setText("Homologs in " + (sequence.getConservation() - 1) + "/"
+		lblConservation2.setText("Homologs in " + (sequence.getConservation()) + "/"
 				+ Genome.getAvailableGenomes().size() + " "+Database.getInstance().getSpecies()+" genomes");
 		lblProduct.setText("Product: " + sequence.getProduct());
 		lblProtID.setText("ProteinId: " + RWTUtils.setProteinNCBILink(sequence.getProtein_id()));
@@ -2329,9 +2396,11 @@ public class GeneView implements SelectionListener, MouseListener {
 					composite_pvalue.dispose();
 				}*/
 			}
-			btnUpdateCutoff = new Button(composite_8, SWT.NONE);
+			btnUpdateCutoff = new Button(composite_8, SWT.TOGGLE);
 			btnUpdateCutoff.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 5, 1));
 			btnUpdateCutoff.setText("Choose cut-off and update transcript differential expressions");
+			btnUpdateCutoff.setBackground(BasicColor.BUTTON);
+
 			btnUpdateCutoff.addSelectionListener(this);
 
 			Composite composite_3 = new Composite(compositeTranscriptome, SWT.NONE);
@@ -2356,12 +2425,14 @@ public class GeneView implements SelectionListener, MouseListener {
 			lblHeatmapViewer.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
 			lblHeatmapViewer.setText("HeatMap Viewer");
 
-			btnGenomeViewer = new Button(composite_3, SWT.NONE);
+			btnGenomeViewer = new Button(composite_3, SWT.TOGGLE);
+			btnGenomeViewer.setBackground(BasicColor.BUTTON);
 			btnGenomeViewer.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
 			btnGenomeViewer.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/genomeViewer.bmp"));
 			btnGenomeViewer.addSelectionListener(this);
 
-			btnHeatmapview = new Button(composite_3, SWT.NONE);
+			btnHeatmapview = new Button(composite_3, SWT.TOGGLE);
+			btnHeatmapview.setBackground(BasicColor.BUTTON);
 			btnHeatmapview.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
 			btnHeatmapview.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/compareexpression.bmp"));
 			btnHeatmapview.addSelectionListener(this);
@@ -2376,8 +2447,10 @@ public class GeneView implements SelectionListener, MouseListener {
 			tableOver = new Table(compositeTranscriptome, SWT.BORDER | SWT.FULL_SELECTION | SWT.MULTI);
 			GridData gd_listOver = new GridData(SWT.FILL, SWT.TOP, true, false, 2, 1);
 			gd_listOver.heightHint = 150;
+			RWTUtils.setMarkup(tableOver);
 			tableOver.setLayoutData(gd_listOver);
 			tableOver.addSelectionListener(this);
+
 
 			Label lblUnderExpressedIn = new Label(compositeTranscriptome, SWT.NONE);
 			lblUnderExpressedIn.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
@@ -2390,6 +2463,7 @@ public class GeneView implements SelectionListener, MouseListener {
 			GridData gd_listUnder = new GridData(SWT.FILL, SWT.TOP, true, false, 2, 1);
 			gd_listUnder.heightHint = 150;
 			tableUnder.setLayoutData(gd_listUnder);
+			RWTUtils.setMarkup(tableUnder);
 			tableUnder.addSelectionListener(this);
 
 			Label lblNoDiffExpression = new Label(compositeTranscriptome, SWT.NONE);
@@ -2404,6 +2478,8 @@ public class GeneView implements SelectionListener, MouseListener {
 			gd_listNodiff.heightHint = 150;
 			tableNodiff.setLayoutData(gd_listNodiff);
 			tableNodiff.addSelectionListener(this);
+			RWTUtils.setMarkup(tableNodiff);
+
 		}
 
 		/*
@@ -2489,9 +2565,11 @@ public class GeneView implements SelectionListener, MouseListener {
 					composite_pvalue.dispose();
 				}*/
 			}
-			btnUpdateCutoffProteome = new Button(composite_8, SWT.NONE);
+			btnUpdateCutoffProteome = new Button(composite_8, SWT.TOGGLE);
 			btnUpdateCutoffProteome.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 5, 1));
 			btnUpdateCutoffProteome.setText("Choose cut-off and update protein differential abundances");
+			btnUpdateCutoffProteome.setBackground(BasicColor.BUTTON);
+
 			btnUpdateCutoffProteome.addSelectionListener(this);
 
 			Composite composite_3 = new Composite(compositeProteome, SWT.NONE);
@@ -2516,12 +2594,14 @@ public class GeneView implements SelectionListener, MouseListener {
 			lblHeatmapViewer.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
 			lblHeatmapViewer.setText("HeatMap Viewer");
 
-			btnGenomeViewerProteome = new Button(composite_3, SWT.NONE);
+			btnGenomeViewerProteome = new Button(composite_3, SWT.TOGGLE);
+			btnGenomeViewerProteome.setBackground(BasicColor.BUTTON);
 			btnGenomeViewerProteome.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
 			btnGenomeViewerProteome.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/genomeViewer.bmp"));
 			btnGenomeViewerProteome.addSelectionListener(this);
 
-			btnHeatmapviewProteome = new Button(composite_3, SWT.NONE);
+			btnHeatmapviewProteome = new Button(composite_3, SWT.TOGGLE);
+			btnHeatmapviewProteome.setBackground(BasicColor.BUTTON);
 			btnHeatmapviewProteome.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
 			btnHeatmapviewProteome.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/compareexpression.bmp"));
 			btnHeatmapviewProteome.addSelectionListener(this);
@@ -2538,6 +2618,8 @@ public class GeneView implements SelectionListener, MouseListener {
 			gd_listOver.heightHint = 150;
 			tableOverProteome.setLayoutData(gd_listOver);
 			tableOverProteome.addSelectionListener(this);
+			RWTUtils.setMarkup(tableOverProteome);
+
 
 			Label lblUnderExpressedIn = new Label(compositeProteome, SWT.NONE);
 			lblUnderExpressedIn.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
@@ -2551,6 +2633,7 @@ public class GeneView implements SelectionListener, MouseListener {
 			gd_listUnder.heightHint = 150;
 			tableUnderProteome.setLayoutData(gd_listUnder);
 			tableUnderProteome.addSelectionListener(this);
+			RWTUtils.setMarkup(tableUnderProteome);
 
 			Label lblNoDiffExpression = new Label(compositeProteome, SWT.NONE);
 			lblNoDiffExpression.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
@@ -2564,6 +2647,8 @@ public class GeneView implements SelectionListener, MouseListener {
 			gd_listNodiff.heightHint = 150;
 			tableNodiffProteome.setLayoutData(gd_listNodiff);
 			tableNodiffProteome.addSelectionListener(this);
+			RWTUtils.setMarkup(tableNodiffProteome);
+
 		}
 
 
@@ -3022,15 +3107,15 @@ public class GeneView implements SelectionListener, MouseListener {
 	public ArrayList<String> getSelectedComparisons() {
 		ArrayList<String> comparisons = new ArrayList<>();
 		for (int index : tableOver.getSelectionIndices()) {
-			String comparison = tableOver.getItem(index).getText(ArrayUtils.findColumn(arrayDataList, "Data Name")+2);
+			String comparison = tableOver.getItem(index).getText(ArrayUtils.findColumn(arrayDataList, "Data Name")+3);
 			comparisons.add(comparison);
 		}
 		for (int index : tableUnder.getSelectionIndices()) {
-			String comparison = tableUnder.getItem(index).getText(ArrayUtils.findColumn(arrayDataList, "Data Name")+2);
+			String comparison = tableUnder.getItem(index).getText(ArrayUtils.findColumn(arrayDataList, "Data Name")+3);
 			comparisons.add(comparison);
 		}
 		for (int index : tableNodiff.getSelectionIndices()) {
-			String comparison = tableNodiff.getItem(index).getText(ArrayUtils.findColumn(arrayDataList, "Data Name")+2);
+			String comparison = tableNodiff.getItem(index).getText(ArrayUtils.findColumn(arrayDataList, "Data Name")+3);
 			comparisons.add(comparison);
 		}
 		//System.out.println("comparisons: "+ comparisons);
@@ -3356,6 +3441,28 @@ public class GeneView implements SelectionListener, MouseListener {
 	/**
 	 * Display GeneView <br>
 	 * It will display QMA0440
+	 * 
+	 * @param gene
+	 * @param partService
+	 */
+
+	public static void openQMA0440GeneView(EPartService partService) {
+		String id = GeneView.ID + "-" + String.valueOf(Math.random() * 1000).substring(0, 3);
+		// initiate view
+		ResourceManager.openView(partService, GeneView.ID, id);
+		// update data
+		MPart part = partService.findPart(id);
+		NavigationManagement.pushStateView(id, new HashMap<>());
+		GeneView view = (GeneView) part.getObject();
+		view.setViewID(id);
+		String genomeName = "Yersinia ruckeri QMA0440";
+		view.initGenomeInfo(genomeName);
+		view.setGenomeSelected(genomeName);
+	}
+	
+	/**
+	 * Display GeneView <br>
+	 * It will display SC09
 	 * 
 	 * @param gene
 	 * @param partService

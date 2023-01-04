@@ -47,6 +47,7 @@ import bacnet.swt.ResourceManager;
 import bacnet.swt.SWTResourceManager;
 import bacnet.table.core.BioConditionComparator;
 import bacnet.utils.ArrayUtils;
+import bacnet.utils.BasicColor;
 import bacnet.utils.RWTUtils;
 import bacnet.views.HelpPage;
 
@@ -145,7 +146,7 @@ public class TranscriptomicsView implements SelectionListener {
         lblXxSrnas.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 3, 1));
         lblXxSrnas.setFont(SWTResourceManager.getTitleFont(SWT.BOLD));
         lblXxSrnas.setText(Database.getInstance().getSpecies() + " Transcriptomics Datasets");
-        lblXxSrnas.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
+        lblXxSrnas.setBackground(BasicColor.HEADER);
 /*
         btnHelp = new Button(container, SWT.NONE);
         btnHelp.setToolTipText("How to use Transcriptomic summary panel ?");
@@ -173,7 +174,8 @@ public class TranscriptomicsView implements SelectionListener {
             Label lblSelectBiologicalCondtions = new Label(composite_1, SWT.NONE);
             lblSelectBiologicalCondtions.setText("Select biological condtions and : ");
             {
-                btnGenomeViewer = new Button(composite_1, SWT.NONE);
+                btnGenomeViewer = new Button(composite_1, SWT.TOGGLE);
+                btnGenomeViewer.setBackground(BasicColor.BUTTON);
                 btnGenomeViewer.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/genomeViewer.bmp"));
                 btnGenomeViewer.addSelectionListener(this);
             }
@@ -189,9 +191,11 @@ public class TranscriptomicsView implements SelectionListener {
             Label label = new Label(composite_1, SWT.NONE);
             label.setText("     ");
 
-            btnExpressionAtlas = new Button(composite_1, SWT.NONE);
+            btnExpressionAtlas = new Button(composite_1, SWT.TOGGLE);
             btnExpressionAtlas.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/compareexpression.bmp"));
             btnExpressionAtlas.addSelectionListener(this);
+            btnExpressionAtlas.setBackground(BasicColor.BUTTON);
+
             Label lblDisplayDataComparisons = new Label(composite_1, SWT.WRAP);
             GridData gd_lblDisplayDataComparisons = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
             gd_lblDisplayDataComparisons.widthHint = 200;
@@ -205,31 +209,29 @@ public class TranscriptomicsView implements SelectionListener {
         composite_2.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
         composite_2.setLayout(new GridLayout(10, false));
 
-        btnSelectall = new Button(composite_2, SWT.NONE);
-        btnSelectall.setToolTipText("Select all genomes");
-        btnSelectall.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/checked.bmp"));
-        btnSelectall.addSelectionListener(this);
-        Label lblSelectAll = new Label(composite_2, SWT.NONE);
-        lblSelectAll.setText("Select all");
-        lblSelectAll.setFont(SWTResourceManager.getBodyFont(10, SWT.NORMAL));
+        btnSelectall = new Button(composite_2, SWT.TOGGLE);
+		btnSelectall.setBackground(BasicColor.BUTTON);
+		btnSelectall.setToolTipText("Select all genomes");
+		btnSelectall.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/checked.bmp"));
+		btnSelectall.addSelectionListener(this);
+		btnSelectall.setText("Select all");
+		btnSelectall.setFont(SWTResourceManager.getBodyFont(12, SWT.NORMAL));
 
-        btnUnselectall = new Button(composite_2, SWT.NONE);
-        btnUnselectall.setToolTipText("Unselect all genomes");
-        btnUnselectall.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/unchecked.bmp"));
-        btnUnselectall.addSelectionListener(this);
-        Label lblUnselectAll = new Label(composite_2, SWT.NONE);
-        lblUnselectAll.setText("Unselect all");
-        lblUnselectAll.setFont(SWTResourceManager.getBodyFont(10, SWT.NORMAL));
+		btnUnselectall = new Button(composite_2, SWT.TOGGLE);
+		btnUnselectall.setBackground(BasicColor.BUTTON);
+		btnUnselectall.setToolTipText("Unselect all genomes");
+		btnUnselectall.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/unchecked.bmp"));
+		btnUnselectall.addSelectionListener(this);
+		btnUnselectall.setText("Unselect all");
+		btnUnselectall.setFont(SWTResourceManager.getBodyFont(12, SWT.NORMAL));
 
-        new Label(composite_2, SWT.NONE);
-
-        btnSaveTxt = new Button(composite_2, SWT.NONE);
+        btnSaveTxt = new Button(composite_2, SWT.TOGGLE);
+        btnSaveTxt.setBackground(BasicColor.BUTTON);
         btnSaveTxt.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/fileIO/txt.bmp"));
         btnSaveTxt.setToolTipText("Download the table in tabulated text format");
+        btnSaveTxt.setText("Download transcriptome selection as a table");
+        btnSaveTxt.setFont(SWTResourceManager.getBodyFont(12, SWT.NORMAL));
 
-        Label lblSaveSelectionAs = new Label(composite_2, SWT.NONE);
-        lblSaveSelectionAs.setText("Download transcriptome selection as a table");
-        lblSaveSelectionAs.setFont(SWTResourceManager.getBodyFont(10, SWT.NORMAL));
         new Label(composite_2, SWT.NONE);
         new Label(composite_2, SWT.NONE);
         new Label(composite_2, SWT.NONE);
@@ -298,6 +300,7 @@ public class TranscriptomicsView implements SelectionListener {
                 || Database.getInstance().getProjectName() == Database.UIBCLISTERIOMICS_PROJECT|| Database.getInstance().getProjectName() == Database.YERSINIOMICS_PROJECT|| Database.getInstance().getProjectName() == Database.URY_YERSINIOMICS_PROJECT) {
             compositeDataFilter.updateInfo();
         }
+        compositeDataFilter.redraw();
 
     }
 
@@ -487,6 +490,10 @@ public class TranscriptomicsView implements SelectionListener {
                     	String text = bioCond[k];
 	                    if (colName.equals("Type")) {
 	                        return "";
+	                    } else if (colName.equals("Strain used")) {
+							return "<i>" + text.substring(0,text.indexOf(" ", 10)) + "</i>" + text.substring(text.indexOf(" ", 10), text.length());
+	                    } else if (colName.equals("Reference strain")) {
+							return "<i>" + text.substring(0,text.indexOf(" ", 10)) + "</i>" + text.substring(text.indexOf(" ", 10), text.length());
 	                    } else if (colName.equals("Bibliographical reference")) {
 	                        return RWTUtils.setPubMedLink(text);
 	                    } else if (colName.equals("ENA project")) {
@@ -688,7 +695,7 @@ public class TranscriptomicsView implements SelectionListener {
         } else {
             compositeDataFilter.updateBioConditionList();
             compositeDataFilter.pushState();
-            updateBioConditionTable();
+            //updateBioConditionTable();
             compositeDataFilter.updateInfo();
         }
     }

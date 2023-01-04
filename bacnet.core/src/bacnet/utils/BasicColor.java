@@ -37,17 +37,22 @@ public class BasicColor {
 
     public static Color BANNER_COLOR = new Color(display, 217, 253, 254);
     
-    public static Color LIGHT_ONE = new Color(display, 202, 240, 248);
-    public static Color DARK_ONE = new Color(display, 255, 255, 255);
+    public static Color DARK_ONE = new Color(display, 202, 240, 248);
+    public static Color LIGHT_ONE = new Color(display, 255, 255, 255);
     
-    public static Color LIGHT_TWO = new Color(display, 173, 232, 244);
-    public static Color DARK_TWO = new Color(display, 230, 250, 255);
+    public static Color DARK_TWO = new Color(display, 173, 232, 244);
+    public static Color LIGHT_TWO = new Color(display, 230, 250, 255);
     
-    public static Color LIGHT_THREE = new Color(display, 144, 224, 239);
-    public static Color DARK_THREE = new Color(display, 202, 240, 248);
+    public static Color DARK_THREE = new Color(display, 144, 224, 239);
+    public static Color LIGHT_THREE = new Color(display, 202, 240, 248);
 
     public static Color BROWN = new Color(display, 158, 107, 17);
 
+    //violet public static Color BUTTON = new Color(display, 240, 240, 255);
+    public static Color BUTTON = new Color(display, 245, 245, 245);
+    public static Color HEADER = new Color(display, 235, 235, 235);
+
+    
     public static Color gradientColor(int gradient) {
         return new Color(display, 255, 127, gradient % 255);
     }

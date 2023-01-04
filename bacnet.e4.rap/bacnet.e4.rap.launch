@@ -43,7 +43,7 @@
     <booleanAttribute key="org.eclipse.rap.launch.terminatePrevious" value="true"/>
     <booleanAttribute key="org.eclipse.rap.launch.useDefaultDataLocation" value="true"/>
     <booleanAttribute key="org.eclipse.rap.launch.useManualContextPath" value="false"/>
-    <booleanAttribute key="org.eclipse.rap.launch.useManualPort" value="true"/>
+    <booleanAttribute key="org.eclipse.rap.launch.useManualPort" value="false"/>
     <booleanAttribute key="org.eclipse.rap.launch.useSessionTimeout" value="false"/>
     <stringAttribute key="pde.version" value="3.3"/>
     <setAttribute key="selected_target_bundles">

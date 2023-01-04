@@ -183,10 +183,10 @@ public class DataTrack {
                         alreadyDisplayedData.add(tscData.getName());
                         Color color = BasicColor.getColors(k);
                         if (tscData.getType() == TypeData.RNASeq) {
-                            if (tscData.getName().contains("+")) {
-                                dataColors.put(tscData.getName(), BasicColor.RED);
-                            } else if (tscData.getName().contains("-")) {
-                                dataColors.put(tscData.getName(), BasicColor.BLUE);
+                            if (tscData.getName().substring(tscData.getName().length()-2).equals("_f")) {
+                                dataColors.put(tscData.getName(), BasicColor.REDLIGHT_COV);
+                            } else if (tscData.getName().substring(tscData.getName().length()-2).equals("_r")) {
+                                dataColors.put(tscData.getName(), BasicColor.BLUELIGHT_COV);
                             } else
                                 dataColors.put(tscData.getName(), BasicColor.getColors(k));
                         } else if (tscData instanceof NTermData) {

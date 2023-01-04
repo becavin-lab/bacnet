@@ -173,11 +173,11 @@ public class ColorMapper implements Serializable, Cloneable {
     }
 
     public void setDefaultFont() {
-        fontRowName = SWTResourceManager.getBodyFont(SWT.BOLD);
+        fontRowName = SWTResourceManager.getBodyFont(15,SWT.NORMAL);
 
-        fontText = SWTResourceManager.getBodyFont(SWT.NORMAL);
+        fontText = SWTResourceManager.getBodyFont(15,SWT.NORMAL);
 
-        fontDouble = SWTResourceManager.getBodyFont(SWT.NORMAL);
+        fontDouble = SWTResourceManager.getBodyFont(15,SWT.NORMAL);
 
     }
 

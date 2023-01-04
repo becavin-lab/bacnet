@@ -50,6 +50,7 @@ import bacnet.sequenceTools.GeneView;
 import bacnet.sequenceTools.SrnaView;
 import bacnet.swt.ResourceManager;
 import bacnet.swt.SWTResourceManager;
+import bacnet.utils.BasicColor;
 import bacnet.utils.FileUtils;
 import bacnet.views.HelpPage;
 
@@ -98,13 +99,13 @@ public class TracksComposite extends Composite implements SelectionListener, Mou
 
     private final GridLayout showInfo;
     private final GridLayout hideInfo;
-    private final GridData gridDataCmpInfo;
+    //private final GridData gridDataCmpInfo;
 
     private final Slider sliderHbar;
     private final Slider sliderVBar;
     private final Button btnLegendManagement;
-    private final Composite cmpNTermInfo;
-    private final Table tableNtermInfo;
+    //private final Composite cmpNTermInfo;
+    //private final Table tableNtermInfo;
     private final Button btnSequence;
     private final Button btnZoomInVertical;
     private final Button btnZoomOutVertical;
@@ -123,12 +124,15 @@ public class TracksComposite extends Composite implements SelectionListener, Mou
     /*
      * ********* NTerm related
      */
+    /*
     private final Button btnPreviousnterm;
     private final Button btnNextnterm;
     private final Combo comboNTermFilter;
     private Button btnHideNterminomicsPanel;
     private Combo comboNTermData;
     private CompositeNTermInfo compositeNterm;
+        */
+
     private Composite compositeGenome_1;
     private Composite compositeChromosome;
     private Combo comboChromosome;
@@ -149,7 +153,7 @@ public class TracksComposite extends Composite implements SelectionListener, Mou
         showInfo = new GridLayout(2, false);
         hideInfo = new GridLayout(1, false);
         setLayout(showInfo);
-
+        /*
         cmpNTermInfo = new Composite(this, SWT.NONE);
         gridDataCmpInfo = new GridData(SWT.CENTER, SWT.FILL, false, true, 1, 2);
         cmpNTermInfo.setLayoutData(gridDataCmpInfo);
@@ -158,11 +162,10 @@ public class TracksComposite extends Composite implements SelectionListener, Mou
         lblSelectTypeOf.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
         lblSelectTypeOf.setSize(214, 15);
         lblSelectTypeOf.setText("Select proteomics data to display");
-
+        
         Composite composite_2 = new Composite(cmpNTermInfo, SWT.BORDER);
         composite_2.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
         composite_2.setLayout(new GridLayout(1, false));
-
         // btnAnimate = new Button(composite_2, SWT.NONE);
         // btnAnimate.setText("Animate");
         // btnAnimate.addSelectionListener(this);
@@ -185,7 +188,7 @@ public class TracksComposite extends Composite implements SelectionListener, Mou
         Label lblSelectedPeptideProperties = new Label(cmpNTermInfo, SWT.NONE);
         lblSelectedPeptideProperties.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
         lblSelectedPeptideProperties.setText("Properties of selected peptide");
-
+*/
         {
             /*
              * Need to be commented to be able to Use Windows Builder!
@@ -194,7 +197,7 @@ public class TracksComposite extends Composite implements SelectionListener, Mou
             // compositeNterm.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false,
             // 1, 1));
         }
-
+/*
         Composite cmpSearchNTerm = new Composite(cmpNTermInfo, SWT.BORDER);
         cmpSearchNTerm.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
         cmpSearchNTerm.setSize(300, 59);
@@ -218,7 +221,7 @@ public class TracksComposite extends Composite implements SelectionListener, Mou
         gd_table.widthHint = 250;
         tableNtermInfo.setLayoutData(gd_table);
         tableNtermInfo.setSize(250, 295);
-
+*/
         Composite compositeGenome;
         compositeGenome_1 = new Composite(this, SWT.NONE);
         compositeGenome_1.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 2));
@@ -235,10 +238,10 @@ public class TracksComposite extends Composite implements SelectionListener, Mou
 */
         lblTutorial = new Label(compositeSettings, SWT.WRAP);
         GridData gd_lblTutorial = new GridData(SWT.LEFT, SWT.CENTER, false, true, 1, 1);
-        gd_lblTutorial.widthHint = 150;
+        //gd_lblTutorial.widthHint = 150;
         lblTutorial.setLayoutData(gd_lblTutorial);
         lblTutorial.setText(
-                "Left-click: Position in BP\nRight-click: Center view\nDouble-click: Display Gene/RNA Information");
+                "Left-click: Position in BP\nRight-click: Center view\nDouble-click: Display Gene");
         lblTutorial.setFont(SWTResourceManager.getBodyFont(10, SWT.NORMAL));
         lblTutorial.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
 /*
@@ -255,29 +258,29 @@ public class TracksComposite extends Composite implements SelectionListener, Mou
         composite.setLayout(new GridLayout(2, false));
         composite.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
 */
-        /*
+        
         compositeChromosome = new Composite(compositeSettings, SWT.NONE);
         compositeChromosome.setLayout(new GridLayout(2, false));
-        compositeChromosome.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 7, 1));
+        compositeChromosome.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1));
         compositeChromosome.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
-*/
-        Label lblChromosome = new Label(compositeSettings, SWT.NONE);
+
+        Label lblChromosome = new Label(compositeChromosome, SWT.NONE);
         lblChromosome.setText("Chromosome");
         lblChromosome.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
 
-        comboChromosome = new Combo(compositeSettings, SWT.NONE);
+        comboChromosome = new Combo(compositeChromosome, SWT.NONE);
         GridData gd_comboChromosome = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
         gd_comboChromosome.widthHint = 205;
         comboChromosome.setLayoutData(gd_comboChromosome);
         comboChromosome.addSelectionListener(this);
 
         
-        Label lblSearch = new Label(compositeSettings, SWT.NONE);
+        Label lblSearch = new Label(compositeChromosome, SWT.NONE);
         lblSearch.setAlignment(SWT.RIGHT);
         lblSearch.setText("Search:");
         lblSearch.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
 
-        Text txtSearch = new Text(compositeSettings, SWT.BORDER);
+        Text txtSearch = new Text(compositeChromosome, SWT.BORDER);
         GridData gd_txtSearch = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
         gd_txtSearch.widthHint = 83;
         txtSearch.setLayoutData(gd_txtSearch);
@@ -312,15 +315,18 @@ public class TracksComposite extends Composite implements SelectionListener, Mou
         lblHorizontal.setText("Genome");
         lblHorizontal.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
 
-        btnZoomIn = new Button(composite_1, SWT.NONE);
+        btnZoomIn = new Button(composite_1, SWT.TOGGLE);
+        btnZoomIn.setBackground(BasicColor.BUTTON);
         btnZoomIn.setToolTipText("Zoom In horizontally");
         btnZoomIn.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/genome/zoomIN.bmp"));
-        btnZoomOut = new Button(composite_1, SWT.NONE);
+        btnZoomOut = new Button(composite_1, SWT.TOGGLE);
+        btnZoomOut.setBackground(BasicColor.BUTTON);
         btnZoomOut.setToolTipText("Zoom Out horizontally");
         btnZoomOut.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/genome/zoomOUT.bmp"));
 
 
-        btnSequence = new Button(composite_1, SWT.NONE);
+        btnSequence = new Button(composite_1, SWT.TOGGLE);
+        btnSequence.setBackground(BasicColor.BUTTON);
         btnSequence.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 2));
         btnSequence.setToolTipText("Display DNA and Amino acid sequence");
         btnSequence.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/genome/sequence.bmp"));
@@ -332,11 +338,13 @@ public class TracksComposite extends Composite implements SelectionListener, Mou
         lblVertical.setText("Height");
         lblVertical.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
 
-        btnZoomInVertical = new Button(composite_1, SWT.NONE);
+        btnZoomInVertical = new Button(composite_1, SWT.TOGGLE);
+        btnZoomInVertical.setBackground(BasicColor.BUTTON);
         btnZoomInVertical.setToolTipText("Zoom In vertically");
         btnZoomInVertical.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/genome/zoomIN.bmp"));
 
-        btnZoomOutVertical = new Button(composite_1, SWT.NONE);
+        btnZoomOutVertical = new Button(composite_1, SWT.TOGGLE);
+        btnZoomOutVertical.setBackground(BasicColor.BUTTON);
         btnZoomOutVertical.setToolTipText("Zoom Out vertically");
         btnZoomOutVertical.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/genome/zoomOUT.bmp"));
         
@@ -354,12 +362,16 @@ public class TracksComposite extends Composite implements SelectionListener, Mou
         composite_4.setLayout(new GridLayout(1, false));
         composite_4.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
 
-        btnSaveDataSelection = new Button(composite_4, SWT.NONE);
+        btnSaveDataSelection = new Button(composite_4, SWT.TOGGLE);
+        btnSaveDataSelection.setBackground(BasicColor.BUTTON);
         btnSaveDataSelection.setText("Save data selection");
+        btnSaveDataSelection.setFont(SWTResourceManager.getBodyFont(12, SWT.NORMAL));
         btnSaveDataSelection.addSelectionListener(this);
         btnSaveDataSelection.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/fileIO/txt.bmp"));
-        btnLoadData = new Button(composite_4, SWT.NONE);
+        btnLoadData = new Button(composite_4, SWT.TOGGLE);
+        btnLoadData.setBackground(BasicColor.BUTTON);
         btnLoadData.setText("Load data selection");
+        btnLoadData.setFont(SWTResourceManager.getBodyFont(12, SWT.NORMAL));
         btnLoadData.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/fileIO/txtload.bmp"));
         btnLoadData.addSelectionListener(this);
 
@@ -367,17 +379,21 @@ public class TracksComposite extends Composite implements SelectionListener, Mou
         compositeAddData.setLayout(new GridLayout(1, false));
         compositeAddData.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
 
-        btnAddTranscriptomicsData = new Button(compositeAddData, SWT.NONE);
+        btnAddTranscriptomicsData = new Button(compositeAddData, SWT.TOGGLE);
+        btnAddTranscriptomicsData.setBackground(BasicColor.BUTTON);
         btnAddTranscriptomicsData.setText("Add Transcriptomics Data");
+        btnAddTranscriptomicsData.setFont(SWTResourceManager.getBodyFont(12, SWT.NORMAL));
         btnAddTranscriptomicsData.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/genome/hideData.bmp"));
         btnAddTranscriptomicsData.setToolTipText("Choose transcriptomics data to display");
+        btnAddTranscriptomicsData.addSelectionListener(this);
 
-        btnAddProteomicsData = new Button(compositeAddData, SWT.NONE);
+        btnAddProteomicsData = new Button(compositeAddData, SWT.TOGGLE);
+        btnAddProteomicsData.setBackground(BasicColor.BUTTON);
         btnAddProteomicsData.setText("Add Proteomics Data");
+        btnAddProteomicsData.setFont(SWTResourceManager.getBodyFont(12, SWT.NORMAL));
         btnAddProteomicsData.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/genome/hideData.bmp"));
         btnAddProteomicsData.addSelectionListener(this);
         btnAddProteomicsData.setToolTipText("Choose proteomics data to display");
-        btnAddTranscriptomicsData.addSelectionListener(this);
 
         compositeTypeDisplay = new Composite(compositeSettings, SWT.NONE);
         compositeTypeDisplay.setLayout(new GridLayout(1, false));
@@ -398,8 +414,10 @@ public class TracksComposite extends Composite implements SelectionListener, Mou
 
         comboTypeDisplay.addSelectionListener(this);
         
-        btnLegendManagement = new Button(compositeSettings, SWT.NONE);
-        btnLegendManagement.setText("Legend and Data Management");
+        btnLegendManagement = new Button(compositeSettings, SWT.TOGGLE);
+        btnLegendManagement.setBackground(BasicColor.BUTTON);
+        btnLegendManagement.setText("Legend and Data \nManagement");
+        btnLegendManagement.setFont(SWTResourceManager.getBodyFont(12, SWT.NORMAL));
         btnLegendManagement.setToolTipText("Display data legend");
         btnLegendManagement.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/genome/legend.bmp"));
         btnLegendManagement.addSelectionListener(this);
@@ -472,10 +490,10 @@ public class TracksComposite extends Composite implements SelectionListener, Mou
         boolean nterm = false;
         if (track.getDatas().getDataNames().contains(NTerm.NTERM_PROJECT_BHI))
             nterm = true;
-
+/*
         if (!nterm) {
-            hideInfoPanel();
-        }
+            //hideInfoPanel();
+        }*/
 
         this.track = track;
         if (transcriptome) {
@@ -504,6 +522,7 @@ public class TracksComposite extends Composite implements SelectionListener, Mou
 
         setHorizontalBarProperties();
         setVerticalBarProperties();
+        /*
         if (track.getDatas().getNTermDatas().size() != 0) {
             for (NTermData data : track.getDatas().getNTermDatas()) {
                 comboNTermData.add(data.getName());
@@ -522,7 +541,7 @@ public class TracksComposite extends Composite implements SelectionListener, Mou
             canvasData.setHeightPix(canvasData.getHeightPix() * 2);
             setHorizontalBarProperties();
             setVerticalBarProperties();
-        }
+        }*/
         redrawAllCanvas();
 
         /*
@@ -636,6 +655,7 @@ public class TracksComposite extends Composite implements SelectionListener, Mou
     /**
      * Update cmbDataSelection, comboNTermFilter
      */
+    /*
     private void initNTermInfo() {
         comboNTermFilter.removeAll();
         for (String filter : NTermData.TYPE_OVERLAPS) {
@@ -648,11 +668,12 @@ public class TracksComposite extends Composite implements SelectionListener, Mou
         canvasData.setnTermTypeOverlap("All");
         nTerm = null;
         canvasData.setnTermHighlight(null);
-    }
+    }*/
 
     /**
      * Depending of NTerm selected, update info in the Table
      */
+    /*
     private void setNTermInfo() {
         // System.out.println(compositeNterm);
         compositeNterm.setNTermInfo(nTerm, massSpecData);
@@ -679,10 +700,11 @@ public class TracksComposite extends Composite implements SelectionListener, Mou
         }
         tableNtermInfo.update();
         tableNtermInfo.redraw();
-
+*/
         /*
          * Select NTerm in the Table
          */
+    /*
         for (int i = 0; i < tableNtermInfo.getItemCount(); i++) {
             String item = tableNtermInfo.getItem(i).getText(3);
             // System.out.println(item);
@@ -690,7 +712,7 @@ public class TracksComposite extends Composite implements SelectionListener, Mou
                 tableNtermInfo.select(i);
             }
         }
-    }
+    }*/
 
     /**
      * Move horizontally the tracks
@@ -702,16 +724,18 @@ public class TracksComposite extends Composite implements SelectionListener, Mou
     /**
      * Hide the info Panel showing NTerm data
      */
+    /*
     public void hideInfoPanel() {
         setLayout(hideInfo);
         gridDataCmpInfo.exclude = true;
         cmpNTermInfo.setVisible(false);
         getShell().layout(true, true);
-    }
+    }*/
 
     /**
      * Show the info Panel showing NTerm data
      */
+    /*
     public void showInfoPanel() {
         if (!cmpNTermInfo.isVisible()) {
             setLayout(showInfo);
@@ -719,7 +743,7 @@ public class TracksComposite extends Composite implements SelectionListener, Mou
             cmpNTermInfo.setVisible(true);
             getShell().layout(true, true);
         }
-    }
+    }*/
 
     /**
      * Display a specific element of the genome only by data.getDisplay() to false, except in the region
@@ -764,7 +788,7 @@ public class TracksComposite extends Composite implements SelectionListener, Mou
                     nTerm = massSpecData.getElements().get(text);
                     canvasData.setnTermHighlight(nTerm);
                     search(nTerm.getBegin() + "");
-                    setNTermInfo();
+                    //setNTermInfo();
                     return true;
                 }
             } else {
@@ -888,6 +912,7 @@ public class TracksComposite extends Composite implements SelectionListener, Mou
             }
             redrawAllCanvas();
             setHorizontalBarProperties();
+            /*
         } else if (e.getSource() == comboNTermFilter) {
             String typeOverlap = comboNTermFilter.getItem(comboNTermFilter.getSelectionIndex());
             canvasData.setnTermTypeOverlap(typeOverlap);
@@ -903,7 +928,7 @@ public class TracksComposite extends Composite implements SelectionListener, Mou
             }
             canvasData.setnTermHighlight(nTerm);
             setHorizontalBarProperties();
-            redrawAllCanvas();
+            redrawAllCanvas();*/
         } else if (e.getSource() == comboTypeDisplay) {
             if (comboTypeDisplay.getSelectionIndex() == 0) {
                 track.setDisplayType(DisplayType.BIOCOND);
@@ -938,7 +963,7 @@ public class TracksComposite extends Composite implements SelectionListener, Mou
                     comboAbsoluteRelative.select(0);
                 else
                     comboAbsoluteRelative.select(1);
-                initNTermInfo();
+                //initNTermInfo();
                 setTrack(track);
             }
 
@@ -952,7 +977,7 @@ public class TracksComposite extends Composite implements SelectionListener, Mou
                     comboAbsoluteRelative.select(0);
                 else
                     comboAbsoluteRelative.select(1);
-                initNTermInfo();
+                //initNTermInfo();
                 System.out.println("after nterm");
 
                 setTrack(track);
@@ -979,7 +1004,8 @@ public class TracksComposite extends Composite implements SelectionListener, Mou
             } catch (Exception e1) {
                 System.out.println("Cannot read the list of data");
             }
-        } else if (e.getSource() == btnHideNterminomicsPanel) {
+            
+        } /*else if (e.getSource() == btnHideNterminomicsPanel) {
             hideInfoPanel();
         } else if (e.getSource() == btnPreviousnterm) {
             if (nTerm == null) {
@@ -1046,9 +1072,9 @@ public class TracksComposite extends Composite implements SelectionListener, Mou
             canvasData.setnTermHighlight(nTerm);
             redrawAllCanvas();
             setHorizontalBarProperties();
-        /*} else if (e.getSource() == btnHelp) {
-            HelpPage.helpGenomeViewer(partService);*/
-        }
+        } else if (e.getSource() == btnHelp) {
+            HelpPage.helpGenomeViewer(partService);
+        }*/
         // else if(e.getSource()==btnAnimate){
         // int initpos = sliderHbar.getSelection();
         // moveHorizontally(initpos+100);
@@ -1069,8 +1095,9 @@ public class TracksComposite extends Composite implements SelectionListener, Mou
     @Override
     public void mouseDoubleClick(MouseEvent e) {
         if (e.getSource() == canvasData) {
-            if (massSpecData != null) {
+        	/* if (massSpecData != null) {
                 int basepair = canvasData.convertXtoBP(e.x);
+                
                 NTerm nTermDown = massSpecData.findNextNterm(basepair,
                         comboNTermFilter.getItem(comboNTermFilter.getSelectionIndex()));
                 NTerm nTermUp = massSpecData.findPreviousNterm(basepair,
@@ -1087,7 +1114,7 @@ public class TracksComposite extends Composite implements SelectionListener, Mou
                 canvasData.setnTermHighlight(nTerm);
                 search(newPos + "");
                 setNTermInfo();
-            }
+            }*/
         } else if (e.getSource() == canvasGenome) {
             /*
              * Mouse is in CanvasGenome
@@ -1229,7 +1256,7 @@ public class TracksComposite extends Composite implements SelectionListener, Mou
     public void setCompositeTypeDisplay(Composite compositeTypeDisplay) {
         this.compositeTypeDisplay = compositeTypeDisplay;
     }
-
+/*
     public CompositeNTermInfo getCompositeNterm() {
         return compositeNterm;
     }
@@ -1237,7 +1264,7 @@ public class TracksComposite extends Composite implements SelectionListener, Mou
     public void setCompositeNterm(CompositeNTermInfo compositeNterm) {
         this.compositeNterm = compositeNterm;
     }
-
+*/
     public Track getTrack() {
         return track;
     }

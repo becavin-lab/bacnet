@@ -199,11 +199,13 @@ public class Genome {
     public Gene getGeneFromName(String name, String accessionChromo) {
         if (name.equals("No gene"))
             return null;
-        if (name.contains("-")) {
-            name = name.substring(0, name.indexOf("-")).trim();
+        if (name.contains("- (")) {
+            name = name.substring(name.indexOf(") -") +3, name.length()).trim();
+        } else if (name.contains("(") && !name.contains("- (")) {
+            name = name.substring(name.indexOf("-")+1,name.length()).trim();
         }
-        if (name.contains("(") && name.contains(")")) {
-            name = name.substring(0, name.indexOf("(")).trim();
+        else if (name.contains("-") && !name.contains(")")) {
+            name = name.substring(name.indexOf("-")+1,name.length()).trim();
         }
         Chromosome chromo = this.getChromosomes().get(accessionChromo);
         if (chromo.getGeneNameToLocusTagMap().containsKey(name)) {

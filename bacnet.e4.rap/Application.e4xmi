@@ -56,7 +56,7 @@
       <tags>ViewMenu</tags>
     </menus>
   </descriptors>
-  <descriptors xmi:id="_XY-EYLoeEeWP17x1TBZCrg" elementId="bacnet.GeneView" label="Genes" iconURI="platform:/plugin/bacnet.core/icons/mutantGene.bmp" allowMultiple="true" closeable="true" contributionURI="bundleclass://bacnet.core/bacnet.sequenceTools.GeneView">
+  <descriptors xmi:id="_XY-EYLoeEeWP17x1TBZCrg" elementId="bacnet.GeneView" label="Gene Viewer" iconURI="platform:/plugin/bacnet.core/icons/mutantGene.bmp" allowMultiple="true" closeable="true" contributionURI="bundleclass://bacnet.core/bacnet.sequenceTools.GeneView">
     <tags>REMOVE_ON_HIDE_TAG</tags>
     <menus xmi:id="_XY-EYboeEeWP17x1TBZCrg" elementId="bacnet.GeneView">
       <tags>ViewMenu</tags>
@@ -95,13 +95,13 @@
       <tags>ViewMenu</tags>
     </menus>
   </descriptors>
-  <descriptors xmi:id="_Pkz2cJaIEeipN6twBsTYaA" elementId="bacnet.HeatMapTranscriptomicsView" label="HeatMapTranscriptomics" iconURI="platform:/plugin/bacnet.core/icons/heatmap.bmp" allowMultiple="true" closeable="true" contributionURI="bundleclass://bacnet.core/bacnet.expressionAtlas.HeatMapTranscriptomicsView">
+  <descriptors xmi:id="_Pkz2cJaIEeipN6twBsTYaA" elementId="bacnet.HeatMapTranscriptomicsView" label="HeatMap Viewer Transcriptomics" iconURI="platform:/plugin/bacnet.core/icons/heatmap.bmp" allowMultiple="true" closeable="true" contributionURI="bundleclass://bacnet.core/bacnet.expressionAtlas.HeatMapTranscriptomicsView">
     <tags>REMOVE_ON_HIDE_TAG</tags>
     <menus xmi:id="_Pkz2cZaIEeipN6twBsTYaA" elementId="bacnet.HeatMapTranscriptomicsView">
       <tags>ViewMenu</tags>
     </menus>
   </descriptors>
-  <descriptors xmi:id="_XZvgcLoeEeWP17x1TBZCrg" elementId="bacnet.HeatMapProteomicsView" label="HeatMapProteomics" iconURI="platform:/plugin/bacnet.core/icons/heatmap.bmp" allowMultiple="true" closeable="true" contributionURI="bundleclass://bacnet.core/bacnet.expressionAtlas.HeatMapProteomicsView">
+  <descriptors xmi:id="_XZvgcLoeEeWP17x1TBZCrg" elementId="bacnet.HeatMapProteomicsView" label="HeatMap Viewer Proteomics" iconURI="platform:/plugin/bacnet.core/icons/heatmap.bmp" allowMultiple="true" closeable="true" contributionURI="bundleclass://bacnet.core/bacnet.expressionAtlas.HeatMapProteomicsView">
     <tags>REMOVE_ON_HIDE_TAG</tags>
     <menus xmi:id="_XZvgcboeEeWP17x1TBZCrg" elementId="bacnet.HeatMapProteomicsView">
       <tags>ViewMenu</tags>

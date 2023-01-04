@@ -146,19 +146,23 @@ public class TableCompositeHeatMap extends Composite implements SelectionListene
         composite = new Composite(compositeTable, SWT.BORDER);
         composite.setLayout(new GridLayout(7, false));
         composite.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
-        btnHide = new Button(composite, SWT.NONE);
+        btnHide = new Button(composite, SWT.TOGGLE);
         btnHide.setText("Select genome features");
+        btnHide.setBackground(BasicColor.BUTTON);
         btnHide.setToolTipText("Select specific genome elements");
         btnHide.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/genome/hideData.bmp"));
         btnHide.addSelectionListener(this);
 
-        btnZoomIn = new Button(composite, SWT.NONE);
+        btnZoomIn = new Button(composite, SWT.TOGGLE);
+        btnZoomIn.setBackground(BasicColor.BUTTON);
         btnZoomIn.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/genome/zoomIN.bmp"));
         btnZoomIn.addSelectionListener(this);
-        btnZoomOut = new Button(composite, SWT.NONE);
+        btnZoomOut = new Button(composite, SWT.TOGGLE);
+        btnZoomOut.setBackground(BasicColor.BUTTON);
         btnZoomOut.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/genome/zoomOUT.bmp"));
         btnZoomOut.addSelectionListener(this);
-        btnColormapper = new Button(composite, SWT.NONE);
+        btnColormapper = new Button(composite, SWT.TOGGLE);
+        btnColormapper.setBackground(BasicColor.BUTTON);
         btnColormapper.setToolTipText("Change colors");
         btnColormapper.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/colorMapper.bmp"));
         btnColormapper.addSelectionListener(this);
@@ -169,7 +173,8 @@ public class TableCompositeHeatMap extends Composite implements SelectionListene
         btnDisplayValues.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
         btnDisplayValues.addSelectionListener(this);
 
-        btnSaveText = new Button(composite, SWT.NONE);
+        btnSaveText = new Button(composite, SWT.TOGGLE);
+        btnSaveText.setBackground(BasicColor.BUTTON);
         btnSaveText.setToolTipText("Save to Tab separated text format");
         btnSaveText.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/fileIO/txt.bmp"));
 /*
@@ -292,7 +297,11 @@ public class TableCompositeHeatMap extends Composite implements SelectionListene
                 return "";
 
             }
-
+            @Override
+            public org.eclipse.swt.graphics.Font getFont(Object element) {
+                ColorMapper colorMapper = colorMapperList.getCorrespondingMapper(matrixDisplayed.getHeader(0));
+                return colorMapper.getFontText();
+            }
             @Override
             public Point getToolTipShift(Object object) {
                 return new Point(5, 5);
@@ -320,7 +329,7 @@ public class TableCompositeHeatMap extends Composite implements SelectionListene
                 return 5000; // msec
             }
         });
-        col.getColumn().pack();
+        //col.getColumn().pack();
 
         // create data columns
         for (int i = 0; i < matrixDisplayed.getHeaders().size(); i++) {

@@ -65,7 +65,7 @@ public class BasicApplication implements ApplicationConfiguration {
             googleId = "UA-129705822-1";
         } else if (projectName == Database.YERSINIOMICS_PROJECT) {
             title = "Yersiniomics website";
-            googleId = "UA-80335618-5";
+            googleId = "G-0HQQJHGD66";
         } else if (projectName == Database.URY_YERSINIOMICS_PROJECT) {
             title = "Yersiniomics website";
             googleId = "UA-80335618-7";
@@ -83,12 +83,16 @@ public class BasicApplication implements ApplicationConfiguration {
         // " r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;\n" +
         // " a.appendChild(r);\n" +
         // " })(window,document,'//static.hotjar.com/c/hotjar-','.js?sv=');";
-        String googleAnalytics =
-                "(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){\n(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();"
-                        + "a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)\n"
-                        + "})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');\n"
-                        + "ga('create', '" + googleId + "', 'auto');\n" + "ga('send', 'pageview');\n";
-        webpage_head = "\n<script>" + googleAnalytics + "</script>";
+        webpage_head = "<meta name=\"description\" content=\"Yersiniomics integrates complete genomes, transcriptomes and proteomes published for Yersinia species.\"\n";
+        webpage_head +="<!-- Google tag (gtag.js) -->\n" + 
+        "<script async src=\"https://www.googletagmanager.com/gtag/js?id="+googleId+"\"></script>\n" + 
+        "<script>\n" + 
+        "  window.dataLayer = window.dataLayer || [];\n" + 
+        "  function gtag(){dataLayer.push(arguments);}\n" + 
+        "  gtag('js', new Date());\n" + 
+        "\n" + 
+        "  gtag('config', '"+googleId+"');\n" + 
+        "</script>\n" ;
         webpage_head += "\n<script src=\"https://html2canvas.hertzen.com/dist/html2canvas.min.js\"></script>";
         webpage_head += "\n<script  src=\"https://code.jquery.com/jquery-3.3.1.min.js\"></script>";
         properties.put(WebClient.HEAD_HTML, webpage_head);

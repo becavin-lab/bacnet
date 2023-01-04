@@ -12,6 +12,7 @@ import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.rap.rwt.RWT;
 import org.eclipse.rap.rwt.service.ServiceHandler;
 import org.eclipse.rap.rwt.service.ServiceManager;
+import bacnet.Database;
 
 /**
  * Specific tools for downloading files from eclipse.rap instance NEED TO BE COMMENTED FOR
@@ -64,7 +65,7 @@ public class DownloadServiceHandler implements ServiceHandler {
         StringBuilder url = new StringBuilder();
         url.append(RWT.getServiceManager().getServiceHandlerUrl("dlServiceHandler_" + fileName + "_" + random));
         url.append('&').append("filename").append('=').append(fileName);
-        System.out.println(url.toString());
+        System.out.println("url.toString(): "+url.toString());
         return url.toString();
     }
 

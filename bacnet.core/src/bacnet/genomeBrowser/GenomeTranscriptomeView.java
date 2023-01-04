@@ -230,36 +230,23 @@ public class GenomeTranscriptomeView {
 
         // Create your new ProgressMonitorDialog with a IRunnableWithProgress
         try {
-        	System.out.println("in try 1");
-
             IRunnableWithProgress thread =
                     new OpenBioConditionAndGenomeElementThread(view, genome, bioConditionsSelected, genomeElement);
-            System.out.println("after thread 1");
             new ProgressMonitorDialog(view.shell).run(true, false, thread);
             /*
              * Init Composite
              */
-        	System.out.println("before getTracksComposite ");
-
             view.getTracksComposite().setTrack(view.getTrack());
-            System.out.println("after view");
-
             if (!genomeElement.equals("")) {
-            	System.out.println("genomeElement: "+ genomeElement);
                 view.getTracksComposite().search(genomeElement);
                 try {
-                	System.out.println("in try 2");
                     @SuppressWarnings("unused")
                     int position = Integer.parseInt(genomeElement);
                 } catch (Exception e) {
-                	System.out.println("in catch 2");
-
                     view.getTracksComposite().displaySpecificRegion(genomeElement);
                 }
             }
         } catch (InvocationTargetException ex) {
-        	System.out.println("in catch 1");
-
             ex.printStackTrace();
         } catch (InterruptedException ex) {
             ex.printStackTrace();

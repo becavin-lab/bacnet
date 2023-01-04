@@ -26,6 +26,7 @@ import bacnet.datamodel.sequenceNCBI.GenomeNCBI;
 import bacnet.raprcp.SaveFileUtils;
 import bacnet.reader.TabDelimitedTableReader;
 import bacnet.swt.ResourceManager;
+import bacnet.swt.SWTResourceManager;
 import bacnet.table.core.BioConditionComparator;
 import bacnet.utils.ArrayUtils;
 import bacnet.utils.BasicColor;
@@ -174,11 +175,6 @@ public class GeneViewHomologTools {
 			}
 		}
 		
-		
-		/*
-		 * Highlight selected strain (new method, depending on SVG content)
-		 */
-		
 		/*
 		 * Modify strain name by their similarity value
 		 */
@@ -188,7 +184,7 @@ public class GeneViewHomologTools {
         		String accession = sequence.getConservationHashMap().get(GenomeNCBI.unprocessGenomeName(genome));
         		String gene = accession.split(";")[0];
         		String oldLocus = accession.split(";")[1];
-                String similarity = String.format("%.1f", Float.parseFloat(accession.split(";")[4]))+"%";
+                String similarity = String.format("%.1f", Float.parseFloat(accession.split(";")[4])*Float.parseFloat(accession.split(";")[3])/100)+"%";
         		int indexOfGenome = textSVG.indexOf(">"+genome+"<");
         		String textToADD = similarity + "  --  " + gene + " - " + oldLocus ;
                 textSVG = textSVG.substring(0, indexOfGenome+1) + textToADD + textSVG.substring(indexOfGenome + genome.length() + 1, textSVG.length());
@@ -344,14 +340,17 @@ public class GeneViewHomologTools {
                         cell.setText(text);
                     }
                     Color colorBack = BasicColor.LIGHTGREY;
+					cell.setFont(SWTResourceManager.getBodyFont(12, SWT.NORMAL));
                     int rowIndex = Integer.parseInt(bioCond[0]);
                     if (rowIndex % 2 == 0) {
                         colorBack = BasicColor.WHITE;
+
                     }
                     if (!txtSearchHomolog.getText().equals("")) {
-                        if (bioCond[cell.getColumnIndex() - 1].toLowerCase().contains(txtSearchHomolog.getText().toLowerCase())) {
-                            colorBack = BasicColor.YELLOW;
-                        }
+                    	if (bioCond[cell.getColumnIndex() - 1].toLowerCase().contains(txtSearchHomolog.getText().toLowerCase())) {
+							colorBack = BasicColor.DARK_TWO;
+							cell.setFont(SWTResourceManager.getBodyFont(12, SWT.BOLD));
+						}
                     }
                     cell.setBackground(colorBack);
                 }

@@ -37,8 +37,15 @@ public class SaveFileUtils {
          * IF eclipse.rap
          */
         String url = DownloadServiceHandler.getDownloadUrl(fileName, textToSave, partService);
-        textToDisplay = "<a href=\"" + url + "\">Click here to download " + fileName
-                + "</a><br><br><b>File preview</b><hr>" + textToDisplay;
+        System.out.println("url in saveTexxtFile: "+url);
+        if (url.contains("/Yersiniomics/")){
+        	 textToDisplay = "<a href=\"https://yersiniomics.pasteur.fr/" + url.substring(0,url.indexOf("/Yersiniomics/")) + url.substring(url.indexOf("/Yersiniomics/")+14,url.length()) + "\">Click here to download " + fileName
+                     + "</a><br><br><b>File preview</b><hr>" + textToDisplay;
+        } else {
+        	 textToDisplay = "<a href=\"https://yersiniomics.pasteur.fr/" + url + "\">Click here to download " + fileName
+                     + "</a><br><br><b>File preview</b><hr>" + textToDisplay;
+        }
+       
         if (viewFile) {
             InternalBrowser.openText(textToDisplay, title, partService);
         } else {
@@ -78,8 +85,14 @@ public class SaveFileUtils {
          * IF eclipse.rap
          */
         String url = DownloadServiceHandler.getDownloadUrl(fileName, fileToSave, partService);
+        
         String textToDisplay = "<a href=\"" + url + "\">Click here to download " + fileName
                 + "</a><br><br><b>No file preview available</b><hr>";
+        
+        if (url.contains("/Yersiniomics/")){
+       	textToDisplay = "<a href=\"" + url.substring(0,url.indexOf("/Yersiniomics/")) + url.substring(url.indexOf("/Yersiniomics/")+14,url.length()) + "\">Click here to download " + fileName
+                 + "</a><br><br><b>No file preview available</b><hr>";
+       }
         InternalBrowser.openText(textToDisplay, title, partService);
 
         /*

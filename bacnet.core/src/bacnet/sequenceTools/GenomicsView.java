@@ -130,7 +130,7 @@ public class GenomicsView implements SelectionListener {
 		lblXxSrnas.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 4, 1));
 		lblXxSrnas.setFont(SWTResourceManager.getTitleFont());
 		lblXxSrnas.setText("XX Yersinia Complete Genomes");
-		lblXxSrnas.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
+		lblXxSrnas.setBackground(BasicColor.HEADER);
 /*
 		btnHelp = new Button(container, SWT.NONE);
 		btnHelp.setToolTipText("How to use Genomics panel");
@@ -139,21 +139,15 @@ public class GenomicsView implements SelectionListener {
 */
 		Composite composite_1 = new Composite(container, SWT.NONE);
 		composite_1.setLayout(new GridLayout(3, false));
-
-		Label lblSaveAs = new Label(composite_1, SWT.NONE);
-		lblSaveAs.setText("Download phylogenomic tree as ");
-		lblSaveAs.setFont(SWTResourceManager.getBodyFont(10, SWT.NORMAL));
-		/*
-		btnSavePng = new Button(composite_1, SWT.NONE);
-		btnSavePng.setToolTipText("Download as PNG image");
-		btnSavePng.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/fileIO/png.bmp"));
-		btnSavePng.addSelectionListener(this);
-	*/
 		
-		btnSaveSVG = new Button(composite_1, SWT.NONE);
+		btnSaveSVG = new Button(composite_1, SWT.TOGGLE);
+		btnSaveSVG.setBackground(BasicColor.BUTTON);
 		btnSaveSVG.setToolTipText("Download as SVG vector image (for Illustrator, GIMP, ...)");
 		btnSaveSVG.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/fileIO/svg.bmp"));
+		btnSaveSVG.setText("Download phylogenomic tree");
+		btnSaveSVG.setFont(SWTResourceManager.getBodyFont(12, SWT.NORMAL));
 		btnSaveSVG.addSelectionListener(this);
+		
 		ScrolledComposite scrolledComposite = new ScrolledComposite(container,
 				SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
 		scrolledComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 3, 2));
@@ -173,36 +167,36 @@ public class GenomicsView implements SelectionListener {
 
 		Label lblSearch = new Label(composite_2, SWT.NONE);
 		lblSearch.setText("Search");
-		lblSearch.setFont(SWTResourceManager.getBodyFont(10, SWT.NORMAL));
+		lblSearch.setFont(SWTResourceManager.getBodyFont(12, SWT.NORMAL));
 
 		new Label(composite_2, SWT.NONE);
 
-		btnSelectall = new Button(composite_2, SWT.NONE);
+		btnSelectall = new Button(composite_2, SWT.TOGGLE);
+		btnSelectall.setBackground(BasicColor.BUTTON);
 		btnSelectall.setToolTipText("Select all genomes");
 		btnSelectall.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/checked.bmp"));
 		btnSelectall.addSelectionListener(this);
-		Label lblSelectAll = new Label(composite_2, SWT.NONE);
-		lblSelectAll.setText("Select all");
-		lblSelectAll.setFont(SWTResourceManager.getBodyFont(10, SWT.NORMAL));
+		btnSelectall.setText("Select all");
+		btnSelectall.setFont(SWTResourceManager.getBodyFont(12, SWT.NORMAL));
 
-		btnUnselectall = new Button(composite_2, SWT.NONE);
+		btnUnselectall = new Button(composite_2, SWT.TOGGLE);
+		btnUnselectall.setBackground(BasicColor.BUTTON);
 		btnUnselectall.setToolTipText("Unselect all genomes");
 		btnUnselectall.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/unchecked.bmp"));
 		btnUnselectall.addSelectionListener(this);
-		Label lblUnselectAll = new Label(composite_2, SWT.NONE);
-		lblUnselectAll.setText("Unselect all");
-		lblUnselectAll.setFont(SWTResourceManager.getBodyFont(10, SWT.NORMAL));
+		btnUnselectall.setText("Unselect all");
+		btnUnselectall.setFont(SWTResourceManager.getBodyFont(12, SWT.NORMAL));
 
 		new Label(composite_2, SWT.NONE);
 
-		btnSaveTxt = new Button(composite_2, SWT.NONE);
+		btnSaveTxt = new Button(composite_2, SWT.TOGGLE);
+		btnSaveTxt.setBackground(BasicColor.BUTTON);
 		btnSaveTxt.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/fileIO/txt.bmp"));
 		btnSaveTxt.setToolTipText("Download the table in tabulated text format");
-
-		Label lblSaveSelectionAs = new Label(composite_2, SWT.NONE);
-		lblSaveSelectionAs.setText("Download genome selection as a table");
-		lblSaveSelectionAs.setFont(SWTResourceManager.getBodyFont(10, SWT.NORMAL));
+		btnSaveTxt.setText("Download genome selection as a table");
+		btnSaveTxt.setFont(SWTResourceManager.getBodyFont(12, SWT.NORMAL));
 		btnSaveTxt.addSelectionListener(this);
+		
 		Label lblClickOneTime = new Label(compositeSummary, SWT.NONE);
 		lblClickOneTime.setText("Select strain to highlight. Double click to acces strain information");
 		lblClickOneTime.setFont(SWTResourceManager.getBodyFont(10, SWT.NORMAL));
@@ -459,17 +453,26 @@ public class GenomicsView implements SelectionListener {
 					} else if (colName.equals("Assembly")) {
 						cell.setText("<a href='https://www.ncbi.nlm.nih.gov/data-hub/genome/" + text + "' target='_blank'>"
 								+ text + "</a>");
+					} else if (colName.equals("RefSeq.FTP")) {
+							cell.setText("<a href='http"+ text.substring(3) +"' target='_blank'>"
+									+ text.substring(6) + "</a>");
+					} else if (colName.equals("Species")){
+						cell.setText("<i>" + text + "</i>");
+					} else if (colName.equals("Most recent assignation (cgMLST)")){
+						cell.setText("<i>" + text.substring(0,text.indexOf(" ", 10)) + "</i>" + text.substring(text.indexOf(" ", 10), text.length()));
 					} else {
 						cell.setText(text);
 					}
 					Color colorBack = BasicColor.LIGHTGREY;
 					int rowIndex = Integer.parseInt(bioCond[0]);
+					cell.setFont(SWTResourceManager.getBodyFont(12, SWT.NORMAL));
 					if (rowIndex % 2 == 0) {
 						colorBack = BasicColor.WHITE;
 					}
 					if (!txtSearch.getText().equals("")) {
 						if (bioCond[cell.getColumnIndex() - 1].toLowerCase().contains(txtSearch.getText().toLowerCase())) {
-							colorBack = BasicColor.YELLOW;
+							colorBack = BasicColor.DARK_TWO;
+							cell.setFont(SWTResourceManager.getBodyFont(12, SWT.BOLD));
 						}
 					}
 					cell.setBackground(colorBack);

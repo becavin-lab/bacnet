@@ -162,7 +162,8 @@ public class LegendDialog extends TitleAreaDialog implements SelectionListener {
         tableBioCondition.setHeaderVisible(true);
         tableBioCondition.setLinesVisible(true);
 
-        btnRemoveSelectedBiological = new Button(container, SWT.NONE);
+        btnRemoveSelectedBiological = new Button(container, SWT.TOGGLE);
+        btnRemoveSelectedBiological.setBackground(BasicColor.BUTTON);
         btnRemoveSelectedBiological.setText("Remove selected biological condition");
         btnRemoveSelectedBiological.addSelectionListener(this);
 

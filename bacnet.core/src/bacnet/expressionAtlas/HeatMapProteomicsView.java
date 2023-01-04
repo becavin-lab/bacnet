@@ -30,6 +30,7 @@ import bacnet.expressionAtlas.core.GenomeElementAtlas;
 import bacnet.raprcp.NavigationManagement;
 import bacnet.swt.ResourceManager;
 import bacnet.utils.Filter;
+import bacnet.utils.BasicColor;
 
 public class HeatMapProteomicsView implements SelectionListener {
 
@@ -112,7 +113,8 @@ public class HeatMapProteomicsView implements SelectionListener {
                     }
                 }
 
-                btnUpdateCutoff = new Button(composite_8, SWT.NONE);
+                btnUpdateCutoff = new Button(composite_8, SWT.TOGGLE);
+                btnUpdateCutoff.setBackground(BasicColor.BUTTON);;
                 btnUpdateCutoff.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
                 btnUpdateCutoff.setText("Update HeatMap");
                 btnUpdateCutoff.addSelectionListener(this);

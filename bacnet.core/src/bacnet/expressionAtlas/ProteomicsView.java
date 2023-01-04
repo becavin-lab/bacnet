@@ -47,6 +47,7 @@ import bacnet.swt.ResourceManager;
 import bacnet.swt.SWTResourceManager;
 import bacnet.table.core.BioConditionComparator;
 import bacnet.utils.ArrayUtils;
+import bacnet.utils.BasicColor;
 import bacnet.utils.RWTUtils;
 import bacnet.views.HelpPage;
 
@@ -122,7 +123,7 @@ public class ProteomicsView implements SelectionListener {
         lblXxSrnas.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 3, 1));
         lblXxSrnas.setFont(SWTResourceManager.getTitleFont(SWT.BOLD));
         lblXxSrnas.setText(Database.getInstance().getSpecies() + " Proteomics Datasets");
-        lblXxSrnas.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
+        lblXxSrnas.setBackground(BasicColor.HEADER);
 /*
         btnHelp = new Button(container, SWT.NONE);
         btnHelp.setToolTipText("How to use Proteomic summary panel ?");
@@ -434,6 +435,10 @@ public class ProteomicsView implements SelectionListener {
                         return RWTUtils.setPubMedLink(text);
                     } else if (colName.equals("Pride ID")) {
                         return RWTUtils.setPrideLink(text);
+                    } else if (colName.equals("Strain used")) {
+						return "<i>" + text.substring(0,text.indexOf(" ", 10)) + "</i>" + text.substring(text.indexOf(" ", 10), text.length());
+                    } else if (colName.equals("Reference strain")) {
+						return "<i>" + text.substring(0,text.indexOf(" ", 10)) + "</i>" + text.substring(text.indexOf(" ", 10), text.length());
                     } else {
                         return text;
                     }
@@ -614,7 +619,7 @@ public class ProteomicsView implements SelectionListener {
         } else {
             compositeDataFilter.updateBioConditionList();
             compositeDataFilter.pushState();
-            updateBioConditionTable();
+            //updateBioConditionTable();
             compositeDataFilter.updateInfo();
         }
     }
