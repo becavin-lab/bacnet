@@ -526,7 +526,7 @@ public class GeneView implements SelectionListener, MouseListener {
 							}
 							String geneName = genome.getChromosomes().get(chromoID).getGenes().get(gene).getGeneName();
 							if (!geneName.equals("")) {
-								text += geneName +" - ";
+								text += "(" + geneName +") - ";
 							}
 							text += gene;
 							listGenes.add(text);

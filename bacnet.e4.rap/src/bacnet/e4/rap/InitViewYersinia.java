@@ -87,7 +87,8 @@ public class InitViewYersinia implements SelectionListener {
     private Button btnGenomics;
     private Button btnProteomics;
     private Link linkLicenceField;
-    
+	private Button btnHelp;
+
     @Inject
     EPartService partService;
 
@@ -163,9 +164,10 @@ public class InitViewYersinia implements SelectionListener {
         lblGeneViewer.setAlignment(SWT.CENTER);
         lblGeneViewer.setFont(SWTResourceManager.getTitleFont(30, SWT.BOLD));
         lblGeneViewer.setBackground(BasicColor.DARK_ONE);
+        RWTUtils.setMarkup(lblGeneViewer);
         lblGeneViewer.setForeground(BasicColor.BLACK);
-        lblGeneViewer.setText("Gene viewers");
-     
+        lblGeneViewer.setText("Gene viewers<sup style=\"font-family: Times New Roman;  font-size:18px; color:purple\"><i>i</i></sup>");
+        lblGeneViewer.setToolTipText("Access enriched gene information of a genome by clicking on its name\nHover over the genome button for more information on the strain");
         Label spacer_1 = new Label(gene_view_composite, SWT.NONE);
         spacer_1.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
  
@@ -466,10 +468,12 @@ public class InitViewYersinia implements SelectionListener {
         lblBrowseOmicsDatasets.setAlignment(SWT.CENTER);
         GridData gd_lblBrowseOmicsDatasets = new GridData(SWT.CENTER, SWT.CENTER, true, false, 1, 1);
         lblBrowseOmicsDatasets.setLayoutData(gd_lblBrowseOmicsDatasets);
-        lblBrowseOmicsDatasets.setText("Omics browsers");
+        RWTUtils.setMarkup(lblBrowseOmicsDatasets);
+        lblBrowseOmicsDatasets.setText("Omics browsers<sup style=\"font-family: Times New Roman;  font-size:18px; color:purple\"><i>i</i></sup>");
         lblBrowseOmicsDatasets.setForeground(BasicColor.BLACK);
         lblBrowseOmicsDatasets.setFont(SWTResourceManager.getTitleFont(30, SWT.BOLD));
         lblBrowseOmicsDatasets.setBackground(BasicColor.DARK_TWO);
+        lblBrowseOmicsDatasets.setToolTipText("Access complete genomes, transcriptomes and proteomes gathered on Yersinomics\nHover over the browser buttons for more information on their specific functionalities");
 
         new Label(composite_omics_browser, SWT.NONE);
         
@@ -524,11 +528,13 @@ public class InitViewYersinia implements SelectionListener {
         lblDataLoading.setAlignment(SWT.CENTER);
         GridData gd_lblDataLoading = new GridData(SWT.CENTER, SWT.CENTER, true, false, 1, 1);
         lblDataLoading.setLayoutData(gd_lblDataLoading);
-        lblDataLoading.setText("Data loading");
+        RWTUtils.setMarkup(lblDataLoading);
+        lblDataLoading.setText("Data loading<sup style=\"font-family: Times New Roman;  font-size:18px; color:purple\"><i>i</i></sup>");
         lblDataLoading.setForeground(BasicColor.BLACK);
         lblDataLoading.setFont(SWTResourceManager.getTitleFont(30, SWT.BOLD));
         lblDataLoading.setBackground(BasicColor.DARK_THREE);
-        
+        lblDataLoading.setToolTipText("Load on Yersiniomics and download from Yersiniomics\nHover over the load buttons for more information on their specific functionalities ");
+
         new Label(composite_data_loading, SWT.NONE);
 
         Composite composite_data_loading_row_1 = new Composite(composite_data_loading, SWT.NONE);
@@ -568,9 +574,8 @@ public class InitViewYersinia implements SelectionListener {
         lblLastUpdate.setFont(SWTResourceManager.getBodyFont(20,SWT.BOLD));
 
         new Label(composite_19, SWT.NONE);
-        Link linkPubli = new Link(composite_19, SWT.NONE);
-        linkPubli.setData(RWT.MARKUP_ENABLED, Boolean.TRUE);
 
+        linkPubli = new Link(composite_19, SWT.NONE);
         linkPubli.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, true, false, 1, 1));
         linkPubli.setText("For more information on the website functionalities, please go to <a>L\u00EA-Bury et al.</a>");
         linkPubli.setFont(SWTResourceManager.getBodyFont(18,SWT.NORMAL));
@@ -728,7 +733,10 @@ public class InitViewYersinia implements SelectionListener {
         } else if (e.getSource() == btnGeneView) {
             GeneView.openGeneView(partService);
         } else if (e.getSource() == linkPubli) {
-            String url = "";
+            String url = "https://pubmed.ncbi.nlm.nih.gov/";
+            NavigationManagement.openURLInExternalBrowser(url, partService);
+        } else if (e.getSource() == linkPubli2) {
+            String url = "https://pubmed.ncbi.nlm.nih.gov/";
             NavigationManagement.openURLInExternalBrowser(url, partService);
         } else if (e.getSource() == linkYersinia) {
             String url = "https://research.pasteur.fr/en/team/yersinia/";

@@ -115,9 +115,8 @@ public class ProteomicsView implements SelectionListener {
      */
     @PostConstruct
     public void createPartControl(Composite parent) {
-        focused = true;
+    	focused = true;
         Composite container = new Composite(parent, SWT.NONE);
-        container.setBounds(0, 0, 688, 439);
         container.setLayout(new GridLayout(3, false));
         Label lblXxSrnas = new Label(container, SWT.BORDER | SWT.CENTER);
         lblXxSrnas.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 3, 1));
@@ -126,16 +125,13 @@ public class ProteomicsView implements SelectionListener {
         lblXxSrnas.setBackground(BasicColor.HEADER);
 /*
         btnHelp = new Button(container, SWT.NONE);
-        btnHelp.setToolTipText("How to use Proteomic summary panel ?");
+        btnHelp.setToolTipText("How to use Transcriptomic summary panel ?");
         btnHelp.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/help.png"));
         btnHelp.addSelectionListener(this);
 */
-        // if(Database.getInstance().getTypeProject()==TypeProject.Listeriomics ||
-        // Database.getInstance().getTypeProject()==TypeProject.UIBCListeriomics){
-
         ScrolledComposite scrolledComposite =
                 new ScrolledComposite(container, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
-        GridData gd_scrolledComposite = new GridData(SWT.FILL, SWT.FILL, false, true, 1, 3);
+        GridData gd_scrolledComposite = new GridData(SWT.FILL, SWT.FILL, false, true, 1, 1);
         gd_scrolledComposite.widthHint = 300;
         scrolledComposite.setLayoutData(gd_scrolledComposite);
         scrolledComposite.setExpandHorizontal(true);
@@ -143,87 +139,81 @@ public class ProteomicsView implements SelectionListener {
         compositeDataFilter = new ProteomicsDataFilterComposite(scrolledComposite, SWT.NONE, this);
         scrolledComposite.setContent(compositeDataFilter);
         scrolledComposite.setMinSize(compositeDataFilter.computeSize(SWT.DEFAULT, SWT.DEFAULT));
+        Composite compositeTable = new Composite(container, SWT.NONE);
+        compositeTable.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+        compositeTable.setLayout(new GridLayout(1, false));
         {
-            Composite composite_2 = new Composite(container, SWT.BORDER);
-            composite_2.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
-            composite_2.setLayout(new GridLayout(4, false));
+            Composite composite_1 = new Composite(compositeTable, SWT.BORDER);
+            composite_1.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
+            composite_1.setLayout(new GridLayout(7, false));
+
+            Label lblSelectBiologicalCondtions = new Label(composite_1, SWT.NONE);
+            lblSelectBiologicalCondtions.setText("Select biological conditions and: ");
             {
-                Label label = new Label(composite_2, SWT.NONE);
-                label.setText("Select biological condtions and : ");
+                btnGenomeViewer = new Button(composite_1, SWT.TOGGLE);
+                btnGenomeViewer.setBackground(BasicColor.BUTTON);
+                btnGenomeViewer.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/genomeViewer.bmp"));
+                btnGenomeViewer.addSelectionListener(this);
             }
             {
-                Composite composite_1 = new Composite(composite_2, SWT.NONE);
-                composite_1.setLayout(new GridLayout(2, false));
-                {
-                    btnGenomeViewer = new Button(composite_1, SWT.NONE);
-                    btnGenomeViewer.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/genomeViewer.bmp"));
-                    {
-                        Label lblDisplayTheseBiocondition = new Label(composite_1, SWT.WRAP);
-                        GridData gd_lblDisplayTheseBiocondition =
-                                new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
-                        gd_lblDisplayTheseBiocondition.widthHint = 200;
-                        lblDisplayTheseBiocondition.setLayoutData(gd_lblDisplayTheseBiocondition);
-                        lblDisplayTheseBiocondition
-                                .setText("Visualize their proteomics datasets with the Genome Viewer");
-                        // lblDisplayTheseBiocondition.setForeground(BasicColor.GREY);
-                    }
-                    btnGenomeViewer.addSelectionListener(this);
-                }
+                Label lblDisplayTheseBiocondition = new Label(composite_1, SWT.WRAP);
+                GridData gd_lblDisplayTheseBiocondition = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
+                gd_lblDisplayTheseBiocondition.widthHint = 200;
+                lblDisplayTheseBiocondition.setLayoutData(gd_lblDisplayTheseBiocondition);
+                lblDisplayTheseBiocondition.setText("Visualize their proteomics datasets with the Genome Viewer");
+                // lblDisplayTheseBiocondition.setForeground(BasicColor.GREY);
             }
-            {
-                Composite composite_2_1 = new Composite(composite_2, SWT.NONE);
-                composite_2_1.setLayout(new GridLayout(2, false));
-                {
-                    btnHeatmap = new Button(composite_2_1, SWT.NONE);
-                    btnHeatmap.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/compareexpression.bmp"));
-                    btnHeatmap.addSelectionListener(this);
-                }
-                {
-                    Label lblDisplayFoldchangeOf = new Label(composite_2_1, SWT.WRAP);
-                    GridData gd_lblDisplayFoldchangeOf = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
-                    gd_lblDisplayFoldchangeOf.widthHint = 200;
-                    lblDisplayFoldchangeOf.setLayoutData(gd_lblDisplayFoldchangeOf);
-                    lblDisplayFoldchangeOf.setText("Visualize differently expressed proteins with the HeatMap Viewer");
-                }
-            }
-            new Label(composite_2, SWT.NONE);
+
+            Label label = new Label(composite_1, SWT.NONE);
+            label.setText("     ");
+
+            btnHeatmap = new Button(composite_1, SWT.TOGGLE);
+            btnHeatmap.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/compareexpression.bmp"));
+            btnHeatmap.addSelectionListener(this);
+            btnHeatmap.setBackground(BasicColor.BUTTON);
+
+            Label lblDisplayDataComparisons = new Label(composite_1, SWT.WRAP);
+            GridData gd_lblDisplayDataComparisons = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
+            gd_lblDisplayDataComparisons.widthHint = 200;
+            lblDisplayDataComparisons.setLayoutData(gd_lblDisplayDataComparisons);
+            lblDisplayDataComparisons
+                    .setText("Visualize protein abundance differences with the HeatMap Viewer");
+            new Label(composite_1, SWT.NONE);
         }
-        new Label(container, SWT.NONE);
-        {
-            Composite composite_2 = new Composite(container, SWT.BORDER);
-            composite_2.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
-            composite_2.setLayout(new GridLayout(10, false));
 
-            btnSelectall = new Button(composite_2, SWT.NONE);
-            btnSelectall.setToolTipText("Select all genomes");
-            btnSelectall.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/checked.bmp"));
-            btnSelectall.addSelectionListener(this);
-            Label lblSelectAll = new Label(composite_2, SWT.NONE);
-            lblSelectAll.setText("Select all");
-            lblSelectAll.setFont(SWTResourceManager.getBodyFont(10, SWT.NORMAL));
+        Composite composite_2 = new Composite(compositeTable, SWT.BORDER);
+        composite_2.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
+        composite_2.setLayout(new GridLayout(10, false));
 
-            btnUnselectall = new Button(composite_2, SWT.NONE);
-            btnUnselectall.setToolTipText("Unselect all genomes");
-            btnUnselectall.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/unchecked.bmp"));
-            btnUnselectall.addSelectionListener(this);
-            Label lblUnselectAll = new Label(composite_2, SWT.NONE);
-            lblUnselectAll.setText("Unselect all");
-            lblUnselectAll.setFont(SWTResourceManager.getBodyFont(10, SWT.NORMAL));
+        btnSelectall = new Button(composite_2, SWT.TOGGLE);
+		btnSelectall.setBackground(BasicColor.BUTTON);
+		btnSelectall.setToolTipText("Select all genomes");
+		btnSelectall.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/checked.bmp"));
+		btnSelectall.addSelectionListener(this);
+		btnSelectall.setText("Select all");
+		btnSelectall.setFont(SWTResourceManager.getBodyFont(12, SWT.NORMAL));
 
-            new Label(composite_2, SWT.NONE);
+		btnUnselectall = new Button(composite_2, SWT.TOGGLE);
+		btnUnselectall.setBackground(BasicColor.BUTTON);
+		btnUnselectall.setToolTipText("Unselect all genomes");
+		btnUnselectall.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/unchecked.bmp"));
+		btnUnselectall.addSelectionListener(this);
+		btnUnselectall.setText("Unselect all");
+		btnUnselectall.setFont(SWTResourceManager.getBodyFont(12, SWT.NORMAL));
 
-            btnSaveTxt = new Button(composite_2, SWT.NONE);
-            btnSaveTxt.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/fileIO/txt.bmp"));
-            btnSaveTxt.setToolTipText("Download the table in tabulated text format");
+        btnSaveTxt = new Button(composite_2, SWT.TOGGLE);
+        btnSaveTxt.setBackground(BasicColor.BUTTON);
+        btnSaveTxt.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/fileIO/txt.bmp"));
+        btnSaveTxt.setToolTipText("Download the table in tabulated text format");
+        btnSaveTxt.setText("Download transcriptome selection as a table");
+        btnSaveTxt.setFont(SWTResourceManager.getBodyFont(12, SWT.NORMAL));
 
-            Label lblSaveSelectionAs = new Label(composite_2, SWT.NONE);
-            lblSaveSelectionAs.setText("Download proteome selection as a table");
-            lblSaveSelectionAs.setFont(SWTResourceManager.getBodyFont(10, SWT.NORMAL));
-            btnSaveTxt.addSelectionListener(this);
-        }
-        new Label(container, SWT.NONE);
-        // }
-        tableProteomeViewer = new TableViewer(container, SWT.BORDER | SWT.FULL_SELECTION | SWT.MULTI);
+        new Label(composite_2, SWT.NONE);
+        new Label(composite_2, SWT.NONE);
+        new Label(composite_2, SWT.NONE);
+        btnSaveTxt.addSelectionListener(this);
+        
+        tableProteomeViewer = new TableViewer(compositeTable, SWT.BORDER | SWT.FULL_SELECTION | SWT.MULTI);
         tableProteome = tableProteomeViewer.getTable();
         tableProteome.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
         tableProteomeViewer.getTable().setHeaderVisible(true);

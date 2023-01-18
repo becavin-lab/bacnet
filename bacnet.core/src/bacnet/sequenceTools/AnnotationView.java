@@ -45,6 +45,7 @@ import bacnet.swt.ResourceManager;
 import bacnet.swt.SWTResourceManager;
 import bacnet.table.core.BioConditionComparator;
 import bacnet.utils.ArrayUtils;
+import bacnet.utils.BasicColor;
 
 public class AnnotationView implements SelectionListener {
 
@@ -123,8 +124,9 @@ public class AnnotationView implements SelectionListener {
         Composite composite = new Composite(compositeSummary, SWT.NONE);
         composite.setLayout(new GridLayout(9, false));
 
-        btnHide = new Button(composite, SWT.NONE);
+        btnHide = new Button(composite, SWT.TOGGLE);
         btnHide.setText("Select genome elements");
+        btnHide.setBackground(BasicColor.BUTTON);
         btnHide.setToolTipText("Select specific genome elements");
         btnHide.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/genome/hideData.bmp"));
         btnHide.addSelectionListener(this);
@@ -135,30 +137,29 @@ public class AnnotationView implements SelectionListener {
         lblSearch.setText("Search");
         lblSearch.setFont(SWTResourceManager.getBodyFont(10, SWT.NORMAL));
 
-        btnSelectall = new Button(composite, SWT.NONE);
+        btnSelectall = new Button(composite, SWT.TOGGLE);
+        btnSelectall.setBackground(BasicColor.BUTTON);
         btnSelectall.setToolTipText("Select all genomes");
         btnSelectall.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/checked.bmp"));
         btnSelectall.addSelectionListener(this);
-        Label lblSelectAll = new Label(composite, SWT.NONE);
-        lblSelectAll.setText("Select all");
-        lblSelectAll.setFont(SWTResourceManager.getBodyFont(10, SWT.NORMAL));
+        btnSelectall.setText("Select all");
+        btnSelectall.setFont(SWTResourceManager.getBodyFont(10, SWT.NORMAL));
 
-        btnUnselectall = new Button(composite, SWT.NONE);
+        btnUnselectall = new Button(composite, SWT.TOGGLE);
+        btnUnselectall.setBackground(BasicColor.BUTTON);
         btnUnselectall.setToolTipText("Unselect all genomes");
         btnUnselectall.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/unchecked.bmp"));
         btnUnselectall.addSelectionListener(this);
-        Label lblUnselectAll = new Label(composite, SWT.NONE);
-        lblUnselectAll.setText("Unselect all");
-        lblUnselectAll.setFont(SWTResourceManager.getBodyFont(10, SWT.NORMAL));
+        btnUnselectall.setText("Unselect all");
+        btnUnselectall.setFont(SWTResourceManager.getBodyFont(10, SWT.NORMAL));
 
-        btnSaveTxt = new Button(composite, SWT.NONE);
+        btnSaveTxt = new Button(composite, SWT.TOGGLE);
+        btnSaveTxt.setBackground(BasicColor.BUTTON);
         btnSaveTxt.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/fileIO/txt.bmp"));
         btnSaveTxt.setToolTipText("Download gene selection into a table");
         btnSaveTxt.addSelectionListener(this);
-
-        Label lblSaveSelectionAs = new Label(composite, SWT.NONE);
-        lblSaveSelectionAs.setText("Download gene selection into a table");
-        lblSaveSelectionAs.setFont(SWTResourceManager.getBodyFont(10, SWT.NORMAL));
+        btnSaveTxt.setText("Download gene selection into a table");
+        btnSaveTxt.setFont(SWTResourceManager.getBodyFont(10, SWT.NORMAL));
         txtSearch.addKeyListener(new org.eclipse.swt.events.KeyListener() {
             /**
              * 
@@ -478,10 +479,10 @@ public class AnnotationView implements SelectionListener {
             if (bioCondsToDisplayTemp.size() < 100) {
                 String[][] array = ArrayUtils.toArray(bioCondsToDisplayTemp);
                 String arrayRepHTML = TabDelimitedTableReader.getHTMLVersion(array);
-                SaveFileUtils.saveTextFile("Listeria_Annotation_Table_" + genome.getSpecies() + ".txt", arrayRep, true,
+                SaveFileUtils.saveTextFile("Yersinia_Annotation_Table_" + genome.getSpecies() + ".txt", arrayRep, true,
                         "", arrayRepHTML, partService, shell);
             } else {
-                SaveFileUtils.saveTextFile("Listeria_Annotation_Table_" + genome.getSpecies() + ".txt", arrayRep, true,
+                SaveFileUtils.saveTextFile("Yersinia_Annotation_Table_" + genome.getSpecies() + ".txt", arrayRep, true,
                         "", "", partService, shell);
             }
         } else if (e.getSource() == btnSelectall) {

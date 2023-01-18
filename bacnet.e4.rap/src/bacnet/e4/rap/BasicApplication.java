@@ -64,10 +64,10 @@ public class BasicApplication implements ApplicationConfiguration {
             // title = "CRISPRGo - CRISPR design tools for bacteria";
             googleId = "UA-129705822-1";
         } else if (projectName == Database.YERSINIOMICS_PROJECT) {
-            title = "Yersiniomics website";
+            title = "Yersiniomics";
             googleId = "G-0HQQJHGD66";
         } else if (projectName == Database.URY_YERSINIOMICS_PROJECT) {
-            title = "Yersiniomics website";
+            title = "Yersiniomics";
             googleId = "UA-80335618-7";
         }
         application.addResource("theme/favicon.png", createResourceLoader("theme/favicon.png"));

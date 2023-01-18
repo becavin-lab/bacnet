@@ -108,7 +108,7 @@ public class TranscriptomicsView implements SelectionListener {
     private final Image imageGeneExpr;
     private final Image imageTiling;
     private Table tableBioCondition;
-    private Button btnExpressionAtlas;
+    private Button btnHeatmap;
     //private Button btnHelp;
     private Button btnUnselectall;
     private Button btnSelectall;
@@ -140,7 +140,6 @@ public class TranscriptomicsView implements SelectionListener {
     public void createPartControl(Composite parent) {
         focused = true;
         Composite container = new Composite(parent, SWT.NONE);
-        container.setBounds(0, 0, 1031, 903);
         container.setLayout(new GridLayout(3, false));
         Label lblXxSrnas = new Label(container, SWT.BORDER | SWT.CENTER);
         lblXxSrnas.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 3, 1));
@@ -172,7 +171,7 @@ public class TranscriptomicsView implements SelectionListener {
             composite_1.setLayout(new GridLayout(7, false));
 
             Label lblSelectBiologicalCondtions = new Label(composite_1, SWT.NONE);
-            lblSelectBiologicalCondtions.setText("Select biological condtions and : ");
+            lblSelectBiologicalCondtions.setText("Select biological conditions and: ");
             {
                 btnGenomeViewer = new Button(composite_1, SWT.TOGGLE);
                 btnGenomeViewer.setBackground(BasicColor.BUTTON);
@@ -191,10 +190,10 @@ public class TranscriptomicsView implements SelectionListener {
             Label label = new Label(composite_1, SWT.NONE);
             label.setText("     ");
 
-            btnExpressionAtlas = new Button(composite_1, SWT.TOGGLE);
-            btnExpressionAtlas.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/compareexpression.bmp"));
-            btnExpressionAtlas.addSelectionListener(this);
-            btnExpressionAtlas.setBackground(BasicColor.BUTTON);
+            btnHeatmap = new Button(composite_1, SWT.TOGGLE);
+            btnHeatmap.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/compareexpression.bmp"));
+            btnHeatmap.addSelectionListener(this);
+            btnHeatmap.setBackground(BasicColor.BUTTON);
 
             Label lblDisplayDataComparisons = new Label(composite_1, SWT.WRAP);
             GridData gd_lblDisplayDataComparisons = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
@@ -504,7 +503,7 @@ public class TranscriptomicsView implements SelectionListener {
 	                        return RWTUtils.setGEOLink(text);
 	                    } else if (colName.equals("GEO platform")) {
 	                        return RWTUtils.setGEOLink(text);
-	                    } else if (colName.equals("ArrayExpressId")) {
+	                    } else if (colName.equals("ArrayExpressID")) {
 	                        return RWTUtils.setArrayExpressExpLink(text);
 	                    } else if (colName.equals("ArrayExpressTechnoID")) {
 	                        return RWTUtils.setArrayExpressArrayLink(text);
@@ -642,13 +641,12 @@ public class TranscriptomicsView implements SelectionListener {
     @Override
     public void widgetSelected(SelectionEvent e) {
         if (e.getSource() == btnGenomeViewer) {
-        	System.out.println("bouton genome viewer");
             HashMap<String, ArrayList<String>> genomeToBioConds = getSelectedBioConditions();
             for (String genomeName : genomeToBioConds.keySet()) {
                 GenomeTranscriptomeView.displayGenomeElementAndBioConditions(partService, genomeName,
                         genomeToBioConds.get(genomeName), "");
             }
-        } else if (e.getSource() == btnExpressionAtlas) {
+        } else if (e.getSource() == btnHeatmap) {
             HashMap<String, ArrayList<String>> genomeToComparisons = new HashMap<>();
             try {
                 IRunnableWithProgress thread = new OpenExpressionMatrixAndComparisons(selectedTranscriptomes, genomeToComparisons, true);

@@ -97,8 +97,8 @@ public class FileUtils {
             
             for (String line : texts) {
                 bufferW.write(line);
-                bufferW.write("\n"); //to run blast on cluster
-                //bufferW.newLine(); //for Windows
+                //bufferW.write("\n"); //to run blast on cluster
+                bufferW.newLine(); //for Windows
             }
             bufferW.close();
             fileW.close();
