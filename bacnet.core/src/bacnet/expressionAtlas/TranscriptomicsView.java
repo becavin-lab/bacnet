@@ -296,7 +296,10 @@ public class TranscriptomicsView implements SelectionListener {
         new Label(container, SWT.NONE);
         setData();
         if (Database.getInstance().getProjectName() == Database.LISTERIOMICS_PROJECT
-                || Database.getInstance().getProjectName() == Database.UIBCLISTERIOMICS_PROJECT|| Database.getInstance().getProjectName() == Database.YERSINIOMICS_PROJECT|| Database.getInstance().getProjectName() == Database.URY_YERSINIOMICS_PROJECT) {
+                || Database.getInstance().getProjectName() == Database.UIBCLISTERIOMICS_PROJECT|| 
+                Database.getInstance().getProjectName() == Database.YERSINIOMICS_PROJECT|| 
+                Database.getInstance().getProjectName() == Database.URY_YERSINIOMICS_PROJECT|| 
+                Database.getInstance().getProjectName() == Database.CLOSTRIDIOMICS_PROJECT) {
             compositeDataFilter.updateInfo();
         }
         compositeDataFilter.redraw();

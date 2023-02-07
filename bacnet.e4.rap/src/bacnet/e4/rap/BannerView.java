@@ -79,7 +79,7 @@ public class BannerView implements SelectionListener {
     	
         SessionControl.initBacnetApp(partService, modelService, shell);
         String appName = Database.getInstance().getProjectName();
-        
+        /*
         Composite container = new Composite(parent, SWT.BORDER);
         container.setLayout(new GridLayout(3, false));
         container.setBackground(BasicColor.BANNER_COLOR);
@@ -94,10 +94,11 @@ public class BannerView implements SelectionListener {
          * Paint the Banner of the software/website
          */
         
-        canvas.addPaintListener(new PaintListener() {
+        // canvas.addPaintListener(new PaintListener() {
             /**
              * 
              */
+        /*
             private static final long serialVersionUID = 1241919382522062960L;
             
             @Override
@@ -163,7 +164,7 @@ public class BannerView implements SelectionListener {
         }
 
         System.out.println("BannerView loaded");
-
+*/
     }
     
     @Override

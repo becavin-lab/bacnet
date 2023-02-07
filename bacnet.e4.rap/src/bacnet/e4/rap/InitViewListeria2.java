@@ -43,14 +43,14 @@ import bacnet.swt.SWTResourceManager;
 import bacnet.utils.FileUtils;
 import bacnet.views.CoExprNetworkView;
 
-public class InitViewListeria implements SelectionListener {
+public class InitViewListeria2 implements SelectionListener {
 
     /**
      * 
      */
     private static final long serialVersionUID = -3252983689419871498L;
 
-    public static final String ID = "bacnet.Yersinia"; //$NON-NLS-1$
+    public static final String ID = "bacnet.Clostri"; //$NON-NLS-1$
 
     /**
      * Indicates if we focus the view, so we can pushState navigation
@@ -87,7 +87,7 @@ public class InitViewListeria implements SelectionListener {
     private Link link_NTerm;
 
     @Inject
-    public InitViewListeria() {}
+    public InitViewListeria2() {}
 
     @SuppressWarnings("unused")
     @PostConstruct
@@ -674,7 +674,7 @@ public class InitViewListeria implements SelectionListener {
      * Push genome, chromosome, gene and Tabitem state
      */
     public void pushState() {
-        NavigationManagement.pushStateView(InitViewListeria.ID);
+        NavigationManagement.pushStateView(InitViewListeria2.ID);
     }
 
     @Override

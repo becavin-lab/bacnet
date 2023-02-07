@@ -77,6 +77,11 @@ public class Database {
     public static String URY_YERSINIOMICS_PROJECT = "URY_Yersiniomics";
 
     /**
+     * Static variable to discriminate Clostridiomics project from the others
+     */
+    public static String CLOSTRIDIOMICS_PROJECT = "Clostridiomics";
+
+    /**
      * Static variable to discriminate Listeriomics project from the others
      */
     public static String UIBCLISTERIOMICS_PROJECT = "UIBCListeriomics";

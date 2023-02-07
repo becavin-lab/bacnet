@@ -34,6 +34,8 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
+
+import bacnet.Database;
 import bacnet.datamodel.annotation.Annotation;
 import bacnet.datamodel.sequence.Gene;
 import bacnet.datamodel.sequence.Genome;
@@ -479,10 +481,10 @@ public class AnnotationView implements SelectionListener {
             if (bioCondsToDisplayTemp.size() < 100) {
                 String[][] array = ArrayUtils.toArray(bioCondsToDisplayTemp);
                 String arrayRepHTML = TabDelimitedTableReader.getHTMLVersion(array);
-                SaveFileUtils.saveTextFile("Yersinia_Annotation_Table_" + genome.getSpecies() + ".txt", arrayRep, true,
+                SaveFileUtils.saveTextFile("Annotation_Table_" + genome.getSpecies() + ".txt", arrayRep, true,
                         "", arrayRepHTML, partService, shell);
             } else {
-                SaveFileUtils.saveTextFile("Yersinia_Annotation_Table_" + genome.getSpecies() + ".txt", arrayRep, true,
+                SaveFileUtils.saveTextFile("Annotation_Table_" + genome.getSpecies() + ".txt", arrayRep, true,
                         "", "", partService, shell);
             }
         } else if (e.getSource() == btnSelectall) {

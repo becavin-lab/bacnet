@@ -76,7 +76,10 @@ public class SessionControl {
         }
 
         System.out.println("Init Navigation management");
+        System.out.println("databaseInit.getInitView(): "+databaseInit.getInitView());
         partService.showPart(databaseInit.getInitView(), PartState.ACTIVATE);
+        System.out.println("after databaseInit.getInitView(): "+databaseInit.getInitView());
+
         NavigationManagement.parseInitURL(partService);
         NavigationManagement.registerServiceAndNavigationTab(partService);
         SessionControl.registerClosingUIsession(partService, modelService, shell);

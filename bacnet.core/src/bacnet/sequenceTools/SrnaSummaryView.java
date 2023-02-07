@@ -235,7 +235,7 @@ public class SrnaSummaryView implements SelectionListener {
             }
             String arrayRep = ArrayUtils.toString(array);
             String arrayRepHTML = TabDelimitedTableReader.getHTMLVersion(array);
-            SaveFileUtils.saveTextFile("Listeria_" + displayType + "_Table.txt", arrayRep, true, "", arrayRepHTML,
+            SaveFileUtils.saveTextFile(Database.getInstance().getSpecies() + "_" + displayType + "_Table.txt", arrayRep, true, "", arrayRepHTML,
                     partService, shell);
         }
     }

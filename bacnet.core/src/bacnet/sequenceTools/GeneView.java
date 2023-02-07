@@ -125,14 +125,14 @@ public class GeneView implements SelectionListener, MouseListener {
 	private Track trackGenome;
 	private ArrayList<String> listGenes = new ArrayList<>();
 	private Gene sequence;
-	private Text lblName;
-	private Text lblBegin;
-	private Text lblEnd;
-	private Text lblSizeaa;
-	private Text lblSizeBP;
-	private Text lblProduct;
-	private Text lblStrand;
-	private Text lblLocus;
+	private Label lblName;
+	private Label lblBegin;
+	private Label lblEnd;
+	private Label lblSizeaa;
+	private Label lblSizeBP;
+	private Label lblProduct;
+	private Label lblStrand;
+	private Label lblLocus;
 	private Text lblCog;
 	private Label lblProtID;
 	private Combo comboGenome;
@@ -301,7 +301,7 @@ public class GeneView implements SelectionListener, MouseListener {
 	 * Other
 	 */
 
-	private Text lblConservation;
+	private Label lblConservation;
 	private TabItem tbtmHomologs;
 	private Composite composite_13;
 	private Composite composite_14;
@@ -519,7 +519,7 @@ public class GeneView implements SelectionListener, MouseListener {
 						listGenes.clear();
 						for (String gene : searchResults) {
 							String text = "";
-							String oldLocusTag = genome.getChromosomes().get(chromoID).getGenes().get(gene).getOldLocusTag();
+							String oldLocusTag = genome.getChromosomes().get(chromoID).getGenes().get(gene).getOldLocusTag().replace("%2C", ",");
 							if (!oldLocusTag.equals("")) {
 								text += oldLocusTag+" - ";
 								
@@ -633,48 +633,54 @@ public class GeneView implements SelectionListener, MouseListener {
 		compGeneralInfo.setLayoutData(gd_compGeneralInfo);
 		compGeneralInfo.setLayout(new GridLayout(5, false));
 
-		lblLocus = new Text(compGeneralInfo, SWT.READ_ONLY);
+		lblLocus = new Label(compGeneralInfo, SWT.READ_ONLY);
 		lblLocus.setTouchEnabled(true);
 		GridData gd_lblLocus = new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1);
-		gd_lblLocus.widthHint = 250;
+		//gd_lblLocus.widthHint = 250;
+		RWTUtils.setMarkup(lblLocus);
 		lblLocus.setLayoutData(gd_lblLocus);
-		lblLocus.setText("Locus");
+		lblLocus.setText("<b>Locus: </b>");
 
-		
-
-		lblStrand = new Text(compGeneralInfo, SWT.READ_ONLY);
+		lblStrand = new Label(compGeneralInfo, SWT.READ_ONLY);
 		GridData gd_lblStrand = new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1);
-		gd_lblStrand.widthHint = 65;
+		//gd_lblStrand.widthHint = 65;
+		RWTUtils.setMarkup(lblStrand);
 		lblStrand.setLayoutData(gd_lblStrand);
-		lblStrand.setText("Strand");
+		lblStrand.setText("<b>Strand: </b>");
 
-		lblBegin = new Text(compGeneralInfo, SWT.READ_ONLY);
+		lblBegin = new Label(compGeneralInfo, SWT.READ_ONLY);
 		lblBegin.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
-		lblBegin.setText("Begin");
+		RWTUtils.setMarkup(lblBegin);
+		lblBegin.setText("<b>Begin: </b>");
 		
-		lblEnd = new Text(compGeneralInfo, SWT.READ_ONLY);
+		lblEnd = new Label(compGeneralInfo, SWT.READ_ONLY);
 		lblEnd.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
-		lblEnd.setText("End");
+		RWTUtils.setMarkup(lblEnd);
+		lblEnd.setText("<b>End: </b>");
 
-		lblSizeBP = new Text(compGeneralInfo, SWT.READ_ONLY);
+		lblSizeBP = new Label(compGeneralInfo, SWT.READ_ONLY);
 		GridData gd_lblSizeBP = new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1);
 		gd_lblSizeBP.widthHint = 80;
 		lblSizeBP.setLayoutData(gd_lblSizeBP);
-		lblSizeBP.setText("Size");
+		RWTUtils.setMarkup(lblSizeBP);
+		lblSizeBP.setText("<b>Size: </b>");
 
-		lblSizeaa = new Text(compGeneralInfo, SWT.READ_ONLY);
+		lblSizeaa = new Label(compGeneralInfo, SWT.READ_ONLY);
 		lblSizeaa.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
-		lblSizeaa.setText("SizeAA");
+		RWTUtils.setMarkup(lblSizeaa);
+		lblSizeaa.setText("<b>SizeAA: </b>");
 
-		lblName = new Text(compGeneralInfo, SWT.READ_ONLY);
+		lblName = new Label(compGeneralInfo, SWT.READ_ONLY);
 		lblName.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
-		lblName.setText("Name: ");
+		RWTUtils.setMarkup(lblName);
+		lblName.setText("<b>Gene: </b>");
 
-		lblProduct = new Text(compGeneralInfo, SWT.READ_ONLY);
+		lblProduct = new Label(compGeneralInfo, SWT.READ_ONLY);
 		GridData gd_lblProduct = new GridData(SWT.FILL, SWT.CENTER, true, false, 3, 1);
 		//gd_lblProduct.heightHint = 60;
+		RWTUtils.setMarkup(lblProduct);
 		lblProduct.setLayoutData(gd_lblProduct);
-		lblProduct.setText("Product");
+		lblProduct.setText("<b>Product: </b>");
 
 		
 		composite_15 = new Composite(composite_1, SWT.BORDER);
@@ -709,7 +715,7 @@ public class GeneView implements SelectionListener, MouseListener {
 		
 		lblProtID = new Label(compSuppInfo, SWT.NONE);
 		RWTUtils.setMarkup(lblProtID);
-		lblProtID.setText("ProteinId");
+		lblProtID.setText("<b>GenBank Protein</b>: ");
 		
 		
 		/*
@@ -717,8 +723,8 @@ public class GeneView implements SelectionListener, MouseListener {
 		lblCog.setText("COG");
 		*/
 		
-		lblConservation = new Text(compSuppInfo, SWT.NONE);
-		lblConservation.setData(RWT.MARKUP_ENABLED, Boolean.TRUE);
+		lblConservation = new Label(compSuppInfo, SWT.NONE);
+		RWTUtils.setMarkup(lblConservation);
 		lblConservation.setText("Homologs in 000/000 Yersinia genomes");
 
 		
@@ -1448,6 +1454,7 @@ public class GeneView implements SelectionListener, MouseListener {
 		composite_1.layout(true,true);
 
 		if(syntenyHashMap.containsKey(genome.getSpecies())){
+			if (Database.getInstance().getProjectName() == Database.URY_YERSINIOMICS_PROJECT || (Database.getInstance().getProjectName() == Database.YERSINIOMICS_PROJECT) && !genome.getSpecies().equals("Yersinia pseudotuberculosis IP31758")) {
 				btnShowSynteny = new Button(compSynt, SWT.TOGGLE);
 				btnShowSynteny.setBackground(BasicColor.BUTTON);
 				btnShowSynteny.setText("Show synteny");
@@ -1458,14 +1465,16 @@ public class GeneView implements SelectionListener, MouseListener {
 				browserSynteny = new Browser(compSynt, SWT.NONE);
 				browserSynteny.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 				composite_1.layout(true,true);
-
-			 }
+			}
 		}
+	}
 	
 	private void loadSynteny() {
 		String syntenyURL = new String();
 		String syntenyURLPrefix = "https://yersiniomics.pasteur.fr/SynTView/site/?dataDir=\"data/";
-
+		if (Database.getInstance().getProjectName() == Database.URY_YERSINIOMICS_PROJECT && genome.getSpecies().equals("Yersinia pseudotuberculosis IP31758")) {
+			syntenyURLPrefix = "https://yersiniomics.pasteur.fr/SynTView/siteRestricted/?dataDir=\"data/";
+		}
 		try {
 			//pathGraphHTML = "http://hub15.hosting.pasteur.fr:8080/SynTView/site/?dataDir=\"data/CO92\"";
 			syntenyURL = syntenyURLPrefix + syntenyHashMap.get(genome.getSpecies()) + "\"";
@@ -1483,7 +1492,7 @@ public class GeneView implements SelectionListener, MouseListener {
 				if (locus.equals("")) {
 					locus = sequence.getName();
 				} else {
-					if(genome.getSpecies().equals("Yersinia pestis 91001")) {
+					if(genome.getSpecies().equals("Yersinia pestis 91001") || genome.getSpecies().equals("Clostridioides difficile 630Derm")) {
 						String[] splitLoc = locus.split("%2C");
 						if (splitLoc.length==2) {
 							locus = splitLoc[1];
@@ -1742,6 +1751,8 @@ public class GeneView implements SelectionListener, MouseListener {
 		} else if (Database.getInstance().getProjectName() == "ListeriomicsSample") {
 			initListeriomicsSample();
 		} else if (Database.getInstance().getProjectName() == Database.YERSINIOMICS_PROJECT || Database.getInstance().getProjectName() == Database.URY_YERSINIOMICS_PROJECT) {
+			initYersiniomics();
+		} else if (Database.getInstance().getProjectName() == Database.CLOSTRIDIOMICS_PROJECT) {
 			initYersiniomics();
 		} else {
 			initDefault();
@@ -2062,7 +2073,7 @@ public class GeneView implements SelectionListener, MouseListener {
 		listGenes = new ArrayList<>();
 		for (String gene : genome.getChromosomes().get(chromoID).getGenes().keySet()) {
 			String text = "";
-			String oldLocusTag = genome.getChromosomes().get(chromoID).getGenes().get(gene).getOldLocusTag();
+			String oldLocusTag = genome.getChromosomes().get(chromoID).getGenes().get(gene).getOldLocusTag().replace("%2C", ",");
 			if (!oldLocusTag.equals("")) {
 				text += oldLocusTag + " - ";
 			}
@@ -2125,14 +2136,18 @@ public class GeneView implements SelectionListener, MouseListener {
 			updateGeneBasicInfo();
 			if (Database.getInstance().getProjectName() == Database.LISTERIOMICS_PROJECT
 					|| Database.getInstance().getProjectName() == Database.UIBCLISTERIOMICS_PROJECT
-					|| Database.getInstance().getProjectName() == Database.YERSINIOMICS_PROJECT || Database.getInstance().getProjectName() == Database.URY_YERSINIOMICS_PROJECT) {
+					|| Database.getInstance().getProjectName() == Database.YERSINIOMICS_PROJECT || Database.getInstance().getProjectName() == Database.URY_YERSINIOMICS_PROJECT
+					) {
 				updateAllGeneOmicsInfo();
-
+			} else if (Database.getInstance().getProjectName() == Database.CLOSTRIDIOMICS_PROJECT) {
+				updateGeneOmicsInfo();
+				updateCrossRefs();
 			} else if (Database.getInstance().getProjectName() == "ListeriomicsSample") {
 				updateGeneOmicsInfo();
 				updateHomolog();
 			} else if (Database.getInstance().getProjectName() != Database.CRISPRGO_PROJECT) {
 				updateGeneOmicsInfo();
+
 			}
 
 			/*
@@ -2150,14 +2165,15 @@ public class GeneView implements SelectionListener, MouseListener {
 			title += sequence.getGeneName() +" - " ;
 		title += sequence.getName();
 		lblGene.setText(title);
-		lblLocus.setText("Locus: " + sequence.getName() +  " - "+ sequence.getFeature("old_locus_tag") );
-		lblBegin.setText("Begin: " + sequence.getBegin() + "");
-		lblSizeBP.setText("Size bp: " + sequence.getLength());
-		lblStrand.setText("Strand: " + sequence.getStrand());
-		lblName.setText("Gene: " + sequence.getGeneName());
-		lblEnd.setText("End: " + sequence.getEnd() + "");
-		lblSizeaa.setText("Size aa: " + sequence.getLengthAA());
-		lblProduct.setText("Product: " + sequence.getProduct());
+		lblLocus.setText("<b>Locus:</b> " + sequence.getName() +  " - "+ sequence.getFeature("old_locus_tag") );
+		lblBegin.setText("<b>Begin:</b> " + sequence.getBegin() + "");
+		lblSizeBP.setText("<b>Size bp:</b> " + sequence.getLength());
+		lblStrand.setText("<b>Strand:</b> " + sequence.getStrand());
+		lblName.setText("<b>Gene:</b> " + sequence.getGeneName());
+
+		lblEnd.setText("<b>End:</b> " + sequence.getEnd() + "");
+		lblSizeaa.setText("<b>Size aa:</b> " + sequence.getLengthAA());
+		lblProduct.setText("<b>Product:</b> " + sequence.getProduct());
 		textFeature.setText("Note: " + sequence.getComment() + "\nFeatures: " + sequence.getFeaturesText());
 
 		canvasGenome.getTrack().moveHorizontally(sequence.getBegin());
@@ -2217,12 +2233,12 @@ public class GeneView implements SelectionListener, MouseListener {
 			lblOperon.setText("Not in an operon");
 		}
 		*/
-		lblConservation.setText("Homologs in " + (sequence.getConservation()) + "/"
-				+ Genome.getAvailableGenomes().size() + " "+Database.getInstance().getSpecies()+" genomes");
+		lblConservation.setText("Homologs in <b>" + (sequence.getConservation()) + "/"
+				+ Genome.getAvailableGenomes().size() + "</b> "+Database.getInstance().getSpecies()+" genomes");
 		lblConservation2.setText("Homologs in " + (sequence.getConservation()) + "/"
 				+ Genome.getAvailableGenomes().size() + " "+Database.getInstance().getSpecies()+" genomes");
-		lblProduct.setText("Product: " + sequence.getProduct());
-		lblProtID.setText("ProteinId: " + RWTUtils.setProteinNCBILink(sequence.getProtein_id()));
+		lblProduct.setText("<b>Product: </b>" + sequence.getProduct());
+		lblProtID.setText("<b>GenBank Protein: </b>" + RWTUtils.setProteinNCBILink(sequence.getProtein_id()));
 		//lblCog.setText("COG: " + sequence.getCog());
 		
 		/*
@@ -3158,13 +3174,13 @@ public class GeneView implements SelectionListener, MouseListener {
 		//System.out.println("gene.getGenomeName(): "+gene.getGenomeName());
 
 
-		view.initGenomeInfo(gene.getGenomeName());
+		view.initGenomeInfo(gene.getGenomeName(),gene.getChromosomeID());
 		//System.out.println("after initGenomeInfo");
 		view.setGenomeSelected(gene.getGenomeName());
 		//System.out.println("after setGenomeSelected");
-
-
+		
 		view.setSequence(gene);
+		
 		for (int i = 0; i < view.getListGenes().size(); i++) {        	
 			if (view.getListGenes().get(i).equals(gene.getName())) {
 				view.getTableGenes().select(i);
@@ -3524,6 +3540,64 @@ public class GeneView implements SelectionListener, MouseListener {
 		view.initGenomeInfo(genomeName);
 		view.setGenomeSelected(genomeName);
 	}
+	
+
+	public static void open630GeneView(EPartService partService) {
+		String id = GeneView.ID + "-" + String.valueOf(Math.random() * 1000).substring(0, 3);
+		// initiate view
+		ResourceManager.openView(partService, GeneView.ID, id);
+		// update data
+		MPart part = partService.findPart(id);
+		NavigationManagement.pushStateView(id, new HashMap<>());
+		GeneView view = (GeneView) part.getObject();
+		view.setViewID(id);
+		String genomeName = "Clostridioides difficile 630";
+		view.initGenomeInfo(genomeName);
+		view.setGenomeSelected(genomeName);
+	}
+	
+
+	public static void open630bisGeneView(EPartService partService) {
+		String id = GeneView.ID + "-" + String.valueOf(Math.random() * 1000).substring(0, 3);
+		// initiate view
+		ResourceManager.openView(partService, GeneView.ID, id);
+		// update data
+		MPart part = partService.findPart(id);
+		NavigationManagement.pushStateView(id, new HashMap<>());
+		GeneView view = (GeneView) part.getObject();
+		view.setViewID(id);
+		String genomeName = "Clostridioides difficile 630 bis";
+		view.initGenomeInfo(genomeName);
+		view.setGenomeSelected(genomeName);
+	}
+	
+
+	public static void open630DermGeneView(EPartService partService) {
+		String id = GeneView.ID + "-" + String.valueOf(Math.random() * 1000).substring(0, 3);
+		// initiate view
+		ResourceManager.openView(partService, GeneView.ID, id);
+		// update data
+		MPart part = partService.findPart(id);
+		NavigationManagement.pushStateView(id, new HashMap<>());
+		GeneView view = (GeneView) part.getObject();
+		view.setViewID(id);
+		String genomeName = "Clostridioides difficile 630Derm";
+		view.initGenomeInfo(genomeName);
+		view.setGenomeSelected(genomeName);
+	}
+	public static void open630deltaErmGeneView(EPartService partService) {
+		String id = GeneView.ID + "-" + String.valueOf(Math.random() * 1000).substring(0, 3);
+		// initiate view
+		ResourceManager.openView(partService, GeneView.ID, id);
+		// update data
+		MPart part = partService.findPart(id);
+		NavigationManagement.pushStateView(id, new HashMap<>());
+		GeneView view = (GeneView) part.getObject();
+		view.setViewID(id);
+		String genomeName = "Clostridioides difficile 630 delta erm";
+		view.initGenomeInfo(genomeName);
+		view.setGenomeSelected(genomeName);
+	}
 	/**
 	 * Display the view with saved parameters
 	 * 
@@ -3718,7 +3792,7 @@ public class GeneView implements SelectionListener, MouseListener {
 			}
 		} else if (e.getSource() == btnSaveAsSvg) {
 			String textSVG = GeneViewHomologTools.getPhyloFigure(sequence, selectedGenomes);
-			SaveFileUtils.saveTextFile("Yersinia_Phylogenomic_Tree_" + sequence.getName() + ".svg", textSVG, true,
+			SaveFileUtils.saveTextFile(Database.getInstance().getSpecies()+"_Phylogenomic_Tree_" + sequence.getName() + ".svg", textSVG, true,
 					"SVG (vector image) file", textSVG, partService, shell);
 		} else if (e.getSource() == btnDownloadtxt) {
 			System.out.println("click on btnDonwload: " +columnNames.size());
@@ -3737,7 +3811,7 @@ public class GeneView implements SelectionListener, MouseListener {
 			}
 			String arrayRep = ArrayUtils.toString(arrayToSave);
 			String arrayRepHTML = TabDelimitedTableReader.getHTMLVersion(arrayToSave);
-			SaveFileUtils.saveTextFile("Yersinia_Genomic_Table_" + sequence.getName() + ".txt", arrayRep, true, "",
+			SaveFileUtils.saveTextFile(Database.getInstance().getSpecies()+"_Genomic_Table_" + sequence.getName() + ".txt", arrayRep, true, "",
 					arrayRepHTML, partService, shell);
 		} else if (e.getSource() == btnSelectall) {
 			selectedGenomes.clear();
@@ -3945,6 +4019,10 @@ public class GeneView implements SelectionListener, MouseListener {
 		this.sequence = sequence;
 	}
 
+	public void setChromoID(String chromoID) {
+		this.chromoID = chromoID;
+	}
+	
 	public Combo getComboGenome() {
 		return comboGenome;
 	}

@@ -106,7 +106,7 @@ public class GeneViewHomologTools {
             String genome = bioCondsArray[i][genomeIndex];
             if (sequence.getConservationHashMap().containsKey(genome)) {
                 bioCondsArray[i][2] = sequence.getConservationHashMap().get(genome).split(";")[0];
-                bioCondsArray[i][3] = sequence.getConservationHashMap().get(genome).split(";")[1];
+                bioCondsArray[i][3] = sequence.getConservationHashMap().get(genome).split(";")[1].replace("%2C", ",");
                 bioCondsArray[i][4] = sequence.getConservationHashMap().get(genome).split(";")[2];
                 bioCondsArray[i][5] = String.format("%.1f", Float.parseFloat(sequence.getConservationHashMap().get(genome).split(";")[3]));
                 bioCondsArray[i][6] = String.format("%.1f", Float.parseFloat(sequence.getConservationHashMap().get(genome).split(";")[4]));
@@ -183,10 +183,10 @@ public class GeneViewHomologTools {
         	if (sequence.getConservationHashMap().containsKey(GenomeNCBI.unprocessGenomeName(genome))) {
         		String accession = sequence.getConservationHashMap().get(GenomeNCBI.unprocessGenomeName(genome));
         		String gene = accession.split(";")[0];
-        		String oldLocus = accession.split(";")[1];
+        		String oldLocus = accession.split(";")[1].replace("%2C", ",");
                 String similarity = String.format("%.1f", Float.parseFloat(accession.split(";")[4])*Float.parseFloat(accession.split(";")[3])/100)+"%";
         		int indexOfGenome = textSVG.indexOf(">"+genome+"<");
-        		String textToADD = similarity + "  --  " + gene + " - " + oldLocus ;
+        		String textToADD = similarity + "  --  " + gene + " - " + oldLocus;
                 textSVG = textSVG.substring(0, indexOfGenome+1) + textToADD + textSVG.substring(indexOfGenome + genome.length() + 1, textSVG.length());
             }else {
             	int indexOfGenome = textSVG.indexOf(">"+genome+"<");

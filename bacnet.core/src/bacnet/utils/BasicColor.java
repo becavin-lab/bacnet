@@ -46,6 +46,14 @@ public class BasicColor {
     public static Color DARK_THREE = new Color(display, 144, 224, 239);
     public static Color LIGHT_THREE = new Color(display, 202, 240, 248);
 
+    public static Color ORANGE_LIGHT_ONE = new Color(display, 255, 255, 255);
+    public static Color ORANGE_DARK_ONE = new Color(display, 250,238,218);
+    public static Color ORANGE_LIGHT_TWO = new Color(display, 250,238,218);
+    public static Color ORANGE_DARK_TWO = new Color(display, 255, 213, 151);
+    public static Color ORANGE_LIGHT_THREE = new Color(display,  255, 213, 151);
+    public static Color ORANGE_DARK_THREE = new Color(display, 239, 172, 73);
+
+    
     public static Color BROWN = new Color(display, 158, 107, 17);
 
     //violet public static Color BUTTON = new Color(display, 240, 240, 255);

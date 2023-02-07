@@ -23,11 +23,11 @@
       </children>
     </children>
   </children>
+  <descriptors xmi:id="_0OuyMKZSEe2izIK_k56RKg" elementId="bacnet.Clostridioides" label="Clostridiomics" iconURI="platform:/plugin/bacnet.core/icons/ToolBar/ClostridiomicsLogo.png" contributionURI="bundleclass://bacnet.e4.rap/bacnet.e4.rap.InitViewClostridioides"/>
   <descriptors xmi:id="__IkNYL90EeWgHPGw7Po5aA" elementId="bacnet.e4.rap.BannerView" label="BannerView" category="" contributionURI="bundleclass://bacnet.e4.rap/bacnet.e4.rap.BannerView"/>
   <descriptors xmi:id="_C9nzYL91EeWgHPGw7Po5aA" elementId="bacnet.CoExprNetworkView" label="Co-Expression network view" closeable="true" contributionURI="bundleclass://bacnet.core/bacnet.views.CoExprNetworkView">
     <tags>REMOVE_ON_HIDE_TAG</tags>
   </descriptors>
-  <descriptors xmi:id="_Q68C0L91EeWgHPGw7Po5aA" elementId="bacnet.e4.rap.InitViewYersinia" label="Home" iconURI="" contributionURI="bundleclass://bacnet.e4.rap/bacnet.e4.rap.InitViewYersinia"/>
   <descriptors xmi:id="_ZCDT4L91EeWgHPGw7Po5aA" elementId="bacnet.e4.rap.InitViewNTerm" label="Home NTerminomics" contributionURI="bundleclass://bacnet.e4.rap/bacnet.e4.rap.InitViewCRISPRNTerm"/>
   <descriptors xmi:id="_erg2wL91EeWgHPGw7Po5aA" elementId="bacnet.e4.rap.SubmitDataView" label="Submit data to Listeriomics" allowMultiple="true" closeable="true" contributionURI="bundleclass://bacnet.e4.rap/bacnet.e4.rap.SubmitDataView">
     <tags>REMOVE_ON_HIDE_TAG</tags>

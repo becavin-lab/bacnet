@@ -205,7 +205,7 @@ public class ProteomicsView implements SelectionListener {
         btnSaveTxt.setBackground(BasicColor.BUTTON);
         btnSaveTxt.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/fileIO/txt.bmp"));
         btnSaveTxt.setToolTipText("Download the table in tabulated text format");
-        btnSaveTxt.setText("Download transcriptome selection as a table");
+        btnSaveTxt.setText("Download proteome selection as a table");
         btnSaveTxt.setFont(SWTResourceManager.getBodyFont(12, SWT.NORMAL));
 
         new Label(composite_2, SWT.NONE);
@@ -244,7 +244,9 @@ public class ProteomicsView implements SelectionListener {
 
         setData();
         if (Database.getInstance().getProjectName() == Database.LISTERIOMICS_PROJECT
-                || Database.getInstance().getProjectName() == Database.UIBCLISTERIOMICS_PROJECT || Database.getInstance().getProjectName() == Database.YERSINIOMICS_PROJECT|| Database.getInstance().getProjectName() == Database.URY_YERSINIOMICS_PROJECT) {
+                || Database.getInstance().getProjectName() == Database.UIBCLISTERIOMICS_PROJECT || 
+                Database.getInstance().getProjectName() == Database.YERSINIOMICS_PROJECT|| Database.getInstance().getProjectName() == Database.URY_YERSINIOMICS_PROJECT
+                || Database.getInstance().getProjectName() == Database.CLOSTRIDIOMICS_PROJECT) {
             compositeDataFilter.updateInfo();
         }
     }

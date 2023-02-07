@@ -27,8 +27,10 @@ public class BasicApplication implements ApplicationConfiguration {
     //public static String projectName = Database.BACNET;
     //public static String projectName = Database.YERSINIOMICS_PROJECT;
     //public static String projectName = Database.URY_YERSINIOMICS_PROJECT;  
+    public static String projectName = Database.CLOSTRIDIOMICS_PROJECT;  
+
     //public static String projectName = "ListeriomicsSample";
-    public static String projectName = Database.YERSINIOMICS_PROJECT;
+    //public static String projectName = Database.YERSINIOMICS_PROJECT;
     // public static String projectName = "CRISPRGo";
     // public static String projectName = "Leishomics";
     public static String MAIN_ENTRYPOINT = "/";
@@ -48,8 +50,8 @@ public class BasicApplication implements ApplicationConfiguration {
         String title = "";
         String googleId = "1";
         if (projectName == Database.LISTERIOMICS_PROJECT) {
-            title = "Listeriomics website";
-            googleId = "UA-80335618-1";
+            title = "Listeriomics";
+            googleId = "G-3MDN2379JH";
         } else if (projectName == Database.BACNET) {
             title = "Build your own omics website with BACNET";
             googleId = "UA-80335618-6";
@@ -67,9 +69,14 @@ public class BasicApplication implements ApplicationConfiguration {
             title = "Yersiniomics";
             googleId = "G-0HQQJHGD66";
         } else if (projectName == Database.URY_YERSINIOMICS_PROJECT) {
-            title = "Yersiniomics";
-            googleId = "UA-80335618-7";
+            title = "URY_Yersiniomics";
+            googleId = "G-PPEL1NHJYD";
+        } else if (projectName == Database.CLOSTRIDIOMICS_PROJECT) {
+            title = "Clostridiomics";
+            googleId = "G-YH0XCEYV46";
         }
+        
+        
         application.addResource("theme/favicon.png", createResourceLoader("theme/favicon.png"));
         properties.put(WebClient.FAVICON, "theme/favicon.png");
         properties.put(WebClient.PAGE_TITLE, title);

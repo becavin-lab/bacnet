@@ -459,7 +459,7 @@ public class GenomicsView implements SelectionListener {
 					} else if (colName.equals("Species")){
 						cell.setText("<i>" + text + "</i>");
 					} else if (colName.equals("Most recent assignation (cgMLST)")){
-						cell.setText("<i>" + text.substring(0,text.indexOf(" ", 10)) + "</i>" + text.substring(text.indexOf(" ", 10), text.length()));
+						cell.setText("<i>" + text.substring(0,text.indexOf(" ", 15)) + "</i>" + text.substring(text.indexOf(" ", 15), text.length()));
 					} else {
 						cell.setText(text);
 					}
@@ -609,7 +609,7 @@ public class GenomicsView implements SelectionListener {
 			}
 		} else if (e.getSource() == btnSaveSVG) {
 			String textSVG = getPhyloFigure(selectedGenomes);
-			SaveFileUtils.saveTextFile("Yersinia_Phylogenomic_Tree.svg", textSVG, true, "SVG (vector image) file",
+			SaveFileUtils.saveTextFile(Database.getInstance().getSpecies()+"_Phylogenomic_Tree.svg", textSVG, true, "SVG (vector image) file",
 					textSVG, partService, shell);
 		} else if (e.getSource() == btnSaveTxt) {
 			String[][] arrayToSave = new String[1][columnNames.size()];
@@ -626,7 +626,7 @@ public class GenomicsView implements SelectionListener {
 			}
 			String arrayRep = ArrayUtils.toString(arrayToSave);
 			String arrayRepHTML = TabDelimitedTableReader.getHTMLVersion(arrayToSave);
-			SaveFileUtils.saveTextFile("Yersinia_Genomic_Table.txt", arrayRep, true, "", arrayRepHTML, partService,
+			SaveFileUtils.saveTextFile(Database.getInstance().getSpecies()+"_Genomic_Table.txt", arrayRep, true, "", arrayRepHTML, partService,
 					shell);
 		} else if (e.getSource() == btnSelectall) {
 			selectedGenomes = new ArrayList<>();
