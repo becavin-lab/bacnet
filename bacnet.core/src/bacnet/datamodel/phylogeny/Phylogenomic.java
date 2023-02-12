@@ -32,17 +32,20 @@ public class Phylogenomic {
     	HashMap<String, String> genomeToAttribute = new HashMap<String, String>();
     	svgTxt.replaceAll("\n","");
     	String[] phyloTree = svgTxt.replaceAll("\n","").split("<text");
-		
+
     	/*
     	 * Go through all text line
     	 */
+    	
     	for(String line : phyloTree) {
     		if(line.contains("/text") && line.contains(Database.getInstance().getSpecies())) {
     			line = line.split("/text")[0].trim();
     			String attribute = line.substring(0,line.indexOf(">")).trim();
     			String genomeTemp = line.substring(line.indexOf(">")+1, line.indexOf("<")).trim();
 				genomeToAttribute.put(genomeTemp, attribute);
+				System.out.println("genomeToAttribute: "+genomeTemp+" - "+attribute);
     		}
+
 		}
     	return genomeToAttribute;
     }

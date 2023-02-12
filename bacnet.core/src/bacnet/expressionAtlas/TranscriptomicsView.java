@@ -299,7 +299,8 @@ public class TranscriptomicsView implements SelectionListener {
                 || Database.getInstance().getProjectName() == Database.UIBCLISTERIOMICS_PROJECT|| 
                 Database.getInstance().getProjectName() == Database.YERSINIOMICS_PROJECT|| 
                 Database.getInstance().getProjectName() == Database.URY_YERSINIOMICS_PROJECT|| 
-                Database.getInstance().getProjectName() == Database.CLOSTRIDIOMICS_PROJECT) {
+                Database.getInstance().getProjectName() == Database.CLOSTRIDIOMICS_PROJECT || 
+                Database.getInstance().getProjectName() == Database.STAPHYLOMICS_PROJECT ) {
             compositeDataFilter.updateInfo();
         }
         compositeDataFilter.redraw();
@@ -476,6 +477,7 @@ public class TranscriptomicsView implements SelectionListener {
             }
         });
         for (int i = 0; i < bioConds.get(0).length; i++) {
+
             final int k = i;
             TableViewerColumn col2 = createTableViewerColumn(bioCondsArray[0][i], i + 1);
             col2.setLabelProvider(new ColumnLabelProvider() {
@@ -488,8 +490,11 @@ public class TranscriptomicsView implements SelectionListener {
                 public String getText(Object element) {
                     String[] bioCond = (String[]) element;
                     String colName = columnNames.get(k);
+                    System.out.println("colName: "+colName);
                     if(k!=bioCond.length) {
                     	String text = bioCond[k];
+                        System.out.println("text: "+text);
+
 	                    if (colName.equals("Type")) {
 	                        return "";
 	                    } else if (colName.equals("Strain used")) {

@@ -45,23 +45,23 @@ import bacnet.utils.FileUtils;
 import bacnet.utils.RWTUtils;
 import bacnet.views.CoExprNetworkView;
 
-public class InitViewClostridioides implements SelectionListener {
+public class InitViewStaphylococcus implements SelectionListener {
 
     /**
      * 
      */
     private static final long serialVersionUID = -9052983689419871498L;
 
-    public static final String ID = "bacnet.Clostridioides"; //$NON-NLS-1$
+    public static final String ID = "bacnet.Staphylococcus"; //$NON-NLS-1$
 
     /**
      * Indicates if we focus the view, so we can pushState navigation
      */
     private boolean focused = false;
     
-    private Button btn630;
-    private Button btn630bis;
-    private Button btn630Derm;
+    private Button btnUSA300_ISMMS1;
+    private Button btnNewman;
+    private Button btnUSA300_TCH1516;
     private Button btnYPIII;
     private Button btnIP32953;
     private Button btnIP31758;
@@ -72,7 +72,7 @@ public class InitViewClostridioides implements SelectionListener {
     private Button btnWA;
     private Button btnSC09;
     private Button btnQMA0440;
-    private Button btn630deltaErm;
+    private Button btnUSA300_FPR3757;
     private Button btnMH96;
     private Button btnIP38326;
     private Button btnIP38023;
@@ -103,7 +103,7 @@ public class InitViewClostridioides implements SelectionListener {
     private Shell shell;
 
     @Inject
-    public InitViewClostridioides() {}
+    public InitViewStaphylococcus() {}
 
     @PostConstruct
     public void createPartControl(Composite parent) {
@@ -132,7 +132,7 @@ public class InitViewClostridioides implements SelectionListener {
         Label yersiniomicsLogo = new Label(composite_Intro, SWT.NONE);
         yersiniomicsLogo.setAlignment(SWT.CENTER);
         yersiniomicsLogo.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, true, false, 1, 1));
-        yersiniomicsLogo.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/ToolBar/LogoClostridiomics.png"));
+        yersiniomicsLogo.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/ToolBar/LogoStaphylomics.png"));
         
         Label lblIntro = new Label(composite_Intro, SWT.NONE);
         lblIntro.setAlignment(SWT.CENTER);
@@ -169,7 +169,7 @@ public class InitViewClostridioides implements SelectionListener {
         //gd_gene_view_composite.widthHint = 1500;
         gene_view_composite.setLayoutData(gd_gene_view_composite);
         gene_view_composite.setLayout(new GridLayout(1, false));
-        gene_view_composite.setBackground(BasicColor.ORANGE_DARK_ONE);
+        gene_view_composite.setBackground(BasicColor.GOLD_DARK_ONE);
         
         Label spacer_0 = new Label(gene_view_composite, SWT.NONE);
         spacer_0.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
@@ -179,7 +179,7 @@ public class InitViewClostridioides implements SelectionListener {
         lblGeneViewer.setLayoutData(gd_lblGeneViewer);
         lblGeneViewer.setAlignment(SWT.CENTER);
         lblGeneViewer.setFont(SWTResourceManager.getTitleFont(30, SWT.BOLD));
-        lblGeneViewer.setBackground(BasicColor.ORANGE_DARK_ONE);
+        lblGeneViewer.setBackground(BasicColor.GOLD_DARK_ONE);
         RWTUtils.setMarkup(lblGeneViewer);
         lblGeneViewer.setForeground(BasicColor.BLACK);
         lblGeneViewer.setText("Gene viewers<sup style=\"font-family: Times New Roman;  font-size:18px; color:purple\"><i>i</i></sup>");
@@ -192,72 +192,75 @@ public class InitViewClostridioides implements SelectionListener {
         gd_gene_view_composite_row_1.widthHint = 1200;
         gene_view_composite_row_1.setLayoutData(gd_gene_view_composite_row_1);
         gene_view_composite_row_1.setLayout(new GridLayout(5, false));
-        gene_view_composite_row_1.setBackground(BasicColor.ORANGE_DARK_ONE);
+        gene_view_composite_row_1.setBackground(BasicColor.GOLD_DARK_ONE);
         
         Composite pestis_composite = new Composite(gene_view_composite_row_1, SWT.NONE);
         GridData gd_pestis_composite = new GridData(SWT.CENTER, SWT.CENTER, true, false, 1, 1);
         pestis_composite.setLayoutData(gd_pestis_composite);
         pestis_composite.setLayout(new GridLayout(1, false));
-        pestis_composite.setBackground(BasicColor.ORANGE_DARK_ONE);
+        pestis_composite.setBackground(BasicColor.GOLD_DARK_ONE);
         
         Label lblPestis = new Label(pestis_composite, SWT.NONE);
         RWTUtils.setMarkup(lblPestis);
         GridData gd_lblPestis = new GridData(SWT.CENTER, SWT.TOP, true, false, 1, 1);
         lblPestis.setLayoutData(gd_lblPestis);
         lblPestis.setFont(SWTResourceManager.getBodyFont(22,SWT.BOLD));
-        lblPestis.setBackground(BasicColor.ORANGE_DARK_ONE);
+        lblPestis.setBackground(BasicColor.GOLD_DARK_ONE);
         lblPestis.setForeground(BasicColor.BLACK);
-        lblPestis.setText("<i>C. difficile</i>");
+        lblPestis.setText("<i>S. aureus</i>");
         
         Composite composite_pestis_row_1 = new Composite(pestis_composite, SWT.NONE);
         GridData gd_composite_pestis_row_1 = new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1);
         composite_pestis_row_1.setLayoutData(gd_composite_pestis_row_1);
         composite_pestis_row_1.setLayout(new GridLayout(3, false));
-        composite_pestis_row_1.setBackground(BasicColor.ORANGE_DARK_ONE);
-        
-        btn630 = new Button(composite_pestis_row_1, SWT.TOGGLE);
-        btn630.setLayoutData(new GridData(SWT.CENTER, SWT.TOP, false, false, 1, 1));
-        btn630.setText("630");
-        btn630.setToolTipText("630");
-        btn630.setFont(SWTResourceManager.getBodyFont(22,SWT.NORMAL));
-        btn630.setBackground(BasicColor.ORANGE_LIGHT_ONE);
-        //btn630.setForeground(BasicColor.BLACK);
-        btn630.addSelectionListener(this);
-        
-        btn630bis = new Button(composite_pestis_row_1, SWT.TOGGLE);
-        btn630bis.setLayoutData(new GridData(SWT.CENTER, SWT.TOP, false, false, 1, 1));
-        btn630bis.setText("630 bis");
-        btn630bis.setToolTipText("630 bis");
-        btn630bis.setFont(SWTResourceManager.getBodyFont(22,SWT.NORMAL));
-        btn630bis.setBackground(BasicColor.ORANGE_LIGHT_ONE);
-        //btn630bis.setForeground(BasicColor.BLACK);
-        btn630bis.addSelectionListener(this);
+        composite_pestis_row_1.setBackground(BasicColor.GOLD_DARK_ONE);
+               
+        btnNewman = new Button(composite_pestis_row_1, SWT.TOGGLE);
+        btnNewman.setLayoutData(new GridData(SWT.CENTER, SWT.TOP, false, false, 1, 1));
+        btnNewman.setText("Newman");
+        btnNewman.setToolTipText("Newman");
+        btnNewman.setFont(SWTResourceManager.getBodyFont(22,SWT.NORMAL));
+        btnNewman.setBackground(BasicColor.GOLD_LIGHT_ONE);
+        //btnNewman.setForeground(BasicColor.BLACK);
+        btnNewman.addSelectionListener(this);
        
 
         Composite composite_pestis_row_2 = new Composite(pestis_composite, SWT.NONE);
         GridData gd_composite_pestis_row_2 = new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1);
         composite_pestis_row_2.setLayoutData(gd_composite_pestis_row_2);
-        composite_pestis_row_2.setLayout(new GridLayout(2, false));
-        composite_pestis_row_2.setBackground(BasicColor.ORANGE_DARK_ONE);
+        composite_pestis_row_2.setLayout(new GridLayout(3, false));
+        composite_pestis_row_2.setBackground(BasicColor.GOLD_DARK_ONE);
         
-        btn630Derm = new Button(composite_pestis_row_2, SWT.TOGGLE);
-        btn630Derm.setLayoutData(new GridData(SWT.CENTER, SWT.TOP, false, false, 1, 1));
-        btn630Derm.setText("630Derm");
-        btn630Derm.setToolTipText("630Derm");
-        btn630Derm.setFont(SWTResourceManager.getBodyFont(22,SWT.NORMAL));
-        btn630Derm.setBackground(BasicColor.ORANGE_LIGHT_ONE);
-        //btn630Derm.setForeground(BasicColor.BLACK);
-        btn630Derm.addSelectionListener(this);
+        btnUSA300_TCH1516 = new Button(composite_pestis_row_2, SWT.TOGGLE);
+        btnUSA300_TCH1516.setLayoutData(new GridData(SWT.CENTER, SWT.TOP, false, false, 1, 1));
+        btnUSA300_TCH1516.setText("USA300_TCH1516");
+        btnUSA300_TCH1516.setToolTipText("USA300_TCH1516");
+        btnUSA300_TCH1516.setFont(SWTResourceManager.getBodyFont(22,SWT.NORMAL));
+        btnUSA300_TCH1516.setBackground(BasicColor.GOLD_LIGHT_ONE);
+        //btnUSA300_TCH1516.setForeground(BasicColor.BLACK);
+        btnUSA300_TCH1516.addSelectionListener(this);
         
         
-        btn630deltaErm = new Button(composite_pestis_row_2, SWT.TOGGLE);
-        btn630deltaErm.setData(RWT.MARKUP_ENABLED, Boolean.TRUE);
-        btn630deltaErm.setLayoutData(new GridData(SWT.CENTER, SWT.TOP, false, false, 1, 1));
-        btn630deltaErm.addSelectionListener(this);
-        btn630deltaErm.setText("630 delta <i>erm</i>");
-        btn630deltaErm.setToolTipText("630 delta erm");
-        btn630deltaErm.setFont(SWTResourceManager.getBodyFont(22,SWT.NORMAL));
-        btn630deltaErm.setBackground(BasicColor.ORANGE_LIGHT_ONE);
+        btnUSA300_FPR3757 = new Button(composite_pestis_row_2, SWT.TOGGLE);
+        btnUSA300_FPR3757.setData(RWT.MARKUP_ENABLED, Boolean.TRUE);
+        btnUSA300_FPR3757.setLayoutData(new GridData(SWT.CENTER, SWT.TOP, false, false, 1, 1));
+        btnUSA300_FPR3757.addSelectionListener(this);
+        btnUSA300_FPR3757.setText("USA300_FPR3757");
+        btnUSA300_FPR3757.setToolTipText("USA300_FPR3757");
+        btnUSA300_FPR3757.setFont(SWTResourceManager.getBodyFont(22,SWT.NORMAL));
+        btnUSA300_FPR3757.setBackground(BasicColor.GOLD_LIGHT_ONE);
+        
+
+        btnUSA300_ISMMS1 = new Button(composite_pestis_row_2, SWT.TOGGLE);
+        btnUSA300_ISMMS1.setLayoutData(new GridData(SWT.CENTER, SWT.TOP, false, false, 1, 1));
+        btnUSA300_ISMMS1.setText("USA300_ISMMS1");
+        btnUSA300_ISMMS1.setToolTipText("USA300_ISMMS1");
+        btnUSA300_ISMMS1.setFont(SWTResourceManager.getBodyFont(22,SWT.NORMAL));
+        btnUSA300_ISMMS1.setBackground(BasicColor.GOLD_LIGHT_ONE);
+        //btnUSA300_ISMMS1.setForeground(BasicColor.BLACK);
+        btnUSA300_ISMMS1.addSelectionListener(this);
+        
+        
         //btn91001.setForeground(BasicColor.BLACK);
         
         /*
@@ -480,7 +483,7 @@ public class InitViewClostridioides implements SelectionListener {
         GridData gd_composite_omics_browser = new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1);
         composite_omics_browser.setLayoutData(gd_composite_omics_browser);
         composite_omics_browser.setLayout(new GridLayout(1, false));
-        composite_omics_browser.setBackground(BasicColor.ORANGE_DARK_TWO);
+        composite_omics_browser.setBackground(BasicColor.GOLD_DARK_TWO);
         
         new Label(composite_omics_browser, SWT.NONE);
         
@@ -492,7 +495,7 @@ public class InitViewClostridioides implements SelectionListener {
         lblBrowseOmicsDatasets.setText("Omics browsers<sup style=\"font-family: Times New Roman;  font-size:18px; color:purple\"><i>i</i></sup>");
         lblBrowseOmicsDatasets.setForeground(BasicColor.BLACK);
         lblBrowseOmicsDatasets.setFont(SWTResourceManager.getTitleFont(30, SWT.BOLD));
-        lblBrowseOmicsDatasets.setBackground(BasicColor.ORANGE_DARK_TWO);
+        lblBrowseOmicsDatasets.setBackground(BasicColor.GOLD_DARK_TWO);
         lblBrowseOmicsDatasets.setToolTipText("Access complete genomes, transcriptomes and proteomes gathered on "+Database.getInstance().getWebpageTitle()+"\nHover over the browser buttons for more information on their specific functionalities");
 
         new Label(composite_omics_browser, SWT.NONE);
@@ -502,14 +505,14 @@ public class InitViewClostridioides implements SelectionListener {
         gd_composite_omics_browser_row_1.widthHint = 800;
         composite_omics_browser_row_1.setLayoutData(gd_composite_omics_browser_row_1);
         composite_omics_browser_row_1.setLayout(new GridLayout(3, false));
-        composite_omics_browser_row_1.setBackground(BasicColor.ORANGE_DARK_TWO);
+        composite_omics_browser_row_1.setBackground(BasicColor.GOLD_DARK_TWO);
         
         btnGenomics = new Button(composite_omics_browser_row_1, SWT.TOGGLE);
         btnGenomics.setText("Genomics browser");
         btnGenomics.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, true, false, 1, 1));
         btnGenomics.setFont(SWTResourceManager.getBodyFont(22,SWT.NORMAL));
         btnGenomics.addSelectionListener(this);
-        btnGenomics.setBackground(BasicColor.ORANGE_LIGHT_TWO);
+        btnGenomics.setBackground(BasicColor.GOLD_LIGHT_TWO);
         btnGenomics.setToolTipText("Browse all complete genomes\n"
                 + " Visualize strain relationship in a phylogenomic tree\n"
                 + "Access all annotated genome elements");
@@ -519,7 +522,7 @@ public class InitViewClostridioides implements SelectionListener {
         btnTranscriptomics.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, true, false, 1, 1));
         btnTranscriptomics.setFont(SWTResourceManager.getBodyFont(22,SWT.NORMAL));
         btnTranscriptomics.addSelectionListener(this);
-        btnTranscriptomics.setBackground(BasicColor.ORANGE_LIGHT_TWO);
+        btnTranscriptomics.setBackground(BasicColor.GOLD_LIGHT_TWO);
         btnTranscriptomics.setToolTipText("Browse all microarray and RNA-Seq biological conditions available on "+Database.getInstance().getWebpageTitle()+"\n"
                         + "Visualize transcript fold changes and RNA-Seq coverage in the genome viewer\n"
                         + "Display transcript fold change patterns in the heatmap viewer");
@@ -529,7 +532,7 @@ public class InitViewClostridioides implements SelectionListener {
         btnProteomics.setText("Proteomics browser");
         btnProteomics.setFont(SWTResourceManager.getBodyFont(22,SWT.NORMAL));
         btnProteomics.addSelectionListener(this);
-        btnProteomics.setBackground(BasicColor.ORANGE_LIGHT_TWO);
+        btnProteomics.setBackground(BasicColor.GOLD_LIGHT_TWO);
         btnProteomics.setToolTipText("Browse all proteomics biological conditions available on "+Database.getInstance().getWebpageTitle()+"\n"
         		+ "Visualize protein abundances and fold changes in the genome viewer"
         		+ "\nDisplay protein abundance fold change patterns in the heatmap viewer");
@@ -540,7 +543,7 @@ public class InitViewClostridioides implements SelectionListener {
         GridData gd_composite_data_loading = new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1);
         composite_data_loading.setLayoutData(gd_composite_data_loading);
         composite_data_loading.setLayout(new GridLayout(1, false));
-        composite_data_loading.setBackground(BasicColor.ORANGE_DARK_THREE);
+        composite_data_loading.setBackground(BasicColor.GOLD_DARK_THREE);
           
         new Label(composite_data_loading, SWT.NONE);
 
@@ -552,7 +555,7 @@ public class InitViewClostridioides implements SelectionListener {
         lblDataLoading.setText("Data loading<sup style=\"font-family: Times New Roman;  font-size:18px; color:purple\"><i>i</i></sup>");
         lblDataLoading.setForeground(BasicColor.BLACK);
         lblDataLoading.setFont(SWTResourceManager.getTitleFont(30, SWT.BOLD));
-        lblDataLoading.setBackground(BasicColor.ORANGE_DARK_THREE);
+        lblDataLoading.setBackground(BasicColor.GOLD_DARK_THREE);
         lblDataLoading.setToolTipText("Load on "+Database.getInstance().getWebpageTitle()+" and download from "+Database.getInstance().getWebpageTitle()+"\nHover over the load buttons for more information on their specific functionalities ");
 
         new Label(composite_data_loading, SWT.NONE);
@@ -562,14 +565,14 @@ public class InitViewClostridioides implements SelectionListener {
         gd_composite_data_loading_row_1.widthHint = 600;
         composite_data_loading_row_1.setLayoutData(gd_composite_data_loading_row_1);
         composite_data_loading_row_1.setLayout(new GridLayout(2, false));
-        composite_data_loading_row_1.setBackground(BasicColor.ORANGE_DARK_THREE);
+        composite_data_loading_row_1.setBackground(BasicColor.GOLD_DARK_THREE);
         
         btnLoadData = new Button(composite_data_loading_row_1, SWT.TOGGLE);
         btnLoadData.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, true, false, 1, 1));
         btnLoadData.setText(" Load genome viewer");
         //btnLoadData.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/fileIO/txtload.bmp"));
         btnLoadData.setFont(SWTResourceManager.getBodyFont(22,SWT.NORMAL));
-        btnLoadData.setBackground(BasicColor.ORANGE_LIGHT_THREE);
+        btnLoadData.setBackground(BasicColor.GOLD_LIGHT_THREE);
         btnLoadData.setToolTipText("Load a genome viewer displaying specific omics\ndata previously saved in a .gview file");
         btnLoadData.addSelectionListener(this);
 
@@ -578,7 +581,7 @@ public class InitViewClostridioides implements SelectionListener {
         btnDownloadData.setText(" Download processed data");
         //btnDownloadData.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/fileIO/txtload.bmp"));
         btnDownloadData.setFont(SWTResourceManager.getBodyFont(22,SWT.NORMAL));
-        btnDownloadData.setBackground(BasicColor.ORANGE_LIGHT_THREE);
+        btnDownloadData.setBackground(BasicColor.GOLD_LIGHT_THREE);
         btnDownloadData.setToolTipText("Download processed transcriptomics and proteomics\ndata for each genome in a table format");
         btnDownloadData.addSelectionListener(this);
 
@@ -690,7 +693,7 @@ public class InitViewClostridioides implements SelectionListener {
      * Push genome, chromosome, gene and Tabitem state
      */
     public void pushState() {
-        NavigationManagement.pushStateView(InitViewClostridioides.ID);
+        NavigationManagement.pushStateView(InitViewStaphylococcus.ID);
     }
 
     @Override
@@ -700,14 +703,14 @@ public class InitViewClostridioides implements SelectionListener {
             NavigationManagement.pushStateView(CoExprNetworkView.ID);
         //}else if (e.getSource() == btnCO92) {
         //    GeneView.openGeneView(partService);
-        }else if (e.getSource() == btn630) {
-            GeneView.open630GeneView(partService);
-        }else if (e.getSource() == btn630bis) {
-            GeneView.open630bisGeneView(partService);
-        } else if (e.getSource() == btn630deltaErm) {
-            GeneView.open630deltaErmGeneView(partService);
-        } else if (e.getSource() == btn630Derm) {
-            GeneView.open630DermGeneView(partService);
+        }else if (e.getSource() == btnUSA300_ISMMS1) {
+            GeneView.openUSA300_ISMMS1GeneView(partService);
+        }else if (e.getSource() == btnNewman) {
+            GeneView.openNewmanGeneView(partService);
+        } else if (e.getSource() == btnUSA300_FPR3757) {
+            GeneView.openUSA300_FPR3757GeneView(partService);
+        } else if (e.getSource() == btnUSA300_TCH1516) {
+            GeneView.openUSA300_TCH1516GeneView(partService);
         } else if (e.getSource() == btnEV76) {
             GeneView.openEV76GeneView(partService);
         } else if (e.getSource() == btnIP32953) {

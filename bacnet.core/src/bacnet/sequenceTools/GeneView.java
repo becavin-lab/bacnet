@@ -725,7 +725,7 @@ public class GeneView implements SelectionListener, MouseListener {
 		
 		lblConservation = new Label(compSuppInfo, SWT.NONE);
 		RWTUtils.setMarkup(lblConservation);
-		lblConservation.setText("Homologs in 000/000 Yersinia genomes");
+		lblConservation.setText("Homologs in 000/000 " + Database.getInstance().getSpecies() + " genomes");
 
 		
 		//textFeature = new Text(compSuppInfo, SWT.BORDER | SWT.WRAP | SWT.H_SCROLL | SWT.V_SCROLL | SWT.CANCEL);		
@@ -849,7 +849,7 @@ public class GeneView implements SelectionListener, MouseListener {
 		composite_17.setLayout(new GridLayout(5, false));
 
 		lblConservation2 = new Label(composite_17, SWT.NONE);
-		lblConservation2.setText("Homologs in 000/000 Yersinia genomes");
+		lblConservation2.setText("Homologs in 000/000 "+ Database.getInstance().getSpecies() +" genomes");
 
 		new Label(composite_17, SWT.NONE);
 		new Label(composite_17, SWT.NONE);
@@ -1746,13 +1746,13 @@ public class GeneView implements SelectionListener, MouseListener {
 		} else if (Database.getInstance().getProjectName().equals("Yersiniomics")) {
 			initYersiniomics();
 		} else if (Database.getInstance().getProjectName().equals(Database.UIBCLISTERIOMICS_PROJECT)
-				|| Database.getInstance().getProjectName().equals(Database.LISTERIOMICS_PROJECT)) {
+				) {
 			initListeriomics();
 		} else if (Database.getInstance().getProjectName() == "ListeriomicsSample") {
 			initListeriomicsSample();
-		} else if (Database.getInstance().getProjectName() == Database.YERSINIOMICS_PROJECT || Database.getInstance().getProjectName() == Database.URY_YERSINIOMICS_PROJECT) {
-			initYersiniomics();
-		} else if (Database.getInstance().getProjectName() == Database.CLOSTRIDIOMICS_PROJECT) {
+		} else if (Database.getInstance().getProjectName() == Database.YERSINIOMICS_PROJECT || Database.getInstance().getProjectName() == Database.URY_YERSINIOMICS_PROJECT ||
+				Database.getInstance().getProjectName() == Database.CLOSTRIDIOMICS_PROJECT || 
+				Database.getInstance().getProjectName() == Database.STAPHYLOMICS_PROJECT || Database.getInstance().getProjectName() == Database.LISTERIOMICS_PROJECT) {
 			initYersiniomics();
 		} else {
 			initDefault();
@@ -1790,13 +1790,18 @@ public class GeneView implements SelectionListener, MouseListener {
 			ex.printStackTrace();
 		}
 		initGenomeInfo();
-
+		updateSyntenyBrowser();
+		updateCrossRefsBrowsers();
+		
 		this.chromoID = chromoID;
-				
-		updateComboChromosome(this.chromoID);
+		
+		this.setGenomeSelected(genomeName);
+		updateComboChromosome(this.chromoID);		
 		updateListGenomeElements();
 		updateGenomeViewer();
 		updateGeneInfo();
+				
+		
 	}
 
 	/**
@@ -2134,14 +2139,11 @@ public class GeneView implements SelectionListener, MouseListener {
 	public void updateGeneInfo() {
 		if (sequence != null) {
 			updateGeneBasicInfo();
-			if (Database.getInstance().getProjectName() == Database.LISTERIOMICS_PROJECT
-					|| Database.getInstance().getProjectName() == Database.UIBCLISTERIOMICS_PROJECT
+			if (Database.getInstance().getProjectName() == Database.UIBCLISTERIOMICS_PROJECT
 					|| Database.getInstance().getProjectName() == Database.YERSINIOMICS_PROJECT || Database.getInstance().getProjectName() == Database.URY_YERSINIOMICS_PROJECT
-					) {
+					|| Database.getInstance().getProjectName() == Database.CLOSTRIDIOMICS_PROJECT || Database.getInstance().getProjectName() == Database.STAPHYLOMICS_PROJECT 
+					|| Database.getInstance().getProjectName() == Database.LISTERIOMICS_PROJECT) {
 				updateAllGeneOmicsInfo();
-			} else if (Database.getInstance().getProjectName() == Database.CLOSTRIDIOMICS_PROJECT) {
-				updateGeneOmicsInfo();
-				updateCrossRefs();
 			} else if (Database.getInstance().getProjectName() == "ListeriomicsSample") {
 				updateGeneOmicsInfo();
 				updateHomolog();
@@ -3598,6 +3600,141 @@ public class GeneView implements SelectionListener, MouseListener {
 		view.initGenomeInfo(genomeName);
 		view.setGenomeSelected(genomeName);
 	}
+	
+	public static void openUSA300_TCH1516GeneView(EPartService partService) {
+		String id = GeneView.ID + "-" + String.valueOf(Math.random() * 1000).substring(0, 3);
+		// initiate view
+		ResourceManager.openView(partService, GeneView.ID, id);
+		// update data
+		MPart part = partService.findPart(id);
+		NavigationManagement.pushStateView(id, new HashMap<>());
+		GeneView view = (GeneView) part.getObject();
+		view.setViewID(id);
+		String genomeName = "Staphylococcus aureus USA300_TCH1516";
+		view.initGenomeInfo(genomeName);
+		view.setGenomeSelected(genomeName);
+	}
+	
+
+	public static void openUSA300_FPR3757GeneView(EPartService partService) {
+		String id = GeneView.ID + "-" + String.valueOf(Math.random() * 1000).substring(0, 3);
+		// initiate view
+		ResourceManager.openView(partService, GeneView.ID, id);
+		// update data
+		MPart part = partService.findPart(id);
+		NavigationManagement.pushStateView(id, new HashMap<>());
+		GeneView view = (GeneView) part.getObject();
+		view.setViewID(id);
+		String genomeName = "Staphylococcus aureus USA300_FPR3757";
+		view.initGenomeInfo(genomeName);
+		view.setGenomeSelected(genomeName);
+	}
+	
+
+	public static void openUSA300_ISMMS1GeneView(EPartService partService) {
+		String id = GeneView.ID + "-" + String.valueOf(Math.random() * 1000).substring(0, 3);
+		// initiate view
+		ResourceManager.openView(partService, GeneView.ID, id);
+		// update data
+		MPart part = partService.findPart(id);
+		NavigationManagement.pushStateView(id, new HashMap<>());
+		GeneView view = (GeneView) part.getObject();
+		view.setViewID(id);
+		String genomeName = "Staphylococcus aureus USA300-ISMMS1";
+		view.initGenomeInfo(genomeName);
+		view.setGenomeSelected(genomeName);
+	}
+	
+
+	public static void openNewmanGeneView(EPartService partService) {
+		String id = GeneView.ID + "-" + String.valueOf(Math.random() * 1000).substring(0, 3);
+		// initiate view
+		ResourceManager.openView(partService, GeneView.ID, id);
+		// update data
+		MPart part = partService.findPart(id);
+		NavigationManagement.pushStateView(id, new HashMap<>());
+		GeneView view = (GeneView) part.getObject();
+		view.setViewID(id);
+		String genomeName = "Staphylococcus aureus Newman";
+		view.initGenomeInfo(genomeName);
+		view.setGenomeSelected(genomeName);
+	}
+	
+
+	public static void openEGDeGeneView(EPartService partService) {
+		String id = GeneView.ID + "-" + String.valueOf(Math.random() * 1000).substring(0, 3);
+		// initiate view
+		ResourceManager.openView(partService, GeneView.ID, id);
+		// update data
+		MPart part = partService.findPart(id);
+		NavigationManagement.pushStateView(id, new HashMap<>());
+		GeneView view = (GeneView) part.getObject();
+		view.setViewID(id);
+		String genomeName = "Listeria monocytogenes EGD-e";
+		view.initGenomeInfo(genomeName);
+		view.setGenomeSelected(genomeName);
+	}
+	
+
+	public static void openEGDGeneView(EPartService partService) {
+		String id = GeneView.ID + "-" + String.valueOf(Math.random() * 1000).substring(0, 3);
+		// initiate view
+		ResourceManager.openView(partService, GeneView.ID, id);
+		// update data
+		MPart part = partService.findPart(id);
+		NavigationManagement.pushStateView(id, new HashMap<>());
+		GeneView view = (GeneView) part.getObject();
+		view.setViewID(id);
+		String genomeName = "Listeria monocytogenes EGD";
+		view.initGenomeInfo(genomeName);
+		view.setGenomeSelected(genomeName);
+	}
+	
+
+	public static void openClip11262GeneView(EPartService partService) {
+		String id = GeneView.ID + "-" + String.valueOf(Math.random() * 1000).substring(0, 3);
+		// initiate view
+		ResourceManager.openView(partService, GeneView.ID, id);
+		// update data
+		MPart part = partService.findPart(id);
+		NavigationManagement.pushStateView(id, new HashMap<>());
+		GeneView view = (GeneView) part.getObject();
+		view.setViewID(id);
+		String genomeName = "Listeria innocua Clip11262";
+		view.initGenomeInfo(genomeName);
+		view.setGenomeSelected(genomeName);
+	}
+	
+
+	public static void openSLCC5334GeneView(EPartService partService) {
+		String id = GeneView.ID + "-" + String.valueOf(Math.random() * 1000).substring(0, 3);
+		// initiate view
+		ResourceManager.openView(partService, GeneView.ID, id);
+		// update data
+		MPart part = partService.findPart(id);
+		NavigationManagement.pushStateView(id, new HashMap<>());
+		GeneView view = (GeneView) part.getObject();
+		view.setViewID(id);
+		String genomeName = "Listeria welshimeri serovar 6b str SLCC5334";
+		view.initGenomeInfo(genomeName);
+		view.setGenomeSelected(genomeName);
+	}
+	
+
+	public static void openPAM55GeneView(EPartService partService) {
+		String id = GeneView.ID + "-" + String.valueOf(Math.random() * 1000).substring(0, 3);
+		// initiate view
+		ResourceManager.openView(partService, GeneView.ID, id);
+		// update data
+		MPart part = partService.findPart(id);
+		NavigationManagement.pushStateView(id, new HashMap<>());
+		GeneView view = (GeneView) part.getObject();
+		view.setViewID(id);
+		String genomeName = "Listeria ivanovii subsp ivanovii PAM 55";
+		view.initGenomeInfo(genomeName);
+		view.setGenomeSelected(genomeName);
+	}
+	
 	/**
 	 * Display the view with saved parameters
 	 * 

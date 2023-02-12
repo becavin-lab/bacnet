@@ -53,6 +53,31 @@ public class BasicColor {
     public static Color ORANGE_LIGHT_THREE = new Color(display,  255, 213, 151);
     public static Color ORANGE_DARK_THREE = new Color(display, 239, 172, 73);
 
+
+    public static Color GOLD_LIGHT_ONE = new Color(display, 255, 255, 255);
+    public static Color GOLD_DARK_ONE = new Color(display, 255,246,178);
+    public static Color GOLD_LIGHT_TWO = new Color(display, 255,246,178);
+    public static Color GOLD_DARK_TWO = new Color(display, 255,233,90);
+    public static Color GOLD_LIGHT_THREE = new Color(display,  255,233,90);
+    public static Color GOLD_DARK_THREE = new Color(display, 255,215,0);
+
+
+    public static Color GREEN_LIGHT_ONE = new Color(display, 255, 255, 255);
+    public static Color GREEN_DARK_ONE = new Color(display, 230,255,230);
+    public static Color GREEN_LIGHT_TWO = new Color(display, 230,255,230);
+    public static Color GREEN_DARK_TWO = new Color(display, 200,247,200);
+    public static Color GREEN_LIGHT_THREE = new Color(display,200,247,200);
+    public static Color GREEN_DARK_THREE = new Color(display, 164,236,164);
+
+
+    public static Color PURPLE_LIGHT_ONE = new Color(display, 255, 255, 255);
+    public static Color PURPLE_DARK_ONE = new Color(display, 214,185,243);
+    public static Color PURPLE_LIGHT_TWO = new Color(display, 214,185,243);
+    public static Color PURPLE_DARK_TWO = new Color(display, 184,122,246);
+    public static Color PURPLE_LIGHT_THREE = new Color(display, 184,122,246);
+    public static Color PURPLE_DARK_THREE = new Color(display, 153,51,255);
+
+    
     
     public static Color BROWN = new Color(display, 158, 107, 17);
 

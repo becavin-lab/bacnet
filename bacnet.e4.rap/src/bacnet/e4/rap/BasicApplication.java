@@ -25,12 +25,14 @@ import bacnet.Database;
 public class BasicApplication implements ApplicationConfiguration {
 
     //public static String projectName = Database.BACNET;
-    //public static String projectName = Database.YERSINIOMICS_PROJECT;
+    public static String projectName = Database.YERSINIOMICS_PROJECT;
     //public static String projectName = Database.URY_YERSINIOMICS_PROJECT;  
-    public static String projectName = Database.CLOSTRIDIOMICS_PROJECT;  
+    //public static String projectName = Database.CLOSTRIDIOMICS_PROJECT;  
+    //public static String projectName = Database.STAPHYLOMICS_PROJECT;  
+    //public static String projectName = Database.LISTERIOMICS_PROJECT;  
+    //public static String projectName = Database.BISOMICS_PROJECT;  
 
     //public static String projectName = "ListeriomicsSample";
-    //public static String projectName = Database.YERSINIOMICS_PROJECT;
     // public static String projectName = "CRISPRGo";
     // public static String projectName = "Leishomics";
     public static String MAIN_ENTRYPOINT = "/";
@@ -74,6 +76,9 @@ public class BasicApplication implements ApplicationConfiguration {
         } else if (projectName == Database.CLOSTRIDIOMICS_PROJECT) {
             title = "Clostridiomics";
             googleId = "G-YH0XCEYV46";
+        } else if (projectName == Database.STAPHYLOMICS_PROJECT) {
+            title = "Staphylomics";
+            googleId = "G-7G3WEX0J0Z";
         }
         
         

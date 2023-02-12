@@ -68,11 +68,11 @@ public class Database {
      */
     public static String LISTERIOMICS_PROJECT = "Listeriomics";
     /**
-     * Static variable to discriminate Listeriomics project from the others
+     * Static variable to discriminate Yersiniomics project from the others
      */
     public static String YERSINIOMICS_PROJECT = "Yersiniomics";
     /**
-     * Static variable to discriminate Listeriomics project from the others
+     * Static variable to discriminate URY_Yersiniomics project from the others
      */
     public static String URY_YERSINIOMICS_PROJECT = "URY_Yersiniomics";
 
@@ -82,17 +82,26 @@ public class Database {
     public static String CLOSTRIDIOMICS_PROJECT = "Clostridiomics";
 
     /**
-     * Static variable to discriminate Listeriomics project from the others
+     * Static variable to discriminate Staphylomics project from the others
+     */
+    public static String STAPHYLOMICS_PROJECT = "Staphylomics";
+    
+    /**
+     * Static variable to discriminate UIBCListeriomics project from the others
      */
     public static String UIBCLISTERIOMICS_PROJECT = "UIBCListeriomics";
     /**
-     * Static variable to discriminate Listeriomics project from the others
+     * Static variable to discriminate CRISPRGo project from the others
      */
     public static String CRISPRGO_PROJECT = "CRISPRGo";
     /**
-     * Static variable to discriminate Listeriomics project from the others
+     * Static variable to discriminate Leishomics project from the others
      */
     public static String LEISHOMICS_PROJECT = "Leishomics";
+    /**
+     * Static variable to discriminate Bisomics project from the others
+     */
+    public static String BISOMICS_PROJECT = "Bisomics";
 
     /**
      * Path when using MAC OX X

@@ -488,7 +488,7 @@ public class InitViewYersinia implements SelectionListener {
         lblBrowseOmicsDatasets.setForeground(BasicColor.BLACK);
         lblBrowseOmicsDatasets.setFont(SWTResourceManager.getTitleFont(30, SWT.BOLD));
         lblBrowseOmicsDatasets.setBackground(BasicColor.DARK_TWO);
-        lblBrowseOmicsDatasets.setToolTipText("Access complete genomes, transcriptomes and proteomes gathered on Yersinomics\nHover over the browser buttons for more information on their specific functionalities");
+        lblBrowseOmicsDatasets.setToolTipText("Access complete genomes, transcriptomes and proteomes gathered on "+Database.getInstance().getWebpageTitle()+"\nHover over the browser buttons for more information on their specific functionalities");
 
         new Label(composite_omics_browser, SWT.NONE);
         
@@ -515,7 +515,7 @@ public class InitViewYersinia implements SelectionListener {
         btnTranscriptomics.setFont(SWTResourceManager.getBodyFont(22,SWT.NORMAL));
         btnTranscriptomics.addSelectionListener(this);
         btnTranscriptomics.setBackground(BasicColor.LIGHT_TWO);
-        btnTranscriptomics.setToolTipText("Browse all 151 microarray and 166 RNA-Seq biological conditions available on Yersiniomics\n"
+        btnTranscriptomics.setToolTipText("Browse all 151 microarray and 166 RNA-Seq biological conditions available on "+Database.getInstance().getWebpageTitle()+"\n"
                         + "Visualize transcript fold changes and RNA-Seq coverage in the genome viewer\n"
                         + "Display transcript fold change patterns in the heatmap viewer");
        
@@ -525,7 +525,7 @@ public class InitViewYersinia implements SelectionListener {
         btnProteomics.setFont(SWTResourceManager.getBodyFont(22,SWT.NORMAL));
         btnProteomics.addSelectionListener(this);
         btnProteomics.setBackground(BasicColor.LIGHT_TWO);
-        btnProteomics.setToolTipText("Browse all 62 proteomics biological conditions available on Yersiniomics\n"
+        btnProteomics.setToolTipText("Browse all 62 proteomics biological conditions available on "+Database.getInstance().getWebpageTitle()+"\n"
         		+ "Visualize protein abundances and fold changes in the genome viewer"
         		+ "\nDisplay protein abundance fold change patterns in the heatmap viewer");
 
@@ -548,7 +548,7 @@ public class InitViewYersinia implements SelectionListener {
         lblDataLoading.setForeground(BasicColor.BLACK);
         lblDataLoading.setFont(SWTResourceManager.getTitleFont(30, SWT.BOLD));
         lblDataLoading.setBackground(BasicColor.DARK_THREE);
-        lblDataLoading.setToolTipText("Load on Yersiniomics and download from Yersiniomics\nHover over the load buttons for more information on their specific functionalities ");
+        lblDataLoading.setToolTipText("Load on "+Database.getInstance().getWebpageTitle()+" and download from "+Database.getInstance().getWebpageTitle()+"\nHover over the load buttons for more information on their specific functionalities ");
 
         new Label(composite_data_loading, SWT.NONE);
 
@@ -603,7 +603,7 @@ public class InitViewYersinia implements SelectionListener {
         new Label(composite_19, SWT.NONE);
         linkPubli2 = new Link(composite_19, SWT.NONE);
         linkPubli2.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, true, false, 1, 1));
-        linkPubli2.setText("If you use Yersiniomics, please cite our <a>article</a>");
+        linkPubli2.setText("If you use "+Database.getInstance().getWebpageTitle()+", please cite our <a>article</a>");
         linkPubli2.setFont(SWTResourceManager.getBodyFont(18,SWT.NORMAL));
         linkPubli2.addSelectionListener(this);
 
@@ -611,7 +611,7 @@ public class InitViewYersinia implements SelectionListener {
         Label lblContact = new Label(composite_19, SWT.NONE);
         lblContact.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, true, false, 1, 1));
         lblContact.setData(RWT.MARKUP_ENABLED, Boolean.TRUE);
-        lblContact.setText("Contact us if you have a recently published \"omics\" datasets<br/>you want to be integrated to Yersiniomics:<br><a href=\"mailto:yersiniomics@pasteur.fr\">yersiniomics@pasteur.fr</a></br>");
+        lblContact.setText("Contact us if you have a recently published \"omics\" datasets<br/>you want to be integrated to "+Database.getInstance().getWebpageTitle()+":<br><a href=\"mailto:yersiniomics@pasteur.fr\">yersiniomics@pasteur.fr</a></br>");
         lblContact.setFont(SWTResourceManager.getBodyFont(18,SWT.NORMAL));
         lblContact.setAlignment(SWT.CENTER);
 
@@ -790,6 +790,9 @@ public class InitViewYersinia implements SelectionListener {
             }
         } else if (e.getSource() == btnDownloadData) {
             String url = "https://yersiniomics.pasteur.fr/Download/";
+            if (Database.getInstance().getProjectName() == Database.URY_YERSINIOMICS_PROJECT) {
+            	url = "https://yersiniomics.pasteur.fr/PrivateDownload/";
+             }
             NavigationManagement.openURLInExternalBrowser(url, partService);
         }
         // else if(e.getSource()==btnCheckSessionStatus){

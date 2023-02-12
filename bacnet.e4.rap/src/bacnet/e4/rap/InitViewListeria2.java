@@ -16,6 +16,7 @@ import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.rap.rwt.RWT;
 import org.eclipse.rap.rwt.client.service.UrlLauncher;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
@@ -28,19 +29,20 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Link;
 import org.eclipse.swt.widgets.Shell;
 
+import bacnet.Database;
 import bacnet.datamodel.sequence.Genome;
 import bacnet.datamodel.sequence.Genome.OpenGenomesThread;
 import bacnet.expressionAtlas.ProteomicsView;
 import bacnet.expressionAtlas.TranscriptomicsView;
 import bacnet.genomeBrowser.GenomeTranscriptomeView;
-import bacnet.genomeBrowser.NTerminomicsView;
 import bacnet.raprcp.NavigationManagement;
 import bacnet.sequenceTools.GeneView;
 import bacnet.sequenceTools.GenomicsView;
-import bacnet.sequenceTools.SrnaSummaryView;
 import bacnet.swt.ResourceManager;
 import bacnet.swt.SWTResourceManager;
+import bacnet.utils.BasicColor;
 import bacnet.utils.FileUtils;
+import bacnet.utils.RWTUtils;
 import bacnet.views.CoExprNetworkView;
 
 public class InitViewListeria2 implements SelectionListener {
@@ -48,32 +50,47 @@ public class InitViewListeria2 implements SelectionListener {
     /**
      * 
      */
-    private static final long serialVersionUID = -3252983689419871498L;
+    private static final long serialVersionUID = -9052983689419871498L;
 
-    public static final String ID = "bacnet.Clostri"; //$NON-NLS-1$
+    public static final String ID = "bacnet.Listeria2"; //$NON-NLS-1$
 
     /**
      * Indicates if we focus the view, so we can pushState navigation
      */
     private boolean focused = false;
-
-    private Button btnBHI37;
-    private Button btnSrnas;
+    
+    private Button btnUSA300_ISMMS1;
+    private Button btnEGDe;
+    private Button btnEGD;
+    private Button btnClip11262;
+    private Button btnIP32953;
+    private Button btnIP31758;
+    private Button btnEV76;
+    private Button btnY11;
+    private Button btnY1;
+    private Button btnSLCC5334;
+    private Button btnWA;
+    private Button btnPAM55;
+    private Button btnQMA0440;
+    private Button btnUSA300_FPR3757;
+    private Button btnMH96;
+    private Button btnIP38326;
+    private Button btnIP38023;
+    private Button btnIP37485;
+    private Button btnIP37574;
     private Button btnCoExpression;
-    private Button btnStat;
-    private Button btnNTerm;
-    private Button btnIntracellular;
-    private Button btnNTermTable;
     private Button btnLoadData;
+    private Button btnDownloadData;
     private Button btnGeneView;
     private Button btnAccessWiki;
-    private Link linkUIBC;
     private Link linkPubli;
-    private Link linkHUB;
+    private Link linkPubli2;
+    private Link linkYersinia;
     private Button btnTranscriptomics;
     private Button btnGenomics;
     private Button btnProteomics;
     private Link linkLicenceField;
+	private Button btnHelp;
 
     @Inject
     EPartService partService;
@@ -84,14 +101,16 @@ public class InitViewListeria2 implements SelectionListener {
     @Inject
     @Named(IServiceConstants.ACTIVE_SHELL)
     private Shell shell;
-    private Link link_NTerm;
 
     @Inject
     public InitViewListeria2() {}
 
-    @SuppressWarnings("unused")
     @PostConstruct
     public void createPartControl(Composite parent) {
+    	System.out.println("TEST INIT");
+    	//AppSpecificMethods AppSpecificMethods = new AppSpecificMethods();
+    	//AppSpecificMethods.openPasswordDialog(shell);
+        //System.out.println("Load InitView");
 
         focused = true;
         parent.setLayout(new GridLayout(1, false));
@@ -104,566 +123,568 @@ public class InitViewListeria2 implements SelectionListener {
         composite.setLayout(new GridLayout(1, false));
 
         Composite composite_Intro = new Composite(composite, SWT.NONE);
-        composite_Intro.setLayout(new GridLayout(2, false));
-        GridData gd_composite_Intro = new GridData(SWT.CENTER, SWT.CENTER, true, false, 1, 1);
-        gd_composite_Intro.widthHint = 850;
+        composite_Intro.setLayout(new GridLayout(1, false));
+        GridData gd_composite_Intro = new GridData(SWT.CENTER, SWT.FILL, false, false, 1, 1);
         composite_Intro.setLayoutData(gd_composite_Intro);
-        // composite_Intro.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
-        Label lblListeriomicsIsSo = new Label(composite_Intro, SWT.WRAP);
-        lblListeriomicsIsSo.setAlignment(SWT.CENTER);
-        // lblListeriomicsIsSo.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
-        lblListeriomicsIsSo.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, true, false, 2, 1));
-        // lblListeriomicsIsSo.setData(RWT.MARKUP_ENABLED, Boolean.TRUE );
-        // lblListeriomicsIsSo.setText("Systems biology of the model pathogen
-        // <i>Listeria</i>");
-        // lblListeriomicsIsSo.setFont(SWTResourceManager.getTitleFont(SWT.BOLD));
-        lblListeriomicsIsSo.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/ToolBar/LogoListeriomics.png"));
+        // composite_Intro.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_DARK_SHADOW));
         new Label(composite_Intro, SWT.NONE);
-        Label lblNewLabel_1 = new Label(composite_Intro, SWT.WRAP);
-        lblNewLabel_1.setData(RWT.MARKUP_ENABLED, Boolean.TRUE);
 
-        lblNewLabel_1.setAlignment(SWT.CENTER);
-        GridData gd_lblNewLabel_1 = new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1);
-        gd_lblNewLabel_1.widthHint = 700;
-        lblNewLabel_1.setLayoutData(gd_lblNewLabel_1);
-        lblNewLabel_1.setText(
-                "Listeriomics integrates all complete genomes, transcriptomes and proteomes published for�<i>Listeria</i> "
-                        + "species to date. It allows navigating among all these datasets with enriched metadata in a user-friendly format. "
-                        + "Use Listeriomics for deciphering regulatory mechanisms of your genome element of interest.\r");
-        // lblNewLabel_1.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
+        Label yersiniomicsLogo = new Label(composite_Intro, SWT.NONE);
+        yersiniomicsLogo.setAlignment(SWT.CENTER);
+        yersiniomicsLogo.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, true, false, 1, 1));
+        yersiniomicsLogo.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/ToolBar/LogoListeriomics.png"));
+        
+        Label lblIntro = new Label(composite_Intro, SWT.NONE);
+        lblIntro.setAlignment(SWT.CENTER);
+        GridData gd_lblIntro = new GridData(SWT.CENTER, SWT.CENTER, true, false, 1, 1);
+        //gd_lblIntro.widthHint=900;
+        lblIntro.setLayoutData(gd_lblIntro);
+        lblIntro.setData(RWT.MARKUP_ENABLED, Boolean.TRUE);
+        lblIntro.setText(
+                "<br>"+Database.getInstance().getWebpageTitle()+" integrates complete <b>genomes</b>, <b>transcriptomes</b> and <b>proteomes</b> published for <i>"+Database.getInstance().getSpecies()+"</i> species.</br>"
+                		+ "<br>Access <b>enriched information</b> about <i>"+Database.getInstance().getSpecies()+"</i> species genes in complete genomes:</br>"
+                        + "Annotation, gene conservation, synteny, transcript atlas, protein atlas, integration of external databases."
+                		+ "<br></br>Use "+Database.getInstance().getWebpageTitle()+" to decipher <b>regulatory mechanisms</b> of your genome element of interest,<br>"
+                        + "navigating among all these datasets with <b>enriched metadata</b> in a user-friendly format.</br>"
+                        );
 
-        lblNewLabel_1.setFont(SWTResourceManager.getBodyFont(SWT.NORMAL));
+        lblIntro.setFont(SWTResourceManager.getBodyFont(20,SWT.NORMAL));
+        new Label(composite_Intro, SWT.NONE);
 
-        Composite composite_11 = new Composite(composite, SWT.BORDER);
-        GridData gd_composite_11 = new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1);
-        gd_composite_11.widthHint = 850;
-        composite_11.setLayoutData(gd_composite_11);
-        composite_11.setLayout(new GridLayout(4, false));
-        composite_11.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
+        if (Database.getInstance().getProjectName() == Database.URY_YERSINIOMICS_PROJECT) {
 
-        Composite composite_12 = new Composite(composite_11, SWT.NONE);
-        composite_12.setLayoutData(new GridData(SWT.CENTER, SWT.TOP, false, false, 1, 1));
-        composite_12.setLayout(new GridLayout(1, false));
-        composite_12.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
-        Label lblFastAccessTo = new Label(composite_12, SWT.WRAP);
-        GridData gd_lblFastAccessTo = new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1);
-        gd_lblFastAccessTo.widthHint = 140;
-        lblFastAccessTo.setLayoutData(gd_lblFastAccessTo);
-        lblFastAccessTo.setAlignment(SWT.CENTER);
-        lblFastAccessTo.setFont(SWTResourceManager.getTitleFont(SWT.BOLD));
-        lblFastAccessTo.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
-        lblFastAccessTo.setText("Multi-omics views");
-        Label lblImage = new Label(composite_12, SWT.BORDER);
-        lblImage.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/InitPage/genomeView.png"));
-        Composite composite_1 = new Composite(composite_11, SWT.NONE);
-        GridData gd_composite_1 = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
-        gd_composite_1.heightHint = 180;
-        composite_1.setLayoutData(gd_composite_1);
-        composite_1.setSize(480, 109);
-        composite_1.setLayout(new GridLayout(1, false));
-        composite_1.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
+        	Label privateDatabase = new Label(composite_Intro, SWT.NONE);
+        	GridData gd_PrivateDatabase = new GridData(SWT.CENTER, SWT.CENTER, true, false, 1, 1);
+            //gd_lblIntro.widthHint=900;
+        	privateDatabase.setLayoutData(gd_PrivateDatabase);
+        	privateDatabase.setData(RWT.MARKUP_ENABLED, Boolean.TRUE);
+            privateDatabase.setText("<b>You are on the <i>Yersinia</i> Research Unit private database website</b>" );
+            privateDatabase.setFont(SWTResourceManager.getBodyFont(30,SWT.NORMAL));
+            privateDatabase.setForeground(BasicColor.RED);;
 
-        btnBHI37 = new Button(composite_1, SWT.BORDER);
-        btnBHI37.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
-        btnBHI37.setText("Exponential phase");
-        btnBHI37.setFont(SWTResourceManager.getTitleFont(SWT.NORMAL));
-        btnBHI37.addSelectionListener(this);
+        }
+        
+        Composite gene_view_composite = new Composite(composite, SWT.BORDER);
+        GridData gd_gene_view_composite = new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1);
+        //gd_gene_view_composite.widthHint = 1500;
+        gene_view_composite.setLayoutData(gd_gene_view_composite);
+        gene_view_composite.setLayout(new GridLayout(1, false));
+        gene_view_composite.setBackground(BasicColor.GREEN_DARK_ONE);
+        
+        Label spacer_0 = new Label(gene_view_composite, SWT.NONE);
+        spacer_0.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
+        
+        Label lblGeneViewer = new Label(gene_view_composite, SWT.WRAP);
+        GridData gd_lblGeneViewer = new GridData(SWT.CENTER, SWT.CENTER, true, false, 1, 1);
+        lblGeneViewer.setLayoutData(gd_lblGeneViewer);
+        lblGeneViewer.setAlignment(SWT.CENTER);
+        lblGeneViewer.setFont(SWTResourceManager.getTitleFont(30, SWT.BOLD));
+        lblGeneViewer.setBackground(BasicColor.GREEN_DARK_ONE);
+        RWTUtils.setMarkup(lblGeneViewer);
+        lblGeneViewer.setForeground(BasicColor.BLACK);
+        lblGeneViewer.setText("Gene viewers<sup style=\"font-family: Times New Roman;  font-size:18px; color:purple\"><i>i</i></sup>");
+        lblGeneViewer.setToolTipText("Access enriched gene information of a genome by clicking on its name\nHover over the genome button for more information on the strain");
+        Label spacer_1 = new Label(gene_view_composite, SWT.NONE);
+        spacer_1.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
+ 
+        Composite gene_view_composite_row_1 = new Composite(gene_view_composite, SWT.NONE);
+        GridData gd_gene_view_composite_row_1 = new GridData(SWT.CENTER, SWT.CENTER, true, false, 1, 1);
+        gd_gene_view_composite_row_1.widthHint = 1200;
+        gene_view_composite_row_1.setLayoutData(gd_gene_view_composite_row_1);
+        gene_view_composite_row_1.setLayout(new GridLayout(5, false));
+        gene_view_composite_row_1.setBackground(BasicColor.GREEN_DARK_ONE);
+        
+        Composite composite_monocytogenes = new Composite(gene_view_composite_row_1, SWT.NONE);
+        GridData gd_composite_monocytogenes = new GridData(SWT.CENTER, SWT.CENTER, true, false, 1, 1);
+        composite_monocytogenes.setLayoutData(gd_composite_monocytogenes);
+        composite_monocytogenes.setLayout(new GridLayout(1, false));
+        composite_monocytogenes.setBackground(BasicColor.GREEN_DARK_ONE);
+        
+        Label lblMono = new Label(composite_monocytogenes, SWT.NONE);
+        RWTUtils.setMarkup(lblMono);
+        GridData gd_lblMono = new GridData(SWT.CENTER, SWT.TOP, true, false, 1, 1);
+        lblMono.setLayoutData(gd_lblMono);
+        lblMono.setFont(SWTResourceManager.getBodyFont(22,SWT.BOLD));
+        lblMono.setBackground(BasicColor.GREEN_DARK_ONE);
+        lblMono.setForeground(BasicColor.BLACK);
+        lblMono.setText("<i>L. monocytogenes</i>");
+        
+        Composite composite_monocytogenes_row_1 = new Composite(composite_monocytogenes, SWT.NONE);
+        GridData gd_composite_monocytogenes_row_1 = new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1);
+        composite_monocytogenes_row_1.setLayoutData(gd_composite_monocytogenes_row_1);
+        composite_monocytogenes_row_1.setLayout(new GridLayout(3, false));
+        composite_monocytogenes_row_1.setBackground(BasicColor.GREEN_DARK_ONE);
+               
+        btnEGDe = new Button(composite_monocytogenes_row_1, SWT.TOGGLE);
+        btnEGDe.setLayoutData(new GridData(SWT.CENTER, SWT.TOP, false, false, 1, 1));
+        btnEGDe.setText("EGD-e");
+        btnEGDe.setToolTipText("EGD-e");
+        btnEGDe.setFont(SWTResourceManager.getBodyFont(22,SWT.NORMAL));
+        btnEGDe.setBackground(BasicColor.GREEN_LIGHT_ONE);
+        //btnEGD-e.setForeground(BasicColor.BLACK);
+        btnEGDe.addSelectionListener(this);
 
-        Label lblExpressionAtlas = new Label(composite_1, SWT.WRAP);
-        lblExpressionAtlas.setAlignment(SWT.CENTER);
-        GridData gd_lblExpressionAtlas = new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1);
-        gd_lblExpressionAtlas.widthHint = 200;
-        lblExpressionAtlas.setLayoutData(gd_lblExpressionAtlas);
-        lblExpressionAtlas.setFont(SWTResourceManager.getBodyFont(SWT.NORMAL));
-        lblExpressionAtlas.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
-        lblExpressionAtlas.setData(RWT.MARKUP_ENABLED, Boolean.TRUE);
-        lblExpressionAtlas.setText("Browse RNA-seq, tiling arrays, transcription start sites (TSS), "
-                + "transcription termination sites (TermSeq),"
-                + " and Ribosome Profiling (RiboSeq) of <i>Listeria monocytogenes</i> EGD-e strain grown in BHI at 37°C to exponential phase");
+        btnEGD = new Button(composite_monocytogenes_row_1, SWT.TOGGLE);
+        btnEGD.setLayoutData(new GridData(SWT.CENTER, SWT.TOP, false, false, 1, 1));
+        btnEGD.setText("EGD");
+        btnEGD.setToolTipText("EGD");
+        btnEGD.setFont(SWTResourceManager.getBodyFont(22,SWT.NORMAL));
+        btnEGD.setBackground(BasicColor.GREEN_LIGHT_ONE);
+        //btnEGD.setForeground(BasicColor.BLACK);
+        btnEGD.addSelectionListener(this);
+        /*
+        Composite composite_monocytogenes_row_2 = new Composite(composite_monocytogenes, SWT.NONE);
+        GridData gd_composite_monocytogenes_row_2 = new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1);
+        composite_monocytogenes_row_2.setLayoutData(gd_composite_monocytogenes_row_2);
+        composite_monocytogenes_row_2.setLayout(new GridLayout(3, false));
+        composite_monocytogenes_row_2.setBackground(BasicColor.GREEN_DARK_ONE);
+        
+        
+        
+        btnUSA300_FPR3757 = new Button(composite_monocytogenes_row_2, SWT.TOGGLE);
+        btnUSA300_FPR3757.setData(RWT.MARKUP_ENABLED, Boolean.TRUE);
+        btnUSA300_FPR3757.setLayoutData(new GridData(SWT.CENTER, SWT.TOP, false, false, 1, 1));
+        btnUSA300_FPR3757.addSelectionListener(this);
+        btnUSA300_FPR3757.setText("USA300_FPR3757");
+        btnUSA300_FPR3757.setToolTipText("USA300_FPR3757");
+        btnUSA300_FPR3757.setFont(SWTResourceManager.getBodyFont(22,SWT.NORMAL));
+        btnUSA300_FPR3757.setBackground(BasicColor.GREEN_LIGHT_ONE);
+        
 
-        Composite composite_7 = new Composite(composite_11, SWT.NONE);
-        GridData gd_composite_7 = new GridData(SWT.LEFT, SWT.CENTER, false, true, 1, 1);
-        gd_composite_7.heightHint = 180;
-        composite_7.setLayoutData(gd_composite_7);
-        composite_7.setLayout(new GridLayout(1, false));
-        composite_7.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
+        btnUSA300_ISMMS1 = new Button(composite_monocytogenes_row_2, SWT.TOGGLE);
+        btnUSA300_ISMMS1.setLayoutData(new GridData(SWT.CENTER, SWT.TOP, false, false, 1, 1));
+        btnUSA300_ISMMS1.setText("USA300_ISMMS1");
+        btnUSA300_ISMMS1.setToolTipText("USA300_ISMMS1");
+        btnUSA300_ISMMS1.setFont(SWTResourceManager.getBodyFont(22,SWT.NORMAL));
+        btnUSA300_ISMMS1.setBackground(BasicColor.GREEN_LIGHT_ONE);
+        //btnUSA300_ISMMS1.setForeground(BasicColor.BLACK);
+        btnUSA300_ISMMS1.addSelectionListener(this);
+        
+        
+        //btn91001.setForeground(BasicColor.BLACK);
+        
+        
+        btnEV76 = new Button(composite_monocytogenes_row_2, SWT.TOGGLE);
+        btnEV76.setLayoutData(new GridData(SWT.CENTER, SWT.TOP, false, false, 1, 1));
+        btnEV76.setText("EV76-CN");
+        btnEV76.setToolTipText("Lineage 1.ORI\nIsolated in Madagascar"
+        		+ "\nUsed as vaccinal strain");
+        btnEV76.setFont(SWTResourceManager.getBodyFont(22,SWT.NORMAL));
+        btnEV76.setBackground(BasicColor.LIGHT_ONE);
+        //btnEV76.setForeground(BasicColor.BLACK);
+        btnEV76.addSelectionListener(this);
+*/
+        Composite composite_innocua = new Composite(gene_view_composite_row_1, SWT.NONE);
+        GridData gd_composite_innocua = new GridData(SWT.CENTER, SWT.CENTER, true, false, 1, 1);
+        composite_innocua.setLayoutData(gd_composite_innocua);
+        composite_innocua.setLayout(new GridLayout(1, false));
+        composite_innocua.setBackground(BasicColor.GREEN_DARK_ONE);
+        composite_innocua.setForeground(BasicColor.BLACK);
+        
+        
+        Label lblInno = new Label(composite_innocua, SWT.NONE);
+        RWTUtils.setMarkup(lblInno);
+        lblInno.setAlignment(SWT.CENTER);
+        GridData gd_lblInno = new GridData(SWT.CENTER, SWT.TOP, true, false, 1, 1);
+        lblInno.setLayoutData(gd_lblInno);
+        lblInno.setFont(SWTResourceManager.getBodyFont(22,SWT.BOLD));
+        lblInno.setBackground(BasicColor.GREEN_DARK_ONE);
+        lblInno.setForeground(BasicColor.BLACK);
+        lblInno.setText("<i>L. innocua</i>");
 
-        btnStat = new Button(composite_7, SWT.BORDER);
-        btnStat.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
-        btnStat.setText("Stationary phase");
-        btnStat.setFont(SWTResourceManager.getTitleFont(SWT.NORMAL));
-        btnStat.addSelectionListener(this);
+        Composite composite_innocua_row_1 = new Composite(composite_innocua, SWT.NONE);
+        GridData gd_composite_innocua_row_1 = new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1);
+        composite_innocua_row_1.setLayoutData(gd_composite_innocua_row_1);
+        composite_innocua_row_1.setLayout(new GridLayout(2, false));
+        composite_innocua_row_1.setBackground(BasicColor.GREEN_DARK_ONE);
+        
+        btnClip11262 = new Button(composite_innocua_row_1, SWT.TOGGLE);
+        btnClip11262.setLayoutData(new GridData(SWT.CENTER, SWT.TOP, false, false, 1, 1));
+        btnClip11262.addSelectionListener(this);
+        btnClip11262.setText("Clip11262");
+        btnClip11262.setToolTipText("Clip11262");
 
-        Label lblStationnaryPhaseData = new Label(composite_7, SWT.WRAP);
-        lblStationnaryPhaseData.setAlignment(SWT.CENTER);
-        lblStationnaryPhaseData.setData(RWT.MARKUP_ENABLED, Boolean.TRUE);
-        lblStationnaryPhaseData.setText("Browse tiling arrays, transcription start sites (TSS), proteomics datasets"
-                + " of <i>Listeria monocytogenes</i> EGD-e strain grown in BHI at 37°C to stationary phase");
-        lblStationnaryPhaseData.setFont(SWTResourceManager.getBodyFont(SWT.NORMAL));
-        GridData gd_lblStationnaryPhaseData = new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1);
-        gd_lblStationnaryPhaseData.widthHint = 200;
-        lblStationnaryPhaseData.setLayoutData(gd_lblStationnaryPhaseData);
-        lblStationnaryPhaseData.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
+        btnClip11262.setFont(SWTResourceManager.getBodyFont(22,SWT.NORMAL));
+        btnClip11262.setBackground(BasicColor.GREEN_LIGHT_ONE);
+        /*
+        btnIP32953 = new Button(composite_innocua_row_1, SWT.TOGGLE);
+        btnIP32953.setLayoutData(new GridData(SWT.CENTER, SWT.TOP, false, false, 1, 1));
+        btnIP32953.addSelectionListener(this);
+        btnIP32953.setText("IP32953");
+        btnIP32953.setToolTipText("Genotype 16\nFirst Y. pseudotuberculosis genome to be sequenced");
 
-        Composite composite_9 = new Composite(composite_11, SWT.NONE);
-        GridData gd_composite_9 = new GridData(SWT.LEFT, SWT.CENTER, false, true, 1, 1);
-        gd_composite_9.heightHint = 180;
-        composite_9.setLayoutData(gd_composite_9);
-        composite_9.setLayout(new GridLayout(1, false));
-        composite_9.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
+        btnIP32953.setFont(SWTResourceManager.getBodyFont(22,SWT.NORMAL));
+        btnIP32953.setBackground(BasicColor.LIGHT_ONE);
+        
+        Composite composite_innocua_row_2 = new Composite(composite_innocua, SWT.NONE);
+        GridData gd_composite_innocua_row_2 = new GridData(SWT.CENTER, SWT.TOP, false, false, 1, 1);
+        composite_innocua_row_2.setLayoutData(gd_composite_innocua_row_2);
+        composite_innocua_row_2.setLayout(new GridLayout(1, false));
+        composite_innocua_row_2.setBackground(BasicColor.DARK_ONE);
+        
+        btnIP31758 = new Button(composite_innocua_row_2, SWT.TOGGLE);
+        btnIP31758.setLayoutData(new GridData(SWT.CENTER, SWT.TOP, false, false, 1, 1));
+        btnIP31758.addSelectionListener(this);
+        btnIP31758.setText("IP31758");
+        btnIP31758.setToolTipText("Genotype 8\nEtiologic agent of Far East Scarlet-Like Fever (FESLF)");
+        btnIP31758.setFont(SWTResourceManager.getBodyFont(22,SWT.NORMAL));
+        btnIP31758.setBackground(BasicColor.LIGHT_ONE);
+ */
+        Composite composite_welshimeri = new Composite(gene_view_composite_row_1, SWT.NONE);
+        GridData gd_composite_welshimeri = new GridData(SWT.CENTER, SWT.CENTER, true, false, 1, 1);
 
-        btnIntracellular = new Button(composite_9, SWT.BORDER);
-        btnIntracellular.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
-        btnIntracellular.addSelectionListener(this);
-        btnIntracellular.setText("Intracellular growth");
-        btnIntracellular.setFont(SWTResourceManager.getTitleFont(SWT.NORMAL));
+        composite_welshimeri.setLayoutData(gd_composite_welshimeri);
+        composite_welshimeri.setLayout(new GridLayout(1, false));
+        composite_welshimeri.setBackground(BasicColor.GREEN_DARK_ONE);
+        
+        Label lblWelsh = new Label(composite_welshimeri, SWT.NONE);
+        RWTUtils.setMarkup(lblWelsh);
+        lblWelsh.setAlignment(SWT.CENTER);
+        GridData gd_lblWelsh = new GridData(SWT.CENTER, SWT.CENTER, true, false, 1, 1);
+        lblWelsh.setLayoutData(gd_lblWelsh);
+        lblWelsh.setFont(SWTResourceManager.getBodyFont(22,SWT.BOLD));
+        lblWelsh.setBackground(BasicColor.GREEN_DARK_ONE);
+        lblWelsh.setForeground(BasicColor.BLACK);
+        lblWelsh.setText("<i>L. welshimeri</i>");
+              
+        Composite composite_welshimeri_row_1 = new Composite(composite_welshimeri, SWT.NONE);
+        GridData gd_composite_welshimeri_row_1 = new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1);
+        composite_welshimeri_row_1.setLayoutData(gd_composite_welshimeri_row_1);
+        composite_welshimeri_row_1.setLayout(new GridLayout(2, false));
+        composite_welshimeri_row_1.setBackground(BasicColor.GREEN_DARK_ONE);
+        composite_welshimeri_row_1.setForeground(BasicColor.BLACK);
+ 
+        btnSLCC5334 = new Button(composite_welshimeri_row_1, SWT.TOGGLE);
+        btnSLCC5334.setLayoutData(new GridData(SWT.CENTER, SWT.TOP, false, false, 1, 1));
+        btnSLCC5334.addSelectionListener(this);
+        btnSLCC5334.setText("SLCC5334");
+        btnSLCC5334.setToolTipText("SLCC5334");
 
-        Label lblIntracellularMouse = new Label(composite_9, SWT.WRAP);
-        lblIntracellularMouse.setAlignment(SWT.CENTER);
-        GridData gd_lblIntracellularMouse = new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1);
-        gd_lblIntracellularMouse.widthHint = 200;
-        lblIntracellularMouse.setLayoutData(gd_lblIntracellularMouse);
-        lblIntracellularMouse.setFont(SWTResourceManager.getBodyFont(SWT.NORMAL));
-        lblIntracellularMouse.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
-        lblIntracellularMouse.setData(RWT.MARKUP_ENABLED, Boolean.TRUE);
-        lblIntracellularMouse.setText("Browse RNA-seq, and transcription start sites (TSS) "
-                + "of <i>Listeria monocytogenes</i> EGD-e strain grown in mouse macrophages");
+        btnSLCC5334.setFont(SWTResourceManager.getBodyFont(22,SWT.NORMAL));
+        btnSLCC5334.setBackground(BasicColor.GREEN_LIGHT_ONE);
+/*
+        btnWA = new Button(composite_welshimeri_row_1, SWT.TOGGLE);
+        btnWA.setLayoutData(new GridData(SWT.CENTER, SWT.TOP, false, false, 1, 1));
+        btnWA.addSelectionListener(this);
+        btnWA.setText("WA");
+        btnWA.setToolTipText("Genotype 1B");
 
-        Composite composite_23 = new Composite(composite, SWT.BORDER);
-        gd_composite_11.widthHint = 850;
-        GridData gd_composite_23 = new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1);
-        gd_composite_23.widthHint = 850;
-        composite_23.setLayoutData(gd_composite_23);
-        composite_23.setLayout(new GridLayout(4, false));
-        composite_23.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
+        btnWA.setFont(SWTResourceManager.getBodyFont(22,SWT.NORMAL));
+        btnWA.setBackground(BasicColor.LIGHT_ONE);
+        
+        Composite composite_welshimeri_row_2 = new Composite(composite_welshimeri, SWT.NONE);
+        GridData gd_composite_welshimeri_row_2 = new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1);
+        composite_welshimeri_row_2.setLayoutData(gd_composite_welshimeri_row_2);
+        composite_welshimeri_row_2.setLayout(new GridLayout(2, false));
+        composite_welshimeri_row_2.setBackground(BasicColor.DARK_ONE);
+        composite_welshimeri_row_2.setForeground(BasicColor.BLACK);
+        
+        btnY1 = new Button(composite_welshimeri_row_2, SWT.TOGGLE);
+        btnY1.setLayoutData(new GridData(SWT.CENTER, SWT.TOP, false, false, 1, 1));
+        btnY1.addSelectionListener(this);
+        btnY1.setText("Y1");
+        btnY1.setToolTipText("Genotype 4");
 
-        Composite composite_87 = new Composite(composite_23, SWT.NONE);
-        composite_87.setLayoutData(new GridData(SWT.CENTER, SWT.TOP, false, false, 1, 1));
-        composite_87.setLayout(new GridLayout(1, false));
-        composite_87.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
-        Label lblFastAccess = new Label(composite_87, SWT.WRAP);
-        GridData gd_lblFastAccess = new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1);
-        gd_lblFastAccess.widthHint = 140;
-        lblFastAccess.setLayoutData(gd_lblFastAccess);
-        lblFastAccess.setAlignment(SWT.CENTER);
-        lblFastAccess.setFont(SWTResourceManager.getTitleFont(SWT.BOLD));
-        lblFastAccess.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
-        lblFastAccess.setText("NTerminomics views");
-        Label lblImage2 = new Label(composite_87, SWT.BORDER);
-        lblImage2.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/InitPage/Nterm.png"));
-        gd_lblExpressionAtlas.widthHint = 200;
+        btnY1.setFont(SWTResourceManager.getBodyFont(22,SWT.NORMAL));
+        btnY1.setBackground(BasicColor.LIGHT_ONE);
+        
+        btnY11 = new Button(composite_welshimeri_row_2, SWT.TOGGLE);
+        btnY11.setLayoutData(new GridData(SWT.CENTER, SWT.TOP, false, false, 1, 1));
+        btnY11.addSelectionListener(this);
+        btnY11.setText("Y11");
+        btnY11.setToolTipText("Genotype 4");
 
-        Composite composite_71 = new Composite(composite_23, SWT.NONE);
-        GridData gd_composite_71 = new GridData(SWT.LEFT, SWT.TOP, false, true, 1, 1);
-        gd_composite_71.heightHint = 180;
-        composite_71.setLayoutData(gd_composite_71);
-        composite_71.setLayout(new GridLayout(1, false));
-        composite_71.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
+        btnY11.setFont(SWTResourceManager.getBodyFont(22,SWT.NORMAL));
+        btnY11.setBackground(BasicColor.LIGHT_ONE);
+        */
+        
+        Composite composite_ivanovii = new Composite(gene_view_composite_row_1, SWT.NONE);
+        GridData gd_composite_ivanovii = new GridData(SWT.CENTER, SWT.TOP, true, false, 1, 1);
+        composite_ivanovii.setLayoutData(gd_composite_ivanovii);
+        composite_ivanovii.setLayout(new GridLayout(1, false));
+        composite_ivanovii.setBackground(BasicColor.GREEN_DARK_ONE);
+        composite_ivanovii.setForeground(BasicColor.BLACK);
+        
+        Label lblIvan = new Label(composite_ivanovii, SWT.NONE);
+        RWTUtils.setMarkup(lblIvan);
+        lblIvan.setAlignment(SWT.CENTER);
+        GridData gd_lblIvan = new GridData(SWT.CENTER, SWT.TOP, true, false, 1, 1);
+        lblIvan.setLayoutData(gd_lblIvan);
+        lblIvan.setFont(SWTResourceManager.getBodyFont(22,SWT.BOLD));
+        lblIvan.setBackground(BasicColor.GREEN_DARK_ONE);
+        lblIvan.setForeground(BasicColor.BLACK);
+        lblIvan.setText("<i>L. ivanovii</i>");
+        
+        Composite composite_ivanovii_row_1 = new Composite(composite_ivanovii, SWT.NONE);
+        GridData gd_composite_ivanovii_row_1 = new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1);
+        composite_ivanovii_row_1.setLayoutData(gd_composite_ivanovii_row_1);
+        composite_ivanovii_row_1.setLayout(new GridLayout(2, false));
+        composite_ivanovii_row_1.setBackground(BasicColor.GREEN_DARK_ONE);
+        composite_ivanovii_row_1.setForeground(BasicColor.BLACK);
+        
+        btnPAM55 = new Button(composite_ivanovii_row_1, SWT.TOGGLE);
+        btnPAM55.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
+        btnPAM55.addSelectionListener(this);
+        btnPAM55.setText("PAM 55");
+        btnPAM55.setToolTipText("PAM 55");
 
-        btnNTerm = new Button(composite_71, SWT.BORDER);
-        btnNTerm.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
-        btnNTerm.setText("N-Terminomics viewer");
-        btnNTerm.setFont(SWTResourceManager.getTitleFont(SWT.NORMAL));
-        btnNTerm.addSelectionListener(this);
-
-        Label lblYo = new Label(composite_71, SWT.WRAP);
-        lblYo.setAlignment(SWT.CENTER);
-        lblYo.setData(RWT.MARKUP_ENABLED, Boolean.TRUE);
-        lblYo.setText("Browse Listeria's protein n-termini, with RNA-seq, tiling arrays, "
-                + "transcription start sites (TSS), transcription termination sites (TermSeq), "
-                + "and Ribosome profiling (RiboSeq) of <i>Listeria monocytogenes EGD-e</i> strain grown "
-                + "in BHI at 37°C");
-        lblYo.setFont(SWTResourceManager.getBodyFont(SWT.NORMAL));
-        GridData gd_lblYo = new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1);
-        gd_lblYo.widthHint = 200;
-        lblYo.setLayoutData(gd_lblYo);
-        lblYo.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
-
-        Composite composite_92 = new Composite(composite_23, SWT.NONE);
-        gd_composite_9.heightHint = 180;
-        composite_92.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false, true, 1, 1));
-        composite_92.setLayout(new GridLayout(1, false));
-        composite_92.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
-
-        btnNTermTable = new Button(composite_92, SWT.BORDER);
-        btnNTermTable.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
-        btnNTermTable.addSelectionListener(this);
-        btnNTermTable.setText("Browse Nterm-peptides");
-        btnNTermTable.setFont(SWTResourceManager.getTitleFont(SWT.NORMAL));
-
-        Label lblNtermTable = new Label(composite_92, SWT.WRAP);
-        lblNtermTable.setAlignment(SWT.CENTER);
-        lblNtermTable.setData(RWT.MARKUP_ENABLED, Boolean.TRUE);
-
-        gd_lblIntracellularMouse.widthHint = 200;
-        GridData gd_lblNtermTable = new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1);
-        gd_lblNtermTable.heightHint = 180;
-        gd_lblNtermTable.widthHint = 200;
-
-        lblNtermTable.setLayoutData(gd_lblNtermTable);
-        lblNtermTable.setFont(SWTResourceManager.getBodyFont(SWT.NORMAL));
-        lblNtermTable.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
-        lblNtermTable.setText(
-                "Search every Nterm peptides in a table and click on one of them to display it in the NTerminomics Viewer");
-
-        Composite composite_24 = new Composite(composite_23, SWT.NONE);
-        composite_24.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false, false, 1, 1));
-        composite_24.setBackground(SWTResourceManager.getColor(232, 232, 232));
-        composite_24.setLayout(new GridLayout(1, false));
-        composite_24.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
-
-        Label lblDetectionOfNtermini = new Label(composite_24, SWT.WRAP);
-        lblDetectionOfNtermini.setData(RWT.MARKUP_ENABLED, Boolean.TRUE);
-
-        GridData gd_lblDetectionOfNtermini = new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1);
-        gd_lblDetectionOfNtermini.widthHint = 200;
-        lblDetectionOfNtermini.setLayoutData(gd_lblDetectionOfNtermini);
-        lblDetectionOfNtermini.setText(
-                "N-terminomics identifies Prli42 as a membrane miniprotein conserved in Firmicutes and critical for stressosome activation in <i>Listeria monocytogenes</i>");
-        lblDetectionOfNtermini.setFont(SWTResourceManager.getBodyFont(SWT.NORMAL));
-        lblDetectionOfNtermini.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
-        lblDetectionOfNtermini.setAlignment(SWT.CENTER);
-
-        link_NTerm = new Link(composite_24, SWT.NONE);
-        link_NTerm.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
-        link_NTerm.setText("<a>Impens et al. Nature Microbiology 2017</a>");
-        link_NTerm.addSelectionListener(this);
-        link_NTerm.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
-
-        Composite composite_6 = new Composite(composite, SWT.BORDER);
-        GridData gd_composite_6 = new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1);
-        gd_composite_6.widthHint = 850;
-        composite_6.setLayoutData(gd_composite_6);
-        composite_6.setLayout(new GridLayout(4, false));
-        composite_6.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
-        Composite composite_8 = new Composite(composite_6, SWT.NONE);
-        composite_8.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false, false, 1, 1));
-        composite_8.setLayout(new GridLayout(1, false));
-        composite_8.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
-        Label lblBrowseOmicsDatasets = new Label(composite_8, SWT.WRAP);
+        btnPAM55.setFont(SWTResourceManager.getBodyFont(22,SWT.NORMAL));
+        btnPAM55.setBackground(BasicColor.GREEN_LIGHT_ONE);
+        
+        /*
+        Composite composite_ivanovii_row_2 = new Composite(composite_ivanovii, SWT.NONE);
+        GridData gd_composite_ivanovii_row_2 = new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1);
+        composite_ivanovii_row_2.setLayoutData(gd_composite_ivanovii_row_2);
+        composite_ivanovii_row_2.setLayout(new GridLayout(2, false));
+        composite_ivanovii_row_2.setBackground(BasicColor.DARK_ONE);
+        composite_ivanovii_row_2.setForeground(BasicColor.BLACK);
+        
+        btnQMA0440 = new Button(composite_ivanovii_row_2, SWT.TOGGLE);
+        btnQMA0440.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
+        btnQMA0440.addSelectionListener(this);
+        btnQMA0440.setText("QMA0440");
+        btnQMA0440.setToolTipText("Etiologic agent of enteric redmouth disease in fish");
+        btnQMA0440.setFont(SWTResourceManager.getBodyFont(22,SWT.NORMAL));
+        btnQMA0440.setBackground(BasicColor.LIGHT_ONE);
+        
+        Composite composite_entomophaga = new Composite(gene_view_composite_row_1, SWT.NONE);
+        GridData gd_composite_entomophaga = new GridData(SWT.CENTER, SWT.FILL, true, false, 1, 1);
+        composite_entomophaga.setLayoutData(gd_composite_entomophaga);
+        composite_entomophaga.setLayout(new GridLayout(1, false));
+        composite_entomophaga.setBackground(BasicColor.DARK_ONE);
+        composite_entomophaga.setForeground(BasicColor.BLACK);
+        
+        Label lblEntomo = new Label(composite_entomophaga, SWT.NONE);
+        RWTUtils.setMarkup(lblEntomo);
+        lblEntomo.setAlignment(SWT.CENTER);
+        GridData gd_lblEntomo = new GridData(SWT.CENTER, SWT.TOP, true, false, 1, 1);
+        lblEntomo.setLayoutData(gd_lblEntomo);
+        lblEntomo.setFont(SWTResourceManager.getBodyFont(22,SWT.BOLD));
+        lblEntomo.setBackground(BasicColor.DARK_ONE);
+        lblEntomo.setForeground(BasicColor.BLACK);
+        lblEntomo.setText("<i>Y. entomophaga</i>");
+        
+        Composite composite_entomophaga_row_1= new Composite(composite_entomophaga, SWT.NONE);
+        GridData gd_composite_entomophaga_row_1 = new GridData(SWT.CENTER, SWT.CENTER, false, true, 1, 1);
+        composite_entomophaga_row_1.setLayoutData(gd_composite_entomophaga_row_1);
+        composite_entomophaga_row_1.setLayout(new GridLayout(2, false));
+        composite_entomophaga_row_1.setBackground(BasicColor.DARK_ONE);
+        composite_entomophaga_row_1.setForeground(BasicColor.BLACK);
+        
+        btnMH96 = new Button(composite_entomophaga_row_1, SWT.TOGGLE);
+        btnMH96.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, true, 1, 1));
+        btnMH96.addSelectionListener(this);
+        btnMH96.setText("MH96");
+        btnMH96.setToolTipText("Insect pathogen");
+        btnMH96.setFont(SWTResourceManager.getBodyFont(22,SWT.NORMAL));
+        btnMH96.setBackground(BasicColor.LIGHT_ONE);
+        
+        */
+        
+        Composite composite_omics_browser = new Composite(composite, SWT.BORDER);
+        GridData gd_composite_omics_browser = new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1);
+        composite_omics_browser.setLayoutData(gd_composite_omics_browser);
+        composite_omics_browser.setLayout(new GridLayout(1, false));
+        composite_omics_browser.setBackground(BasicColor.GREEN_DARK_TWO);
+        
+        new Label(composite_omics_browser, SWT.NONE);
+        
+        Label lblBrowseOmicsDatasets = new Label(composite_omics_browser, SWT.NONE);
         lblBrowseOmicsDatasets.setAlignment(SWT.CENTER);
-        GridData gd_lblBrowseOmicsDatasets = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
-        gd_lblBrowseOmicsDatasets.widthHint = 140;
+        GridData gd_lblBrowseOmicsDatasets = new GridData(SWT.CENTER, SWT.CENTER, true, false, 1, 1);
         lblBrowseOmicsDatasets.setLayoutData(gd_lblBrowseOmicsDatasets);
-        lblBrowseOmicsDatasets.setText("Browse omics datasets");
-        lblBrowseOmicsDatasets.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
-        lblBrowseOmicsDatasets.setFont(SWTResourceManager.getTitleFont());
+        RWTUtils.setMarkup(lblBrowseOmicsDatasets);
+        lblBrowseOmicsDatasets.setText("Omics browsers<sup style=\"font-family: Times New Roman;  font-size:18px; color:purple\"><i>i</i></sup>");
+        lblBrowseOmicsDatasets.setForeground(BasicColor.BLACK);
+        lblBrowseOmicsDatasets.setFont(SWTResourceManager.getTitleFont(30, SWT.BOLD));
+        lblBrowseOmicsDatasets.setBackground(BasicColor.GREEN_DARK_TWO);
+        lblBrowseOmicsDatasets.setToolTipText("Access complete genomes, transcriptomes and proteomes gathered on "+Database.getInstance().getWebpageTitle()+"\nHover over the browser buttons for more information on their specific functionalities");
 
-        Label lblImage_3 = new Label(composite_8, SWT.BORDER);
-        lblImage_3.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/InitPage/heatmap.png"));
-        Composite composite_10 = new Composite(composite_6, SWT.NONE);
-        GridData gd_composite_10 = new GridData(SWT.LEFT, SWT.TOP, false, false, 1, 1);
-        gd_composite_10.heightHint = 180;
-        composite_10.setLayoutData(gd_composite_10);
-        composite_10.setLayout(new GridLayout(1, false));
-        composite_10.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
-        btnGenomics = new Button(composite_10, SWT.BORDER);
+        new Label(composite_omics_browser, SWT.NONE);
+        
+        Composite composite_omics_browser_row_1 = new Composite(composite_omics_browser, SWT.NONE);
+        GridData gd_composite_omics_browser_row_1 = new GridData(SWT.CENTER, SWT.CENTER, true, false, 1, 1);
+        gd_composite_omics_browser_row_1.widthHint = 800;
+        composite_omics_browser_row_1.setLayoutData(gd_composite_omics_browser_row_1);
+        composite_omics_browser_row_1.setLayout(new GridLayout(3, false));
+        composite_omics_browser_row_1.setBackground(BasicColor.GREEN_DARK_TWO);
+        
+        btnGenomics = new Button(composite_omics_browser_row_1, SWT.TOGGLE);
         btnGenomics.setText("Genomics browser");
-        btnGenomics.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
-        btnGenomics.setFont(SWTResourceManager.getTitleFont(SWT.NORMAL));
+        btnGenomics.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, true, false, 1, 1));
+        btnGenomics.setFont(SWTResourceManager.getBodyFont(22,SWT.NORMAL));
         btnGenomics.addSelectionListener(this);
-        Label lblGoThroughAll = new Label(composite_10, SWT.WRAP);
-        lblGoThroughAll.setData(RWT.MARKUP_ENABLED, Boolean.TRUE);
+        btnGenomics.setBackground(BasicColor.GREEN_LIGHT_TWO);
+        btnGenomics.setToolTipText("Browse all complete genomes\n"
+                + " Visualize strain relationship in a phylogenomic tree\n"
+                + "Access all annotated genome elements");
 
-        lblGoThroughAll.setAlignment(SWT.CENTER);
-        GridData gd_lblGoThroughAll = new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1);
-        gd_lblGoThroughAll.widthHint = 200;
-        lblGoThroughAll.setLayoutData(gd_lblGoThroughAll);
-        lblGoThroughAll.setText("Browse all 83 <i>Listeria</i> complete genomes available on Listeriomics."
-                + " Visualize strain relationship in a phylogenomic tree. Access to all their annotated genome elements.");
-        lblGoThroughAll.setFont(SWTResourceManager.getBodyFont(SWT.NORMAL));
-        lblGoThroughAll.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
-
-        Composite composite_21 = new Composite(composite_6, SWT.NONE);
-        GridData gd_composite_21 = new GridData(SWT.LEFT, SWT.TOP, false, false, 1, 1);
-        gd_composite_21.heightHint = 180;
-        composite_21.setLayoutData(gd_composite_21);
-        composite_21.setLayout(new GridLayout(1, false));
-        composite_21.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
-        btnTranscriptomics = new Button(composite_21, SWT.BORDER);
+        btnTranscriptomics = new Button(composite_omics_browser_row_1, SWT.TOGGLE);
         btnTranscriptomics.setText("Transcriptomics browser");
-        btnTranscriptomics.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
-        btnTranscriptomics.setFont(SWTResourceManager.getTitleFont(SWT.NORMAL));
+        btnTranscriptomics.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, true, false, 1, 1));
+        btnTranscriptomics.setFont(SWTResourceManager.getBodyFont(22,SWT.NORMAL));
         btnTranscriptomics.addSelectionListener(this);
-        Label lblGoThroughAll_1 = new Label(composite_21, SWT.WRAP);
-        lblGoThroughAll_1.setData(RWT.MARKUP_ENABLED, Boolean.TRUE);
-
-        lblGoThroughAll_1.setAlignment(SWT.CENTER);
-        GridData gd_lblGoThroughAll_1 = new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1);
-        gd_lblGoThroughAll_1.widthHint = 200;
-        lblGoThroughAll_1.setLayoutData(gd_lblGoThroughAll_1);
-        lblGoThroughAll_1
-                .setText("Browse all 426 <i>Listeria</i> species transcriptomics datasets available on Listeriomics. "
-                        + "Visualize them on the genome browser. Extract differently expressed genome elements and display their fold changes in a heatmap viewer.");
-        lblGoThroughAll_1.setFont(SWTResourceManager.getBodyFont(SWT.NORMAL));
-        lblGoThroughAll_1.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
-
-        Composite composite_22 = new Composite(composite_6, SWT.NONE);
-        GridData gd_composite_22 = new GridData(SWT.LEFT, SWT.TOP, false, false, 1, 1);
-        gd_composite_22.heightHint = 180;
-        composite_22.setLayoutData(gd_composite_22);
-        composite_22.setLayout(new GridLayout(1, false));
-        composite_22.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
-        btnProteomics = new Button(composite_22, SWT.BORDER);
-        btnProteomics.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
+        btnTranscriptomics.setBackground(BasicColor.GREEN_LIGHT_TWO);
+        btnTranscriptomics.setToolTipText("Browse all microarray and RNA-Seq biological conditions available on "+Database.getInstance().getWebpageTitle()+"\n"
+                        + "Visualize transcript fold changes and RNA-Seq coverage in the genome viewer\n"
+                        + "Display transcript fold change patterns in the heatmap viewer");
+       
+        btnProteomics = new Button(composite_omics_browser_row_1, SWT.TOGGLE);
+        btnProteomics.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, true, false, 1, 1));
         btnProteomics.setText("Proteomics browser");
-        btnProteomics.setFont(SWTResourceManager.getTitleFont(SWT.NORMAL));
+        btnProteomics.setFont(SWTResourceManager.getBodyFont(22,SWT.NORMAL));
         btnProteomics.addSelectionListener(this);
-        Label lblGoThroughAll_2 = new Label(composite_22, SWT.WRAP);
-        lblGoThroughAll_2.setData(RWT.MARKUP_ENABLED, Boolean.TRUE);
+        btnProteomics.setBackground(BasicColor.GREEN_LIGHT_TWO);
+        btnProteomics.setToolTipText("Browse all proteomics biological conditions available on "+Database.getInstance().getWebpageTitle()+"\n"
+        		+ "Visualize protein abundances and fold changes in the genome viewer"
+        		+ "\nDisplay protein abundance fold change patterns in the heatmap viewer");
 
-        lblGoThroughAll_2.setAlignment(SWT.CENTER);
-        GridData gd_lblGoThroughAll_2 = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
-        gd_lblGoThroughAll_2.widthHint = 200;
-        lblGoThroughAll_2.setLayoutData(gd_lblGoThroughAll_2);
-        lblGoThroughAll_2
-                .setText("Browse all 76 <i>Listeria</i> species proteomics datasets available on Listeriomics. "
-                        + "Visualize them on the genome browser. Display protein detection patterns for each datasets in a heatmap viewer.");
-        lblGoThroughAll_2.setFont(SWTResourceManager.getBodyFont(SWT.NORMAL));
-        lblGoThroughAll_2.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
+        new Label(composite_omics_browser, SWT.NONE);
 
-        Composite composite_13 = new Composite(composite, SWT.BORDER);
-        GridData gd_composite_13 = new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1);
-        gd_composite_13.widthHint = 850;
-        composite_13.setLayoutData(gd_composite_13);
-        composite_13.setLayout(new GridLayout(3, false));
-        composite_13.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
-        Composite composite_14 = new Composite(composite_13, SWT.NONE);
-        composite_14.setLayout(new GridLayout(1, false));
-        composite_14.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
-        Label lblAccessToInformation = new Label(composite_14, SWT.WRAP);
-        lblAccessToInformation.setAlignment(SWT.CENTER);
-        GridData gd_lblAccessToInformation = new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1);
-        gd_lblAccessToInformation.widthHint = 140;
-        lblAccessToInformation.setLayoutData(gd_lblAccessToInformation);
-        lblAccessToInformation.setText("Genes and small non-coding RNAs");
-        lblAccessToInformation.setFont(SWTResourceManager.getTitleFont());
-        lblAccessToInformation.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
-        Label lblImage_1 = new Label(composite_14, SWT.BORDER);
-        lblImage_1.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/InitPage/sRNAs.png"));
+        Composite composite_data_loading = new Composite(composite, SWT.BORDER);
+        GridData gd_composite_data_loading = new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1);
+        composite_data_loading.setLayoutData(gd_composite_data_loading);
+        composite_data_loading.setLayout(new GridLayout(1, false));
+        composite_data_loading.setBackground(BasicColor.GREEN_DARK_THREE);
+          
+        new Label(composite_data_loading, SWT.NONE);
 
-        Composite composite_15 = new Composite(composite_13, SWT.NONE);
-        GridData gd_composite_15 = new GridData(SWT.CENTER, SWT.TOP, false, false, 1, 1);
-        gd_composite_15.heightHint = 180;
-        composite_15.setLayoutData(gd_composite_15);
-        composite_15.setLayout(new GridLayout(1, false));
-        composite_15.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
-        btnGeneView = new Button(composite_15, SWT.BORDER);
-        btnGeneView.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
-        // btnGeneView.setImage(ResourceManager.getPluginImage("bacnet.core",
-        // "icons/InitPage/SystemsBio.png"));
-        btnGeneView.addSelectionListener(this);
-        btnGeneView.setText("Genes information");
-        btnGeneView.setFont(SWTResourceManager.getTitleFont(SWT.NORMAL));
+        Label lblDataLoading = new Label(composite_data_loading, SWT.WRAP);
+        lblDataLoading.setAlignment(SWT.CENTER);
+        GridData gd_lblDataLoading = new GridData(SWT.CENTER, SWT.CENTER, true, false, 1, 1);
+        lblDataLoading.setLayoutData(gd_lblDataLoading);
+        RWTUtils.setMarkup(lblDataLoading);
+        lblDataLoading.setText("Data loading<sup style=\"font-family: Times New Roman;  font-size:18px; color:purple\"><i>i</i></sup>");
+        lblDataLoading.setForeground(BasicColor.BLACK);
+        lblDataLoading.setFont(SWTResourceManager.getTitleFont(30, SWT.BOLD));
+        lblDataLoading.setBackground(BasicColor.GREEN_DARK_THREE);
+        lblDataLoading.setToolTipText("Load on "+Database.getInstance().getWebpageTitle()+" and download from "+Database.getInstance().getWebpageTitle()+"\nHover over the load buttons for more information on their specific functionalities ");
 
-        Label lblinfo = new Label(composite_15, SWT.WRAP);
-        lblinfo.setData(RWT.MARKUP_ENABLED, Boolean.TRUE);
+        new Label(composite_data_loading, SWT.NONE);
 
-        lblinfo.setAlignment(SWT.CENTER);
-        lblinfo.setFont(SWTResourceManager.getBodyFont(SWT.NORMAL));
-        lblinfo.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
-        GridData gd_lblinfo = new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1);
-        gd_lblinfo.widthHint = 200;
-        lblinfo.setLayoutData(gd_lblinfo);
-        lblinfo.setText("Access to all information about <i>Listeria</i> species genes: "
-                + "functional annotation, gene conservation, synteny, expression atlas and protein atlas. "
-                + "The expression atlas extracts the transcriptomics datasets in which a gene is differently expressed."
-                + " The protein atlas shows in which proteomics datasets a protein has been observed.");
-        Composite composite_4 = new Composite(composite_13, SWT.NONE);
-        GridData gd_composite_4 = new GridData(SWT.CENTER, SWT.TOP, false, false, 1, 1);
-        gd_composite_4.heightHint = 180;
-        composite_4.setLayoutData(gd_composite_4);
-        composite_4.setSize(242, 79);
-        composite_4.setLayout(new GridLayout(1, false));
-        composite_4.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
-
-        btnSrnas = new Button(composite_4, SWT.BORDER);
-        btnSrnas.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
-        btnSrnas.addSelectionListener(this);
-        btnSrnas.setText("Small RNAs information");
-        btnSrnas.setFont(SWTResourceManager.getTitleFont(SWT.NORMAL));
-
-        Label lblEgdeSmallRnas = new Label(composite_4, SWT.WRAP);        
-        lblEgdeSmallRnas.setData(RWT.MARKUP_ENABLED, Boolean.TRUE);
-
-        lblEgdeSmallRnas.setAlignment(SWT.CENTER);
-        GridData gd_lblEgdeSmallRnas = new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1);
-        gd_lblEgdeSmallRnas.widthHint = 200;
-        lblEgdeSmallRnas.setLayoutData(gd_lblEgdeSmallRnas);
-        lblEgdeSmallRnas.setText(
-                "Access to all information about the 304 <i>Listeria monocytogenes</i> EGD-e small non-coding RNAs,"
-                        + " 154 small non-coding RNAs (sRNAs) supposedly acting in <i>trans</i>, 104 are anti-sense RNAs (asRNAs),"
-                        + " and 46 are cis-regulatory elements (cisRegs) including riboswitches. Their"
-                        + " position, sequence, predicted secondary structure and supplementary information from the original publications are displayed."
-                        + "The expression atlas extracts the transcriptomics datasets in which a small RNA is differently expressed.");
-        lblEgdeSmallRnas.setFont(SWTResourceManager.getBodyFont(SWT.NORMAL));
-        lblEgdeSmallRnas.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
-
-        Composite composite_16 = new Composite(composite, SWT.BORDER);
-        GridData gd_composite_16 = new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1);
-        gd_composite_16.widthHint = 850;
-        composite_16.setLayoutData(gd_composite_16);
-        composite_16.setLayout(new GridLayout(4, false));
-        composite_16.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
-        Composite composite_17 = new Composite(composite_16, SWT.NONE);
-        composite_17.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 2));
-        composite_17.setLayout(new GridLayout(1, false));
-        composite_17.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
-        Label lblListeriomicsSpecificTools = new Label(composite_17, SWT.WRAP);
-        lblListeriomicsSpecificTools.setAlignment(SWT.CENTER);
-        GridData gd_lblListeriomicsSpecificTools = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
-        gd_lblListeriomicsSpecificTools.widthHint = 140;
-        lblListeriomicsSpecificTools.setLayoutData(gd_lblListeriomicsSpecificTools);
-        lblListeriomicsSpecificTools.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
-        lblListeriomicsSpecificTools.setText("Listeriomics specific tools");
-        lblListeriomicsSpecificTools.setFont(SWTResourceManager.getTitleFont(SWT.BOLD));
-        Label lblImage_2 = new Label(composite_17, SWT.BORDER);
-        lblImage_2.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/InitPage/SysBio.png"));
-
-        Composite composite_2 = new Composite(composite_16, SWT.NONE);
-        composite_2.setLayoutData(new GridData(SWT.CENTER, SWT.TOP, false, false, 1, 1));
-        composite_2.setSize(275, 99);
-        composite_2.setLayout(new GridLayout(1, false));
-        composite_2.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
-        btnCoExpression = new Button(composite_2, SWT.BORDER);
-        btnCoExpression.addSelectionListener(this);
-        btnCoExpression.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
-        btnCoExpression.setText("Co-Expression Network");
-        btnCoExpression.setFont(SWTResourceManager.getTitleFont(SWT.NORMAL));
-        Label lblExpressionAtlas_1 = new Label(composite_2, SWT.WRAP);
-        lblExpressionAtlas_1.setAlignment(SWT.CENTER);
-        GridData gd_lblExpressionAtlas_1 = new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1);
-        gd_lblExpressionAtlas_1.widthHint = 200;
-        lblExpressionAtlas_1.setLayoutData(gd_lblExpressionAtlas_1);
-        lblExpressionAtlas_1.setText("Access to the co-expression network tool to search for potential regulations");
-        lblExpressionAtlas_1.setFont(SWTResourceManager.getBodyFont(SWT.NORMAL));
-        lblExpressionAtlas_1.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
-
-        Composite composite_18 = new Composite(composite_16, SWT.NONE);
-        composite_18.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false, false, 1, 1));
-        composite_18.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
-        composite_18.setLayout(new GridLayout(1, false));
-        btnLoadData = new Button(composite_18, SWT.BORDER | SWT.CENTER);
-        btnLoadData.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
-        btnLoadData.setText(" Load data selection");
-        btnLoadData.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/fileIO/txtload.bmp"));
-        btnLoadData.setFont(SWTResourceManager.getTitleFont(SWT.NORMAL));
-
-        Label lblLoadAPrevious = new Label(composite_18, SWT.WRAP);
-        lblLoadAPrevious.setAlignment(SWT.CENTER);
-        lblLoadAPrevious.setFont(SWTResourceManager.getBodyFont(SWT.NORMAL));
-        GridData gd_lblLoadAPrevious = new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1);
-        gd_lblLoadAPrevious.widthHint = 200;
-        lblLoadAPrevious.setLayoutData(gd_lblLoadAPrevious);
-        lblLoadAPrevious.setText("Load a previous genome viewer visualization saved in .gview file");
-        lblLoadAPrevious.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
+        Composite composite_data_loading_row_1 = new Composite(composite_data_loading, SWT.NONE);
+        GridData gd_composite_data_loading_row_1 = new GridData(SWT.CENTER, SWT.CENTER, true, false, 1, 1);
+        gd_composite_data_loading_row_1.widthHint = 600;
+        composite_data_loading_row_1.setLayoutData(gd_composite_data_loading_row_1);
+        composite_data_loading_row_1.setLayout(new GridLayout(2, false));
+        composite_data_loading_row_1.setBackground(BasicColor.GREEN_DARK_THREE);
+        
+        btnLoadData = new Button(composite_data_loading_row_1, SWT.TOGGLE);
+        btnLoadData.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, true, false, 1, 1));
+        btnLoadData.setText(" Load genome viewer");
+        //btnLoadData.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/fileIO/txtload.bmp"));
+        btnLoadData.setFont(SWTResourceManager.getBodyFont(22,SWT.NORMAL));
+        btnLoadData.setBackground(BasicColor.GREEN_LIGHT_THREE);
+        btnLoadData.setToolTipText("Load a genome viewer displaying specific omics\ndata previously saved in a .gview file");
         btnLoadData.addSelectionListener(this);
 
-        Composite composite_5 = new Composite(composite_16, SWT.NONE);
-        composite_5.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false, false, 1, 1));
-        composite_5.setLayout(new GridLayout(1, false));
-        composite_5.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
-        btnAccessWiki = new Button(composite_16, SWT.BORDER);
-        btnAccessWiki.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
-        btnAccessWiki.setText("Access Listeriomics wiki");
-        btnAccessWiki.setFont(SWTResourceManager.getTitleFont(SWT.NORMAL));
-        btnAccessWiki.addSelectionListener(this);
-        Label lblGoToThe = new Label(composite_16, SWT.WRAP);
-        lblGoToThe.setAlignment(SWT.CENTER);
-        lblGoToThe.setFont(SWTResourceManager.getBodyFont(SWT.NORMAL));
-        GridData gd_lblGoToThe = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
-        gd_lblGoToThe.widthHint = 200;
-        lblGoToThe.setLayoutData(gd_lblGoToThe);
-        lblGoToThe.setText(
-                "Go to the Listeriomics wiki page for tutorials and description of the different tools included in Listeriomics. "
-                        + "Be careful, it might not display if you disallow your internet browser to display pop-up webpage.");
-        lblGoToThe.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
-        new Label(composite_16, SWT.NONE);
-        new Label(composite_16, SWT.NONE);
+        btnDownloadData = new Button(composite_data_loading_row_1, SWT.TOGGLE);
+        btnDownloadData.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, true, false, 1, 1));
+        btnDownloadData.setText(" Download processed data");
+        //btnDownloadData.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/fileIO/txtload.bmp"));
+        btnDownloadData.setFont(SWTResourceManager.getBodyFont(22,SWT.NORMAL));
+        btnDownloadData.setBackground(BasicColor.GREEN_LIGHT_THREE);
+        btnDownloadData.setToolTipText("Download processed transcriptomics and proteomics\ndata for each genome in a table format");
+        btnDownloadData.addSelectionListener(this);
 
-        Composite composite_19 = new Composite(composite, SWT.NONE);
-        composite_19.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, true, false, 1, 1));
-        composite_19.setLayout(new GridLayout(1, false));
-
+        new Label(composite_data_loading, SWT.NONE);
+        
+        Composite composite_foot = new Composite(composite, SWT.NONE);
+        composite_foot.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, true, true, 1, 1));
+        composite_foot.setLayout(new GridLayout(4, true));
+        
+        Composite composite_19 = new Composite(composite_foot, SWT.NONE);
+        composite_19.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, true, true, 4, 1));
+        composite_19.setLayout(new GridLayout(1, true));
+        
         Label lblLastUpdate = new Label(composite_19, SWT.NONE);
-        lblLastUpdate.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, true, 1, 1));
-        lblLastUpdate.setText("Last update: July 2017");
+        lblLastUpdate.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, true, true, 1, 1));
+        lblLastUpdate.setText("Last update: January 2023");
+        lblLastUpdate.setFont(SWTResourceManager.getBodyFont(20,SWT.BOLD));
+        
+        new Label(composite_19, SWT.NONE);
 
         linkPubli = new Link(composite_19, SWT.NONE);
-        linkPubli.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
-        linkPubli.setText("<a>Cite Listeriomics</a>");
+        linkPubli.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, true, false, 1, 1));
+        linkPubli.setText("For more information on the website functionalities, please go to <a>L\u00EA-Bury et al.</a>");
+        linkPubli.setFont(SWTResourceManager.getBodyFont(18,SWT.NORMAL));
         linkPubli.addSelectionListener(this);
+        
+        new Label(composite_19, SWT.NONE);
+        linkPubli2 = new Link(composite_19, SWT.NONE);
+        linkPubli2.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, true, false, 1, 1));
+        linkPubli2.setText("If you use "+Database.getInstance().getWebpageTitle()+", please cite our <a>article</a>");
+        linkPubli2.setFont(SWTResourceManager.getBodyFont(18,SWT.NORMAL));
+        linkPubli2.addSelectionListener(this);
 
-        Link link = new Link(composite_19, SWT.NONE);
-        link.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
-        link.setText("Contact us if you have a recently published \\\"omics\\\" dataset you want to be integrated to Listeriomics<br><a>becavin AT ipmc.cnrs DOT fr</a>");
+        new Label(composite_19, SWT.NONE);
+        Label lblContact = new Label(composite_19, SWT.NONE);
+        lblContact.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, true, false, 1, 1));
+        lblContact.setData(RWT.MARKUP_ENABLED, Boolean.TRUE);
+        lblContact.setText("Contact us if you have a recently published \"omics\" datasets<br/>you want to be integrated to "+Database.getInstance().getWebpageTitle()+":<br><a href=\"mailto:yersiniomics@pasteur.fr\">yersiniomics@pasteur.fr</a></br>");
+        lblContact.setFont(SWTResourceManager.getBodyFont(18,SWT.NORMAL));
+        lblContact.setAlignment(SWT.CENTER);
 
-        Label label_1 = new Label(composite_19, SWT.NONE);
+/*
+        new Label(composite_19, SWT.NONE);
 
         Label lblImagelicence = new Label(composite_19, SWT.CENTER);
         lblImagelicence.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
         lblImagelicence.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/logos/cccommons.png"));
 
         Label lblThisWorkIs = new Label(composite_19, SWT.NONE);
-        lblThisWorkIs.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
+        lblThisWorkIs.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, true, false, 1, 1));
         lblThisWorkIs.setAlignment(SWT.CENTER);
         lblThisWorkIs.setText("This work is licensed under");
         linkLicenceField = new Link(composite_19, SWT.NONE);
         linkLicenceField.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, true, true, 1, 1));
         linkLicenceField.setText("<a>Creative Commons Attribution 4.0 International License</a>");
         linkLicenceField.addSelectionListener(this);
-
-        Label label = new Label(composite_19, SWT.NONE);
+*/
+        new Label(composite_19, SWT.NONE);
 
         Label lblCredits = new Label(composite_19, SWT.NONE);
         lblCredits.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
         lblCredits.setAlignment(SWT.CENTER);
         lblCredits.setText("Credits");
-        linkUIBC = new Link(composite_19, SWT.NONE);
-        linkUIBC.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
-        linkUIBC.setText("<a>Unité des Intéractions Bactéries-Cellules, Institut Pasteur, Paris</a>");
-        linkUIBC.addSelectionListener(this);
-        linkHUB = new Link(composite_19, SWT.NONE);
-        linkHUB.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
-        linkHUB.setText("<a>Bioinformatics and Biostatistics HUB, Institut Pasteur, Paris</a>");
-        linkHUB.addSelectionListener(this);
+        lblCredits.setFont(SWTResourceManager.getBodyFont(20,SWT.BOLD));
 
-        Label lblBacnet_1 = new Label(composite_19, SWT.NONE);
-        lblBacnet_1.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
-        lblBacnet_1.setText("BACNET 10-BINF-02-01");
+        linkYersinia = new Link(composite_19, SWT.NONE);
+        linkYersinia.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
+        linkYersinia.setText("<a>Yersinia Research Unit, Institut Pasteur, Paris</a>");
+        linkYersinia.setFont(SWTResourceManager.getBodyFont(18,SWT.NORMAL));
+
+        linkYersinia.addSelectionListener(this);
+       
+        new Label(composite_19, SWT.NONE);
 
         Composite composite_3 = new Composite(composite_19, SWT.NONE);
-        composite_3.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
-        composite_3.setLayout(new GridLayout(4, false));
+        GridData gd_composite_3 = new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1);
 
-        Label lblPasteur = new Label(composite_3, SWT.NONE);
-        lblPasteur.setSize(0, 15);
-        lblPasteur.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-        lblPasteur.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/logos/Pasteur.png"));
-
-        Label lblInra = new Label(composite_3, SWT.NONE);
-        lblInra.setSize(0, 15);
-        lblInra.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-        lblInra.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/logos/INRA.png"));
-        Label lblAnr = new Label(composite_3, SWT.NONE);
-        lblAnr.setSize(0, 15);
-        lblAnr.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/logos/Logo ANR.png"));
-
-        Label lblBacnet = new Label(composite_3, SWT.NONE);
-        lblBacnet.setSize(0, 15);
-        lblBacnet.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/logos/investissement-davenir.png"));
-
+        composite_3.setLayoutData(gd_composite_3);
+        composite_3.setLayout(new GridLayout(1, false));
+        
+        Label lblAll = new Label(composite_3, SWT.NONE);
+        lblAll.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
+        lblAll.setImage(ResourceManager.getPluginImage("bacnet.core", "icons/logos/logos.png"));
+        
+        new Label(composite_19, SWT.NONE);
+        new Label(composite_19, SWT.NONE);
+        
         scrolledComposite.setContent(composite);
         scrolledComposite.setMinSize(composite.computeSize(SWT.DEFAULT, SWT.DEFAULT));
 
         pushState();
 
+        //System.out.println("InitView loaded");
+ 
     }
 
     @Focus
     public void onFocus() {
         if (!focused) {
             pushState();
+            System.out.println("InitView Focused");
             focused = true;
         } else {
             focused = false;
@@ -679,35 +700,50 @@ public class InitViewListeria2 implements SelectionListener {
 
     @Override
     public void widgetSelected(SelectionEvent e) {
-        if (e.getSource() == btnSrnas) {
-            partService.showPart(SrnaSummaryView.ID, PartState.ACTIVATE);
-            NavigationManagement.pushStateView(SrnaSummaryView.ID);
-        } else if (e.getSource() == btnCoExpression) {
+        if (e.getSource() == btnCoExpression) {
             partService.showPart(CoExprNetworkView.ID, PartState.ACTIVATE);
             NavigationManagement.pushStateView(CoExprNetworkView.ID);
-        } else if (e.getSource() == btnNTerm) {
-            GenomeTranscriptomeView.displayNTerminomics(partService, "");
-        } else if (e.getSource() == btnNTermTable) {
-            partService.showPart(NTerminomicsView.ID, PartState.ACTIVATE);
-            NavigationManagement.pushStateView(NTerminomicsView.ID);
-        } else if (e.getSource() == btnBHI37) {
-            // AnnotationView.openAnnotationView(partService, Genome.loadEgdeGenome());
-            GenomeTranscriptomeView.displayBHI37View(partService);
-        } else if (e.getSource() == btnStat) {
-            GenomeTranscriptomeView.displayStat37View(partService);
-        } else if (e.getSource() == btnIntracellular) {
-            GenomeTranscriptomeView.displayIntracellularMacrophagesView(partService);
-        } else if (e.getSource() == btnProteomics) {
-            try {
-                ArrayList<String> genomeNames = new ArrayList<>();
-                genomeNames.add(Genome.EGDE_NAME);
-                OpenGenomesThread thread = new OpenGenomesThread(genomeNames);
-                new ProgressMonitorDialog(this.shell).run(true, false, thread);
-            } catch (InvocationTargetException ex) {
-                ex.printStackTrace();
-            } catch (InterruptedException ex) {
-                ex.printStackTrace();
-            }
+        //}else if (e.getSource() == btnCO92) {
+        //    GeneView.openGeneView(partService);
+        }else if (e.getSource() == btnUSA300_ISMMS1) {
+            GeneView.openUSA300_ISMMS1GeneView(partService);
+        }else if (e.getSource() == btnEGDe) {
+            GeneView.openEGDeGeneView(partService);
+        } else if (e.getSource() == btnUSA300_FPR3757) {
+            GeneView.openUSA300_FPR3757GeneView(partService);
+        } else if (e.getSource() == btnEGD) {
+            GeneView.openEGDGeneView(partService);
+        } else if (e.getSource() == btnEV76) {
+            GeneView.openEV76GeneView(partService);
+        } else if (e.getSource() == btnIP32953) {
+            GeneView.openIP32953GeneView(partService);
+        } else if (e.getSource() == btnClip11262) {
+            GeneView.openClip11262GeneView(partService);
+        } else if (e.getSource() == btnIP31758) {
+            GeneView.openIP31758GeneView(partService);
+        } else if (e.getSource() == btnY11) {
+            GeneView.openY11GeneView(partService);
+        } else if (e.getSource() == btnY1) {
+            GeneView.openY1GeneView(partService);
+        } else if (e.getSource() == btnSLCC5334) {
+            GeneView.openSLCC5334GeneView(partService);
+        } else if (e.getSource() == btnIP38326) {
+            GeneView.openIP38326GeneView(partService);
+        } else if (e.getSource() == btnWA) {
+            GeneView.openWAGeneView(partService);
+        } else if (e.getSource() == btnIP38023) {
+            GeneView.openIP38023GeneView(partService);
+        } else if (e.getSource() == btnIP37485) {
+            GeneView.openIP37485GeneView(partService);
+        } else if (e.getSource() == btnIP37574) {
+            GeneView.openIP37574GeneView(partService);
+        } else if (e.getSource() == btnPAM55) {
+            GeneView.openPAM55GeneView(partService);
+        } else if (e.getSource() == btnQMA0440) {
+            GeneView.openQMA0440GeneView(partService);
+        } else if (e.getSource() == btnMH96) {
+            GeneView.openMH96GeneView(partService);
+        }else if (e.getSource() == btnProteomics) {
             partService.showPart(ProteomicsView.ID, PartState.ACTIVATE);
             NavigationManagement.pushStateView(ProteomicsView.ID);
         } else if (e.getSource() == btnGenomics) {
@@ -716,7 +752,7 @@ public class InitViewListeria2 implements SelectionListener {
         } else if (e.getSource() == btnTranscriptomics) {
             try {
                 ArrayList<String> genomeNames = new ArrayList<>();
-                genomeNames.add(Genome.EGDE_NAME);
+                genomeNames.add(Genome.YERSINIA_NAME);
                 OpenGenomesThread thread = new OpenGenomesThread(genomeNames);
                 new ProgressMonitorDialog(this.shell).run(true, false, thread);
             } catch (InvocationTargetException ex) {
@@ -732,16 +768,13 @@ public class InitViewListeria2 implements SelectionListener {
         } else if (e.getSource() == btnGeneView) {
             GeneView.openGeneView(partService);
         } else if (e.getSource() == linkPubli) {
-            String url = "http://msystems.asm.org/content/2/2/e00186-16";
+            String url = "https://pubmed.ncbi.nlm.nih.gov/";
             NavigationManagement.openURLInExternalBrowser(url, partService);
-        } else if (e.getSource() == link_NTerm) {
-            String url = "https://www.nature.com/articles/nmicrobiol20175";
+        } else if (e.getSource() == linkPubli2) {
+            String url = "https://pubmed.ncbi.nlm.nih.gov/";
             NavigationManagement.openURLInExternalBrowser(url, partService);
-        } else if (e.getSource() == linkUIBC) {
-            String url = "https://research.pasteur.fr/en/team/bacteria-cell-interactions/";
-            NavigationManagement.openURLInExternalBrowser(url, partService);
-        } else if (e.getSource() == linkHUB) {
-            String url = "https://research.pasteur.fr/en/team/bioinformatics-and-biostatistics-hub/";
+        } else if (e.getSource() == linkYersinia) {
+            String url = "https://research.pasteur.fr/en/team/yersinia/";
             NavigationManagement.openURLInExternalBrowser(url, partService);
         } else if (e.getSource() == linkLicenceField) {
             String url = "http://creativecommons.org/licenses/by/4.0/";
@@ -758,6 +791,9 @@ public class InitViewListeria2 implements SelectionListener {
             } catch (Exception e1) {
                 System.out.println("Cannot read the list of data");
             }
+        } else if (e.getSource() == btnDownloadData) {
+            //String url = "https://yersiniomics.pasteur.fr/Download/";
+            //NavigationManagement.openURLInExternalBrowser(url, partService);
         }
         // else if(e.getSource()==btnCheckSessionStatus){
         // SessionControl sessionControl = new SessionControl();
