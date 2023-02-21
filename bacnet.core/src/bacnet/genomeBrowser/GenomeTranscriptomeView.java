@@ -116,14 +116,14 @@ public class GenomeTranscriptomeView {
         this.genome = Genome.loadGenome(genomeName);
     }
 
-    public void updateView(IProgressMonitor monitor) {
+    public void updateView(IProgressMonitor monitor, String GenomeElement) {
         /*
          * Load Experiment and init Track
          */
-        String firstChromoID = genome.getFirstChromosome().getChromosomeID();
+        String chromoID = genome.getElement(GenomeElement).getChromosomeID();
         //System.out.println("updateView: "+ firstChromoID);
 
-        track = new Track(genome, firstChromoID);
+        track = new Track(genome, chromoID);
         int i = 1;
         for (String bioCondName : bioCondNames) {
         	
@@ -226,7 +226,7 @@ public class GenomeTranscriptomeView {
         NavigationManagement.pushStateView(id, new HashMap<>());
         GenomeTranscriptomeView view = (GenomeTranscriptomeView) part.getObject();
         view.getTracksComposite().setParentViewId(id);
-    	System.out.println("displayGenomeElementAndBioConditions"+ bioConditionsSelected);
+    	//System.out.println("displayGenomeElementAndBioConditions"+ bioConditionsSelected);
 
         // Create your new ProgressMonitorDialog with a IRunnableWithProgress
         try {
@@ -453,7 +453,7 @@ public class GenomeTranscriptomeView {
             monitor.worked(1);
             //System.out.println("run6");
 
-            view.updateView(monitor);
+            view.updateView(monitor, genomeElement);
             //System.out.println("run7");
 
             // You are done
@@ -733,7 +733,7 @@ public class GenomeTranscriptomeView {
         MPart part = partService.findPart(id);
         GenomeTranscriptomeView view = (GenomeTranscriptomeView) part.getObject();
 
-        view.setData(Genome.EGDE_NAME, bioConditions);
+        //view.setData(Genome.EGDE_NAME, bioConditions);
         view.updateView();
         return view;
     }

@@ -43,7 +43,7 @@ public class Phylogenomic {
     			String attribute = line.substring(0,line.indexOf(">")).trim();
     			String genomeTemp = line.substring(line.indexOf(">")+1, line.indexOf("<")).trim();
 				genomeToAttribute.put(genomeTemp, attribute);
-				System.out.println("genomeToAttribute: "+genomeTemp+" - "+attribute);
+				//System.out.println("genomeToAttribute: "+genomeTemp+" - "+attribute);
     		}
 
 		}

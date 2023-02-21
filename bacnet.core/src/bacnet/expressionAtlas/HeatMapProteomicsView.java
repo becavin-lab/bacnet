@@ -244,7 +244,8 @@ public class HeatMapProteomicsView implements SelectionListener {
 
     public static void displayComparisonsAndElement(String genomeName, ArrayList<String> comparisons, String sequence,
             EPartService partService) {
-        ArrayList<String> genomeArrays = BioCondition.getTranscriptomesGenomes();
+        ArrayList<String> genomeArrays = BioCondition.getProteomeGenomes();
+        
         if (genomeArrays.contains(genomeName)) {
             String id = HeatMapProteomicsView.ID + "-" + String.valueOf(Math.random() * 1000).substring(0, 3);
             // initiate view

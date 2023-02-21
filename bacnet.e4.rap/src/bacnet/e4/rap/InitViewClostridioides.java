@@ -763,10 +763,10 @@ public class InitViewClostridioides implements SelectionListener {
         } else if (e.getSource() == btnGeneView) {
             GeneView.openGeneView(partService);
         } else if (e.getSource() == linkPubli) {
-            String url = "https://pubmed.ncbi.nlm.nih.gov/";
+            String url = "https://journals.asm.org/doi/full/10.1128/spectrum.03826-22";
             NavigationManagement.openURLInExternalBrowser(url, partService);
         } else if (e.getSource() == linkPubli2) {
-            String url = "https://pubmed.ncbi.nlm.nih.gov/";
+            String url = "https://journals.asm.org/doi/full/10.1128/spectrum.03826-22";
             NavigationManagement.openURLInExternalBrowser(url, partService);
         } else if (e.getSource() == linkYersinia) {
             String url = "https://research.pasteur.fr/en/team/yersinia/";

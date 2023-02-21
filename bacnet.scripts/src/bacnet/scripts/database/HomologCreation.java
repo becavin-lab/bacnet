@@ -35,9 +35,9 @@ public class HomologCreation {
 	 * Path for data on the server when running homolog search blasts
 	 */
 
-	//public static String PATH_SCRIPT = "/pasteur/zeus/projets/p02/yersiniomics/BLAST/"+Database.getInstance().getProjectName()+"/";
+	public static String PATH_SCRIPT = "/pasteur/zeus/projets/p02/yersiniomics/BLAST/"+Database.getInstance().getProjectName()+"/";
 	//public static String PATH_SCRIPT = "/Users/christophebecavin/Documents/Peptidomics//GenomeNCBI/";
-	public static String PATH_SCRIPT = "C:\\Users\\pilebury\\Documents\\Yersiniomics\\"+Database.getInstance().getProjectName()+"\\GenomeNCBI\\";
+	//public static String PATH_SCRIPT = "C:\\Users\\pilebury\\Documents\\Yersiniomics\\"+Database.getInstance().getProjectName()+"\\GenomeNCBI\\";
 
 	/**
 	 * Path for Blast+ 
