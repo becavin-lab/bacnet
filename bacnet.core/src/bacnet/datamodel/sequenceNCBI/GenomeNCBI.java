@@ -118,7 +118,7 @@ public class GenomeNCBI {
         this.species = FileUtils.removeExtensionAndPath(genomePath);
         File file = new File(genomePath);
         System.out.println(genomePath);
-        System.out.println("Load " + this.species);
+        System.out.println("GenomeNCBI load " + this.species);
         /*
          ****** First we read Genome sequence information in the different fna files
          *
@@ -130,7 +130,7 @@ public class GenomeNCBI {
         File[] files = file.listFiles(new FilenameFilter() {
             @Override
             public boolean accept(File dir, String name) {
-            	System.out.println(name);
+            	System.out.println("list files: "+name);
                 if (name.endsWith(".fna"))
                     return true;
                 return false;
@@ -169,6 +169,8 @@ public class GenomeNCBI {
                     chromosome.setAccession(new AccessionID(accession, DataSource.NCBI));
                 } else {
                     chromosome.setAccession(dnaSequence.getAccession());
+                    System.out.println("dnaSequence.getAccession() " + dnaSequence.getAccession());
+
                 }
                 chromosome.setChromosomeID(accession);
                 chromosome.setDescription(dnaSequence.getDescription());

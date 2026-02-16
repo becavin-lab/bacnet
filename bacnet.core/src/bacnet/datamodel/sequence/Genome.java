@@ -657,7 +657,7 @@ public class Genome {
      * @return
      */
     public static String getDefautGenome() {
-        return getAvailableGenomes().get(27);
+        return getAvailableGenomes().get(67); //to change if CO92 change place
     }
 
     /**

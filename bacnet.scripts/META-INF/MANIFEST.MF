@@ -1,6 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Scripts
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Bundle-SymbolicName: bacnet.scripts; singleton:=true
 Automatic-Module-Name: bacnet.scripts
 Bundle-Version: 2.0.0.qualifier
@@ -11,7 +12,6 @@ Require-Bundle: org.eclipse.e4.ui.workbench;bundle-version="0.0.0",
  org.apache.commons.io;bundle-version="2.2.0",
  org.eclipse.rap.rwt
 Bundle-ActivationPolicy: lazy
-Bundle-RequiredExecutionEnvironment: JavaSE-11
 Export-Package: 
  bacnet.scripts,
  bacnet.scripts.arrayexpress,

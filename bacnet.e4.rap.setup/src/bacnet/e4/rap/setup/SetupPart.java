@@ -961,7 +961,11 @@ public class SetupPart implements SelectionListener {
             for (String genome : dataValidation.getGenomes().keySet()) {
                 if (!dataValidation.getGenomes().get(genome)) {
                     logs += "Convert genome: " + genome + "\n";
+                	System.out.println("before load");
+
                     GenomeNCBI genomeNCBI = GenomeNCBITools.loadGenome(genome, GenomeNCBI.PATH_GENOMES, false, true);
+                	System.out.println("afterload");
+
                     GenomeConversion.run(genomeNCBI, GenomeNCBI.PATH_GENOMES + "/" + genome, genome);
                     //System.out.println("Conversion complete");
                     Genome genomeTemp = Genome.loadGenome(genome);
@@ -996,7 +1000,8 @@ public class SetupPart implements SelectionListener {
         	logs = HomologCreation.createBlastDB(logs);
         	updateConsole();        	
         } else if (e.getSource() == btnCreatBlastpScript) {
-        	logs = HomologCreation.createBlastScript(logs);
+//			WARNING: change breakline in FileUtils/saveText to run on Linux cluster
+        	logs = HomologCreation.createBlastScript(logs); 
         	updateConsole();        	
         } else if (e.getSource() == btnCheckBlastResult) {
         	logs = HomologCreation.verifyBlastResults(logs);

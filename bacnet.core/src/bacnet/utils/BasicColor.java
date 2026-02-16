@@ -33,6 +33,8 @@ public class BasicColor {
     public static Color LIGHTBLUE = new Color(display, 149, 224, 245);
     // CYAN
     public static Color CYAN = new Color(display, 0, 217, 217);
+    // FIREBIRCK
+    public static Color FIREBRICK = new Color(display, 178, 34, 34);
 
 
     public static Color BANNER_COLOR = new Color(display, 217, 253, 254);

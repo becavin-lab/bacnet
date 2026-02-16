@@ -25,6 +25,7 @@ public class Test {
 //			e.printStackTrace();
 //		}
 
+		//To annotate KIM5 strain with KIM10+ original old locus
 		//bacnet.scripts.database.GenomesCreation.correctKIM5OldLocusTag();
 		
 		/*

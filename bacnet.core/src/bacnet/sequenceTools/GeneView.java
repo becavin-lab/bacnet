@@ -1503,18 +1503,22 @@ public class GeneView implements SelectionListener, MouseListener {
 				}
 
 					KEGGPath = "https://www.genome.jp/entry/"+ KEGGHashMap.get(genome.getSpecies()) + ":" + locus;
+					// Security update from 2023.10.16 on server: no browser from external link displayed
 					browserKEGG.setUrl(KEGGPath);
 					
 					IntactPath = "https://www.ebi.ac.uk/intact/search?query="+ locus;
 						    
 					// open and read HTML page at KEGG conversion API tool
 					URL url = new URL("https://rest.kegg.jp/conv/uniprot/"+ KEGGHashMap.get(genome.getSpecies()) + ":" + locus);
+
+					
 					InputStream is = url.openStream();
 					int ptr = 0;
 					StringBuffer buffer = new StringBuffer();
 					while ((ptr = is.read()) != -1) {
-					    buffer.append((char)ptr);
+						buffer.append((char)ptr);
 					}
+					System.out.println("string buffer2: "+buffer);
 					if (buffer.length()==1) { //if string buffer is empty because no Uniprot accession is found in KEGG conversion tool
 						browserUniprot.setText("<h2 style=\"text-align:center\">Could not find UniProt ID</h2>");
 						UniprotPath = "";
@@ -1537,7 +1541,6 @@ public class GeneView implements SelectionListener, MouseListener {
 						//query IntAct by locus name and UniProt accession
 						IntactPath = "https://www.ebi.ac.uk/intact/search?query="+ locus + "%20" + UpAccession;
 						browserIntact.setUrl(IntactPath);
-
 					}
 			} else {
 				System.out.println("does not contains key genome for KEGG browser: "+ genome.getSpecies());
@@ -1557,13 +1560,14 @@ public class GeneView implements SelectionListener, MouseListener {
 				locus2 = sequence.getName();
 			}
 			StringPath = "https://string-db.org/api/tsv-no-header/get_link?identifiers="+ locus2 +"&species="+stringHashMap.get(genome.getSpecies());
+			stringURL = "";
+			
 			try {
 				InputStream in = new URL(StringPath).openStream();
 				String result = IOUtils.toString(in);
 				stringURL = result;
 				browserString.setUrl(stringURL);
 			} catch (Exception e) {
-				stringURL = "";
 				browserString.setText("<h2 style=\"text-align:center\">Could not find String ID</h2>");
 			}
 		} 
@@ -3297,6 +3301,19 @@ public class GeneView implements SelectionListener, MouseListener {
 		GeneView view = (GeneView) part.getObject();
 		view.setViewID(id);
 		String genomeName = "Yersinia pseudotuberculosis IP31758";
+		view.initGenomeInfo(genomeName);
+		view.setGenomeSelected(genomeName);
+	}
+	public static void openSP1303GeneView(EPartService partService) {
+		String id = GeneView.ID + "-" + String.valueOf(Math.random() * 1000).substring(0, 3);
+		// initiate view
+		ResourceManager.openView(partService, GeneView.ID, id);
+		// update data
+		MPart part = partService.findPart(id);
+		NavigationManagement.pushStateView(id, new HashMap<>());
+		GeneView view = (GeneView) part.getObject();
+		view.setViewID(id);
+		String genomeName = "Yersinia pseudotuberculosis SP-1303";
 		view.initGenomeInfo(genomeName);
 		view.setGenomeSelected(genomeName);
 	}

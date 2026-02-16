@@ -72,6 +72,7 @@ public class GenomeConversion {
      * @param genomeName final genome name
      */
     public static Genome run(GenomeNCBI genomeNCBI, String pathGenome, String genomeName) {
+    	System.out.println("in run");
         String genomePath = Database.getGENOMES_PATH() + genomeName;
         return run(genomeNCBI, pathGenome, genomeName, genomePath);
     }
@@ -141,6 +142,7 @@ public class GenomeConversion {
      * @param genomeNCBI
      */
     private static void convertGenes(Genome genome, GenomeNCBI genomeNCBI, String pathSequences) {
+    	System.out.println("in convertgenes");
         String[][] correctGenesArray = new String[0][0];
         if (genome.getSpecies().equals(Genome.EGDE_NAME)) {
             correctGenesArray = TabDelimitedTableReader.read(Annotation.PATH_CORRECTGENE);
@@ -392,7 +394,7 @@ public class GenomeConversion {
                 annot[i][3] = 10 + "";
                 annot[i][4] = "+";
                 annot[i][5] = "unknown";
-                // typeSrna and synonim
+                // typeSrna and synonyme
                 annot[i][6] = "";
                 annot[i][7] = "";
             }

@@ -34,18 +34,38 @@ public class HomologCreation {
 	/**
 	 * Path for data on the server when running homolog search blasts
 	 */
+	
+		/**
+		 * first locally on Windows for blastdb (and then for check BlastP)
+		 */
+			public static String PATH_SCRIPT = "C:\\Users\\pilebury\\Documents\\Yersiniomics\\"+Database.getInstance().getProjectName()+"\\GenomeNCBI\\";
 
-	public static String PATH_SCRIPT = "/pasteur/zeus/projets/p02/yersiniomics/BLAST/"+Database.getInstance().getProjectName()+"/";
+		/**
+		 * then on cluster for threads script writing
+		 */
+			//public static String PATH_SCRIPT = "/pasteur/zeus/projets/p02/yersiniomics/BLAST/"+Database.getInstance().getProjectName()+"/";
+
+		
 	//public static String PATH_SCRIPT = "/Users/christophebecavin/Documents/Peptidomics//GenomeNCBI/";
-	//public static String PATH_SCRIPT = "C:\\Users\\pilebury\\Documents\\Yersiniomics\\"+Database.getInstance().getProjectName()+"\\GenomeNCBI\\";
+	
 
 	/**
 	 * Path for Blast+ 
 	 */
-	public static String PATH_BLAST = "";
+	
+		/**
+		 * first locally on Windows for blastdb
+		 */
+			public static String PATH_BLAST = "C:\\Program Files\\NCBI\\blast-BLAST_VERSION+\\bin\\";
+		
+		/**
+		 * then on cluster for threads script writing
+		 */
+			//public static String PATH_BLAST = "";
+	
+	
 	//public static String PATH_BLAST = "/share/apps/local/rmblast-2-2-28/bin/";
-	//public static String PATH_BLAST = "C:\\Program Files\\NCBI\\blast-BLAST_VERSION+\\bin\\";
-
+		
 	/**
 	 * Shortcut for running blastP
 	 */
@@ -577,165 +597,179 @@ public class HomologCreation {
 		folderCreation(results_folder);
 		
 		for (String genome_target : listGenomes) {
-			System.out.println("Add column for: " + genome_pivot + " vs " + genome_target);
-			
-			File file = new File(results_folder + "resultBlast_" + genome_pivot + "_vs_" + genome_target + ".blast.txt");
-			if (file.exists()) {
-				String[][] genomeP_vs_genomeT = TabDelimitedTableReader
-						.read(results_folder + "resultBlast_" + genome_pivot + "_vs_" + genome_target + ".blast.txt");
-				//String[] columToAdd_P_VS_T_identity = new String[genomeP_vs_genomeT.length];
-				String[] columToAdd_P_VS_T_bidirectional = new String[genomeP_vs_genomeT.length];
-				//String[] columToAdd_P_VS_T_coverage = new String[genomeP_vs_genomeT.length];
+			File file_identity = new File(addedcolumn_folder + genome_pivot + "_vs_" + genome_target + ".blast.txt");
+			if (!file_identity.exists()) {
+
+				File file = new File(results_folder + "resultBlast_" + genome_pivot + "_vs_" + genome_target + ".blast.txt");
+				if (file.exists()) {
+					System.out.println("Add column for: " + genome_pivot + " vs " + genome_target);
+
+					String[][] genomeP_vs_genomeT = TabDelimitedTableReader
+							.read(results_folder + "resultBlast_" + genome_pivot + "_vs_" + genome_target + ".blast.txt");
+					//String[] columToAdd_P_VS_T_identity = new String[genomeP_vs_genomeT.length];
+					String[] columToAdd_P_VS_T_bidirectional = new String[genomeP_vs_genomeT.length];
+					//String[] columToAdd_P_VS_T_coverage = new String[genomeP_vs_genomeT.length];
 
 				
-				String[][] genomeT_vs_genomeP = TabDelimitedTableReader
-						.read(results_folder + "resultBlast_" + genome_target + "_vs_" + genome_pivot + ".blast.txt");
-				//String[] columToAdd_T_VS_P_identity = new String[genomeT_vs_genomeP.length];
-				//String[] columToAdd_T_VS_P_origin = new String[genomeT_vs_genomeP.length];
+					String[][] genomeT_vs_genomeP = TabDelimitedTableReader
+							.read(results_folder + "resultBlast_" + genome_target + "_vs_" + genome_pivot + ".blast.txt");
+					//String[] columToAdd_T_VS_P_identity = new String[genomeT_vs_genomeP.length];
+					//String[] columToAdd_T_VS_P_origin = new String[genomeT_vs_genomeP.length];
 
-				for (int i = 0; i < genomeP_vs_genomeT.length; i++) {
-					String id_genomeT = genomeP_vs_genomeT[i][1].split("\\|")[1];
-					HashMap<String, Integer> indexRow_T_vs_P = indexRows(genomeT_vs_genomeP); //for "target vs pivot", value of the first column is mapped to the row number
+					for (int i = 0; i < genomeP_vs_genomeT.length; i++) {
+						String id_genomeT = genomeP_vs_genomeT[i][1];
+						if (genomeP_vs_genomeT[i][1].contains("|")) {
+							id_genomeT = genomeP_vs_genomeT[i][1].split("\\|")[1];
+						}
 					
-					/*
-					float identitiesP_vs_T = (100*Float.valueOf(genomeP_vs_genomeT[i][5]))
-							/ (Float.valueOf(genomeP_vs_genomeT[i][4])); // calcul of identity (number identical / query length) for "pivot vs target" file
-					float coverageP_vs_T = (100*Float.valueOf(genomeP_vs_genomeT[i][4]))
-							/ (Float.valueOf(genomeP_vs_genomeT[i][2]));
-					columToAdd_P_VS_T_identity[i] = String.valueOf(identitiesP_vs_T);
-					columToAdd_P_VS_T_coverage[i] = String.valueOf(coverageP_vs_T);
-*/
-				
-					if (indexRow_T_vs_P.containsKey(id_genomeT)) { //check in "target vs pivot" file if first column contains target id
-						int row = indexRow_T_vs_P.get(id_genomeT);
-						String id_genomeP = genomeT_vs_genomeP[row][1].split("\\|")[1];
-						/*
-						float identitiesT_vs_P = (Float.valueOf(genomeT_vs_genomeP[row][5]))
-								/ (Float.valueOf(genomeT_vs_genomeP[row][2])); // calcul of identity (number identical / query length) for "target vs pivot" file
-									
-						/*
-						 * add better identity of blast between "pivot vs target" and " target vs pivot" files
-						 */
-						/*
-						if (identitiesP_vs_T > identitiesT_vs_P) {
-							columToAdd_P_VS_T_identity[i] = String.valueOf(identitiesP_vs_T);
-							columToAdd_P_VS_T_bidirectional[i] = "query";
-							
-							columToAdd_T_VS_P_identity[row] = String.valueOf(identitiesP_vs_T);
-							columToAdd_T_VS_P_origin[row] = "subject";
-
-						} else {
-							columToAdd_P_VS_T_identity[i] = String.valueOf(identitiesT_vs_P);
-							columToAdd_P_VS_T_origin[i] = "subject";
-							columToAdd_T_VS_P_identity[row] = String.valueOf(identitiesT_vs_P);
-							columToAdd_T_VS_P_origin[row] = "query";
-
-						}*/
+						HashMap<String, Integer> indexRow_T_vs_P = indexRows(genomeT_vs_genomeP); //for "target vs pivot", value of the first column is mapped to the row number
 						
-						if (id_genomeP.equals(genomeP_vs_genomeT[i][0])) {
-							columToAdd_P_VS_T_bidirectional[i] = "yes";
-						} else {
+						/*
+						float identitiesP_vs_T = (100*Float.valueOf(genomeP_vs_genomeT[i][5]))
+								/ (Float.valueOf(genomeP_vs_genomeT[i][4])); // calcul of identity (number identical / query length) for "pivot vs target" file
+						float coverageP_vs_T = (100*Float.valueOf(genomeP_vs_genomeT[i][4]))
+								/ (Float.valueOf(genomeP_vs_genomeT[i][2]));
+						columToAdd_P_VS_T_identity[i] = String.valueOf(identitiesP_vs_T);
+						columToAdd_P_VS_T_coverage[i] = String.valueOf(coverageP_vs_T);
+	*/
+					
+						if (indexRow_T_vs_P.containsKey(id_genomeT)) { //check in "target vs pivot" file if first column contains target id
+							int row = indexRow_T_vs_P.get(id_genomeT);
+							String id_genomeP = genomeT_vs_genomeP[row][1];
+							if (genomeT_vs_genomeP[row][1].contains("|")) {
+								id_genomeP = genomeT_vs_genomeP[row][1].split("\\|")[1];
+							}
+							/*
+							float identitiesT_vs_P = (Float.valueOf(genomeT_vs_genomeP[row][5]))
+									/ (Float.valueOf(genomeT_vs_genomeP[row][2])); // calcul of identity (number identical / query length) for "target vs pivot" file
+										
+							/*
+							 * add better identity of blast between "pivot vs target" and " target vs pivot" files
+							 */
+							/*
+							if (identitiesP_vs_T > identitiesT_vs_P) {
+								columToAdd_P_VS_T_identity[i] = String.valueOf(identitiesP_vs_T);
+								columToAdd_P_VS_T_bidirectional[i] = "query";
+								
+								columToAdd_T_VS_P_identity[row] = String.valueOf(identitiesP_vs_T);
+								columToAdd_T_VS_P_origin[row] = "subject";
+	
+							} else {
+								columToAdd_P_VS_T_identity[i] = String.valueOf(identitiesT_vs_P);
+								columToAdd_P_VS_T_origin[i] = "subject";
+								columToAdd_T_VS_P_identity[row] = String.valueOf(identitiesT_vs_P);
+								columToAdd_T_VS_P_origin[row] = "query";
+	
+							}*/
+							
+							if (id_genomeP.equals(genomeP_vs_genomeT[i][0])) {
+								columToAdd_P_VS_T_bidirectional[i] = "yes";
+							} else {
+								columToAdd_P_VS_T_bidirectional[i] = "no";
+							}
+							
+						} else { // if no target id in first column of "target vs pivot"
+							//columToAdd_P_VS_T_identity[i] = String.valueOf(identitiesP_vs_T);
+							//columToAdd_P_VS_T_origin[i] = "query";
 							columToAdd_P_VS_T_bidirectional[i] = "no";
 						}
+					}
+					/*
+					 * pour quoi faire ?
+					 */
+					/*
+					for (int i = 0; i < genomeT_vs_genomeP.length; i++) {
+						try {
+							if (columToAdd_T_VS_P_identity[i].equals(""))
+								;
+						} catch (NullPointerException e) {
+							float identitiesT_vs_P = (Float.valueOf(genomeT_vs_genomeP[i][5]))
+									/ (Float.valueOf(genomeT_vs_genomeP[i][2]));
+							columToAdd_T_VS_P_identity[i] = String.valueOf(identitiesT_vs_P);
+							//columToAdd_T_VS_P_origin[i] = "query";
+						}
 						
-					} else { // if no target id in first column of "target vs pivot"
-						//columToAdd_P_VS_T_identity[i] = String.valueOf(identitiesP_vs_T);
-						//columToAdd_P_VS_T_origin[i] = "query";
-						columToAdd_P_VS_T_bidirectional[i] = "no";
-					}
-				}
-				/*
-				 * pour quoi faire ?
-				 */
-				/*
-				for (int i = 0; i < genomeT_vs_genomeP.length; i++) {
-					try {
-						if (columToAdd_T_VS_P_identity[i].equals(""))
-							;
-					} catch (NullPointerException e) {
-						float identitiesT_vs_P = (Float.valueOf(genomeT_vs_genomeP[i][5]))
-								/ (Float.valueOf(genomeT_vs_genomeP[i][2]));
-						columToAdd_T_VS_P_identity[i] = String.valueOf(identitiesT_vs_P);
-						//columToAdd_T_VS_P_origin[i] = "query";
-					}
+					}*/
+					//genomeP_vs_genomeT = ArrayUtils.addColumn(genomeP_vs_genomeT, columToAdd_P_VS_T_coverage);
+					//genomeP_vs_genomeT = ArrayUtils.addColumn(genomeP_vs_genomeT, columToAdd_P_VS_T_identity);
+					genomeP_vs_genomeT = ArrayUtils.addColumn(genomeP_vs_genomeT, columToAdd_P_VS_T_bidirectional);
+	
+					//genomeT_vs_genomeP = ArrayUtils.addColumn(genomeT_vs_genomeP, columToAdd_T_VS_P_identity);
+					//genomeT_vs_genomeP = ArrayUtils.addColumn(genomeT_vs_genomeP, columToAdd_T_VS_P_origin);
+	
+					TabDelimitedTableReader.save(genomeP_vs_genomeT,
+							addedcolumn_folder + genome_pivot + "_vs_" + genome_target + ".blast.txt");
+					//TabDelimitedTableReader.save(genomeT_vs_genomeP,
+						//	addedcolumn_folder + genome_target + "_vs_" + genome_pivot + ".blast.txt");
+					System.out.println("Column added: " + genome_pivot + " vs " + genome_target);
 					
-				}*/
-				//genomeP_vs_genomeT = ArrayUtils.addColumn(genomeP_vs_genomeT, columToAdd_P_VS_T_coverage);
-				//genomeP_vs_genomeT = ArrayUtils.addColumn(genomeP_vs_genomeT, columToAdd_P_VS_T_identity);
-				genomeP_vs_genomeT = ArrayUtils.addColumn(genomeP_vs_genomeT, columToAdd_P_VS_T_bidirectional);
-
-				//genomeT_vs_genomeP = ArrayUtils.addColumn(genomeT_vs_genomeP, columToAdd_T_VS_P_identity);
-				//genomeT_vs_genomeP = ArrayUtils.addColumn(genomeT_vs_genomeP, columToAdd_T_VS_P_origin);
-
-				TabDelimitedTableReader.save(genomeP_vs_genomeT,
-						addedcolumn_folder + genome_pivot + "_vs_" + genome_target + ".blast.txt");
-				//TabDelimitedTableReader.save(genomeT_vs_genomeP,
-					//	addedcolumn_folder + genome_target + "_vs_" + genome_pivot + ".blast.txt");
-				System.out.println("Column added: " + genome_pivot + " vs " + genome_target);
+					/*
+					 * Add column the other way
+					 */
+					/*
+					file = new File(results_folder + "resultBlast_" + genome_target + "_vs_" + genome_pivot + ".blast.txt");
+					if (file.exists()) {
+						System.out.println("Add column for: " + genome_target + " vs " + genome_pivot);			
+						String[][] genomeT_vs_genomeP = TabDelimitedTableReader
+						.read(results_folder + "resultBlast_" + genome_target + "_vs_" + genome_pivot + ".blast.txt");
+						String[] columToAdd_T_VS_P = new String[genomeT_vs_genomeP.length];
+						for (int i = 0; i < genomeT_vs_genomeP.length; i++) {
+							float identitiesT_vs_P = (Float.valueOf(genomeT_vs_genomeP[i][5]))
+									/ (Float.valueOf(genomeT_vs_genomeP[i][2]));
+							columToAdd_T_VS_P[i] = String.valueOf(identitiesT_vs_P);
+						}
+						genomeT_vs_genomeP = ArrayUtils.addColumn(genomeT_vs_genomeP, columToAdd_T_VS_P);
+						TabDelimitedTableReader.save(genomeT_vs_genomeP,
+								addedcolumn_folder + genome_target + "_vs_" + genome_pivot + ".blast.txt");
+						//System.out.println("Column added: " + genome_target + " vs " + genome_pivot);
+					
+					}
+					*/
+				}
 				
+					
 				/*
-				 * Add column the other way
-				 */
-				/*
-				file = new File(results_folder + "resultBlast_" + genome_target + "_vs_" + genome_pivot + ".blast.txt");
+				File file = new File(results_folder + "resultBlast_" + genome_pivot + "_vs_" + genome_target + ".blast.txt");
 				if (file.exists()) {
-					System.out.println("Add column for: " + genome_target + " vs " + genome_pivot);			
+					String[][] genomeP_vs_genomeT = TabDelimitedTableReader
+							.read(results_folder + "resultBlast_" + genome_pivot + "_vs_" + genome_target + ".blast.txt");
+					String[] columToAdd_P_VS_T = new String[genomeP_vs_genomeT.length];
+	
+					for (int i = 0; i < genomeP_vs_genomeT.length; i++) {
+						float identitiesP_vs_T = (Float.valueOf(genomeP_vs_genomeT[i][5]))
+								/ (Float.valueOf(genomeP_vs_genomeT[i][2]));
+						columToAdd_P_VS_T[i] = String.valueOf(identitiesP_vs_T);
+					}
+					genomeP_vs_genomeT = ArrayUtils.addColumn(genomeP_vs_genomeT, columToAdd_P_VS_T);
+					TabDelimitedTableReader.save(genomeP_vs_genomeT,
+							addedcolumn_folder + genome_pivot + "_vs_" + genome_target + ".blast.txt");
+	*/
+					/*
+					 * Add column the other way and intervert column 0 identifiers with column 1 identifiers
+					 */
+					/*
+				} else {
 					String[][] genomeT_vs_genomeP = TabDelimitedTableReader
 					.read(results_folder + "resultBlast_" + genome_target + "_vs_" + genome_pivot + ".blast.txt");
 					String[] columToAdd_T_VS_P = new String[genomeT_vs_genomeP.length];
-					for (int i = 0; i < genomeT_vs_genomeP.length; i++) {
-						float identitiesT_vs_P = (Float.valueOf(genomeT_vs_genomeP[i][5]))
-								/ (Float.valueOf(genomeT_vs_genomeP[i][2]));
-						columToAdd_T_VS_P[i] = String.valueOf(identitiesT_vs_P);
+					for (int j = 0; j < genomeT_vs_genomeP.length; j++) {
+						float identitiesT_vs_P = (Float.valueOf(genomeT_vs_genomeP[j][5]))
+								/ (Float.valueOf(genomeT_vs_genomeP[j][2]));
+						String targetProtein_temp = genomeT_vs_genomeP[j][0];
+						genomeT_vs_genomeP[j][0] = genomeT_vs_genomeP[j][1];
+						genomeT_vs_genomeP[j][1] = targetProtein_temp;
+						columToAdd_T_VS_P[j] = String.valueOf(identitiesT_vs_P);
 					}
 					genomeT_vs_genomeP = ArrayUtils.addColumn(genomeT_vs_genomeP, columToAdd_T_VS_P);
 					TabDelimitedTableReader.save(genomeT_vs_genomeP,
-							addedcolumn_folder + genome_target + "_vs_" + genome_pivot + ".blast.txt");
+							addedcolumn_folder + genome_pivot + "_vs_" + genome_target + ".blast.txt");
 					//System.out.println("Column added: " + genome_target + " vs " + genome_pivot);
-				
-				}
+				}		
 				*/
-			}
+			} else { 
+				System.out.println("File already existing: " + genome_pivot + "_vs_" + genome_target + ".blast.txt");
 			
-				
-			/*
-			File file = new File(results_folder + "resultBlast_" + genome_pivot + "_vs_" + genome_target + ".blast.txt");
-			if (file.exists()) {
-				String[][] genomeP_vs_genomeT = TabDelimitedTableReader
-						.read(results_folder + "resultBlast_" + genome_pivot + "_vs_" + genome_target + ".blast.txt");
-				String[] columToAdd_P_VS_T = new String[genomeP_vs_genomeT.length];
-
-				for (int i = 0; i < genomeP_vs_genomeT.length; i++) {
-					float identitiesP_vs_T = (Float.valueOf(genomeP_vs_genomeT[i][5]))
-							/ (Float.valueOf(genomeP_vs_genomeT[i][2]));
-					columToAdd_P_VS_T[i] = String.valueOf(identitiesP_vs_T);
-				}
-				genomeP_vs_genomeT = ArrayUtils.addColumn(genomeP_vs_genomeT, columToAdd_P_VS_T);
-				TabDelimitedTableReader.save(genomeP_vs_genomeT,
-						addedcolumn_folder + genome_pivot + "_vs_" + genome_target + ".blast.txt");
-*/
-				/*
-				 * Add column the other way and intervert column 0 identifiers with column 1 identifiers
-				 */
-				/*
-			} else {
-				String[][] genomeT_vs_genomeP = TabDelimitedTableReader
-				.read(results_folder + "resultBlast_" + genome_target + "_vs_" + genome_pivot + ".blast.txt");
-				String[] columToAdd_T_VS_P = new String[genomeT_vs_genomeP.length];
-				for (int j = 0; j < genomeT_vs_genomeP.length; j++) {
-					float identitiesT_vs_P = (Float.valueOf(genomeT_vs_genomeP[j][5]))
-							/ (Float.valueOf(genomeT_vs_genomeP[j][2]));
-					String targetProtein_temp = genomeT_vs_genomeP[j][0];
-					genomeT_vs_genomeP[j][0] = genomeT_vs_genomeP[j][1];
-					genomeT_vs_genomeP[j][1] = targetProtein_temp;
-					columToAdd_T_VS_P[j] = String.valueOf(identitiesT_vs_P);
-				}
-				genomeT_vs_genomeP = ArrayUtils.addColumn(genomeT_vs_genomeP, columToAdd_T_VS_P);
-				TabDelimitedTableReader.save(genomeT_vs_genomeP,
-						addedcolumn_folder + genome_pivot + "_vs_" + genome_target + ".blast.txt");
-				//System.out.println("Column added: " + genome_target + " vs " + genome_pivot);
-			}		
-			*/
+			}
 		}	
 	}
 
@@ -789,7 +823,7 @@ public class HomologCreation {
 						float qcovs = Float.parseFloat(homologyTable[indexRow][13]);
 						float bitscore = Float.parseFloat(homologyTable[indexRow][14]);
 						String bidirectional = homologyTable[indexRow][15];
-
+						// add condition for gb|...| protein name (enterocolitica FORC065 for examplee)
 						String proteinTargetName = homologyTable[indexRow][1].replaceAll("ref|", "")
 								.replace('|', ' ').trim();
 						if (pident > IDENTITY_CUTOFF) {

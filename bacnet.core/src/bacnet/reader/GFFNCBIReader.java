@@ -98,7 +98,7 @@ public class GFFNCBIReader {
             HashMap<String, ArrayList<FeatureI>> listLocusTag) {
 
         for (String chromo : chromosomes.keySet()) {
-            System.out.println(chromo);
+            //System.out.println(chromo);
         }
 
         for (String locusTag : listLocusTag.keySet()) {
@@ -174,27 +174,27 @@ public class GFFNCBIReader {
                  * Multiple features available
                  */
                 for (FeatureI feature : listFeatures) {
-                	System.out.println("feature type: "+feature.type());
+                	//System.out.println("feature type: "+feature.type());
 
 
                     /*
                      * Create the genome element
                      */
                     String chromoID = feature.seqname();
-                	System.out.println("chromoID: "+chromoID);
+                	//System.out.println("chromoID: "+chromoID);
                 	for (String text : chromosomes.keySet()) {
-                    	System.out.println("chromosome accession: "+text);
+                    	//System.out.println("chromosome accession: "+text);
 
                 	}
                     // System.out.println("search chromoID: "+chromoID);
                     if (chromosomes.containsKey(chromoID)) {
-                    	System.out.println("chromoID : "+chromoID);
+                    	//System.out.println("chromoID : "+chromoID);
                         ChromosomeBacteriaSequence chromosome = chromosomes.get(chromoID);
                         /*
                          * Add the different information available
                          */
                         if (feature.type().equals("gene")) { // Add coding sequence
-                        	System.out.println("feature type gene: "+feature.type());
+                        	//System.out.println("feature type gene: "+feature.type());
 
                             sequence.setBioBegin(feature.location().bioStart());
                             sequence.setBioEnd(feature.location().bioEnd());

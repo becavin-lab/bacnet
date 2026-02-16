@@ -65,6 +65,7 @@ public class InitViewYersinia implements SelectionListener {
     private Button btnYPIII;
     private Button btnIP32953;
     private Button btnIP31758;
+    private Button btnSP1303;
     private Button btnEV76;
     private Button btnY11;
     private Button btnY1;
@@ -91,6 +92,7 @@ public class InitViewYersinia implements SelectionListener {
     private Button btnProteomics;
     private Link linkLicenceField;
 	private Button btnHelp;
+	private Browser browserTutorial;
 
     @Inject
     EPartService partService;
@@ -146,20 +148,33 @@ public class InitViewYersinia implements SelectionListener {
                 		+ "<br></br>Use Yersiniomics to decipher <b>regulatory mechanisms</b> of your genome element of interest,<br>"
                         + "navigating among all these datasets with <b>enriched metadata</b> in a user-friendly format.</br>"
                         );
-
+        
         lblIntro.setFont(SWTResourceManager.getBodyFont(20,SWT.NORMAL));
-        new Label(composite_Intro, SWT.NONE);
+    	
+        
+        Label lblUpdate = new Label(composite_Intro, SWT.NONE);
+    	lblUpdate.setAlignment(SWT.CENTER);
+    	GridData gd_Update = new GridData(SWT.CENTER, SWT.CENTER, true, false, 1, 1);
+        //gd_lblIntro.widthHint=900;
+    	lblUpdate.setLayoutData(gd_Update);
+    	lblUpdate.setData(RWT.MARKUP_ENABLED, Boolean.TRUE);
+    	lblUpdate.setText("<b><br>New: check our new Yersiniomics tutorial video below !</br></b>" );
+    	lblUpdate.setFont(SWTResourceManager.getBodyFont(30,SWT.NORMAL));
+    	lblUpdate.setForeground(BasicColor.FIREBRICK);
+        
+    	new Label(composite_Intro, SWT.NONE);
 
         if (Database.getInstance().getProjectName() == Database.URY_YERSINIOMICS_PROJECT) {
 
         	Label privateDatabase = new Label(composite_Intro, SWT.NONE);
+        	privateDatabase.setAlignment(SWT.CENTER);
         	GridData gd_PrivateDatabase = new GridData(SWT.CENTER, SWT.CENTER, true, false, 1, 1);
             //gd_lblIntro.widthHint=900;
         	privateDatabase.setLayoutData(gd_PrivateDatabase);
         	privateDatabase.setData(RWT.MARKUP_ENABLED, Boolean.TRUE);
             privateDatabase.setText("<b>You are on the <i>Yersinia</i> Research Unit private database website</b>" );
             privateDatabase.setFont(SWTResourceManager.getBodyFont(30,SWT.NORMAL));
-            privateDatabase.setForeground(BasicColor.RED);;
+            privateDatabase.setForeground(BasicColor.RED);
 
         }
         
@@ -313,7 +328,7 @@ public class InitViewYersinia implements SelectionListener {
         Composite composite_pseudotb_row_2 = new Composite(composite_pseudotb, SWT.NONE);
         GridData gd_composite_pseudotb_row_2 = new GridData(SWT.CENTER, SWT.TOP, false, false, 1, 1);
         composite_pseudotb_row_2.setLayoutData(gd_composite_pseudotb_row_2);
-        composite_pseudotb_row_2.setLayout(new GridLayout(1, false));
+        composite_pseudotb_row_2.setLayout(new GridLayout(2, false));
         composite_pseudotb_row_2.setBackground(BasicColor.DARK_ONE);
         
         btnIP31758 = new Button(composite_pseudotb_row_2, SWT.TOGGLE);
@@ -324,6 +339,16 @@ public class InitViewYersinia implements SelectionListener {
         btnIP31758.setFont(SWTResourceManager.getBodyFont(22,SWT.NORMAL));
         btnIP31758.setBackground(BasicColor.LIGHT_ONE);
  
+
+        btnSP1303 = new Button(composite_pseudotb_row_2, SWT.TOGGLE);
+        btnSP1303.setLayoutData(new GridData(SWT.CENTER, SWT.TOP, false, false, 1, 1));
+        btnSP1303.addSelectionListener(this);
+        btnSP1303.setText("SP-1303");
+        btnSP1303.setToolTipText("Genotype 8\nEtiologic agent of Far East Scarlet-Like Fever (FESLF)");
+        btnSP1303.setFont(SWTResourceManager.getBodyFont(22,SWT.NORMAL));
+        btnSP1303.setBackground(BasicColor.LIGHT_ONE);
+ 
+        
         Composite composite_entero = new Composite(gene_view_composite_row_1, SWT.NONE);
         GridData gd_composite_entero = new GridData(SWT.CENTER, SWT.CENTER, true, false, 1, 1);
 
@@ -505,7 +530,7 @@ public class InitViewYersinia implements SelectionListener {
         btnGenomics.setFont(SWTResourceManager.getBodyFont(22,SWT.NORMAL));
         btnGenomics.addSelectionListener(this);
         btnGenomics.setBackground(BasicColor.LIGHT_TWO);
-        btnGenomics.setToolTipText("Browse all 200 complete genomes\n"
+        btnGenomics.setToolTipText("Browse more than 300 complete genomes\n"
                 + " Visualize strain relationship in a phylogenomic tree\n"
                 + "Access all annotated genome elements");
 
@@ -515,7 +540,7 @@ public class InitViewYersinia implements SelectionListener {
         btnTranscriptomics.setFont(SWTResourceManager.getBodyFont(22,SWT.NORMAL));
         btnTranscriptomics.addSelectionListener(this);
         btnTranscriptomics.setBackground(BasicColor.LIGHT_TWO);
-        btnTranscriptomics.setToolTipText("Browse all 151 microarray and 166 RNA-Seq biological conditions available on "+Database.getInstance().getWebpageTitle()+"\n"
+        btnTranscriptomics.setToolTipText("Browse over 300 microarray and RNA-Seq biological conditions available on "+Database.getInstance().getWebpageTitle()+"\n"
                         + "Visualize transcript fold changes and RNA-Seq coverage in the genome viewer\n"
                         + "Display transcript fold change patterns in the heatmap viewer");
        
@@ -525,7 +550,7 @@ public class InitViewYersinia implements SelectionListener {
         btnProteomics.setFont(SWTResourceManager.getBodyFont(22,SWT.NORMAL));
         btnProteomics.addSelectionListener(this);
         btnProteomics.setBackground(BasicColor.LIGHT_TWO);
-        btnProteomics.setToolTipText("Browse all 62 proteomics biological conditions available on "+Database.getInstance().getWebpageTitle()+"\n"
+        btnProteomics.setToolTipText("Browse over 80 proteomics biological conditions available on "+Database.getInstance().getWebpageTitle()+"\n"
         		+ "Visualize protein abundances and fold changes in the genome viewer"
         		+ "\nDisplay protein abundance fold change patterns in the heatmap viewer");
 
@@ -581,37 +606,105 @@ public class InitViewYersinia implements SelectionListener {
         
         Composite composite_foot = new Composite(composite, SWT.NONE);
         composite_foot.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, true, true, 1, 1));
-        composite_foot.setLayout(new GridLayout(4, true));
+        composite_foot.setLayout(new GridLayout(1, false));
         
         Composite composite_19 = new Composite(composite_foot, SWT.NONE);
-        composite_19.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, true, true, 4, 1));
-        composite_19.setLayout(new GridLayout(1, true));
+        composite_19.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, true, true, 1, 1));
+        composite_19.setLayout(new GridLayout(2, false));
+
+		browserTutorial = new Browser(composite_19, SWT.NONE);
+		GridData browserData = new GridData(SWT.FILL, SWT.FILL, true, true);
+		browserData.minimumHeight = 500;	
+		browserData.minimumWidth = 720;
+
+		browserTutorial.setLayoutData(browserData);
+		String videoId = "LHCY7hGwemQ"; 
+
+		   String html = "<html>" +
+			        "<head>" +
+			        "<style>" +
+			        "body {margin: 10px; background: #ffffff; font-family: Arial;}" +
+			        ".video-container {" +
+			        "    position: relative;" +
+			        "    padding-bottom: 56.25%;" +
+			        "    height: 0;" +
+			        "}" +
+			        ".video-container iframe {" +
+			        "    position: absolute;" +
+			        "    top: 0;" +
+			        "    left: 0;" +
+			        "    width: 100%;" +
+			        "    height: 100%;" +
+			        "}" +
+			        "</style>" +
+			        "</head>" +
+			        "<body>" +
+			        "<h3 style=\"font-size:25px;text-align: center;\">The Yersiniomics </br><a href = \"https://youtu.be/LHCY7hGwemQ\" target=\"_blank\">video tutorial</a></h3>"+
+			        "<div class=\"video-container\">" +
+			        "<iframe " +
+			        "src=\"https://www.youtube.com/embed/" + videoId + "?rel=0\" " +
+			        "frameborder=\"0\" " +
+			        "allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" " +
+			        "allowfullscreen>" +
+			        "</iframe>" +
+			        "</div>" +
+			        "</body>" +
+			        "</html>";
+		   
+		   browserTutorial.setText(html);
+	    
+		   Browser browserBluesky = new Browser(composite_19, SWT.NONE);
+           GridData browserDataBluesky = new GridData(SWT.FILL, SWT.FILL, true, true);
+       //browserDataBluesky.minimumHeight = 400;
+        	browserDataBluesky.minimumWidth = 400;
+        browserBluesky.setLayoutData(browserDataBluesky);
+        browserBluesky.setText("<html>" +
+        				"<head>" +
+        	            "<meta charset='UTF-8'>" +
+        	            "<style>" +
+        	            "body {margin: 10px; font-family: Arial; }" +
+        	     
+        	            ".post-container { margin: 10px 0; }" +
+        	            "</style>" +
+        	            "</head>" +
+        	            "<body>" +
+        	            "<h3 style=\"font-size:25px;text-align: center; \">The <i>Yersinia</i> Research Unit <a href=\"https://bsky.app/profile/yersiniaunit.bsky.social\" target=\"_blank\">Bluesky feed</a></h3>" +
+        				"<script async src=\"https://cdn.jsdelivr.net/npm/bsky-embed/dist/bsky-embed.es.js\" type=\"module\"></script><bsky-embed username=\"yersiniaunit.bsky.social\"  limit=\"10\"  mode=\"light\"></bsky-embed>");
+                       
+        //new Label(composite_foot, SWT.NONE);
         
-        Label lblLastUpdate = new Label(composite_19, SWT.NONE);
+        Composite composite_20 = new Composite(composite_foot, SWT.NONE);
+        composite_20.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, true, true, 1, 1));
+        composite_20.setLayout(new GridLayout(1, true));
+                
+        Label lblLastUpdate = new Label(composite_20, SWT.NONE);
         lblLastUpdate.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, true, true, 1, 1));
-        lblLastUpdate.setText("Last update: January 2023");
+        lblLastUpdate.setText("Last update: February 2025");
         lblLastUpdate.setFont(SWTResourceManager.getBodyFont(20,SWT.BOLD));
         
-        new Label(composite_19, SWT.NONE);
+        new Label(composite_20, SWT.NONE);
 
-        linkPubli = new Link(composite_19, SWT.NONE);
+        Label linkPubli = new Label(composite_20, SWT.NONE);
         linkPubli.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, true, false, 1, 1));
-        linkPubli.setText("For more information on the website functionalities, please go to <a>L\u00EA-Bury et al.</a>");
+        linkPubli.setData(RWT.MARKUP_ENABLED, Boolean.TRUE);
+        linkPubli.setText("For more information on the website functionalities, please go to <a href=\"https://journals.asm.org/doi/full/10.1128/spectrum.03826-22\" target=\"_blank\">L\u00EA-Bury et al.</a>");
         linkPubli.setFont(SWTResourceManager.getBodyFont(18,SWT.NORMAL));
-        linkPubli.addSelectionListener(this);
-        
-        new Label(composite_19, SWT.NONE);
-        linkPubli2 = new Link(composite_19, SWT.NONE);
-        linkPubli2.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, true, false, 1, 1));
-        linkPubli2.setText("If you use "+Database.getInstance().getWebpageTitle()+", please cite our <a>article</a>");
-        linkPubli2.setFont(SWTResourceManager.getBodyFont(18,SWT.NORMAL));
-        linkPubli2.addSelectionListener(this);
+        linkPubli.setAlignment(SWT.CENTER);
 
-        new Label(composite_19, SWT.NONE);
-        Label lblContact = new Label(composite_19, SWT.NONE);
+        new Label(composite_20, SWT.NONE);
+        Label linkPubli2 = new Label(composite_20, SWT.NONE);
+        linkPubli2.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, true, false, 1, 1));
+        linkPubli2.setData(RWT.MARKUP_ENABLED, Boolean.TRUE);
+        linkPubli2.setText("If you use "+Database.getInstance().getWebpageTitle()+", please cite our <a href=\"https://journals.asm.org/doi/full/10.1128/spectrum.03826-22\" target=\"_blank\">article</a>");
+        linkPubli2.setFont(SWTResourceManager.getBodyFont(18,SWT.NORMAL));
+        linkPubli2.setAlignment(SWT.CENTER);
+
+
+        new Label(composite_20, SWT.NONE);
+        Label lblContact = new Label(composite_20, SWT.NONE);
         lblContact.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, true, false, 1, 1));
         lblContact.setData(RWT.MARKUP_ENABLED, Boolean.TRUE);
-        lblContact.setText("Contact us if you have a recently published \"omics\" datasets<br/>you want to be integrated to "+Database.getInstance().getWebpageTitle()+":<br><a href=\"mailto:yersiniomics@pasteur.fr\">yersiniomics@pasteur.fr</a></br>");
+        lblContact.setText("Contact us if you have a recently published \"omics\" datasets you want to be integrated to "+Database.getInstance().getWebpageTitle()+":<br><a href=\"mailto:yersiniomics@pasteur.fr\">yersiniomics@pasteur.fr</a></br>");
         lblContact.setFont(SWTResourceManager.getBodyFont(18,SWT.NORMAL));
         lblContact.setAlignment(SWT.CENTER);
 
@@ -631,25 +724,25 @@ public class InitViewYersinia implements SelectionListener {
         linkLicenceField.setText("<a>Creative Commons Attribution 4.0 International License</a>");
         linkLicenceField.addSelectionListener(this);
 */
-        new Label(composite_19, SWT.NONE);
+        new Label(composite_20, SWT.NONE);
 
-        Label lblCredits = new Label(composite_19, SWT.NONE);
+        Label lblCredits = new Label(composite_20, SWT.NONE);
         lblCredits.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
         lblCredits.setAlignment(SWT.CENTER);
         lblCredits.setText("Credits");
         lblCredits.setFont(SWTResourceManager.getBodyFont(20,SWT.BOLD));
 
-        linkYersinia = new Link(composite_19, SWT.NONE);
+        Label linkYersinia = new Label(composite_20, SWT.NONE);
         linkYersinia.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
-        linkYersinia.setText("<a>Yersinia Research Unit, Institut Pasteur, Paris</a>");
+        linkYersinia.setData(RWT.MARKUP_ENABLED, Boolean.TRUE);
+        linkYersinia.setText("<a href=\"https://research.pasteur.fr/en/team/yersinia/\" target=\"_blank\"><i>Yersinia</i> Research Unit, Institut Pasteur, Université Paris Cit\u00E9, Paris, France</a>");
         linkYersinia.setFont(SWTResourceManager.getBodyFont(18,SWT.NORMAL));
-
-        linkYersinia.addSelectionListener(this);
-       
+        linkYersinia.setAlignment(SWT.CENTER);
+        
         new Label(composite_19, SWT.NONE);
 
-        Composite composite_3 = new Composite(composite_19, SWT.NONE);
-        GridData gd_composite_3 = new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1);
+        Composite composite_3 = new Composite(composite_foot, SWT.NONE);
+        GridData gd_composite_3 = new GridData(SWT.CENTER, SWT.CENTER, false, false, 2, 1);
 
         composite_3.setLayoutData(gd_composite_3);
         composite_3.setLayout(new GridLayout(1, false));
@@ -660,16 +753,16 @@ public class InitViewYersinia implements SelectionListener {
         
         new Label(composite_19, SWT.NONE);
         new Label(composite_19, SWT.NONE);
-        
+
         new Label(composite_foot, SWT.NONE);
 
-    	Browser browserTwitter = new Browser(composite_foot, SWT.NONE);
-		GridData gd_browserTwitter = new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1);
-		gd_browserTwitter.heightHint = 600;
+    	//Browser browserTwitter = new Browser(composite_foot, SWT.NONE);
+		//GridData gd_browserTwitter = new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1);
+		//gd_browserTwitter.heightHint = 600;
 		//gd_browserTwitter.widthHint = 430;
-		browserTwitter.setLayoutData(gd_browserTwitter);
-        browserTwitter.setText("<a class=\"twitter-timeline\" href=\"https://twitter.com/YersiniaUnit?ref_src=twsrc%5Etfw\">Tweets by YersiniaUnit</a> <script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>");
-        
+		//browserTwitter.setLayoutData(gd_browserTwitter);
+        //browserTwitter.setText("<a class=\"twitter-timeline\" href=\"https://twitter.com/YersiniaUnit?ref_src=twsrc%5Etfw\">Tweets by YersiniaUnit</a> <script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>");
+
         scrolledComposite.setContent(composite);
         scrolledComposite.setMinSize(composite.computeSize(SWT.DEFAULT, SWT.DEFAULT));
 
@@ -718,6 +811,8 @@ public class InitViewYersinia implements SelectionListener {
             GeneView.openYPIIIGeneView(partService);
         } else if (e.getSource() == btnIP31758) {
             GeneView.openIP31758GeneView(partService);
+        } else if (e.getSource() == btnSP1303) {
+            GeneView.openSP1303GeneView(partService);
         } else if (e.getSource() == btnY11) {
             GeneView.openY11GeneView(partService);
         } else if (e.getSource() == btnY1) {
@@ -764,15 +859,6 @@ public class InitViewYersinia implements SelectionListener {
             launcher.openURL("https://listeriomics.pasteur.fr/WikiListeriomics/index.php/Summary");
         } else if (e.getSource() == btnGeneView) {
             GeneView.openGeneView(partService);
-        } else if (e.getSource() == linkPubli) {
-            String url = "https://journals.asm.org/doi/full/10.1128/spectrum.03826-22";
-            NavigationManagement.openURLInExternalBrowser(url, partService);
-        } else if (e.getSource() == linkPubli2) {
-            String url = "https://journals.asm.org/doi/full/10.1128/spectrum.03826-22";
-            NavigationManagement.openURLInExternalBrowser(url, partService);
-        } else if (e.getSource() == linkYersinia) {
-            String url = "https://research.pasteur.fr/en/team/yersinia/";
-            NavigationManagement.openURLInExternalBrowser(url, partService);
         } else if (e.getSource() == linkLicenceField) {
             String url = "http://creativecommons.org/licenses/by/4.0/";
             NavigationManagement.openURLInExternalBrowser(url, partService);
